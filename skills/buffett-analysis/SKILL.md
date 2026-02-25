@@ -322,7 +322,7 @@ read references/analysis-template.md
 3. 如果该公司已存在（按 code 匹配），则**覆盖更新**；否则追加
 4. 写入后 commit 并 push 到 GitHub，确保阿尔法工坊在线页面同步更新
 
-**阿尔法工坊地址：** https://oscar2sun.github.io/alpha-factor-lab/fundamental.html
+**阿尔法工坊地址：** https://finstep-ai.github.io/alpha-factor-lab/fundamental.html
 
 ---
 

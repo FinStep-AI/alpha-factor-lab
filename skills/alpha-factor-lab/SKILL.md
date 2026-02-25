@@ -247,7 +247,7 @@ python3 scripts/visualizer.py \
 4. 在因子记录中设置 `nav_data` 和 `ic_data` 路径指向这些文件
 5. 写入后 commit 并 push 到 GitHub
 
-**阿尔法工坊地址：** https://oscar2sun.github.io/alpha-factor-lab/factor-backtest.html
+**阿尔法工坊地址：** https://finstep-ai.github.io/alpha-factor-lab/factor-backtest.html
 
 ### factors.json 标准字段格式
 
