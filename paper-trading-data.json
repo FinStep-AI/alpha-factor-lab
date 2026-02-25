@@ -6,7 +6,7 @@
     "benchmark": "000300",
     "benchmark_name": "沪深300",
     "created_at": "2026-02-23 22:14:25",
-    "updated_at": "2026-02-25 16:05:00",
+    "updated_at": "2026-02-26 00:03:01",
     "status": "active"
   },
   "players": {
@@ -779,6 +779,50 @@
       },
       "cash": 10000000.0,
       "positions": {}
+    },
+    "dwj": {
+      "name": "趋势游侠（文晋老师）",
+      "emoji": "🏄",
+      "style": "趋势跟踪 · 板块轮动 · 全A股扫描 · 中长线波段",
+      "description": "BBI+MA60趋势判断，KDJ低位捕捉买点，板块轮动做趋势收益。核心逻辑：阳率×盈亏比最大化。",
+      "portfolio": {
+        "cash": 10000000.0,
+        "positions": {},
+        "total_value": 10000000.0,
+        "last_update": "2026-02-26 00:03"
+      },
+      "nav_history": {
+        "dates": [
+          "2026-02-25"
+        ],
+        "nav": [
+          1.0
+        ],
+        "cash_pct": [
+          100.0
+        ]
+      },
+      "trades": [],
+      "decisions": [
+        {
+          "date": "2026-02-25",
+          "time": "23:50",
+          "type": "系统",
+          "action": "初始化",
+          "summary": "趋势游侠加入竞赛，初始资金¥10,000,000",
+          "detail": "策略来源：邓文晋。BBI+MA60趋势+KDJ低位+单针下30，板块轮动中长线波段。"
+        }
+      ],
+      "rebalances": [],
+      "stats": {
+        "total_trades": 0,
+        "win_rate": 0,
+        "max_drawdown_pct": 0,
+        "sharpe_ratio": 0,
+        "calmar_ratio": 0
+      },
+      "cash": 10000000.0,
+      "positions": {}
     }
   },
   "benchmark": {
@@ -825,6 +869,17 @@
         "current_nav": 1.0,
         "total_trades": 0,
         "rank": 3
+      },
+      {
+        "player_id": "dwj",
+        "name": "趋势游侠（文晋老师）",
+        "emoji": "🏄",
+        "total_return_pct": 0.0,
+        "sharpe_ratio": 0.0,
+        "max_drawdown_pct": 0,
+        "current_nav": 1.0,
+        "total_trades": 0,
+        "rank": 4
       }
     ],
     "updated_at": "2026-02-25 15:16:42"
