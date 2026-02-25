@@ -355,7 +355,13 @@ function renderPlayerTabs() {
 function renderPlayerDetail(pid) {
   const el = document.getElementById('playerDetails');
   const p = DATA.players[pid];
-  const positions = Object.values(p.portfolio.positions);
+  const positions = Object.entries(p.portfolio.positions).map(([code, pos]) => ({
+    ...pos,
+    code: code,
+    volume: pos.shares || pos.volume || 0,
+    avg_cost: pos.cost_price || pos.avg_cost || 0,
+    pnl_pct: pos.pnl_pct != null ? pos.pnl_pct : (pos.current_price && (pos.cost_price || pos.avg_cost) ? ((pos.current_price / (pos.cost_price || pos.avg_cost) - 1) * 100) : 0)
+  }));
   const trades = (p.trades || []).slice().reverse().slice(0, 20);
   const decisions = (p.decisions || []).slice().reverse().slice(0, 15);
   const rebalances = (p.rebalances || []).slice().reverse().slice(0, 10);
@@ -384,8 +390,8 @@ function renderPlayerDetail(pid) {
       <thead><tr><th>日期</th><th>代码</th><th>名称</th><th>方向</th><th>价格</th><th>数量</th><th>金额</th><th>原因</th></tr></thead>
       <tbody>${trades.map(t => `<tr>
         <td>${t.date}</td><td>${t.code}</td><td>${t.name}</td>
-        <td><span class="tag-${t.direction}">${t.direction === 'buy' ? '买入' : '卖出'}</span></td>
-        <td>¥${fmt(t.price)}</td><td>${t.volume}</td><td>${fmtMoney(t.amount)}</td>
+        <td><span class="tag-${t.action || t.direction}">${(t.action || t.direction) === 'buy' ? '买入' : '卖出'}</span></td>
+        <td>¥${fmt(t.price)}</td><td>${t.shares || t.volume || '—'}</td><td>${fmtMoney(t.amount)}</td>
         <td style="color:var(--text2);font-size:0.8rem;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${t.reason || ''}">${t.reason || '—'}</td>
       </tr>`).join('')}</tbody></table></div>`;
   }
