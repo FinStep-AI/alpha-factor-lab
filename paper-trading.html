@@ -28,14 +28,14 @@ a:hover { text-decoration:underline; }
 
 /* Leaderboard */
 .leaderboard { display:grid; grid-template-columns:repeat(5,1fr); gap:16px; margin:24px 0; }
-.player-card { background:var(--card); border:1px solid var(--border); border-radius:14px; padding:20px; cursor:pointer; transition:all .2s; position:relative; overflow:hidden; }
+.player-card { background:var(--card); border:1px solid var(--border); border-radius:14px; padding:20px; cursor:pointer; transition:all .2s; position:relative; overflow:hidden; display:flex; flex-direction:column; }
 .player-card:hover { border-color:var(--accent); transform:translateY(-2px); }
 .player-card.active { border-color:var(--accent); box-shadow:0 0 20px rgba(79,140,255,.15); }
 .player-card .rank { position:absolute; top:12px; right:16px; font-size:1.8rem; }
 .player-card .emoji { font-size:2rem; margin-bottom:8px; display:block; }
 .player-card .name { font-size:1.1rem; font-weight:700; }
-.player-card .style { color:var(--text2); font-size:0.78rem; margin-top:2px; }
-.player-card .return { font-size:1.8rem; font-weight:700; margin-top:12px; }
+.player-card .style { color:var(--text2); font-size:0.78rem; margin-top:2px; min-height:2.4em; }
+.player-card .return { font-size:1.8rem; font-weight:700; margin-top:auto; padding-top:12px; }
 .player-card .return.green { color:var(--green); }
 .player-card .return.red { color:var(--red); }
 .player-card .return.neutral { color:var(--text2); }
