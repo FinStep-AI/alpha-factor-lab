@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Alpha Factor Lab</title>
+<title>Alpha Factor Lab · 阿尔法工坊</title>
 <style>
   :root {
     --bg: #0f1117; --card: #1a1d29; --border: #2a2d3a;
@@ -15,123 +15,116 @@
   
   .hero {
     text-align: center;
-    padding: 80px 20px 60px;
+    padding: 80px 20px 48px;
     position: relative;
     overflow: hidden;
   }
   .hero::before {
     content: '';
     position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
+    top: -50%; left: -50%; width: 200%; height: 200%;
     background: radial-gradient(ellipse at center, rgba(79,140,255,0.08) 0%, transparent 60%);
     pointer-events: none;
   }
   .hero h1 {
-    font-size: 3rem;
-    font-weight: 800;
+    font-size: 3rem; font-weight: 800;
     background: linear-gradient(135deg, var(--accent), var(--purple));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    margin-bottom: 12px;
-    position: relative;
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    margin-bottom: 12px; position: relative;
   }
   .hero .subtitle {
-    color: var(--text2);
-    font-size: 1.15rem;
-    max-width: 600px;
-    margin: 0 auto;
-    position: relative;
+    color: var(--text2); font-size: 1.1rem;
+    max-width: 640px; margin: 0 auto; position: relative;
   }
 
-  .container {
-    max-width: 960px;
-    margin: 0 auto;
-    padding: 0 20px 80px;
-    flex: 1;
+  .container { max-width: 960px; margin: 0 auto; padding: 0 20px 80px; flex: 1; }
+
+  /* Section headers */
+  .section-header {
+    display: flex; align-items: center; gap: 12px;
+    margin: 40px 0 8px; position: relative;
+  }
+  .section-header h2 {
+    font-size: 1.25rem; font-weight: 700; white-space: nowrap;
+  }
+  .section-header .line {
+    flex: 1; height: 1px; background: var(--border);
+  }
+  .section-header .badge {
+    font-size: 0.72rem; font-weight: 600;
+    padding: 3px 10px; border-radius: 20px; white-space: nowrap;
+  }
+  .badge-live { background: rgba(34,197,94,0.15); color: var(--green); }
+  .badge-lib  { background: rgba(79,140,255,0.12); color: var(--accent); }
+
+  .section-desc {
+    color: var(--text2); font-size: 0.88rem; margin-bottom: 20px; line-height: 1.7;
   }
 
-  .cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 24px;
-    margin-top: 20px;
-  }
+  /* Cards grid */
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+  .cards.single { grid-template-columns: 1fr; max-width: 560px; }
 
   .card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 32px 28px;
-    text-decoration: none;
-    color: var(--text);
-    transition: all 0.25s ease;
-    position: relative;
-    overflow: hidden;
+    background: var(--card); border: 1px solid var(--border); border-radius: 16px;
+    padding: 32px 28px; text-decoration: none; color: var(--text);
+    transition: all 0.25s ease; position: relative; overflow: hidden;
   }
   .card:hover {
-    border-color: var(--accent);
-    transform: translateY(-4px);
+    border-color: var(--accent); transform: translateY(-4px);
     box-shadow: 0 12px 40px rgba(79,140,255,0.12);
   }
   .card::after {
-    content: '→';
-    position: absolute;
-    top: 32px;
-    right: 28px;
-    font-size: 1.4rem;
-    color: var(--text2);
-    transition: all 0.25s;
+    content: '→'; position: absolute; top: 32px; right: 28px;
+    font-size: 1.4rem; color: var(--text2); transition: all 0.25s;
   }
-  .card:hover::after {
-    color: var(--accent);
-    transform: translateX(4px);
-  }
+  .card:hover::after { color: var(--accent); transform: translateX(4px); }
 
-  .card-icon {
-    font-size: 2.4rem;
-    margin-bottom: 16px;
-    display: block;
-  }
-  .card h2 {
-    font-size: 1.3rem;
-    font-weight: 700;
-    margin-bottom: 10px;
-  }
-  .card p {
-    color: var(--text2);
-    font-size: 0.92rem;
-    line-height: 1.65;
-  }
+  .card-icon { font-size: 2.4rem; margin-bottom: 16px; display: block; }
+  .card h3 { font-size: 1.3rem; font-weight: 700; margin-bottom: 10px; }
+  .card p { color: var(--text2); font-size: 0.9rem; line-height: 1.65; }
 
   .card-tag {
-    display: inline-block;
-    margin-top: 16px;
-    padding: 4px 12px;
-    border-radius: 20px;
-    font-size: 0.75rem;
-    font-weight: 600;
+    display: inline-block; margin-top: 16px; padding: 4px 12px;
+    border-radius: 20px; font-size: 0.75rem; font-weight: 600;
   }
-  .tag-blue { background: rgba(79,140,255,0.12); color: var(--accent); }
-  .tag-green { background: rgba(34,197,94,0.12); color: var(--green); }
+  .tag-blue   { background: rgba(79,140,255,0.12); color: var(--accent); }
+  .tag-green  { background: rgba(34,197,94,0.12); color: var(--green); }
   .tag-purple { background: rgba(168,85,247,0.12); color: var(--purple); }
   .tag-orange { background: rgba(245,158,11,0.12); color: var(--orange); }
 
+  /* Competition card special styling */
+  .card.card-competition {
+    border-image: linear-gradient(135deg, var(--accent), var(--purple), var(--orange)) 1;
+    border-width: 2px;
+  }
+  .card.card-competition:hover {
+    box-shadow: 0 12px 40px rgba(168,85,247,0.15);
+  }
+
+  /* Status indicator */
+  .status-dot {
+    display: inline-block; width: 8px; height: 8px; border-radius: 50%;
+    margin-right: 6px; position: relative; top: -1px;
+  }
+  .status-dot.live { background: var(--green); animation: pulse 2s infinite; }
+  .status-dot.archive { background: var(--text2); }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
   .footer {
-    text-align: center;
-    padding: 24px;
-    color: var(--text2);
-    font-size: 0.8rem;
-    border-top: 1px solid var(--border);
+    text-align: center; padding: 24px; color: var(--text2);
+    font-size: 0.8rem; border-top: 1px solid var(--border);
   }
   .footer a { color: var(--accent); text-decoration: none; }
   .footer a:hover { text-decoration: underline; }
 
   @media (max-width: 640px) {
     .hero h1 { font-size: 2rem; }
-    .hero { padding: 50px 16px 40px; }
+    .hero { padding: 50px 16px 32px; }
     .cards { grid-template-columns: 1fr; }
   }
 </style>
@@ -140,36 +133,67 @@
 
 <div class="hero">
   <h1>📈 Alpha Factor Lab</h1>
-  <p class="subtitle">量化因子研究 · 模拟验证 · 基本面分析<br>数据驱动的投资决策工具箱</p>
+  <p class="subtitle">由 AI Agent 驱动的量化投资研究平台<br>因子挖掘 · 基本面分析 · 技术研判 · AI 模拟对决</p>
 </div>
 
 <div class="container">
+
+  <!-- ========== Section 1: Live Competition ========== -->
+  <div class="section-header">
+    <h2>🏆 实时竞赛</h2>
+    <span class="badge badge-live"><span class="status-dot live"></span>进行中</span>
+    <span class="line"></span>
+  </div>
+  <p class="section-desc">
+    四位 AI Agent 各怀绝技、同台竞技。每位选手拥有 1000 万虚拟资金，独立做出投资决策，
+    收盘后自动结算净值。这不是回测——是 AI 的实时对决。
+  </p>
+  <div class="cards single">
+    <a class="card card-competition" href="paper-trading.html">
+      <span class="card-icon">🏆</span>
+      <h3>AI 投资竞赛 · 四大流派对决</h3>
+      <p>
+        🔢 因子猎人（量化多因子）&nbsp;&nbsp;
+        📊 技术猎手（技术择时）<br>
+        🏛️ 巴菲特门徒（价值投资）&nbsp;&nbsp;
+        🏄 趋势游侠（趋势跟踪）<br><br>
+        实时净值曲线、持仓明细、交易记录、AI 决策日志全公开。
+      </p>
+      <span class="card-tag tag-green"><span class="status-dot live"></span>Live Tracking</span>
+    </a>
+  </div>
+
+  <!-- ========== Section 2: Research Library ========== -->
+  <div class="section-header">
+    <h2>📚 研究库</h2>
+    <span class="badge badge-lib">持续更新</span>
+    <span class="line"></span>
+  </div>
+  <p class="section-desc">
+    AI Agent 自动生成的投研报告合集。涵盖量化因子回测、上市公司基本面深度分析、个股技术分析。
+    所有报告均为 AI 自主完成——从数据采集、指标计算到结论输出，全链路自动化。
+  </p>
   <div class="cards">
     <a class="card" href="factor-backtest.html">
       <span class="card-icon">🔬</span>
-      <h2>因子回测报告</h2>
-      <p>单因子回测评估：IC 序列、分层收益、因子衰减分析。从 Alpha Idea 到量化验证的完整链路。</p>
+      <h3>因子回测</h3>
+      <p>单因子回测评估：IC 序列、分层收益、因子衰减分析。<br>从 Alpha Idea 到量化验证的完整链路。</p>
       <span class="card-tag tag-blue">Quant Research</span>
-    </a>
-    <a class="card" href="paper-trading.html">
-      <span class="card-icon">📊</span>
-      <h2>模拟盘状态</h2>
-      <p>AI 因子精选策略实盘模拟：持仓组合、收益曲线、风险指标实时跟踪。</p>
-      <span class="card-tag tag-green">Live Tracking</span>
     </a>
     <a class="card" href="fundamental.html">
       <span class="card-icon">🏰</span>
-      <h2>基本面分析报告</h2>
+      <h3>基本面分析</h3>
       <p>巴菲特视角深度分析：护城河、盈利质量、财务健康、估值合理性四维评估。</p>
       <span class="card-tag tag-purple">Value Investing</span>
     </a>
     <a class="card" href="technical.html">
       <span class="card-icon">📈</span>
-      <h2>技术分析</h2>
-      <p>K线形态、均线系统、MACD/KDJ/RSI/BOLL 多指标信号，自动识别买卖点。</p>
+      <h3>技术分析</h3>
+      <p>K线形态、均线系统、MACD / KDJ / RSI / BOLL 多指标信号，自动识别买卖点。</p>
       <span class="card-tag tag-orange">Technical Analysis</span>
     </a>
   </div>
+
 </div>
 
 <div class="footer">

@@ -77,16 +77,26 @@ tr:last-child td { border-bottom:none; }
 /* Chart */
 .chart-box { position:relative; height:380px; }
 
-/* Decision timeline */
-.timeline { max-height:500px; overflow-y:auto; }
-.timeline-item { display:flex; gap:12px; padding:10px 0; border-bottom:1px solid var(--border); }
+/* Decision timeline — vertical layout, each item takes full width */
+.timeline { max-height:600px; overflow-y:auto; }
+.timeline-item { display:flex; gap:12px; padding:14px 0; border-bottom:1px solid var(--border); }
 .timeline-item:last-child { border-bottom:none; }
-.timeline-item .time { min-width:80px; color:var(--text2); font-size:0.8rem; }
-.timeline-item .badge { min-width:24px; font-size:1.1rem; }
-.timeline-item .content { flex:1; }
-.timeline-item .content .title { font-weight:600; font-size:0.88rem; }
-.timeline-item .content .detail { color:var(--text2); font-size:0.82rem; margin-top:2px; }
-.timeline-item .action-tag { font-size:0.75rem; padding:1px 8px; border-radius:3px; margin-left:8px; }
+.timeline-item .time { min-width:80px; flex-shrink:0; color:var(--text2); font-size:0.8rem; line-height:1.5; }
+.timeline-item .badge { min-width:28px; flex-shrink:0; font-size:1.1rem; }
+.timeline-item .content { flex:1; min-width:0; }
+.timeline-item .content .title { font-weight:600; font-size:0.88rem; line-height:1.5; }
+.timeline-item .content .detail { color:var(--text2); font-size:0.82rem; margin-top:4px; line-height:1.6; word-break:break-word; }
+.timeline-item .action-tag { font-size:0.75rem; padding:1px 8px; border-radius:3px; margin-left:8px; white-space:nowrap; }
+
+/* Intro banner */
+.intro-banner { background:linear-gradient(135deg, rgba(79,140,255,0.06), rgba(168,85,247,0.06)); border:1px solid var(--border); border-radius:14px; padding:28px 32px; margin-bottom:24px; }
+.intro-banner h2 { font-size:1.15rem; font-weight:700; margin-bottom:12px; }
+.intro-banner p { color:var(--text2); font-size:0.88rem; line-height:1.75; margin-bottom:8px; }
+.intro-banner .players-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:10px; margin-top:16px; }
+.intro-banner .player-intro { display:flex; align-items:center; gap:8px; font-size:0.85rem; }
+.intro-banner .player-intro .emoji { font-size:1.3rem; }
+.intro-banner .player-intro .pname { font-weight:600; }
+.intro-banner .player-intro .pstyle { color:var(--text2); font-size:0.78rem; }
 
 /* Empty */
 .empty { text-align:center; padding:48px 20px; color:var(--text2); }
@@ -117,6 +127,23 @@ tr:last-child td { border-bottom:none; }
     <a href="paper-trading.html" class="active">模拟竞赛</a>
     <a href="fundamental.html">基本面分析</a>
     <a href="technical.html">技术分析</a>
+  </div>
+</div>
+
+<!-- Competition Intro -->
+<div class="intro-banner">
+  <h2>🤖 这是一场 AI Agent 的投资对决</h2>
+  <p>
+    四位 AI Agent 各自独立运行，拥有不同的投资哲学和交易策略。它们每天自动扫描市场、分析数据、做出买卖决策——没有人类干预，完全自主。每位选手初始资金 ¥1,000 万，真实模拟 A 股交易费率（佣金 + 印花税 + 过户费 + 滑点），收盘后自动结算净值。
+  </p>
+  <p>
+    谁的策略能跑赢市场？量化因子 vs 技术择时 vs 价值投资 vs 趋势跟踪——用数据说话。
+  </p>
+  <div class="players-grid">
+    <div class="player-intro"><span class="emoji">🔢</span><span><span class="pname">因子猎人</span><br><span class="pstyle">量化多因子 · 周度调仓 · 中证1000</span></span></div>
+    <div class="player-intro"><span class="emoji">📊</span><span><span class="pname">技术猎手</span><br><span class="pstyle">技术择时 · 每日交易 · 高波动标的</span></span></div>
+    <div class="player-intro"><span class="emoji">🏛️</span><span><span class="pname">巴菲特门徒</span><br><span class="pstyle">价值投资 · 月度换仓 · 白马蓝筹</span></span></div>
+    <div class="player-intro"><span class="emoji">🏄</span><span><span class="pname">趋势游侠</span><br><span class="pstyle">趋势跟踪 · 板块轮动 · 全A选股</span></span></div>
   </div>
 </div>
 
@@ -440,7 +467,7 @@ function renderPlayerDetail(pid) {
   `;
 }
 
-// ===== Activity Timeline =====
+// ===== Activity Timeline — each item takes full width =====
 function renderActivityTimeline() {
   const el = document.getElementById('activityTimeline');
   
@@ -466,17 +493,28 @@ function renderActivityTimeline() {
     return;
   }
   
+  // Group by date for visual separation
+  let lastDate = '';
   el.innerHTML = recent.map(d => {
     const actionColors = { buy: 'var(--green)', sell: 'var(--red)', rebalance: 'var(--accent)', hold: 'var(--text2)' };
     const actionText = { buy: '买入', sell: '卖出', rebalance: '调仓', hold: '观望' };
-    return `<div class="timeline-item">
-      <div class="time">${d.date}<br>${d.time || ''}</div>
+    let dateSep = '';
+    if (d.date !== lastDate) {
+      dateSep = `<div style="padding:8px 0 4px;color:var(--text2);font-size:0.75rem;font-weight:600;border-bottom:1px solid var(--border);margin-bottom:4px;${lastDate ? 'margin-top:12px' : ''}">${d.date}</div>`;
+      lastDate = d.date;
+    }
+    return `${dateSep}<div class="timeline-item">
+      <div class="time">${d.time || ''}</div>
       <div class="badge">${d.player_emoji}</div>
       <div class="content">
-        <div class="title">${d.player_name}: ${d.summary}
-          <span style="color:${actionColors[d.action] || 'var(--text2)'};font-size:0.8rem;margin-left:6px">[${actionText[d.action] || d.action}]</span>
+        <div class="title">
+          <span style="color:${PLAYER_COLORS[d.player_id]}">${d.player_name}</span>
+          <span style="color:${actionColors[d.action] || 'var(--text2)'};font-size:0.78rem;margin-left:6px;padding:1px 8px;border-radius:3px;background:${d.action === 'buy' ? 'rgba(34,197,94,.12)' : d.action === 'sell' ? 'rgba(239,68,68,.12)' : 'rgba(139,143,163,.1)'}">
+            ${actionText[d.action] || d.action || '—'}
+          </span>
         </div>
-        ${d.detail ? `<div class="detail">${d.detail}</div>` : ''}
+        <div class="detail" style="margin-top:4px">${d.summary || ''}</div>
+        ${d.detail ? `<div class="detail" style="margin-top:2px;font-size:0.78rem;opacity:0.7">${d.detail.length > 200 ? d.detail.substring(0, 200) + '...' : d.detail}</div>` : ''}
       </div>
     </div>`;
   }).join('');
