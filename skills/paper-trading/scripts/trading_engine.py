@@ -501,7 +501,7 @@ def main():
     
     # trade
     sp_trade = subparsers.add_parser("trade", help="执行交易")
-    sp_trade.add_argument("--player", required=True, choices=["quant","trader","value"])
+    sp_trade.add_argument("--player", required=True, choices=["quant","trader","value","dwj"])
     sp_trade.add_argument("--code", required=True)
     sp_trade.add_argument("--name", required=True)
     sp_trade.add_argument("--price", type=float, required=True)
@@ -520,12 +520,12 @@ def main():
     
     # summary
     sp_summary = subparsers.add_parser("summary", help="输出竞赛摘要")
-    sp_summary.add_argument("--player", choices=["quant","trader","value"], help="指定选手（留空=全部）")
+    sp_summary.add_argument("--player", choices=["quant","trader","value","dwj"], help="指定选手（留空=全部）")
     sp_summary.add_argument("--data", default=DEFAULT_DATA_FILE)
     
     # decision
     sp_dec = subparsers.add_parser("decision", help="记录决策")
-    sp_dec.add_argument("--player", required=True, choices=["quant","trader","value"])
+    sp_dec.add_argument("--player", required=True, choices=["quant","trader","value","dwj"])
     sp_dec.add_argument("--date", required=True)
     sp_dec.add_argument("--type", required=True)
     sp_dec.add_argument("--summary", required=True)

@@ -6,7 +6,7 @@
     "benchmark": "000300",
     "benchmark_name": "沪深300",
     "created_at": "2026-02-23 22:14:25",
-    "updated_at": "2026-02-26 09:29:16",
+    "updated_at": "2026-02-26 09:37:55",
     "status": "active"
   },
   "players": {
@@ -911,8 +911,86 @@
       "style": "趋势跟踪 · 板块轮动 · 全A股扫描 · 中长线波段",
       "description": "BBI+MA60趋势判断，KDJ低位捕捉买点，板块轮动做趋势收益。核心逻辑：阳率×盈亏比最大化。",
       "portfolio": {
-        "cash": 10000000.0,
-        "positions": {},
+        "cash": 1327.8900000012945,
+        "positions": {
+          "603999": {
+            "code": "603999",
+            "name": "读者传媒",
+            "volume": 180800,
+            "avg_cost": 7.9,
+            "current_price": 7.9,
+            "market_value": 1428320.0,
+            "pnl": 0,
+            "pnl_pct": 0,
+            "entry_date": "2026-02-26"
+          },
+          "601999": {
+            "code": "601999",
+            "name": "出版传媒",
+            "volume": 188400,
+            "avg_cost": 7.58,
+            "current_price": 7.58,
+            "market_value": 1428072.0,
+            "pnl": 0,
+            "pnl_pct": 0,
+            "entry_date": "2026-02-26"
+          },
+          "002259": {
+            "code": "002259",
+            "name": "升达林业",
+            "volume": 255100,
+            "avg_cost": 5.6,
+            "current_price": 5.6,
+            "market_value": 1428560.0,
+            "pnl": 0,
+            "pnl_pct": 0,
+            "entry_date": "2026-02-26"
+          },
+          "603096": {
+            "code": "603096",
+            "name": "新经典",
+            "volume": 74200,
+            "avg_cost": 19.23,
+            "current_price": 19.23,
+            "market_value": 1426866.0,
+            "pnl": 0,
+            "pnl_pct": 0,
+            "entry_date": "2026-02-26"
+          },
+          "002983": {
+            "code": "002983",
+            "name": "芯瑞达",
+            "volume": 55800,
+            "avg_cost": 25.6,
+            "current_price": 25.6,
+            "market_value": 1428480.0,
+            "pnl": 0,
+            "pnl_pct": 0,
+            "entry_date": "2026-02-26"
+          },
+          "603012": {
+            "code": "603012",
+            "name": "创力集团",
+            "volume": 176100,
+            "avg_cost": 8.11,
+            "current_price": 8.11,
+            "market_value": 1428171.0,
+            "pnl": 0,
+            "pnl_pct": 0,
+            "entry_date": "2026-02-26"
+          },
+          "001366": {
+            "code": "001366",
+            "name": "播恩集团",
+            "volume": 96600,
+            "avg_cost": 14.67,
+            "current_price": 14.67,
+            "market_value": 1417122.0,
+            "pnl": 0,
+            "pnl_pct": 0,
+            "entry_date": "2026-02-26"
+          }
+        },
         "total_value": 10000000.0,
         "last_update": "2026-02-26 00:03"
       },
@@ -930,7 +1008,127 @@
           100.0
         ]
       },
-      "trades": [],
+      "trades": [
+        {
+          "date": "2026-02-26",
+          "code": "603999",
+          "name": "读者传媒",
+          "direction": "buy",
+          "price": 7.9,
+          "volume": 180800,
+          "amount": 1428320.0,
+          "fees": {
+            "commission": 428.5,
+            "stamp_duty": 0,
+            "transfer_fee": 14.28,
+            "slippage_cost": 1428.32,
+            "total": 1871.1
+          },
+          "reason": "主策略:J=7.1<13+上升趋势+板块集中(新闻出版3只),score=73,量比4.3,量价齐升"
+        },
+        {
+          "date": "2026-02-26",
+          "code": "601999",
+          "name": "出版传媒",
+          "direction": "buy",
+          "price": 7.58,
+          "volume": 188400,
+          "amount": 1428072.0,
+          "fees": {
+            "commission": 428.42,
+            "stamp_duty": 0,
+            "transfer_fee": 14.28,
+            "slippage_cost": 1428.07,
+            "total": 1870.77
+          },
+          "reason": "主策略:J=1.6<13+上升趋势+板块集中(新闻出版3只),score=73,量比3.3,量价齐升"
+        },
+        {
+          "date": "2026-02-26",
+          "code": "002259",
+          "name": "升达林业",
+          "direction": "buy",
+          "price": 5.6,
+          "volume": 255100,
+          "amount": 1428560.0,
+          "fees": {
+            "commission": 428.57,
+            "stamp_duty": 0,
+            "transfer_fee": 14.29,
+            "slippage_cost": 1428.56,
+            "total": 1871.41
+          },
+          "reason": "主策略:J=11.3<13+上升趋势,score=70,量比9.0≥8异常放量,量价齐升"
+        },
+        {
+          "date": "2026-02-26",
+          "code": "603096",
+          "name": "新经典",
+          "direction": "buy",
+          "price": 19.23,
+          "volume": 74200,
+          "amount": 1426866.0,
+          "fees": {
+            "commission": 428.06,
+            "stamp_duty": 0,
+            "transfer_fee": 14.27,
+            "slippage_cost": 1426.87,
+            "total": 1869.19
+          },
+          "reason": "主策略:J=5.9<13+上升趋势+板块集中(新闻出版3只),score=65,量价齐升"
+        },
+        {
+          "date": "2026-02-26",
+          "code": "002983",
+          "name": "芯瑞达",
+          "direction": "buy",
+          "price": 25.6,
+          "volume": 55800,
+          "amount": 1428480.0,
+          "fees": {
+            "commission": 428.54,
+            "stamp_duty": 0,
+            "transfer_fee": 14.28,
+            "slippage_cost": 1428.48,
+            "total": 1871.31
+          },
+          "reason": "主策略:J=0.6极低+上升趋势,score=63,量比5.0,量价齐升"
+        },
+        {
+          "date": "2026-02-26",
+          "code": "603012",
+          "name": "创力集团",
+          "direction": "buy",
+          "price": 8.11,
+          "volume": 176100,
+          "amount": 1428171.0,
+          "fees": {
+            "commission": 428.45,
+            "stamp_duty": 0,
+            "transfer_fee": 14.28,
+            "slippage_cost": 1428.17,
+            "total": 1870.9
+          },
+          "reason": "主策略:J=5.8<13+上升趋势,score=63,量比4.8,量价齐升"
+        },
+        {
+          "date": "2026-02-26",
+          "code": "001366",
+          "name": "播恩集团",
+          "direction": "buy",
+          "price": 14.67,
+          "volume": 96600,
+          "amount": 1417122.0,
+          "fees": {
+            "commission": 425.14,
+            "stamp_duty": 0,
+            "transfer_fee": 14.17,
+            "slippage_cost": 1417.12,
+            "total": 1856.43
+          },
+          "reason": "主策略:J=-4.6极低+上升趋势,score=63,量比3.6,量价齐升"
+        }
+      ],
       "decisions": [
         {
           "date": "2026-02-24",
@@ -963,15 +1161,29 @@
           "action": "hold",
           "summary": "收盘观察：A股延续涨势，大盘小幅上涨",
           "detail": "系统搭建完成度90%——扫描器✅、K线缓存✅、行业映射✅（55%覆盖率待补全）、止盈止损模块✅。Cron定时任务已配置，明日起自动化运行。"
+        },
+        {
+          "date": "2026-02-26",
+          "time": "09:37",
+          "type": "morning_scan",
+          "action": "buy",
+          "summary": "晨扫首次建仓7只：扫描5086只→Level2过滤2611只→Level3筛出16只候选(14主策略+2单针下30)。板块集中信号：新闻出版业3只(读者传媒/出版传媒/新经典)优先买入。另选3只高分标的(升达林业量比9.0≥8/芯瑞达J=0.6极低/创力集团量比4.8)+1只低J值标的(播恩集团J=-4.6)。7只均满足四大硬条件(上升趋势+J<13+P>BBI+BBI>MA60)。单只仓位约143万，总投入约999.6万，满仓运行。",
+          "detail": ""
         }
       ],
       "rebalances": [],
       "stats": {
-        "total_trades": 0,
+        "total_trades": 7,
         "win_rate": 0,
         "max_drawdown_pct": 0,
         "sharpe_ratio": 0,
-        "calmar_ratio": 0
+        "calmar_ratio": 0,
+        "total_return_pct": 0.0,
+        "annualized_return_pct": 0.0,
+        "profit_loss_ratio": 0,
+        "total_fees": 13081.109999999999,
+        "current_positions": 0,
+        "turnover_rate": 0.0
       },
       "cash": 10000000.0,
       "positions": {}
