@@ -78,10 +78,10 @@ tr:last-child td { border-bottom:none; }
 .chart-box { position:relative; height:380px; }
 
 /* Decision timeline — vertical layout, each item takes full width */
-/* Timeline: force vertical stacking — every item block-level, full-width */
-.timeline { max-height:600px; overflow-y:auto; display:block !important; }
-.timeline > * { display:block !important; width:100% !important; }
-.timeline-item { display:flex !important; flex-direction:row !important; flex-wrap:nowrap !important; gap:12px; padding:14px 0; border-bottom:1px solid var(--border); width:100% !important; }
+/* Timeline: force vertical stacking via flex-column */
+.timeline { max-height:600px; overflow-y:auto; display:flex !important; flex-direction:column !important; flex-wrap:nowrap !important; gap:0; }
+.timeline > * { display:block !important; width:100% !important; flex:0 0 auto !important; }
+.timeline-item { display:flex !important; flex-direction:row !important; flex-wrap:nowrap !important; gap:12px; padding:14px 0; border-bottom:1px solid var(--border); width:100% !important; box-sizing:border-box; }
 .timeline-item:last-child { border-bottom:none; }
 .timeline-item .time { min-width:80px; max-width:80px; flex-shrink:0; color:var(--text2); font-size:0.8rem; line-height:1.5; }
 .timeline-item .badge { min-width:28px; max-width:36px; flex-shrink:0; font-size:1.1rem; }
