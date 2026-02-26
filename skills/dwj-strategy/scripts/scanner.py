@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-邓文晋趋势策略 — 全A股扫描器
+趋势游侠策略 — 全A股扫描器
 三级漏斗：实时行情快筛 → K线指标计算 → 信号排序输出
 
 用法:
@@ -196,7 +196,7 @@ def check_bbi_ma60_golden_cross(closes, lookback=5):
 
 
 def scan(quotes_file, output_file, top_n=30):
-    """全A股扫描主函数 — 严格按邓文晋策略过滤"""
+    """全A股扫描主函数 — 严格按趋势游侠策略过滤"""
     
     # 加载数据
     with open(quotes_file) as f:
@@ -413,7 +413,7 @@ def scan(quotes_file, output_file, top_n=30):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="邓文晋策略全A股扫描")
+    parser = argparse.ArgumentParser(description="趋势游侠策略全A股扫描")
     parser.add_argument("--quotes", default="/tmp/a_share_quotes.json", help="实时行情JSON")
     parser.add_argument("--output", default="/tmp/dwj_signals.json", help="输出文件")
     parser.add_argument("--top-n", type=int, default=30, help="输出前N只候选")
