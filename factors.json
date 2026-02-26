@@ -410,5 +410,71 @@
       ]
     },
     "conclusion": "第二强因子。Sharpe=1.07，MDD仅-9.6%，单调性0.6分层清晰。方向为正（高波动→高收益），发现中证1000存在'高波动溢价'，与大盘低波异象相反。与Amihud低相关，适合组合使用。"
+  },
+  {
+    "id": "overnight_momentum_v1",
+    "name": "隔夜收益动量 v1",
+    "name_en": "Overnight Return Momentum v1",
+    "category": "动量",
+    "description": "计算20日累计隔夜收益(close→open)与日内收益(open→close)的差值。正值=隔夜持续涨但日内跌，暗示知情交易者在盘后/集合竞价买入。经市值中性化处理。A股隔夜效应在中证1000上显著。",
+    "hypothesis": "隔夜收益包含更多知情交易信息(机构偏好集合竞价)，隔夜持续强于日内的股票后续有超额收益",
+    "expected_direction": "正向（高因子值=高预期收益）",
+    "factor_type": "量价/信息",
+    "formula": "neutralize(sum(overnight_ret, 20) - sum(intraday_ret, 20), log_mktcap)",
+    "direction": 1,
+    "stock_pool": "中证1000",
+    "period": "2022-10 ~ 2026-02",
+    "rebalance_freq": 20,
+    "forward_days": 20,
+    "cost": 0.002,
+    "rating": "★★★★ 强",
+    "nav_data": "output/overnight_momentum_v1/cumulative_returns.json",
+    "ic_data": "output/overnight_momentum_v1/ic_series.json",
+    "upgrade_notes": "首版即达标。隔夜效应在A股中证1000小盘股上非常显著。",
+    "lessons_learned": [
+      "隔夜收益在A股有显著alpha，尤其是小盘股",
+      "隔夜vs日内的差值比单独用隔夜效果更好",
+      "换手76%偏高，考虑拉长窗口或降低调仓频率",
+      "IC=0.039比Amihud(0.028)还高，是当前最强IC因子"
+    ],
+    "created": "2026-02-26",
+    "updated": "2026-02-26",
+    "metrics": {
+      "ic_mean": 0.0393,
+      "ic_std": 0.1011,
+      "ic_t": 2.87,
+      "ic_positive_ratio": 0.65,
+      "rank_ic": 0.0713,
+      "ir": 0.3885,
+      "long_short_total": 0.5159,
+      "long_short_annual": 0.1398,
+      "long_short_annual_return": 0.1398,
+      "long_short_sharpe": 1.0,
+      "long_short_mdd": -0.1266,
+      "turnover": 0.7567,
+      "monotonicity": 0.9,
+      "group_returns_annualized": [
+        0.0583,
+        0.1555,
+        0.1752,
+        0.1629,
+        0.224
+      ],
+      "group_sharpe": [
+        0.208,
+        0.632,
+        0.744,
+        0.675,
+        0.853
+      ],
+      "group_mdd": [
+        -0.4326,
+        -0.3271,
+        -0.3197,
+        -0.3907,
+        -0.3591
+      ]
+    },
+    "conclusion": "强因子。IC=0.039(t=2.87)在所有因子中最高，单调性0.9优秀，Sharpe=1.0。发现A股中证1000存在显著隔夜效应——隔夜持续强势的股票后续表现更好。换手76%中等偏高，适合月度调仓。与Amihud(流动性)互补性好。"
   }
 ]
