@@ -262,12 +262,15 @@ def update_nav(data: dict, player_id: str, prices: dict, date: str):
     # 更新每个持仓的当前价格和盈亏
     total_market_value = 0
     for code, pos in portfolio["positions"].items():
+        # 兼容两种字段名: shares/cost_price (quant) vs volume/avg_cost (trader/dwj)
+        vol = pos.get("volume") or pos.get("shares", 0)
+        cost = pos.get("avg_cost") or pos.get("cost_price", 0)
         if code in prices:
             pos["current_price"] = prices[code]
-            pos["market_value"] = round(pos["current_price"] * pos["volume"], 2)
-            pos["pnl"] = round((pos["current_price"] - pos["avg_cost"]) * pos["volume"], 2)
-            pos["pnl_pct"] = round((pos["current_price"] / pos["avg_cost"] - 1) * 100, 2) if pos["avg_cost"] > 0 else 0
-        total_market_value += pos.get("market_value", pos["avg_cost"] * pos["volume"])
+            pos["market_value"] = round(pos["current_price"] * vol, 2)
+            pos["pnl"] = round((pos["current_price"] - cost) * vol, 2)
+            pos["pnl_pct"] = round((pos["current_price"] / cost - 1) * 100, 2) if cost > 0 else 0
+        total_market_value += pos.get("market_value", cost * vol)
     
     # 计算总资产和净值
     total_value = portfolio["cash"] + total_market_value
@@ -353,7 +356,7 @@ def _update_stats(player: dict, initial_cash: float):
     trades = player["trades"]
     if trades:
         # 只统计已平仓的（简化：按每笔卖出交易算）
-        sell_trades = [t for t in trades if t["direction"] == "sell"]
+        sell_trades = [t for t in trades if t.get("direction") == "sell" or t.get("action") == "sell"]
         # 这里简化处理，后续可以精确匹配买卖对
         winning = sum(1 for t in sell_trades if t.get("pnl", 0) > 0)
         stats["win_rate"] = round(winning / len(sell_trades) * 100, 2) if sell_trades else 0
