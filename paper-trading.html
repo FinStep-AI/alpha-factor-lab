@@ -335,11 +335,24 @@ function renderNavChart() {
       interaction: { mode: 'index', intersect: false },
       plugins: {
         legend: { labels: { color: '#8b8fa3', font: { size: 12 } } },
-        tooltip: { callbacks: { label: ctx => ctx.dataset.label + ': ' + ctx.parsed.y.toFixed(4) } }
+        tooltip: { callbacks: { label: ctx => ctx.dataset.label + ': ' + ((ctx.parsed.y - 1) * 100).toFixed(2) + '% (NAV ' + ctx.parsed.y.toFixed(4) + ')' } }
       },
       scales: {
         x: { ticks: { color: '#8b8fa3', maxTicksLimit: 12 }, grid: { color: 'rgba(255,255,255,.05)' } },
-        y: { ticks: { color: '#8b8fa3' }, grid: { color: 'rgba(255,255,255,.05)' } }
+        y: {
+          ticks: {
+            color: '#8b8fa3',
+            callback: function(v) { return ((v - 1) * 100).toFixed(2) + '%'; }
+          },
+          grid: { color: 'rgba(255,255,255,.05)' },
+          afterDataLimits: function(axis) {
+            // 在1.0上下对称扩展，确保负收益可见
+            var range = Math.max(Math.abs(axis.max - 1), Math.abs(1 - axis.min), 0.005);
+            var pad = range * 0.2;
+            axis.min = Math.min(axis.min, 1 - range - pad);
+            axis.max = Math.max(axis.max, 1 + range + pad);
+          }
+        }
       }
     }
   });
