@@ -1,11 +1,11 @@
 ---
 name: paper-trading
-description: AI投资竞赛模拟交易系统。三位AI选手（因子猎人/技术猎手/巴菲特门徒）各1000万本金实时对决。当需要执行模拟交易、更新净值、查看竞赛状态、调仓决策、记录决策日志时使用。也用于竞赛相关的cron任务调度和断网恢复。
+description: AI投资竞赛模拟交易系统。四位AI选手（因子猎人/技术猎手/巴菲特门徒/趋势游侠）各1000万本金实时对决。当需要执行模拟交易、更新净值、查看竞赛状态、调仓决策、记录决策日志时使用。也用于竞赛相关的cron任务调度和断网恢复。
 ---
 
 # Paper Trading — AI投资竞赛
 
-三位AI选手，三种投资流派，1000万本金实时对决。
+四位AI选手，四种投资流派，1000万本金实时对决。
 
 ## 架构
 
@@ -17,7 +17,8 @@ paper-trading/
 └── references/
     ├── player_quant.md     # 因子猎人决策指南
     ├── player_trader.md    # 技术猎手决策指南
-    └── player_value.md     # 巴菲特门徒决策指南
+    ├── player_value.md     # 巴菲特门徒决策指南
+    └── player_dwj.md       # 趋势游侠决策指南
 ```
 
 ## 数据文件
@@ -26,7 +27,7 @@ paper-trading/
 
 | 文件 | 用途 |
 |------|------|
-| `paper-trading-data.json` | 竞赛核心数据（三选手portfolio/trades/nav/decisions） |
+| `paper-trading-data.json` | 竞赛核心数据（四选手portfolio/trades/nav/decisions） |
 | `paper-trading-state.json` | 任务调度状态（last_run/pending队列） |
 
 ## 交易引擎 CLI
@@ -77,7 +78,7 @@ python3 skills/paper-trading/scripts/task_state.py status
 python3 skills/paper-trading/scripts/task_state.py should-run --task quant_rebalance
 ```
 
-## 三位选手策略
+## 四位选手策略
 
 ### 🔢 因子猎人（quant）
 - **股票池**：中证1000
@@ -100,6 +101,15 @@ python3 skills/paper-trading/scripts/task_state.py should-run --task quant_rebal
 - **调仓**：月度或事件驱动
 - **选股**：ROE>15%、PE合理、护城河深、管理层优
 - **决策参考**：读 `references/player_value.md`
+
+### 🏄 趋势游侠（dwj）
+- **股票池**：全A
+- **选股**：BBI+MA60趋势判断 + KDJ低位买入 + 板块轮动集中度
+- **扫描**：每天收盘后跑 `skills/dwj-strategy/scripts/scanner.py`
+- **信号**：五级漏斗过滤（基础→趋势→KDJ→排序→板块聚类）+ 单针下30补充通道
+- **仓位**：分散持仓，同板块≥3只信号加分
+- **决策参考**：读 `references/player_dwj.md`
+- **⚠️ 策略保密**：具体参数和漏斗逻辑不对外公开
 
 ## Cron任务执行流程
 
@@ -142,4 +152,5 @@ GitHub Pages 一般1~2分钟内自动部署。不需要额外的deploy步骤。
 - **alpha-factor-lab**：因子猎人的因子挖掘和回测
 - **technical-analysis**：技术猎手的K线图表和技术分析
 - **buffett-analysis**：巴菲特门徒的基本面分析
+- **dwj-strategy**：趋势游侠的全A股扫描和板块轮动
 - **us-market**：数据获取（如需美股标的对比）
