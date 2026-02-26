@@ -219,6 +219,7 @@ async function loadData() {
 
 function fmt(n, d=2) { return n == null ? '—' : Number(n).toFixed(d); }
 function fmtMoney(n) { return n == null ? '—' : '¥' + Number(n).toLocaleString('zh-CN', {minimumFractionDigits:0, maximumFractionDigits:0}); }
+function escHtml(s) { if(!s) return ''; return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 function pctClass(v) { return v > 0.01 ? 'green' : v < -0.01 ? 'red' : 'neutral'; }
 
 // ===== Render =====
@@ -442,10 +443,10 @@ function renderPlayerDetail(pid) {
     tradesHtml = `<div style="overflow-x:auto"><table>
       <thead><tr><th>日期</th><th>代码</th><th>名称</th><th>方向</th><th>价格</th><th>数量</th><th>金额</th><th>原因</th></tr></thead>
       <tbody>${trades.map(t => `<tr>
-        <td>${t.date}</td><td>${t.code}</td><td>${t.name}</td>
+        <td>${escHtml(t.date)}</td><td>${escHtml(t.code)}</td><td>${escHtml(t.name)}</td>
         <td><span class="tag-${t.action || t.direction}">${(t.action || t.direction) === 'buy' ? '买入' : '卖出'}</span></td>
         <td>¥${fmt(t.price)}</td><td>${t.shares || t.volume || '—'}</td><td>${fmtMoney(t.amount)}</td>
-        <td style="color:var(--text2);font-size:0.8rem;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${t.reason || ''}">${t.reason || '—'}</td>
+        <td style="color:var(--text2);font-size:0.8rem;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${escHtml(t.reason || '')}">${escHtml(t.reason || '—')}</td>
       </tr>`).join('')}</tbody></table></div>`;
   }
   
@@ -460,8 +461,8 @@ function renderPlayerDetail(pid) {
                         d.action === 'rebalance' ? '<span class="action-tag" style="background:rgba(79,140,255,.15);color:var(--accent)">调仓</span>' :
                         '<span class="action-tag tag-hold">持仓</span>';
       return `<div class="timeline-item">
-        <div class="time">${d.date}<br>${d.time || ''}</div>
-        <div class="content"><div class="title">${d.summary}${actionTag}</div>${d.detail ? `<div class="detail">${d.detail}</div>` : ''}</div>
+        <div class="time">${escHtml(d.date)}<br>${escHtml(d.time || '')}</div>
+        <div class="content"><div class="title">${escHtml(d.summary)}${actionTag}</div>${d.detail ? `<div class="detail">${escHtml(d.detail)}</div>` : ''}</div>
       </div>`;
     }).join('') + '</div>';
   }
@@ -536,17 +537,17 @@ function renderActivityTimeline() {
     const truncDetail = d.detail ? (d.detail.length > 200 ? d.detail.substring(0, 200) + '...' : d.detail) : '';
     
     html += `<div class="feed-entry"><div class="feed-item">
-      <div class="time">${d.time || ''}</div>
+      <div class="time">${escHtml(d.time || '')}</div>
       <div class="badge">${d.player_emoji}</div>
       <div class="content">
         <div class="title">
-          <span style="color:${PLAYER_COLORS[d.player_id]}">${d.player_name}</span>
+          <span style="color:${PLAYER_COLORS[d.player_id]}">${escHtml(d.player_name)}</span>
           <span style="color:${actionColors[d.action] || 'var(--text2)'};font-size:0.78rem;margin-left:6px;padding:1px 8px;border-radius:3px;background:${actionBg[d.action] || 'rgba(139,143,163,.1)'}">
-            ${actionText[d.action] || d.action || '—'}
+            ${actionText[d.action] || escHtml(d.action) || '—'}
           </span>
         </div>
-        <div class="detail">${d.summary || ''}</div>
-        ${truncDetail ? `<div class="detail" style="font-size:0.78rem;opacity:0.7;margin-top:2px">${truncDetail}</div>` : ''}
+        <div class="detail">${escHtml(d.summary || '')}</div>
+        ${truncDetail ? `<div class="detail" style="font-size:0.78rem;opacity:0.7;margin-top:2px">${escHtml(truncDetail)}</div>` : ''}
       </div>
     </div></div>`;
   });
