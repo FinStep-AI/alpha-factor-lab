@@ -335,14 +335,14 @@ function renderNavChart() {
       interaction: { mode: 'index', intersect: false },
       plugins: {
         legend: { labels: { color: '#8b8fa3', font: { size: 12 } } },
-        tooltip: { callbacks: { label: ctx => ctx.dataset.label + ': ' + ((ctx.parsed.y - 1) * 100).toFixed(2) + '% (NAV ' + ctx.parsed.y.toFixed(4) + ')' } }
+        tooltip: { callbacks: { label: ctx => ctx.dataset.label + ': NAV ' + ctx.parsed.y.toFixed(4) } }
       },
       scales: {
         x: { ticks: { color: '#8b8fa3', maxTicksLimit: 12 }, grid: { color: 'rgba(255,255,255,.05)' } },
         y: {
           ticks: {
             color: '#8b8fa3',
-            callback: function(v) { return ((v - 1) * 100).toFixed(2) + '%'; }
+            callback: function(v) { return v.toFixed(4); }
           },
           grid: { color: 'rgba(255,255,255,.05)' },
           afterDataLimits: function(axis) {
