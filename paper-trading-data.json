@@ -6,7 +6,7 @@
     "benchmark": "000300",
     "benchmark_name": "沪深300",
     "created_at": "2026-02-23 22:14:25",
-    "updated_at": "2026-02-26 09:15",
+    "updated_at": "2026-02-26 09:29:16",
     "status": "active"
   },
   "players": {
@@ -642,8 +642,20 @@
       "style": "技术面择时 · 单标的 · 日内决策",
       "description": "盯一只高波动高换手标的，MACD/KDJ/RSI/BOLL综合分析，择时进出",
       "portfolio": {
-        "cash": 10000000.0,
-        "positions": {},
+        "cash": 4993450.0,
+        "positions": {
+          "002716": {
+            "code": "002716",
+            "name": "湖南白银",
+            "volume": 312500,
+            "avg_cost": 16.0,
+            "current_price": 16.0,
+            "market_value": 5000000.0,
+            "pnl": 0,
+            "pnl_pct": 0,
+            "entry_date": "2026-02-26"
+          }
+        },
         "total_value": 10000000.0,
         "last_update": "2026-02-25"
       },
@@ -661,7 +673,25 @@
           100.0
         ]
       },
-      "trades": [],
+      "trades": [
+        {
+          "date": "2026-02-26",
+          "code": "002716",
+          "name": "湖南白银",
+          "direction": "buy",
+          "price": 16.0,
+          "volume": 312500,
+          "amount": 5000000.0,
+          "fees": {
+            "commission": 1500.0,
+            "stamp_duty": 0,
+            "transfer_fee": 50.0,
+            "slippage_cost": 5000.0,
+            "total": 6550.0
+          },
+          "reason": "技术面综合评分60:收盘突破MA20+连续反弹+放量+MACD绿柱收窄+KDJ多头,半仓试探"
+        }
+      ],
       "decisions": [
         {
           "date": "2026-02-24",
@@ -694,6 +724,14 @@
           "action": "hold",
           "summary": "午盘分析：002716湖南白银15.51(+3.06%)，冲高15.75后回落，逼近但未突破MA20(15.79)关键压力位。均线混合排列(MA20>MA5>MA10>MA60)，BOLL中轨附近(46.9%)。MACD绿柱收窄(DIF<DEA但柱向上)，KDJ金叉但J=91超买，RSI6=76.8偏强。量比1.23温和放量。综合评分+20，继续空仓观望。昨日涨停后连续2日正收益验证反弹趋势，但MA20未破不追高。",
           "detail": "关键位: 压力MA20=15.79/BOLL中轨, 支撑MA5=14.44/MA10=14.28。策略: 突破MA20(15.79)+收盘站稳→考虑半仓; 跌破MA5(14.44)→放弃反弹逻辑。早盘判断'等回踩MA5确认支撑或突破MA20'仍有效。KDJ J=91+RSI6=77短期偏热，追高风险大。"
+        },
+        {
+          "date": "2026-02-26",
+          "time": "09:29",
+          "type": "morning_analysis",
+          "action": "buy",
+          "summary": "002716湖南白银早盘分析：今日开16.00(+0.82%)。昨收15.87站上MA20(15.81)关键压力位,节后连涨2日(涨停+5.45%)。综合评分60分：趋势+15(价格在MA5/MA10上方),MACD+5(绿柱收窄DIF向上),KDJ+0(多头但J=91超买),RSI+10(RSI6=80偏强),BOLL+5(中轨50.7%),量价+10(放量1.6倍),形态+5(连续反弹),突破MA20+10。半仓312500股@16.00买入,金额500万。",
+          "detail": "关键位: 支撑MA5=14.51/MA10=14.31, 压力前高21.15。BOLL带宽8.84(20.23-11.39)说明波动极大。从高点21.15回撤25%反弹至中轨。MACD仍空头(DIF<DEA)但绿柱连续2日收窄,即将金叉。KDJ J=91超买短期回调风险大,但突破MA20确认反弹趋势。策略: 半仓试探性建仓,若站稳MA20+MACD金叉则加至满仓;若跌破MA5(14.51)止损。"
         }
       ],
       "rebalances": [],
@@ -705,8 +743,8 @@
         "calmar_ratio": 0.0,
         "win_rate": 0.0,
         "profit_loss_ratio": 0.0,
-        "total_trades": 0,
-        "total_fees": 0.0,
+        "total_trades": 1,
+        "total_fees": 6550.0,
         "current_positions": 0,
         "turnover_rate": 0.0
       },
