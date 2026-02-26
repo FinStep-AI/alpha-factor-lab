@@ -253,19 +253,20 @@ def main():
         nav = round(total_value / INITIAL_CASH, 6)
         cash_pct = round(cash / total_value * 100, 2) if total_value > 0 else 100
         
-        # 更新nav_history：如果今天已有记录则覆盖，否则追加
+        # 更新nav_history：盘中追加带时间戳的点
         nav_hist = player.get("nav_history", {})
         dates = nav_hist.get("dates", [])
         navs = nav_hist.get("nav", [])
         cash_pcts = nav_hist.get("cash_pct", [])
         
-        if dates and dates[-1] == today:
-            # 覆盖今天的值
+        time_label = datetime.now().strftime("%m-%d %H:%M")
+        
+        # 如果最后一个点是今天的盘中点（含HH:MM），覆盖同一时刻；否则追加
+        if dates and dates[-1] == time_label:
             navs[-1] = nav
             cash_pcts[-1] = cash_pct
         else:
-            # 追加
-            dates.append(today)
+            dates.append(time_label)
             navs.append(nav)
             cash_pcts.append(cash_pct)
         
@@ -298,10 +299,11 @@ def main():
         bm = data.get("benchmark", {})
         bm_dates = bm.get("dates", [])
         bm_navs = bm.get("nav", [])
-        if bm_dates and bm_dates[-1] == today:
+        bm_time_label = datetime.now().strftime("%m-%d %H:%M")
+        if bm_dates and bm_dates[-1] == bm_time_label:
             bm_navs[-1] = benchmark_nav
         else:
-            bm_dates.append(today)
+            bm_dates.append(bm_time_label)
             bm_navs.append(benchmark_nav)
         bm["dates"] = bm_dates
         bm["nav"] = bm_navs
