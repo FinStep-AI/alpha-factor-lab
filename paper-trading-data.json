@@ -6,7 +6,7 @@
     "benchmark": "000300",
     "benchmark_name": "沪深300",
     "created_at": "2026-02-23 22:14:25",
-    "updated_at": "2026-02-27 00:40:00",
+    "updated_at": "2026-02-27 00:51:45",
     "status": "active"
   },
   "players": {
@@ -1393,7 +1393,9 @@
       "description": "只看市场情绪温度和龙头连板高度，顺周期重仓龙头，退潮绝对空仓",
       "portfolio": {
         "cash": 10000000.0,
-        "positions": {}
+        "positions": {},
+        "total_value": 10000000.0,
+        "last_update": "2026-02-24"
       },
       "trades": [],
       "nav_history": {
@@ -1402,10 +1404,27 @@
         ],
         "nav": [
           1.0
+        ],
+        "cash_pct": [
+          100.0
         ]
       },
       "decisions": [],
-      "latest_news": "情绪战神入场！当前市场情绪高潮期(温度73)，豫能控股6连板为绝对龙头。观望评估中。"
+      "latest_news": "情绪战神入场！当前市场情绪高潮期(温度73)，豫能控股6连板为绝对龙头。观望评估中。",
+      "stats": {
+        "total_return_pct": 0.0,
+        "annualized_return_pct": 0.0,
+        "max_drawdown_pct": 0.0,
+        "sharpe_ratio": 0.0,
+        "calmar_ratio": 0.0,
+        "win_rate": 0.0,
+        "profit_loss_ratio": 0.0,
+        "total_trades": 0,
+        "total_fees": 0.0,
+        "current_positions": 0,
+        "turnover_rate": 0.0
+      },
+      "rebalances": []
     }
   },
   "benchmark": {
@@ -1440,33 +1459,63 @@
     "start_value": 4660.41
   },
   "leaderboard": {
-    "updated": "2026-02-27 00:40:00",
     "rankings": [
       {
-        "player": "quant",
-        "nav": 1.035447,
+        "player_id": "quant",
+        "name": "因子猎人",
+        "emoji": "🔢",
+        "total_return_pct": 3.54,
+        "sharpe_ratio": 4.62,
+        "max_drawdown_pct": 0.41,
+        "current_nav": 1.035447,
+        "total_trades": 19,
         "rank": 1
       },
       {
-        "player": "value",
-        "nav": 1.0,
+        "player_id": "value",
+        "name": "巴菲特门徒",
+        "emoji": "🏛️",
+        "total_return_pct": 0.0,
+        "sharpe_ratio": 0.0,
+        "max_drawdown_pct": 0,
+        "current_nav": 1.0,
+        "total_trades": 0,
         "rank": 2
       },
       {
-        "player": "sentiment",
-        "nav": 1.0,
+        "player_id": "sentiment",
+        "name": "情绪战神",
+        "emoji": "⚡",
+        "total_return_pct": 0.0,
+        "sharpe_ratio": 0.0,
+        "max_drawdown_pct": 0.0,
+        "current_nav": 1.0,
+        "total_trades": 0,
         "rank": 3
       },
       {
-        "player": "dwj",
-        "nav": 0.999721,
+        "player_id": "dwj",
+        "name": "趋势游侠",
+        "emoji": "🏄",
+        "total_return_pct": -0.03,
+        "sharpe_ratio": -1.16,
+        "max_drawdown_pct": 0.41,
+        "current_nav": 0.999721,
+        "total_trades": 11,
         "rank": 4
       },
       {
-        "player": "trader",
-        "nav": 0.980595,
+        "player_id": "trader",
+        "name": "技术猎手",
+        "emoji": "📊",
+        "total_return_pct": -1.94,
+        "sharpe_ratio": -5.41,
+        "max_drawdown_pct": 2.16,
+        "current_nav": 0.980595,
+        "total_trades": 1,
         "rank": 5
       }
-    ]
+    ],
+    "updated_at": "2026-02-27 00:51:45"
   }
 }
