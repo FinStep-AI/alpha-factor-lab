@@ -2,7 +2,12 @@
 # -*- coding: utf-8 -*-
 """
 趋势游侠策略 — 全A股扫描器
-三级漏斗：实时行情快筛 → K线指标计算 → 信号排序输出
+多级漏斗：基础过滤 → 趋势过滤 → 长阴排除 → 三通道信号 → 排序 → 板块聚类
+
+三条选股通道：
+1. 主策略：N型上升趋势 + J<13
+2. 单针下30：MA多头排列上升趋势 + 短期急跌长期强势
+3. 金叉缩量回调：BBI上穿MA60 + 放量上涨 + 缩量回调
 
 用法:
   python3 scanner.py --quotes /tmp/a_share_quotes.json --output /tmp/dwj_signals.json
@@ -170,9 +175,9 @@ def detect_uptrend(highs, lows, closes, lookback=60):
 
 
 def check_bbi_ma60_golden_cross(closes, lookback=5):
-    """检查BBI是否刚上穿MA60（最近lookback天内）"""
+    """检查BBI是否刚上穿MA60（最近lookback天内），返回金叉位置索引或None"""
     if len(closes) < 61:
-        return False
+        return None
     
     for i in range(max(1, len(closes) - lookback), len(closes)):
         subset = closes[:i+1]
@@ -190,9 +195,178 @@ def check_bbi_ma60_golden_cross(closes, lookback=5):
         ma60_prev = np.mean(prev_subset[-60:])
         
         if bbi_prev <= ma60_prev and bbi_now > ma60_now:
-            return True
+            return i  # 返回金叉位置
     
-    return False
+    return None
+
+
+def detect_big_selloff(klines, lookback=5, vol_ratio_threshold=2.0, drop_threshold=-0.015):
+    """
+    检测近期是否有长阴放量（大资金撤退信号）
+    条件：近lookback天内出现 阴线(C<O) + 跌幅≥1.5% + 成交量≥20日均量的2倍
+    返回：(has_selloff, details)
+    """
+    if len(klines) < 25:
+        return False, None
+    
+    # kline格式: [date, open, close, high, low, volume]
+    volumes = [k[5] for k in klines if len(k) > 5 and k[5] > 0]
+    if len(volumes) < 20:
+        return False, None
+    
+    # 20日均量（不含最后lookback天，用之前的数据作为基准）
+    base_end = max(len(klines) - lookback, 20)
+    avg_vol_20 = np.mean([k[5] for k in klines[base_end-20:base_end] if len(k) > 5 and k[5] > 0])
+    if avg_vol_20 <= 0:
+        return False, None
+    
+    recent = klines[-lookback:]
+    for k in recent:
+        if len(k) < 6:
+            continue
+        date, open_p, close_p, high_p, low_p, vol = k[0], k[1], k[2], k[3], k[4], k[5]
+        if open_p <= 0 or vol <= 0:
+            continue
+        
+        # 阴线: 收盘 < 开盘
+        is_bearish = close_p < open_p
+        # 跌幅
+        change = (close_p - open_p) / open_p
+        # 放量
+        vol_ratio = vol / avg_vol_20
+        
+        if is_bearish and change <= drop_threshold and vol_ratio >= vol_ratio_threshold:
+            return True, {
+                "date": date,
+                "change_pct": round(change * 100, 2),
+                "vol_ratio": round(vol_ratio, 2),
+            }
+    
+    return False, None
+
+
+def detect_ma_uptrend(closes):
+    """
+    严格MA多头排列上升趋势（用于单针下30通道）
+    条件1：MA5 > MA10 > MA15 > MA30 > MA60
+    条件2：五条均线斜率均为正（今日MA > 昨日MA）
+    """
+    if len(closes) < 62:  # 需要61天算昨日MA60 + 今日MA60
+        return False
+    
+    periods = [5, 10, 15, 30, 60]
+    ma_today = {}
+    ma_yesterday = {}
+    
+    for p in periods:
+        ma_today[p] = np.mean(closes[-p:])
+        ma_yesterday[p] = np.mean(closes[-(p+1):-1])
+    
+    # 条件1：完美多头排列
+    aligned = (ma_today[5] > ma_today[10] > ma_today[15] > 
+               ma_today[30] > ma_today[60])
+    if not aligned:
+        return False
+    
+    # 条件2：所有均线斜率为正
+    all_rising = all(ma_today[p] > ma_yesterday[p] for p in periods)
+    
+    return aligned and all_rising
+
+
+def detect_golden_pullback(closes, volumes, lookback=20):
+    """
+    BBI金叉 + 量价齐升 + 缩量回调 选股信号（第三通道）
+    
+    三步检测：
+    1. 近20日内BBI上穿MA60
+    2. 金叉后出现放量上涨段（量增价升）
+    3. 之后出现缩量回调段（价跌量缩，量缩至放量段的50%以下越好）
+    
+    返回：(triggered, details)
+    """
+    if len(closes) < 65 or len(volumes) < 65:
+        return False, None
+    
+    # Step 1: 找近20日内的BBI金叉点
+    gc_idx = check_bbi_ma60_golden_cross(closes, lookback=lookback)
+    if gc_idx is None:
+        return False, None
+    
+    # 金叉后到当前的数据
+    post_gc_closes = closes[gc_idx:]
+    post_gc_volumes = volumes[gc_idx:]
+    
+    if len(post_gc_closes) < 3:  # 金叉后至少3天才能有"放量上涨+缩量回调"
+        return False, None
+    
+    # Step 2: 找放量上涨段
+    # 金叉前20日均量作为基准
+    pre_gc_start = max(0, gc_idx - 20)
+    pre_gc_vols = [v for v in volumes[pre_gc_start:gc_idx] if v > 0]
+    if not pre_gc_vols:
+        return False, None
+    base_avg_vol = np.mean(pre_gc_vols)
+    if base_avg_vol <= 0:
+        return False, None
+    
+    # 找高点（金叉后的最高收盘价位置）
+    peak_idx = np.argmax(post_gc_closes)
+    if peak_idx < 1:  # 高点至少在金叉后第2天
+        return False, None
+    
+    # 放量上涨段：金叉到高点
+    up_closes = post_gc_closes[:peak_idx + 1]
+    up_volumes = post_gc_volumes[:peak_idx + 1]
+    
+    # 检查：价格上涨
+    if up_closes[-1] <= up_closes[0]:
+        return False, None
+    
+    # 检查：放量（上涨段均量 > 基准均量的1.5倍）
+    up_avg_vol = np.mean([v for v in up_volumes if v > 0]) if any(v > 0 for v in up_volumes) else 0
+    vol_amplify = up_avg_vol / base_avg_vol if base_avg_vol > 0 else 0
+    if vol_amplify < 1.5:
+        return False, None
+    
+    # Step 3: 缩量回调段：高点到当前
+    if peak_idx >= len(post_gc_closes) - 1:
+        return False, None  # 今天就是高点，还没回调
+    
+    pullback_closes = post_gc_closes[peak_idx:]
+    pullback_volumes = post_gc_volumes[peak_idx:]
+    
+    # 检查：价格回调（当前价 < 高点价）
+    if pullback_closes[-1] >= pullback_closes[0]:
+        return False, None
+    
+    # 检查：缩量（回调段均量相比上涨段均量的比例，越低越好）
+    pb_avg_vol = np.mean([v for v in pullback_volumes if v > 0]) if any(v > 0 for v in pullback_volumes) else 0
+    vol_shrink = pb_avg_vol / up_avg_vol if up_avg_vol > 0 else 1.0
+    
+    if vol_shrink >= 0.6:  # 缩量不够明显（需缩至放量段60%以下）
+        return False, None
+    
+    # 检查：回调期间量逐步递减（地量地价）
+    valid_pb_vols = [v for v in pullback_volumes if v > 0]
+    vol_declining = True
+    if len(valid_pb_vols) >= 2:
+        # 后半段均量 < 前半段均量
+        mid = len(valid_pb_vols) // 2
+        if mid > 0:
+            first_half = np.mean(valid_pb_vols[:mid])
+            second_half = np.mean(valid_pb_vols[mid:])
+            vol_declining = second_half <= first_half
+    
+    if not vol_declining:
+        return False, None
+    
+    return True, {
+        "gc_days_ago": len(closes) - gc_idx,
+        "vol_amplify": round(vol_amplify, 2),
+        "vol_shrink_pct": round(vol_shrink * 100, 1),
+        "pullback_pct": round((pullback_closes[-1] / pullback_closes[0] - 1) * 100, 2),
+    }
 
 
 def scan(quotes_file, output_file, top_n=30):
@@ -249,16 +423,32 @@ def scan(quotes_file, output_file, top_n=30):
     
     print(f"Level 2 (BBI>MA60, P>BBI): {len(level1)} → {len(level2)}", file=sys.stderr)
     
+    # ===== 第2.5级：长阴放量排除（大资金撤退） =====
+    level2b = {}
+    selloff_count = 0
+    for code, (q, klines, bbi, ma60) in level2.items():
+        has_selloff, selloff_detail = detect_big_selloff(klines)
+        if has_selloff:
+            selloff_count += 1
+            continue  # 直接排除
+        level2b[code] = (q, klines, bbi, ma60)
+    
+    print(f"Level 2.5 (selloff filter): {len(level2)} → {len(level2b)} "
+          f"(排除{selloff_count}只长阴放量)", file=sys.stderr)
+    
     # ===== 第3级：上升区间 + KDJ硬过滤 =====
-    # 主策略候选: 上升趋势 AND J<13（硬条件）
-    # 单针下30候选: 独立信号（上升趋势 + 单针下30条件）
+    # 主策略候选: N型上升趋势 AND J<13（硬条件）
+    # 单针下30候选: MA多头排列上升趋势 + 单针下30条件
+    # 金叉缩量回调候选: BBI金叉 + 放量上涨 + 缩量回调（第三通道）
     main_candidates = []
     needle_candidates = []
+    pullback_candidates = []
     
-    for code, (q, klines, bbi, ma60) in level2.items():
+    for code, (q, klines, bbi, ma60) in level2b.items():
         closes = np.array([k[2] for k in klines], dtype=float)
         highs = np.array([k[3] for k in klines], dtype=float)
         lows = np.array([k[4] for k in klines], dtype=float)
+        volumes = np.array([k[5] if len(k) > 5 else 0 for k in klines], dtype=float)
         closes[-1] = q["price"]
         highs[-1] = max(highs[-1], q["high"]) if q["high"] > 0 else highs[-1]
         lows[-1] = min(lows[-1], q["low"]) if q["low"] > 0 else lows[-1]
@@ -271,8 +461,9 @@ def scan(quotes_file, output_file, top_n=30):
         # 上升趋势
         is_uptrend, trend_score = detect_uptrend(highs.tolist(), lows.tolist(), closes.tolist())
         
-        # BBI金叉
-        golden_cross = check_bbi_ma60_golden_cross(closes.tolist())
+        # BBI金叉（返回索引或None）
+        gc_idx = check_bbi_ma60_golden_cross(closes.tolist())
+        golden_cross = gc_idx is not None
         
         # 单针下30
         needle = calc_needle30(highs.tolist(), lows.tolist(), closes.tolist())
@@ -329,10 +520,10 @@ def scan(quotes_file, output_file, top_n=30):
             entry = {**base_info, "score": score, "signals": signals, "signal_type": "main"}
             main_candidates.append(entry)
         
-        # ===== 单针下30（补充策略，独立通道） =====
-        if needle_triggered and is_uptrend:
+        # ===== 单针下30（补充策略，MA多头排列上升趋势） =====
+        if needle_triggered and detect_ma_uptrend(closes):
             score = 40
-            signals = ["单针下30 + 上升趋势"]
+            signals = ["单针下30 + MA多头排列"]
             
             if j_val < 13:
                 continue  # 已经在主策略里了
@@ -348,12 +539,38 @@ def scan(quotes_file, output_file, top_n=30):
             
             entry = {**base_info, "score": score, "signals": signals, "signal_type": "needle30"}
             needle_candidates.append(entry)
+        
+        # ===== 金叉缩量回调（第三通道，独立信号） =====
+        pb_triggered, pb_detail = detect_golden_pullback(closes.tolist(), volumes.tolist())
+        if pb_triggered:
+            # 避免与主策略/单针下30重复
+            already_in = (is_uptrend and j_val < 13) or (needle_triggered and detect_ma_uptrend(closes))
+            if not already_in:
+                score = 45
+                signals = [f"BBI金叉{pb_detail['gc_days_ago']}天前 + 放量{pb_detail['vol_amplify']}x + 缩量回调{pb_detail['vol_shrink_pct']}%"]
+                
+                if pb_detail["vol_shrink_pct"] <= 50:
+                    score += 15
+                    signals.append("缩量至半量以下")
+                if pb_detail["vol_amplify"] >= 2.0:
+                    score += 10
+                    signals.append(f"强放量{pb_detail['vol_amplify']}x")
+                if vr >= 3:
+                    score += 8
+                    signals.append(f"量比{vr:.1f}")
+                if volume_price_up:
+                    score += 5
+                    signals.append("量价齐升")
+                
+                entry = {**base_info, "score": score, "signals": signals, "signal_type": "pullback"}
+                pullback_candidates.append(entry)
     
     # 合并候选
-    all_candidates = main_candidates + needle_candidates
+    all_candidates = main_candidates + needle_candidates + pullback_candidates
     
-    print(f"Level 3 (hard filter): {len(level2)} → "
+    print(f"Level 3 (hard filter): {len(level2b)} → "
           f"{len(main_candidates)} main + {len(needle_candidates)} needle30 "
+          f"+ {len(pullback_candidates)} pullback "
           f"= {len(all_candidates)} total", file=sys.stderr)
     
     # ===== 第4级：排序（量比降序，量价齐升优先） =====
@@ -384,8 +601,11 @@ def scan(quotes_file, output_file, top_n=30):
         "total_scanned": len(quotes),
         "level1_pass": len(level1),
         "level2_pass": len(level2),
+        "selloff_filtered": selloff_count,
+        "level2b_pass": len(level2b),
         "main_signals": len(main_candidates),
         "needle30_signals": len(needle_candidates),
+        "pullback_signals": len(pullback_candidates),
         "candidates_count": len(all_candidates),
         "hot_industries": list(hot_industries),
         "top_candidates": all_candidates[:top_n],
@@ -396,8 +616,10 @@ def scan(quotes_file, output_file, top_n=30):
         json.dump(result, f, ensure_ascii=False, indent=2)
     
     print(f"\n{'='*60}", file=sys.stderr)
-    print(f"主策略候选（J<13 + 上升趋势）: {len(main_candidates)}只", file=sys.stderr)
-    print(f"单针下30候选: {len(needle_candidates)}只", file=sys.stderr)
+    print(f"长阴放量排除: {selloff_count}只", file=sys.stderr)
+    print(f"主策略候选（J<13 + N型上升趋势）: {len(main_candidates)}只", file=sys.stderr)
+    print(f"单针下30候选（MA多头排列）: {len(needle_candidates)}只", file=sys.stderr)
+    print(f"金叉缩量回调候选: {len(pullback_candidates)}只", file=sys.stderr)
     if hot_industries:
         print(f"板块集中: {', '.join(hot_industries)}", file=sys.stderr)
     print(f"{'='*60}", file=sys.stderr)
