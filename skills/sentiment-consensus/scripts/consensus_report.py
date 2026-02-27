@@ -247,63 +247,69 @@ def draw_consensus(data, name, code, output_path):
     # ============================================
     # 1. 仪表盘 (紧凑半圆)
     # ============================================
-    gauge_h = 2.5 / fig_h
-    gauge_bot = 1 - 1.0/fig_h - gauge_h
-    ax_g = fig.add_axes([0.15, gauge_bot, 0.7, gauge_h])
-    ax_g.set_xlim(-1.4, 1.4); ax_g.set_ylim(-0.15, 1.15)
+    gauge_h = 2.8 / fig_h
+    gauge_bot = 1 - 0.8/fig_h - gauge_h
+    ax_g = fig.add_axes([0.25, gauge_bot, 0.5, gauge_h])  # 缩窄：0.5宽居中
+    ax_g.set_xlim(-1.5, 1.5); ax_g.set_ylim(-0.3, 1.4)
     ax_g.set_facecolor(BG); ax_g.axis('off')
 
-    # 渐变弧 — 从左(极度看空/红)到右(极度看多/绿)
+    # 渐变弧 — 更亮更饱和，从左(红/看空)到右(绿/看多)
     n_seg = 60
     for i in range(n_seg):
         a_start = 180 - i * (180 / n_seg)
         a_end = 180 - (i + 1) * (180 / n_seg)
         t = i / n_seg  # 0=左(看空/红) → 1=右(看多/绿)
-        if t < 0.35:
-            # 红 → 橙
-            r = 248
-            g = int(81 + (153-81) * t/0.35)
-            b = int(73 + (34-73) * t/0.35)
-        elif t < 0.65:
-            # 橙 → 黄
-            tt = (t - 0.35) / 0.3
-            r = int(248 + (210-248) * tt)
-            g = int(153 + (153-153) * tt)
-            b = int(34 + (34-34) * tt)
+        if t < 0.3:
+            # 亮红 → 橙
+            r = 255
+            g = int(70 + (165-70) * t/0.3)
+            b = int(60 + (30-60) * t/0.3)
+        elif t < 0.5:
+            # 橙 → 亮黄
+            tt = (t - 0.3) / 0.2
+            r = int(255 + (255-255) * tt)
+            g = int(165 + (210-165) * tt)
+            b = int(30 + (50-30) * tt)
+        elif t < 0.7:
+            # 亮黄 → 黄绿
+            tt = (t - 0.5) / 0.2
+            r = int(255 + (120-255) * tt)
+            g = int(210 + (220-210) * tt)
+            b = int(50 + (80-50) * tt)
         else:
-            # 黄 → 绿
-            tt = (t - 0.65) / 0.35
-            r = int(210 + (63-210) * tt)
-            g = int(153 + (185-153) * tt)
-            b = int(34 + (80-34) * tt)
-        color = f'#{r:02x}{g:02x}{b:02x}'
-        w = Wedge((0, 0), 0.95, a_end, a_start, width=0.18, fc=color, ec='none', alpha=0.85)
+            # 黄绿 → 亮绿
+            tt = (t - 0.7) / 0.3
+            r = int(120 + (50-120) * tt)
+            g = int(220 + (205-220) * tt)
+            b = int(80 + (100-80) * tt)
+        color = f'#{min(r,255):02x}{min(g,255):02x}{min(b,255):02x}'
+        w = Wedge((0, 0), 1.0, a_end, a_start, width=0.22, fc=color, ec='none', alpha=0.92)
         ax_g.add_patch(w)
 
     # 内阴影
-    w_inner = Wedge((0, 0), 0.77, 0, 180, fc=BG, ec='none')
+    w_inner = Wedge((0, 0), 0.78, 0, 180, fc=BG, ec='none')
     ax_g.add_patch(w_inner)
 
     # 指针 — score -1(极度看空/左/180°)→0(中/90°)→+1(极度看多/右/0°)
-    ptr_angle = 90 - consensus_score * 90  # +1→0°(右), -1→180°(左)
+    ptr_angle = 90 - consensus_score * 90
     ptr_rad = np.radians(ptr_angle)
     ax_g.plot([0, 0.7*np.cos(ptr_rad)], [0, 0.7*np.sin(ptr_rad)],
              color='white', lw=2.5, solid_capstyle='round')
     ax_g.plot(0, 0, 'o', color=TXT, markersize=6, zorder=5)
 
-    # 刻度标签 — 左=看空, 右=看多
+    # 刻度标签 — 外移到1.25避免和弧重叠
     for val, label in [(-1, '极度看空'), (-0.5, '看空'), (0, '中性'), (0.5, '看多'), (1, '极度看多')]:
-        a = np.radians(90 - val * 90)  # -1→180°(左), +1→0°(右)
-        ax_g.text(1.08*np.cos(a), 1.08*np.sin(a), label,
-                 fontsize=7.5, color=LBL, ha='center', va='center')
+        a = np.radians(90 - val * 90)
+        ax_g.text(1.22*np.cos(a), 1.22*np.sin(a), label,
+                 fontsize=8, color=LBL, ha='center', va='center')
 
     # 分数
     score_color = BULL if consensus_score > 0.2 else BEAR if consensus_score < -0.2 else NEU
     label_text = '看多' if consensus_score > 0.2 else '看空' if consensus_score < -0.2 else '中性'
-    ax_g.text(0, -0.08, f'{consensus_score:+.2f}', fontsize=26, fontweight='bold',
+    ax_g.text(0, -0.1, f'{consensus_score:+.2f}', fontsize=28, fontweight='bold',
              color=score_color, ha='center', va='top',
              path_effects=[pe.withStroke(linewidth=2, foreground=BG)])
-    ax_g.text(0, -0.22, label_text, fontsize=12, color=score_color, ha='center')
+    ax_g.text(0, -0.28, label_text, fontsize=13, color=score_color, ha='center')
 
     # ============================================
     # 2. 多空占比条
