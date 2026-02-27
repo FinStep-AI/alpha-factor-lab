@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>舆情分析 — Alpha Factor Lab</title>
+<style>
+:root {
+  --bg: #0f1117; --card: #1a1d29; --border: #2a2d3a;
+  --text: #e4e6eb; --text2: #8b8fa3; --accent: #4f8cff;
+  --green: #22c55e; --red: #ef4444; --orange: #f59e0b; --purple: #a855f7; --yellow: #eab308;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+.header {
+  text-align: center; padding: 32px 0 24px;
+  border-bottom: 1px solid var(--border);
+}
+.header h1 { font-size: 2rem; font-weight: 700; margin-bottom: 4px; }
+.header h1 .icon { font-size: 1.6rem; margin-right: 8px; }
+.header .subtitle { color: var(--text2); font-size: 0.95rem; }
+.nav-links { margin-top: 12px; }
+.nav-links a {
+  margin: 0 8px; padding: 6px 16px;
+  border: 1px solid var(--border); border-radius: 8px;
+  font-size: 0.85rem; transition: all .2s; display: inline-block;
+}
+.nav-links a:hover { border-color: var(--accent); background: rgba(79,140,255,.1); text-decoration: none; }
+
+.container { max-width: 1200px; margin: 0 auto; padding: 24px 16px; }
+
+.empty-state { text-align: center; padding: 80px 20px; color: var(--text2); }
+.empty-state .icon { font-size: 4rem; margin-bottom: 20px; display: block; }
+.empty-state h2 { font-size: 1.3rem; color: var(--text); margin-bottom: 12px; }
+.empty-state p { max-width: 500px; margin: 0 auto; font-size: 0.95rem; line-height: 1.7; }
+
+.report-list { display: flex; flex-direction: column; gap: 16px; }
+
+.report-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 12px; padding: 24px;
+  cursor: pointer; transition: all 0.2s;
+}
+.report-card:hover { border-color: var(--accent); transform: translateY(-1px); }
+.report-card.active { border-color: var(--accent); }
+
+.report-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; }
+.report-name { font-size: 1.15rem; font-weight: 600; }
+.report-code { color: var(--text2); font-size: 0.85rem; margin-left: 8px; }
+.report-date { color: var(--text2); font-size: 0.8rem; }
+
+/* 共识仪表 */
+.consensus-row { display: flex; align-items: center; gap: 16px; margin: 12px 0; flex-wrap: wrap; }
+.consensus-score {
+  font-size: 2rem; font-weight: 800;
+  min-width: 80px; text-align: center;
+}
+.consensus-score.bull { color: var(--green); }
+.consensus-score.bear { color: var(--red); }
+.consensus-score.neutral { color: var(--orange); }
+
+.consensus-label {
+  font-size: 0.95rem; font-weight: 600;
+  padding: 4px 16px; border-radius: 20px;
+}
+.consensus-label.bull { background: rgba(34,197,94,0.15); color: var(--green); }
+.consensus-label.bear { background: rgba(239,68,68,0.15); color: var(--red); }
+.consensus-label.neutral { background: rgba(245,158,11,0.15); color: var(--orange); }
+
+/* 多空条 */
+.sentiment-bar { display: flex; height: 24px; border-radius: 12px; overflow: hidden; width: 100%; }
+.sentiment-bar .bull-seg { background: var(--green); }
+.sentiment-bar .neutral-seg { background: var(--orange); }
+.sentiment-bar .bear-seg { background: var(--red); }
+.sentiment-bar span {
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.72rem; font-weight: 600; color: #fff;
+  min-width: 0; transition: width 0.5s;
+}
+
+.source-tags { display: flex; gap: 6px; margin-top: 8px; flex-wrap: wrap; }
+.source-tag {
+  background: rgba(79,140,255,0.08); border: 1px solid rgba(79,140,255,0.15);
+  padding: 3px 10px; border-radius: 6px; font-size: 0.75rem; color: var(--text2);
+}
+
+/* 详情面板 */
+.detail-panel {
+  display: none; background: var(--card); border: 1px solid var(--border);
+  border-radius: 12px; padding: 30px; margin-top: 16px; animation: fadeIn 0.3s;
+}
+.detail-panel.show { display: block; }
+@keyframes fadeIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+
+.detail-section {
+  margin-bottom: 24px; padding-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+}
+.detail-section:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+.detail-section h3 {
+  font-size: 1rem; margin-bottom: 12px;
+  display: flex; align-items: center; gap: 8px;
+}
+.detail-section h3 .dot { width: 4px; height: 16px; border-radius: 2px; background: var(--accent); }
+
+.chart-container { margin: 16px 0; text-align: center; }
+.chart-container img {
+  max-width: 100%; border-radius: 8px; border: 1px solid var(--border);
+}
+
+/* 评级分布 */
+.rating-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px;
+}
+.rating-item {
+  padding: 12px; background: rgba(255,255,255,0.02);
+  border-radius: 8px; text-align: center;
+  border-left: 3px solid var(--border);
+}
+.rating-item.buy { border-left-color: var(--green); }
+.rating-item.hold { border-left-color: var(--orange); }
+.rating-item.sell { border-left-color: var(--red); }
+.rating-item .rn { font-size: 1.4rem; font-weight: 700; }
+.rating-item .rl { font-size: 0.82rem; color: var(--text2); margin-top: 4px; }
+
+/* 机构列表 */
+.org-list { display: flex; flex-direction: column; gap: 6px; }
+.org-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 8px 12px; background: rgba(255,255,255,0.02);
+  border-radius: 8px; font-size: 0.88rem;
+}
+.org-item .org-name { min-width: 80px; font-weight: 600; }
+.org-item .org-rating {
+  padding: 2px 10px; border-radius: 4px; font-size: 0.8rem; font-weight: 600;
+}
+.org-rating.buy { background: rgba(34,197,94,0.15); color: var(--green); }
+.org-rating.hold { background: rgba(245,158,11,0.15); color: var(--orange); }
+.org-rating.sell { background: rgba(239,68,68,0.15); color: var(--red); }
+.org-item .org-title { color: var(--text2); font-size: 0.82rem; flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.org-item .org-date { color: var(--text2); font-size: 0.78rem; min-width: 55px; text-align: right; }
+
+/* 观点列表 */
+.opinion-list { display: flex; flex-direction: column; gap: 6px; }
+.opinion-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 8px 12px; background: rgba(255,255,255,0.02);
+  border-radius: 8px; font-size: 0.85rem;
+}
+.opinion-item .dot-signal { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.dot-signal.bull { background: var(--green); }
+.dot-signal.bear { background: var(--red); }
+.dot-signal.neu { background: var(--orange); }
+.opinion-item .op-src { color: var(--text2); font-size: 0.78rem; min-width: 50px; }
+.opinion-item .op-text { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.opinion-item .op-score { font-size: 0.8rem; font-weight: 600; min-width: 40px; text-align: right; }
+
+.footer {
+  text-align: center; padding: 24px; color: var(--text2);
+  font-size: 0.8rem; border-top: 1px solid var(--border); margin-top: 40px;
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1><span class="icon">🗣️</span>舆情分析</h1>
+  <p class="subtitle">机构评级 · 新闻情绪 · 多空共识</p>
+  <div class="nav-links">
+    <a href="index.html">← 首页</a>
+    <a href="fundamental.html">基本面分析</a>
+    <a href="technical.html">技术分析</a>
+    <a href="factor-backtest.html">因子回测</a>
+    <a href="paper-trading.html">模拟盘</a>
+  </div>
+</div>
+
+<div class="container">
+  <div id="report-list" class="report-list"></div>
+  <div id="detail-panel" class="detail-panel"></div>
+  <div id="empty-state" class="empty-state" style="display:none;">
+    <span class="icon">🗣️</span>
+    <h2>暂无舆情分析报告</h2>
+    <p>通过 AI 助手运行舆情分析后，报告会自动展示在这里。<br>示例指令：「帮我看看茅台的市场共识」</p>
+  </div>
+</div>
+
+<div class="footer">
+  Alpha Factor Lab · <a href="index.html">返回首页</a>
+</div>
+
+<script>
+const DATA_FILE = 'sentiment-reports.json';
+
+function escHtml(s) {
+  if (typeof s !== 'string') s = String(s || '');
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function cClass(score) {
+  if (score > 0.2) return 'bull';
+  if (score < -0.2) return 'bear';
+  return 'neutral';
+}
+
+function ratingClass(rating) {
+  const r = (rating || '').trim();
+  if (/买入|强推|推荐|强烈/.test(r)) return 'buy';
+  if (/减持|卖出|回避/.test(r)) return 'sell';
+  if (/增持/.test(r)) return 'buy';
+  return 'hold';
+}
+
+function renderDetail(r) {
+  const panel = document.getElementById('detail-panel');
+  let html = '';
+
+  // 共识仪表盘图表
+  if (r.chart) {
+    html += `<div class="detail-section">
+      <h3><span class="dot"></span>📊 共识仪表盘</h3>
+      <div class="chart-container">
+        <img src="${escHtml(r.chart)}?t=${Date.now()}" alt="${escHtml(r.name)} 舆情共识" loading="lazy"
+             onerror="this.parentElement.innerHTML='<p style=\\'color:var(--text2)\\'>图表暂未生成</p>'">
+      </div>
+    </div>`;
+  }
+
+  // 评级分布
+  const dist = r.rating_distribution || {};
+  const distKeys = Object.keys(dist);
+  if (distKeys.length) {
+    const total = distKeys.reduce((s,k) => s + dist[k], 0);
+    html += `<div class="detail-section">
+      <h3><span class="dot"></span>🏛️ 机构评级分布 (${total}家)</h3>
+      <div class="rating-grid">`;
+    distKeys.sort((a,b) => dist[b] - dist[a]);
+    distKeys.forEach(k => {
+      const cls = ratingClass(k);
+      html += `<div class="rating-item ${cls}">
+        <div class="rn">${dist[k]}</div>
+        <div class="rl">${escHtml(k)}</div>
+      </div>`;
+    });
+    html += '</div></div>';
+  }
+
+  // 机构评级详情
+  const orgs = r.org_ratings || [];
+  if (orgs.length) {
+    html += `<div class="detail-section">
+      <h3><span class="dot"></span>📋 机构评级详情</h3>
+      <div class="org-list">`;
+    orgs.forEach(o => {
+      const cls = ratingClass(o.rating);
+      html += `<div class="org-item">
+        <span class="org-name">${escHtml(o.org)}</span>
+        <span class="org-rating ${cls}">${escHtml(o.rating)}</span>
+        <span class="org-title">${escHtml(o.title)}</span>
+        <span class="org-date">${escHtml((o.report_date||'').slice(5))}</span>
+      </div>`;
+    });
+    html += '</div></div>';
+  }
+
+  // 同花顺诊股
+  const ths = r.ths_diagnosis || {};
+  const thsKeys = ['技术面','资金面','基本面','消息面'].filter(k => ths[k]);
+  if (thsKeys.length || ths.score) {
+    html += `<div class="detail-section">
+      <h3><span class="dot"></span>🔍 同花顺诊股`;
+    if (ths.score) html += ` <span style="color:var(--text2);font-size:0.85rem;font-weight:400;">综合 ${ths.score}分</span>`;
+    html += `</h3><div class="rating-grid">`;
+    thsKeys.forEach(k => {
+      const v = ths[k];
+      const cls = v > 60 ? 'buy' : v < 40 ? 'sell' : 'hold';
+      html += `<div class="rating-item ${cls}"><div class="rn">${v}</div><div class="rl">${k}</div></div>`;
+    });
+    html += '</div></div>';
+  }
+
+  // 近期重要观点
+  const ops = r.top_opinions || [];
+  if (ops.length) {
+    html += `<div class="detail-section">
+      <h3><span class="dot"></span>💬 近期重要观点</h3>
+      <div class="opinion-list">`;
+    ops.forEach(o => {
+      const s = o.sentiment || 0;
+      const cls = s > 0.15 ? 'bull' : s < -0.15 ? 'bear' : 'neu';
+      const color = s > 0.15 ? 'var(--green)' : s < -0.15 ? 'var(--red)' : 'var(--orange)';
+      html += `<div class="opinion-item">
+        <span class="dot-signal ${cls}"></span>
+        <span class="op-src">${escHtml(o.source)}</span>
+        <span class="op-text">${escHtml(o.title)}</span>
+        <span class="op-score" style="color:${color}">${s > 0 ? '+' : ''}${s.toFixed(1)}</span>
+      </div>`;
+    });
+    html += '</div></div>';
+  }
+
+  // 数据来源
+  const src = r.sources || {};
+  html += `<div class="detail-section">
+    <h3><span class="dot"></span>📡 数据来源</h3>
+    <div class="source-tags">`;
+  if (src.em_ratings) html += `<span class="source-tag">东方财富研报 ×${src.em_ratings}</span>`;
+  if (src.em_news) html += `<span class="source-tag">东方财富新闻 ×${src.em_news}</span>`;
+  if (src.sina_news) html += `<span class="source-tag">新浪快讯 ×${src.sina_news}</span>`;
+  if (src.ths) html += `<span class="source-tag">同花顺诊股 ✓</span>`;
+  html += '</div></div>';
+
+  panel.innerHTML = html;
+  panel.classList.add('show');
+}
+
+async function init() {
+  const listEl = document.getElementById('report-list');
+  const emptyEl = document.getElementById('empty-state');
+  const panel = document.getElementById('detail-panel');
+
+  let reports = [];
+  try {
+    const resp = await fetch(DATA_FILE + '?t=' + Date.now(), {cache: 'no-cache'});
+    if (!resp.ok) throw new Error('no data');
+    reports = await resp.json();
+  } catch(e) {
+    emptyEl.style.display = 'block';
+    return;
+  }
+
+  if (!reports.length) {
+    emptyEl.style.display = 'block';
+    return;
+  }
+
+  reports.sort((a,b) => (b.date||'').localeCompare(a.date||''));
+
+  listEl.innerHTML = reports.map((r, i) => {
+    const sc = r.consensus_score || 0;
+    const cls = cClass(sc);
+    const bp = r.bull_pct || 0, np = r.neutral_pct || 0, rp = r.bear_pct || 0;
+    const srcSum = Object.values(r.sources || {}).reduce((a,v) => a + (typeof v === 'number' ? v : (v ? 1 : 0)), 0);
+    return `
+    <div class="report-card" data-idx="${i}">
+      <div class="report-top">
+        <div>
+          <span class="report-name">${escHtml(r.name)}</span>
+          <span class="report-code">${escHtml(r.code)}</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <span class="consensus-label ${cls}">${escHtml(r.consensus_label)}</span>
+          <span class="report-date">${escHtml(r.date)}</span>
+        </div>
+      </div>
+      <div class="consensus-row">
+        <span class="consensus-score ${cls}">${sc >= 0 ? '+' : ''}${sc.toFixed(2)}</span>
+        <div style="flex:1;">
+          <div class="sentiment-bar">
+            <span class="bull-seg" style="width:${bp}%">${bp > 10 ? '看多 '+bp.toFixed(0)+'%' : ''}</span>
+            <span class="neutral-seg" style="width:${np}%">${np > 10 ? '中性 '+np.toFixed(0)+'%' : ''}</span>
+            <span class="bear-seg" style="width:${rp}%">${rp > 10 ? '看空 '+rp.toFixed(0)+'%' : ''}</span>
+          </div>
+        </div>
+      </div>
+      <div class="source-tags">
+        <span class="source-tag">共 ${srcSum} 条数据</span>
+        <span class="source-tag">机构评级: ${(r.rating_avg||0) >= 0 ? '+' : ''}${(r.rating_avg||0).toFixed(2)}</span>
+        <span class="source-tag">新闻情绪: ${(r.news_sentiment||0) >= 0 ? '+' : ''}${(r.news_sentiment||0).toFixed(2)}</span>
+      </div>
+    </div>`;
+  }).join('');
+
+  let activeIdx = -1;
+  listEl.querySelectorAll('.report-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const idx = parseInt(card.dataset.idx);
+      listEl.querySelectorAll('.report-card').forEach(c => c.classList.remove('active'));
+      if (idx === activeIdx) {
+        activeIdx = -1;
+        panel.classList.remove('show');
+        return;
+      }
+      activeIdx = idx;
+      card.classList.add('active');
+      renderDetail(reports[idx]);
+      // 滚动到详情面板
+      setTimeout(() => {
+        const rect = card.getBoundingClientRect();
+        const panelEl = document.getElementById('detail-panel');
+        panelEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 50);
+    });
+  });
+}
+
+init();
+</script>
+</body>
+</html>
