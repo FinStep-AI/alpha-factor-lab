@@ -194,187 +194,280 @@ def rating_to_score(rating):
 # 可视化: 共识仪表盘
 # ═══════════════════════════════════════
 def draw_consensus(data, name, code, output_path):
-    """绘制共识仪表盘"""
+    """绘制共识仪表盘 — v2 精简美观版"""
     import matplotlib
     matplotlib.use('Agg')
     import matplotlib.pyplot as plt
-    from matplotlib.patches import FancyBboxPatch, Arc, Wedge
+    from matplotlib.patches import Wedge
     import matplotlib.patheffects as pe
 
     plt.rcParams['font.sans-serif'] = ['PingFang SC','Hiragino Sans GB','STHeiti','SimHei','Arial Unicode MS']
     plt.rcParams['axes.unicode_minus'] = False
 
-    BG='#0d1117'; PNL='#161b22'; GRD='#21262d'
-    TXT='#e6edf3'; LBL='#8b949e'
-    BULL='#3fb950'; BEAR='#f85149'; NEU='#d29922'
+    # 配色系统
+    BG     = '#0d1117'
+    PNL    = '#161b22'
+    GRD    = '#21262d'
+    TXT    = '#e6edf3'
+    LBL    = '#8b949e'
+    BULL   = '#3fb950'
+    BEAR   = '#f85149'
+    NEU    = '#d29922'
+    ACCENT = '#58a6ff'
 
-    fig = plt.figure(figsize=(16, 20), facecolor=BG)
-
-    # === 标题区 ===
-    fig.text(0.5, 0.97, f'{name} ({code})', fontsize=24, fontweight='bold',
-             color=TXT, ha='center', va='top')
-    fig.text(0.5, 0.955, f'舆情共识分析  {datetime.now().strftime("%Y-%m-%d %H:%M")}',
-             fontsize=11, color=LBL, ha='center', va='top')
-
-    # 数据提取
-    consensus_score = data.get('consensus_score', 0)  # -1 ~ +1
+    consensus_score = data.get('consensus_score', 0)
     bull_pct = data.get('bull_pct', 0)
     bear_pct = data.get('bear_pct', 0)
     neu_pct = data.get('neutral_pct', 0)
-    ratings = data.get('ratings', [])
-    guba_sentiment = data.get('guba_sentiment', data.get('news_sentiment', 0))
     news_sentiment = data.get('news_sentiment', 0)
+    rating_avg = data.get('rating_avg', 0)
     ths_data = data.get('ths_diagnosis', {})
     top_opinions = data.get('top_opinions', [])
     rating_dist = data.get('rating_distribution', {})
     orgs = data.get('org_ratings', [])
 
-    # === 1. 共识仪表盘 (大半圆) ===
-    ax_gauge = fig.add_axes([0.1, 0.74, 0.8, 0.2])
-    ax_gauge.set_xlim(-1.5, 1.5); ax_gauge.set_ylim(-0.3, 1.2)
-    ax_gauge.set_facecolor(BG); ax_gauge.axis('off')
+    # 计算需要几个面板来决定高度
+    has_orgs = len(orgs) > 0
+    has_opinions = len(top_opinions) > 0
+    n_orgs = min(len(orgs), 15)
+    n_ops = min(len(top_opinions), 12)
 
-    # 半圆弧 (绿-黄-红)
-    for angle, color in [(0, BEAR), (60, NEU), (120, BULL)]:
-        w = Wedge((0, 0), 1.0, angle, angle+60, width=0.15, fc=color, alpha=0.3)
-        ax_gauge.add_patch(w)
+    fig_h = 10  # 仪表盘+多空条+评分+评级分布
+    if has_orgs: fig_h += max(3, n_orgs * 0.35)
+    if has_opinions: fig_h += max(3, n_ops * 0.3)
 
-    # 指针
-    ptr_angle = 90 + consensus_score * 90  # -1→0°, 0→90°, +1→180°
+    fig = plt.figure(figsize=(14, fig_h), facecolor=BG)
+
+    # === 标题 ===
+    fig.text(0.5, 1 - 0.15/fig_h, f'{name} ({code})', fontsize=22, fontweight='bold',
+             color=TXT, ha='center', va='top')
+    fig.text(0.5, 1 - 0.45/fig_h, f'舆情共识分析  {data.get("date", "")}',
+             fontsize=10, color=LBL, ha='center', va='top')
+
+    # ============================================
+    # 1. 仪表盘 (紧凑半圆)
+    # ============================================
+    gauge_h = 2.5 / fig_h
+    gauge_bot = 1 - 1.0/fig_h - gauge_h
+    ax_g = fig.add_axes([0.15, gauge_bot, 0.7, gauge_h])
+    ax_g.set_xlim(-1.4, 1.4); ax_g.set_ylim(-0.15, 1.15)
+    ax_g.set_facecolor(BG); ax_g.axis('off')
+
+    # 渐变弧 — 从左(极度看空/红)到右(极度看多/绿)
+    n_seg = 60
+    for i in range(n_seg):
+        a_start = 180 - i * (180 / n_seg)
+        a_end = 180 - (i + 1) * (180 / n_seg)
+        t = i / n_seg  # 0=左(看空/红) → 1=右(看多/绿)
+        if t < 0.35:
+            # 红 → 橙
+            r = 248
+            g = int(81 + (153-81) * t/0.35)
+            b = int(73 + (34-73) * t/0.35)
+        elif t < 0.65:
+            # 橙 → 黄
+            tt = (t - 0.35) / 0.3
+            r = int(248 + (210-248) * tt)
+            g = int(153 + (153-153) * tt)
+            b = int(34 + (34-34) * tt)
+        else:
+            # 黄 → 绿
+            tt = (t - 0.65) / 0.35
+            r = int(210 + (63-210) * tt)
+            g = int(153 + (185-153) * tt)
+            b = int(34 + (80-34) * tt)
+        color = f'#{r:02x}{g:02x}{b:02x}'
+        w = Wedge((0, 0), 0.95, a_end, a_start, width=0.18, fc=color, ec='none', alpha=0.85)
+        ax_g.add_patch(w)
+
+    # 内阴影
+    w_inner = Wedge((0, 0), 0.77, 0, 180, fc=BG, ec='none')
+    ax_g.add_patch(w_inner)
+
+    # 指针 — score -1(极度看空/左/180°)→0(中/90°)→+1(极度看多/右/0°)
+    ptr_angle = 90 - consensus_score * 90  # +1→0°(右), -1→180°(左)
     ptr_rad = np.radians(ptr_angle)
-    ax_gauge.annotate('', xy=(0.85*np.cos(ptr_rad), 0.85*np.sin(ptr_rad)),
-                      xytext=(0, 0),
-                      arrowprops=dict(arrowstyle='->', color=TXT, lw=3))
+    ax_g.plot([0, 0.7*np.cos(ptr_rad)], [0, 0.7*np.sin(ptr_rad)],
+             color='white', lw=2.5, solid_capstyle='round')
+    ax_g.plot(0, 0, 'o', color=TXT, markersize=6, zorder=5)
 
-    # 刻度标签
+    # 刻度标签 — 左=看空, 右=看多
     for val, label in [(-1, '极度看空'), (-0.5, '看空'), (0, '中性'), (0.5, '看多'), (1, '极度看多')]:
-        a = np.radians(90 + val * 90)
-        ax_gauge.text(1.15*np.cos(a), 1.15*np.sin(a), label,
-                     fontsize=8, color=LBL, ha='center', va='center')
+        a = np.radians(90 - val * 90)  # -1→180°(左), +1→0°(右)
+        ax_g.text(1.08*np.cos(a), 1.08*np.sin(a), label,
+                 fontsize=7.5, color=LBL, ha='center', va='center')
 
-    # 中心分数
+    # 分数
     score_color = BULL if consensus_score > 0.2 else BEAR if consensus_score < -0.2 else NEU
     label_text = '看多' if consensus_score > 0.2 else '看空' if consensus_score < -0.2 else '中性'
-    ax_gauge.text(0, -0.15, f'{consensus_score:+.2f}', fontsize=28, fontweight='bold',
-                 color=score_color, ha='center', va='center',
-                 path_effects=[pe.withStroke(linewidth=3, foreground=BG)])
-    ax_gauge.text(0, -0.28, label_text, fontsize=14, color=score_color, ha='center')
+    ax_g.text(0, -0.08, f'{consensus_score:+.2f}', fontsize=26, fontweight='bold',
+             color=score_color, ha='center', va='top',
+             path_effects=[pe.withStroke(linewidth=2, foreground=BG)])
+    ax_g.text(0, -0.22, label_text, fontsize=12, color=score_color, ha='center')
 
-    # === 2. 多头/空头/中性占比 (三色条) ===
-    ax_bar = fig.add_axes([0.1, 0.70, 0.8, 0.03])
+    # ============================================
+    # 2. 多空占比条
+    # ============================================
+    bar_bot = gauge_bot - 0.6/fig_h
+    ax_bar = fig.add_axes([0.1, bar_bot, 0.8, 0.25/fig_h])
     ax_bar.set_facecolor(BG); ax_bar.axis('off')
     ax_bar.set_xlim(0, 1); ax_bar.set_ylim(0, 1)
-
     x = 0
     for pct, color, label in [(bull_pct, BULL, '看多'), (neu_pct, NEU, '中性'), (bear_pct, BEAR, '看空')]:
         if pct > 0:
-            ax_bar.barh(0.5, pct/100, left=x, height=0.8, color=color, alpha=0.8)
-            if pct > 8:
-                ax_bar.text(x + pct/200, 0.5, f'{label} {pct:.0f}%', fontsize=9,
+            ax_bar.barh(0.5, pct/100, left=x, height=0.7, color=color, alpha=0.85,
+                       edgecolor=BG, linewidth=0.5)
+            if pct > 10:
+                ax_bar.text(x + pct/200, 0.5, f'{label} {pct:.0f}%', fontsize=8.5,
                            color='white', ha='center', va='center', fontweight='bold')
             x += pct/100
 
-    # === 3. 各维度雷达/评分 ===
-    dims_data = []
-    if ths_data:
-        for k in ['技术面','资金面','基本面','消息面']:
-            if k in ths_data:
-                dims_data.append((k, ths_data[k]))
-    if guba_sentiment != 0:
-        dims_data.append(('新闻情绪', (guba_sentiment + 1) * 50))  # -1~+1 → 0~100
-    if news_sentiment != 0:
-        dims_data.append(('新闻情绪', (news_sentiment + 1) * 50))
+    # ============================================
+    # 3. 核心指标卡片 (评级+新闻+同花顺)
+    # ============================================
+    card_bot = bar_bot - 1.8/fig_h
+    ax_card = fig.add_axes([0.05, card_bot, 0.9, 1.5/fig_h])
+    ax_card.set_facecolor(BG); ax_card.axis('off')
+    ax_card.set_xlim(0, 1); ax_card.set_ylim(0, 1)
 
-    if dims_data:
-        ax_radar = fig.add_axes([0.05, 0.52, 0.45, 0.18])
-        ax_radar.set_facecolor(PNL)
-        for s in ax_radar.spines.values(): s.set_color(GRD)
-        ax_radar.tick_params(colors=LBL, labelsize=8)
-
-        names_d = [d[0] for d in dims_data]
-        vals = [d[1] for d in dims_data]
-        colors_d = [BULL if v > 60 else BEAR if v < 40 else NEU for v in vals]
-
-        bars = ax_radar.barh(range(len(dims_data)), vals, color=colors_d, alpha=0.7, height=0.6)
-        ax_radar.set_yticks(range(len(dims_data)))
-        ax_radar.set_yticklabels(names_d, fontsize=9, color=TXT)
-        ax_radar.set_xlim(0, 100)
-        ax_radar.set_xlabel('分数', fontsize=8, color=LBL)
-        ax_radar.axvline(50, color=LBL, lw=0.5, ls='--', alpha=0.4)
-        for i, v in enumerate(vals):
-            ax_radar.text(v + 1, i, f'{v:.0f}', fontsize=9, color=TXT, va='center')
-        ax_radar.set_title('多维度评分', fontsize=11, color=TXT, pad=8, loc='left')
-        ax_radar.grid(axis='x', alpha=0.1, color=GRD)
-
-    # === 4. 机构评级分布 (饼图) ===
+    # 计算有几个指标卡片
+    cards = []
+    cards.append(('机构评级', f'{rating_avg:+.2f}', rating_avg))
+    cards.append(('新闻情绪', f'{news_sentiment:+.2f}', news_sentiment))
+    if ths_data and ths_data.get('score'):
+        cards.append(('同花顺', f"{ths_data['score']}分", (ths_data['score']-50)/50))
     if rating_dist:
-        ax_pie = fig.add_axes([0.55, 0.52, 0.4, 0.18])
-        ax_pie.set_facecolor(PNL)
+        total = sum(rating_dist.values())
+        cards.append(('机构覆盖', f'{total}家', 0.5))
+
+    card_w = 0.85 / max(len(cards), 1)
+    for i, (title, value, sent) in enumerate(cards):
+        cx = 0.075 + i * card_w + card_w/2
+        # 卡片背景
+        from matplotlib.patches import FancyBboxPatch
+        rect = FancyBboxPatch((0.075 + i*card_w + 0.01, 0.1), card_w - 0.02, 0.8,
+                              boxstyle="round,pad=0.02", fc=PNL, ec=GRD, lw=0.8)
+        ax_card.add_patch(rect)
+        # 标题
+        ax_card.text(cx, 0.75, title, fontsize=8.5, color=LBL, ha='center', va='center')
+        # 数值
+        if isinstance(sent, (int, float)):
+            vc = BULL if sent > 0.2 else BEAR if sent < -0.2 else NEU
+        else:
+            vc = TXT
+        ax_card.text(cx, 0.38, value, fontsize=16, fontweight='bold', color=vc,
+                    ha='center', va='center')
+
+    # ============================================
+    # 4. 机构评级分布 + 饼图
+    # ============================================
+    if rating_dist:
+        pie_bot = card_bot - 2.2/fig_h
+        # 饼图
+        ax_pie = fig.add_axes([0.1, pie_bot, 0.35, 2.0/fig_h])
+        ax_pie.set_facecolor(BG)
 
         labels_p = list(rating_dist.keys())
         sizes = list(rating_dist.values())
-        colors_p = []
-        for l in labels_p:
-            s = rating_to_score(l)
-            colors_p.append(BULL if s > 0.3 else BEAR if s < -0.3 else NEU)
+        colors_p = [BULL if rating_to_score(l) > 0.3 else BEAR if rating_to_score(l) < -0.3 else NEU
+                   for l in labels_p]
 
         if sum(sizes) > 0:
-            wedges, texts, autotexts = ax_pie.pie(sizes, labels=labels_p, autopct='%1.0f%%',
+            wedges, texts, autotexts = ax_pie.pie(
+                sizes, labels=labels_p, autopct='%1.0f%%',
                 colors=colors_p, textprops=dict(color=TXT, fontsize=8),
-                pctdistance=0.75, startangle=90)
-            for at in autotexts: at.set_fontsize(8); at.set_color('white')
-            ax_pie.set_title(f'机构评级分布 ({sum(sizes)}家)', fontsize=11, color=TXT, pad=8, loc='left')
+                pctdistance=0.78, startangle=90, wedgeprops=dict(width=0.55, edgecolor=BG))
+            for at in autotexts:
+                at.set_fontsize(7.5); at.set_color('white'); at.set_fontweight('bold')
+            ax_pie.set_title(f'评级分布 ({sum(sizes)}家)', fontsize=10, color=TXT, pad=6, loc='left')
 
-    # === 5. 机构评级时间线 ===
-    if orgs:
-        ax_tl = fig.add_axes([0.05, 0.30, 0.9, 0.20])
+        # 评级数量条
+        if len(rating_dist) > 1:
+            ax_rd = fig.add_axes([0.55, pie_bot + 0.3/fig_h, 0.38, 1.4/fig_h])
+            ax_rd.set_facecolor(PNL)
+            for s in ax_rd.spines.values(): s.set_color(GRD)
+            ax_rd.tick_params(colors=LBL, labelsize=8)
+
+            sorted_r = sorted(rating_dist.items(), key=lambda x: x[1], reverse=True)
+            r_labels = [x[0] for x in sorted_r]
+            r_vals = [x[1] for x in sorted_r]
+            r_colors = [BULL if rating_to_score(l) > 0.3 else BEAR if rating_to_score(l) < -0.3 else NEU
+                       for l in r_labels]
+            bars = ax_rd.barh(range(len(r_labels)), r_vals, color=r_colors, alpha=0.8, height=0.6,
+                             edgecolor=BG, linewidth=0.5)
+            ax_rd.set_yticks(range(len(r_labels)))
+            ax_rd.set_yticklabels(r_labels, fontsize=8.5, color=TXT)
+            for i, v in enumerate(r_vals):
+                ax_rd.text(v + 0.2, i, str(v), fontsize=8.5, color=TXT, va='center')
+            ax_rd.set_title('各评级数量', fontsize=10, color=TXT, pad=6, loc='left')
+            ax_rd.grid(axis='x', alpha=0.08, color=GRD)
+    else:
+        pie_bot = card_bot - 0.3/fig_h
+
+    # ============================================
+    # 5. 机构评级详情 (横向条)
+    # ============================================
+    if has_orgs:
+        tl_h = max(2.5, n_orgs * 0.3) / fig_h
+        tl_bot = pie_bot - tl_h - 0.5/fig_h
+        ax_tl = fig.add_axes([0.08, tl_bot, 0.84, tl_h])
         ax_tl.set_facecolor(PNL)
         for s in ax_tl.spines.values(): s.set_color(GRD)
         ax_tl.tick_params(colors=LBL, labelsize=7)
 
         orgs_show = orgs[:15]
-        y_labels = [f"{o['org'][:8]}" for o in orgs_show]
+        y_labels = [f"{o['org'][:6]}" for o in orgs_show]
         x_scores = [rating_to_score(o.get('rating', '')) for o in orgs_show]
         colors_o = [BULL if s > 0.3 else BEAR if s < -0.3 else NEU for s in x_scores]
         dates = [o.get('report_date', '')[-5:] for o in orgs_show]
 
-        ax_tl.barh(range(len(orgs_show)), x_scores, color=colors_o, alpha=0.7, height=0.6)
+        ax_tl.barh(range(len(orgs_show)), x_scores, color=colors_o, alpha=0.75, height=0.55,
+                  edgecolor=BG, linewidth=0.3)
         ax_tl.set_yticks(range(len(orgs_show)))
-        ax_tl.set_yticklabels(y_labels, fontsize=8, color=TXT)
-        ax_tl.set_xlim(-1.2, 1.2)
-        ax_tl.axvline(0, color=LBL, lw=0.5)
+        ax_tl.set_yticklabels(y_labels, fontsize=7.5, color=TXT)
+        ax_tl.set_xlim(-1.15, 1.15)
+        ax_tl.axvline(0, color=LBL, lw=0.5, alpha=0.5)
         for i, (sc, dt, o) in enumerate(zip(x_scores, dates, orgs_show)):
             r = o.get('rating', '')
-            ax_tl.text(sc + (0.05 if sc >= 0 else -0.05), i,
-                      f'{r} ({dt})', fontsize=7, color=TXT,
+            ax_tl.text(sc + (0.04 if sc >= 0 else -0.04), i,
+                      f'{r} ({dt})', fontsize=6.5, color=TXT,
                       va='center', ha='left' if sc >= 0 else 'right')
-        ax_tl.set_title('机构评级详情 (近期)', fontsize=11, color=TXT, pad=8, loc='left')
-        ax_tl.grid(axis='x', alpha=0.1, color=GRD)
+        ax_tl.set_title('机构评级详情', fontsize=10, color=TXT, pad=8, loc='left')
+        ax_tl.grid(axis='x', alpha=0.06, color=GRD)
+    else:
+        tl_bot = pie_bot - 0.3/fig_h
 
-    # === 6. 舆情关键词/观点摘要 ===
-    if top_opinions:
-        ax_op = fig.add_axes([0.05, 0.03, 0.9, 0.25])
+    # ============================================
+    # 6. 近期重要观点
+    # ============================================
+    if has_opinions:
+        op_h = max(2.5, n_ops * 0.26) / fig_h
+        op_bot = tl_bot - op_h - 0.3/fig_h
+        ax_op = fig.add_axes([0.05, max(0.02, op_bot), 0.9, op_h])
         ax_op.set_facecolor(PNL)
         ax_op.axis('off')
-        ax_op.set_title('近期重要观点', fontsize=11, color=TXT, pad=8, loc='left')
+        ax_op.set_title('近期重要观点', fontsize=10, color=TXT, pad=8, loc='left')
 
         y = 0.92
-        for i, op in enumerate(top_opinions[:12]):
+        step = min(0.08, 0.85 / max(n_ops, 1))
+        for i, op in enumerate(top_opinions[:n_ops]):
             src = op.get('source', '')
-            title = op.get('title', '')[:60]
+            title = op.get('title', '')[:55]
             sentiment = op.get('sentiment', 0)
-            marker = '🟢' if sentiment > 0.2 else '🔴' if sentiment < -0.2 else '🟡'
-            score_t = f'{sentiment:+.1f}' if sentiment != 0 else '  0'
+            dot_c = BULL if sentiment > 0.15 else BEAR if sentiment < -0.15 else NEU
+            score_t = f'{sentiment:+.1f}'
 
-            ax_op.text(0.0, y, marker, fontsize=9, transform=ax_op.transAxes, va='top')
-            ax_op.text(0.03, y, f'[{src}]', fontsize=8, color=LBL, transform=ax_op.transAxes, va='top')
-            ax_op.text(0.15, y, title, fontsize=8, color=TXT, transform=ax_op.transAxes, va='top')
-            ax_op.text(0.95, y, score_t, fontsize=8,
-                      color=BULL if sentiment > 0.2 else BEAR if sentiment < -0.2 else NEU,
-                      transform=ax_op.transAxes, va='top', ha='right')
-            y -= 0.075
+            ax_op.plot(0.01, y - 0.01, 'o', color=dot_c, markersize=5,
+                      transform=ax_op.transAxes)
+            ax_op.text(0.035, y, f'[{src}]', fontsize=7, color=LBL,
+                      transform=ax_op.transAxes, va='top')
+            ax_op.text(0.13, y, title, fontsize=7.5, color=TXT,
+                      transform=ax_op.transAxes, va='top')
+            ax_op.text(0.97, y, score_t, fontsize=7.5, fontweight='bold',
+                      color=dot_c, transform=ax_op.transAxes, va='top', ha='right')
+            y -= step
 
-    plt.savefig(output_path, dpi=150, bbox_inches='tight', facecolor=BG)
+    plt.savefig(output_path, dpi=150, bbox_inches='tight', facecolor=BG, pad_inches=0.3)
     plt.close()
     print(f"Chart saved: {output_path}")
 
