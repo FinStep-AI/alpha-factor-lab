@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>🏆 AI投资竞赛 · 五大流派对决</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script>if(typeof Chart==='undefined'){document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"><\/script>')}</script>
 <style>
 :root {
   --bg: #0f1117; --card: #181b23; --border: #2a2d38;
@@ -225,12 +226,12 @@ function pctClass(v) { return v > 0.01 ? 'green' : v < -0.01 ? 'red' : 'neutral'
 
 // ===== Render =====
 function renderAll() {
-  renderMeta();
-  renderLeaderboard();
-  renderNavChart();
-  renderStatsComparison();
-  renderPlayerTabs();
-  renderActivityTimeline();
+  try { renderMeta(); } catch(e) { console.error('renderMeta:', e); }
+  try { renderLeaderboard(); } catch(e) { console.error('renderLeaderboard:', e); }
+  try { renderNavChart(); } catch(e) { console.error('renderNavChart:', e); }
+  try { renderStatsComparison(); } catch(e) { console.error('renderStatsComparison:', e); }
+  try { renderPlayerTabs(); } catch(e) { console.error('renderPlayerTabs:', e); }
+  try { renderActivityTimeline(); } catch(e) { console.error('renderActivityTimeline:', e); }
 }
 
 function renderMeta() {
@@ -288,6 +289,10 @@ function renderNavChart() {
   
   if (!hasData) {
     wrap.innerHTML = '<div class="empty"><div class="icon">📈</div>竞赛尚未开始<br><small>首个交易日后将显示净值曲线</small></div>';
+    return;
+  }
+  if (typeof Chart === 'undefined') {
+    wrap.innerHTML = '<div class="empty"><div class="icon">📈</div>图表库加载失败<br><small>请刷新页面重试</small></div>';
     return;
   }
   
