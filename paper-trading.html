@@ -211,11 +211,13 @@ let DATA = null;
 async function loadData() {
   try {
     const resp = await fetch('paper-trading-data.json?v=' + Date.now());
-    DATA = await resp.json();
+    if (!resp.ok) throw new Error('HTTP ' + resp.status);
+    const text = await resp.text();
+    DATA = JSON.parse(text);
     renderAll();
   } catch (e) {
     console.error('Failed to load data:', e);
-    document.getElementById('leaderboard').innerHTML = '<div class="empty" style="grid-column:1/-1"><div class="icon">📡</div>数据加载失败<br><small>请检查 paper-trading-data.json</small></div>';
+    document.getElementById('leaderboard').innerHTML = '<div class="empty" style="grid-column:1/-1"><div class="icon">📡</div>数据加载失败<br><small>' + e.message + '</small></div>';
   }
 }
 
