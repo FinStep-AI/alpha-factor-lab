@@ -1,22 +1,14 @@
 {
   "history": [
     {
-      "date": "20260226",
-      "zt_count": 61,
-      "dt_count": 3,
-      "zb_count": 23,
-      "max_streak": 6,
-      "temperature": 73,
-      "phase": "climax"
-    },
-    {
       "date": "20260223",
       "zt_count": 0,
       "dt_count": 0,
       "zb_count": 0,
       "max_streak": 0,
       "temperature": 0,
-      "phase": "ice"
+      "phase": "ice",
+      "note": "休市"
     },
     {
       "date": "20260224",
@@ -47,12 +39,15 @@
     },
     {
       "date": "20260227",
-      "zt_count": 21,
-      "dt_count": 1,
-      "zb_count": 7,
+      "zt_count": 75,
+      "dt_count": 0,
+      "zb_count": 15,
       "max_streak": 7,
-      "temperature": 63,
-      "phase": "climax"
+      "temperature": 90,
+      "phase": "overheated",
+      "seal_rate": 83.3,
+      "leader": "豫能控股(001896) 7连板 炸板3次",
+      "note": "收盘数据。盘前温度63(涨停仅21)→收盘温度90(涨停暴增至75)。过热末期特征明确。"
     }
   ],
   "updated": "20260227"
