@@ -278,7 +278,7 @@ function renderLeaderboard() {
         <div class="return ${pctClass(retPct)}">${retPct >= 0 ? '+' : ''}${fmt(retPct)}%</div>
         <div class="sub-stats">
           <span><span class="label">Sharpe</span><span class="val">${fmt(r.sharpe_ratio)}</span></span>
-          <span><span class="label">回撤</span><span class="val">${fmt(r.max_drawdown_pct)}%</span></span>
+          <span><span class="label">最大回撤</span><span class="val">${fmt(r.max_drawdown_pct)}%</span></span>
           <span><span class="label">交易</span><span class="val">${r.total_trades}笔</span></span>
         </div>
       </div>`;
