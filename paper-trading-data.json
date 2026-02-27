@@ -6,7 +6,7 @@
     "benchmark": "000300",
     "benchmark_name": "沪深300",
     "created_at": "2026-02-23 22:14:25",
-    "updated_at": "2026-02-27 09:30:04",
+    "updated_at": "2026-02-27 09:39:54",
     "status": "active"
   },
   "players": {
@@ -1123,7 +1123,7 @@
       "style": "趋势跟踪 · 板块轮动 · 全A股扫描 · 中长线波段",
       "description": "BBI+MA60趋势判断，KDJ低位捕捉买点，板块轮动做趋势收益。核心逻辑：阳率×盈亏比最大化。",
       "portfolio": {
-        "cash": 5633716.780000001,
+        "cash": 1169048.270000001,
         "positions": {
           "002259": {
             "code": "002259",
@@ -1136,17 +1136,6 @@
             "pnl_pct": 1.43,
             "entry_date": "2026-02-26"
           },
-          "002983": {
-            "code": "002983",
-            "name": "芯瑞达",
-            "volume": 55800,
-            "avg_cost": 25.6,
-            "current_price": 25.69,
-            "market_value": 1433502.0,
-            "pnl": 5022.0,
-            "pnl_pct": 0.35,
-            "entry_date": "2026-02-26"
-          },
           "603012": {
             "code": "603012",
             "name": "创力集团",
@@ -1157,6 +1146,61 @@
             "pnl": 26415.0,
             "pnl_pct": 1.85,
             "entry_date": "2026-02-26"
+          },
+          "002040": {
+            "code": "002040",
+            "name": "南京港",
+            "volume": 108200,
+            "avg_cost": 10.82,
+            "current_price": 10.82,
+            "market_value": 1170724.0,
+            "pnl": 0,
+            "pnl_pct": 0,
+            "entry_date": "2026-02-27"
+          },
+          "601298": {
+            "code": "601298",
+            "name": "青岛港",
+            "volume": 126400,
+            "avg_cost": 9.26,
+            "current_price": 9.26,
+            "market_value": 1170464.0,
+            "pnl": 0,
+            "pnl_pct": 0,
+            "entry_date": "2026-02-27"
+          },
+          "301062": {
+            "code": "301062",
+            "name": "上海艾录",
+            "volume": 118100,
+            "avg_cost": 9.91,
+            "current_price": 9.91,
+            "market_value": 1170371.0,
+            "pnl": 0,
+            "pnl_pct": 0,
+            "entry_date": "2026-02-27"
+          },
+          "603538": {
+            "code": "603538",
+            "name": "美诺华",
+            "volume": 54600,
+            "avg_cost": 21.43,
+            "current_price": 21.43,
+            "market_value": 1170078.0,
+            "pnl": 0,
+            "pnl_pct": 0,
+            "entry_date": "2026-02-27"
+          },
+          "301004": {
+            "code": "301004",
+            "name": "嘉益股份",
+            "volume": 20000,
+            "avg_cost": 58.42,
+            "current_price": 58.42,
+            "market_value": 1168400.0,
+            "pnl": 0,
+            "pnl_pct": 0,
+            "entry_date": "2026-02-27"
           }
         },
         "total_value": 9970772.78,
@@ -1399,6 +1443,108 @@
             "total": 2530.02
           },
           "reason": "止损：现价14.47≤止损线14.62（成本14.67-5tick），破BBI(14.60)，全清"
+        },
+        {
+          "date": "2026-02-27",
+          "code": "002983",
+          "name": "芯瑞达",
+          "direction": "sell",
+          "price": 25.01,
+          "volume": 55800,
+          "amount": 1395558.0,
+          "fees": {
+            "commission": 418.67,
+            "stamp_duty": 697.78,
+            "transfer_fee": 13.96,
+            "slippage_cost": 1395.56,
+            "total": 2525.96
+          },
+          "reason": "止损：现价25.01低于止损线25.35(买入价25.60-5tick)，全清"
+        },
+        {
+          "date": "2026-02-27",
+          "code": "002040",
+          "name": "南京港",
+          "direction": "buy",
+          "price": 10.82,
+          "volume": 108200,
+          "amount": 1170724.0,
+          "fees": {
+            "commission": 351.22,
+            "stamp_duty": 0,
+            "transfer_fee": 11.71,
+            "slippage_cost": 1170.72,
+            "total": 1533.65
+          },
+          "reason": "水上运输业板块集中(4只)，BBI金叉缩量回调(放量3.09x+缩量至半量40.5%)，score=93"
+        },
+        {
+          "date": "2026-02-27",
+          "code": "601298",
+          "name": "青岛港",
+          "direction": "buy",
+          "price": 9.26,
+          "volume": 126400,
+          "amount": 1170464.0,
+          "fees": {
+            "commission": 351.14,
+            "stamp_duty": 0,
+            "transfer_fee": 11.7,
+            "slippage_cost": 1170.46,
+            "total": 1533.31
+          },
+          "reason": "水上运输业板块集中(4只)，BBI金叉缩量回调(放量2.27x+缩量至半量41.0%)，score=93"
+        },
+        {
+          "date": "2026-02-27",
+          "code": "301062",
+          "name": "上海艾录",
+          "direction": "buy",
+          "price": 9.91,
+          "volume": 118100,
+          "amount": 1170371.0,
+          "fees": {
+            "commission": 351.11,
+            "stamp_duty": 0,
+            "transfer_fee": 11.7,
+            "slippage_cost": 1170.37,
+            "total": 1533.19
+          },
+          "reason": "主策略信号(J=10.3<13+上升趋势)，造纸板块集中(3只)，量比8.7≥8，score=80"
+        },
+        {
+          "date": "2026-02-27",
+          "code": "603538",
+          "name": "美诺华",
+          "direction": "buy",
+          "price": 21.43,
+          "volume": 54600,
+          "amount": 1170078.0,
+          "fees": {
+            "commission": 351.02,
+            "stamp_duty": 0,
+            "transfer_fee": 11.7,
+            "slippage_cost": 1170.08,
+            "total": 1532.8
+          },
+          "reason": "医药制造业板块集中(5只)，BBI金叉缩量回调(放量3.08x+缩量至半量30.8%)，score=80"
+        },
+        {
+          "date": "2026-02-27",
+          "code": "301004",
+          "name": "嘉益股份",
+          "direction": "buy",
+          "price": 58.42,
+          "volume": 20000,
+          "amount": 1168400.0,
+          "fees": {
+            "commission": 350.52,
+            "stamp_duty": 0,
+            "transfer_fee": 11.68,
+            "slippage_cost": 1168.4,
+            "total": 1530.6
+          },
+          "reason": "金属制品业板块集中(3只)，BBI金叉缩量回调(放量3.34x+缩量至半量48.6%)，score=80"
         }
       ],
       "decisions": [
@@ -1453,7 +1599,7 @@
       ],
       "rebalances": [],
       "stats": {
-        "total_trades": 11,
+        "total_trades": 17,
         "win_rate": 0.0,
         "max_drawdown_pct": 0.69,
         "sharpe_ratio": -1.16,
@@ -1461,7 +1607,7 @@
         "total_return_pct": -0.29,
         "annualized_return_pct": -0.58,
         "profit_loss_ratio": 0,
-        "total_fees": 23294.219999999998,
+        "total_fees": 33483.729999999996,
         "current_positions": 3,
         "turnover_rate": 0.0
       },
@@ -1642,5 +1788,20 @@
       }
     ],
     "updated_at": "2026-02-27 09:30:04"
+  },
+  "value": {
+    "positions": [],
+    "cash": 10000000,
+    "nav_history": [],
+    "trades": [],
+    "decisions": [
+      {
+        "date": "2026-02-27",
+        "action": "news_scan",
+        "summary": "1.【央行降准备金】央行将远期售汇业务外汇风险准备金率从20%下调至0（3月2日起生效），释放汇率政策宽松信号，利好出口型企业（中性偏利好）；2.【离岸人民币走弱】受央行政策影响，离岸人民币兑美元短线走低约100点（中性）；3.【对华关税维持】美国贸易代表称对华关税预计维持现有水平，部分其他国家关税将上调至15%（利好：A股关税恐慌缓解）；4.【ASML下一代EUV量产就绪】阿斯麦下一代EUV光刻机可大规模量产，造价翻倍至4亿美元，利好半导体设备链（利好科技板块）；5.【载人航天】2026年计划2次载人飞行+推进登月，利好航天军工板块（中性）；6.【AI替代】瑞穗金融拟AI裁减5000行政岗，AI应用持续渗透（利好AI概念）",
+        "recommendation": "当前空仓观望。央行汇率政策宽松+对华关税维持，市场情绪偏暖。建议关注：①半导体设备链（ASML利好传导）②AI应用概念（海外AI替代加速）③出口型白马（汇率政策利好）。等待更明确的入场信号再建仓。",
+        "market_sentiment": "中性偏暖"
+      }
+    ]
   }
 }
