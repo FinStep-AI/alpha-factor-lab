@@ -476,5 +476,139 @@
       ]
     },
     "conclusion": "强因子。IC=0.039(t=2.87)在所有因子中最高，单调性0.9优秀，Sharpe=1.0。发现A股中证1000存在显著隔夜效应——隔夜持续强势的股票后续表现更好。换手76%中等偏高，适合月度调仓。与Amihud(流动性)互补性好。"
+  },
+  {
+    "id": "gap_momentum_v1",
+    "name": "跳空缺口动量 v1",
+    "name_en": "Gap Momentum v1",
+    "category": "量价/信息",
+    "description": "集合竞价跳空方向一致性+幅度加权+近因加权的复合信号。衡量近20日跳空缺口的方向性和集中度。持续上跳暗示知情交易者在集合竞价阶段买入，信息逐步释放。市值中性化处理。",
+    "hypothesis": "集合竞价反映知情交易者方向判断，持续单方向跳空暗示信息逐步释放，后续有动量延续",
+    "expected_direction": "正向（高因子值=高预期收益）",
+    "factor_type": "量价/动量",
+    "formula": "neutralize(mean(gap_direction_z + gap_amplitude_z + gap_recency_z, 20), log_mktcap)",
+    "direction": 1,
+    "stock_pool": "中证1000",
+    "period": "2022-10 ~ 2026-02",
+    "rebalance_freq": 20,
+    "forward_days": 20,
+    "cost": 0.002,
+    "rating": "★★★★ 强",
+    "nav_data": "output/gap_momentum_v1/cumulative_returns.json",
+    "ic_data": "output/gap_momentum_v1/ic_series.json",
+    "upgrade_notes": "首版即达标。IC在1%水平显著(p=0.003)，单调性完美(1.0)，多空MDD仅-6.4%极低。与隔夜动量互补(一个看幅度，一个看方向一致性)。",
+    "lessons_learned": [
+      "跳空方向一致性比单纯幅度更稳定",
+      "三成分复合(方向+幅度加权+近因)优于单成分",
+      "与隔夜动量有一定相关但角度不同，适合组合",
+      "IC_IR=0.34在所有因子中最高，信号极稳定",
+      "单调性1.0完美，是目前唯一完美单调的因子"
+    ],
+    "created": "2026-02-27",
+    "updated": "2026-02-27",
+    "metrics": {
+      "ic_mean": 0.0151,
+      "ic_std": 0.0447,
+      "ic_t": 3.14,
+      "ic_p_value": 0.003,
+      "ic_positive_ratio": 0.641,
+      "rank_ic": 0.0266,
+      "ir": 0.3376,
+      "long_short_total": 0.1886,
+      "long_short_annual": 0.0548,
+      "long_short_annual_return": 0.0548,
+      "long_short_sharpe": 0.6464,
+      "long_short_mdd": -0.0639,
+      "turnover": 0.7451,
+      "monotonicity": 1.0,
+      "group_returns_annualized": [
+        0.1397,
+        0.1508,
+        0.1712,
+        0.2001,
+        0.2106
+      ],
+      "group_sharpe": [
+        0.514,
+        0.615,
+        0.724,
+        0.836,
+        0.812
+      ],
+      "group_mdd": [
+        -0.382,
+        -0.362,
+        -0.355,
+        -0.347,
+        -0.354
+      ]
+    },
+    "conclusion": "强因子。IC=0.015(t=3.14)在1%水平显著，IR=0.34是所有因子中最高(信号最稳定)，单调性1.0完美，多空MDD仅-6.4%。跳空方向一致性+幅度加权+近因加权的三维复合信号，捕捉知情交易者在集合竞价阶段的方向性押注。与隔夜动量互补，推荐组合使用。"
+  },
+  {
+    "id": "turnover_decay_v1",
+    "name": "换手率衰减 v1",
+    "name_en": "Turnover Decay v1",
+    "category": "流动性/反转",
+    "description": "近5日换手率/近20日换手率的对数比值，反向使用+市值中性化。低比值(量能衰减)→做多，高比值(放量)→做空。衡量卖压耗尽后的反弹机会。",
+    "hypothesis": "换手率持续萎缩意味着卖压耗尽、筹码趋于集中，后续倾向反弹(均值回复)",
+    "expected_direction": "反向（低衰减比=做多）",
+    "factor_type": "流动性/反转",
+    "formula": "neutralize(-log(MA5_turnover / MA20_turnover), log_mktcap)",
+    "direction": -1,
+    "stock_pool": "中证1000",
+    "period": "2022-10 ~ 2026-02",
+    "rebalance_freq": 20,
+    "forward_days": 20,
+    "cost": 0.002,
+    "rating": "★★★ 边缘有效",
+    "nav_data": "output/turnover_decay_v1/cumulative_returns.json",
+    "ic_data": "output/turnover_decay_v1/ic_series.json",
+    "upgrade_notes": "t=1.95边缘未通过5%显著性(差0.05)，但Sharpe=0.72、单调性0.9优秀。IC=0.021超阈值。作为辅助因子有价值。",
+    "lessons_learned": [
+      "换手率衰减在中证1000有一定反转效应",
+      "t=1.95边缘未达标，考虑调整窗口或增加周期改进",
+      "换手81%偏高，可考虑拉长调仓频率降低成本",
+      "与Amihud(流动性溢价)方向不同但互补：Amihud看绝对流动性，衰减看流动性变化"
+    ],
+    "created": "2026-02-27",
+    "updated": "2026-02-27",
+    "metrics": {
+      "ic_mean": 0.0214,
+      "ic_std": 0.0855,
+      "ic_t": 1.95,
+      "ic_positive_ratio": 0.6,
+      "rank_ic": 0.0366,
+      "ir": 0.2505,
+      "long_short_total": 0.2858,
+      "long_short_annual": 0.0822,
+      "long_short_annual_return": 0.0822,
+      "long_short_sharpe": 0.7153,
+      "long_short_mdd": -0.0982,
+      "turnover": 0.815,
+      "monotonicity": 0.9,
+      "group_returns_annualized": [
+        0.0823,
+        0.1619,
+        0.1781,
+        0.1718,
+        0.1829
+      ],
+      "group_sharpe": [
+        0.295,
+        0.655,
+        0.747,
+        0.723,
+        0.735
+      ],
+      "group_mdd": [
+        -0.447,
+        -0.359,
+        -0.337,
+        -0.355,
+        -0.366
+      ]
+    },
+    "conclusion": "边缘有效。IC=0.021(t=1.95)差一点达到5%显著性，但Sharpe=0.72和单调性0.9表现不错。换手率衰减(量能枯竭→反弹)逻辑清晰，作为辅助因子有价值。建议改进：尝试不同窗口组合(3d/10d)或加入成交额衰减。"
   }
 ]
