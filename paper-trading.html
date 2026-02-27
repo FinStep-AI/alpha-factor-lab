@@ -223,7 +223,7 @@ async function loadData() {
 
 function fmt(n, d=2) { return n == null ? '—' : Number(n).toFixed(d); }
 function fmtMoney(n) { return n == null ? '—' : '¥' + Number(n).toLocaleString('zh-CN', {minimumFractionDigits:0, maximumFractionDigits:0}); }
-function escHtml(s) { if(!s) return ''; return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function escHtml(s) { if(!s) return ''; if(typeof s !== 'string') s = JSON.stringify(s); return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 function pctClass(v) { return v > 0.01 ? 'green' : v < -0.01 ? 'red' : 'neutral'; }
 
 // ===== Render =====
