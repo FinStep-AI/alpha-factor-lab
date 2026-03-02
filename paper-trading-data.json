@@ -6,7 +6,7 @@
     "benchmark": "000300",
     "benchmark_name": "沪深300",
     "created_at": "2026-02-23 22:14:25",
-    "updated_at": "2026-03-02 09:31:44",
+    "updated_at": "2026-03-02 09:37:40",
     "status": "active"
   },
   "players": {
@@ -1236,7 +1236,7 @@
       "style": "趋势跟踪 · 板块轮动 · 全A股扫描 · 中长线波段",
       "description": "BBI+MA60趋势判断，KDJ低位捕捉买点，板块轮动做趋势收益。核心逻辑：阳率×盈亏比最大化。",
       "portfolio": {
-        "cash": 1169048.270000001,
+        "cash": 1156.3300000008894,
         "positions": {
           "002259": {
             "code": "002259",
@@ -1314,6 +1314,28 @@
             "pnl": 17600.0,
             "pnl_pct": 1.51,
             "entry_date": "2026-02-27"
+          },
+          "300328": {
+            "code": "300328",
+            "name": "宜安科技",
+            "volume": 30800,
+            "avg_cost": 18.97,
+            "current_price": 18.97,
+            "market_value": 584276.0,
+            "pnl": 0,
+            "pnl_pct": 0,
+            "entry_date": "2026-03-02"
+          },
+          "002923": {
+            "code": "002923",
+            "name": "润都股份",
+            "volume": 37700,
+            "avg_cost": 15.44,
+            "current_price": 15.44,
+            "market_value": 582088.0,
+            "pnl": 0,
+            "pnl_pct": 0,
+            "entry_date": "2026-03-02"
           }
         },
         "total_value": 10116582.27,
@@ -1694,6 +1716,40 @@
             "total": 1530.6
           },
           "reason": "金属制品业板块集中(3只)，BBI金叉缩量回调(放量3.34x+缩量至半量48.6%)，score=80"
+        },
+        {
+          "date": "2026-03-02",
+          "code": "300328",
+          "name": "宜安科技",
+          "direction": "buy",
+          "price": 18.97,
+          "volume": 30800,
+          "amount": 584276.0,
+          "fees": {
+            "commission": 175.28,
+            "stamp_duty": 0,
+            "transfer_fee": 5.84,
+            "slippage_cost": 584.28,
+            "total": 765.4
+          },
+          "reason": "pullback信号score=88，BBI金叉4天+放量2.05x+缩量回调48%至半量以下，板块集中金属制品业(3只)，量比4.2"
+        },
+        {
+          "date": "2026-03-02",
+          "code": "002923",
+          "name": "润都股份",
+          "direction": "buy",
+          "price": 15.44,
+          "volume": 37700,
+          "amount": 582088.0,
+          "fees": {
+            "commission": 174.63,
+            "stamp_duty": 0,
+            "transfer_fee": 5.82,
+            "slippage_cost": 582.09,
+            "total": 762.54
+          },
+          "reason": "主策略信号score=65，J=2.9极低+上升趋势+量比12.2≥8异常放量，四大硬条件满足"
         }
       ],
       "decisions": [
@@ -1760,11 +1816,19 @@
           "action": "hold",
           "summary": "收盘更新：7只持仓全部盈利，无止盈止损触发。升达林业+3.93%领涨，美诺华+4.43%最强。组合NAV=1.005306(+0.53%)，继续持有观察。",
           "detail": ""
+        },
+        {
+          "date": "2026-03-02",
+          "time": "09:37",
+          "type": "morning_scan",
+          "action": "buy",
+          "summary": "晨扫(09:35)：扫描5086只→Level1过滤4935→Level2趋势2027→排除66只长阴放量→Level3筛出52只(8主策略+10单针+34缩量回调)。板块集中：金属制品业(3只)。持仓7只无止损止盈触发(升达林业从上周五6.04跌至5.84，+4.29%未到7%止盈)。新买入2只：宜安科技(score=88,pullback+板块集中金属制品业+缩量半量以下)、润都股份(score=65,J=2.9极低+量比12.2异常放量)。当前持仓9只，几乎满仓。",
+          "detail": ""
         }
       ],
       "rebalances": [],
       "stats": {
-        "total_trades": 17,
+        "total_trades": 19,
         "win_rate": 0.0,
         "max_drawdown_pct": 0.79,
         "sharpe_ratio": -1.16,
@@ -1772,7 +1836,7 @@
         "total_return_pct": 1.17,
         "annualized_return_pct": -0.58,
         "profit_loss_ratio": 0,
-        "total_fees": 33483.729999999996,
+        "total_fees": 35011.67,
         "current_positions": 7,
         "turnover_rate": 0.0
       },
