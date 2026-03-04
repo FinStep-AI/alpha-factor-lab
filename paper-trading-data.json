@@ -6,7 +6,7 @@
     "benchmark": "000300",
     "benchmark_name": "沪深300",
     "created_at": "2026-02-23 22:14:25",
-    "updated_at": "2026-03-04 14:30:04",
+    "updated_at": "2026-03-04 14:53:46",
     "status": "active"
   },
   "players": {
@@ -2231,117 +2231,19 @@
       "style": "趋势跟踪 · 板块轮动 · 全A股扫描 · 中长线波段",
       "description": "BBI+MA60趋势判断，KDJ低位捕捉买点，板块轮动做趋势收益。核心逻辑：阳率×盈亏比最大化。",
       "portfolio": {
-        "cash": 2083.420000000857,
+        "cash": 9321622.45,
         "positions": {
-          "002259": {
-            "code": "002259",
-            "name": "升达林业",
-            "volume": 255100,
-            "avg_cost": 5.6,
-            "current_price": 5.52,
-            "market_value": 1408152.0,
-            "pnl": -20408.0,
-            "pnl_pct": -1.43,
-            "entry_date": "2026-02-26"
-          },
-          "603012": {
-            "code": "603012",
-            "name": "创力集团",
-            "volume": 176100,
-            "avg_cost": 8.11,
-            "current_price": 7.91,
-            "market_value": 1392951.0,
-            "pnl": -35220.0,
-            "pnl_pct": -2.47,
-            "entry_date": "2026-02-26"
-          },
           "002040": {
             "code": "002040",
             "name": "南京港",
-            "volume": 54100,
+            "volume": 27100,
             "avg_cost": 10.82,
             "current_price": 11.86,
-            "market_value": 641626.0,
+            "market_value": 321406.0,
             "pnl": 56264.0,
             "pnl_pct": 9.61,
-            "entry_date": "2026-02-27"
-          },
-          "601298": {
-            "code": "601298",
-            "name": "青岛港",
-            "volume": 126400,
-            "avg_cost": 9.26,
-            "current_price": 9.18,
-            "market_value": 1160352.0,
-            "pnl": -10112.0,
-            "pnl_pct": -0.86,
-            "entry_date": "2026-02-27"
-          },
-          "603538": {
-            "code": "603538",
-            "name": "美诺华",
-            "volume": 54600,
-            "avg_cost": 21.43,
-            "current_price": 20.39,
-            "market_value": 1113294.0,
-            "pnl": -56784.0,
-            "pnl_pct": -4.85,
-            "entry_date": "2026-02-27"
-          },
-          "301004": {
-            "code": "301004",
-            "name": "嘉益股份",
-            "volume": 20000,
-            "avg_cost": 58.42,
-            "current_price": 57.06,
-            "market_value": 1141200.0,
-            "pnl": -27200.0,
-            "pnl_pct": -2.33,
-            "entry_date": "2026-02-27"
-          },
-          "600172": {
-            "code": "600172",
-            "name": "黄河旋风",
-            "volume": 77200,
-            "avg_cost": 9.36,
-            "current_price": 9.17,
-            "market_value": 707924.0,
-            "pnl": -14668.0,
-            "pnl_pct": -2.03,
-            "entry_date": "2026-03-03"
-          },
-          "002302": {
-            "code": "002302",
-            "name": "西部建设",
-            "volume": 112900,
-            "avg_cost": 6.4,
-            "current_price": 6.27,
-            "market_value": 707883.0,
-            "pnl": -14677.0,
-            "pnl_pct": -2.03,
-            "entry_date": "2026-03-03"
-          },
-          "600207": {
-            "code": "600207",
-            "name": "安彩高科",
-            "volume": 129000,
-            "avg_cost": 5.6,
-            "current_price": 5.44,
-            "market_value": 701760.0,
-            "pnl": -20640.0,
-            "pnl_pct": -2.86,
-            "entry_date": "2026-03-03"
-          },
-          "603232": {
-            "code": "603232",
-            "name": "格尔软件",
-            "volume": 28100,
-            "avg_cost": 25.54,
-            "current_price": 24.06,
-            "market_value": 676086.0,
-            "pnl": -41588.0,
-            "pnl_pct": -5.79,
-            "entry_date": "2026-03-03"
+            "entry_date": "2026-02-27",
+            "half_profit_taken": true
           }
         },
         "total_value": 9653311.42,
@@ -2958,6 +2860,176 @@
             "total": 940.15
           },
           "reason": "pullback信号score=83,软件信息技术,BBI金叉12天+放量2.12x+缩量回调至半量以下,VR=8.1异常放量≥8加分"
+        },
+        {
+          "date": "2026-03-04",
+          "code": "002259",
+          "name": "升达林业",
+          "direction": "sell",
+          "price": 5.53,
+          "volume": 255100,
+          "amount": 1410703.0,
+          "fees": {
+            "commission": 423.21,
+            "stamp_duty": 705.35,
+            "transfer_fee": 14.11,
+            "slippage_cost": 1410.7,
+            "total": 2553.37
+          },
+          "reason": "止损: 现价5.53<=止损价5.55(成本5.60-5tick)"
+        },
+        {
+          "date": "2026-03-04",
+          "code": "603012",
+          "name": "创力集团",
+          "direction": "sell",
+          "price": 7.93,
+          "volume": 176100,
+          "amount": 1396473.0,
+          "fees": {
+            "commission": 418.94,
+            "stamp_duty": 698.24,
+            "transfer_fee": 13.96,
+            "slippage_cost": 1396.47,
+            "total": 2527.62
+          },
+          "reason": "止损: 现价7.93<=止损价8.06(成本8.11-5tick)"
+        },
+        {
+          "date": "2026-03-04",
+          "code": "601298",
+          "name": "青岛港",
+          "direction": "sell",
+          "price": 9.21,
+          "volume": 126400,
+          "amount": 1164144.0,
+          "fees": {
+            "commission": 349.24,
+            "stamp_duty": 582.07,
+            "transfer_fee": 11.64,
+            "slippage_cost": 1164.14,
+            "total": 2107.1
+          },
+          "reason": "止损: 现价9.21<=止损价9.21(成本9.26-5tick)"
+        },
+        {
+          "date": "2026-03-04",
+          "code": "603538",
+          "name": "美诺华",
+          "direction": "sell",
+          "price": 20.3,
+          "volume": 54600,
+          "amount": 1108380.0,
+          "fees": {
+            "commission": 332.51,
+            "stamp_duty": 554.19,
+            "transfer_fee": 11.08,
+            "slippage_cost": 1108.38,
+            "total": 2006.17
+          },
+          "reason": "止损: 现价20.30<=止损价21.38(成本21.43-5tick)"
+        },
+        {
+          "date": "2026-03-04",
+          "code": "301004",
+          "name": "嘉益股份",
+          "direction": "sell",
+          "price": 57.15,
+          "volume": 20000,
+          "amount": 1143000.0,
+          "fees": {
+            "commission": 342.9,
+            "stamp_duty": 571.5,
+            "transfer_fee": 11.43,
+            "slippage_cost": 1143.0,
+            "total": 2068.83
+          },
+          "reason": "止损: 现价57.15<=止损价58.37(成本58.42-5tick)"
+        },
+        {
+          "date": "2026-03-04",
+          "code": "600172",
+          "name": "黄河旋风",
+          "direction": "sell",
+          "price": 9.12,
+          "volume": 77200,
+          "amount": 704064.0,
+          "fees": {
+            "commission": 211.22,
+            "stamp_duty": 352.03,
+            "transfer_fee": 7.04,
+            "slippage_cost": 704.06,
+            "total": 1274.36
+          },
+          "reason": "止损: 现价9.12<=止损价9.31(成本9.36-5tick)"
+        },
+        {
+          "date": "2026-03-04",
+          "code": "002302",
+          "name": "西部建设",
+          "direction": "sell",
+          "price": 6.29,
+          "volume": 112900,
+          "amount": 710141.0,
+          "fees": {
+            "commission": 213.04,
+            "stamp_duty": 355.07,
+            "transfer_fee": 7.1,
+            "slippage_cost": 710.14,
+            "total": 1285.36
+          },
+          "reason": "止损: 现价6.29<=止损价6.35(成本6.40-5tick)"
+        },
+        {
+          "date": "2026-03-04",
+          "code": "600207",
+          "name": "安彩高科",
+          "direction": "sell",
+          "price": 5.46,
+          "volume": 129000,
+          "amount": 704340.0,
+          "fees": {
+            "commission": 211.3,
+            "stamp_duty": 352.17,
+            "transfer_fee": 7.04,
+            "slippage_cost": 704.34,
+            "total": 1274.86
+          },
+          "reason": "止损: 现价5.46<=止损价5.55(成本5.60-5tick)"
+        },
+        {
+          "date": "2026-03-04",
+          "code": "603232",
+          "name": "格尔软件",
+          "direction": "sell",
+          "price": 24.03,
+          "volume": 28100,
+          "amount": 675243.0,
+          "fees": {
+            "commission": 202.57,
+            "stamp_duty": 337.62,
+            "transfer_fee": 6.75,
+            "slippage_cost": 675.24,
+            "total": 1222.19
+          },
+          "reason": "止损: 现价24.03<=止损价25.49(成本25.54-5tick)"
+        },
+        {
+          "date": "2026-03-04",
+          "code": "002040",
+          "name": "南京港",
+          "direction": "sell",
+          "price": 11.85,
+          "volume": 27000,
+          "amount": 319950.0,
+          "fees": {
+            "commission": 95.98,
+            "stamp_duty": 159.97,
+            "transfer_fee": 3.2,
+            "slippage_cost": 319.95,
+            "total": 579.11
+          },
+          "reason": "止盈1: 现价11.85,盈利+9.52%>7%,卖出半仓27000股"
         }
       ],
       "decisions": [
@@ -3040,11 +3112,19 @@
           "action": "sell:301062,300328,002923(止损)+002040半仓(止盈1);buy:600172,002302,600207,603232",
           "summary": "晨扫(09:38)：扫描5085只→Level1=4936→Level2趋势1771→排除42只长阴放量→Level3筛出50只(7主策略+4单针+39缩量回调)。板块集中：非金属矿物制品业(5只最强)、专用设备制造业(2只)、金属制品业(3只)。持仓检查：3只止损全清(上海艾录9.17<止损9.66/-7.5%,宜安科技18.67<止损18.72/-1.6%,润都股份14.95<止损15.19/-3.2%)+南京港止盈1卖半仓(+15.1%>7%卖54100股)。新买入4只：黄河旋风(score=88,非金属矿物制品业板块集中+缩量半量)、西部建设(score=85,非金属矿物制品业+放量3.73x)、安彩高科(score=83,非金属矿物制品业+缩量半量)、格尔软件(score=83,VR=8.1异常放量+缩量回调)。当前持仓10只(6原有+4新买),几乎满仓。",
           "detail": ""
+        },
+        {
+          "date": "2026-03-04",
+          "time": "14:53",
+          "type": "afternoon_scan",
+          "action": "sell:002259,603012,601298,603538,301004,600172,002302,600207,603232(止损全清)+002040半仓(止盈1);风控:空仓休息至3/9",
+          "summary": "尾盘扫描(14:50)：全A5085只扫描→18只候选(2主策略+16缩量回调)，无板块集中，无极强信号(最高score=75但无板块聚类)。持仓检查：8只止损全清(升达林业/创力集团/青岛港/美诺华/嘉益股份/黄河旋风/西部建设/安彩高科/格尔软件)+南京港止盈1卖半仓(+9.52%>7%)。⚠️风控触发：近2日累计11只止损(3/3三只+3/4八只)，远超连续5只阈值，决定空仓休息至3/9(周一)。当前仅持有南京港27100股(已半仓止盈)，现金932万。大盘趋势走弱明显，等待趋势企稳再重新建仓。",
+          "detail": ""
         }
       ],
       "rebalances": [],
       "stats": {
-        "total_trades": 27,
+        "total_trades": 37,
         "win_rate": 0.0,
         "max_drawdown_pct": 4.98,
         "sharpe_ratio": -1.16,
@@ -3052,7 +3132,7 @@
         "total_return_pct": -3.47,
         "annualized_return_pct": -0.58,
         "profit_loss_ratio": 0,
-        "total_fees": 44031.58,
+        "total_fees": 60930.55000000001,
         "current_positions": 10,
         "turnover_rate": 0.0
       },
