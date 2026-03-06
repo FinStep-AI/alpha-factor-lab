@@ -60,7 +60,67 @@
       "seal_rate": 74.5,
       "leader": "泰嘉股份(002843) 3连板 一封不开",
       "note": "盘中补扫描。温度从2/27的90降至65，最高连板从7降至3，退潮但未冰。"
+    },
+    {
+      "date": "20260303",
+      "zt_count": 33,
+      "dt_count": 0,
+      "zb_count": 8,
+      "max_streak": 4,
+      "temperature": 68,
+      "phase": "climax"
+    },
+    {
+      "date": "20260303",
+      "zt_count": 82,
+      "dt_count": 53,
+      "zb_count": 24,
+      "max_streak": 3,
+      "temperature": 58,
+      "phase": "ferment"
+    },
+    {
+      "date": "20260303",
+      "zt_count": 82,
+      "dt_count": 53,
+      "zb_count": 24,
+      "max_streak": 3,
+      "temperature": 58,
+      "phase": "ferment"
+    },
+    {
+      "date": "20260304",
+      "zt_count": 43,
+      "dt_count": 13,
+      "zb_count": 20,
+      "max_streak": 4,
+      "temperature": 49,
+      "phase": "ferment"
+    },
+    {
+      "date": "20260304",
+      "zt_count": 43,
+      "dt_count": 13,
+      "zb_count": 20,
+      "max_streak": 4,
+      "temperature": 49,
+      "phase": "ferment",
+      "seal_rate": 68.3,
+      "leader": "亚盛集团(600108) 4连板 早封 炸板1次 封单0.99%",
+      "note": "PM盘中跟踪。温度从3/3的58继续降至49。封板率68.3%偏弱。龙头均不满足强封确认。跌停13家有亏钱效应。空仓观望。"
+    },
+    {
+      "date": "20260306",
+      "zt_count": 74,
+      "dt_count": 0,
+      "zb_count": 26,
+      "max_streak": 3,
+      "temperature": 68,
+      "phase": "climax",
+      "seal_rate": 74.0,
+      "leader": "王力安防(605268) 3连板 秒板一封不开 封单9.22% score=170",
+      "note": "收盘数据。温度从3/4的49回升至68，进入高潮期。涨停74家跌停0家，赚钱效应极强。3板梯队4只(王力安防/顺钠股份/卓郎智能/汉缆股份)。电网设备板块最活跃(4只涨停)。空仓观望：高潮期不追买，等待退潮后重新入场。"
     }
   ],
-  "updated": "20260302"
+  "updated": "20260306"
 }
