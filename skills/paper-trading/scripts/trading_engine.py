@@ -218,6 +218,13 @@ def execute_trade(data: dict, player_id: str, code: str, name: str,
         else:
             pos["market_value"] = pos["current_price"] * pos["volume"]
     
+    # 即时更新 total_value（避免卖出后 NAV 计算用旧值）
+    total_mv = sum(
+        p.get("market_value", (p.get("avg_cost", 0) or p.get("cost_price", 0)) * (p.get("volume", 0) or p.get("shares", 0)))
+        for p in portfolio["positions"].values()
+    )
+    portfolio["total_value"] = round(portfolio["cash"] + total_mv, 2)
+    
     # 记录交易
     trade_record = {
         "date": date,
