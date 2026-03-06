@@ -151,7 +151,7 @@ python3 scripts/fetch_us_company_data.py MSFT
 
 **这是新增的关键步骤——先看行业再看公司。**
 
-1. **web_search** 搜索行业信息：
+1. **step_search** 搜索行业信息（用脚本 `python3 scripts/step_search.py "搜索词" --topk 5`，或直接 curl 调 StepSearch API）：
    - `"{行业名}" 市场规模 增速 2025 2026`
    - `"{行业名}" 产业链 竞争格局`
    - `"{行业名}" 技术路线 趋势`
@@ -176,9 +176,11 @@ python3 scripts/fetch_us_company_data.py MSFT
 
 #### A股路径
 
-1. **web_search** 搜索公司最新新闻、PR稿件、公告：
-   - 搜索 3-5 组不同关键词，覆盖不同角度
-   - 用 `freshness: "pm"` 限定近期新闻
+1. **step_search** 搜索公司最新新闻、PR稿件、公告（3-5组关键词）：
+   ```bash
+   python3 scripts/step_search.py "{公司名} 最新消息 公告" --topk 5
+   python3 scripts/step_search.py "{公司名} 业绩 财报" --topk 3
+   ```
 
 2. **web_fetch** 对重要搜索结果抓取全文
 
@@ -194,7 +196,10 @@ python3 scripts/fetch_us_company_data.py MSFT
    python3 skills/us-market/scripts/us_market_query.py --type news --symbol AAPL
    ```
 
-2. **web_search** 补充搜索（英文关键词）
+2. **step_search** 补充搜索（英文关键词）：
+   ```bash
+   python3 scripts/step_search.py "AAPL latest news earnings" --topk 5 --location US
+   ```
 
 3. **web_fetch** 抓取关键报道全文
 
@@ -208,9 +213,10 @@ python3 scripts/fetch_us_company_data.py MSFT
 
 #### A股路径
 
-1. **web_search** 搜索高管信息：
-   - `"{公司名}" 高管 任命/变动/离职`
-   - `"{高管姓名}" 背景/简历`
+1. **step_search** 搜索高管信息：
+   ```bash
+   python3 scripts/step_search.py "{公司名} 高管 任命 变动 离职" --topk 5
+   ```
 
 2. **web_fetch** 抓取关键人物报道
 
@@ -221,7 +227,10 @@ python3 scripts/fetch_us_company_data.py MSFT
    python3 skills/us-market/scripts/us_market_query.py --type insider --symbol AAPL
    ```
 
-2. **web_search** 搜索高管信息（英文）
+2. **step_search** 搜索高管信息（英文）：
+   ```bash
+   python3 scripts/step_search.py "AAPL CEO management team" --topk 3 --location US
+   ```
 
 3. **web_fetch** 抓取关键报道
 
@@ -332,17 +341,13 @@ read references/analysis-template.md
 
 ### Step B1: 行业数据采集
 
-1. **web_search** 广泛搜索行业信息（至少10组关键词）：
-   - `"{行业名}" 市场规模 2025 2026`
-   - `"{行业名}" 产业链 全景图`
-   - `"{行业名}" 竞争格局 市场份额`
-   - `"{行业名}" 技术路线 趋势`
-   - `"{行业名}" 政策 产业政策`
-   - `"{行业名}" 龙头企业 排名`
-   - `"{行业名}" 供需分析`
-   - `"{行业名}" 投资逻辑 研报`
-   - `"{行业名}" 国产替代 自主可控`（适用时）
-   - `"{行业名}" 发展历程 历史`
+1. **step_search** 广泛搜索行业信息（多组关键词，用 `python3 scripts/step_search.py` 或直接 curl）：
+   ```bash
+   python3 scripts/step_search.py "{行业名} 市场规模 增速 2025 2026" --topk 5
+   python3 scripts/step_search.py "{行业名} 产业链 竞争格局 市场份额" --topk 5
+   python3 scripts/step_search.py "{行业名} 技术路线 趋势 政策" --topk 5
+   python3 scripts/step_search.py "{行业名} 龙头企业 排名 投资逻辑" --topk 5
+   ```
 
 2. **web_fetch** 抓取 5-10 篇核心报告/文章全文
 

@@ -11,7 +11,7 @@
   --bg: #0f1117; --card: #181b23; --border: #2a2d38;
   --text: #e2e4ea; --text2: #8b8fa3; --accent: #4f8cff;
   --green: #22c55e; --red: #ef4444; --yellow: #f59e0b; --purple: #a855f7;
-  --quant: #4f8cff; --trader: #f59e0b; --value: #22c55e; --dwj: #a855f7; --sentiment: #ef4444;
+  --quant: #4f8cff; --trader: #f59e0b; --value: #22c55e; --dwj: #a855f7; --sentiment: #ef4444; --hotspot: #ff6b35;
 }
 * { margin:0; padding:0; box-sizing:border-box; }
 body { background:var(--bg); color:var(--text); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif; line-height:1.6; }
@@ -28,7 +28,7 @@ a:hover { text-decoration:underline; }
 .nav-links a:hover, .nav-links a.active { border-color:var(--accent); background:rgba(79,140,255,.1); text-decoration:none; }
 
 /* Leaderboard */
-.leaderboard { display:grid; grid-template-columns:repeat(5,1fr); gap:16px; margin:24px 0; }
+.leaderboard { display:grid; grid-template-columns:repeat(6,1fr); gap:16px; margin:24px 0; }
 .player-card { background:var(--card); border:1px solid var(--border); border-radius:14px; padding:20px; cursor:pointer; transition:all .2s; position:relative; overflow:hidden; display:flex; flex-direction:column; }
 .player-card:hover { border-color:var(--accent); transform:translateY(-2px); }
 .player-card.active { border-color:var(--accent); box-shadow:0 0 20px rgba(79,140,255,.15); }
@@ -148,7 +148,7 @@ tr:last-child td { border-bottom:none; }
 <div class="intro-banner">
   <h2>🤖 这是一场 AI Agent 的投资对决</h2>
   <p>
-    五位 AI Agent 各自独立运行，拥有不同的投资哲学和交易策略。它们每天自动扫描市场、分析数据、做出买卖决策——没有人类干预，完全自主。每位选手初始资金 ¥1,000 万，真实模拟 A 股交易费率（佣金 + 印花税 + 过户费 + 滑点），收盘后自动结算净值。
+    六位 AI Agent 各自独立运行，拥有不同的投资哲学和交易策略。它们每天自动扫描市场、分析数据、做出买卖决策——没有人类干预，完全自主。每位选手初始资金 ¥1,000 万，真实模拟 A 股交易费率（佣金 + 印花税 + 过户费 + 滑点），收盘后自动结算净值。
   </p>
   <p>
     谁的策略能跑赢市场？量化因子 vs 技术择时 vs 价值投资 vs 趋势跟踪 vs 情绪博弈——用数据说话。
@@ -159,6 +159,7 @@ tr:last-child td { border-bottom:none; }
     <div class="player-intro"><span class="emoji">🏛️</span><span><span class="pname">巴菲特门徒</span><br><span class="pstyle">价值投资 · 月度换仓 · 白马蓝筹</span></span></div>
     <div class="player-intro"><span class="emoji">🏄</span><span><span class="pname">趋势游侠</span><br><span class="pstyle">趋势跟踪 · 板块轮动 · 全A选股</span></span></div>
     <div class="player-intro"><span class="emoji">⚡</span><span><span class="pname">情绪战神</span><br><span class="pstyle">情绪周期 · 龙头战法 · 打板博弈</span></span></div>
+    <div class="player-intro"><span class="emoji">📰</span><span><span class="pname">热点猎手</span><br><span class="pstyle">新闻驱动 · 热点追踪 · 短线出击</span></span></div>
   </div>
 </div>
 
@@ -202,8 +203,8 @@ tr:last-child td { border-bottom:none; }
 
 <script>
 // ===== Data Loading =====
-const PLAYER_COLORS = { quant: '#4f8cff', trader: '#f59e0b', value: '#22c55e', dwj: '#a855f7', sentiment: '#ef4444' };
-const PLAYER_IDS = ['quant', 'trader', 'value', 'dwj', 'sentiment'];
+const PLAYER_COLORS = { quant: '#4f8cff', trader: '#f59e0b', value: '#22c55e', dwj: '#a855f7', sentiment: '#ef4444', hotspot: '#ff6b35' };
+const PLAYER_IDS = ['quant', 'trader', 'value', 'dwj', 'sentiment', 'hotspot'];
 const MEDALS = ['🥇', '🥈', '🥉', '4️⃣', '5️⃣'];
 
 let DATA = null;

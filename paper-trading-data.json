@@ -7,7 +7,8 @@
     "benchmark_name": "沪深300",
     "created_at": "2026-02-23 22:14:25",
     "updated_at": "2026-03-06 15:18:00",
-    "status": "active"
+    "status": "active",
+    "players_count": 6
   },
   "players": {
     "quant": {
@@ -3597,6 +3598,40 @@
         "turnover_rate": 0.0
       },
       "rebalances": []
+    },
+    "hotspot": {
+      "name": "热点猎手",
+      "emoji": "📰",
+      "style": "新闻驱动 · 热点追踪 · 短线出击",
+      "description": "追踪市场热点新闻，挖掘受益标的，快进快出。3-5天周期，多热点分散持仓。",
+      "portfolio": {
+        "cash": 10000000.0,
+        "total_value": 10000000.0,
+        "positions": {},
+        "last_update": "2026-03-06"
+      },
+      "trades": [],
+      "nav_history": {
+        "dates": [],
+        "nav": [],
+        "cash_pct": []
+      },
+      "decisions": [],
+      "latest_news": "3/6加入竞赛，初始资金¥1000万，待下周一开始扫描建仓。",
+      "stats": {
+        "total_return_pct": 0.0,
+        "annualized_return_pct": 0.0,
+        "max_drawdown_pct": 0.0,
+        "sharpe_ratio": 0.0,
+        "calmar_ratio": 0.0,
+        "win_rate": 0,
+        "profit_loss_ratio": 0.0,
+        "total_trades": 0,
+        "total_fees": 0.0,
+        "current_positions": 0,
+        "turnover_rate": 0.0
+      },
+      "rebalances": []
     }
   },
   "benchmark": {
@@ -3776,6 +3811,17 @@
         "current_nav": 0.96246,
         "total_trades": 37,
         "rank": 5
+      },
+      {
+        "player_id": "hotspot",
+        "name": "热点猎手",
+        "emoji": "📰",
+        "total_return_pct": 0.0,
+        "sharpe_ratio": 0.0,
+        "max_drawdown_pct": 0.0,
+        "current_nav": 1.0,
+        "total_trades": 0,
+        "rank": 6
       }
     ],
     "updated_at": "2026-03-06 15:18:00",
