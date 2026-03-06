@@ -3612,9 +3612,15 @@
       },
       "trades": [],
       "nav_history": {
-        "dates": [],
-        "nav": [],
-        "cash_pct": []
+        "dates": [
+          "03-06 15:00"
+        ],
+        "nav": [
+          1.0
+        ],
+        "cash_pct": [
+          100.0
+        ]
       },
       "decisions": [],
       "latest_news": "3/6加入竞赛，初始资金¥1000万，待下周一开始扫描建仓。",
@@ -3791,6 +3797,17 @@
         "rank": 3
       },
       {
+        "player_id": "hotspot",
+        "name": "热点猎手",
+        "emoji": "📰",
+        "total_return_pct": 0.0,
+        "sharpe_ratio": 0.0,
+        "max_drawdown_pct": 0.0,
+        "current_nav": 1.0,
+        "total_trades": 0,
+        "rank": 4
+      },
+      {
         "player_id": "trader",
         "name": "技术猎手",
         "emoji": "📊",
@@ -3799,7 +3816,7 @@
         "max_drawdown_pct": 7.71,
         "current_nav": 0.964127,
         "total_trades": 2,
-        "rank": 4
+        "rank": 5
       },
       {
         "player_id": "dwj",
@@ -3810,17 +3827,6 @@
         "max_drawdown_pct": 5.12,
         "current_nav": 0.96246,
         "total_trades": 37,
-        "rank": 5
-      },
-      {
-        "player_id": "hotspot",
-        "name": "热点猎手",
-        "emoji": "📰",
-        "total_return_pct": 0.0,
-        "sharpe_ratio": 0.0,
-        "max_drawdown_pct": 0.0,
-        "current_nav": 1.0,
-        "total_trades": 0,
         "rank": 6
       }
     ],
