@@ -9,6 +9,7 @@ import json
 import re
 import time
 import os
+import threading
 from typing import Optional, List, Dict, Any
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
@@ -19,9 +20,23 @@ HEADERS = {
     "Accept": "application/json, text/event-stream"
 }
 
+# 全局Session复用TCP连接，大幅降低延迟
+# 线程安全：每个线程用独立Session
+_thread_local = threading.local()
+
+def _get_session():
+    if not hasattr(_thread_local, 'session'):
+        _thread_local.session = requests.Session()
+        _thread_local.session.headers.update(HEADERS)
+    return _thread_local.session
+
+# 主线程也有一个全局session（向后兼容）
+_session = requests.Session()
+_session.headers.update(HEADERS)
+
 
 def _call(service: str, tool: str, args: dict, timeout: int = 30) -> dict:
-    """底层调用：发送JSON-RPC请求，解析SSE响应"""
+    """底层调用：发送JSON-RPC请求，解析SSE响应（使用Session复用连接）"""
     url = f"{BASE_URL}/{service}?signature={SIGNATURE}"
     payload = {
         "jsonrpc": "2.0",
@@ -29,7 +44,8 @@ def _call(service: str, tool: str, args: dict, timeout: int = 30) -> dict:
         "id": 1,
         "params": {"name": tool, "arguments": args}
     }
-    r = requests.post(url, headers=HEADERS, json=payload, timeout=timeout)
+    session = _get_session()
+    r = session.post(url, json=payload, timeout=timeout)
     r.encoding = 'utf-8'
 
     for line in r.text.split("\n"):

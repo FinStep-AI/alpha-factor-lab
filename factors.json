@@ -563,5 +563,35 @@
       ]
     },
     "conclusion": "弱因子。IC=0.019(t=1.65)边缘显著，但单调性=0.0是致命伤——G1偏低而G2-G5几乎平坦，无法有效分层选股。换手79%偏高。更适合做市场风格择时信号。"
+  },
+  {
+    "id": "close_vwap_dev_v1",
+    "name": "VWAP偏离度(反向)",
+    "description": "(close-vwap)/vwap的20日均值，反向使用（做多close<vwap即尾盘弱势股）。逻辑：尾盘持续收在vwap下方=卖压重但日内已消化，后续20日均值回复效应强。A股中证1000小盘股效果显著。市值中性化处理。",
+    "category": "量价",
+    "direction": "反向（原始负值做多）",
+    "stock_pool": "中证1000",
+    "rebalance_freq": "20天",
+    "neutralization": "市值（OLS回归取残差）",
+    "data_source": "K线OHLCV（日频）",
+    "created_at": "2026-03-08",
+    "ic_mean": 0.0404,
+    "ic_std": 0.0759,
+    "ic_t": 2.9,
+    "ic_significant": true,
+    "rank_ic": 0.083,
+    "ic_ir": 0.5315,
+    "long_short_return": 0.2073,
+    "long_short_sharpe": 1.4872,
+    "long_short_mdd": -0.182,
+    "turnover": 0.2673,
+    "monotonicity": 0.9,
+    "group_returns_annualized": {},
+    "group_sharpe": {},
+    "group_mdd": {},
+    "nav_data": "output/close_vwap_dev_v1/cumulative_returns.json",
+    "ic_data": "output/close_vwap_dev_v1/ic_series.json",
+    "status": "active",
+    "rating": "★★★★★"
   }
 ]
