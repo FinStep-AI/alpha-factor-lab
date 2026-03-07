@@ -1,9 +1,33 @@
 #!/usr/bin/env python3
-"""通用A股K线获取（支持东方财富 + 腾讯双数据源）"""
+"""通用A股K线获取（支持 fintool/聚源 + 腾讯 + 东方财富 三数据源）
+优先级: fintool > tencent > eastmoney
+"""
 import urllib.request
 import json
 import time
 import sys
+import os
+
+def fetch_kline_fintool(code, days=120, end_date=None):
+    """fintool K线接口（聚源数据源，优先级最高）
+    code: 6位纯数字代码
+    days: 条数（最多100/次，自动分段）
+    """
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    from fintool_client import get_kline, get_kline_history
+    if end_date is None:
+        from datetime import date
+        end_date = date.today().strftime('%Y-%m-%d')
+    
+    if days <= 100:
+        return get_kline(code, end_date, days)
+    else:
+        # 超过100条用分段拉取
+        from datetime import date, timedelta
+        dt = date.today()
+        start = (dt - timedelta(days=int(days * 1.5))).strftime('%Y-%m-%d')
+        return get_kline_history(code, start, end_date)
+
 
 def fetch_kline_tencent(code, days=120):
     """腾讯K线接口（web.ifzq.gtimg.cn）
@@ -80,22 +104,30 @@ def fetch_kline_eastmoney(code, days=120):
 
 
 def fetch_kline(code, days=120, source='auto'):
-    """获取K线，支持 auto/tencent/eastmoney
-    auto: 先试东方财富，失败再试腾讯
+    """获取K线，支持 auto/fintool/tencent/eastmoney
+    auto: fintool → tencent → eastmoney
     """
-    if source == 'tencent':
+    if source == 'fintool':
+        return fetch_kline_fintool(code, days)
+    elif source == 'tencent':
         return fetch_kline_tencent(code, days)
     elif source == 'eastmoney':
         return fetch_kline_eastmoney(code, days)
-    else:  # auto
+    else:  # auto: fintool → tencent → eastmoney
         try:
-            result = fetch_kline_eastmoney(code, days)
+            result = fetch_kline_fintool(code, days)
             if result:
                 return result
         except Exception:
             pass
         try:
             result = fetch_kline_tencent(code, days)
+            if result:
+                return result
+        except Exception:
+            pass
+        try:
+            result = fetch_kline_eastmoney(code, days)
             if result:
                 return result
         except Exception:
