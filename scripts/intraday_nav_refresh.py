@@ -253,43 +253,14 @@ def main():
         nav = round(total_value / INITIAL_CASH, 6)
         cash_pct = round(cash / total_value * 100, 2) if total_value > 0 else 100
         
-        # 更新nav_history：盘中追加带时间戳的点
-        nav_hist = player.get("nav_history", {})
-        dates = nav_hist.get("dates", [])
-        navs = nav_hist.get("nav", [])
-        cash_pcts = nav_hist.get("cash_pct", [])
+        # 盘中刷新：只更新portfolio，不追加nav_history
+        # nav_history 仅由 nav-update（收盘）写入，保证每天只有一条收盘NAV
         
-        time_label = datetime.now().strftime("%m-%d %H:%M")
-        
-        # 如果最后一个点是今天的盘中点（含HH:MM），覆盖同一时刻；否则追加
-        if dates and dates[-1] == time_label:
-            navs[-1] = nav
-            cash_pcts[-1] = cash_pct
-        else:
-            dates.append(time_label)
-            navs.append(nav)
-            cash_pcts.append(cash_pct)
-        
-        nav_hist["dates"] = dates
-        nav_hist["nav"] = navs
-        nav_hist["cash_pct"] = cash_pcts
-        player["nav_history"] = nav_hist
-        
-        # 更新stats
+        # 更新stats（仅更新实时收益率和持仓数）
         stats = player.get("stats", {})
         stats["total_return_pct"] = round((nav - 1) * 100, 2)
         stats["current_positions"] = len(positions)
         player["stats"] = stats
-        
-        # 计算最大回撤
-        if len(navs) > 1:
-            peak = navs[0]
-            max_dd = 0
-            for n in navs:
-                if n > peak: peak = n
-                dd = (peak - n) / peak if peak > 0 else 0
-                if dd > max_dd: max_dd = dd
-            stats["max_drawdown_pct"] = round(max_dd * 100, 2)
         
         print(f"  {player.get('emoji','?')} {player.get('name', pid)}: NAV={nav:.4f} ({stats['total_return_pct']:+.2f}%), "
               f"updated {updated_count}/{len(positions)} prices", file=sys.stderr)

@@ -208,6 +208,11 @@ def execute_trade(data: dict, player_id: str, code: str, name: str,
         if volume > pos["volume"]:
             return {"status": "error", "message": f"持仓不足: 持有{pos['volume']}, 卖出{volume}"}
         
+        # 计算盈亏
+        avg_cost = pos.get("avg_cost") or pos.get("cost_price", price)
+        pnl = round((price - avg_cost) * volume, 2)
+        pnl_pct = round((price / avg_cost - 1) * 100, 2) if avg_cost > 0 else 0
+        
         # 收钱
         portfolio["cash"] += amount - fees["total"]
         
@@ -235,6 +240,8 @@ def execute_trade(data: dict, player_id: str, code: str, name: str,
         "volume": volume,
         "amount": round(amount, 2),
         "fees": fees,
+        "pnl": pnl if direction == "sell" else 0,
+        "pnl_pct": pnl_pct if direction == "sell" else 0,
         "reason": reason
     }
     player["trades"].append(trade_record)
@@ -270,10 +277,12 @@ def execute_order_list(data: dict, player_id: str, orders: list, date: str) -> l
 
 
 # ─── 净值更新 ───
-def update_nav(data: dict, player_id: str, prices: dict, date: str):
+def update_nav(data: dict, player_id: str, prices: dict, date: str, intraday: bool = False):
     """
     用最新价格更新某选手的净值
     prices: {"000001": 10.5, "600519": 1800.0, ...}
+    date: YYYY-MM-DD 格式
+    intraday: True=盘中刷新（只更新portfolio，不追加nav_history）
     """
     player = data["players"][player_id]
     portfolio = player["portfolio"]
@@ -281,7 +290,6 @@ def update_nav(data: dict, player_id: str, prices: dict, date: str):
     # 更新每个持仓的当前价格和盈亏
     total_market_value = 0
     for code, pos in portfolio["positions"].items():
-        # 兼容两种字段名: shares/cost_price (quant) vs volume/avg_cost (trader/dwj)
         vol = pos.get("volume") or pos.get("shares", 0)
         cost = pos.get("avg_cost") or pos.get("cost_price", 0)
         if code in prices:
@@ -296,15 +304,27 @@ def update_nav(data: dict, player_id: str, prices: dict, date: str):
     portfolio["total_value"] = round(total_value, 2)
     portfolio["last_update"] = date
     
+    # 盘中刷新：只更新portfolio，不追加nav_history
+    if intraday:
+        return
+    
     initial_cash = data["meta"]["initial_cash"]
     nav = round(total_value / initial_cash, 6)
     cash_pct = round(portfolio["cash"] / total_value * 100, 2) if total_value > 0 else 100
     
-    # 追加净值历史
+    # 日期标准化为 YYYY-MM-DD
+    date_key = date[:10]
+    
+    # 追加或覆盖当日收盘净值（同一天只保留一条）
     nav_history = player["nav_history"]
-    nav_history["dates"].append(date)
-    nav_history["nav"].append(nav)
-    nav_history["cash_pct"].append(cash_pct)
+    if nav_history["dates"] and nav_history["dates"][-1] == date_key:
+        # 覆盖当日
+        nav_history["nav"][-1] = nav
+        nav_history["cash_pct"][-1] = cash_pct
+    else:
+        nav_history["dates"].append(date_key)
+        nav_history["nav"].append(nav)
+        nav_history["cash_pct"].append(cash_pct)
     
     # 更新统计指标
     _update_stats(player, initial_cash)
@@ -313,17 +333,25 @@ def update_nav(data: dict, player_id: str, prices: dict, date: str):
 
 
 def update_benchmark(data: dict, benchmark_nav: float, date: str):
-    """更新基准净值"""
-    data["benchmark"]["dates"].append(date)
-    data["benchmark"]["nav"].append(round(benchmark_nav, 6))
+    """更新基准净值（同日覆盖，日期格式 YYYY-MM-DD）"""
+    date_key = date[:10]
+    bm = data["benchmark"]
+    if bm["dates"] and bm["dates"][-1] == date_key:
+        bm["nav"][-1] = round(benchmark_nav, 6)
+    else:
+        bm["dates"].append(date_key)
+        bm["nav"].append(round(benchmark_nav, 6))
 
 
-def update_all_navs(data: dict, all_prices: dict, benchmark_nav: float, date: str):
-    """一次性更新所有选手净值和基准"""
+def update_all_navs(data: dict, all_prices: dict, benchmark_nav: float, date: str, intraday: bool = False):
+    """一次性更新所有选手净值和基准
+    intraday=True: 盘中刷新，只更新portfolio价格，不追加nav_history
+    """
     for pid in data["players"]:
-        update_nav(data, pid, all_prices, date)
-    update_benchmark(data, benchmark_nav, date)
-    _update_leaderboard(data)
+        update_nav(data, pid, all_prices, date, intraday=intraday)
+    if not intraday:
+        update_benchmark(data, benchmark_nav, date)
+        _update_leaderboard(data)
 
 
 # ─── 统计指标 ───
@@ -374,11 +402,14 @@ def _update_stats(player: dict, initial_cash: float):
     # 胜率和盈亏比
     trades = player["trades"]
     if trades:
-        # 只统计已平仓的（简化：按每笔卖出交易算）
-        sell_trades = [t for t in trades if t.get("direction") == "sell" or t.get("action") == "sell"]
-        # 这里简化处理，后续可以精确匹配买卖对
-        winning = sum(1 for t in sell_trades if t.get("pnl", 0) > 0)
-        stats["win_rate"] = round(winning / len(sell_trades) * 100, 2) if sell_trades else 0
+        sell_trades = [t for t in trades if t.get("direction") == "sell"]
+        if sell_trades:
+            winning = [t for t in sell_trades if t.get("pnl", 0) > 0]
+            losing = [t for t in sell_trades if t.get("pnl", 0) < 0]
+            stats["win_rate"] = round(len(winning) / len(sell_trades) * 100, 2)
+            avg_win = sum(t["pnl"] for t in winning) / max(len(winning), 1)
+            avg_loss = abs(sum(t["pnl"] for t in losing) / max(len(losing), 1))
+            stats["profit_loss_ratio"] = round(avg_win / avg_loss, 2) if avg_loss > 0 else 0
 
 
 def _update_leaderboard(data: dict):
@@ -478,7 +509,8 @@ def get_player_summary(data: dict, player_id: str) -> str:
     if recent_decisions:
         lines.append("\n### 最近决策")
         for d in recent_decisions:
-            lines.append(f"- [{d['date']} {d.get('time','')}] {d['summary']}")
+            summary = d.get('summary') or d.get('action', '')
+            lines.append(f"- [{d['date']} {d.get('time','')}] {summary}")
     
     return "\n".join(lines)
 
