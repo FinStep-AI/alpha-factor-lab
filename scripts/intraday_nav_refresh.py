@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
 """
 盘中实时净值刷新 — 每半小时拉实时行情更新持仓盈亏+净值+排行榜
+数据源优先级: 腾讯行情（批量快） > fintool snapshot（fallback）
 用法: python3 scripts/intraday_nav_refresh.py [--data paper-trading-data.json]
 
 流程:
 1. 从 paper-trading-data.json 提取所有选手持仓股票代码
-2. 用腾讯行情API批量获取实时价格
+2. 用腾讯行情API批量获取实时价格（失败则用fintool逐个拉）
 3. 获取沪深300实时点位计算基准净值
 4. 更新每只持仓的 current_price/market_value/pnl/pnl_pct
 5. 更新每位选手的 portfolio.total_value + 盘中净值（覆盖今天的nav点）
@@ -27,6 +28,14 @@ DATA_FILE = "paper-trading-data.json"
 INITIAL_CASH = 10_000_000
 # 沪深300起始点位 (2026-02-24开盘)
 HS300_START = None  # 从data文件读取
+
+# fintool fallback
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+try:
+    from fintool_client import get_snapshot as fintool_snapshot
+    HAS_FINTOOL = True
+except ImportError:
+    HAS_FINTOOL = False
 
 
 def fetch_quotes_tencent(codes):
@@ -66,7 +75,8 @@ def fetch_quotes_tencent(codes):
 
 
 def fetch_hs300_nav():
-    """获取沪深300实时点位"""
+    """获取沪深300实时点位（腾讯优先，fintool fallback）"""
+    # 腾讯
     try:
         url = "https://qt.gtimg.cn/q=sh000300"
         req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
@@ -76,8 +86,24 @@ def fetch_hs300_nav():
             if "~" in line:
                 fields = line.split("~")
                 if len(fields) >= 4:
-                    return _safe_float(fields[3])
+                    val = _safe_float(fields[3])
+                    if val > 0:
+                        return val
     except Exception as e:
+        print(f"[WARN] HS300 tencent failed: {e}", file=sys.stderr)
+
+    # fintool fallback
+    if HAS_FINTOOL:
+        try:
+            snap = fintool_snapshot("000300")
+            price = _safe_float(snap.get("current_price", snap.get("close_price", 0)))
+            if price > 0:
+                print("[INFO] HS300 via fintool fallback", file=sys.stderr)
+                return price
+        except Exception as e:
+            print(f"[WARN] HS300 fintool fallback failed: {e}", file=sys.stderr)
+
+    return None
         print(f"[WARN] HS300 fetch failed: {e}", file=sys.stderr)
     return None
 
@@ -189,6 +215,21 @@ def main():
     print(f"[INFO] 获取 {len(tencent_codes)} 只股票实时行情...", file=sys.stderr)
     quotes = fetch_quotes_tencent(tencent_codes)
     
+    # fintool fallback: 腾讯拿不到的用fintool补
+    missing_codes = [tc for tc in tencent_codes if tc not in quotes]
+    if missing_codes and HAS_FINTOOL:
+        print(f"[INFO] {len(missing_codes)} 只腾讯缺失，fintool补充...", file=sys.stderr)
+        for tc in missing_codes:
+            pos_code = code_map.get(tc, tencent_to_position(tc))
+            pure_code = pos_code.split('.')[0] if '.' in pos_code else pos_code
+            try:
+                snap = fintool_snapshot(pure_code)
+                price = _safe_float(snap.get("current_price", snap.get("close_price", 0)))
+                if price > 0:
+                    quotes[tc] = price
+            except Exception:
+                pass
+
     # 转换回持仓代码格式的价格dict
     prices = {}
     for tc, price in quotes.items():
