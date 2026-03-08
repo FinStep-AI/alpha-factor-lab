@@ -19,7 +19,7 @@
       "period": "2022-10 ~ 2026-02",
       "ic_mean": 0.028,
       "ic_t": 2.76,
-      "sharpe": 0.90,
+      "sharpe": 0.9,
       "monotonicity": 1.0
     },
     "diff_notes": "原文用美股大盘+中盘，我们用A股小盘(中证1000)；原文未做市值中性化，我们做了OLS市值中性化后依然显著；公式一致：|ret|/dollar_volume",
@@ -48,7 +48,7 @@
       "period": "2022-10 ~ 2026-02",
       "ic_mean": 0.017,
       "ic_t": 0.98,
-      "sharpe": 0.70,
+      "sharpe": 0.7,
       "monotonicity": 0.7
     },
     "diff_notes": "⚠️ 方向相反！原文美股是低波异象（高idio_vol→低收益），中证1000是高波溢价（高idio_vol→高收益）。可能因为：A股散户多+小盘股+彩票效应。需用正向而非原文的负向",
@@ -114,5 +114,132 @@
     "conclusion": "入库但标记弱",
     "date": "2026-02-24",
     "status": "active"
+  },
+  {
+    "id": "tail_risk_cvar_v1",
+    "date": "2026-03-08",
+    "status": "accepted",
+    "name": "尾部风险CVaR (Expected Shortfall)",
+    "category": "风险/尾部",
+    "source_type": "论文复现+本土化",
+    "source_title": "Bali, Cakici & Whitelaw (2011) \"Maxing Out: Stocks as Lotteries and the Cross-Section of Expected Returns\", JFE",
+    "source_url": "https://doi.org/10.1016/j.jfineco.2010.08.014",
+    "additional_refs": [
+      "Ang, Chen & Xing (2006) \"Downside Risk\", RFS",
+      "Amaya, Christoffersen, Jacobs & Vasquez (2015) \"Does Realized Skewness Predict...\", JFE"
+    ],
+    "hypothesis": "近期经历极端下跌的股票面临连锁抛售压力(基本面恶化、机构止损、流动性危机)，后续持续承压。回避尾部风险=正alpha。",
+    "formula": "-mean(bottom_2(daily_return, 10d)), neutralize(log_amount_20d)",
+    "construction": {
+      "data": "日频OHLCV",
+      "window": 10,
+      "k_worst": 2,
+      "neutralize": "log(20d_avg_amount)",
+      "winsorize": "MAD 3x",
+      "standardize": "cross-section z-score"
+    },
+    "backtest_config": {
+      "stock_pool": "CSI1000",
+      "forward_days": 5,
+      "rebalance_freq": 20,
+      "n_groups": 5,
+      "cost": 0.003
+    },
+    "results": {
+      "ic_mean": 0.0202,
+      "ic_t": 2.3,
+      "ic_significant_5pct": true,
+      "rank_ic": 0.011,
+      "long_short_sharpe": 2.0364,
+      "long_short_ann_return": 0.2892,
+      "long_short_mdd": -0.1433,
+      "monotonicity": 1.0,
+      "g5_sharpe": 0.85,
+      "g5_ann_return": 0.2551,
+      "g1_ann_return": -0.0172
+    },
+    "correlations_with_existing": {
+      "amihud_illiq_v2": 0.2175,
+      "overnight_momentum_v1": 0.0127,
+      "close_vwap_dev_v1": -0.0228
+    },
+    "redundancy_check": "PASS (max |r| = 0.22 vs amihud)",
+    "verdict": "全部4项指标达标。IC>0.02✅ IC_t>2.0✅ G5_Sharpe>0.8✅ 单调性>0.8✅。多空Sharpe=2.04刷新全库纪录。",
+    "script": "scripts/compute_tail_risk_cvar.py",
+    "factor_file": "data/factor_tail_risk_cvar_v1.csv",
+    "notes": "同时测试了realized skewness(Amaya 2015)、MAX/MIN effect(原版)、downside variance ratio、volume concentration(HHI)、volume-return correlation等多种变体，均未达标。CVaR(Expected Shortfall)构造在A股CSI1000效果最佳。"
+  },
+  {
+    "id": "realized_skew_v1",
+    "date": "2026-03-08",
+    "status": "rejected",
+    "name": "Realized Skewness (日频近似)",
+    "source_type": "论文复现",
+    "source_title": "Amaya, Christoffersen, Jacobs & Vasquez (2015) JFE",
+    "source_url": "https://doi.org/10.1016/j.jfineco.2015.08.024",
+    "hypothesis": "低偏度股票被低估(投资者偏好正偏度/彩票型)，后续有超额收益",
+    "formula": "-skewness(daily_ret, 20d)",
+    "results": {
+      "ic_mean": 0.0013,
+      "ic_t": 0.26,
+      "long_short_sharpe": -0.28,
+      "monotonicity": 0.0
+    },
+    "failure_reason": "日频数据计算偏度噪声太大，原文用5分钟高频数据。正/反向、20d/60d窗口均无效。",
+    "notes": "测试了4个变体(正/负×20d/60d)，均IC≈0，完全无信号。需高频数据才能复现。"
+  },
+  {
+    "id": "down_var_ratio_v1",
+    "date": "2026-03-08",
+    "status": "rejected",
+    "name": "Downside Variance Ratio",
+    "source_type": "论文复现",
+    "source_title": "Ang, Chen & Xing (2006) \"Downside Risk\", RFS",
+    "source_url": "",
+    "hypothesis": "高下行方差比的股票被过度抛售，后续均值回复",
+    "formula": "mean(min(r,0)^2) / mean(r^2), 20d rolling",
+    "results": {
+      "ic_mean": 0.0054,
+      "ic_t": 0.35,
+      "long_short_sharpe": 0.07,
+      "monotonicity": 0.3
+    },
+    "failure_reason": "IC不显著，分层无单调性。下行方差比在日频CSI1000上无预测力。"
+  },
+  {
+    "id": "vol_hhi_v1",
+    "date": "2026-03-08",
+    "status": "rejected",
+    "name": "Volume Concentration (HHI)",
+    "source_type": "自研",
+    "source_title": "成交量集中度HHI",
+    "source_url": "",
+    "hypothesis": "成交量集中在少数交易日→知情交易信号",
+    "formula": "HHI(daily_volume, 20d)",
+    "results": {
+      "ic_mean": 0.006,
+      "ic_t": 0.59,
+      "long_short_sharpe": 0.16,
+      "monotonicity": 0.0
+    },
+    "failure_reason": "IC不显著，无单调性。日频成交量HHI噪声太大。"
+  },
+  {
+    "id": "vol_ret_corr_v1",
+    "date": "2026-03-08",
+    "status": "rejected",
+    "name": "Volume-Return Correlation",
+    "source_type": "自研",
+    "source_title": "量价相关性因子",
+    "source_url": "",
+    "hypothesis": "放量上涨(正相关)→动量延续",
+    "formula": "corr(ret, log_vol, 20d)",
+    "results": {
+      "ic_mean": -0.002,
+      "ic_t": -0.26,
+      "long_short_sharpe": 0.06,
+      "monotonicity": 0.1
+    },
+    "failure_reason": "IC≈0，完全无信号。量价相关性在CSI1000上无截面预测力。"
   }
 ]
