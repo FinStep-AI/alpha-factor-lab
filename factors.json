@@ -60,7 +60,23 @@
         -0.3206
       ]
     },
-    "conclusion": "当前最强因子。流动性越差的股票后续收益越高，IC=0.028(t=2.76)显著，单调性完美(1.0)，换手率25%低频友好。推荐作为主力因子长期使用。"
+    "conclusion": "当前最强因子。流动性越差的股票后续收益越高，IC=0.028(t=2.76)显著，单调性完美(1.0)，换手率25%低频友好。推荐作为主力因子长期使用。",
+    "barra_style": "Liquidity",
+    "source_type": "自研",
+    "source_title": "Amihud (2002) Illiquidity Premium 本土化",
+    "source_url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=276135",
+    "correlations": {
+      "amihud_illiq_v2": 1.0,
+      "shadow_pressure_v1": -0.227,
+      "overnight_momentum_v1": null,
+      "gap_momentum_v1": null,
+      "turnover_decay_v1": 0.102,
+      "idio_vol_v1": null,
+      "close_location_v1": null,
+      "pb_roe_residual_v1": null,
+      "beta_elasticity_v1": null,
+      "close_vwap_dev_v1": 0.24
+    }
   },
   {
     "id": "shadow_pressure_v1",
@@ -124,7 +140,23 @@
         -0.359
       ]
     },
-    "conclusion": "全因子库最强Sharpe(1.49)。上影线卖压正向使用(高卖压→高收益)揭示中证1000的均值回复效应：短期遭受卖压的小盘股后续反弹力度更大。IC=0.024, 单调性完美1.0, MDD仅-9%。与Amihud/隔夜动量互补，推荐组合使用。"
+    "conclusion": "全因子库最强Sharpe(1.49)。上影线卖压正向使用(高卖压→高收益)揭示中证1000的均值回复效应：短期遭受卖压的小盘股后续反弹力度更大。IC=0.024, 单调性完美1.0, MDD仅-9%。与Amihud/隔夜动量互补，推荐组合使用。",
+    "barra_style": "微观结构",
+    "source_type": "自研",
+    "source_title": "影线压力因子（上下影线比差异）",
+    "source_url": "",
+    "correlations": {
+      "amihud_illiq_v2": -0.227,
+      "shadow_pressure_v1": 1.0,
+      "overnight_momentum_v1": null,
+      "gap_momentum_v1": null,
+      "turnover_decay_v1": 0.096,
+      "idio_vol_v1": null,
+      "close_location_v1": null,
+      "pb_roe_residual_v1": null,
+      "beta_elasticity_v1": null,
+      "close_vwap_dev_v1": -0.341
+    }
   },
   {
     "id": "overnight_momentum_v1",
@@ -188,7 +220,23 @@
         -0.3591
       ]
     },
-    "conclusion": "强因子。IC=0.039(t=2.87)在所有因子中最高，单调性0.9优秀，Sharpe=1.0。发现A股中证1000存在显著隔夜效应——隔夜持续强势的股票后续表现更好。换手76%中等偏高，适合月度调仓。与Amihud(流动性)互补性好。"
+    "conclusion": "强因子。IC=0.039(t=2.87)在所有因子中最高，单调性0.9优秀，Sharpe=1.0。发现A股中证1000存在显著隔夜效应——隔夜持续强势的股票后续表现更好。换手76%中等偏高，适合月度调仓。与Amihud(流动性)互补性好。",
+    "barra_style": "Momentum",
+    "source_type": "自研",
+    "source_title": "隔夜动量效应（Lou et al. 2019）",
+    "source_url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2856453",
+    "correlations": {
+      "amihud_illiq_v2": null,
+      "shadow_pressure_v1": null,
+      "overnight_momentum_v1": 1.0,
+      "gap_momentum_v1": null,
+      "turnover_decay_v1": null,
+      "idio_vol_v1": null,
+      "close_location_v1": null,
+      "pb_roe_residual_v1": null,
+      "beta_elasticity_v1": null,
+      "close_vwap_dev_v1": null
+    }
   },
   {
     "id": "gap_momentum_v1",
@@ -253,7 +301,23 @@
         -0.3541
       ]
     },
-    "conclusion": "强因子。IC=0.015(t=3.14)在1%水平显著，IR=0.34是所有因子中最高(信号最稳定)，单调性1.0完美，多空MDD仅-6.4%。跳空方向一致性+幅度加权+近因加权的三维复合信号，捕捉知情交易者在集合竞价阶段的方向性押注。与隔夜动量互补，推荐组合使用。"
+    "conclusion": "强因子。IC=0.015(t=3.14)在1%水平显著，IR=0.34是所有因子中最高(信号最稳定)，单调性1.0完美，多空MDD仅-6.4%。跳空方向一致性+幅度加权+近因加权的三维复合信号，捕捉知情交易者在集合竞价阶段的方向性押注。与隔夜动量互补，推荐组合使用。",
+    "barra_style": "Momentum",
+    "source_type": "自研",
+    "source_title": "跳空动量因子（方向+幅度+回补）",
+    "source_url": "",
+    "correlations": {
+      "amihud_illiq_v2": null,
+      "shadow_pressure_v1": null,
+      "overnight_momentum_v1": null,
+      "gap_momentum_v1": 1.0,
+      "turnover_decay_v1": null,
+      "idio_vol_v1": -0.158,
+      "close_location_v1": null,
+      "pb_roe_residual_v1": -0.233,
+      "beta_elasticity_v1": 0.048,
+      "close_vwap_dev_v1": null
+    }
   },
   {
     "id": "turnover_decay_v1",
@@ -317,7 +381,23 @@
         -0.3395
       ]
     },
-    "conclusion": "边缘有效。IC=0.021(t=1.95)差一点达到5%显著性，但Sharpe=0.72和单调性0.9表现不错。换手率衰减(量能枯竭→反弹)逻辑清晰，作为辅助因子有价值。建议改进：尝试不同窗口组合(3d/10d)或加入成交额衰减。"
+    "conclusion": "边缘有效。IC=0.021(t=1.95)差一点达到5%显著性，但Sharpe=0.72和单调性0.9表现不错。换手率衰减(量能枯竭→反弹)逻辑清晰，作为辅助因子有价值。建议改进：尝试不同窗口组合(3d/10d)或加入成交额衰减。",
+    "barra_style": "Liquidity",
+    "source_type": "自研",
+    "source_title": "换手率衰减因子（短期/长期换手率比）",
+    "source_url": "",
+    "correlations": {
+      "amihud_illiq_v2": 0.102,
+      "shadow_pressure_v1": 0.096,
+      "overnight_momentum_v1": null,
+      "gap_momentum_v1": null,
+      "turnover_decay_v1": 1.0,
+      "idio_vol_v1": null,
+      "close_location_v1": null,
+      "pb_roe_residual_v1": null,
+      "beta_elasticity_v1": null,
+      "close_vwap_dev_v1": 0.188
+    }
   },
   {
     "id": "idio_vol_v1",
@@ -380,7 +460,23 @@
         -0.3675
       ]
     },
-    "conclusion": "第二强因子。Sharpe=1.07，MDD仅-9.6%，单调性0.6分层清晰。方向为正（高波动→高收益），发现中证1000存在'高波动溢价'，与大盘低波异象相反。与Amihud低相关，适合组合使用。"
+    "conclusion": "第二强因子。Sharpe=1.07，MDD仅-9.6%，单调性0.6分层清晰。方向为正（高波动→高收益），发现中证1000存在'高波动溢价'，与大盘低波异象相反。与Amihud低相关，适合组合使用。",
+    "barra_style": "Volatility",
+    "source_type": "自研",
+    "source_title": "特质波动率因子（Ang et al. 2006）",
+    "source_url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=276076",
+    "correlations": {
+      "amihud_illiq_v2": null,
+      "shadow_pressure_v1": null,
+      "overnight_momentum_v1": null,
+      "gap_momentum_v1": -0.158,
+      "turnover_decay_v1": null,
+      "idio_vol_v1": 1.0,
+      "close_location_v1": null,
+      "pb_roe_residual_v1": 0.536,
+      "beta_elasticity_v1": 0.097,
+      "close_vwap_dev_v1": null
+    }
   },
   {
     "id": "close_location_v1",
@@ -436,7 +532,23 @@
         -0.3909
       ]
     },
-    "rating": "★★★ 可用"
+    "rating": "★★★ 可用",
+    "barra_style": "微观结构",
+    "source_type": "自研",
+    "source_title": "收盘价位置因子（日内价格位置20日均值）",
+    "source_url": "",
+    "correlations": {
+      "amihud_illiq_v2": null,
+      "shadow_pressure_v1": null,
+      "overnight_momentum_v1": null,
+      "gap_momentum_v1": null,
+      "turnover_decay_v1": null,
+      "idio_vol_v1": null,
+      "close_location_v1": 1.0,
+      "pb_roe_residual_v1": null,
+      "beta_elasticity_v1": null,
+      "close_vwap_dev_v1": null
+    }
   },
   {
     "id": "pb_roe_residual_v1",
@@ -499,7 +611,23 @@
         -0.417
       ]
     },
-    "conclusion": "完全失效。基本面因子(PB/ROE)在中证1000小盘股中信噪比太低，截面回归R²仅3.3%。小盘股财务数据质量差、波动大，传统价值因子不适用。"
+    "conclusion": "完全失效。基本面因子(PB/ROE)在中证1000小盘股中信噪比太低，截面回归R²仅3.3%。小盘股财务数据质量差、波动大，传统价值因子不适用。",
+    "barra_style": "Value",
+    "source_type": "自研",
+    "source_title": "PB-ROE偏离度因子",
+    "source_url": "",
+    "correlations": {
+      "amihud_illiq_v2": null,
+      "shadow_pressure_v1": null,
+      "overnight_momentum_v1": null,
+      "gap_momentum_v1": -0.233,
+      "turnover_decay_v1": null,
+      "idio_vol_v1": 0.536,
+      "close_location_v1": null,
+      "pb_roe_residual_v1": 1.0,
+      "beta_elasticity_v1": -0.326,
+      "close_vwap_dev_v1": null
+    }
   },
   {
     "id": "beta_elasticity_v1",
@@ -562,7 +690,23 @@
         -0.3772
       ]
     },
-    "conclusion": "弱因子。IC=0.019(t=1.65)边缘显著，但单调性=0.0是致命伤——G1偏低而G2-G5几乎平坦，无法有效分层选股。换手79%偏高。更适合做市场风格择时信号。"
+    "conclusion": "弱因子。IC=0.019(t=1.65)边缘显著，但单调性=0.0是致命伤——G1偏低而G2-G5几乎平坦，无法有效分层选股。换手79%偏高。更适合做市场风格择时信号。",
+    "barra_style": "Volatility",
+    "source_type": "自研",
+    "source_title": "Beta弹性因子（短期Beta vs 长期Beta）",
+    "source_url": "",
+    "correlations": {
+      "amihud_illiq_v2": null,
+      "shadow_pressure_v1": null,
+      "overnight_momentum_v1": null,
+      "gap_momentum_v1": 0.048,
+      "turnover_decay_v1": null,
+      "idio_vol_v1": 0.097,
+      "close_location_v1": null,
+      "pb_roe_residual_v1": -0.326,
+      "beta_elasticity_v1": 1.0,
+      "close_vwap_dev_v1": null
+    }
   },
   {
     "id": "close_vwap_dev_v1",
@@ -592,6 +736,22 @@
     "nav_data": "output/close_vwap_dev_v1/cumulative_returns.json",
     "ic_data": "output/close_vwap_dev_v1/ic_series.json",
     "status": "active",
-    "rating": "★★★★★"
+    "rating": "★★★★★",
+    "barra_style": "微观结构",
+    "source_type": "自研",
+    "source_title": "收盘价偏离VWAP因子",
+    "source_url": "",
+    "correlations": {
+      "amihud_illiq_v2": 0.24,
+      "shadow_pressure_v1": -0.341,
+      "overnight_momentum_v1": null,
+      "gap_momentum_v1": null,
+      "turnover_decay_v1": 0.188,
+      "idio_vol_v1": null,
+      "close_location_v1": null,
+      "pb_roe_residual_v1": null,
+      "beta_elasticity_v1": null,
+      "close_vwap_dev_v1": 1.0
+    }
   }
 ]

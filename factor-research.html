@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alpha Factor Lab — 因子复现日志</title>
+<style>
+  :root {
+    --bg: #0f1117; --card: #1a1d29; --border: #2a2d3a;
+    --text: #e4e6eb; --text2: #8b8fa3; --accent: #4f8cff;
+    --green: #22c55e; --red: #ef4444; --orange: #f59e0b; --purple: #a855f7;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+  .header { text-align:center; padding:40px 0 30px; border-bottom:1px solid var(--border); margin-bottom:30px; }
+  .header h1 { font-size:2rem; background:linear-gradient(135deg,var(--accent),var(--purple)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; margin-bottom:8px; }
+  .header p { color:var(--text2); font-size:0.95rem; }
+  .nav-links { margin-top:12px; }
+  .nav-links a { margin:0 6px; padding:6px 14px; border:1px solid var(--border); border-radius:8px; font-size:0.82rem; color:var(--accent); text-decoration:none; transition:all .2s; }
+  .nav-links a:hover { border-color:var(--accent); background:rgba(79,140,255,.05); }
+  .nav-links a.active { border-color:var(--accent); background:rgba(79,140,255,.1); }
+
+  .stats-bar { display:flex; justify-content:center; gap:40px; margin-top:20px; flex-wrap:wrap; }
+  .stat { text-align:center; }
+  .stat .num { font-size:1.8rem; font-weight:700; color:var(--accent); }
+  .stat .label { font-size:0.8rem; color:var(--text2); text-transform:uppercase; }
+
+  .filter-bar { display:flex; gap:8px; margin-bottom:24px; flex-wrap:wrap; }
+  .filter-btn { padding:6px 16px; border:1px solid var(--border); border-radius:20px; font-size:0.82rem; color:var(--text2); background:transparent; cursor:pointer; transition:all .2s; }
+  .filter-btn:hover { border-color:var(--accent); color:var(--accent); }
+  .filter-btn.active { border-color:var(--accent); background:rgba(79,140,255,.1); color:var(--accent); }
+
+  .research-list { display:flex; flex-direction:column; gap:20px; }
+
+  .research-card { background:var(--card); border:1px solid var(--border); border-radius:14px; padding:28px; transition:all .2s; }
+  .research-card:hover { border-color:var(--accent); box-shadow:0 4px 20px rgba(79,140,255,.08); }
+
+  .card-header { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:16px; flex-wrap:wrap; gap:12px; }
+  .card-title { font-size:1.15rem; font-weight:600; flex:1; min-width:200px; }
+  .card-title a { color:var(--accent); text-decoration:none; }
+  .card-title a:hover { text-decoration:underline; }
+  .card-badges { display:flex; gap:8px; flex-wrap:wrap; }
+
+  .badge { display:inline-block; padding:3px 10px; border-radius:20px; font-size:0.72rem; font-weight:600; }
+  .badge-paper { background:rgba(168,85,247,0.15); color:var(--purple); }
+  .badge-report { background:rgba(79,140,255,0.15); color:var(--accent); }
+  .badge-self { background:rgba(245,158,11,0.15); color:var(--orange); }
+  .badge-active { background:rgba(34,197,94,0.15); color:var(--green); }
+  .badge-weak { background:rgba(239,68,68,0.15); color:var(--red); }
+  .badge-pending { background:rgba(245,158,11,0.15); color:var(--orange); }
+  .badge-rejected { background:rgba(107,114,128,0.15); color:#6b7280; }
+
+  .card-meta { display:flex; gap:20px; font-size:0.82rem; color:var(--text2); margin-bottom:16px; flex-wrap:wrap; }
+  .meta-item { display:flex; align-items:center; gap:4px; }
+
+  .comparison { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:16px 0; }
+  @media(max-width:640px) { .comparison { grid-template-columns:1fr; } }
+
+  .comp-box { background:rgba(0,0,0,.2); border:1px solid var(--border); border-radius:10px; padding:16px; }
+  .comp-box h4 { font-size:0.82rem; color:var(--text2); margin-bottom:10px; text-transform:uppercase; letter-spacing:0.5px; }
+  .comp-box .metrics { display:flex; flex-wrap:wrap; gap:8px; }
+
+  .metric-pill { background:rgba(79,140,255,0.08); border:1px solid rgba(79,140,255,0.15); padding:4px 10px; border-radius:6px; font-size:0.78rem; }
+  .metric-pill .label { color:var(--text2); }
+  .metric-pill .val { font-weight:600; margin-left:4px; }
+  .metric-pill .val.pos { color:var(--green); }
+  .metric-pill .val.neg { color:var(--red); }
+  .metric-pill .val.neutral { color:var(--accent); }
+  .metric-pill .val.na { color:var(--text2); }
+
+  .diff-notes { background:rgba(245,158,11,0.06); border:1px solid rgba(245,158,11,0.15); border-radius:8px; padding:12px 16px; font-size:0.85rem; color:var(--text); margin-top:12px; line-height:1.7; }
+  .diff-notes::before { content:'📝 '; }
+
+  .card-footer { display:flex; justify-content:space-between; align-items:center; margin-top:16px; padding-top:12px; border-top:1px solid var(--border); font-size:0.82rem; }
+  .linked-factor { color:var(--accent); text-decoration:none; }
+  .linked-factor:hover { text-decoration:underline; }
+
+  .loading { text-align:center; padding:60px 0; color:var(--text2); }
+  .loading .spinner { display:inline-block; width:40px; height:40px; border:3px solid var(--border); border-top-color:var(--accent); border-radius:50%; animation:spin .8s linear infinite; margin-bottom:16px; }
+  @keyframes spin { to { transform:rotate(360deg); } }
+
+  .empty { text-align:center; padding:60px 20px; color:var(--text2); }
+  .empty .icon { font-size:3rem; margin-bottom:16px; }
+
+  footer { text-align:center; padding:40px 0; color:var(--text2); font-size:0.8rem; border-top:1px solid var(--border); margin-top:40px; }
+  footer a { color:var(--accent); text-decoration:none; }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <h1>📝 因子复现日志</h1>
+    <p>研报 & 论文因子的复现记录：原始指标 vs 本土化结果</p>
+    <div class="nav-links">
+      <a href="index.html">首页</a>
+      <a href="factor-backtest.html">因子库</a>
+      <a class="active" href="factor-research.html">复现日志</a>
+      <a href="style-exposure.html">风格暴露</a>
+      <a href="paper-trading.html">竞赛</a>
+    </div>
+    <div class="stats-bar" id="statsBar"></div>
+  </div>
+
+  <div class="filter-bar" id="filterBar"></div>
+  <div class="research-list" id="researchList">
+    <div class="loading"><div class="spinner"></div><br>加载中...</div>
+  </div>
+</div>
+
+<footer>
+  Alpha Factor Lab · <a href="https://github.com/FinStep-AI/alpha-factor-lab" target="_blank">FinStep-AI</a>
+</footer>
+
+<script>
+function escHtml(s) {
+  if (typeof s !== 'string') s = String(s || '');
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function fmtVal(v, fmt) {
+  if (v === null || v === undefined) return '<span class="val na">N/A</span>';
+  if (fmt === 'pct') return `<span class="val ${v>0?'pos':'neg'}">${(v*100).toFixed(1)}%</span>`;
+  if (fmt === 'f2') return `<span class="val ${v>0?'pos':v<0?'neg':'neutral'}">${v.toFixed(2)}</span>`;
+  if (fmt === 'f3') return `<span class="val ${v>0?'pos':v<0?'neg':'neutral'}">${v.toFixed(3)}</span>`;
+  return `<span class="val neutral">${v}</span>`;
+}
+
+async function init() {
+  const resp = await fetch('factor-research.json?t=' + Date.now());
+  const data = await resp.json();
+
+  // Stats
+  const total = data.length;
+  const active = data.filter(d => d.conclusion && d.conclusion.includes('入库')).length;
+  const papers = data.filter(d => d.source_type === '论文').length;
+  const reports = data.filter(d => d.source_type === '研报').length;
+
+  document.getElementById('statsBar').innerHTML = `
+    <div class="stat"><div class="num">${total}</div><div class="label">总复现</div></div>
+    <div class="stat"><div class="num">${active}</div><div class="label">入库</div></div>
+    <div class="stat"><div class="num">${papers}</div><div class="label">论文</div></div>
+    <div class="stat"><div class="num">${reports}</div><div class="label">研报</div></div>
+  `;
+
+  // Filters
+  const types = ['全部', '论文', '研报', '自研'];
+  const statuses = ['入库', '淘汰', '待优化'];
+  let activeFilter = '全部';
+
+  function renderFilters() {
+    document.getElementById('filterBar').innerHTML = types.map(t =>
+      `<button class="filter-btn ${t===activeFilter?'active':''}" onclick="setFilter('${t}')">${t}</button>`
+    ).join('');
+  }
+
+  window.setFilter = function(t) {
+    activeFilter = t;
+    renderFilters();
+    renderList();
+  };
+
+  function renderList() {
+    let filtered = data;
+    if (activeFilter !== '全部') {
+      filtered = data.filter(d => d.source_type === activeFilter);
+    }
+
+    if (filtered.length === 0) {
+      document.getElementById('researchList').innerHTML = `
+        <div class="empty"><div class="icon">📭</div>暂无${activeFilter === '全部' ? '' : activeFilter}类型的复现记录</div>`;
+      return;
+    }
+
+    document.getElementById('researchList').innerHTML = filtered.map(item => {
+      const typeBadge = item.source_type === '论文' ? 'badge-paper' :
+                        item.source_type === '研报' ? 'badge-report' : 'badge-self';
+      const statusBadge = item.conclusion && item.conclusion.includes('入库') ? 'badge-active' :
+                          item.conclusion && item.conclusion.includes('淘汰') ? 'badge-rejected' : 'badge-pending';
+
+      const titleLink = item.source_url ?
+        `<a href="${escHtml(item.source_url)}" target="_blank">${escHtml(item.source_title)}</a>` :
+        escHtml(item.source_title);
+
+      const om = item.original_metric || {};
+      const um = item.our_metric || {};
+
+      return `
+      <div class="research-card">
+        <div class="card-header">
+          <div class="card-title">${titleLink}</div>
+          <div class="card-badges">
+            <span class="badge ${typeBadge}">${escHtml(item.source_type)}</span>
+            <span class="badge ${statusBadge}">${escHtml(item.conclusion || '待评估')}</span>
+          </div>
+        </div>
+        <div class="card-meta">
+          ${item.source_author ? `<span class="meta-item">👤 ${escHtml(item.source_author)}</span>` : ''}
+          ${item.source_year ? `<span class="meta-item">📅 ${item.source_year}</span>` : ''}
+          ${item.source_journal ? `<span class="meta-item">📖 ${escHtml(item.source_journal)}</span>` : ''}
+          <span class="meta-item">🗓️ 复现于 ${escHtml(item.date || '')}</span>
+        </div>
+
+        <div class="comparison">
+          <div class="comp-box">
+            <h4>📄 原文指标 · ${escHtml(om.market || '')}</h4>
+            ${om.description ? `<p style="font-size:0.82rem;color:var(--text2);margin-bottom:10px;line-height:1.6">${escHtml(om.description)}</p>` : ''}
+            <div class="metrics">
+              ${om.ic_mean !== null && om.ic_mean !== undefined ? `<span class="metric-pill"><span class="label">IC</span>${fmtVal(om.ic_mean,'f3')}</span>` : ''}
+              ${om.sharpe !== null && om.sharpe !== undefined ? `<span class="metric-pill"><span class="label">Sharpe</span>${fmtVal(om.sharpe,'f2')}</span>` : ''}
+              <span class="metric-pill"><span class="label">Period</span><span class="val neutral">${escHtml(om.period || '')}</span></span>
+            </div>
+          </div>
+          <div class="comp-box">
+            <h4>🔬 我们的复现 · ${escHtml(um.market || '')}</h4>
+            <div class="metrics">
+              ${um.ic_mean !== null && um.ic_mean !== undefined ? `<span class="metric-pill"><span class="label">IC</span>${fmtVal(um.ic_mean,'f3')}</span>` : ''}
+              ${um.ic_t !== null && um.ic_t !== undefined ? `<span class="metric-pill"><span class="label">IC_t</span>${fmtVal(um.ic_t,'f2')}</span>` : ''}
+              ${um.sharpe !== null && um.sharpe !== undefined ? `<span class="metric-pill"><span class="label">Sharpe</span>${fmtVal(um.sharpe,'f2')}</span>` : ''}
+              ${um.monotonicity !== null && um.monotonicity !== undefined ? `<span class="metric-pill"><span class="label">单调性</span>${fmtVal(um.monotonicity,'f2')}</span>` : ''}
+              ${um.period ? `<span class="metric-pill"><span class="label">Period</span><span class="val neutral">${escHtml(um.period)}</span></span>` : ''}
+            </div>
+          </div>
+        </div>
+
+        ${item.diff_notes ? `<div class="diff-notes">${escHtml(item.diff_notes)}</div>` : ''}
+
+        <div class="card-footer">
+          ${item.local_factor_id ?
+            `<a class="linked-factor" href="factor-backtest.html#${escHtml(item.local_factor_id)}">→ 查看因子: ${escHtml(item.local_factor_id)}</a>` :
+            '<span style="color:var(--text2)">未入库</span>'}
+          <span style="color:var(--text2)">${escHtml(item.id)}</span>
+        </div>
+      </div>`;
+    }).join('');
+  }
+
+  renderFilters();
+  renderList();
+}
+
+init().catch(e => {
+  document.getElementById('researchList').innerHTML = `<div class="empty"><div class="icon">❌</div>加载失败: ${e.message}</div>`;
+});
+</script>
+</body>
+</html>

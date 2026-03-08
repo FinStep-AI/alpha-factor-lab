@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alpha Factor Lab — 风格暴露分析</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+  :root {
+    --bg: #0f1117; --card: #1a1d29; --border: #2a2d3a;
+    --text: #e4e6eb; --text2: #8b8fa3; --accent: #4f8cff;
+    --green: #22c55e; --red: #ef4444; --orange: #f59e0b; --purple: #a855f7;
+    --cyan: #06b6d4;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+  .header { text-align:center; padding:40px 0 30px; border-bottom:1px solid var(--border); margin-bottom:30px; }
+  .header h1 { font-size:2rem; background:linear-gradient(135deg,var(--accent),var(--purple)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; margin-bottom:8px; }
+  .header p { color:var(--text2); font-size:0.95rem; }
+  .nav-links { margin-top:12px; }
+  .nav-links a { margin:0 6px; padding:6px 14px; border:1px solid var(--border); border-radius:8px; font-size:0.82rem; color:var(--accent); text-decoration:none; transition:all .2s; }
+  .nav-links a:hover { border-color:var(--accent); background:rgba(79,140,255,.05); }
+  .nav-links a.active { border-color:var(--accent); background:rgba(79,140,255,.1); }
+
+  .grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-bottom:24px; }
+  .grid-3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:24px; margin-bottom:24px; }
+  @media(max-width:900px) { .grid-2,.grid-3 { grid-template-columns:1fr; } }
+
+  .panel { background:var(--card); border:1px solid var(--border); border-radius:14px; padding:24px; }
+  .panel h3 { font-size:1rem; font-weight:600; margin-bottom:16px; display:flex; align-items:center; gap:8px; }
+  .panel h3 .icon { font-size:1.2rem; }
+
+  .chart-wrap { position:relative; width:100%; }
+  .chart-wrap canvas { width:100% !important; }
+
+  .section-title { font-size:1.2rem; font-weight:700; margin:32px 0 16px; padding-bottom:8px; border-bottom:1px solid var(--border); display:flex; align-items:center; gap:8px; }
+
+  .risk-cards { display:grid; grid-template-columns:repeat(auto-fit, minmax(180px,1fr)); gap:12px; margin-bottom:24px; }
+  .risk-card { background:var(--card); border:1px solid var(--border); border-radius:10px; padding:16px; text-align:center; }
+  .risk-card .value { font-size:1.6rem; font-weight:700; }
+  .risk-card .label { font-size:0.78rem; color:var(--text2); margin-top:4px; }
+  .risk-card.ok .value { color:var(--green); }
+  .risk-card.warn .value { color:var(--orange); }
+  .risk-card.danger .value { color:var(--red); }
+
+  /* Heatmap */
+  .heatmap { width:100%; overflow-x:auto; }
+  .heatmap table { border-collapse:collapse; width:100%; min-width:500px; }
+  .heatmap th, .heatmap td { padding:6px 4px; text-align:center; font-size:0.72rem; border:1px solid var(--border); }
+  .heatmap th { background:rgba(79,140,255,.08); color:var(--text2); font-weight:600; white-space:nowrap; }
+  .heatmap td { font-weight:600; min-width:48px; }
+  .heatmap .row-header { text-align:right; padding-right:8px; color:var(--text2); font-weight:600; background:rgba(79,140,255,.04); white-space:nowrap; }
+
+  /* Barra coverage table */
+  .coverage-table { width:100%; border-collapse:collapse; }
+  .coverage-table th { text-align:left; padding:8px 12px; font-size:0.82rem; color:var(--text2); border-bottom:1px solid var(--border); }
+  .coverage-table td { padding:8px 12px; font-size:0.85rem; border-bottom:1px solid rgba(42,45,58,.5); }
+  .coverage-table tr:hover { background:rgba(79,140,255,.03); }
+  .factor-chip { display:inline-block; padding:2px 8px; margin:2px; border-radius:4px; font-size:0.75rem; background:rgba(79,140,255,.08); border:1px solid rgba(79,140,255,.15); }
+  .gap-chip { display:inline-block; padding:2px 8px; margin:2px; border-radius:4px; font-size:0.75rem; background:rgba(239,68,68,.08); border:1px solid rgba(239,68,68,.15); color:var(--red); }
+
+  .update-time { text-align:right; font-size:0.78rem; color:var(--text2); margin-bottom:16px; }
+
+  footer { text-align:center; padding:40px 0; color:var(--text2); font-size:0.8rem; border-top:1px solid var(--border); margin-top:40px; }
+  footer a { color:var(--accent); text-decoration:none; }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <h1>📊 风格暴露分析</h1>
+    <p>因子猎人组合的Barra风格暴露 · 行业分布 · 因子相关性</p>
+    <div class="nav-links">
+      <a href="index.html">首页</a>
+      <a href="factor-backtest.html">因子库</a>
+      <a href="factor-research.html">复现日志</a>
+      <a class="active" href="style-exposure.html">风格暴露</a>
+      <a href="paper-trading.html">竞赛</a>
+    </div>
+  </div>
+
+  <div class="update-time" id="updateTime"></div>
+
+  <!-- Risk summary cards -->
+  <div class="risk-cards" id="riskCards"></div>
+
+  <!-- Charts row -->
+  <div class="grid-2">
+    <div class="panel">
+      <h3><span class="icon">🎯</span> 风格暴露雷达图</h3>
+      <div class="chart-wrap"><canvas id="radarChart"></canvas></div>
+    </div>
+    <div class="panel">
+      <h3><span class="icon">🏭</span> 行业分布</h3>
+      <div class="chart-wrap"><canvas id="industryChart"></canvas></div>
+    </div>
+  </div>
+
+  <!-- Barra coverage -->
+  <div class="section-title">🏛️ Barra风格因子覆盖</div>
+  <div class="panel" style="margin-bottom:24px;">
+    <table class="coverage-table" id="coverageTable"></table>
+  </div>
+
+  <!-- Correlation heatmap -->
+  <div class="section-title">🔥 因子相关性矩阵</div>
+  <div class="panel">
+    <div class="heatmap" id="heatmap"></div>
+  </div>
+</div>
+
+<footer>
+  Alpha Factor Lab · <a href="https://github.com/FinStep-AI/alpha-factor-lab" target="_blank">FinStep-AI</a>
+</footer>
+
+<script>
+function escHtml(s) {
+  if (typeof s !== 'string') s = String(s || '');
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function corrColor(v) {
+  if (v === null || v === undefined) return 'rgba(42,45,58,0.5)';
+  if (v === 1) return 'rgba(79,140,255,0.3)';
+  const abs = Math.abs(v);
+  if (v > 0) {
+    const r = Math.round(34 + (255-34) * abs);
+    const g = Math.round(197 - 197 * abs * 0.7);
+    const b = Math.round(94 - 94 * abs * 0.5);
+    return `rgba(${r},${g},${b},${0.15 + abs * 0.5})`;
+  } else {
+    const r = Math.round(239);
+    const g = Math.round(68 + (200-68) * (1-abs));
+    const b = Math.round(68 + (200-68) * (1-abs));
+    return `rgba(${r},${g},${b},${0.15 + abs * 0.5})`;
+  }
+}
+
+async function init() {
+  const resp = await fetch('style-exposure.json?t=' + Date.now());
+  const data = await resp.json();
+
+  // Update time
+  document.getElementById('updateTime').textContent = `最后更新: ${data.updated || 'N/A'}`;
+
+  // Risk cards
+  const rs = data.risk_summary || {};
+  const maxIW = rs.max_industry_weight || 0;
+  document.getElementById('riskCards').innerHTML = `
+    <div class="risk-card ok"><div class="value">${rs.total_positions || 0}</div><div class="label">持仓数量</div></div>
+    <div class="risk-card ok"><div class="value">${rs.n_industries || 0}</div><div class="label">覆盖行业</div></div>
+    <div class="risk-card ${maxIW > 0.25 ? 'warn' : 'ok'}"><div class="value">${(maxIW*100).toFixed(1)}%</div><div class="label">最大行业 · ${escHtml(rs.max_industry || '')}</div></div>
+    <div class="risk-card ${rs.missing_styles && rs.missing_styles.length > 0 ? 'warn' : 'ok'}"><div class="value">${rs.missing_styles ? rs.missing_styles.length : 0}</div><div class="label">风格空白</div></div>
+  `;
+
+  // Radar chart
+  const styles = ['Size', 'Value', 'Momentum', 'Volatility', 'Liquidity', 'Quality', 'Growth', '微观结构'];
+  const loading = data.style_loading || {};
+  const radarData = styles.map(s => loading[s] || 0);
+
+  new Chart(document.getElementById('radarChart'), {
+    type: 'radar',
+    data: {
+      labels: styles,
+      datasets: [{
+        label: '当前暴露',
+        data: radarData,
+        backgroundColor: 'rgba(79,140,255,0.15)',
+        borderColor: 'rgba(79,140,255,0.8)',
+        borderWidth: 2,
+        pointBackgroundColor: 'rgba(79,140,255,1)',
+        pointRadius: 4
+      }]
+    },
+    options: {
+      responsive: true,
+      scales: {
+        r: {
+          beginAtZero: true, max: 1,
+          ticks: { display: false },
+          grid: { color: 'rgba(42,45,58,0.8)' },
+          pointLabels: { color: '#8b8fa3', font: { size: 11 } },
+          angleLines: { color: 'rgba(42,45,58,0.5)' }
+        }
+      },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: ctx => `${ctx.label}: ${(ctx.raw * 100).toFixed(0)}%`
+          }
+        }
+      }
+    }
+  });
+
+  // Industry chart
+  const indExp = data.industry_exposure || {};
+  const indLabels = Object.keys(indExp);
+  const indWeights = indLabels.map(k => indExp[k].weight);
+  const colors = ['#4f8cff','#a855f7','#22c55e','#f59e0b','#ef4444','#06b6d4','#ec4899','#8b5cf6','#14b8a6','#f97316','#64748b','#6366f1','#84cc16','#d946ef','#0ea5e9'];
+
+  new Chart(document.getElementById('industryChart'), {
+    type: 'doughnut',
+    data: {
+      labels: indLabels,
+      datasets: [{
+        data: indWeights.map(w => (w * 100).toFixed(1)),
+        backgroundColor: colors.slice(0, indLabels.length),
+        borderColor: '#1a1d29',
+        borderWidth: 2
+      }]
+    },
+    options: {
+      responsive: true,
+      cutout: '55%',
+      plugins: {
+        legend: {
+          position: 'right',
+          labels: { color: '#8b8fa3', font: { size: 10 }, padding: 8, usePointStyle: true, pointStyleWidth: 8 }
+        },
+        tooltip: {
+          callbacks: {
+            label: ctx => `${ctx.label}: ${ctx.raw}% (${indExp[ctx.label]?.count || 0}只)`
+          }
+        }
+      }
+    }
+  });
+
+  // Barra coverage table
+  const bc = data.barra_coverage || {};
+  const allStyles = ['Size', 'Value', 'Momentum', 'Volatility', 'Liquidity', 'Quality', 'Growth', '微观结构'];
+  let tableHTML = '<thead><tr><th>Barra风格</th><th>因子数</th><th>因子列表</th><th>状态</th></tr></thead><tbody>';
+
+  for (const style of allStyles) {
+    const factors = bc[style] || [];
+    const count = factors.length;
+    const status = count === 0 ? '<span class="gap-chip">⬚ 空白</span>' :
+                   count === 1 ? '<span class="factor-chip" style="background:rgba(245,158,11,.1);border-color:rgba(245,158,11,.2);color:var(--orange)">⚠ 单因子</span>' :
+                   `<span class="factor-chip" style="background:rgba(34,197,94,.1);border-color:rgba(34,197,94,.2);color:var(--green)">✓ ${count}个</span>`;
+
+    const chips = factors.map(f =>
+      `<span class="factor-chip" title="Sharpe: ${f.sharpe?.toFixed(2) || 'N/A'}">${escHtml(f.name || f.id)}</span>`
+    ).join('');
+
+    tableHTML += `<tr><td style="font-weight:600">${escHtml(style)}</td><td style="text-align:center">${count}</td><td>${chips || '<span style="color:var(--text2)">—</span>'}</td><td>${status}</td></tr>`;
+  }
+  tableHTML += '</tbody>';
+  document.getElementById('coverageTable').innerHTML = tableHTML;
+
+  // Correlation heatmap
+  const cm = data.correlation_matrix || {};
+  const fids = cm.factor_ids || [];
+  const fnames = cm.factor_names || fids;
+  const matrix = cm.matrix || {};
+
+  if (fids.length > 0) {
+    // Short names for display
+    const shortNames = fnames.map(n => n.length > 8 ? n.slice(0, 7) + '…' : n);
+
+    let html = '<table><thead><tr><th></th>';
+    for (let j = 0; j < fids.length; j++) {
+      html += `<th title="${escHtml(fnames[j])}">${escHtml(shortNames[j])}</th>`;
+    }
+    html += '</tr></thead><tbody>';
+
+    for (let i = 0; i < fids.length; i++) {
+      html += `<tr><td class="row-header" title="${escHtml(fnames[i])}">${escHtml(shortNames[i])}</td>`;
+      for (let j = 0; j < fids.length; j++) {
+        const v = matrix[fids[i]] ? matrix[fids[i]][fids[j]] : null;
+        const bg = corrColor(v);
+        const txt = v !== null && v !== undefined ? (i === j ? '1.00' : v.toFixed(2)) : '—';
+        const fontColor = v !== null && Math.abs(v) > 0.5 && i !== j ? '#fff' : 'var(--text)';
+        html += `<td style="background:${bg};color:${fontColor}" title="${fnames[i]} × ${fnames[j]}: ${txt}">${txt}</td>`;
+      }
+      html += '</tr>';
+    }
+    html += '</tbody></table>';
+    document.getElementById('heatmap').innerHTML = html;
+  }
+}
+
+init();
+</script>
+</body>
+</html>

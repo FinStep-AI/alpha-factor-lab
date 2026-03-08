@@ -1,0 +1,118 @@
+[
+  {
+    "id": "amihud_illiq_v2",
+    "source_type": "论文",
+    "source_title": "Illiquidity and Stock Returns: Cross-Section and Time-Series Effects",
+    "source_url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=276135",
+    "source_author": "Yakov Amihud",
+    "source_year": 2002,
+    "source_journal": "Journal of Financial Markets",
+    "original_metric": {
+      "market": "NYSE/AMEX",
+      "period": "1964-1997",
+      "ic_mean": null,
+      "sharpe": null,
+      "description": "原文使用NYSE/AMEX股票，发现Amihud非流动性指标对预期收益有正向预测能力，且小盘股效应更显著"
+    },
+    "our_metric": {
+      "market": "中证1000",
+      "period": "2022-10 ~ 2026-02",
+      "ic_mean": 0.028,
+      "ic_t": 2.76,
+      "sharpe": 0.90,
+      "monotonicity": 1.0
+    },
+    "diff_notes": "原文用美股大盘+中盘，我们用A股小盘(中证1000)；原文未做市值中性化，我们做了OLS市值中性化后依然显著；公式一致：|ret|/dollar_volume",
+    "local_factor_id": "amihud_illiq_v2",
+    "conclusion": "入库",
+    "date": "2026-02-23",
+    "status": "active"
+  },
+  {
+    "id": "idio_vol_v1",
+    "source_type": "论文",
+    "source_title": "The Cross-Section of Volatility and Expected Returns",
+    "source_url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=276076",
+    "source_author": "Ang, Hodrick, Xing, Zhang",
+    "source_year": 2006,
+    "source_journal": "Journal of Finance",
+    "original_metric": {
+      "market": "US All Stocks",
+      "period": "1963-2000",
+      "ic_mean": null,
+      "sharpe": null,
+      "description": "原文发现美股高特质波动率股票未来收益更低（低波异象），alpha约-1.06%/月"
+    },
+    "our_metric": {
+      "market": "中证1000",
+      "period": "2022-10 ~ 2026-02",
+      "ic_mean": 0.017,
+      "ic_t": 0.98,
+      "sharpe": 0.70,
+      "monotonicity": 0.7
+    },
+    "diff_notes": "⚠️ 方向相反！原文美股是低波异象（高idio_vol→低收益），中证1000是高波溢价（高idio_vol→高收益）。可能因为：A股散户多+小盘股+彩票效应。需用正向而非原文的负向",
+    "local_factor_id": "idio_vol_v1",
+    "conclusion": "入库（方向反转）",
+    "date": "2026-02-24",
+    "status": "active"
+  },
+  {
+    "id": "overnight_momentum_v1",
+    "source_type": "论文",
+    "source_title": "A Tug of War: Overnight Versus Intraday Expected Returns",
+    "source_url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2856453",
+    "source_author": "Lou, Polk, Skouras",
+    "source_year": 2019,
+    "source_journal": "Journal of Financial Economics",
+    "original_metric": {
+      "market": "US All Stocks",
+      "period": "1993-2013",
+      "ic_mean": null,
+      "sharpe": null,
+      "description": "隔夜收益和日内收益呈负相关，隔夜动量对横截面收益有预测能力"
+    },
+    "our_metric": {
+      "market": "中证1000",
+      "period": "2022-10 ~ 2026-02",
+      "ic_mean": 0.027,
+      "ic_t": 2.87,
+      "sharpe": 0.79,
+      "monotonicity": 0.7
+    },
+    "diff_notes": "在A股中证1000同样有效，IC显著(t=2.87)但单调性不完美(0.7)，G2/G3分组不够分散",
+    "local_factor_id": "overnight_momentum_v1",
+    "conclusion": "入库",
+    "date": "2026-02-23",
+    "status": "active"
+  },
+  {
+    "id": "pb_roe_residual_v1",
+    "source_type": "研报",
+    "source_title": "PB-ROE偏离度选股因子",
+    "source_url": "",
+    "source_author": "多家券商金工",
+    "source_year": 2020,
+    "source_journal": "",
+    "original_metric": {
+      "market": "沪深300/中证500",
+      "period": "不同研报各异",
+      "ic_mean": null,
+      "sharpe": null,
+      "description": "PB与ROE截面回归残差，筛选估值偏离基本面的股票，多家券商金工有相关研报"
+    },
+    "our_metric": {
+      "market": "中证1000",
+      "period": "2022-10 ~ 2026-02",
+      "ic_mean": -0.005,
+      "ic_t": -0.22,
+      "sharpe": 0.61,
+      "monotonicity": 0.3
+    },
+    "diff_notes": "在中证1000几乎失效（IC不显著），可能因为小盘股PB/ROE数据质量差、波动大。研报通常在沪深300/500上验证，大盘股效果可能更好",
+    "local_factor_id": "pb_roe_residual_v1",
+    "conclusion": "入库但标记弱",
+    "date": "2026-02-24",
+    "status": "active"
+  }
+]
