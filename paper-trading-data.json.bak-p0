@@ -14,8 +14,8 @@
     "quant": {
       "name": "因子猎人",
       "emoji": "🔢",
-      "style": "LightGBM机器学习选股 · 99特征 · 中证1000 · 周度调仓",
-      "description": "10因子+K线衍生→99维特征矩阵→LightGBM预测超额收益→风控过滤→TOP25组合",
+      "style": "量化因子选股 · 中证1000 · 周度调仓",
+      "description": "每天读研报挖因子，用统计显著的因子排名选股，系统化交易",
       "portfolio": {
         "cash": 235541.47999999893,
         "positions": {
@@ -291,25 +291,121 @@
       },
       "nav_history": {
         "dates": [
-          "2026-02-24",
-          "2026-02-25",
-          "2026-02-26",
-          "2026-02-27",
-          "2026-03-02",
-          "2026-03-03",
-          "2026-03-04",
-          "2026-03-05",
+          "02-24 15:00",
+          "02-25 15:00",
+          "02-26 10:56",
+          "02-26 11:00",
+          "02-26 11:30",
+          "02-26 12:00",
+          "02-26 12:30",
+          "02-26 13:00",
+          "02-26 13:38",
+          "02-26 14:00",
+          "02-26 14:30",
+          "02-26 15:00",
+          "02-27 09:15",
+          "02-27 09:30",
+          "02-27 10:00",
+          "02-27 11:00",
+          "02-27 11:30",
+          "02-27 12:00",
+          "02-27 13:00",
+          "02-27 14:00",
+          "02-27 14:30",
+          "02-27 16:04",
+          "03-02 09:20",
+          "03-02 09:31",
+          "03-02 10:00",
+          "03-02 10:30",
+          "03-02 11:00",
+          "03-02 12:00",
+          "03-02 12:32",
+          "03-02 13:03",
+          "03-02 13:35",
+          "03-02 14:00",
+          "03-02 14:33",
+          "03-03 10:00",
+          "03-03 10:30",
+          "03-03 11:00",
+          "03-03 11:31",
+          "03-03 12:00",
+          "03-03 12:33",
+          "03-03 13:33",
+          "03-03 14:00",
+          "03-03 14:30",
+          "03-04 09:32",
+          "03-04 12:35",
+          "03-04 14:00",
+          "03-04 14:30",
+          "03-05 12:41",
+          "03-05 13:00",
+          "03-05 13:41",
+          "03-06 09:30",
+          "03-06 10:00",
+          "03-06 11:00",
+          "03-06 11:30",
+          "03-06 12:30",
+          "03-06 13:40",
+          "03-06 14:42",
           "2026-03-06"
         ],
         "nav": [
           1.0125,
           1.0357,
+          1.031459,
+          1.031521,
+          1.035324,
+          1.035324,
+          1.035324,
+          1.03564,
+          1.034566,
+          1.034275,
+          1.035212,
           1.035447,
+          1.02795,
+          1.028424,
+          1.0396,
+          1.030875,
+          1.028571,
+          1.028571,
+          1.028693,
+          1.043184,
+          1.041598,
           1.042149,
+          1.05319,
+          1.053281,
+          1.047711,
+          1.037079,
+          1.038195,
+          1.040245,
+          1.040245,
+          1.039276,
+          1.050285,
+          1.061264,
           1.055341,
+          1.033033,
+          1.026216,
+          1.033462,
+          1.031659,
+          1.031659,
+          1.031659,
+          1.026979,
+          1.019577,
           1.021251,
+          1.009174,
+          1.008806,
+          1.012834,
           1.007983,
+          1.023948,
+          1.023453,
           1.018722,
+          1.014469,
+          1.02852,
+          1.032472,
+          1.032655,
+          1.032655,
+          1.031972,
+          1.031594,
           1.032019
         ],
         "cash_pct": [
@@ -317,10 +413,58 @@
           0.4,
           0.3,
           0.3,
+          0.3,
+          0.3,
+          0.3,
+          0.3,
+          0.3,
+          0.3,
+          0.3,
+          0.3,
+          0.3,
+          0.3,
+          0.3,
+          0.3,
+          0.3,
+          0.3,
+          0.3,
+          0.3,
+          0.3,
+          0.3,
+          0.29,
+          0.29,
+          0.29,
+          0.3,
+          0.3,
+          0.3,
+          0.3,
+          0.3,
+          0.29,
+          0.29,
           2.23,
+          2.28,
+          2.3,
+          2.28,
+          2.28,
+          2.28,
+          2.28,
+          2.29,
           2.31,
+          2.31,
+          2.33,
+          2.33,
+          2.33,
           2.34,
+          2.3,
+          2.3,
           2.31,
+          2.32,
+          2.29,
+          2.28,
+          2.28,
+          2.28,
+          2.28,
+          2.28,
           2.28
         ]
       },
@@ -330,384 +474,231 @@
           "time": "09:30",
           "code": "000603.SZ",
           "name": "盛达资源",
-          "direction": "buy",
+          "action": "buy",
           "price": 47.87,
-          "volume": 10900,
+          "shares": 10900,
           "amount": 521783.0,
-          "fees": {
-            "commission": 156.53,
-            "stamp_duty": 0,
-            "transfer_fee": 5.22,
-            "slippage_cost": 307.85,
-            "total": 521.78
-          },
-          "reason": "Amihud v2 + IdioVol 双因子TOP19等权建仓",
-          "pnl": 0,
-          "pnl_pct": 0
+          "fee": 521.78,
+          "reason": "Amihud v2 + IdioVol 双因子TOP19等权建仓"
         },
         {
           "date": "2026-02-24",
           "time": "09:30",
           "code": "000761.SZ",
           "name": "本钢板材",
-          "direction": "buy",
+          "action": "buy",
           "price": 3.62,
-          "volume": 145300,
+          "shares": 145300,
           "amount": 525986.0,
-          "fees": {
-            "commission": 157.8,
-            "stamp_duty": 0,
-            "transfer_fee": 5.26,
-            "slippage_cost": 310.33,
-            "total": 525.99
-          },
-          "reason": "Amihud v2 + IdioVol 双因子TOP19等权建仓",
-          "pnl": 0,
-          "pnl_pct": 0
+          "fee": 525.99,
+          "reason": "Amihud v2 + IdioVol 双因子TOP19等权建仓"
         },
         {
           "date": "2026-02-24",
           "time": "09:30",
           "code": "001337.SZ",
           "name": "四川黄金",
-          "direction": "buy",
+          "action": "buy",
           "price": 48.18,
-          "volume": 10900,
+          "shares": 10900,
           "amount": 525162.0,
-          "fees": {
-            "commission": 157.55,
-            "stamp_duty": 0,
-            "transfer_fee": 5.25,
-            "slippage_cost": 309.84,
-            "total": 525.16
-          },
-          "reason": "Amihud v2 + IdioVol 双因子TOP19等权建仓",
-          "pnl": 0,
-          "pnl_pct": 0
+          "fee": 525.16,
+          "reason": "Amihud v2 + IdioVol 双因子TOP19等权建仓"
         },
         {
           "date": "2026-02-24",
           "time": "09:30",
           "code": "002498.SZ",
           "name": "汉缆股份",
-          "direction": "buy",
+          "action": "buy",
           "price": 7.1,
-          "volume": 74100,
+          "shares": 74100,
           "amount": 526110.0,
-          "fees": {
-            "commission": 157.83,
-            "stamp_duty": 0,
-            "transfer_fee": 5.26,
-            "slippage_cost": 310.4,
-            "total": 526.11
-          },
-          "reason": "Amihud v2 + IdioVol 双因子TOP19等权建仓",
-          "pnl": 0,
-          "pnl_pct": 0
+          "fee": 526.11,
+          "reason": "Amihud v2 + IdioVol 双因子TOP19等权建仓"
         },
         {
           "date": "2026-02-24",
           "time": "09:30",
           "code": "300257.SZ",
           "name": "开山股份",
-          "direction": "buy",
+          "action": "buy",
           "price": 19.22,
-          "volume": 27300,
+          "shares": 27300,
           "amount": 524706.0,
-          "fees": {
-            "commission": 157.41,
-            "stamp_duty": 0,
-            "transfer_fee": 5.25,
-            "slippage_cost": 309.58,
-            "total": 524.71
-          },
-          "reason": "Amihud v2 + IdioVol 双因子TOP19等权建仓",
-          "pnl": 0,
-          "pnl_pct": 0
+          "fee": 524.71,
+          "reason": "Amihud v2 + IdioVol 双因子TOP19等权建仓"
         },
         {
           "date": "2026-02-24",
           "time": "09:30",
           "code": "300492.SZ",
           "name": "华图山鼎",
-          "direction": "buy",
+          "action": "buy",
           "price": 75.27,
-          "volume": 6900,
+          "shares": 6900,
           "amount": 519363.0,
-          "fees": {
-            "commission": 155.81,
-            "stamp_duty": 0,
-            "transfer_fee": 5.19,
-            "slippage_cost": 306.42,
-            "total": 519.36
-          },
-          "reason": "Amihud v2 + IdioVol 双因子TOP19等权建仓",
-          "pnl": 0,
-          "pnl_pct": 0
+          "fee": 519.36,
+          "reason": "Amihud v2 + IdioVol 双因子TOP19等权建仓"
         },
         {
           "date": "2026-02-24",
           "time": "09:30",
           "code": "301035.SZ",
           "name": "润丰股份",
-          "direction": "buy",
+          "action": "buy",
           "price": 82.0,
-          "volume": 6400,
+          "shares": 6400,
           "amount": 524800.0,
-          "fees": {
-            "commission": 157.44,
-            "stamp_duty": 0,
-            "transfer_fee": 5.25,
-            "slippage_cost": 309.63,
-            "total": 524.8
-          },
-          "reason": "Amihud v2 + IdioVol 双因子TOP19等权建仓",
-          "pnl": 0,
-          "pnl_pct": 0
+          "fee": 524.8,
+          "reason": "Amihud v2 + IdioVol 双因子TOP19等权建仓"
         },
         {
           "date": "2026-02-24",
           "time": "09:30",
           "code": "301177.SZ",
           "name": "迪阿股份",
-          "direction": "buy",
+          "action": "buy",
           "price": 32.51,
-          "volume": 16100,
+          "shares": 16100,
           "amount": 523410.99999999994,
-          "fees": {
-            "commission": 157.02,
-            "stamp_duty": 0,
-            "transfer_fee": 5.23,
-            "slippage_cost": 308.81,
-            "total": 523.41
-          },
-          "reason": "Amihud v2 + IdioVol 双因子TOP19等权建仓",
-          "pnl": 0,
-          "pnl_pct": 0
+          "fee": 523.41,
+          "reason": "Amihud v2 + IdioVol 双因子TOP19等权建仓"
         },
         {
           "date": "2026-02-24",
           "time": "09:30",
           "code": "301268.SZ",
           "name": "铭利达",
-          "direction": "buy",
+          "action": "buy",
           "price": 24.37,
-          "volume": 21500,
+          "shares": 21500,
           "amount": 523955.0,
-          "fees": {
-            "commission": 157.19,
-            "stamp_duty": 0,
-            "transfer_fee": 5.24,
-            "slippage_cost": 309.14,
-            "total": 523.96
-          },
-          "reason": "Amihud v2 + IdioVol 双因子TOP19等权建仓",
-          "pnl": 0,
-          "pnl_pct": 0
+          "fee": 523.96,
+          "reason": "Amihud v2 + IdioVol 双因子TOP19等权建仓"
         },
         {
           "date": "2026-02-24",
           "time": "09:30",
           "code": "600531.SH",
           "name": "豫光金铅",
-          "direction": "buy",
+          "action": "buy",
           "price": 17.15,
-          "volume": 30600,
+          "shares": 30600,
           "amount": 524790.0,
-          "fees": {
-            "commission": 157.44,
-            "stamp_duty": 0,
-            "transfer_fee": 5.25,
-            "slippage_cost": 309.63,
-            "total": 524.79
-          },
-          "reason": "Amihud v2 + IdioVol 双因子TOP19等权建仓",
-          "pnl": 0,
-          "pnl_pct": 0
+          "fee": 524.79,
+          "reason": "Amihud v2 + IdioVol 双因子TOP19等权建仓"
         },
         {
           "date": "2026-02-24",
           "time": "09:30",
           "code": "600916.SH",
           "name": "中国黄金",
-          "direction": "buy",
+          "action": "buy",
           "price": 11.28,
-          "volume": 46600,
+          "shares": 46600,
           "amount": 525648.0,
-          "fees": {
-            "commission": 157.69,
-            "stamp_duty": 0,
-            "transfer_fee": 5.26,
-            "slippage_cost": 310.13,
-            "total": 525.65
-          },
-          "reason": "Amihud v2 + IdioVol 双因子TOP19等权建仓",
-          "pnl": 0,
-          "pnl_pct": 0
+          "fee": 525.65,
+          "reason": "Amihud v2 + IdioVol 双因子TOP19等权建仓"
         },
         {
           "date": "2026-02-24",
           "time": "09:30",
           "code": "601069.SH",
           "name": "西部黄金",
-          "direction": "buy",
+          "action": "buy",
           "price": 35.23,
-          "volume": 14900,
+          "shares": 14900,
           "amount": 524927.0,
-          "fees": {
-            "commission": 157.48,
-            "stamp_duty": 0,
-            "transfer_fee": 5.25,
-            "slippage_cost": 309.71,
-            "total": 524.93
-          },
-          "reason": "Amihud v2 + IdioVol 双因子TOP19等权建仓",
-          "pnl": 0,
-          "pnl_pct": 0
+          "fee": 524.93,
+          "reason": "Amihud v2 + IdioVol 双因子TOP19等权建仓"
         },
         {
           "date": "2026-02-24",
           "time": "09:30",
           "code": "601089.SH",
           "name": "福元医药",
-          "direction": "buy",
+          "action": "buy",
           "price": 25.6,
-          "volume": 20500,
+          "shares": 20500,
           "amount": 524800.0,
-          "fees": {
-            "commission": 157.44,
-            "stamp_duty": 0,
-            "transfer_fee": 5.25,
-            "slippage_cost": 309.63,
-            "total": 524.8
-          },
-          "reason": "Amihud v2 + IdioVol 双因子TOP19等权建仓",
-          "pnl": 0,
-          "pnl_pct": 0
+          "fee": 524.8,
+          "reason": "Amihud v2 + IdioVol 双因子TOP19等权建仓"
         },
         {
           "date": "2026-02-24",
           "time": "09:30",
           "code": "603355.SH",
           "name": "莱克电气",
-          "direction": "buy",
+          "action": "buy",
           "price": 31.28,
-          "volume": 16800,
+          "shares": 16800,
           "amount": 525504.0,
-          "fees": {
-            "commission": 157.65,
-            "stamp_duty": 0,
-            "transfer_fee": 5.25,
-            "slippage_cost": 310.04,
-            "total": 525.5
-          },
-          "reason": "Amihud v2 + IdioVol 双因子TOP19等权建仓",
-          "pnl": 0,
-          "pnl_pct": 0
+          "fee": 525.5,
+          "reason": "Amihud v2 + IdioVol 双因子TOP19等权建仓"
         },
         {
           "date": "2026-02-24",
           "time": "09:30",
           "code": "603826.SH",
           "name": "坤彩科技",
-          "direction": "buy",
+          "action": "buy",
           "price": 18.58,
-          "volume": 28300,
+          "shares": 28300,
           "amount": 525814.0,
-          "fees": {
-            "commission": 157.74,
-            "stamp_duty": 0,
-            "transfer_fee": 5.26,
-            "slippage_cost": 310.23,
-            "total": 525.81
-          },
-          "reason": "Amihud v2 + IdioVol 双因子TOP19等权建仓",
-          "pnl": 0,
-          "pnl_pct": 0
+          "fee": 525.81,
+          "reason": "Amihud v2 + IdioVol 双因子TOP19等权建仓"
         },
         {
           "date": "2026-02-24",
           "time": "09:30",
           "code": "605099.SH",
           "name": "共创草坪",
-          "direction": "buy",
+          "action": "buy",
           "price": 42.09,
-          "volume": 12500,
+          "shares": 12500,
           "amount": 526125.0,
-          "fees": {
-            "commission": 157.84,
-            "stamp_duty": 0,
-            "transfer_fee": 5.26,
-            "slippage_cost": 310.41,
-            "total": 526.12
-          },
-          "reason": "Amihud v2 + IdioVol 双因子TOP19等权建仓",
-          "pnl": 0,
-          "pnl_pct": 0
+          "fee": 526.12,
+          "reason": "Amihud v2 + IdioVol 双因子TOP19等权建仓"
         },
         {
           "date": "2026-02-24",
           "time": "09:30",
           "code": "605198.SH",
           "name": "安德利",
-          "direction": "buy",
+          "action": "buy",
           "price": 41.8,
-          "volume": 12500,
+          "shares": 12500,
           "amount": 522499.99999999994,
-          "fees": {
-            "commission": 156.75,
-            "stamp_duty": 0,
-            "transfer_fee": 5.23,
-            "slippage_cost": 308.27,
-            "total": 522.5
-          },
-          "reason": "Amihud v2 + IdioVol 双因子TOP19等权建仓",
-          "pnl": 0,
-          "pnl_pct": 0
+          "fee": 522.5,
+          "reason": "Amihud v2 + IdioVol 双因子TOP19等权建仓"
         },
         {
           "date": "2026-02-24",
           "time": "09:30",
           "code": "605599.SH",
           "name": "菜百股份",
-          "direction": "buy",
+          "action": "buy",
           "price": 25.83,
-          "volume": 20300,
+          "shares": 20300,
           "amount": 524349.0,
-          "fees": {
-            "commission": 157.31,
-            "stamp_duty": 0,
-            "transfer_fee": 5.24,
-            "slippage_cost": 309.37,
-            "total": 524.35
-          },
-          "reason": "Amihud v2 + IdioVol 双因子TOP19等权建仓",
-          "pnl": 0,
-          "pnl_pct": 0
+          "fee": 524.35,
+          "reason": "Amihud v2 + IdioVol 双因子TOP19等权建仓"
         },
         {
           "date": "2026-02-24",
           "time": "09:30",
           "code": "688519.SH",
           "name": "南亚新材",
-          "direction": "buy",
+          "action": "buy",
           "price": 108.22,
-          "volume": 4800,
+          "shares": 4800,
           "amount": 519456.0,
-          "fees": {
-            "commission": 155.84,
-            "stamp_duty": 0,
-            "transfer_fee": 5.19,
-            "slippage_cost": 306.48,
-            "total": 519.46
-          },
-          "reason": "Amihud v2 + IdioVol 双因子TOP19等权建仓",
-          "pnl": 0,
-          "pnl_pct": 0
+          "fee": 519.46,
+          "reason": "Amihud v2 + IdioVol 双因子TOP19等权建仓"
         },
         {
           "date": "2026-03-02",
-          "time": "",
           "code": "000603.SZ",
           "name": "盛达资源",
           "direction": "sell",
@@ -721,13 +712,10 @@
             "slippage_cost": 603.1,
             "total": 1091.61
           },
-          "reason": "周一调仓：双因子TOP25轮换",
-          "pnl": 81314.0,
-          "pnl_pct": 15.58
+          "reason": "周一调仓：双因子TOP25轮换"
         },
         {
           "date": "2026-03-02",
-          "time": "",
           "code": "000761.SZ",
           "name": "本钢板材",
           "direction": "sell",
@@ -741,13 +729,10 @@
             "slippage_cost": 553.59,
             "total": 1002.0
           },
-          "reason": "周一调仓：双因子TOP25轮换",
-          "pnl": 27607.0,
-          "pnl_pct": 5.25
+          "reason": "周一调仓：双因子TOP25轮换"
         },
         {
           "date": "2026-03-02",
-          "time": "",
           "code": "001337.SZ",
           "name": "四川黄金",
           "direction": "sell",
@@ -761,13 +746,10 @@
             "slippage_cost": 607.57,
             "total": 1099.69
           },
-          "reason": "周一调仓：双因子TOP25轮换",
-          "pnl": 82404.0,
-          "pnl_pct": 15.69
+          "reason": "周一调仓：双因子TOP25轮换"
         },
         {
           "date": "2026-03-02",
-          "time": "",
           "code": "002498.SZ",
           "name": "汉缆股份",
           "direction": "sell",
@@ -781,13 +763,10 @@
             "slippage_cost": 592.06,
             "total": 1071.63
           },
-          "reason": "周一调仓：双因子TOP25轮换",
-          "pnl": 65949.0,
-          "pnl_pct": 12.54
+          "reason": "周一调仓：双因子TOP25轮换"
         },
         {
           "date": "2026-03-02",
-          "time": "",
           "code": "300257.SZ",
           "name": "开山股份",
           "direction": "sell",
@@ -801,13 +780,10 @@
             "slippage_cost": 663.39,
             "total": 1200.74
           },
-          "reason": "周一调仓：双因子TOP25轮换",
-          "pnl": 138684.0,
-          "pnl_pct": 26.43
+          "reason": "周一调仓：双因子TOP25轮换"
         },
         {
           "date": "2026-03-02",
-          "time": "",
           "code": "300492.SZ",
           "name": "华图山鼎",
           "direction": "sell",
@@ -821,13 +797,10 @@
             "slippage_cost": 497.08,
             "total": 899.71
           },
-          "reason": "周一调仓：双因子TOP25轮换",
-          "pnl": -22287.0,
-          "pnl_pct": -4.29
+          "reason": "周一调仓：双因子TOP25轮换"
         },
         {
           "date": "2026-03-02",
-          "time": "",
           "code": "301035.SZ",
           "name": "润丰股份",
           "direction": "sell",
@@ -841,13 +814,10 @@
             "slippage_cost": 520.38,
             "total": 941.9
           },
-          "reason": "周一调仓：双因子TOP25轮换",
-          "pnl": -4416.0,
-          "pnl_pct": -0.84
+          "reason": "周一调仓：双因子TOP25轮换"
         },
         {
           "date": "2026-03-02",
-          "time": "",
           "code": "301268.SZ",
           "name": "铭利达",
           "direction": "sell",
@@ -861,13 +831,10 @@
             "slippage_cost": 482.25,
             "total": 872.86
           },
-          "reason": "周一调仓：双因子TOP25轮换",
-          "pnl": -41710.0,
-          "pnl_pct": -7.96
+          "reason": "周一调仓：双因子TOP25轮换"
         },
         {
           "date": "2026-03-02",
-          "time": "",
           "code": "600531.SH",
           "name": "豫光金铅",
           "direction": "sell",
@@ -881,13 +848,10 @@
             "slippage_cost": 571.61,
             "total": 1034.61
           },
-          "reason": "周一调仓：双因子TOP25轮换",
-          "pnl": 46818.0,
-          "pnl_pct": 8.92
+          "reason": "周一调仓：双因子TOP25轮换"
         },
         {
           "date": "2026-03-02",
-          "time": "",
           "code": "600916.SH",
           "name": "中国黄金",
           "direction": "sell",
@@ -901,13 +865,10 @@
             "slippage_cost": 572.25,
             "total": 1035.77
           },
-          "reason": "周一调仓：双因子TOP25轮换",
-          "pnl": 46600.0,
-          "pnl_pct": 8.87
+          "reason": "周一调仓：双因子TOP25轮换"
         },
         {
           "date": "2026-03-02",
-          "time": "",
           "code": "601069.SH",
           "name": "西部黄金",
           "direction": "sell",
@@ -921,13 +882,10 @@
             "slippage_cost": 594.36,
             "total": 1075.79
           },
-          "reason": "周一调仓：双因子TOP25轮换",
-          "pnl": 69434.0,
-          "pnl_pct": 13.23
+          "reason": "周一调仓：双因子TOP25轮换"
         },
         {
           "date": "2026-03-02",
-          "time": "",
           "code": "601089.SH",
           "name": "福元医药",
           "direction": "sell",
@@ -941,13 +899,10 @@
             "slippage_cost": 489.95,
             "total": 886.81
           },
-          "reason": "周一调仓：双因子TOP25轮换",
-          "pnl": -34850.0,
-          "pnl_pct": -6.64
+          "reason": "周一调仓：双因子TOP25轮换"
         },
         {
           "date": "2026-03-02",
-          "time": "",
           "code": "603355.SH",
           "name": "莱克电气",
           "direction": "sell",
@@ -961,13 +916,10 @@
             "slippage_cost": 547.68,
             "total": 991.3
           },
-          "reason": "周一调仓：双因子TOP25轮换",
-          "pnl": 22176.0,
-          "pnl_pct": 4.22
+          "reason": "周一调仓：双因子TOP25轮换"
         },
         {
           "date": "2026-03-02",
-          "time": "",
           "code": "603826.SH",
           "name": "坤彩科技",
           "direction": "sell",
@@ -981,13 +933,10 @@
             "slippage_cost": 584.39,
             "total": 1057.75
           },
-          "reason": "周一调仓：双因子TOP25轮换",
-          "pnl": 58581.0,
-          "pnl_pct": 11.14
+          "reason": "周一调仓：双因子TOP25轮换"
         },
         {
           "date": "2026-03-02",
-          "time": "",
           "code": "605198.SH",
           "name": "安德利",
           "direction": "sell",
@@ -1001,13 +950,10 @@
             "slippage_cost": 517.38,
             "total": 936.45
           },
-          "reason": "周一调仓：双因子TOP25轮换",
-          "pnl": -5125.0,
-          "pnl_pct": -0.98
+          "reason": "周一调仓：双因子TOP25轮换"
         },
         {
           "date": "2026-03-02",
-          "time": "",
           "code": "605599.SH",
           "name": "菜百股份",
           "direction": "sell",
@@ -1021,13 +967,10 @@
             "slippage_cost": 522.73,
             "total": 946.13
           },
-          "reason": "周一调仓：双因子TOP25轮换",
-          "pnl": -1624.0,
-          "pnl_pct": -0.31
+          "reason": "周一调仓：双因子TOP25轮换"
         },
         {
           "date": "2026-03-02",
-          "time": "",
           "code": "688519.SH",
           "name": "南亚新材",
           "direction": "sell",
@@ -1041,13 +984,10 @@
             "slippage_cost": 540.1,
             "total": 977.57
           },
-          "reason": "周一调仓：双因子TOP25轮换",
-          "pnl": 20640.0,
-          "pnl_pct": 3.97
+          "reason": "周一调仓：双因子TOP25轮换"
         },
         {
           "date": "2026-03-02",
-          "time": "",
           "code": "688232.SH",
           "name": "新点软件",
           "direction": "buy",
@@ -1061,13 +1001,10 @@
             "slippage_cost": 420.82,
             "total": 551.28
           },
-          "reason": "周一调仓：Amihud+ShadowPressure双因子TOP25等权",
-          "pnl": 0,
-          "pnl_pct": 0
+          "reason": "周一调仓：Amihud+ShadowPressure双因子TOP25等权"
         },
         {
           "date": "2026-03-02",
-          "time": "",
           "code": "300188.SZ",
           "name": "国投智能",
           "direction": "buy",
@@ -1081,13 +1018,10 @@
             "slippage_cost": 420.26,
             "total": 550.54
           },
-          "reason": "周一调仓：Amihud+ShadowPressure双因子TOP25等权",
-          "pnl": 0,
-          "pnl_pct": 0
+          "reason": "周一调仓：Amihud+ShadowPressure双因子TOP25等权"
         },
         {
           "date": "2026-03-02",
-          "time": "",
           "code": "688552.SH",
           "name": "航天南湖",
           "direction": "buy",
@@ -1101,13 +1035,10 @@
             "slippage_cost": 418.6,
             "total": 548.37
           },
-          "reason": "周一调仓：Amihud+ShadowPressure双因子TOP25等权",
-          "pnl": 0,
-          "pnl_pct": 0
+          "reason": "周一调仓：Amihud+ShadowPressure双因子TOP25等权"
         },
         {
           "date": "2026-03-02",
-          "time": "",
           "code": "301571.SZ",
           "name": "国科天成",
           "direction": "buy",
@@ -1121,13 +1052,10 @@
             "slippage_cost": 420.78,
             "total": 551.23
           },
-          "reason": "周一调仓：Amihud+ShadowPressure双因子TOP25等权",
-          "pnl": 0,
-          "pnl_pct": 0
+          "reason": "周一调仓：Amihud+ShadowPressure双因子TOP25等权"
         },
         {
           "date": "2026-03-02",
-          "time": "",
           "code": "301376.SZ",
           "name": "致欧科技",
           "direction": "buy",
@@ -1141,13 +1069,10 @@
             "slippage_cost": 420.15,
             "total": 550.4
           },
-          "reason": "周一调仓：Amihud+ShadowPressure双因子TOP25等权",
-          "pnl": 0,
-          "pnl_pct": 0
+          "reason": "周一调仓：Amihud+ShadowPressure双因子TOP25等权"
         },
         {
           "date": "2026-03-02",
-          "time": "",
           "code": "300579.SZ",
           "name": "数字认证",
           "direction": "buy",
@@ -1161,13 +1086,10 @@
             "slippage_cost": 418.11,
             "total": 547.73
           },
-          "reason": "周一调仓：Amihud+ShadowPressure双因子TOP25等权",
-          "pnl": 0,
-          "pnl_pct": 0
+          "reason": "周一调仓：Amihud+ShadowPressure双因子TOP25等权"
         },
         {
           "date": "2026-03-02",
-          "time": "",
           "code": "300341.SZ",
           "name": "麦克奥迪",
           "direction": "buy",
@@ -1181,13 +1103,10 @@
             "slippage_cost": 419.77,
             "total": 549.89
           },
-          "reason": "周一调仓：Amihud+ShadowPressure双因子TOP25等权",
-          "pnl": 0,
-          "pnl_pct": 0
+          "reason": "周一调仓：Amihud+ShadowPressure双因子TOP25等权"
         },
         {
           "date": "2026-03-02",
-          "time": "",
           "code": "601811.SH",
           "name": "新华文轩",
           "direction": "buy",
@@ -1201,13 +1120,10 @@
             "slippage_cost": 419.96,
             "total": 550.14
           },
-          "reason": "周一调仓：Amihud+ShadowPressure双因子TOP25等权",
-          "pnl": 0,
-          "pnl_pct": 0
+          "reason": "周一调仓：Amihud+ShadowPressure双因子TOP25等权"
         },
         {
           "date": "2026-03-02",
-          "time": "",
           "code": "688177.SH",
           "name": "百奥泰",
           "direction": "buy",
@@ -1221,13 +1137,10 @@
             "slippage_cost": 419.77,
             "total": 549.9
           },
-          "reason": "周一调仓：Amihud+ShadowPressure双因子TOP25等权",
-          "pnl": 0,
-          "pnl_pct": 0
+          "reason": "周一调仓：Amihud+ShadowPressure双因子TOP25等权"
         },
         {
           "date": "2026-03-02",
-          "time": "",
           "code": "300768.SZ",
           "name": "迪普科技",
           "direction": "buy",
@@ -1241,13 +1154,10 @@
             "slippage_cost": 419.56,
             "total": 549.63
           },
-          "reason": "周一调仓：Amihud+ShadowPressure双因子TOP25等权",
-          "pnl": 0,
-          "pnl_pct": 0
+          "reason": "周一调仓：Amihud+ShadowPressure双因子TOP25等权"
         },
         {
           "date": "2026-03-02",
-          "time": "",
           "code": "601858.SH",
           "name": "中国科传",
           "direction": "buy",
@@ -1261,13 +1171,10 @@
             "slippage_cost": 419.2,
             "total": 549.15
           },
-          "reason": "周一调仓：Amihud+ShadowPressure双因子TOP25等权",
-          "pnl": 0,
-          "pnl_pct": 0
+          "reason": "周一调仓：Amihud+ShadowPressure双因子TOP25等权"
         },
         {
           "date": "2026-03-02",
-          "time": "",
           "code": "688107.SH",
           "name": "安路科技",
           "direction": "buy",
@@ -1281,13 +1188,10 @@
             "slippage_cost": 418.21,
             "total": 547.86
           },
-          "reason": "周一调仓：Amihud+ShadowPressure双因子TOP25等权",
-          "pnl": 0,
-          "pnl_pct": 0
+          "reason": "周一调仓：Amihud+ShadowPressure双因子TOP25等权"
         },
         {
           "date": "2026-03-02",
-          "time": "",
           "code": "600821.SH",
           "name": "金开新能",
           "direction": "buy",
@@ -1301,13 +1205,10 @@
             "slippage_cost": 420.49,
             "total": 550.84
           },
-          "reason": "周一调仓：Amihud+ShadowPressure双因子TOP25等权",
-          "pnl": 0,
-          "pnl_pct": 0
+          "reason": "周一调仓：Amihud+ShadowPressure双因子TOP25等权"
         },
         {
           "date": "2026-03-02",
-          "time": "",
           "code": "002345.SZ",
           "name": "潮宏基",
           "direction": "buy",
@@ -1321,13 +1222,10 @@
             "slippage_cost": 420.62,
             "total": 551.02
           },
-          "reason": "周一调仓：Amihud+ShadowPressure双因子TOP25等权",
-          "pnl": 0,
-          "pnl_pct": 0
+          "reason": "周一调仓：Amihud+ShadowPressure双因子TOP25等权"
         },
         {
           "date": "2026-03-02",
-          "time": "",
           "code": "301592.SZ",
           "name": "六九一二",
           "direction": "buy",
@@ -1341,13 +1239,10 @@
             "slippage_cost": 417.79,
             "total": 547.31
           },
-          "reason": "周一调仓：Amihud+ShadowPressure双因子TOP25等权",
-          "pnl": 0,
-          "pnl_pct": 0
+          "reason": "周一调仓：Amihud+ShadowPressure双因子TOP25等权"
         },
         {
           "date": "2026-03-02",
-          "time": "",
           "code": "688433.SH",
           "name": "华曙高科",
           "direction": "buy",
@@ -1361,13 +1256,10 @@
             "slippage_cost": 412.64,
             "total": 540.56
           },
-          "reason": "周一调仓：Amihud+ShadowPressure双因子TOP25等权",
-          "pnl": 0,
-          "pnl_pct": 0
+          "reason": "周一调仓：Amihud+ShadowPressure双因子TOP25等权"
         },
         {
           "date": "2026-03-02",
-          "time": "",
           "code": "002946.SZ",
           "name": "新乳业",
           "direction": "buy",
@@ -1381,13 +1273,10 @@
             "slippage_cost": 419.32,
             "total": 549.31
           },
-          "reason": "周一调仓：Amihud+ShadowPressure双因子TOP25等权",
-          "pnl": 0,
-          "pnl_pct": 0
+          "reason": "周一调仓：Amihud+ShadowPressure双因子TOP25等权"
         },
         {
           "date": "2026-03-02",
-          "time": "",
           "code": "300687.SZ",
           "name": "赛意信息",
           "direction": "buy",
@@ -1401,13 +1290,10 @@
             "slippage_cost": 419.96,
             "total": 550.14
           },
-          "reason": "周一调仓：Amihud+ShadowPressure双因子TOP25等权",
-          "pnl": 0,
-          "pnl_pct": 0
+          "reason": "周一调仓：Amihud+ShadowPressure双因子TOP25等权"
         },
         {
           "date": "2026-03-02",
-          "time": "",
           "code": "688182.SH",
           "name": "灿勤科技",
           "direction": "buy",
@@ -1421,13 +1307,10 @@
             "slippage_cost": 419.5,
             "total": 549.54
           },
-          "reason": "周一调仓：Amihud+ShadowPressure双因子TOP25等权",
-          "pnl": 0,
-          "pnl_pct": 0
+          "reason": "周一调仓：Amihud+ShadowPressure双因子TOP25等权"
         },
         {
           "date": "2026-03-02",
-          "time": "",
           "code": "000156.SZ",
           "name": "华数传媒",
           "direction": "buy",
@@ -1441,13 +1324,10 @@
             "slippage_cost": 420.15,
             "total": 550.39
           },
-          "reason": "周一调仓：Amihud+ShadowPressure双因子TOP25等权",
-          "pnl": 0,
-          "pnl_pct": 0
+          "reason": "周一调仓：Amihud+ShadowPressure双因子TOP25等权"
         },
         {
           "date": "2026-03-02",
-          "time": "",
           "code": "301215.SZ",
           "name": "中汽股份",
           "direction": "buy",
@@ -1461,13 +1341,10 @@
             "slippage_cost": 420.39,
             "total": 550.72
           },
-          "reason": "周一调仓：Amihud+ShadowPressure双因子TOP25等权",
-          "pnl": 0,
-          "pnl_pct": 0
+          "reason": "周一调仓：Amihud+ShadowPressure双因子TOP25等权"
         },
         {
           "date": "2026-03-02",
-          "time": "",
           "code": "301207.SZ",
           "name": "华兰疫苗",
           "direction": "buy",
@@ -1481,9 +1358,7 @@
             "slippage_cost": 419.89,
             "total": 550.06
           },
-          "reason": "周一调仓：Amihud+ShadowPressure双因子TOP25等权",
-          "pnl": 0,
-          "pnl_pct": 0
+          "reason": "周一调仓：Amihud+ShadowPressure双因子TOP25等权"
         }
       ],
       "decisions": [
@@ -1633,12 +1508,12 @@
       ],
       "stats": {
         "total_return_pct": 3.2,
-        "annualized_return_pct": 70.68,
-        "max_drawdown_pct": 4.49,
-        "sharpe_ratio": 2.36,
-        "calmar_ratio": 15.75,
-        "win_rate": 64.71,
-        "profit_loss_ratio": 3.27,
+        "annualized_return_pct": 8.81,
+        "max_drawdown_pct": 5.02,
+        "sharpe_ratio": 0.64,
+        "calmar_ratio": 1.75,
+        "win_rate": 0.0,
+        "profit_loss_ratio": 0.0,
         "total_trades": 58,
         "total_fees": 39167.52,
         "current_positions": 24,
@@ -1794,35 +1669,179 @@
       },
       "nav_history": {
         "dates": [
-          "2026-02-24",
-          "2026-02-25",
-          "2026-02-26",
-          "2026-02-27",
-          "2026-03-02",
-          "2026-03-03",
-          "2026-03-04",
-          "2026-03-05",
+          "02-24 15:00",
+          "02-25 15:00",
+          "02-26 10:56",
+          "02-26 11:00",
+          "02-26 11:30",
+          "02-26 12:00",
+          "02-26 12:30",
+          "02-26 13:00",
+          "02-26 13:38",
+          "02-26 14:00",
+          "02-26 14:30",
+          "02-26 15:00",
+          "02-27 09:15",
+          "02-27 09:30",
+          "02-27 10:00",
+          "02-27 11:00",
+          "02-27 11:30",
+          "02-27 12:00",
+          "02-27 13:00",
+          "02-27 14:00",
+          "02-27 14:30",
+          "02-27 16:04",
+          "03-02 09:20",
+          "03-02 09:31",
+          "03-02 10:00",
+          "03-02 10:30",
+          "03-02 11:00",
+          "03-02 12:00",
+          "03-02 12:32",
+          "03-02 13:03",
+          "03-02 13:35",
+          "03-02 14:00",
+          "03-02 14:33",
+          "03-03 10:00",
+          "03-03 10:30",
+          "03-03 11:00",
+          "03-03 11:31",
+          "03-03 12:00",
+          "03-03 12:33",
+          "03-03 13:33",
+          "03-03 14:00",
+          "03-03 14:30",
+          "03-04 09:32",
+          "03-04 12:35",
+          "03-04 14:00",
+          "03-04 14:30",
+          "03-05 12:41",
+          "03-05 13:00",
+          "03-05 13:41",
+          "03-06 09:30",
+          "03-06 10:00",
+          "03-06 11:00",
+          "03-06 11:30",
+          "03-06 12:30",
+          "03-06 13:40",
+          "03-06 14:42",
           "2026-03-06"
         ],
         "nav": [
           1.0,
           1.0,
+          0.981845,
           0.980595,
+          0.978407,
+          0.978407,
+          0.978407,
+          0.97872,
+          0.98247,
+          0.980282,
+          0.980595,
+          0.980595,
+          0.968407,
+          0.97997,
+          0.98622,
+          0.986533,
+          0.984345,
+          0.984345,
+          0.984345,
           0.992783,
+          0.99122,
+          0.992783,
+          1.042158,
+          1.020595,
+          1.005595,
+          1.003408,
+          1.009345,
+          1.010282,
+          1.010282,
+          1.004345,
+          1.013095,
+          1.02747,
           1.038095,
+          1.003095,
+          1.01122,
+          1.024657,
+          1.019033,
+          1.019033,
+          1.019033,
+          1.00747,
+          0.997783,
           1.00122,
+          0.961845,
+          0.96997,
+          0.973407,
           0.970595,
+          0.971845,
+          0.970595,
+          0.964127,
+          0.964127,
+          0.964127,
+          0.964127,
+          0.964127,
+          0.964127,
+          0.964127,
           0.964127,
           0.964127
         ],
         "cash_pct": [
           100.0,
           100.0,
+          50.86,
           50.92,
+          51.04,
+          51.04,
+          51.04,
+          51.02,
+          50.83,
+          50.94,
+          50.92,
+          50.92,
+          51.56,
+          50.96,
+          50.63,
+          50.62,
+          50.73,
+          50.73,
+          50.73,
           50.3,
+          50.38,
+          50.3,
+          47.91,
+          48.93,
+          49.66,
+          49.76,
+          49.47,
+          49.43,
+          49.43,
+          49.72,
+          49.29,
+          48.6,
           48.1,
+          49.78,
+          49.38,
+          48.73,
+          49.0,
+          49.0,
+          49.0,
+          49.56,
+          50.05,
           49.87,
+          51.92,
+          51.48,
+          51.3,
           51.45,
+          51.38,
+          51.45,
+          100.0,
+          100.0,
+          100.0,
+          100.0,
+          100.0,
+          100.0,
+          100.0,
           100.0,
           100.0
         ]
@@ -1830,7 +1849,6 @@
       "trades": [
         {
           "date": "2026-02-26",
-          "time": "",
           "code": "002716",
           "name": "湖南白银",
           "direction": "buy",
@@ -1844,13 +1862,10 @@
             "slippage_cost": 5000.0,
             "total": 6550.0
           },
-          "reason": "技术面综合评分60:收盘突破MA20+连续反弹+放量+MACD绿柱收窄+KDJ多头,半仓试探",
-          "pnl": 0,
-          "pnl_pct": 0
+          "reason": "技术面综合评分60:收盘突破MA20+连续反弹+放量+MACD绿柱收窄+KDJ多头,半仓试探"
         },
         {
           "date": "2026-03-05",
-          "time": "",
           "code": "002716",
           "name": "湖南白银",
           "direction": "sell",
@@ -1864,9 +1879,7 @@
             "slippage_cost": 4656.25,
             "total": 8427.81
           },
-          "reason": "午盘止损清仓：综合评分-65(极弱)+盘中低点14.80已破止损线14.88。3/2涨停后连跌3日(-9.79%/-3.64%/-1.32%)，跌破MA5/MA10/MA20全部短期均线，MACD绿柱扩大，缩量阴跌无人接盘。亏损-6.87%接近7%红线，执行纪律止损。",
-          "pnl": -343750.0,
-          "pnl_pct": -6.87
+          "reason": "午盘止损清仓：综合评分-65(极弱)+盘中低点14.80已破止损线14.88。3/2涨停后连跌3日(-9.79%/-3.64%/-1.32%)，跌破MA5/MA10/MA20全部短期均线，MACD绿柱扩大，缩量阴跌无人接盘。亏损-6.87%接近7%红线，执行纪律止损。"
         }
       ],
       "decisions": [
@@ -1978,10 +1991,10 @@
       "rebalances": [],
       "stats": {
         "total_return_pct": -3.59,
-        "annualized_return_pct": -64.05,
-        "max_drawdown_pct": 7.13,
-        "sharpe_ratio": -2.84,
-        "calmar_ratio": -8.99,
+        "annualized_return_pct": -14.91,
+        "max_drawdown_pct": 7.71,
+        "sharpe_ratio": -0.9,
+        "calmar_ratio": -1.93,
         "win_rate": 0.0,
         "profit_loss_ratio": 0.0,
         "total_trades": 2,
@@ -2005,14 +2018,62 @@
       },
       "nav_history": {
         "dates": [
-          "2026-02-24",
-          "2026-02-25",
-          "2026-02-26",
-          "2026-02-27",
-          "2026-03-02",
-          "2026-03-03",
-          "2026-03-04",
-          "2026-03-05",
+          "02-24 15:00",
+          "02-25 15:00",
+          "02-26 10:56",
+          "02-26 11:00",
+          "02-26 11:30",
+          "02-26 12:00",
+          "02-26 12:30",
+          "02-26 13:00",
+          "02-26 13:38",
+          "02-26 14:00",
+          "02-26 14:30",
+          "02-26 15:00",
+          "02-27 09:15",
+          "02-27 09:30",
+          "02-27 10:00",
+          "02-27 11:00",
+          "02-27 11:30",
+          "02-27 12:00",
+          "02-27 13:00",
+          "02-27 14:00",
+          "02-27 14:30",
+          "02-27 16:04",
+          "03-02 09:20",
+          "03-02 09:31",
+          "03-02 10:00",
+          "03-02 10:30",
+          "03-02 11:00",
+          "03-02 12:00",
+          "03-02 12:32",
+          "03-02 13:03",
+          "03-02 13:35",
+          "03-02 14:00",
+          "03-02 14:33",
+          "03-03 10:00",
+          "03-03 10:30",
+          "03-03 11:00",
+          "03-03 11:31",
+          "03-03 12:00",
+          "03-03 12:33",
+          "03-03 13:33",
+          "03-03 14:00",
+          "03-03 14:30",
+          "03-04 09:32",
+          "03-04 12:35",
+          "03-04 14:00",
+          "03-04 14:30",
+          "03-05 12:41",
+          "03-05 13:00",
+          "03-05 13:41",
+          "03-06 09:30",
+          "03-06 10:00",
+          "03-06 11:00",
+          "03-06 11:30",
+          "03-06 12:30",
+          "03-06 13:40",
+          "03-06 14:42",
           "2026-03-06"
         ],
         "nav": [
@@ -2024,9 +2085,105 @@
           1.0,
           1.0,
           1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
           1.0
         ],
         "cash_pct": [
+          100.0,
+          100.0,
+          100.0,
+          100.0,
+          100.0,
+          100.0,
+          100.0,
+          100.0,
+          100.0,
+          100.0,
+          100.0,
+          100.0,
+          100.0,
+          100.0,
+          100.0,
+          100.0,
+          100.0,
+          100.0,
+          100.0,
+          100.0,
+          100.0,
+          100.0,
+          100.0,
+          100.0,
+          100.0,
+          100.0,
+          100.0,
+          100.0,
+          100.0,
+          100.0,
+          100.0,
+          100.0,
+          100.0,
+          100.0,
+          100.0,
+          100.0,
+          100.0,
+          100.0,
+          100.0,
+          100.0,
+          100.0,
+          100.0,
+          100.0,
+          100.0,
+          100.0,
+          100.0,
+          100.0,
+          100.0,
           100.0,
           100.0,
           100.0,
@@ -2127,7 +2284,7 @@
         "win_rate": 0.0,
         "profit_loss_ratio": 0.0,
         "total_trades": 0,
-        "total_fees": 0,
+        "total_fees": 0.0,
         "current_positions": 0,
         "turnover_rate": 0.0
       },
@@ -2213,43 +2370,198 @@
       },
       "nav_history": {
         "dates": [
-          "2026-02-24",
-          "2026-02-25",
-          "2026-02-26",
-          "2026-02-27",
-          "2026-03-02",
-          "2026-03-03",
-          "2026-03-04",
-          "2026-03-05",
+          "02-24 15:00",
+          "02-25 15:00",
+          "02-26 10:56",
+          "02-26 11:00",
+          "02-26 11:30",
+          "02-26 12:00",
+          "02-26 12:30",
+          "02-26 13:00",
+          "02-26 13:38",
+          "02-26 14:00",
+          "02-26 14:30",
+          "02-26 15:00",
+          "02-27 09:15",
+          "02-27 09:30",
+          "02-27 10:00",
+          "02-27 11:00",
+          "02-27 11:30",
+          "02-27 12:00",
+          "02-27 13:00",
+          "02-27 14:00",
+          "02-27 14:30",
+          "02-27 14:50",
+          "02-27 15:00",
+          "02-27 16:04",
+          "03-02 09:20",
+          "03-02 09:31",
+          "03-02 10:00",
+          "03-02 10:30",
+          "03-02 11:00",
+          "03-02 12:00",
+          "03-02 12:32",
+          "03-02 13:03",
+          "03-02 13:35",
+          "03-02 14:00",
+          "03-02 14:33",
+          "03-03 10:00",
+          "03-03 10:30",
+          "03-03 11:00",
+          "03-03 11:31",
+          "03-03 12:00",
+          "03-03 12:33",
+          "03-03 13:33",
+          "03-03 14:00",
+          "03-03 14:30",
+          "03-04 09:32",
+          "03-04 12:35",
+          "03-04 14:00",
+          "03-04 14:30",
+          "03-05 12:41",
+          "03-05 13:00",
+          "03-05 13:41",
+          "03-06 09:30",
+          "03-06 10:00",
+          "03-06 11:00",
+          "03-06 11:30",
+          "03-06 12:30",
+          "03-06 13:40",
+          "03-06 14:42",
+          "03-06 14:50",
+          "03-06 15:00",
           "2026-03-06"
         ],
         "nav": [
           1.0,
           1.0,
+          0.99798,
+          0.997497,
+          0.998791,
+          0.998791,
+          0.998791,
+          0.998825,
+          0.996258,
+          0.995895,
+          0.996757,
           0.999721,
+          0.993059,
+          0.997077,
+          0.995658,
+          0.992097,
+          0.995862,
+          0.995862,
+          0.996014,
+          0.997396,
+          1.001138,
+          1.00461,
           1.005306,
+          1.005306,
+          1.006561,
+          1.011658,
+          0.998426,
+          1.001263,
+          1.004581,
+          1.004628,
+          1.004628,
+          1.004589,
+          1.006779,
+          1.004433,
           1.002506,
+          1.006059,
+          0.995809,
+          0.997937,
+          1.007879,
+          1.007879,
+          1.007879,
+          1.013568,
+          1.001133,
           0.998144,
+          0.970077,
+          0.963044,
+          0.970511,
           0.965331,
+          0.962514,
+          0.962541,
           0.962812,
+          0.961837,
+          0.961701,
+          0.962081,
+          0.962026,
+          0.962026,
+          0.962081,
+          0.962433,
+          0.962487,
+          0.96246,
           0.96246
         ],
         "cash_pct": [
           100.0,
           100.0,
+          0.01,
+          0.01,
+          0.01,
+          0.01,
+          0.01,
+          0.01,
+          0.01,
+          0.01,
+          0.01,
           56.35,
+          56.73,
+          56.5,
+          11.74,
+          11.78,
+          11.74,
+          11.74,
+          11.74,
+          11.72,
+          11.68,
+          11.64,
           11.63,
+          11.63,
+          11.61,
+          11.56,
+          0.01,
+          0.01,
+          0.01,
+          0.01,
+          0.01,
+          0.01,
+          0.01,
+          0.01,
           0.01,
           0.02,
           0.02,
+          0.02,
+          0.02,
+          0.02,
+          0.02,
+          0.02,
+          0.02,
+          0.02,
+          0.02,
+          0.02,
+          0.02,
+          0.02,
+          96.85,
+          96.84,
           96.82,
+          96.91,
+          96.93,
+          96.89,
+          96.9,
+          96.9,
+          96.89,
+          96.85,
+          96.85,
+          96.85,
           96.85
         ]
       },
       "trades": [
         {
           "date": "2026-02-26",
-          "time": "",
           "code": "603999",
           "name": "读者传媒",
           "direction": "buy",
@@ -2263,13 +2575,10 @@
             "slippage_cost": 1428.32,
             "total": 1871.1
           },
-          "reason": "主策略:J=7.1<13+上升趋势+板块集中(新闻出版3只),score=73,量比4.3,量价齐升",
-          "pnl": 0,
-          "pnl_pct": 0
+          "reason": "主策略:J=7.1<13+上升趋势+板块集中(新闻出版3只),score=73,量比4.3,量价齐升"
         },
         {
           "date": "2026-02-26",
-          "time": "",
           "code": "601999",
           "name": "出版传媒",
           "direction": "buy",
@@ -2283,13 +2592,10 @@
             "slippage_cost": 1428.07,
             "total": 1870.77
           },
-          "reason": "主策略:J=1.6<13+上升趋势+板块集中(新闻出版3只),score=73,量比3.3,量价齐升",
-          "pnl": 0,
-          "pnl_pct": 0
+          "reason": "主策略:J=1.6<13+上升趋势+板块集中(新闻出版3只),score=73,量比3.3,量价齐升"
         },
         {
           "date": "2026-02-26",
-          "time": "",
           "code": "002259",
           "name": "升达林业",
           "direction": "buy",
@@ -2303,13 +2609,10 @@
             "slippage_cost": 1428.56,
             "total": 1871.41
           },
-          "reason": "主策略:J=11.3<13+上升趋势,score=70,量比9.0≥8异常放量,量价齐升",
-          "pnl": 0,
-          "pnl_pct": 0
+          "reason": "主策略:J=11.3<13+上升趋势,score=70,量比9.0≥8异常放量,量价齐升"
         },
         {
           "date": "2026-02-26",
-          "time": "",
           "code": "603096",
           "name": "新经典",
           "direction": "buy",
@@ -2323,13 +2626,10 @@
             "slippage_cost": 1426.87,
             "total": 1869.19
           },
-          "reason": "主策略:J=5.9<13+上升趋势+板块集中(新闻出版3只),score=65,量价齐升",
-          "pnl": 0,
-          "pnl_pct": 0
+          "reason": "主策略:J=5.9<13+上升趋势+板块集中(新闻出版3只),score=65,量价齐升"
         },
         {
           "date": "2026-02-26",
-          "time": "",
           "code": "002983",
           "name": "芯瑞达",
           "direction": "buy",
@@ -2343,13 +2643,10 @@
             "slippage_cost": 1428.48,
             "total": 1871.31
           },
-          "reason": "主策略:J=0.6极低+上升趋势,score=63,量比5.0,量价齐升",
-          "pnl": 0,
-          "pnl_pct": 0
+          "reason": "主策略:J=0.6极低+上升趋势,score=63,量比5.0,量价齐升"
         },
         {
           "date": "2026-02-26",
-          "time": "",
           "code": "603012",
           "name": "创力集团",
           "direction": "buy",
@@ -2363,13 +2660,10 @@
             "slippage_cost": 1428.17,
             "total": 1870.9
           },
-          "reason": "主策略:J=5.8<13+上升趋势,score=63,量比4.8,量价齐升",
-          "pnl": 0,
-          "pnl_pct": 0
+          "reason": "主策略:J=5.8<13+上升趋势,score=63,量比4.8,量价齐升"
         },
         {
           "date": "2026-02-26",
-          "time": "",
           "code": "001366",
           "name": "播恩集团",
           "direction": "buy",
@@ -2383,13 +2677,10 @@
             "slippage_cost": 1417.12,
             "total": 1856.43
           },
-          "reason": "主策略:J=-4.6极低+上升趋势,score=63,量比3.6,量价齐升",
-          "pnl": 0,
-          "pnl_pct": 0
+          "reason": "主策略:J=-4.6极低+上升趋势,score=63,量比3.6,量价齐升"
         },
         {
           "date": "2026-02-26",
-          "time": "",
           "code": "603999",
           "name": "读者传媒",
           "direction": "sell",
@@ -2403,13 +2694,10 @@
             "slippage_cost": 1415.66,
             "total": 2562.35
           },
-          "reason": "止损：现价7.83≤止损线7.85（成本7.90-5tick），破BBI(7.88)，全清",
-          "pnl": -12656.0,
-          "pnl_pct": -0.89
+          "reason": "止损：现价7.83≤止损线7.85（成本7.90-5tick），破BBI(7.88)，全清"
         },
         {
           "date": "2026-02-26",
-          "time": "",
           "code": "601999",
           "name": "出版传媒",
           "direction": "sell",
@@ -2423,13 +2711,10 @@
             "slippage_cost": 1414.88,
             "total": 2560.94
           },
-          "reason": "止损：现价7.51≤止损线7.53（成本7.58-5tick），破BBI(7.56)，全清",
-          "pnl": -13188.0,
-          "pnl_pct": -0.92
+          "reason": "止损：现价7.51≤止损线7.53（成本7.58-5tick），破BBI(7.56)，全清"
         },
         {
           "date": "2026-02-26",
-          "time": "",
           "code": "603096",
           "name": "新经典",
           "direction": "sell",
@@ -2443,13 +2728,10 @@
             "slippage_cost": 1414.25,
             "total": 2559.8
           },
-          "reason": "止损：现价19.06≤止损线19.18（成本19.23-5tick），破BBI(19.21)，全清",
-          "pnl": -12614.0,
-          "pnl_pct": -0.88
+          "reason": "止损：现价19.06≤止损线19.18（成本19.23-5tick），破BBI(19.21)，全清"
         },
         {
           "date": "2026-02-26",
-          "time": "",
           "code": "001366",
           "name": "播恩集团",
           "direction": "sell",
@@ -2463,13 +2745,10 @@
             "slippage_cost": 1397.8,
             "total": 2530.02
           },
-          "reason": "止损：现价14.47≤止损线14.62（成本14.67-5tick），破BBI(14.60)，全清",
-          "pnl": -19320.0,
-          "pnl_pct": -1.36
+          "reason": "止损：现价14.47≤止损线14.62（成本14.67-5tick），破BBI(14.60)，全清"
         },
         {
           "date": "2026-02-27",
-          "time": "",
           "code": "002983",
           "name": "芯瑞达",
           "direction": "sell",
@@ -2483,13 +2762,10 @@
             "slippage_cost": 1395.56,
             "total": 2525.96
           },
-          "reason": "止损：现价25.01低于止损线25.35(买入价25.60-5tick)，全清",
-          "pnl": -32922.0,
-          "pnl_pct": -2.3
+          "reason": "止损：现价25.01低于止损线25.35(买入价25.60-5tick)，全清"
         },
         {
           "date": "2026-02-27",
-          "time": "",
           "code": "002040",
           "name": "南京港",
           "direction": "buy",
@@ -2503,13 +2779,10 @@
             "slippage_cost": 1170.72,
             "total": 1533.65
           },
-          "reason": "水上运输业板块集中(4只)，BBI金叉缩量回调(放量3.09x+缩量至半量40.5%)，score=93",
-          "pnl": 0,
-          "pnl_pct": 0
+          "reason": "水上运输业板块集中(4只)，BBI金叉缩量回调(放量3.09x+缩量至半量40.5%)，score=93"
         },
         {
           "date": "2026-02-27",
-          "time": "",
           "code": "601298",
           "name": "青岛港",
           "direction": "buy",
@@ -2523,13 +2796,10 @@
             "slippage_cost": 1170.46,
             "total": 1533.31
           },
-          "reason": "水上运输业板块集中(4只)，BBI金叉缩量回调(放量2.27x+缩量至半量41.0%)，score=93",
-          "pnl": 0,
-          "pnl_pct": 0
+          "reason": "水上运输业板块集中(4只)，BBI金叉缩量回调(放量2.27x+缩量至半量41.0%)，score=93"
         },
         {
           "date": "2026-02-27",
-          "time": "",
           "code": "301062",
           "name": "上海艾录",
           "direction": "buy",
@@ -2543,13 +2813,10 @@
             "slippage_cost": 1170.37,
             "total": 1533.19
           },
-          "reason": "主策略信号(J=10.3<13+上升趋势)，造纸板块集中(3只)，量比8.7≥8，score=80",
-          "pnl": 0,
-          "pnl_pct": 0
+          "reason": "主策略信号(J=10.3<13+上升趋势)，造纸板块集中(3只)，量比8.7≥8，score=80"
         },
         {
           "date": "2026-02-27",
-          "time": "",
           "code": "603538",
           "name": "美诺华",
           "direction": "buy",
@@ -2563,13 +2830,10 @@
             "slippage_cost": 1170.08,
             "total": 1532.8
           },
-          "reason": "医药制造业板块集中(5只)，BBI金叉缩量回调(放量3.08x+缩量至半量30.8%)，score=80",
-          "pnl": 0,
-          "pnl_pct": 0
+          "reason": "医药制造业板块集中(5只)，BBI金叉缩量回调(放量3.08x+缩量至半量30.8%)，score=80"
         },
         {
           "date": "2026-02-27",
-          "time": "",
           "code": "301004",
           "name": "嘉益股份",
           "direction": "buy",
@@ -2583,13 +2847,10 @@
             "slippage_cost": 1168.4,
             "total": 1530.6
           },
-          "reason": "金属制品业板块集中(3只)，BBI金叉缩量回调(放量3.34x+缩量至半量48.6%)，score=80",
-          "pnl": 0,
-          "pnl_pct": 0
+          "reason": "金属制品业板块集中(3只)，BBI金叉缩量回调(放量3.34x+缩量至半量48.6%)，score=80"
         },
         {
           "date": "2026-03-02",
-          "time": "",
           "code": "300328",
           "name": "宜安科技",
           "direction": "buy",
@@ -2603,13 +2864,10 @@
             "slippage_cost": 584.28,
             "total": 765.4
           },
-          "reason": "pullback信号score=88，BBI金叉4天+放量2.05x+缩量回调48%至半量以下，板块集中金属制品业(3只)，量比4.2",
-          "pnl": 0,
-          "pnl_pct": 0
+          "reason": "pullback信号score=88，BBI金叉4天+放量2.05x+缩量回调48%至半量以下，板块集中金属制品业(3只)，量比4.2"
         },
         {
           "date": "2026-03-02",
-          "time": "",
           "code": "002923",
           "name": "润都股份",
           "direction": "buy",
@@ -2623,13 +2881,10 @@
             "slippage_cost": 582.09,
             "total": 762.54
           },
-          "reason": "主策略信号score=65，J=2.9极低+上升趋势+量比12.2≥8异常放量，四大硬条件满足",
-          "pnl": 0,
-          "pnl_pct": 0
+          "reason": "主策略信号score=65，J=2.9极低+上升趋势+量比12.2≥8异常放量，四大硬条件满足"
         },
         {
           "date": "2026-03-03",
-          "time": "",
           "code": "301062",
           "name": "上海艾录",
           "direction": "sell",
@@ -2643,13 +2898,10 @@
             "slippage_cost": 1082.98,
             "total": 1960.19
           },
-          "reason": "止损全清：买入价9.91,止损线9.66,现价9.17远破止损",
-          "pnl": -87394.0,
-          "pnl_pct": -7.47
+          "reason": "止损全清：买入价9.91,止损线9.66,现价9.17远破止损"
         },
         {
           "date": "2026-03-03",
-          "time": "",
           "code": "300328",
           "name": "宜安科技",
           "direction": "sell",
@@ -2663,13 +2915,10 @@
             "slippage_cost": 575.04,
             "total": 1040.82
           },
-          "reason": "止损全清：买入价18.97,止损线18.72,现价18.67破止损",
-          "pnl": -9240.0,
-          "pnl_pct": -1.58
+          "reason": "止损全清：买入价18.97,止损线18.72,现价18.67破止损"
         },
         {
           "date": "2026-03-03",
-          "time": "",
           "code": "002923",
           "name": "润都股份",
           "direction": "sell",
@@ -2683,13 +2932,10 @@
             "slippage_cost": 563.62,
             "total": 1020.14
           },
-          "reason": "止损全清：买入价15.44,止损线15.19,现价14.95破止损",
-          "pnl": -18473.0,
-          "pnl_pct": -3.17
+          "reason": "止损全清：买入价15.44,止损线15.19,现价14.95破止损"
         },
         {
           "date": "2026-03-03",
-          "time": "",
           "code": "002040",
           "name": "南京港",
           "direction": "sell",
@@ -2703,13 +2949,10 @@
             "slippage_cost": 673.54,
             "total": 1219.12
           },
-          "reason": "止盈1：累计+15.1%超7%,卖出一半(54100/108200),剩余不破BBI持有",
-          "pnl": 88183.0,
-          "pnl_pct": 15.06
+          "reason": "止盈1：累计+15.1%超7%,卖出一半(54100/108200),剩余不破BBI持有"
         },
         {
           "date": "2026-03-03",
-          "time": "",
           "code": "600172",
           "name": "黄河旋风",
           "direction": "buy",
@@ -2723,13 +2966,10 @@
             "slippage_cost": 722.59,
             "total": 946.6
           },
-          "reason": "pullback信号score=88,非金属矿物制品业板块集中5只,BBI金叉20天+放量2.26x+缩量回调至半量以下,VR=3.5",
-          "pnl": 0,
-          "pnl_pct": 0
+          "reason": "pullback信号score=88,非金属矿物制品业板块集中5只,BBI金叉20天+放量2.26x+缩量回调至半量以下,VR=3.5"
         },
         {
           "date": "2026-03-03",
-          "time": "",
           "code": "002302",
           "name": "西部建设",
           "direction": "buy",
@@ -2743,13 +2983,10 @@
             "slippage_cost": 722.56,
             "total": 946.55
           },
-          "reason": "pullback信号score=85,非金属矿物制品业板块集中5只,BBI金叉9天+放量3.73x+缩量回调至半量以下,VR=2.8",
-          "pnl": 0,
-          "pnl_pct": 0
+          "reason": "pullback信号score=85,非金属矿物制品业板块集中5只,BBI金叉9天+放量3.73x+缩量回调至半量以下,VR=2.8"
         },
         {
           "date": "2026-03-03",
-          "time": "",
           "code": "600207",
           "name": "安彩高科",
           "direction": "buy",
@@ -2763,13 +3000,10 @@
             "slippage_cost": 722.4,
             "total": 946.34
           },
-          "reason": "pullback信号score=83,非金属矿物制品业板块集中5只,BBI金叉9天+放量1.81x+缩量回调至半量以下,VR=3.9",
-          "pnl": 0,
-          "pnl_pct": 0
+          "reason": "pullback信号score=83,非金属矿物制品业板块集中5只,BBI金叉9天+放量1.81x+缩量回调至半量以下,VR=3.9"
         },
         {
           "date": "2026-03-03",
-          "time": "",
           "code": "603232",
           "name": "格尔软件",
           "direction": "buy",
@@ -2783,13 +3017,10 @@
             "slippage_cost": 717.67,
             "total": 940.15
           },
-          "reason": "pullback信号score=83,软件信息技术,BBI金叉12天+放量2.12x+缩量回调至半量以下,VR=8.1异常放量≥8加分",
-          "pnl": 0,
-          "pnl_pct": 0
+          "reason": "pullback信号score=83,软件信息技术,BBI金叉12天+放量2.12x+缩量回调至半量以下,VR=8.1异常放量≥8加分"
         },
         {
           "date": "2026-03-04",
-          "time": "",
           "code": "002259",
           "name": "升达林业",
           "direction": "sell",
@@ -2803,13 +3034,10 @@
             "slippage_cost": 1410.7,
             "total": 2553.37
           },
-          "reason": "止损: 现价5.53<=止损价5.55(成本5.60-5tick)",
-          "pnl": -17857.0,
-          "pnl_pct": -1.25
+          "reason": "止损: 现价5.53<=止损价5.55(成本5.60-5tick)"
         },
         {
           "date": "2026-03-04",
-          "time": "",
           "code": "603012",
           "name": "创力集团",
           "direction": "sell",
@@ -2823,13 +3051,10 @@
             "slippage_cost": 1396.47,
             "total": 2527.62
           },
-          "reason": "止损: 现价7.93<=止损价8.06(成本8.11-5tick)",
-          "pnl": -31698.0,
-          "pnl_pct": -2.22
+          "reason": "止损: 现价7.93<=止损价8.06(成本8.11-5tick)"
         },
         {
           "date": "2026-03-04",
-          "time": "",
           "code": "601298",
           "name": "青岛港",
           "direction": "sell",
@@ -2843,13 +3068,10 @@
             "slippage_cost": 1164.14,
             "total": 2107.1
           },
-          "reason": "止损: 现价9.21<=止损价9.21(成本9.26-5tick)",
-          "pnl": -6320.0,
-          "pnl_pct": -0.54
+          "reason": "止损: 现价9.21<=止损价9.21(成本9.26-5tick)"
         },
         {
           "date": "2026-03-04",
-          "time": "",
           "code": "603538",
           "name": "美诺华",
           "direction": "sell",
@@ -2863,13 +3085,10 @@
             "slippage_cost": 1108.38,
             "total": 2006.17
           },
-          "reason": "止损: 现价20.30<=止损价21.38(成本21.43-5tick)",
-          "pnl": -61698.0,
-          "pnl_pct": -5.27
+          "reason": "止损: 现价20.30<=止损价21.38(成本21.43-5tick)"
         },
         {
           "date": "2026-03-04",
-          "time": "",
           "code": "301004",
           "name": "嘉益股份",
           "direction": "sell",
@@ -2883,13 +3102,10 @@
             "slippage_cost": 1143.0,
             "total": 2068.83
           },
-          "reason": "止损: 现价57.15<=止损价58.37(成本58.42-5tick)",
-          "pnl": -25400.0,
-          "pnl_pct": -2.17
+          "reason": "止损: 现价57.15<=止损价58.37(成本58.42-5tick)"
         },
         {
           "date": "2026-03-04",
-          "time": "",
           "code": "600172",
           "name": "黄河旋风",
           "direction": "sell",
@@ -2903,13 +3119,10 @@
             "slippage_cost": 704.06,
             "total": 1274.36
           },
-          "reason": "止损: 现价9.12<=止损价9.31(成本9.36-5tick)",
-          "pnl": -18528.0,
-          "pnl_pct": -2.56
+          "reason": "止损: 现价9.12<=止损价9.31(成本9.36-5tick)"
         },
         {
           "date": "2026-03-04",
-          "time": "",
           "code": "002302",
           "name": "西部建设",
           "direction": "sell",
@@ -2923,13 +3136,10 @@
             "slippage_cost": 710.14,
             "total": 1285.36
           },
-          "reason": "止损: 现价6.29<=止损价6.35(成本6.40-5tick)",
-          "pnl": -12419.0,
-          "pnl_pct": -1.72
+          "reason": "止损: 现价6.29<=止损价6.35(成本6.40-5tick)"
         },
         {
           "date": "2026-03-04",
-          "time": "",
           "code": "600207",
           "name": "安彩高科",
           "direction": "sell",
@@ -2943,13 +3153,10 @@
             "slippage_cost": 704.34,
             "total": 1274.86
           },
-          "reason": "止损: 现价5.46<=止损价5.55(成本5.60-5tick)",
-          "pnl": -18060.0,
-          "pnl_pct": -2.5
+          "reason": "止损: 现价5.46<=止损价5.55(成本5.60-5tick)"
         },
         {
           "date": "2026-03-04",
-          "time": "",
           "code": "603232",
           "name": "格尔软件",
           "direction": "sell",
@@ -2963,13 +3170,10 @@
             "slippage_cost": 675.24,
             "total": 1222.19
           },
-          "reason": "止损: 现价24.03<=止损价25.49(成本25.54-5tick)",
-          "pnl": -42431.0,
-          "pnl_pct": -5.91
+          "reason": "止损: 现价24.03<=止损价25.49(成本25.54-5tick)"
         },
         {
           "date": "2026-03-04",
-          "time": "",
           "code": "002040",
           "name": "南京港",
           "direction": "sell",
@@ -2983,9 +3187,7 @@
             "slippage_cost": 319.95,
             "total": 579.11
           },
-          "reason": "止盈1: 现价11.85,盈利+9.52%>7%,卖出半仓27000股",
-          "pnl": 27810.0,
-          "pnl_pct": 9.52
+          "reason": "止盈1: 现价11.85,盈利+9.52%>7%,卖出半仓27000股"
         }
       ],
       "decisions": [
@@ -3100,14 +3302,14 @@
       "rebalances": [],
       "stats": {
         "total_trades": 37,
-        "win_rate": 10.53,
-        "max_drawdown_pct": 4.26,
-        "sharpe_ratio": -6.91,
-        "calmar_ratio": -15.43,
+        "win_rate": 0.0,
+        "max_drawdown_pct": 5.12,
+        "sharpe_ratio": -2.09,
+        "calmar_ratio": -2.86,
         "total_return_pct": -3.75,
-        "annualized_return_pct": -65.75,
-        "profit_loss_ratio": 2.24,
-        "total_fees": 60930.55,
+        "annualized_return_pct": -14.62,
+        "profit_loss_ratio": 0,
+        "total_fees": 60930.55000000001,
         "current_positions": 1,
         "turnover_rate": 0.0
       },
@@ -3128,14 +3330,64 @@
       "trades": [],
       "nav_history": {
         "dates": [
-          "2026-02-24",
-          "2026-02-25",
-          "2026-02-26",
-          "2026-02-27",
-          "2026-03-02",
-          "2026-03-03",
-          "2026-03-04",
-          "2026-03-05",
+          "02-24 15:00",
+          "02-25 15:00",
+          "02-26 10:56",
+          "02-26 11:00",
+          "02-26 11:30",
+          "02-26 12:00",
+          "02-26 12:30",
+          "02-26 13:00",
+          "02-26 13:38",
+          "02-26 14:00",
+          "02-26 14:30",
+          "02-26 15:00",
+          "02-27 09:15",
+          "02-27 09:30",
+          "02-27 10:00",
+          "02-27 11:00",
+          "02-27 11:30",
+          "02-27 12:00",
+          "02-27 13:00",
+          "02-27 14:00",
+          "02-27 14:30",
+          "02-27 15:00",
+          "02-27 16:04",
+          "03-02 09:20",
+          "03-02 09:31",
+          "03-02 10:00",
+          "03-02 10:30",
+          "03-02 11:00",
+          "03-02 12:00",
+          "03-02 12:32",
+          "03-02 13:03",
+          "03-02 13:35",
+          "03-02 14:00",
+          "03-02 14:33",
+          "03-03 10:00",
+          "03-03 10:30",
+          "03-03 11:00",
+          "03-03 11:31",
+          "03-03 12:00",
+          "03-03 12:33",
+          "03-03 13:33",
+          "03-03 14:00",
+          "03-03 14:30",
+          "03-04 09:32",
+          "03-04 12:35",
+          "03-04 14:00",
+          "03-04 14:30",
+          "03-05 12:41",
+          "03-05 13:00",
+          "03-05 13:41",
+          "03-06 09:30",
+          "03-06 10:00",
+          "03-06 11:00",
+          "03-06 11:30",
+          "03-06 12:30",
+          "03-06 13:40",
+          "03-06 14:42",
+          "03-06 15:05",
           "2026-03-06"
         ],
         "nav": [
@@ -3147,9 +3399,109 @@
           1.0,
           1.0,
           1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
+          1.0,
           1.0
         ],
         "cash_pct": [
+          100.0,
+          100.0,
+          100.0,
+          100.0,
+          100.0,
+          100.0,
+          100.0,
+          100.0,
+          100.0,
+          100.0,
+          100.0,
+          100.0,
+          100.0,
+          100.0,
+          100.0,
+          100.0,
+          100.0,
+          100.0,
+          100.0,
+          100.0,
+          100.0,
+          100.0,
+          100.0,
+          100.0,
+          100.0,
+          100.0,
+          100.0,
+          100.0,
+          100.0,
+          100.0,
+          100.0,
+          100.0,
+          100.0,
+          100.0,
+          100.0,
+          100.0,
+          100.0,
+          100.0,
+          100.0,
+          100.0,
+          100.0,
+          100.0,
+          100.0,
+          100.0,
+          100.0,
+          100.0,
+          100.0,
+          100.0,
+          100.0,
+          100.0,
           100.0,
           100.0,
           100.0,
@@ -3241,7 +3593,7 @@
         "win_rate": 0.0,
         "profit_loss_ratio": 0.0,
         "total_trades": 0,
-        "total_fees": 0,
+        "total_fees": 0.0,
         "current_positions": 0,
         "turnover_rate": 0.0
       },
@@ -3261,7 +3613,7 @@
       "trades": [],
       "nav_history": {
         "dates": [
-          "2026-03-06"
+          "03-06 15:00"
         ],
         "nav": [
           1.0
@@ -3275,13 +3627,13 @@
       "stats": {
         "total_return_pct": 0.0,
         "annualized_return_pct": 0.0,
-        "max_drawdown_pct": 0,
+        "max_drawdown_pct": 0.0,
         "sharpe_ratio": 0.0,
         "calmar_ratio": 0.0,
         "win_rate": 0,
         "profit_loss_ratio": 0.0,
         "total_trades": 0,
-        "total_fees": 0,
+        "total_fees": 0.0,
         "current_positions": 0,
         "turnover_rate": 0.0
       },
@@ -3290,25 +3642,121 @@
   },
   "benchmark": {
     "dates": [
-      "2026-02-24",
-      "2026-02-25",
-      "2026-02-26",
-      "2026-02-27",
-      "2026-03-02",
-      "2026-03-03",
-      "2026-03-04",
-      "2026-03-05",
+      "02-24 15:00",
+      "02-25 15:00",
+      "02-26 10:56",
+      "02-26 11:00",
+      "02-26 11:30",
+      "02-26 12:00",
+      "02-26 12:30",
+      "02-26 13:00",
+      "02-26 13:38",
+      "02-26 14:00",
+      "02-26 14:30",
+      "02-26 15:00",
+      "02-27 09:15",
+      "02-27 09:30",
+      "02-27 10:00",
+      "02-27 11:00",
+      "02-27 11:30",
+      "02-27 12:00",
+      "02-27 13:00",
+      "02-27 14:00",
+      "02-27 14:30",
+      "02-27 16:04",
+      "03-02 09:20",
+      "03-02 09:31",
+      "03-02 10:00",
+      "03-02 10:30",
+      "03-02 11:00",
+      "03-02 12:00",
+      "03-02 12:32",
+      "03-02 13:03",
+      "03-02 13:35",
+      "03-02 14:00",
+      "03-02 14:33",
+      "03-03 10:00",
+      "03-03 10:30",
+      "03-03 11:00",
+      "03-03 11:31",
+      "03-03 12:00",
+      "03-03 12:33",
+      "03-03 13:33",
+      "03-03 14:00",
+      "03-03 14:30",
+      "03-04 09:32",
+      "03-04 12:35",
+      "03-04 14:00",
+      "03-04 14:30",
+      "03-05 12:41",
+      "03-05 13:00",
+      "03-05 13:41",
+      "03-06 09:30",
+      "03-06 10:00",
+      "03-06 11:00",
+      "03-06 11:30",
+      "03-06 12:30",
+      "03-06 13:40",
+      "03-06 14:42",
       "2026-03-06"
     ],
     "nav": [
       1.0,
       1.006022,
+      1.002403,
+      1.002368,
+      1.004318,
+      1.004285,
+      1.004285,
+      1.004427,
+      1.003658,
+      1.003265,
+      1.002636,
       1.004107,
+      1.004107,
+      0.998126,
+      1.000835,
+      0.998311,
+      0.996943,
+      0.996952,
+      0.997117,
+      1.000145,
+      1.000056,
       1.00066,
+      1.00066,
+      0.995654,
+      1.000304,
+      0.993874,
+      0.99792,
+      0.999694,
+      0.999694,
+      1.00222,
+      1.004982,
+      1.004083,
       1.005121,
+      0.997589,
+      0.996363,
+      1.004361,
+      1.003186,
+      1.003186,
+      1.003186,
+      1.000818,
+      0.994838,
       0.993542,
+      0.979053,
+      0.973133,
+      0.976174,
       0.976319,
+      0.990498,
+      0.990522,
       0.990228,
+      0.981844,
+      0.982173,
+      0.987029,
+      0.989198,
+      0.989224,
+      0.992389,
+      0.989256,
       0.989994
     ],
     "start_value": 4707.54
@@ -3320,8 +3768,8 @@
         "name": "因子猎人",
         "emoji": "🔢",
         "total_return_pct": 3.2,
-        "sharpe_ratio": 2.36,
-        "max_drawdown_pct": 4.49,
+        "sharpe_ratio": 0.64,
+        "max_drawdown_pct": 5.02,
         "current_nav": 1.032019,
         "total_trades": 58,
         "rank": 1
@@ -3354,7 +3802,7 @@
         "emoji": "📰",
         "total_return_pct": 0.0,
         "sharpe_ratio": 0.0,
-        "max_drawdown_pct": 0,
+        "max_drawdown_pct": 0.0,
         "current_nav": 1.0,
         "total_trades": 0,
         "rank": 4
@@ -3364,8 +3812,8 @@
         "name": "技术猎手",
         "emoji": "📊",
         "total_return_pct": -3.59,
-        "sharpe_ratio": -2.84,
-        "max_drawdown_pct": 7.13,
+        "sharpe_ratio": -0.9,
+        "max_drawdown_pct": 7.71,
         "current_nav": 0.964127,
         "total_trades": 2,
         "rank": 5
@@ -3375,14 +3823,14 @@
         "name": "趋势游侠",
         "emoji": "🏄",
         "total_return_pct": -3.75,
-        "sharpe_ratio": -6.91,
-        "max_drawdown_pct": 4.26,
+        "sharpe_ratio": -2.09,
+        "max_drawdown_pct": 5.12,
         "current_nav": 0.96246,
         "total_trades": 37,
         "rank": 6
       }
     ],
-    "updated_at": "2026-03-07 11:04:52",
+    "updated_at": "2026-03-06 15:18:00",
     "benchmark_nav": 0.989994
   },
   "quant": {
