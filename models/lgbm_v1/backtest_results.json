@@ -1,0 +1,182 @@
+{
+  "ic_mean": 0.05279282350491715,
+  "ic_std": 0.08393529481067125,
+  "ic_ir": 0.628970489994696,
+  "ic_t": 10.78459734628722,
+  "ic_positive_rate": 0.7414965986394558,
+  "top_n": 25,
+  "hold_days": 5,
+  "n_rebalance": 59,
+  "period_mean_excess": 0.010636851659926713,
+  "total_excess_return": 0.7797685659469078,
+  "annual_excess_return": 0.6363261266215448,
+  "annual_excess_return_adj": 0.48512612662154475,
+  "sharpe": 1.815480987433757,
+  "max_drawdown": -0.1764025743719158,
+  "ls_sharpe": 3.1594180055525802,
+  "g5_sharpe": 4.312496598169475,
+  "group_returns_per_period": {
+    "G1(低)": -0.002388595393192954,
+    "G2": 0.00036146463371060275,
+    "G3": 0.0016045157975046048,
+    "G4": 0.003442030297257657,
+    "G5(高)": 0.004977214834892878
+  },
+  "group_returns_daily": {
+    "G1(低)": -0.00047771907863859085,
+    "G2": 7.229292674212055e-05,
+    "G3": 0.000320903159500921,
+    "G4": 0.0006884060594515314,
+    "G5(高)": 0.0009954429669785756
+  },
+  "fold_metrics": [
+    {
+      "fold": 1,
+      "train_start": "2022-10-10",
+      "train_end": "2024-11-05",
+      "test_start": "2024-11-06",
+      "test_end": "2025-02-11",
+      "train_size": 481469,
+      "test_size": 62125,
+      "ic": 0.04256540073958737,
+      "best_iter": 367
+    },
+    {
+      "fold": 2,
+      "train_start": "2022-11-08",
+      "train_end": "2024-12-04",
+      "test_start": "2024-12-05",
+      "test_end": "2025-03-12",
+      "train_size": 482916,
+      "test_size": 62262,
+      "ic": 0.05283329808143091,
+      "best_iter": 209
+    },
+    {
+      "fold": 3,
+      "train_start": "2022-12-07",
+      "train_end": "2025-01-03",
+      "test_start": "2025-01-06",
+      "test_end": "2025-04-11",
+      "train_size": 484307,
+      "test_size": 62376,
+      "ic": 0.06950009934252491,
+      "best_iter": 267
+    },
+    {
+      "fold": 4,
+      "train_start": "2023-01-06",
+      "train_end": "2025-02-11",
+      "test_start": "2025-02-12",
+      "test_end": "2025-05-15",
+      "train_size": 485680,
+      "test_size": 62508,
+      "ic": 0.07723944373834728,
+      "best_iter": 299
+    },
+    {
+      "fold": 5,
+      "train_start": "2023-02-13",
+      "train_end": "2025-03-12",
+      "test_start": "2025-03-13",
+      "test_end": "2025-06-16",
+      "train_size": 486997,
+      "test_size": 62623,
+      "ic": 0.077820103127661,
+      "best_iter": 261
+    },
+    {
+      "fold": 6,
+      "train_start": "2023-03-14",
+      "train_end": "2025-04-11",
+      "test_start": "2025-04-14",
+      "test_end": "2025-07-15",
+      "train_size": 488284,
+      "test_size": 62750,
+      "ic": 0.07269105023431231,
+      "best_iter": 262
+    },
+    {
+      "fold": 7,
+      "train_start": "2023-04-13",
+      "train_end": "2025-05-15",
+      "test_start": "2025-05-16",
+      "test_end": "2025-08-13",
+      "train_size": 489555,
+      "test_size": 62811,
+      "ic": 0.01665361828016044,
+      "best_iter": 329
+    },
+    {
+      "fold": 8,
+      "train_start": "2023-05-17",
+      "train_end": "2025-06-16",
+      "test_start": "2025-06-17",
+      "test_end": "2025-09-11",
+      "train_size": 490729,
+      "test_size": 62865,
+      "ic": 0.011144202544818254,
+      "best_iter": 329
+    },
+    {
+      "fold": 9,
+      "train_start": "2023-06-15",
+      "train_end": "2025-07-15",
+      "test_start": "2025-07-16",
+      "test_end": "2025-10-20",
+      "train_size": 491862,
+      "test_size": 62880,
+      "ic": 0.01590797576481053,
+      "best_iter": 411
+    },
+    {
+      "fold": 10,
+      "train_start": "2023-07-18",
+      "train_end": "2025-08-13",
+      "test_start": "2025-08-14",
+      "test_end": "2025-11-18",
+      "train_size": 492884,
+      "test_size": 62874,
+      "ic": 0.00602991971064028,
+      "best_iter": 403
+    },
+    {
+      "fold": 11,
+      "train_start": "2023-08-16",
+      "train_end": "2025-09-11",
+      "test_start": "2025-09-12",
+      "test_end": "2025-12-17",
+      "train_size": 493818,
+      "test_size": 62864,
+      "ic": 0.030867708424772412,
+      "best_iter": 183
+    },
+    {
+      "fold": 12,
+      "train_start": "2023-09-14",
+      "train_end": "2025-10-20",
+      "test_start": "2025-10-21",
+      "test_end": "2026-01-19",
+      "train_size": 494621,
+      "test_size": 62852,
+      "ic": 0.09029433292481058,
+      "best_iter": 264
+    }
+  ],
+  "model_params": {
+    "objective": "regression",
+    "metric": "mse",
+    "boosting_type": "gbdt",
+    "verbose": -1,
+    "n_jobs": -1,
+    "seed": 42,
+    "num_leaves": 26,
+    "learning_rate": 0.020149032822885594,
+    "feature_fraction": 0.6712087529022808,
+    "bagging_fraction": 0.9480932573410354,
+    "bagging_freq": 7,
+    "min_child_samples": 29,
+    "reg_alpha": 0.019874628784002295,
+    "reg_lambda": 0.008583715858992928
+  }
+}
