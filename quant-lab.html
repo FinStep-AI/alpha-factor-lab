@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>因子猎人研究库 · Alpha Factor Lab</title>
+<style>
+  :root {
+    --bg: #0f1117; --card: #1a1d29; --border: #2a2d3a;
+    --text: #e4e6eb; --text2: #8b8fa3; --accent: #4f8cff;
+    --green: #22c55e; --red: #ef4444; --orange: #f59e0b; --purple: #a855f7;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; min-height: 100vh; display: flex; flex-direction: column; }
+
+  .topnav {
+    display: flex; justify-content: center; gap: 24px;
+    padding: 14px 20px;
+    background: rgba(26,29,41,0.95);
+    border-bottom: 1px solid var(--border);
+    position: sticky; top: 0; z-index: 100;
+    backdrop-filter: blur(8px);
+  }
+  .topnav a {
+    color: var(--text2); text-decoration: none; font-size: 0.85rem;
+    font-weight: 500; transition: color 0.2s;
+  }
+  .topnav a:hover { color: var(--text); }
+  .topnav a.active { color: var(--accent); pointer-events: none; }
+
+  .hero {
+    text-align: center; padding: 70px 20px 40px; position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+    background: radial-gradient(ellipse at center, rgba(79,140,255,0.08) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .hero h1 {
+    font-size: 2.6rem; font-weight: 800;
+    background: linear-gradient(135deg, var(--accent), var(--purple));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    margin-bottom: 12px; position: relative;
+  }
+  .hero .subtitle { color: var(--text2); font-size: 1.05rem; max-width: 640px; margin: 0 auto; position: relative; }
+
+  .container { max-width: 960px; margin: 0 auto; padding: 0 20px 80px; flex: 1; }
+
+  .section-desc { color: var(--text2); font-size: 0.9rem; margin: 20px 0 28px; line-height: 1.7; text-align: center; max-width: 700px; margin-left: auto; margin-right: auto; }
+
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+
+  .card {
+    background: var(--card); border: 1px solid var(--border); border-radius: 16px;
+    padding: 32px 28px; text-decoration: none; color: var(--text);
+    transition: all 0.25s ease; position: relative; overflow: hidden;
+  }
+  .card:hover {
+    border-color: var(--accent); transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(79,140,255,0.12);
+  }
+  .card::after {
+    content: '→'; position: absolute; top: 32px; right: 28px;
+    font-size: 1.4rem; color: var(--text2); transition: all 0.25s;
+  }
+  .card:hover::after { color: var(--accent); transform: translateX(4px); }
+
+  .card-icon { font-size: 2.4rem; margin-bottom: 16px; display: block; }
+  .card h3 { font-size: 1.3rem; font-weight: 700; margin-bottom: 10px; }
+  .card p { color: var(--text2); font-size: 0.9rem; line-height: 1.65; }
+
+  .card-tag {
+    display: inline-block; margin-top: 16px; padding: 4px 12px;
+    border-radius: 20px; font-size: 0.75rem; font-weight: 600;
+  }
+  .tag-green  { background: rgba(34,197,94,0.12); color: var(--green); }
+  .tag-blue   { background: rgba(79,140,255,0.12); color: var(--accent); }
+
+  .footer {
+    text-align: center; padding: 24px; color: var(--text2);
+    font-size: 0.8rem; border-top: 1px solid var(--border);
+  }
+  .footer a { color: var(--accent); text-decoration: none; }
+  .footer a:hover { text-decoration: underline; }
+
+  @media (max-width: 640px) {
+    .hero h1 { font-size: 2rem; }
+    .hero { padding: 50px 16px 32px; }
+    .cards { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topnav">
+  <a href="index.html">首页</a>
+  <a href="paper-trading.html">竞赛</a>
+  <a class="active" href="quant-lab.html">因子猎人</a>
+  <a href="research.html">投研报告</a>
+</div>
+
+<div class="hero">
+  <h1>🔢 因子猎人研究库</h1>
+  <p class="subtitle">LightGBM 机器学习选股 · 99维特征 · 中证1000 · 周度调仓</p>
+</div>
+
+<div class="container">
+  <p class="section-desc">
+    因子猎人的完整研究链路：挖因子 → 回测验证 → 入库 → ML 建模 → 策略回测 → 风格暴露监控。<br>
+    每天自动扫描研报与论文、复现因子、更新模型，所有中间结果可检查可追溯。
+  </p>
+
+  <div class="cards">
+    <a class="card" href="strategy-backtest.html">
+      <span class="card-icon">🧪</span>
+      <h3>策略回测</h3>
+      <p>LightGBM 选股模型 Walk-Forward 回测。累计超额曲线、分组收益、IC 序列、特征重要性 TOP20、新旧模型 PK。</p>
+      <span class="card-tag tag-green">ML Strategy</span>
+    </a>
+    <a class="card" href="factor-backtest.html">
+      <span class="card-icon">🔬</span>
+      <h3>因子回测</h3>
+      <p>单因子回测评估：IC 序列、分层收益、因子衰减分析。<br>从 Alpha Idea 到量化验证的完整链路。</p>
+      <span class="card-tag tag-blue">Factor Backtest</span>
+    </a>
+    <a class="card" href="factor-research.html">
+      <span class="card-icon">📝</span>
+      <h3>因子复现日志</h3>
+      <p>研报 & 论文因子的复现记录。原始指标 vs 本土化结果，完整对比可查可验证。</p>
+      <span class="card-tag tag-blue">Research Log</span>
+    </a>
+    <a class="card" href="style-exposure.html">
+      <span class="card-icon">📊</span>
+      <h3>风格暴露分析</h3>
+      <p>Barra 风格暴露雷达图、行业分布、因子相关性热力图。组合风险一目了然。</p>
+      <span class="card-tag tag-blue">Style Analytics</span>
+    </a>
+  </div>
+</div>
+
+<div class="footer">
+  Alpha Factor Lab · <a href="https://github.com/FinStep-AI/alpha-factor-lab" target="_blank">FinStep-AI</a>
+</div>
+
+</body>
+</html>

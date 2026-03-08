@@ -173,14 +173,24 @@
     .kpi-grid { grid-template-columns: repeat(2, 1fr); }
     .feat-bar .feat-name { width: 120px; font-size: 0.72rem; }
   }
+  .topnav { display:flex; justify-content:center; gap:24px; padding:14px 20px; background:rgba(26,29,41,0.95); border-bottom:1px solid var(--border); position:sticky; top:0; z-index:100; backdrop-filter:blur(8px); }
+  .topnav a { color:var(--text2); text-decoration:none; font-size:0.85rem; font-weight:500; transition:color 0.2s; }
+  .topnav a:hover { color:var(--text); }
+  .topnav a.active { color:var(--accent); pointer-events:none; }
 </style>
 </head>
 <body>
 
+<div class="topnav">
+  <a href="index.html">首页</a>
+  <a href="paper-trading.html">竞赛</a>
+  <a href="quant-lab.html">因子猎人</a>
+  <a href="research.html">投研报告</a>
+</div>
+
 <div class="header">
   <h1>🧪 策略回测</h1>
   <p class="subtitle">ML/DL 选股策略的 Walk-Forward 回测结果</p>
-  <a class="back-link" href="index.html">← 返回首页</a>
 </div>
 
 <div class="container">

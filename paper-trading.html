@@ -126,22 +126,25 @@ tr:last-child td { border-bottom:none; }
   .header h1 { font-size:1.4rem; }
   .chart-box { height:280px; }
 }
+  .topnav { display:flex; justify-content:center; gap:24px; padding:14px 20px; background:rgba(26,29,41,0.95); border-bottom:1px solid var(--border); position:sticky; top:0; z-index:100; backdrop-filter:blur(8px); }
+  .topnav a { color:var(--text2); text-decoration:none; font-size:0.85rem; font-weight:500; transition:color 0.2s; }
+  .topnav a:hover { color:var(--text); }
+  .topnav a.active { color:var(--accent,#4f8cff); pointer-events:none; }
 </style>
 </head>
 <body>
+<div class="topnav">
+  <a href="index.html">首页</a>
+  <a class="active" href="paper-trading.html">竞赛</a>
+  <a href="quant-lab.html">因子猎人</a>
+  <a href="research.html">投研报告</a>
+</div>
 <div class="container">
 
 <!-- Header -->
 <div class="header">
   <h1>🏆 AI投资竞赛 · 五大流派对决</h1>
   <div class="subtitle" id="metaInfo"></div>
-  <div class="nav-links">
-    <a href="index.html">← 首页</a>
-    <a href="factor-backtest.html">因子回测</a>
-    <a href="paper-trading.html" class="active">模拟竞赛</a>
-    <a href="fundamental.html">基本面分析</a>
-    <a href="technical.html">技术分析</a>
-  </div>
 </div>
 
 <!-- Competition Intro -->

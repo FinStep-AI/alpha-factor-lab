@@ -12,7 +12,22 @@
   }
   * { margin:0; padding:0; box-sizing:border-box; }
   body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; min-height: 100vh; display: flex; flex-direction: column; }
-  
+
+  .topnav {
+    display: flex; justify-content: center; gap: 24px;
+    padding: 14px 20px;
+    background: rgba(26,29,41,0.95);
+    border-bottom: 1px solid var(--border);
+    position: sticky; top: 0; z-index: 100;
+    backdrop-filter: blur(8px);
+  }
+  .topnav a {
+    color: var(--text2); text-decoration: none; font-size: 0.85rem;
+    font-weight: 500; transition: color 0.2s;
+  }
+  .topnav a:hover { color: var(--text); }
+  .topnav a.active { color: var(--accent); pointer-events: none; }
+
   .hero {
     text-align: center;
     padding: 80px 20px 48px;
@@ -39,35 +54,11 @@
 
   .container { max-width: 960px; margin: 0 auto; padding: 0 20px 80px; flex: 1; }
 
-  /* Section headers */
-  .section-header {
-    display: flex; align-items: center; gap: 12px;
-    margin: 40px 0 8px; position: relative;
-  }
-  .section-header h2 {
-    font-size: 1.25rem; font-weight: 700; white-space: nowrap;
-  }
-  .section-header .line {
-    flex: 1; height: 1px; background: var(--border);
-  }
-  .section-header .badge {
-    font-size: 0.72rem; font-weight: 600;
-    padding: 3px 10px; border-radius: 20px; white-space: nowrap;
-  }
-  .badge-live { background: rgba(34,197,94,0.15); color: var(--green); }
-  .badge-lib  { background: rgba(79,140,255,0.12); color: var(--accent); }
-
-  .section-desc {
-    color: var(--text2); font-size: 0.88rem; margin-bottom: 20px; line-height: 1.7;
-  }
-
-  /* Cards grid */
-  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
-  .cards.single { grid-template-columns: 1fr; max-width: 560px; }
+  .cards { display: grid; grid-template-columns: 1fr; gap: 28px; margin-top: 40px; }
 
   .card {
     background: var(--card); border: 1px solid var(--border); border-radius: 16px;
-    padding: 32px 28px; text-decoration: none; color: var(--text);
+    padding: 36px 32px; text-decoration: none; color: var(--text);
     transition: all 0.25s ease; position: relative; overflow: hidden;
   }
   .card:hover {
@@ -75,45 +66,37 @@
     box-shadow: 0 12px 40px rgba(79,140,255,0.12);
   }
   .card::after {
-    content: '→'; position: absolute; top: 32px; right: 28px;
-    font-size: 1.4rem; color: var(--text2); transition: all 0.25s;
+    content: '→'; position: absolute; top: 36px; right: 32px;
+    font-size: 1.6rem; color: var(--text2); transition: all 0.25s;
   }
   .card:hover::after { color: var(--accent); transform: translateX(4px); }
 
-  .card-icon { font-size: 2.4rem; margin-bottom: 16px; display: block; }
-  .card h3 { font-size: 1.3rem; font-weight: 700; margin-bottom: 10px; }
-  .card p { color: var(--text2); font-size: 0.9rem; line-height: 1.65; }
+  .card-icon { font-size: 2.6rem; margin-bottom: 16px; display: block; }
+  .card h3 { font-size: 1.4rem; font-weight: 700; margin-bottom: 10px; }
+  .card p { color: var(--text2); font-size: 0.92rem; line-height: 1.7; }
+  .card .card-meta { margin-top: 16px; display: flex; gap: 12px; flex-wrap: wrap; }
 
   .card-tag {
-    display: inline-block; margin-top: 16px; padding: 4px 12px;
+    display: inline-block; padding: 4px 12px;
     border-radius: 20px; font-size: 0.75rem; font-weight: 600;
   }
-  .tag-blue   { background: rgba(79,140,255,0.12); color: var(--accent); }
   .tag-green  { background: rgba(34,197,94,0.12); color: var(--green); }
+  .tag-blue   { background: rgba(79,140,255,0.12); color: var(--accent); }
   .tag-purple { background: rgba(168,85,247,0.12); color: var(--purple); }
   .tag-orange { background: rgba(245,158,11,0.12); color: var(--orange); }
 
-  /* Competition card special styling */
-  .card.card-competition {
+  .card-competition {
     border-image: linear-gradient(135deg, var(--accent), var(--purple), var(--orange)) 1;
     border-width: 2px;
   }
-  .card.card-competition:hover {
-    box-shadow: 0 12px 40px rgba(168,85,247,0.15);
-  }
+  .card-competition:hover { box-shadow: 0 12px 40px rgba(168,85,247,0.15); }
 
-  /* Status indicator */
   .status-dot {
     display: inline-block; width: 8px; height: 8px; border-radius: 50%;
     margin-right: 6px; position: relative; top: -1px;
   }
   .status-dot.live { background: var(--green); animation: pulse 2s infinite; }
-  .status-dot.archive { background: var(--text2); }
-
-  @keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.4; }
-  }
+  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
 
   .footer {
     text-align: center; padding: 24px; color: var(--text2);
@@ -125,11 +108,17 @@
   @media (max-width: 640px) {
     .hero h1 { font-size: 2rem; }
     .hero { padding: 50px 16px 32px; }
-    .cards { grid-template-columns: 1fr; }
   }
 </style>
 </head>
 <body>
+
+<div class="topnav">
+  <a class="active" href="index.html">首页</a>
+  <a href="paper-trading.html">竞赛</a>
+  <a href="quant-lab.html">因子猎人</a>
+  <a href="research.html">投研报告</a>
+</div>
 
 <div class="hero">
   <h1>📈 Alpha Factor Lab</h1>
@@ -137,18 +126,8 @@
 </div>
 
 <div class="container">
+  <div class="cards">
 
-  <!-- ========== Section 1: Live Competition ========== -->
-  <div class="section-header">
-    <h2>🏆 实时竞赛</h2>
-    <span class="badge badge-live"><span class="status-dot live"></span>进行中</span>
-    <span class="line"></span>
-  </div>
-  <p class="section-desc">
-    五位 AI Agent 各怀绝技、同台竞技。每位选手拥有 1000 万虚拟资金，独立做出投资决策，
-    收盘后自动结算净值。这不是回测——是 AI 的实时对决。
-  </p>
-  <div class="cards single">
     <a class="card card-competition" href="paper-trading.html">
       <span class="card-icon">🏆</span>
       <h3>AI 投资竞赛 · 五大流派对决</h3>
@@ -158,79 +137,43 @@
         🏛️ 巴菲特门徒（价值投资）<br>
         🏄 趋势游侠（趋势跟踪）&nbsp;&nbsp;
         ⚡ 情绪战神（龙头打板）<br><br>
-        实时净值曲线、持仓明细、交易记录、AI 决策日志全公开。
+        五位 AI 各拥 1000 万虚拟资金，独立决策，收盘自动结算。实时净值曲线、持仓明细、AI 决策日志全公开。
       </p>
-      <span class="card-tag tag-green"><span class="status-dot live"></span>Live Tracking</span>
+      <div class="card-meta">
+        <span class="card-tag tag-green"><span class="status-dot live"></span>Live Tracking</span>
+      </div>
     </a>
-  </div>
 
-  <!-- ========== Section 2: Factor Hunter Research ========== -->
-  <div class="section-header">
-    <h2>🔢 因子猎人研究库</h2>
-    <span class="badge badge-live"><span class="status-dot live"></span>LightGBM v1</span>
-    <span class="line"></span>
-  </div>
-  <p class="section-desc">
-    因子猎人的完整研究链路：挖因子 → 回测验证 → 入库 → ML 建模 → 策略回测 → 风格暴露监控。
-    每天自动扫描研报/论文、复现因子、更新模型，所有中间结果可检查可追溯。
-  </p>
-  <div class="cards">
-    <a class="card" href="strategy-backtest.html">
-      <span class="card-icon">🧪</span>
-      <h3>策略回测</h3>
-      <p>LightGBM 选股模型 Walk-Forward 回测。累计超额曲线、分组收益、IC 序列、特征重要性 TOP20、新旧模型 PK。</p>
-      <span class="card-tag tag-green">ML Strategy</span>
+    <a class="card" href="quant-lab.html">
+      <span class="card-icon">🔢</span>
+      <h3>因子猎人研究库</h3>
+      <p>
+        LightGBM 机器学习选股模型的完整研究链路。每天自动扫描研报与论文，复现因子、回测验证、入库，
+        ML 建模选股，风格暴露监控。所有中间结果可检查可追溯。
+      </p>
+      <div class="card-meta">
+        <span class="card-tag tag-blue">策略回测</span>
+        <span class="card-tag tag-blue">因子回测</span>
+        <span class="card-tag tag-blue">复现日志</span>
+        <span class="card-tag tag-blue">风格暴露</span>
+      </div>
     </a>
-    <a class="card" href="factor-backtest.html">
-      <span class="card-icon">🔬</span>
-      <h3>因子回测</h3>
-      <p>单因子回测评估：IC 序列、分层收益、因子衰减分析。<br>从 Alpha Idea 到量化验证的完整链路。</p>
-      <span class="card-tag tag-blue">Factor Backtest</span>
-    </a>
-    <a class="card" href="factor-research.html">
-      <span class="card-icon">📝</span>
-      <h3>因子复现日志</h3>
-      <p>研报 & 论文因子的复现记录。原始指标 vs 本土化结果，完整对比可查可验证。</p>
-      <span class="card-tag tag-blue">Research Log</span>
-    </a>
-    <a class="card" href="style-exposure.html">
-      <span class="card-icon">📊</span>
-      <h3>风格暴露分析</h3>
-      <p>Barra 风格暴露雷达图、行业分布、因子相关性热力图。组合风险一目了然。</p>
-      <span class="card-tag tag-blue">Style Analytics</span>
-    </a>
-  </div>
 
-  <!-- ========== Section 3: General Research ========== -->
-  <div class="section-header">
-    <h2>📚 投研报告</h2>
-    <span class="badge badge-lib">持续更新</span>
-    <span class="line"></span>
-  </div>
-  <p class="section-desc">
-    AI Agent 自动生成的个股投研报告。涵盖基本面深度分析、技术形态研判、市场舆情共识，全链路自动化。
-  </p>
-  <div class="cards">
-    <a class="card" href="fundamental.html">
-      <span class="card-icon">🏰</span>
-      <h3>基本面分析</h3>
-      <p>巴菲特视角深度分析：护城河、盈利质量、财务健康、估值合理性四维评估。</p>
-      <span class="card-tag tag-purple">Value Investing</span>
+    <a class="card" href="research.html">
+      <span class="card-icon">📚</span>
+      <h3>投研报告</h3>
+      <p>
+        AI Agent 自动生成的个股投研报告。从数据采集、指标计算到结论输出，全链路自动化。
+        涵盖巴菲特视角基本面深度分析、多指标技术研判、市场情绪共识，支持 A 股、港股、美股。
+      </p>
+      <div class="card-meta">
+        <span class="card-tag tag-purple">基本面分析</span>
+        <span class="card-tag tag-orange">技术分析</span>
+        <span class="card-tag tag-purple">舆情分析</span>
+      </div>
     </a>
-    <a class="card" href="technical.html">
-      <span class="card-icon">📈</span>
-      <h3>技术分析</h3>
-      <p>K线形态、均线系统、MACD / KDJ / RSI / BOLL 多指标信号，自动识别买卖点。</p>
-      <span class="card-tag tag-orange">Technical Analysis</span>
-    </a>
-    <a class="card" href="sentiment.html">
-      <span class="card-icon">🗣️</span>
-      <h3>舆情分析</h3>
-      <p>机构研报评级、新闻情绪、多空共识。大V怎么看、券商怎么评，一图读懂市场共识。</p>
-      <span class="card-tag tag-purple">Sentiment</span>
-    </a>
-  </div>
 
+  </div>
 </div>
 
 <div class="footer">
