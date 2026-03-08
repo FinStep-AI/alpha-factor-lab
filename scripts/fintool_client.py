@@ -280,12 +280,20 @@ def get_st_stocks() -> List[Dict]:
         resp = _call("company_info", "get_security_change", {
             "page": page, "page_size": 100
         })
-        data = resp.get("data", [])
-        items = data if isinstance(data, list) else data.get("list", [])
+        # API返回格式: {"code":0,"data":{"items":[...],"total":N,"page":1,"total_pages":2}}
+        data = resp.get("data", resp)
+        if isinstance(data, dict):
+            items = data.get("items", data.get("list", []))
+            total_pages = data.get("total_pages", 1)
+        elif isinstance(data, list):
+            items = data
+            total_pages = 1
+        else:
+            break
         if not items:
             break
         all_st.extend(items)
-        if len(items) < 100:
+        if page >= total_pages or len(items) < 100:
             break
         page += 1
     return all_st
