@@ -7,6 +7,8 @@
     "f_turnover_decay_v1",
     "f_close_location_v1",
     "f_close_vwap_dev_v1",
+    "f_tail_risk_cvar_v1",
+    "f_pv_corr_v1",
     "ret_1d",
     "turnover",
     "amplitude",
@@ -79,6 +81,16 @@
     "f_close_vwap_dev_v1_chg5",
     "f_close_vwap_dev_v1_lag20",
     "f_close_vwap_dev_v1_chg20",
+    "f_tail_risk_cvar_v1_rank",
+    "f_tail_risk_cvar_v1_lag5",
+    "f_tail_risk_cvar_v1_chg5",
+    "f_tail_risk_cvar_v1_lag20",
+    "f_tail_risk_cvar_v1_chg20",
+    "f_pv_corr_v1_rank",
+    "f_pv_corr_v1_lag5",
+    "f_pv_corr_v1_chg5",
+    "f_pv_corr_v1_lag20",
+    "f_pv_corr_v1_chg20",
     "inter_f_amihud_illiq_v2xf_shadow_pressure_v1_prod",
     "inter_f_amihud_illiq_v2xf_shadow_pressure_v1_diff",
     "inter_f_amihud_illiq_v2xf_overnight_momentum_v1_prod",
@@ -105,11 +117,11 @@
     "label_10d",
     "label_20d"
   ],
-  "n_features": 99,
-  "n_samples": 787654,
+  "n_features": 111,
+  "n_samples": 787643,
   "date_range": [
-    "2022-10-10",
-    "2026-02-06"
+    "2022-10-21",
+    "2026-02-27"
   ],
-  "built_at": "2026-03-08T13:22:12.323453"
+  "built_at": "2026-03-09T09:21:05.961876"
 }

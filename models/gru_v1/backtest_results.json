@@ -1,0 +1,158 @@
+{
+  "ic_mean": 0.05129039347468771,
+  "ic_std": 0.09731977324242541,
+  "ic_ir": 0.5270295209887343,
+  "ic_t": 9.036673840640855,
+  "ic_positive_rate": 0.7210884353741497,
+  "top_n": 25,
+  "hold_days": 5,
+  "n_rebalance": 59,
+  "period_mean_excess": 0.006050902884453535,
+  "total_excess_return": 0.41414082050323486,
+  "annual_excess_return": 0.3444864749908447,
+  "annual_excess_return_adj": 0.1932864785194397,
+  "sharpe": 2.3643807592890163,
+  "max_drawdown": -0.1083202138543129,
+  "ls_sharpe": 2.2805101151910256,
+  "g5_sharpe": 2.591158594077148,
+  "group_returns_per_period": {
+    "G1(低)": -0.000518745044246316,
+    "G2": 0.0008393951575271785,
+    "G3": 0.002152680652216077,
+    "G4": 0.0024344169069081545,
+    "G5(高)": 0.0033290006686002016
+  },
+  "fold_metrics": [
+    {
+      "fold": 1,
+      "train_start": "2022-10-10",
+      "train_end": "2024-11-05",
+      "test_start": "2024-11-06",
+      "test_end": "2025-02-11",
+      "train_size": 369469,
+      "test_size": 61944,
+      "ic": 0.08481097153241704
+    },
+    {
+      "fold": 2,
+      "train_start": "2022-11-08",
+      "train_end": "2024-12-04",
+      "test_start": "2024-12-05",
+      "test_end": "2025-03-12",
+      "train_size": 385220,
+      "test_size": 62117,
+      "ic": 0.059808914694989314
+    },
+    {
+      "fold": 3,
+      "train_start": "2022-12-07",
+      "train_end": "2025-01-03",
+      "test_start": "2025-01-06",
+      "test_end": "2025-04-11",
+      "train_size": 386371,
+      "test_size": 62257,
+      "ic": 0.051276923725248745
+    },
+    {
+      "fold": 4,
+      "train_start": "2023-01-06",
+      "train_end": "2025-02-11",
+      "test_start": "2025-02-12",
+      "test_end": "2025-05-15",
+      "train_size": 387492,
+      "test_size": 62409,
+      "ic": 0.11181803826781035
+    },
+    {
+      "fold": 5,
+      "train_start": "2023-02-13",
+      "train_end": "2025-03-12",
+      "test_start": "2025-03-13",
+      "test_end": "2025-06-16",
+      "train_size": 388573,
+      "test_size": 62525,
+      "ic": 0.10042144328555129
+    },
+    {
+      "fold": 6,
+      "train_start": "2023-03-14",
+      "train_end": "2025-04-11",
+      "test_start": "2025-04-14",
+      "test_end": "2025-07-15",
+      "train_size": 389624,
+      "test_size": 62660,
+      "ic": 0.07786146300786737
+    },
+    {
+      "fold": 7,
+      "train_start": "2023-04-13",
+      "train_end": "2025-05-15",
+      "test_start": "2025-05-16",
+      "test_end": "2025-08-13",
+      "train_size": 390673,
+      "test_size": 62748,
+      "ic": 0.02137592103747235
+    },
+    {
+      "fold": 8,
+      "train_start": "2023-05-17",
+      "train_end": "2025-06-16",
+      "test_start": "2025-06-17",
+      "test_end": "2025-09-11",
+      "train_size": 391688,
+      "test_size": 62825,
+      "ic": 0.003828564134324033
+    },
+    {
+      "fold": 9,
+      "train_start": "2023-06-15",
+      "train_end": "2025-07-15",
+      "test_start": "2025-07-16",
+      "test_end": "2025-10-20",
+      "train_size": 392635,
+      "test_size": 62858,
+      "ic": -0.00376578061017143
+    },
+    {
+      "fold": 10,
+      "train_start": "2023-07-18",
+      "train_end": "2025-08-13",
+      "test_start": "2025-08-14",
+      "test_end": "2025-11-18",
+      "train_size": 393527,
+      "test_size": 62870,
+      "ic": 0.008029798425456957
+    },
+    {
+      "fold": 11,
+      "train_start": "2023-08-16",
+      "train_end": "2025-09-11",
+      "test_start": "2025-09-12",
+      "test_end": "2025-12-17",
+      "train_size": 394338,
+      "test_size": 62864,
+      "ic": 0.0408328275803545
+    },
+    {
+      "fold": 12,
+      "train_start": "2023-09-14",
+      "train_end": "2025-10-20",
+      "test_start": "2025-10-21",
+      "test_end": "2026-01-19",
+      "train_size": 395072,
+      "test_size": 62852,
+      "ic": 0.059535988363278135
+    }
+  ],
+  "model_type": "GRU",
+  "hyperparams": {
+    "seq_len": 20,
+    "hidden_size": 128,
+    "num_layers": 2,
+    "dropout": 0.3,
+    "fc_hidden": 64,
+    "lr": 0.001,
+    "epochs": 30,
+    "batch_size": 512
+  }
+}

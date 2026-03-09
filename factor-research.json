@@ -241,5 +241,35 @@
       "monotonicity": 0.1
     },
     "failure_reason": "IC≈0，完全无信号。量价相关性在CSI1000上无截面预测力。"
+  },
+  {
+    "id": "pv_corr_v1",
+    "source_type": "研报复现+改进",
+    "source_title": "CPV量价相关性因子精细化刻画传统反转(东方证券/华泰证券量价系列)",
+    "source_url": "https://zhuanlan.zhihu.com/p/16867796152",
+    "source_author": "东方证券/华泰证券金工团队",
+    "source_year": 2024,
+    "source_journal": "金工研报",
+    "original_metric": {
+      "market": "全A/中证500",
+      "period": "2015-2024",
+      "ic_mean": null,
+      "sharpe": null,
+      "description": "原文用分钟频价量相关性(PV_corr_avg + PV_corr_std),需要Level2分钟数据。在中证500中表现良好,多头超额年化5%+。"
+    },
+    "our_metric": {
+      "market": "中证1000",
+      "period": "2022-11 ~ 2026-03",
+      "ic_mean": 0.0235,
+      "ic_t": 2.98,
+      "sharpe": 1.4658,
+      "monotonicity": 0.9,
+      "mdd": -0.0536
+    },
+    "diff_notes": "原文用分钟频数据，我们降频到日频(日收益率 vs 日成交量变化率的20日滚动相关)。方向相反：原文认为负PV相关=反转增强做多，我们在中证1000上发现正PV相关=动量确认做多更有效。可能原因：小盘股信息传播慢，量价确认的动量效应强于反转。额外做了成交额OLS中性化。",
+    "local_factor_id": "pv_corr_v1",
+    "conclusion": "入库",
+    "date": "2026-03-09",
+    "status": "active"
   }
 ]

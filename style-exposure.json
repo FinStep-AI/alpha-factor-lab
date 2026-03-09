@@ -1,374 +1,41 @@
 {
-  "updated": "2026-03-08 10:26",
-  "active_factors": [
-    "amihud_illiq_v2",
-    "shadow_pressure_v1"
-  ],
-  "style_loading": {
-    "Size": 0.0,
-    "Value": 0.0,
-    "Momentum": 0.0,
-    "Volatility": 0.0,
-    "Liquidity": 0.5,
-    "Quality": 0.0,
-    "Growth": 0.0,
-    "微观结构": 0.5
-  },
-  "barra_coverage": {
-    "Liquidity": [
-      {
-        "id": "amihud_illiq_v2",
-        "name": "Amihud非流动性 v2",
-        "sharpe": 0.8981,
-        "ic_t": 2.757474522893885,
-        "rating": "★★★★ 强"
-      },
-      {
-        "id": "turnover_decay_v1",
-        "name": "换手率衰减 v1",
-        "sharpe": 0.7102,
-        "ic_t": 1.949515571121865,
-        "rating": "★★★ 可用"
-      }
-    ],
-    "微观结构": [
-      {
-        "id": "shadow_pressure_v1",
-        "name": "上影线卖压 v1",
-        "sharpe": 0.8344,
-        "ic_t": 1.9321755634658468,
-        "rating": "★★★★ 强"
-      },
-      {
-        "id": "close_location_v1",
-        "name": "收盘价位置",
-        "sharpe": 0.6354,
-        "ic_t": 1.3719286974015752,
-        "rating": "★★★ 可用"
-      },
-      {
-        "id": "close_vwap_dev_v1",
-        "name": "VWAP偏离度(反向)",
-        "sharpe": 0,
-        "ic_t": 0,
-        "rating": "★★★★★"
-      }
-    ],
-    "Momentum": [
-      {
-        "id": "overnight_momentum_v1",
-        "name": "隔夜收益动量 v1",
-        "sharpe": 0.7881,
-        "ic_t": 2.874869916791353,
-        "rating": "★★★ 可用"
-      },
-      {
-        "id": "gap_momentum_v1",
-        "name": "跳空缺口动量 v1",
-        "sharpe": 0.7854,
-        "ic_t": 3.140760558800396,
-        "rating": "★★★ 可用"
-      }
-    ],
-    "Volatility": [
-      {
-        "id": "idio_vol_v1",
-        "name": "特质波动率",
-        "sharpe": 0.7028,
-        "ic_t": 0.9825731633043696,
-        "rating": "★★★ 可用"
-      },
-      {
-        "id": "beta_elasticity_v1",
-        "name": "Beta弹性",
-        "sharpe": 0.605,
-        "ic_t": 1.6549552344784,
-        "rating": "★★★ 可用"
-      }
-    ],
-    "Value": [
-      {
-        "id": "pb_roe_residual_v1",
-        "name": "PB-ROE估值偏离度",
-        "sharpe": 0.6094,
-        "ic_t": -0.21905748936442276,
-        "rating": "★★★ 可用"
-      }
-    ]
-  },
+  "date": "2026-03-09",
+  "n_stocks": 24,
   "industry_exposure": {
-    "计算机": {
-      "weight": 0.1975,
-      "count": 5,
-      "stocks": [
-        "688232.SH",
-        "300188.SZ",
-        "300579.SZ",
-        "300768.SZ",
-        "300687.SZ"
-      ]
-    },
-    "医药生物": {
-      "weight": 0.1218,
-      "count": 3,
-      "stocks": [
-        "300341.SZ",
-        "688177.SH",
-        "301207.SZ"
-      ]
-    },
-    "国防军工": {
-      "weight": 0.1191,
-      "count": 3,
-      "stocks": [
-        "688552.SH",
-        "301571.SZ",
-        "301592.SZ"
-      ]
-    },
-    "传媒": {
-      "weight": 0.1154,
-      "count": 3,
-      "stocks": [
-        "601811.SH",
-        "601858.SH",
-        "000156.SZ"
-      ]
-    },
-    "轻工制造": {
-      "weight": 0.0925,
-      "count": 2,
-      "stocks": [
-        "605099.SH",
-        "301376.SZ"
-      ]
-    },
-    "纺织服饰": {
-      "weight": 0.0873,
-      "count": 2,
-      "stocks": [
-        "301177.SZ",
-        "002345.SZ"
-      ]
-    },
-    "公用事业": {
-      "weight": 0.0474,
-      "count": 1,
-      "stocks": [
-        "600821.SH"
-      ]
-    },
-    "食品饮料": {
-      "weight": 0.0424,
-      "count": 1,
-      "stocks": [
-        "002946.SZ"
-      ]
-    },
-    "汽车": {
-      "weight": 0.0398,
-      "count": 1,
-      "stocks": [
-        "301215.SZ"
-      ]
-    },
-    "机械设备": {
-      "weight": 0.0389,
-      "count": 1,
-      "stocks": [
-        "688433.SH"
-      ]
-    },
-    "电子": {
-      "weight": 0.0387,
-      "count": 1,
-      "stocks": [
-        "688107.SH"
-      ]
-    },
-    "通信": {
-      "weight": 0.0362,
-      "count": 1,
-      "stocks": [
-        "688182.SH"
-      ]
-    }
+    "有色金属": 0.2917,
+    "公用事业": 0.1667,
+    "电力设备": 0.125,
+    "基础化工": 0.125,
+    "计算机": 0.0833,
+    "电子": 0.0833,
+    "国防军工": 0.0417,
+    "传媒": 0.0417,
+    "通信": 0.0417
   },
-  "correlation_matrix": {
-    "factor_ids": [
-      "amihud_illiq_v2",
-      "shadow_pressure_v1",
-      "overnight_momentum_v1",
-      "gap_momentum_v1",
-      "turnover_decay_v1",
-      "idio_vol_v1",
-      "close_location_v1",
-      "pb_roe_residual_v1",
-      "beta_elasticity_v1",
-      "close_vwap_dev_v1"
-    ],
-    "factor_names": [
-      "Amihud非流动性 v2",
-      "上影线卖压 v1",
-      "隔夜收益动量 v1",
-      "跳空缺口动量 v1",
-      "换手率衰减 v1",
-      "特质波动率",
-      "收盘价位置",
-      "PB-ROE估值偏离度",
-      "Beta弹性",
-      "VWAP偏离度(反向)"
-    ],
-    "matrix": {
-      "amihud_illiq_v2": {
-        "amihud_illiq_v2": 1.0,
-        "shadow_pressure_v1": -0.227,
-        "overnight_momentum_v1": null,
-        "gap_momentum_v1": null,
-        "turnover_decay_v1": 0.102,
-        "idio_vol_v1": null,
-        "close_location_v1": null,
-        "pb_roe_residual_v1": null,
-        "beta_elasticity_v1": null,
-        "close_vwap_dev_v1": 0.24
-      },
-      "shadow_pressure_v1": {
-        "amihud_illiq_v2": -0.227,
-        "shadow_pressure_v1": 1.0,
-        "overnight_momentum_v1": null,
-        "gap_momentum_v1": null,
-        "turnover_decay_v1": 0.096,
-        "idio_vol_v1": null,
-        "close_location_v1": null,
-        "pb_roe_residual_v1": null,
-        "beta_elasticity_v1": null,
-        "close_vwap_dev_v1": -0.341
-      },
-      "overnight_momentum_v1": {
-        "amihud_illiq_v2": null,
-        "shadow_pressure_v1": null,
-        "overnight_momentum_v1": 1.0,
-        "gap_momentum_v1": null,
-        "turnover_decay_v1": null,
-        "idio_vol_v1": null,
-        "close_location_v1": null,
-        "pb_roe_residual_v1": null,
-        "beta_elasticity_v1": null,
-        "close_vwap_dev_v1": null
-      },
-      "gap_momentum_v1": {
-        "amihud_illiq_v2": null,
-        "shadow_pressure_v1": null,
-        "overnight_momentum_v1": null,
-        "gap_momentum_v1": 1.0,
-        "turnover_decay_v1": null,
-        "idio_vol_v1": -0.158,
-        "close_location_v1": null,
-        "pb_roe_residual_v1": -0.233,
-        "beta_elasticity_v1": 0.048,
-        "close_vwap_dev_v1": null
-      },
-      "turnover_decay_v1": {
-        "amihud_illiq_v2": 0.102,
-        "shadow_pressure_v1": 0.096,
-        "overnight_momentum_v1": null,
-        "gap_momentum_v1": null,
-        "turnover_decay_v1": 1.0,
-        "idio_vol_v1": null,
-        "close_location_v1": null,
-        "pb_roe_residual_v1": null,
-        "beta_elasticity_v1": null,
-        "close_vwap_dev_v1": 0.188
-      },
-      "idio_vol_v1": {
-        "amihud_illiq_v2": null,
-        "shadow_pressure_v1": null,
-        "overnight_momentum_v1": null,
-        "gap_momentum_v1": -0.158,
-        "turnover_decay_v1": null,
-        "idio_vol_v1": 1.0,
-        "close_location_v1": null,
-        "pb_roe_residual_v1": 0.536,
-        "beta_elasticity_v1": 0.097,
-        "close_vwap_dev_v1": null
-      },
-      "close_location_v1": {
-        "amihud_illiq_v2": null,
-        "shadow_pressure_v1": null,
-        "overnight_momentum_v1": null,
-        "gap_momentum_v1": null,
-        "turnover_decay_v1": null,
-        "idio_vol_v1": null,
-        "close_location_v1": 1.0,
-        "pb_roe_residual_v1": null,
-        "beta_elasticity_v1": null,
-        "close_vwap_dev_v1": null
-      },
-      "pb_roe_residual_v1": {
-        "amihud_illiq_v2": null,
-        "shadow_pressure_v1": null,
-        "overnight_momentum_v1": null,
-        "gap_momentum_v1": -0.233,
-        "turnover_decay_v1": null,
-        "idio_vol_v1": 0.536,
-        "close_location_v1": null,
-        "pb_roe_residual_v1": 1.0,
-        "beta_elasticity_v1": -0.326,
-        "close_vwap_dev_v1": null
-      },
-      "beta_elasticity_v1": {
-        "amihud_illiq_v2": null,
-        "shadow_pressure_v1": null,
-        "overnight_momentum_v1": null,
-        "gap_momentum_v1": 0.048,
-        "turnover_decay_v1": null,
-        "idio_vol_v1": 0.097,
-        "close_location_v1": null,
-        "pb_roe_residual_v1": -0.326,
-        "beta_elasticity_v1": 1.0,
-        "close_vwap_dev_v1": null
-      },
-      "close_vwap_dev_v1": {
-        "amihud_illiq_v2": 0.24,
-        "shadow_pressure_v1": -0.341,
-        "overnight_momentum_v1": null,
-        "gap_momentum_v1": null,
-        "turnover_decay_v1": 0.188,
-        "idio_vol_v1": null,
-        "close_location_v1": null,
-        "pb_roe_residual_v1": null,
-        "beta_elasticity_v1": null,
-        "close_vwap_dev_v1": 1.0
-      }
-    }
+  "style_loading": {
+    "Size": "偏小盘(中证1000成分股)",
+    "Value": "中性",
+    "Momentum": "中等偏多(量价确认+ML动量特征)",
+    "Volatility": "中等(波动率因子中性化后)",
+    "Liquidity": "偏低流动性(Amihud因子选低流动性)",
+    "Quality": "中性",
+    "Growth": "中性",
+    "微观结构": "偏强(VWAP偏离+量价相关性)"
   },
   "risk_summary": {
-    "total_positions": 24,
-    "total_value": 10320189.48,
-    "max_industry_weight": 0.19754501639247032,
-    "max_industry": "计算机",
-    "n_industries": 12,
-    "style_concentration": "Liquidity + 微观结构",
-    "missing_styles": [
-      "Quality",
-      "Growth"
-    ]
+    "top_industry": "有色金属",
+    "top_industry_weight": 0.2917,
+    "n_industries": 9,
+    "hhi": 0.1632,
+    "max_single_stock_weight": 0.0417,
+    "notes": "有色金属占比29.2%略高但未超30%上限。新增pv_corr_v1(量价相关性)因子后，模型更侧重量价确认的动量股。"
   },
-  "history": [
-    {
-      "date": "2026-03-08",
-      "event": "初始化风格暴露分析",
-      "style_loading": {
-        "Size": 0.0,
-        "Value": 0.0,
-        "Momentum": 0.0,
-        "Volatility": 0.0,
-        "Liquidity": 0.5,
-        "Quality": 0.0,
-        "Growth": 0.0,
-        "微观结构": 0.5
-      },
-      "n_positions": 24
-    }
-  ]
+  "model_info": {
+    "model": "LightGBM v1",
+    "features": 111,
+    "backtest_sharpe": 1.78,
+    "backtest_alpha": "42.03% (扣费)",
+    "retrained_on": "2026-03-09",
+    "new_factor": "pv_corr_v1 (量价相关性, IC=0.024, t=2.98, Sharpe=1.47)"
+  }
 }
