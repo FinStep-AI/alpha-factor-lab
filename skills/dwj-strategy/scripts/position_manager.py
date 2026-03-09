@@ -52,11 +52,17 @@ def format_code(code):
 
 
 def reverse_code(formatted_code):
-    """601777.SH → sh601777"""
+    """601777.SH → sh601777, or bare 601777/002040 → sh601777/sz002040"""
     if formatted_code.endswith(".SH"):
         return f"sh{formatted_code[:-3]}"
     elif formatted_code.endswith(".SZ"):
         return f"sz{formatted_code[:-3]}"
+    # Handle bare numeric codes (e.g. "002040", "600072")
+    if formatted_code.isdigit():
+        if formatted_code.startswith("6"):
+            return f"sh{formatted_code}"
+        else:
+            return f"sz{formatted_code}"
     return formatted_code
 
 
@@ -85,8 +91,8 @@ def check_positions(quotes_file):
             continue
         
         current_price = q["price"]
-        cost_price = pos.get("cost_price", 0)
-        shares = pos.get("shares", 0)
+        cost_price = pos.get("cost_price", 0) or pos.get("avg_cost", 0)
+        shares = pos.get("shares", 0) or pos.get("volume", 0)
         
         if cost_price <= 0 or shares <= 0:
             continue
@@ -122,7 +128,7 @@ def check_positions(quotes_file):
         
         # === 止盈检查 ===
         # 规则1: 累计盈利≥7%，卖出1/2
-        if pnl_pct >= 7 and not pos.get("first_profit_taken", False):
+        if pnl_pct >= 7 and not pos.get("half_profit_taken", False):
             actions.append({
                 "code": pos_code,
                 "name": pos.get("name", ""),
@@ -194,7 +200,7 @@ def check_bbi_stop(quotes_file):
         current = closes[-1]
         
         # 破BBI清仓
-        if current < bbi and pos.get("first_profit_taken", False):
+        if current < bbi and pos.get("half_profit_taken", False):
             # 已经止盈过一次的票，破BBI就清
             actions.append({
                 "code": pos_code,
@@ -246,7 +252,7 @@ def execute_buy(data, code, name, price, shares, reason, stop_loss=None):
         "stop_loss": stop_loss or round(price - 5 * 0.01, 2),
         "buy_date": datetime.now().strftime("%Y-%m-%d"),
         "max_pnl_pct": 0,
-        "first_profit_taken": False,
+        "half_profit_taken": False,
     }
     
     # 更新总市值
@@ -302,7 +308,7 @@ def execute_sell(data, pos_code, portion, price, reason):
         pos["current_price"] = price
         pos["market_value"] = remaining * price
         if portion >= 0.45 and portion <= 0.55:
-            pos["first_profit_taken"] = True
+            pos["half_profit_taken"] = True
     
     # 更新总市值
     total_mv = sum(p.get("market_value", 0) for p in portfolio["positions"].values())
