@@ -2095,6 +2095,14 @@
           "action": "new_factor_added",
           "summary": "新因子pv_corr_v1(量价相关性)入库。IC=0.024(t=2.98),Sharpe=1.47,单调性0.9,MDD仅-5.4%(全库最低)。量价同向确认的动量效应在中证1000显著。从CPV量价系列研报改进：降频到日频+方向反转(正PV相关做多)。与现有因子低相关(max|corr|=0.32)。因子库增至12个。",
           "detail": "pv_corr_v1: rolling_corr(daily_ret, vol_pct_change, 20), neutralized by log_amount_20d. Direction: positive PV corr = volume-confirmed momentum = higher future returns. Source: CPV factor series from Dongfang/Huatai Securities, adapted from minute-level to daily-level. Key insight: in CSI1000 small caps, positive PV correlation (volume confirms price trend) works better than negative (reversal hypothesis), likely due to slower information diffusion."
+        },
+        {
+          "date": "2026-03-09",
+          "time": "09:35",
+          "type": "rebalance",
+          "action": "rebalance",
+          "summary": "LightGBM首次ML调仓: 卖出19只→买入24只, 111特征模型(Sharpe=1.78, alpha=42%), 风控剔除6只(大额减持+有色超配)",
+          "detail": "卖出: 盛达资源, 本钢板材, 四川黄金, 汉缆股份, 开山股份等19只; 买入: , , , , 等24只; 最终24只持仓"
         }
       ],
       "rebalances": [
@@ -2325,7 +2333,7 @@
       "portfolio": {
         "cash": 9641272.190000001,
         "positions": {},
-        "total_value": 10000000.0,
+        "total_value": 9641272.190000001,
         "last_update": "2026-03-09 14:30:07"
       },
       "nav_history": {
@@ -2351,7 +2359,7 @@
           0.970595,
           0.964127,
           0.964127,
-          1.0
+          0.964127
         ],
         "cash_pct": [
           100.0,
@@ -4102,12 +4110,13 @@
         "player_id": "trader",
         "name": "技术猎手",
         "emoji": "📊",
-        "total_return_pct": 0.0,
+        "total_return_pct": -3.59,
         "sharpe_ratio": -2.84,
         "max_drawdown_pct": 7.13,
         "current_nav": 1.0,
         "total_trades": 2,
-        "rank": 2
+        "rank": 2,
+        "nav": 0.9641272190000001
       },
       {
         "player_id": "value",
