@@ -104,8 +104,6 @@ def fetch_hs300_nav():
             print(f"[WARN] HS300 fintool fallback failed: {e}", file=sys.stderr)
 
     return None
-        print(f"[WARN] HS300 fetch failed: {e}", file=sys.stderr)
-    return None
 
 
 def _safe_float(s):

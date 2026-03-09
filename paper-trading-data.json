@@ -6,7 +6,7 @@
     "benchmark": "000300",
     "benchmark_name": "沪深300",
     "created_at": "2026-02-23 22:14:25",
-    "updated_at": "2026-03-09 09:25:00",
+    "updated_at": "2026-03-09 09:32:22",
     "status": "active",
     "players_count": 6
   },
@@ -23,197 +23,245 @@
             "name": "",
             "shares": 4800,
             "cost_price": 89.41,
-            "current_price": 89.41,
-            "market_value": 429168.0,
-            "entry_date": "2026-03-09"
+            "current_price": 83.2,
+            "market_value": 399360.0,
+            "entry_date": "2026-03-09",
+            "pnl": -29808.0,
+            "pnl_pct": -6.95
           },
           "688343.SH": {
             "name": "",
             "shares": 4400,
             "cost_price": 97.87,
-            "current_price": 97.87,
-            "market_value": 430628.0,
-            "entry_date": "2026-03-09"
+            "current_price": 92.75,
+            "market_value": 408100.0,
+            "entry_date": "2026-03-09",
+            "pnl": -22528.0,
+            "pnl_pct": -5.23
           },
           "300475.SZ": {
             "name": "",
             "shares": 2800,
             "cost_price": 155.04,
-            "current_price": 155.04,
-            "market_value": 434112.0,
-            "entry_date": "2026-03-09"
+            "current_price": 146.08,
+            "market_value": 409024.0,
+            "entry_date": "2026-03-09",
+            "pnl": -25088.0,
+            "pnl_pct": -5.78
           },
           "300034.SZ": {
             "name": "",
             "shares": 19400,
             "cost_price": 22.4,
-            "current_price": 22.4,
-            "market_value": 434560.0,
-            "entry_date": "2026-03-09"
+            "current_price": 21.6,
+            "market_value": 419040.0,
+            "entry_date": "2026-03-09",
+            "pnl": -15520.0,
+            "pnl_pct": -3.57
           },
           "600744.SH": {
             "name": "",
             "shares": 47900,
             "cost_price": 9.08,
-            "current_price": 9.08,
-            "market_value": 434932.0,
-            "entry_date": "2026-03-09"
+            "current_price": 9.38,
+            "market_value": 449302.0,
+            "entry_date": "2026-03-09",
+            "pnl": 14370.0,
+            "pnl_pct": 3.3
           },
           "600821.SH": {
             "name": "",
             "shares": 50500,
             "cost_price": 8.6,
-            "current_price": 8.6,
-            "market_value": 434300.0,
-            "entry_date": "2026-03-09"
+            "current_price": 9.46,
+            "market_value": 477730.0,
+            "entry_date": "2026-03-09",
+            "pnl": 43430.0,
+            "pnl_pct": 10.0
           },
           "601208.SH": {
             "name": "",
             "shares": 14100,
             "cost_price": 30.67,
-            "current_price": 30.67,
-            "market_value": 432447.0,
-            "entry_date": "2026-03-09"
+            "current_price": 29.34,
+            "market_value": 413694.0,
+            "entry_date": "2026-03-09",
+            "pnl": -18753.0,
+            "pnl_pct": -4.34
           },
           "300666.SZ": {
             "name": "",
             "shares": 2900,
             "cost_price": 148.37,
-            "current_price": 148.37,
-            "market_value": 430273.0,
-            "entry_date": "2026-03-09"
+            "current_price": 145.46,
+            "market_value": 421834.0,
+            "entry_date": "2026-03-09",
+            "pnl": -8439.0,
+            "pnl_pct": -1.96
           },
           "600259.SH": {
             "name": "",
             "shares": 4700,
             "cost_price": 91.82,
-            "current_price": 91.82,
-            "market_value": 431554.0,
-            "entry_date": "2026-03-09"
+            "current_price": 88.73,
+            "market_value": 417031.0,
+            "entry_date": "2026-03-09",
+            "pnl": -14523.0,
+            "pnl_pct": -3.37
           },
           "600452.SH": {
             "name": "",
             "shares": 27900,
             "cost_price": 15.55,
-            "current_price": 15.55,
-            "market_value": 433845.0,
-            "entry_date": "2026-03-09"
+            "current_price": 15.81,
+            "market_value": 441099.0,
+            "entry_date": "2026-03-09",
+            "pnl": 7254.0,
+            "pnl_pct": 1.67
           },
           "300618.SZ": {
             "name": "",
             "shares": 9000,
             "cost_price": 48.23,
-            "current_price": 48.23,
-            "market_value": 434070.0,
-            "entry_date": "2026-03-09"
+            "current_price": 46.85,
+            "market_value": 421650.0,
+            "entry_date": "2026-03-09",
+            "pnl": -12420.0,
+            "pnl_pct": -2.86
           },
           "600456.SH": {
             "name": "",
             "shares": 10700,
             "cost_price": 40.33,
-            "current_price": 40.33,
-            "market_value": 431531.0,
-            "entry_date": "2026-03-09"
+            "current_price": 38.73,
+            "market_value": 414411.0,
+            "entry_date": "2026-03-09",
+            "pnl": -17120.0,
+            "pnl_pct": -3.97
           },
           "002176.SZ": {
             "name": "",
             "shares": 43500,
             "cost_price": 9.98,
-            "current_price": 9.98,
-            "market_value": 434130.0,
-            "entry_date": "2026-03-09"
+            "current_price": 9.75,
+            "market_value": 424125.0,
+            "entry_date": "2026-03-09",
+            "pnl": -10005.0,
+            "pnl_pct": -2.3
           },
           "002182.SZ": {
             "name": "",
             "shares": 21600,
             "cost_price": 20.06,
-            "current_price": 20.06,
-            "market_value": 433296.0,
-            "entry_date": "2026-03-09"
+            "current_price": 19.61,
+            "market_value": 423576.0,
+            "entry_date": "2026-03-09",
+            "pnl": -9720.0,
+            "pnl_pct": -2.24
           },
           "301175.SZ": {
             "name": "",
             "shares": 58900,
             "cost_price": 7.38,
-            "current_price": 7.38,
-            "market_value": 434682.0,
-            "entry_date": "2026-03-09"
+            "current_price": 7.31,
+            "market_value": 430559.0,
+            "entry_date": "2026-03-09",
+            "pnl": -4123.0,
+            "pnl_pct": -0.95
           },
           "000899.SZ": {
             "name": "",
             "shares": 29900,
             "cost_price": 14.53,
-            "current_price": 14.53,
-            "market_value": 434447.0,
-            "entry_date": "2026-03-09"
+            "current_price": 14.64,
+            "market_value": 437736.0,
+            "entry_date": "2026-03-09",
+            "pnl": 3289.0,
+            "pnl_pct": 0.76
           },
           "002326.SZ": {
             "name": "",
             "shares": 19000,
             "cost_price": 22.79,
-            "current_price": 22.79,
-            "market_value": 433010.0,
-            "entry_date": "2026-03-09"
+            "current_price": 21.96,
+            "market_value": 417240.0,
+            "entry_date": "2026-03-09",
+            "pnl": -15770.0,
+            "pnl_pct": -3.64
           },
           "002378.SZ": {
             "name": "",
             "shares": 9700,
             "cost_price": 44.7,
-            "current_price": 44.7,
-            "market_value": 433590.0,
-            "entry_date": "2026-03-09"
+            "current_price": 43.96,
+            "market_value": 426412.0,
+            "entry_date": "2026-03-09",
+            "pnl": -7178.0,
+            "pnl_pct": -1.66
           },
           "300182.SZ": {
             "name": "",
             "shares": 67000,
             "cost_price": 6.49,
-            "current_price": 6.49,
-            "market_value": 434830.0,
-            "entry_date": "2026-03-09"
+            "current_price": 6.36,
+            "market_value": 426120.0,
+            "entry_date": "2026-03-09",
+            "pnl": -8710.0,
+            "pnl_pct": -2.0
           },
           "600206.SH": {
             "name": "",
             "shares": 18500,
             "cost_price": 23.46,
-            "current_price": 23.46,
-            "market_value": 434010.0,
-            "entry_date": "2026-03-09"
+            "current_price": 22.6,
+            "market_value": 418100.0,
+            "entry_date": "2026-03-09",
+            "pnl": -15910.0,
+            "pnl_pct": -3.67
           },
           "300821.SZ": {
             "name": "",
             "shares": 31400,
             "cost_price": 13.82,
-            "current_price": 13.82,
-            "market_value": 433948.0,
-            "entry_date": "2026-03-09"
+            "current_price": 13.52,
+            "market_value": 424528.0,
+            "entry_date": "2026-03-09",
+            "pnl": -9420.0,
+            "pnl_pct": -2.17
           },
           "688726.SH": {
             "name": "",
             "shares": 6800,
             "cost_price": 63.29,
-            "current_price": 63.29,
-            "market_value": 430372.0,
-            "entry_date": "2026-03-09"
+            "current_price": 60.52,
+            "market_value": 411536.0,
+            "entry_date": "2026-03-09",
+            "pnl": -18836.0,
+            "pnl_pct": -4.38
           },
           "000762.SZ": {
             "name": "",
             "shares": 15000,
             "cost_price": 28.85,
-            "current_price": 28.85,
-            "market_value": 432750.0,
-            "entry_date": "2026-03-09"
+            "current_price": 28.15,
+            "market_value": 422250.0,
+            "entry_date": "2026-03-09",
+            "pnl": -10500.0,
+            "pnl_pct": -2.43
           },
           "688205.SH": {
             "name": "",
             "shares": 2500,
             "cost_price": 169.0,
-            "current_price": 169.0,
-            "market_value": 422500.0,
-            "entry_date": "2026-03-09"
+            "current_price": 154.01,
+            "market_value": 385025.0,
+            "entry_date": "2026-03-09",
+            "pnl": -37475.0,
+            "pnl_pct": -8.87
           }
         },
-        "total_value": 10439926.36,
-        "last_update": "2026-03-09"
+        "total_value": 10196423.36,
+        "last_update": "2026-03-09 09:32:22"
       },
       "nav_history": {
         "dates": [
@@ -2058,7 +2106,7 @@
         }
       ],
       "stats": {
-        "total_return_pct": 3.2,
+        "total_return_pct": 1.96,
         "annualized_return_pct": 70.68,
         "max_drawdown_pct": 4.49,
         "sharpe_ratio": 2.36,
@@ -2274,8 +2322,8 @@
       "portfolio": {
         "cash": 9641272.190000001,
         "positions": {},
-        "total_value": 9641272.19,
-        "last_update": "2026-03-06"
+        "total_value": 10000000.0,
+        "last_update": "2026-03-09 09:32:22"
       },
       "nav_history": {
         "dates": [
@@ -2462,7 +2510,7 @@
       ],
       "rebalances": [],
       "stats": {
-        "total_return_pct": -3.59,
+        "total_return_pct": 0.0,
         "annualized_return_pct": -64.05,
         "max_drawdown_pct": 7.13,
         "sharpe_ratio": -2.84,
@@ -2486,7 +2534,7 @@
         "cash": 10000000.0,
         "positions": {},
         "total_value": 10000000.0,
-        "last_update": "2026-03-06"
+        "last_update": "2026-03-09 09:32:22"
       },
       "nav_history": {
         "dates": [
@@ -2692,16 +2740,16 @@
             "name": "南京港",
             "volume": 27100,
             "avg_cost": 10.82,
-            "current_price": 11.18,
-            "market_value": 302978.0,
-            "pnl": 9756.0,
-            "pnl_pct": 3.33,
+            "current_price": 11.56,
+            "market_value": 313276.0,
+            "pnl": 20054.0,
+            "pnl_pct": 6.84,
             "entry_date": "2026-02-27",
             "half_profit_taken": true
           }
         },
-        "total_value": 9624600.45,
-        "last_update": "2026-03-06"
+        "total_value": 9634898.45,
+        "last_update": "2026-03-09 09:32:22"
       },
       "nav_history": {
         "dates": [
@@ -3596,7 +3644,7 @@
         "max_drawdown_pct": 4.26,
         "sharpe_ratio": -6.91,
         "calmar_ratio": -15.43,
-        "total_return_pct": -3.75,
+        "total_return_pct": -3.65,
         "annualized_return_pct": -65.75,
         "profit_loss_ratio": 2.24,
         "total_fees": 60930.55,
@@ -3615,7 +3663,7 @@
         "cash": 10000000.0,
         "positions": {},
         "total_value": 10000000.0,
-        "last_update": "2026-03-06"
+        "last_update": "2026-03-09 09:32:22"
       },
       "trades": [],
       "nav_history": {
@@ -3748,7 +3796,7 @@
         "cash": 10000000.0,
         "total_value": 10000000.0,
         "positions": {},
-        "last_update": "2026-03-06"
+        "last_update": "2026-03-09 09:32:22"
       },
       "trades": [],
       "nav_history": {
@@ -3790,7 +3838,8 @@
       "2026-03-03",
       "2026-03-04",
       "2026-03-05",
-      "2026-03-06"
+      "2026-03-06",
+      "03-09 09:32"
     ],
     "nav": [
       1.0,
@@ -3801,7 +3850,8 @@
       0.993542,
       0.976319,
       0.990228,
-      0.989994
+      0.989994,
+      0.972555
     ],
     "start_value": 4707.54
   },
@@ -3811,12 +3861,23 @@
         "player_id": "quant",
         "name": "因子猎人",
         "emoji": "🔢",
-        "total_return_pct": 3.2,
+        "total_return_pct": 1.96,
         "sharpe_ratio": 2.36,
         "max_drawdown_pct": 4.49,
         "current_nav": 1.032019,
         "total_trades": 58,
         "rank": 1
+      },
+      {
+        "player_id": "trader",
+        "name": "技术猎手",
+        "emoji": "📊",
+        "total_return_pct": 0.0,
+        "sharpe_ratio": -2.84,
+        "max_drawdown_pct": 7.13,
+        "current_nav": 0.964127,
+        "total_trades": 2,
+        "rank": 2
       },
       {
         "player_id": "value",
@@ -3827,7 +3888,7 @@
         "max_drawdown_pct": 0,
         "current_nav": 1.0,
         "total_trades": 0,
-        "rank": 2
+        "rank": 3
       },
       {
         "player_id": "sentiment",
@@ -3838,7 +3899,7 @@
         "max_drawdown_pct": 0,
         "current_nav": 1.0,
         "total_trades": 0,
-        "rank": 3
+        "rank": 4
       },
       {
         "player_id": "hotspot",
@@ -3849,24 +3910,13 @@
         "max_drawdown_pct": 0,
         "current_nav": 1.0,
         "total_trades": 0,
-        "rank": 4
-      },
-      {
-        "player_id": "trader",
-        "name": "技术猎手",
-        "emoji": "📊",
-        "total_return_pct": -3.59,
-        "sharpe_ratio": -2.84,
-        "max_drawdown_pct": 7.13,
-        "current_nav": 0.964127,
-        "total_trades": 2,
         "rank": 5
       },
       {
         "player_id": "dwj",
         "name": "趋势游侠",
         "emoji": "🏄",
-        "total_return_pct": -3.75,
+        "total_return_pct": -3.65,
         "sharpe_ratio": -6.91,
         "max_drawdown_pct": 4.26,
         "current_nav": 0.96246,
@@ -3874,8 +3924,7 @@
         "rank": 6
       }
     ],
-    "updated_at": "2026-03-07 11:04:52",
-    "benchmark_nav": 0.989994
+    "updated_at": "2026-03-09 09:32:22"
   },
   "quant": {
     "decisions": [
