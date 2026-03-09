@@ -292,8 +292,18 @@ def main():
         nav = round(total_value / INITIAL_CASH, 6)
         cash_pct = round(cash / total_value * 100, 2) if total_value > 0 else 100
         
-        # 盘中刷新：只更新portfolio，不追加nav_history
-        # nav_history 仅由 nav-update（收盘）写入，保证每天只有一条收盘NAV
+        # 盘中刷新：更新nav_history（当天覆盖，不多追加）
+        nh = player.get("nav_history", {"dates": [], "nav": [], "cash_pct": []})
+        if nh["dates"] and nh["dates"][-1] == today:
+            # 当天已有 → 覆盖
+            nh["nav"][-1] = nav
+            nh["cash_pct"][-1] = cash_pct
+        else:
+            # 当天首次 → 追加
+            nh["dates"].append(today)
+            nh["nav"].append(nav)
+            nh["cash_pct"].append(cash_pct)
+        player["nav_history"] = nh
         
         # 更新stats（仅更新实时收益率和持仓数）
         stats = player.get("stats", {})
