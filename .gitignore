@@ -1,3 +1,5 @@
 .env
 data/a_share_kline_cache.json
 data/ml_features.pkl
+data/factor_*.csv
+output/
