@@ -228,7 +228,6 @@ a:hover { text-decoration: underline; }
 
 <div class="container">
   <div id="report-list" class="report-list"></div>
-  <div id="detail-panel" class="detail-panel"></div>
   <div id="empty-state" class="empty-state" style="display:none;">
     <span class="icon">📉</span>
     <h2>暂无技术分析报告</h2>
@@ -260,8 +259,8 @@ function strengthClass(s) {
   return 'neutral';
 }
 
-function renderDetail(r) {
-  const panel = document.getElementById('detail-panel');
+function renderDetail(r, panel) {
+  if (!panel) panel = document.getElementById('detail-panel');
   let html = '';
 
   // 图表
@@ -363,7 +362,6 @@ function renderDetail(r) {
 async function init() {
   const listEl = document.getElementById('report-list');
   const emptyEl = document.getElementById('empty-state');
-  const panel = document.getElementById('detail-panel');
 
   let reports = [];
   try {
@@ -413,14 +411,28 @@ async function init() {
     card.addEventListener('click', () => {
       const idx = parseInt(card.dataset.idx);
       listEl.querySelectorAll('.report-card').forEach(c => c.classList.remove('active'));
+
+      // 收起已有的 detail panel（如果有的话）
+      const existingPanel = listEl.querySelector('.detail-panel');
+      if (existingPanel) existingPanel.remove();
+
       if (idx === activeIdx) {
         activeIdx = -1;
-        panel.classList.remove('show');
         return;
       }
       activeIdx = idx;
       card.classList.add('active');
-      renderDetail(reports[idx]);
+
+      // 创建新的 detail panel 并插入到卡片正下方
+      const newPanel = document.createElement('div');
+      newPanel.className = 'detail-panel show';
+      renderDetail(reports[idx], newPanel);
+      card.after(newPanel);
+
+      // 自动滚动：让卡片顶部可见，detail内容紧跟其后
+      setTimeout(() => {
+        card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 50);
     });
   });
 }
