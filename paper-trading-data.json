@@ -6,7 +6,7 @@
     "benchmark": "000300",
     "benchmark_name": "沪深300",
     "created_at": "2026-02-23 22:14:25",
-    "updated_at": "2026-03-09 09:32:22",
+    "updated_at": "2026-03-09 09:38:12",
     "status": "active",
     "players_count": 6
   },
@@ -2733,7 +2733,7 @@
       "style": "趋势跟踪 · 板块轮动 · 全A股扫描 · 中长线波段",
       "description": "BBI+MA60趋势判断，KDJ低位捕捉买点，板块轮动做趋势收益。核心逻辑：阳率×盈亏比最大化。",
       "portfolio": {
-        "cash": 9321622.45,
+        "cash": 986.3899999989662,
         "positions": {
           "002040": {
             "code": "002040",
@@ -2746,9 +2746,75 @@
             "pnl_pct": 6.84,
             "entry_date": "2026-02-27",
             "half_profit_taken": true
+          },
+          "600072": {
+            "code": "600072",
+            "name": "中船科技",
+            "volume": 118000,
+            "avg_cost": 13.16,
+            "current_price": 13.16,
+            "market_value": 1552880.0,
+            "pnl": 0,
+            "pnl_pct": 0,
+            "entry_date": "2026-03-09"
+          },
+          "003036": {
+            "code": "003036",
+            "name": "泰坦股份",
+            "volume": 85800,
+            "avg_cost": 18.1,
+            "current_price": 18.1,
+            "market_value": 1552980.0000000002,
+            "pnl": 0,
+            "pnl_pct": 0,
+            "entry_date": "2026-03-09"
+          },
+          "600683": {
+            "code": "600683",
+            "name": "京投发展",
+            "volume": 221300,
+            "avg_cost": 7.02,
+            "current_price": 7.02,
+            "market_value": 1553526.0,
+            "pnl": 0,
+            "pnl_pct": 0,
+            "entry_date": "2026-03-09"
+          },
+          "601187": {
+            "code": "601187",
+            "name": "厦门银行",
+            "volume": 207400,
+            "avg_cost": 7.49,
+            "current_price": 7.49,
+            "market_value": 1553426.0,
+            "pnl": 0,
+            "pnl_pct": 0,
+            "entry_date": "2026-03-09"
+          },
+          "301268": {
+            "code": "301268",
+            "name": "铭利达",
+            "volume": 68000,
+            "avg_cost": 22.84,
+            "current_price": 22.84,
+            "market_value": 1553120.0,
+            "pnl": 0,
+            "pnl_pct": 0,
+            "entry_date": "2026-03-09"
+          },
+          "300931": {
+            "code": "300931",
+            "name": "通用电梯",
+            "volume": 118200,
+            "avg_cost": 13.05,
+            "current_price": 13.05,
+            "market_value": 1542510.0,
+            "pnl": 0,
+            "pnl_pct": 0,
+            "entry_date": "2026-03-09"
           }
         },
-        "total_value": 9634898.45,
+        "total_value": 9622704.39,
         "last_update": "2026-03-09 09:32:22"
       },
       "nav_history": {
@@ -3526,6 +3592,120 @@
           "reason": "止盈1: 现价11.85,盈利+9.52%>7%,卖出半仓27000股",
           "pnl": 27810.0,
           "pnl_pct": 9.52
+        },
+        {
+          "date": "2026-03-09",
+          "code": "600072",
+          "name": "中船科技",
+          "direction": "buy",
+          "price": 13.16,
+          "volume": 118000,
+          "amount": 1552880.0,
+          "fees": {
+            "commission": 465.86,
+            "stamp_duty": 0,
+            "transfer_fee": 15.53,
+            "slippage_cost": 1552.88,
+            "total": 2034.27
+          },
+          "pnl": 0,
+          "pnl_pct": 0,
+          "reason": "BBI金叉缩量回调: score=88, 板块集中(土木工程建筑业3只), 金叉16天后缩量至半量以下, VR=3.9"
+        },
+        {
+          "date": "2026-03-09",
+          "code": "003036",
+          "name": "泰坦股份",
+          "direction": "buy",
+          "price": 18.1,
+          "volume": 85800,
+          "amount": 1552980.0,
+          "fees": {
+            "commission": 465.89,
+            "stamp_duty": 0,
+            "transfer_fee": 15.53,
+            "slippage_cost": 1552.98,
+            "total": 2034.4
+          },
+          "pnl": 0,
+          "pnl_pct": 0,
+          "reason": "BBI金叉缩量回调: score=83, 上升趋势确认, 金叉15天后缩量至半量37.2%, 量价齐升, VR=5.5"
+        },
+        {
+          "date": "2026-03-09",
+          "code": "600683",
+          "name": "京投发展",
+          "direction": "buy",
+          "price": 7.02,
+          "volume": 221300,
+          "amount": 1553526.0,
+          "fees": {
+            "commission": 466.06,
+            "stamp_duty": 0,
+            "transfer_fee": 15.54,
+            "slippage_cost": 1553.53,
+            "total": 2035.12
+          },
+          "pnl": 0,
+          "pnl_pct": 0,
+          "reason": "BBI金叉缩量回调: score=83, 金叉19天后放量3.86x+缩量回调23.4%, 今日+2.0%强势, VR=5.0"
+        },
+        {
+          "date": "2026-03-09",
+          "code": "601187",
+          "name": "厦门银行",
+          "direction": "buy",
+          "price": 7.49,
+          "volume": 207400,
+          "amount": 1553426.0,
+          "fees": {
+            "commission": 466.03,
+            "stamp_duty": 0,
+            "transfer_fee": 15.53,
+            "slippage_cost": 1553.43,
+            "total": 2034.99
+          },
+          "pnl": 0,
+          "pnl_pct": 0,
+          "reason": "BBI金叉缩量回调: score=83, BBI金叉14天, 缩量至半量33.7%, 银行板块稳健, VR=3.8"
+        },
+        {
+          "date": "2026-03-09",
+          "code": "301268",
+          "name": "铭利达",
+          "direction": "buy",
+          "price": 22.84,
+          "volume": 68000,
+          "amount": 1553120.0,
+          "fees": {
+            "commission": 465.94,
+            "stamp_duty": 0,
+            "transfer_fee": 15.53,
+            "slippage_cost": 1553.12,
+            "total": 2034.59
+          },
+          "pnl": 0,
+          "pnl_pct": 0,
+          "reason": "主策略信号: score=58, J=9.0极低位, 上升趋势确认, 唯一满足四大硬条件(J<13)的标的, VR=5.4"
+        },
+        {
+          "date": "2026-03-09",
+          "code": "300931",
+          "name": "通用电梯",
+          "direction": "buy",
+          "price": 13.05,
+          "volume": 118200,
+          "amount": 1542510.0,
+          "fees": {
+            "commission": 462.75,
+            "stamp_duty": 0,
+            "transfer_fee": 15.43,
+            "slippage_cost": 1542.51,
+            "total": 2020.69
+          },
+          "pnl": 0,
+          "pnl_pct": 0,
+          "reason": "BBI金叉缩量回调: score=78, J=36.8偏低, 金叉16天后缩量至半量48.7%, 跌幅-0.1%企稳, VR=4.8"
         }
       ],
       "decisions": [
@@ -3635,11 +3815,19 @@
           "action": "hold",
           "summary": "收盘更新：南京港(002040)收11.18(+0.18%)，持仓27100股浮盈+3.33%，未触发止盈止损。NAV=0.9625，现金比96.85%。",
           "detail": ""
+        },
+        {
+          "date": "2026-03-09",
+          "time": "09:38",
+          "type": "morning_scan",
+          "action": "buy",
+          "summary": "晨扫09:35: 全A扫描5085只→19只候选(1只主策略+3只单针下30+15只金叉缩量回调)。板块集中:土木工程建筑业(3只)。持仓南京港(002040)浮盈+6.84%无止盈止损触发,继续持有。新买入6只:中船科技(板块集中score88)、泰坦股份(上升趋势score83)、京投发展(强势+2%score83)、厦门银行(金叉银行稳健score83)、铭利达(J=9极低位唯一主策略)、通用电梯(J低缩量回调score78)。排除润都股份/金富科技/罗曼股份(当日跌幅>3%)。当前持仓7只,资金基本满配。",
+          "detail": ""
         }
       ],
       "rebalances": [],
       "stats": {
-        "total_trades": 37,
+        "total_trades": 43,
         "win_rate": 10.53,
         "max_drawdown_pct": 4.26,
         "sharpe_ratio": -6.91,
@@ -3647,7 +3835,7 @@
         "total_return_pct": -3.65,
         "annualized_return_pct": -65.75,
         "profit_loss_ratio": 2.24,
-        "total_fees": 60930.55,
+        "total_fees": 73124.61,
         "current_positions": 1,
         "turnover_rate": 0.0
       },
