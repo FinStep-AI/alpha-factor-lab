@@ -6,7 +6,7 @@
     "benchmark": "000300",
     "benchmark_name": "沪深300",
     "created_at": "2026-02-23 22:14:25",
-    "updated_at": "2026-03-09 15:06:07",
+    "updated_at": "2026-03-09 15:12:14",
     "status": "active",
     "players_count": 6
   },
@@ -2757,47 +2757,48 @@
             "name": "泰坦股份",
             "volume": 85800,
             "avg_cost": 18.1,
-            "current_price": 18.15,
-            "market_value": 1557270.0,
-            "pnl": 4290.0,
-            "pnl_pct": 0.28,
-            "entry_date": "2026-03-09"
+            "current_price": 18.14,
+            "market_value": 1556412.0,
+            "pnl": 3432.0,
+            "pnl_pct": 0.22,
+            "entry_date": "2026-03-09",
+            "max_pnl_pct": 0.22
           },
           "600683": {
             "code": "600683",
             "name": "京投发展",
             "volume": 221300,
             "avg_cost": 7.02,
-            "current_price": 7.18,
-            "market_value": 1588934.0,
-            "pnl": 35408.0,
-            "pnl_pct": 2.28,
+            "current_price": 7.16,
+            "market_value": 1584508.0,
+            "pnl": 30982.0,
+            "pnl_pct": 1.99,
             "entry_date": "2026-03-09",
-            "max_pnl_pct": 1.57
+            "max_pnl_pct": 1.99
           },
           "301268": {
             "code": "301268",
             "name": "铭利达",
             "volume": 68000,
             "avg_cost": 22.84,
-            "current_price": 23.37,
-            "market_value": 1589160.0,
-            "pnl": 36040.0,
-            "pnl_pct": 2.32,
+            "current_price": 23.27,
+            "market_value": 1582360.0,
+            "pnl": 29240.0,
+            "pnl_pct": 1.88,
             "entry_date": "2026-03-09",
-            "max_pnl_pct": 1.8
+            "max_pnl_pct": 1.88
           },
           "300931": {
             "code": "300931",
             "name": "通用电梯",
             "volume": 118200,
             "avg_cost": 13.05,
-            "current_price": 13.31,
-            "market_value": 1573242.0,
-            "pnl": 30732.0,
-            "pnl_pct": 1.99,
+            "current_price": 13.3,
+            "market_value": 1572060.0,
+            "pnl": 29550.0,
+            "pnl_pct": 1.92,
             "entry_date": "2026-03-09",
-            "max_pnl_pct": 1.46
+            "max_pnl_pct": 1.92
           }
         },
         "total_value": 9654339.41,
@@ -2826,7 +2827,7 @@
           0.965331,
           0.962812,
           0.96246,
-          0.966854
+          0.964107
         ],
         "cash_pct": [
           100.0,
@@ -2838,7 +2839,7 @@
           0.02,
           96.82,
           96.85,
-          0.01
+          34.7
         ]
       },
       "trades": [
@@ -3876,6 +3877,14 @@
           "type": "afternoon_scan",
           "action": "sell_stop_loss:600072,601187; sell_bbi:002040; hold:003036,600683,301268,300931",
           "summary": "尾盘扫描：1）止损卖出中船科技@13.01（成本13.16-5tick触发）；2）止损卖出厦门银行@7.33（成本7.49-5tick触发）；3）破BBI清仓南京港@10.90（BBI=11.04，此前已止盈1/2）。扫描23只候选，12只score≥65但无板块集中信号，不追入。当前持仓4只（泰坦股份/京投发展/铭利达/通用电梯），现金335万。",
+          "detail": ""
+        },
+        {
+          "date": "2026-03-09",
+          "time": "15:12",
+          "type": "close_update",
+          "action": "hold",
+          "summary": "收盘更新：4只持仓均小幅盈利，无止盈止损触发。泰坦股份+0.22%、京投发展+1.99%、铭利达+1.88%、通用电梯+1.92%。NAV=0.964107，继续持有。",
           "detail": ""
         }
       ],
