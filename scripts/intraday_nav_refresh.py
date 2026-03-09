@@ -304,16 +304,20 @@ def main():
         print(f"  {player.get('emoji','?')} {player.get('name', pid)}: NAV={nav:.4f} ({stats['total_return_pct']:+.2f}%), "
               f"updated {updated_count}/{len(positions)} prices", file=sys.stderr)
     
-    # 更新基准
+    # 更新基准（盘中覆盖当天值，不追加新日期）
     if benchmark_nav is not None:
         bm = data.get("benchmark", {})
         bm_dates = bm.get("dates", [])
         bm_navs = bm.get("nav", [])
-        bm_time_label = datetime.now().strftime("%m-%d %H:%M")
-        if bm_dates and bm_dates[-1] == bm_time_label:
+        if bm_dates and bm_dates[-1] == today:
+            # 当天已有收盘数据点 → 盘中覆盖
+            bm_navs[-1] = benchmark_nav
+        elif bm_dates and len(bm_dates[-1]) <= 11 and bm_dates[-1][:10] == today:
+            # 兼容：之前可能写入了 YYYY-MM-DD 格式
             bm_navs[-1] = benchmark_nav
         else:
-            bm_dates.append(bm_time_label)
+            # 当天首次 → 追加新日期（YYYY-MM-DD格式）
+            bm_dates.append(today)
             bm_navs.append(benchmark_nav)
         bm["dates"] = bm_dates
         bm["nav"] = bm_navs
