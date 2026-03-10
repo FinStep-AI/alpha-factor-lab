@@ -6,7 +6,7 @@
     "benchmark": "000300",
     "benchmark_name": "沪深300",
     "created_at": "2026-02-23 22:14:25",
-    "updated_at": "2026-03-10 11:30:04",
+    "updated_at": "2026-03-10 12:00:06",
     "status": "active",
     "players_count": 6
   },
@@ -261,7 +261,7 @@
           }
         },
         "total_value": 10592259.36,
-        "last_update": "2026-03-10 11:30:04"
+        "last_update": "2026-03-10 12:00:06"
       },
       "nav_history": {
         "dates": [
@@ -2337,7 +2337,7 @@
         "cash": 9641272.190000001,
         "positions": {},
         "total_value": 10000000.0,
-        "last_update": "2026-03-10 11:30:04"
+        "last_update": "2026-03-10 12:00:06"
       },
       "nav_history": {
         "dates": [
@@ -2562,7 +2562,7 @@
         "cash": 10000000.0,
         "positions": {},
         "total_value": 10000000.0,
-        "last_update": "2026-03-10 11:30:04"
+        "last_update": "2026-03-10 12:00:06"
       },
       "nav_history": {
         "dates": [
@@ -2892,7 +2892,7 @@
           }
         },
         "total_value": 9812799.54,
-        "last_update": "2026-03-10 11:30:04"
+        "last_update": "2026-03-10 12:00:06"
       },
       "nav_history": {
         "dates": [
@@ -4129,7 +4129,7 @@
         "cash": 10000000.0,
         "positions": {},
         "total_value": 10000000.0,
-        "last_update": "2026-03-10 11:30:04"
+        "last_update": "2026-03-10 12:00:06"
       },
       "trades": [],
       "nav_history": {
@@ -4315,7 +4315,7 @@
             "entry_date": "2026-03-10"
           }
         },
-        "last_update": "2026-03-10 11:30:04"
+        "last_update": "2026-03-10 12:00:06"
       },
       "trades": [
         {
@@ -4464,7 +4464,7 @@
       0.990228,
       0.989994,
       0.980439,
-      0.991093
+      0.991085
     ],
     "start_value": 4707.54
   },
@@ -4537,7 +4537,7 @@
         "rank": 6
       }
     ],
-    "updated_at": "2026-03-10 11:30:04"
+    "updated_at": "2026-03-10 12:00:06"
   },
   "quant": {
     "decisions": [
