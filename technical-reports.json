@@ -828,5 +828,60 @@
     "trend": "弱势反弹",
     "support": "33.47 / 32.89",
     "resistance": "35.12 / 36.10 / 39.30"
+  },
+  {
+    "code": "300807",
+    "name": "天迈科技",
+    "market": "SZ",
+    "date": "2026-03-10",
+    "trend": "震荡偏弱",
+    "chart_file": "charts/300807_chart.png",
+    "support": [
+      50.47,
+      48.0
+    ],
+    "resistance": [
+      53.4,
+      56.32
+    ],
+    "signals": [
+      {
+        "date": "2026-03-05",
+        "type": "buy",
+        "desc": "BOLL下轨反弹"
+      },
+      {
+        "date": "2026-03-05",
+        "type": "sell",
+        "desc": "MA5下穿MA10"
+      },
+      {
+        "date": "2026-03-03",
+        "type": "sell",
+        "desc": "MACD死叉"
+      }
+    ],
+    "indicators": {
+      "price": 53.4,
+      "ma5": 52.0,
+      "ma10": 53.01,
+      "ma20": 53.4,
+      "ma60": 53.77,
+      "rsi6": 48.8,
+      "rsi12": null,
+      "kdj_k": 35.2,
+      "kdj_d": null,
+      "kdj_j": null,
+      "macd": null,
+      "macd_signal": null,
+      "macd_hist": null,
+      "boll_upper": 56.32,
+      "boll_mid": 53.4,
+      "boll_lower": 50.47,
+      "obv_trend": null,
+      "volume_ratio": 1.054
+    },
+    "analysis": "均线完全空头排列MA5(52.0)<MA10(53.0)<MA20(53.4)<MA60(53.8)，MACD死叉运行中。3/5触BOLL下轨50.47获支撑反弹，3/10放量+3.6%收于53.4站上MA5。但上方MA10/MA20/MA60压力密集（53.0-53.8区间），突破困难。KDJ K=35低位，RSI=48.8中性偏弱。若能放量突破MA60(53.8)则打开上行空间，否则继续50-54区间震荡。短线可关注BOLL下轨50.5支撑，跌破则看48。",
+    "recommendation": "技术面偏空，空头排列未改变。短线50.5支撑如不破可博弹，但上方53.8压力重。中线不建议参与。"
   }
 ]
