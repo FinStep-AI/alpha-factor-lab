@@ -6,7 +6,7 @@
     "benchmark": "000300",
     "benchmark_name": "沪深300",
     "created_at": "2026-02-23 22:14:25",
-    "updated_at": "2026-03-10 14:00:04",
+    "updated_at": "2026-03-10 14:51:48",
     "status": "active",
     "players_count": 6
   },
@@ -2782,7 +2782,7 @@
       "style": "趋势跟踪 · 板块轮动 · 全A股扫描 · 中长线波段",
       "description": "BBI+MA60趋势判断，KDJ低位捕捉买点，板块轮动做趋势收益。核心逻辑：阳率×盈亏比最大化。",
       "portfolio": {
-        "cash": 996.539999999688,
+        "cash": 548173.3499999997,
         "positions": {
           "003036": {
             "code": "003036",
@@ -2806,7 +2806,7 @@
             "pnl": 66390.0,
             "pnl_pct": 4.27,
             "entry_date": "2026-03-09",
-            "max_pnl_pct": 3.56
+            "max_pnl_pct": 4.13
           },
           "301268": {
             "code": "301268",
@@ -2818,7 +2818,7 @@
             "pnl": 50320.0,
             "pnl_pct": 3.24,
             "entry_date": "2026-03-09",
-            "max_pnl_pct": 1.88
+            "max_pnl_pct": 2.93
           },
           "300931": {
             "code": "300931",
@@ -2830,7 +2830,7 @@
             "pnl": 48462.0,
             "pnl_pct": 3.14,
             "entry_date": "2026-03-09",
-            "max_pnl_pct": 2.99
+            "max_pnl_pct": 3.37
           },
           "603959": {
             "code": "603959",
@@ -2841,7 +2841,8 @@
             "market_value": 560511.0,
             "pnl": 3444.0,
             "pnl_pct": 0.62,
-            "entry_date": "2026-03-10"
+            "entry_date": "2026-03-10",
+            "max_pnl_pct": 0.62
           },
           "002989": {
             "code": "002989",
@@ -2852,7 +2853,8 @@
             "market_value": 560376.0,
             "pnl": 3258.0,
             "pnl_pct": 0.58,
-            "entry_date": "2026-03-10"
+            "entry_date": "2026-03-10",
+            "max_pnl_pct": 0.1
           },
           "002463": {
             "code": "002463",
@@ -2863,18 +2865,8 @@
             "market_value": 561443.0,
             "pnl": 6716.0,
             "pnl_pct": 1.21,
-            "entry_date": "2026-03-10"
-          },
-          "603399": {
-            "code": "603399",
-            "name": "永杉锂业",
-            "volume": 48900,
-            "avg_cost": 11.4,
-            "current_price": 11.22,
-            "market_value": 548658.0,
-            "pnl": -8802.0,
-            "pnl_pct": -1.58,
-            "entry_date": "2026-03-10"
+            "entry_date": "2026-03-10",
+            "max_pnl_pct": 0.79
           },
           "300258": {
             "code": "300258",
@@ -2885,7 +2877,8 @@
             "market_value": 564201.0,
             "pnl": 7380.0,
             "pnl_pct": 1.33,
-            "entry_date": "2026-03-10"
+            "entry_date": "2026-03-10",
+            "max_pnl_pct": 0.93
           },
           "002634": {
             "code": "002634",
@@ -2896,10 +2889,11 @@
             "market_value": 576568.0,
             "pnl": 19400.0,
             "pnl_pct": 3.48,
-            "entry_date": "2026-03-10"
+            "entry_date": "2026-03-10",
+            "max_pnl_pct": 3.34
           }
         },
-        "total_value": 9792399.54,
+        "total_value": 9790918.35,
         "last_update": "2026-03-10 14:00:04"
       },
       "nav_history": {
@@ -3968,6 +3962,25 @@
           "pnl": 0,
           "pnl_pct": 0,
           "reason": "主策略信号score=63,J=11.9<13四大硬条件全满足,量比6.9异常放量,唯一主通道信号"
+        },
+        {
+          "date": "2026-03-10",
+          "code": "603399",
+          "name": "永杉锂业",
+          "direction": "sell",
+          "price": 11.21,
+          "volume": 48900,
+          "amount": 548169.0,
+          "fees": {
+            "commission": 164.45,
+            "stamp_duty": 274.08,
+            "transfer_fee": 5.48,
+            "slippage_cost": 548.17,
+            "total": 992.19
+          },
+          "pnl": -9291.0,
+          "pnl_pct": -1.67,
+          "reason": "尾盘止损：价格11.21≤止损线11.35（成本11.40-5tick），全清48900股"
         }
       ],
       "decisions": [
@@ -4109,11 +4122,19 @@
           "action": "buy",
           "summary": "晨扫：全A扫描5085只→30候选(1主策略+3单针下30+26金叉缩量回调)。热门板块：土木工程建筑业。持仓4只均无止盈止损触发。新买入6只填满仓位至10只：百利科技(score93板块集中)、中天精装(VR8.3异常放量)、沪电股份(J29.3低位)、永杉锂业(J29.0低位)、精锻科技(J24.3最低)、棒杰股份(唯一主通道J=11.9)。",
           "detail": ""
+        },
+        {
+          "date": "2026-03-10",
+          "time": "14:51",
+          "type": "afternoon_scan",
+          "action": "sell_stop_loss:603399",
+          "summary": "尾盘扫描14:50：全A扫描5085只→38候选(5主策略+2单针下30+31金叉缩量回调)。板块集中:土木工程建筑业(3只)。止损卖出永杉锂业(603399)@11.21（成本11.40-5tick=11.35触发止损，亏损-1.67%）。其余9只持仓无止盈止损触发。高分候选中百利科技score80已持有、中船科技score80但3/9刚止损过不宜追回、逸豪新材涨幅+14.77%追高风险大，不追入新标的。当前持仓9只+现金55万。",
+          "detail": ""
         }
       ],
       "rebalances": [],
       "stats": {
-        "total_trades": 52,
+        "total_trades": 53,
         "win_rate": 13.64,
         "max_drawdown_pct": 4.26,
         "sharpe_ratio": -6.12,
@@ -4121,7 +4142,7 @@
         "total_return_pct": -2.08,
         "annualized_return_pct": -60.19,
         "profit_loss_ratio": 1.52,
-        "total_fees": 83565.46,
+        "total_fees": 84557.65000000001,
         "current_positions": 10,
         "turnover_rate": 0.0
       },
