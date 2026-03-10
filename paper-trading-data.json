@@ -6,7 +6,7 @@
     "benchmark": "000300",
     "benchmark_name": "沪深300",
     "created_at": "2026-02-23 22:14:25",
-    "updated_at": "2026-03-10 15:06:03",
+    "updated_at": "2026-03-10 15:12:27",
     "status": "active",
     "players_count": 6
   },
@@ -3214,10 +3214,10 @@
             "name": "泰坦股份",
             "volume": 85800,
             "avg_cost": 18.1,
-            "current_price": 18.71,
-            "market_value": 1605318.0,
-            "pnl": 52338.0,
-            "pnl_pct": 3.37,
+            "current_price": 18.65,
+            "market_value": 1600170.0,
+            "pnl": 47190.0,
+            "pnl_pct": 3.04,
             "entry_date": "2026-03-09",
             "max_pnl_pct": 4.03
           },
@@ -3226,10 +3226,10 @@
             "name": "京投发展",
             "volume": 221300,
             "avg_cost": 7.02,
-            "current_price": 7.32,
-            "market_value": 1619916.0,
-            "pnl": 66390.0,
-            "pnl_pct": 4.27,
+            "current_price": 7.3,
+            "market_value": 1615490.0,
+            "pnl": 61964.0,
+            "pnl_pct": 3.99,
             "entry_date": "2026-03-09",
             "max_pnl_pct": 4.13
           },
@@ -3238,22 +3238,22 @@
             "name": "铭利达",
             "volume": 68000,
             "avg_cost": 22.84,
-            "current_price": 23.58,
-            "market_value": 1603440.0,
-            "pnl": 50320.0,
-            "pnl_pct": 3.24,
+            "current_price": 23.6,
+            "market_value": 1604800.0,
+            "pnl": 51680.0,
+            "pnl_pct": 3.33,
             "entry_date": "2026-03-09",
-            "max_pnl_pct": 2.93
+            "max_pnl_pct": 3.33
           },
           "300931": {
             "code": "300931",
             "name": "通用电梯",
             "volume": 118200,
             "avg_cost": 13.05,
-            "current_price": 13.46,
-            "market_value": 1590972.0,
-            "pnl": 48462.0,
-            "pnl_pct": 3.14,
+            "current_price": 13.47,
+            "market_value": 1592154.0,
+            "pnl": 49644.0,
+            "pnl_pct": 3.22,
             "entry_date": "2026-03-09",
             "max_pnl_pct": 3.37
           },
@@ -3274,34 +3274,34 @@
             "name": "中天精装",
             "volume": 18100,
             "avg_cost": 30.78,
-            "current_price": 30.96,
-            "market_value": 560376.0,
-            "pnl": 3258.0,
-            "pnl_pct": 0.58,
+            "current_price": 30.86,
+            "market_value": 558566.0,
+            "pnl": 1448.0,
+            "pnl_pct": 0.26,
             "entry_date": "2026-03-10",
-            "max_pnl_pct": 0.1
+            "max_pnl_pct": 0.26
           },
           "002463": {
             "code": "002463",
             "name": "沪电股份",
             "volume": 7300,
             "avg_cost": 75.99,
-            "current_price": 76.91,
-            "market_value": 561443.0,
-            "pnl": 6716.0,
-            "pnl_pct": 1.21,
+            "current_price": 76.65,
+            "market_value": 559545.0,
+            "pnl": 4818.0,
+            "pnl_pct": 0.87,
             "entry_date": "2026-03-10",
-            "max_pnl_pct": 0.79
+            "max_pnl_pct": 0.87
           },
           "300258": {
             "code": "300258",
             "name": "精锻科技",
             "volume": 36900,
             "avg_cost": 15.09,
-            "current_price": 15.29,
-            "market_value": 564201.0,
-            "pnl": 7380.0,
-            "pnl_pct": 1.33,
+            "current_price": 15.22,
+            "market_value": 561618.0,
+            "pnl": 4797.0,
+            "pnl_pct": 0.86,
             "entry_date": "2026-03-10",
             "max_pnl_pct": 0.93
           },
@@ -3310,16 +3310,16 @@
             "name": "棒杰股份",
             "volume": 77600,
             "avg_cost": 7.18,
-            "current_price": 7.43,
-            "market_value": 576568.0,
-            "pnl": 19400.0,
-            "pnl_pct": 3.48,
+            "current_price": 7.44,
+            "market_value": 577344.0,
+            "pnl": 20176.0,
+            "pnl_pct": 3.62,
             "entry_date": "2026-03-10",
-            "max_pnl_pct": 3.34
+            "max_pnl_pct": 3.62
           }
         },
-        "total_value": 9790918.35,
-        "last_update": "2026-03-10 14:00:04"
+        "total_value": 9778371.35,
+        "last_update": "2026-03-10"
       },
       "nav_history": {
         "dates": [
@@ -3346,7 +3346,7 @@
           0.962812,
           0.96246,
           0.964107,
-          0.97924
+          0.977837
         ],
         "cash_pct": [
           100.0,
@@ -3359,7 +3359,7 @@
           96.82,
           96.85,
           34.7,
-          0.01
+          5.61
         ]
       },
       "trades": [
@@ -4554,6 +4554,14 @@
           "type": "afternoon_scan",
           "action": "sell_stop_loss:603399",
           "summary": "尾盘扫描14:50：全A扫描5085只→38候选(5主策略+2单针下30+31金叉缩量回调)。板块集中:土木工程建筑业(3只)。止损卖出永杉锂业(603399)@11.21（成本11.40-5tick=11.35触发止损，亏损-1.67%）。其余9只持仓无止盈止损触发。高分候选中百利科技score80已持有、中船科技score80但3/9刚止损过不宜追回、逸豪新材涨幅+14.77%追高风险大，不追入新标的。当前持仓9只+现金55万。",
+          "detail": ""
+        },
+        {
+          "date": "2026-03-10",
+          "time": "15:12",
+          "type": "close_update",
+          "action": "hold",
+          "summary": "收盘更新：9只持仓均无止盈止损触发。泰坦股份+3.04%、京投发展+3.99%、铭利达+3.33%、通用电梯+3.22%、百利科技+0.62%、中天精装+0.26%、沪电股份+0.87%、精锻科技+0.86%、棒杰股份+3.62%。今日止损卖出永杉锂业（尾盘已执行）。NAV=0.977837，较昨日+1.42%。",
           "detail": ""
         }
       ],
