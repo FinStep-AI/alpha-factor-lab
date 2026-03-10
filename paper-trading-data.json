@@ -6,7 +6,7 @@
     "benchmark": "000300",
     "benchmark_name": "沪深300",
     "created_at": "2026-02-23 22:14:25",
-    "updated_at": "2026-03-10 14:55:50",
+    "updated_at": "2026-03-10 15:06:03",
     "status": "active",
     "players_count": 6
   },
@@ -17,250 +17,505 @@
       "style": "LightGBM机器学习选股 · 99特征 · 中证1000 · 周度调仓",
       "description": "10因子+K线衍生→99维特征矩阵→LightGBM预测超额收益→风控过滤→TOP25组合",
       "portfolio": {
-        "cash": 56941.36,
+        "cash": 261631.03,
         "positions": {
-          "688503.SH": {
-            "name": "",
-            "shares": 4800,
-            "cost_price": 89.41,
-            "current_price": 93.8,
-            "market_value": 450240.0,
-            "entry_date": "2026-03-09",
-            "pnl": 21072.0,
-            "pnl_pct": 4.91
+          "688232.SH": {
+            "code": "688232.SH",
+            "name": "新点软件",
+            "volume": 16400,
+            "avg_cost": 25.66,
+            "current_price": 25.66,
+            "market_value": 420824.0,
+            "pnl": 0.0,
+            "pnl_pct": 0.0,
+            "entry_date": "2026-03-02"
           },
-          "688343.SH": {
-            "name": "",
-            "shares": 4400,
-            "cost_price": 97.87,
-            "current_price": 98.02,
-            "market_value": 431288.0,
-            "entry_date": "2026-03-09",
-            "pnl": 660.0,
-            "pnl_pct": 0.15
+          "300188.SZ": {
+            "code": "300188.SZ",
+            "name": "国投智能",
+            "volume": 30300,
+            "avg_cost": 13.87,
+            "current_price": 13.87,
+            "market_value": 420261.0,
+            "pnl": 0.0,
+            "pnl_pct": 0.0,
+            "entry_date": "2026-03-02"
           },
-          "300475.SZ": {
-            "name": "",
-            "shares": 2800,
-            "cost_price": 155.04,
-            "current_price": 161.82,
-            "market_value": 453096.0,
-            "entry_date": "2026-03-09",
-            "pnl": 18984.0,
-            "pnl_pct": 4.37
+          "688552.SH": {
+            "code": "688552.SH",
+            "name": "航天南湖",
+            "volume": 9100,
+            "avg_cost": 46.0,
+            "current_price": 46.0,
+            "market_value": 418600.0,
+            "pnl": 0.0,
+            "pnl_pct": 0.0,
+            "entry_date": "2026-03-02"
           },
-          "300034.SZ": {
-            "name": "",
-            "shares": 19400,
-            "cost_price": 22.4,
-            "current_price": 22.25,
-            "market_value": 431650.0,
-            "entry_date": "2026-03-09",
-            "pnl": -2910.0,
-            "pnl_pct": -0.67
+          "301571.SZ": {
+            "code": "301571.SZ",
+            "name": "国科天成",
+            "volume": 6800,
+            "avg_cost": 61.88,
+            "current_price": 61.88,
+            "market_value": 420784.0,
+            "pnl": 0.0,
+            "pnl_pct": 0.0,
+            "entry_date": "2026-03-02"
           },
-          "600744.SH": {
-            "name": "",
-            "shares": 47900,
-            "cost_price": 9.08,
-            "current_price": 9.09,
-            "market_value": 435411.0,
-            "entry_date": "2026-03-09",
-            "pnl": 479.0,
-            "pnl_pct": 0.11
+          "301376.SZ": {
+            "code": "301376.SZ",
+            "name": "致欧科技",
+            "volume": 23200,
+            "avg_cost": 18.11,
+            "current_price": 18.11,
+            "market_value": 420152.0,
+            "pnl": 0.0,
+            "pnl_pct": 0.0,
+            "entry_date": "2026-03-02"
+          },
+          "300579.SZ": {
+            "code": "300579.SZ",
+            "name": "数字认证",
+            "volume": 13900,
+            "avg_cost": 30.08,
+            "current_price": 30.08,
+            "market_value": 418112.0,
+            "pnl": 0.0,
+            "pnl_pct": 0.0,
+            "entry_date": "2026-03-02"
+          },
+          "300341.SZ": {
+            "code": "300341.SZ",
+            "name": "麦克奥迪",
+            "volume": 25800,
+            "avg_cost": 16.27,
+            "current_price": 16.27,
+            "market_value": 419766.0,
+            "pnl": 0.0,
+            "pnl_pct": 0.0,
+            "entry_date": "2026-03-02"
+          },
+          "601811.SH": {
+            "code": "601811.SH",
+            "name": "新华文轩",
+            "volume": 30300,
+            "avg_cost": 13.86,
+            "current_price": 13.86,
+            "market_value": 419958.0,
+            "pnl": 0.0,
+            "pnl_pct": 0.0,
+            "entry_date": "2026-03-02"
+          },
+          "688177.SH": {
+            "code": "688177.SH",
+            "name": "百奥泰",
+            "volume": 18900,
+            "avg_cost": 22.21,
+            "current_price": 22.21,
+            "market_value": 419769.0,
+            "pnl": 0.0,
+            "pnl_pct": 0.0,
+            "entry_date": "2026-03-02"
+          },
+          "300768.SZ": {
+            "code": "300768.SZ",
+            "name": "迪普科技",
+            "volume": 23400,
+            "avg_cost": 17.93,
+            "current_price": 17.93,
+            "market_value": 419562.0,
+            "pnl": 0.0,
+            "pnl_pct": 0.0,
+            "entry_date": "2026-03-02"
+          },
+          "601858.SH": {
+            "code": "601858.SH",
+            "name": "中国科传",
+            "volume": 19300,
+            "avg_cost": 21.72,
+            "current_price": 21.72,
+            "market_value": 419196.0,
+            "pnl": 0.0,
+            "pnl_pct": 0.0,
+            "entry_date": "2026-03-02"
+          },
+          "688107.SH": {
+            "code": "688107.SH",
+            "name": "安路科技",
+            "volume": 13000,
+            "avg_cost": 32.17,
+            "current_price": 32.17,
+            "market_value": 418210.0,
+            "pnl": 0.0,
+            "pnl_pct": 0.0,
+            "entry_date": "2026-03-02"
           },
           "600821.SH": {
+            "code": "600821.SH",
+            "name": "金开新能",
+            "volume": 107400,
+            "avg_cost": 7.9589,
+            "current_price": 8.6,
+            "market_value": 923640.0,
+            "pnl": 68854.14,
+            "pnl_pct": 8.06,
+            "entry_date": "2026-03-02"
+          },
+          "002345.SZ": {
+            "code": "002345.SZ",
+            "name": "潮宏基",
+            "volume": 36800,
+            "avg_cost": 11.43,
+            "current_price": 11.43,
+            "market_value": 420624.0,
+            "pnl": 0.0,
+            "pnl_pct": 0.0,
+            "entry_date": "2026-03-02"
+          },
+          "301592.SZ": {
+            "code": "301592.SZ",
+            "name": "六九一二",
+            "volume": 3400,
+            "avg_cost": 122.88,
+            "current_price": 122.88,
+            "market_value": 417792.0,
+            "pnl": 0.0,
+            "pnl_pct": 0.0,
+            "entry_date": "2026-03-02"
+          },
+          "688433.SH": {
+            "code": "688433.SH",
+            "name": "华曙高科",
+            "volume": 4000,
+            "avg_cost": 103.16,
+            "current_price": 103.16,
+            "market_value": 412640.0,
+            "pnl": 0.0,
+            "pnl_pct": 0.0,
+            "entry_date": "2026-03-02"
+          },
+          "002946.SZ": {
+            "code": "002946.SZ",
+            "name": "新乳业",
+            "volume": 22000,
+            "avg_cost": 19.06,
+            "current_price": 19.06,
+            "market_value": 419320.0,
+            "pnl": 0.0,
+            "pnl_pct": 0.0,
+            "entry_date": "2026-03-02"
+          },
+          "300687.SZ": {
+            "code": "300687.SZ",
+            "name": "赛意信息",
+            "volume": 18900,
+            "avg_cost": 22.22,
+            "current_price": 22.22,
+            "market_value": 419958.0,
+            "pnl": 0.0,
+            "pnl_pct": 0.0,
+            "entry_date": "2026-03-02"
+          },
+          "688182.SH": {
+            "code": "688182.SH",
+            "name": "灿勤科技",
+            "volume": 12500,
+            "avg_cost": 33.56,
+            "current_price": 33.56,
+            "market_value": 419500.0,
+            "pnl": 0.0,
+            "pnl_pct": 0.0,
+            "entry_date": "2026-03-02"
+          },
+          "000156.SZ": {
+            "code": "000156.SZ",
+            "name": "华数传媒",
+            "volume": 51300,
+            "avg_cost": 8.19,
+            "current_price": 8.19,
+            "market_value": 420147.0,
+            "pnl": 0.0,
+            "pnl_pct": 0.0,
+            "entry_date": "2026-03-02"
+          },
+          "301215.SZ": {
+            "code": "301215.SZ",
+            "name": "中汽股份",
+            "volume": 59800,
+            "avg_cost": 7.03,
+            "current_price": 7.03,
+            "market_value": 420394.0,
+            "pnl": 0.0,
+            "pnl_pct": 0.0,
+            "entry_date": "2026-03-02"
+          },
+          "301207.SZ": {
+            "code": "301207.SZ",
+            "name": "华兰疫苗",
+            "volume": 21100,
+            "avg_cost": 19.9,
+            "current_price": 19.9,
+            "market_value": 419890.0,
+            "pnl": 0.0,
+            "pnl_pct": 0.0,
+            "entry_date": "2026-03-02"
+          },
+          "688503.SH": {
+            "code": "688503.SH",
             "name": "",
-            "shares": 50500,
-            "cost_price": 8.6,
-            "current_price": 9.63,
-            "market_value": 486315.0,
-            "entry_date": "2026-03-09",
-            "pnl": 52015.0,
-            "pnl_pct": 11.98
+            "volume": 4800,
+            "avg_cost": 89.41,
+            "current_price": 89.41,
+            "market_value": 429168.0,
+            "pnl": 0.0,
+            "pnl_pct": 0.0,
+            "entry_date": "2026-03-09"
+          },
+          "688343.SH": {
+            "code": "688343.SH",
+            "name": "",
+            "volume": 4400,
+            "avg_cost": 97.87,
+            "current_price": 97.87,
+            "market_value": 430628.0,
+            "pnl": 0.0,
+            "pnl_pct": 0.0,
+            "entry_date": "2026-03-09"
+          },
+          "300475.SZ": {
+            "code": "300475.SZ",
+            "name": "",
+            "volume": 2800,
+            "avg_cost": 155.04,
+            "current_price": 155.04,
+            "market_value": 434112.0,
+            "pnl": 0.0,
+            "pnl_pct": 0.0,
+            "entry_date": "2026-03-09"
+          },
+          "300034.SZ": {
+            "code": "300034.SZ",
+            "name": "",
+            "volume": 19400,
+            "avg_cost": 22.4,
+            "current_price": 22.4,
+            "market_value": 434560.0,
+            "pnl": 0.0,
+            "pnl_pct": 0.0,
+            "entry_date": "2026-03-09"
+          },
+          "600744.SH": {
+            "code": "600744.SH",
+            "name": "",
+            "volume": 47900,
+            "avg_cost": 9.08,
+            "current_price": 9.08,
+            "market_value": 434932.0,
+            "pnl": 0.0,
+            "pnl_pct": 0.0,
+            "entry_date": "2026-03-09"
           },
           "601208.SH": {
+            "code": "601208.SH",
             "name": "",
-            "shares": 14100,
-            "cost_price": 30.67,
-            "current_price": 31.54,
-            "market_value": 444714.0,
-            "entry_date": "2026-03-09",
-            "pnl": 12267.0,
-            "pnl_pct": 2.84
+            "volume": 14100,
+            "avg_cost": 30.67,
+            "current_price": 30.67,
+            "market_value": 432447.0,
+            "pnl": 0.0,
+            "pnl_pct": 0.0,
+            "entry_date": "2026-03-09"
           },
           "300666.SZ": {
+            "code": "300666.SZ",
             "name": "",
-            "shares": 2900,
-            "cost_price": 148.37,
-            "current_price": 153.7,
-            "market_value": 445730.0,
-            "entry_date": "2026-03-09",
-            "pnl": 15457.0,
-            "pnl_pct": 3.59
+            "volume": 2900,
+            "avg_cost": 148.37,
+            "current_price": 148.37,
+            "market_value": 430273.0,
+            "pnl": 0.0,
+            "pnl_pct": 0.0,
+            "entry_date": "2026-03-09"
           },
           "600259.SH": {
+            "code": "600259.SH",
             "name": "",
-            "shares": 4700,
-            "cost_price": 91.82,
-            "current_price": 93.86,
-            "market_value": 441142.0,
-            "entry_date": "2026-03-09",
-            "pnl": 9588.0,
-            "pnl_pct": 2.22
+            "volume": 4700,
+            "avg_cost": 91.82,
+            "current_price": 91.82,
+            "market_value": 431554.0,
+            "pnl": 0.0,
+            "pnl_pct": 0.0,
+            "entry_date": "2026-03-09"
           },
           "600452.SH": {
+            "code": "600452.SH",
             "name": "",
-            "shares": 27900,
-            "cost_price": 15.55,
-            "current_price": 15.96,
-            "market_value": 445284.0,
-            "entry_date": "2026-03-09",
-            "pnl": 11439.0,
-            "pnl_pct": 2.64
+            "volume": 27900,
+            "avg_cost": 15.55,
+            "current_price": 15.55,
+            "market_value": 433845.0,
+            "pnl": 0.0,
+            "pnl_pct": 0.0,
+            "entry_date": "2026-03-09"
           },
           "300618.SZ": {
+            "code": "300618.SZ",
             "name": "",
-            "shares": 9000,
-            "cost_price": 48.23,
-            "current_price": 48.59,
-            "market_value": 437310.0,
-            "entry_date": "2026-03-09",
-            "pnl": 3240.0,
-            "pnl_pct": 0.75
+            "volume": 9000,
+            "avg_cost": 48.23,
+            "current_price": 48.23,
+            "market_value": 434070.0,
+            "pnl": 0.0,
+            "pnl_pct": 0.0,
+            "entry_date": "2026-03-09"
           },
           "600456.SH": {
+            "code": "600456.SH",
             "name": "",
-            "shares": 10700,
-            "cost_price": 40.33,
-            "current_price": 39.66,
-            "market_value": 424362.0,
-            "entry_date": "2026-03-09",
-            "pnl": -7169.0,
-            "pnl_pct": -1.66
+            "volume": 10700,
+            "avg_cost": 40.33,
+            "current_price": 40.33,
+            "market_value": 431531.0,
+            "pnl": 0.0,
+            "pnl_pct": 0.0,
+            "entry_date": "2026-03-09"
           },
           "002176.SZ": {
+            "code": "002176.SZ",
             "name": "",
-            "shares": 43500,
-            "cost_price": 9.98,
-            "current_price": 10.15,
-            "market_value": 441525.0,
-            "entry_date": "2026-03-09",
-            "pnl": 7395.0,
-            "pnl_pct": 1.7
+            "volume": 43500,
+            "avg_cost": 9.98,
+            "current_price": 9.98,
+            "market_value": 434130.0,
+            "pnl": 0.0,
+            "pnl_pct": 0.0,
+            "entry_date": "2026-03-09"
           },
           "002182.SZ": {
+            "code": "002182.SZ",
             "name": "",
-            "shares": 21600,
-            "cost_price": 20.06,
-            "current_price": 20.05,
-            "market_value": 433080.0,
-            "entry_date": "2026-03-09",
-            "pnl": -216.0,
-            "pnl_pct": -0.05
+            "volume": 21600,
+            "avg_cost": 20.06,
+            "current_price": 20.06,
+            "market_value": 433296.0,
+            "pnl": 0.0,
+            "pnl_pct": 0.0,
+            "entry_date": "2026-03-09"
           },
           "301175.SZ": {
+            "code": "301175.SZ",
             "name": "",
-            "shares": 58900,
-            "cost_price": 7.38,
-            "current_price": 7.42,
-            "market_value": 437038.0,
-            "entry_date": "2026-03-09",
-            "pnl": 2356.0,
-            "pnl_pct": 0.54
+            "volume": 58900,
+            "avg_cost": 7.38,
+            "current_price": 7.38,
+            "market_value": 434682.0,
+            "pnl": 0.0,
+            "pnl_pct": 0.0,
+            "entry_date": "2026-03-09"
           },
           "000899.SZ": {
+            "code": "000899.SZ",
             "name": "",
-            "shares": 29900,
-            "cost_price": 14.53,
-            "current_price": 14.58,
-            "market_value": 435942.0,
-            "entry_date": "2026-03-09",
-            "pnl": 1495.0,
-            "pnl_pct": 0.34
+            "volume": 29900,
+            "avg_cost": 14.53,
+            "current_price": 14.53,
+            "market_value": 434447.0,
+            "pnl": 0.0,
+            "pnl_pct": 0.0,
+            "entry_date": "2026-03-09"
           },
           "002326.SZ": {
+            "code": "002326.SZ",
             "name": "",
-            "shares": 19000,
-            "cost_price": 22.79,
-            "current_price": 23.24,
-            "market_value": 441560.0,
-            "entry_date": "2026-03-09",
-            "pnl": 8550.0,
-            "pnl_pct": 1.97
+            "volume": 19000,
+            "avg_cost": 22.79,
+            "current_price": 22.79,
+            "market_value": 433010.0,
+            "pnl": 0.0,
+            "pnl_pct": 0.0,
+            "entry_date": "2026-03-09"
           },
           "002378.SZ": {
+            "code": "002378.SZ",
             "name": "",
-            "shares": 9700,
-            "cost_price": 44.7,
-            "current_price": 44.3,
-            "market_value": 429710.0,
-            "entry_date": "2026-03-09",
-            "pnl": -3880.0,
-            "pnl_pct": -0.89
+            "volume": 9700,
+            "avg_cost": 44.7,
+            "current_price": 44.7,
+            "market_value": 433590.0,
+            "pnl": 0.0,
+            "pnl_pct": 0.0,
+            "entry_date": "2026-03-09"
           },
           "300182.SZ": {
+            "code": "300182.SZ",
             "name": "",
-            "shares": 67000,
-            "cost_price": 6.49,
-            "current_price": 6.55,
-            "market_value": 438850.0,
-            "entry_date": "2026-03-09",
-            "pnl": 4020.0,
-            "pnl_pct": 0.92
+            "volume": 67000,
+            "avg_cost": 6.49,
+            "current_price": 6.49,
+            "market_value": 434830.0,
+            "pnl": 0.0,
+            "pnl_pct": 0.0,
+            "entry_date": "2026-03-09"
           },
           "600206.SH": {
+            "code": "600206.SH",
             "name": "",
-            "shares": 18500,
-            "cost_price": 23.46,
-            "current_price": 23.58,
-            "market_value": 436230.0,
-            "entry_date": "2026-03-09",
-            "pnl": 2220.0,
-            "pnl_pct": 0.51
+            "volume": 18500,
+            "avg_cost": 23.46,
+            "current_price": 23.46,
+            "market_value": 434010.0,
+            "pnl": 0.0,
+            "pnl_pct": 0.0,
+            "entry_date": "2026-03-09"
           },
           "300821.SZ": {
+            "code": "300821.SZ",
             "name": "",
-            "shares": 31400,
-            "cost_price": 13.82,
-            "current_price": 13.57,
-            "market_value": 426098.0,
-            "entry_date": "2026-03-09",
-            "pnl": -7850.0,
-            "pnl_pct": -1.81
+            "volume": 31400,
+            "avg_cost": 13.82,
+            "current_price": 13.82,
+            "market_value": 433948.0,
+            "pnl": 0.0,
+            "pnl_pct": 0.0,
+            "entry_date": "2026-03-09"
           },
           "688726.SH": {
+            "code": "688726.SH",
             "name": "",
-            "shares": 6800,
-            "cost_price": 63.29,
-            "current_price": 66.3,
-            "market_value": 450840.0,
-            "entry_date": "2026-03-09",
-            "pnl": 20468.0,
-            "pnl_pct": 4.76
+            "volume": 6800,
+            "avg_cost": 63.29,
+            "current_price": 63.29,
+            "market_value": 430372.0,
+            "pnl": 0.0,
+            "pnl_pct": 0.0,
+            "entry_date": "2026-03-09"
           },
           "000762.SZ": {
+            "code": "000762.SZ",
             "name": "",
-            "shares": 15000,
-            "cost_price": 28.85,
-            "current_price": 29.69,
-            "market_value": 445350.0,
-            "entry_date": "2026-03-09",
-            "pnl": 12600.0,
-            "pnl_pct": 2.91
+            "volume": 15000,
+            "avg_cost": 28.85,
+            "current_price": 28.85,
+            "market_value": 432750.0,
+            "pnl": 0.0,
+            "pnl_pct": 0.0,
+            "entry_date": "2026-03-09"
           },
           "688205.SH": {
+            "code": "688205.SH",
             "name": "",
-            "shares": 2500,
-            "cost_price": 169.0,
-            "current_price": 182.25,
-            "market_value": 455625.0,
-            "entry_date": "2026-03-09",
-            "pnl": 33125.0,
-            "pnl_pct": 7.84
+            "volume": 2500,
+            "avg_cost": 169.0,
+            "current_price": 169.0,
+            "market_value": 422500.0,
+            "pnl": 0.0,
+            "pnl_pct": 0.0,
+            "entry_date": "2026-03-09"
           }
         },
-        "total_value": 10655331.36,
+        "total_value": 19939415.03,
         "last_update": "2026-03-10 14:00:04"
       },
       "nav_history": {
@@ -288,7 +543,7 @@
           1.018722,
           1.032019,
           1.047998,
-          1.065533
+          1.993942
         ],
         "cash_pct": [
           0.4,
@@ -1469,493 +1724,818 @@
           "date": "2026-03-09",
           "code": "000603.SZ",
           "name": "盛达资源",
-          "action": "sell",
-          "shares": 10900,
           "price": 47.66,
           "amount": 519494.0,
-          "cost": 1038.99,
           "pnl": -3327.99,
-          "reason": "LightGBM weekly rebalance"
+          "reason": "LightGBM weekly rebalance",
+          "direction": "sell",
+          "volume": 10900,
+          "fees": {
+            "total": 1038.99,
+            "commission": 1038.99,
+            "stamp_duty": 0,
+            "transfer_fee": 0,
+            "slippage_cost": 0
+          },
+          "pnl_pct": 0
         },
         {
           "date": "2026-03-09",
           "code": "000761.SZ",
           "name": "本钢板材",
-          "action": "sell",
-          "shares": 145300,
           "price": 3.69,
           "amount": 536157.0,
-          "cost": 1072.31,
           "pnl": 9098.69,
-          "reason": "LightGBM weekly rebalance"
+          "reason": "LightGBM weekly rebalance",
+          "direction": "sell",
+          "volume": 145300,
+          "fees": {
+            "total": 1072.31,
+            "commission": 1072.31,
+            "stamp_duty": 0,
+            "transfer_fee": 0,
+            "slippage_cost": 0
+          },
+          "pnl_pct": 0
         },
         {
           "date": "2026-03-09",
           "code": "001337.SZ",
           "name": "四川黄金",
-          "action": "sell",
-          "shares": 10900,
           "price": 57.47,
           "amount": 626423.0,
-          "cost": 1252.85,
           "pnl": 100008.15,
-          "reason": "LightGBM weekly rebalance"
+          "reason": "LightGBM weekly rebalance",
+          "direction": "sell",
+          "volume": 10900,
+          "fees": {
+            "total": 1252.85,
+            "commission": 1252.85,
+            "stamp_duty": 0,
+            "transfer_fee": 0,
+            "slippage_cost": 0
+          },
+          "pnl_pct": 0
         },
         {
           "date": "2026-03-09",
           "code": "002498.SZ",
           "name": "汉缆股份",
-          "action": "sell",
-          "shares": 74100,
           "price": 9.83,
           "amount": 728403.0,
-          "cost": 1456.81,
           "pnl": 200836.19,
-          "reason": "LightGBM weekly rebalance"
+          "reason": "LightGBM weekly rebalance",
+          "direction": "sell",
+          "volume": 74100,
+          "fees": {
+            "total": 1456.81,
+            "commission": 1456.81,
+            "stamp_duty": 0,
+            "transfer_fee": 0,
+            "slippage_cost": 0
+          },
+          "pnl_pct": 0
         },
         {
           "date": "2026-03-09",
           "code": "300257.SZ",
           "name": "开山股份",
-          "action": "sell",
-          "shares": 27300,
           "price": 25.3,
           "amount": 690690.0,
-          "cost": 1381.38,
           "pnl": 164602.62,
-          "reason": "LightGBM weekly rebalance"
+          "reason": "LightGBM weekly rebalance",
+          "direction": "sell",
+          "volume": 27300,
+          "fees": {
+            "total": 1381.38,
+            "commission": 1381.38,
+            "stamp_duty": 0,
+            "transfer_fee": 0,
+            "slippage_cost": 0
+          },
+          "pnl_pct": 0
         },
         {
           "date": "2026-03-09",
           "code": "300492.SZ",
           "name": "华图山鼎",
-          "action": "sell",
-          "shares": 6900,
           "price": 69.56,
           "amount": 479964.0,
-          "cost": 959.93,
           "pnl": -40358.93,
-          "reason": "LightGBM weekly rebalance"
+          "reason": "LightGBM weekly rebalance",
+          "direction": "sell",
+          "volume": 6900,
+          "fees": {
+            "total": 959.93,
+            "commission": 959.93,
+            "stamp_duty": 0,
+            "transfer_fee": 0,
+            "slippage_cost": 0
+          },
+          "pnl_pct": 0
         },
         {
           "date": "2026-03-09",
           "code": "301035.SZ",
           "name": "润丰股份",
-          "action": "sell",
-          "shares": 6400,
           "price": 81.16,
           "amount": 519424.0,
-          "cost": 1038.85,
           "pnl": -6414.85,
-          "reason": "LightGBM weekly rebalance"
+          "reason": "LightGBM weekly rebalance",
+          "direction": "sell",
+          "volume": 6400,
+          "fees": {
+            "total": 1038.85,
+            "commission": 1038.85,
+            "stamp_duty": 0,
+            "transfer_fee": 0,
+            "slippage_cost": 0
+          },
+          "pnl_pct": 0
         },
         {
           "date": "2026-03-09",
           "code": "301177.SZ",
           "name": "迪阿股份",
-          "action": "sell",
-          "shares": 16100,
           "price": 31.12,
           "amount": 501032.0,
-          "cost": 1002.06,
           "pnl": -23381.06,
-          "reason": "LightGBM weekly rebalance"
+          "reason": "LightGBM weekly rebalance",
+          "direction": "sell",
+          "volume": 16100,
+          "fees": {
+            "total": 1002.06,
+            "commission": 1002.06,
+            "stamp_duty": 0,
+            "transfer_fee": 0,
+            "slippage_cost": 0
+          },
+          "pnl_pct": 0
         },
         {
           "date": "2026-03-09",
           "code": "301268.SZ",
           "name": "铭利达",
-          "action": "sell",
-          "shares": 21500,
           "price": 23.24,
           "amount": 499660.0,
-          "cost": 999.32,
           "pnl": -25294.32,
-          "reason": "LightGBM weekly rebalance"
+          "reason": "LightGBM weekly rebalance",
+          "direction": "sell",
+          "volume": 21500,
+          "fees": {
+            "total": 999.32,
+            "commission": 999.32,
+            "stamp_duty": 0,
+            "transfer_fee": 0,
+            "slippage_cost": 0
+          },
+          "pnl_pct": 0
         },
         {
           "date": "2026-03-09",
           "code": "600531.SH",
           "name": "豫光金铅",
-          "action": "sell",
-          "shares": 30600,
           "price": 16.5,
           "amount": 504900.0,
-          "cost": 1009.8,
           "pnl": -20899.8,
-          "reason": "LightGBM weekly rebalance"
+          "reason": "LightGBM weekly rebalance",
+          "direction": "sell",
+          "volume": 30600,
+          "fees": {
+            "total": 1009.8,
+            "commission": 1009.8,
+            "stamp_duty": 0,
+            "transfer_fee": 0,
+            "slippage_cost": 0
+          },
+          "pnl_pct": 0
         },
         {
           "date": "2026-03-09",
           "code": "600916.SH",
           "name": "中国黄金",
-          "action": "sell",
-          "shares": 46600,
           "price": 10.7,
           "amount": 498620.0,
-          "cost": 997.24,
           "pnl": -28025.24,
-          "reason": "LightGBM weekly rebalance"
+          "reason": "LightGBM weekly rebalance",
+          "direction": "sell",
+          "volume": 46600,
+          "fees": {
+            "total": 997.24,
+            "commission": 997.24,
+            "stamp_duty": 0,
+            "transfer_fee": 0,
+            "slippage_cost": 0
+          },
+          "pnl_pct": 0
         },
         {
           "date": "2026-03-09",
           "code": "601069.SH",
           "name": "西部黄金",
-          "action": "sell",
-          "shares": 14900,
           "price": 37.01,
           "amount": 551449.0,
-          "cost": 1102.9,
           "pnl": 25419.1,
-          "reason": "LightGBM weekly rebalance"
+          "reason": "LightGBM weekly rebalance",
+          "direction": "sell",
+          "volume": 14900,
+          "fees": {
+            "total": 1102.9,
+            "commission": 1102.9,
+            "stamp_duty": 0,
+            "transfer_fee": 0,
+            "slippage_cost": 0
+          },
+          "pnl_pct": 0
         },
         {
           "date": "2026-03-09",
           "code": "601089.SH",
           "name": "福元医药",
-          "action": "sell",
-          "shares": 20500,
           "price": 23.85,
           "amount": 488925.0,
-          "cost": 977.85,
           "pnl": -36852.85,
-          "reason": "LightGBM weekly rebalance"
+          "reason": "LightGBM weekly rebalance",
+          "direction": "sell",
+          "volume": 20500,
+          "fees": {
+            "total": 977.85,
+            "commission": 977.85,
+            "stamp_duty": 0,
+            "transfer_fee": 0,
+            "slippage_cost": 0
+          },
+          "pnl_pct": 0
         },
         {
           "date": "2026-03-09",
           "code": "603355.SH",
           "name": "莱克电气",
-          "action": "sell",
-          "shares": 16800,
           "price": 33.53,
           "amount": 563304.0,
-          "cost": 1126.61,
           "pnl": 36673.39,
-          "reason": "LightGBM weekly rebalance"
+          "reason": "LightGBM weekly rebalance",
+          "direction": "sell",
+          "volume": 16800,
+          "fees": {
+            "total": 1126.61,
+            "commission": 1126.61,
+            "stamp_duty": 0,
+            "transfer_fee": 0,
+            "slippage_cost": 0
+          },
+          "pnl_pct": 0
         },
         {
           "date": "2026-03-09",
           "code": "603826.SH",
           "name": "坤彩科技",
-          "action": "sell",
-          "shares": 28300,
           "price": 23.9,
           "amount": 676370.0,
-          "cost": 1352.74,
           "pnl": 149203.26,
-          "reason": "LightGBM weekly rebalance"
+          "reason": "LightGBM weekly rebalance",
+          "direction": "sell",
+          "volume": 28300,
+          "fees": {
+            "total": 1352.74,
+            "commission": 1352.74,
+            "stamp_duty": 0,
+            "transfer_fee": 0,
+            "slippage_cost": 0
+          },
+          "pnl_pct": 0
         },
         {
           "date": "2026-03-09",
           "code": "605099.SH",
           "name": "共创草坪",
-          "action": "sell",
-          "shares": 12500,
           "price": 44.0,
           "amount": 550000.0,
-          "cost": 1100.0,
           "pnl": 22775.0,
-          "reason": "LightGBM weekly rebalance"
+          "reason": "LightGBM weekly rebalance",
+          "direction": "sell",
+          "volume": 12500,
+          "fees": {
+            "total": 1100.0,
+            "commission": 1100.0,
+            "stamp_duty": 0,
+            "transfer_fee": 0,
+            "slippage_cost": 0
+          },
+          "pnl_pct": 0
         },
         {
           "date": "2026-03-09",
           "code": "605198.SH",
           "name": "安德利",
-          "action": "sell",
-          "shares": 12500,
           "price": 39.85,
           "amount": 498125.0,
-          "cost": 996.25,
           "pnl": -25371.25,
-          "reason": "LightGBM weekly rebalance"
+          "reason": "LightGBM weekly rebalance",
+          "direction": "sell",
+          "volume": 12500,
+          "fees": {
+            "total": 996.25,
+            "commission": 996.25,
+            "stamp_duty": 0,
+            "transfer_fee": 0,
+            "slippage_cost": 0
+          },
+          "pnl_pct": 0
         },
         {
           "date": "2026-03-09",
           "code": "605599.SH",
           "name": "菜百股份",
-          "action": "sell",
-          "shares": 20300,
           "price": 24.14,
           "amount": 490042.0,
-          "cost": 980.08,
           "pnl": -35287.08,
-          "reason": "LightGBM weekly rebalance"
+          "reason": "LightGBM weekly rebalance",
+          "direction": "sell",
+          "volume": 20300,
+          "fees": {
+            "total": 980.08,
+            "commission": 980.08,
+            "stamp_duty": 0,
+            "transfer_fee": 0,
+            "slippage_cost": 0
+          },
+          "pnl_pct": 0
         },
         {
           "date": "2026-03-09",
           "code": "688519.SH",
           "name": "南亚新材",
-          "action": "sell",
-          "shares": 4800,
           "price": 109.95,
           "amount": 527760.0,
-          "cost": 1055.52,
           "pnl": 7248.48,
-          "reason": "LightGBM weekly rebalance"
+          "reason": "LightGBM weekly rebalance",
+          "direction": "sell",
+          "volume": 4800,
+          "fees": {
+            "total": 1055.52,
+            "commission": 1055.52,
+            "stamp_duty": 0,
+            "transfer_fee": 0,
+            "slippage_cost": 0
+          },
+          "pnl_pct": 0
         },
         {
           "date": "2026-03-09",
           "code": "688503.SH",
           "name": "",
-          "action": "buy",
-          "shares": 4800,
           "price": 89.41,
           "amount": 429168.0,
-          "cost": 858.34,
-          "reason": "LightGBM weekly rebalance"
+          "reason": "LightGBM weekly rebalance",
+          "direction": "buy",
+          "volume": 4800,
+          "fees": {
+            "total": 858.34,
+            "commission": 858.34,
+            "stamp_duty": 0,
+            "transfer_fee": 0,
+            "slippage_cost": 0
+          },
+          "pnl": 0,
+          "pnl_pct": 0
         },
         {
           "date": "2026-03-09",
           "code": "688343.SH",
           "name": "",
-          "action": "buy",
-          "shares": 4400,
           "price": 97.87,
           "amount": 430628.0,
-          "cost": 861.26,
-          "reason": "LightGBM weekly rebalance"
+          "reason": "LightGBM weekly rebalance",
+          "direction": "buy",
+          "volume": 4400,
+          "fees": {
+            "total": 861.26,
+            "commission": 861.26,
+            "stamp_duty": 0,
+            "transfer_fee": 0,
+            "slippage_cost": 0
+          },
+          "pnl": 0,
+          "pnl_pct": 0
         },
         {
           "date": "2026-03-09",
           "code": "300475.SZ",
           "name": "",
-          "action": "buy",
-          "shares": 2800,
           "price": 155.04,
           "amount": 434112.0,
-          "cost": 868.22,
-          "reason": "LightGBM weekly rebalance"
+          "reason": "LightGBM weekly rebalance",
+          "direction": "buy",
+          "volume": 2800,
+          "fees": {
+            "total": 868.22,
+            "commission": 868.22,
+            "stamp_duty": 0,
+            "transfer_fee": 0,
+            "slippage_cost": 0
+          },
+          "pnl": 0,
+          "pnl_pct": 0
         },
         {
           "date": "2026-03-09",
           "code": "300034.SZ",
           "name": "",
-          "action": "buy",
-          "shares": 19400,
           "price": 22.4,
           "amount": 434560.0,
-          "cost": 869.12,
-          "reason": "LightGBM weekly rebalance"
+          "reason": "LightGBM weekly rebalance",
+          "direction": "buy",
+          "volume": 19400,
+          "fees": {
+            "total": 869.12,
+            "commission": 869.12,
+            "stamp_duty": 0,
+            "transfer_fee": 0,
+            "slippage_cost": 0
+          },
+          "pnl": 0,
+          "pnl_pct": 0
         },
         {
           "date": "2026-03-09",
           "code": "600744.SH",
           "name": "",
-          "action": "buy",
-          "shares": 47900,
           "price": 9.08,
           "amount": 434932.0,
-          "cost": 869.86,
-          "reason": "LightGBM weekly rebalance"
+          "reason": "LightGBM weekly rebalance",
+          "direction": "buy",
+          "volume": 47900,
+          "fees": {
+            "total": 869.86,
+            "commission": 869.86,
+            "stamp_duty": 0,
+            "transfer_fee": 0,
+            "slippage_cost": 0
+          },
+          "pnl": 0,
+          "pnl_pct": 0
         },
         {
           "date": "2026-03-09",
           "code": "600821.SH",
           "name": "",
-          "action": "buy",
-          "shares": 50500,
           "price": 8.6,
           "amount": 434300.0,
-          "cost": 868.6,
-          "reason": "LightGBM weekly rebalance"
+          "reason": "LightGBM weekly rebalance",
+          "direction": "buy",
+          "volume": 50500,
+          "fees": {
+            "total": 868.6,
+            "commission": 868.6,
+            "stamp_duty": 0,
+            "transfer_fee": 0,
+            "slippage_cost": 0
+          },
+          "pnl": 0,
+          "pnl_pct": 0
         },
         {
           "date": "2026-03-09",
           "code": "601208.SH",
           "name": "",
-          "action": "buy",
-          "shares": 14100,
           "price": 30.67,
           "amount": 432447.0,
-          "cost": 864.89,
-          "reason": "LightGBM weekly rebalance"
+          "reason": "LightGBM weekly rebalance",
+          "direction": "buy",
+          "volume": 14100,
+          "fees": {
+            "total": 864.89,
+            "commission": 864.89,
+            "stamp_duty": 0,
+            "transfer_fee": 0,
+            "slippage_cost": 0
+          },
+          "pnl": 0,
+          "pnl_pct": 0
         },
         {
           "date": "2026-03-09",
           "code": "300666.SZ",
           "name": "",
-          "action": "buy",
-          "shares": 2900,
           "price": 148.37,
           "amount": 430273.0,
-          "cost": 860.55,
-          "reason": "LightGBM weekly rebalance"
+          "reason": "LightGBM weekly rebalance",
+          "direction": "buy",
+          "volume": 2900,
+          "fees": {
+            "total": 860.55,
+            "commission": 860.55,
+            "stamp_duty": 0,
+            "transfer_fee": 0,
+            "slippage_cost": 0
+          },
+          "pnl": 0,
+          "pnl_pct": 0
         },
         {
           "date": "2026-03-09",
           "code": "600259.SH",
           "name": "",
-          "action": "buy",
-          "shares": 4700,
           "price": 91.82,
           "amount": 431554.0,
-          "cost": 863.11,
-          "reason": "LightGBM weekly rebalance"
+          "reason": "LightGBM weekly rebalance",
+          "direction": "buy",
+          "volume": 4700,
+          "fees": {
+            "total": 863.11,
+            "commission": 863.11,
+            "stamp_duty": 0,
+            "transfer_fee": 0,
+            "slippage_cost": 0
+          },
+          "pnl": 0,
+          "pnl_pct": 0
         },
         {
           "date": "2026-03-09",
           "code": "600452.SH",
           "name": "",
-          "action": "buy",
-          "shares": 27900,
           "price": 15.55,
           "amount": 433845.0,
-          "cost": 867.69,
-          "reason": "LightGBM weekly rebalance"
+          "reason": "LightGBM weekly rebalance",
+          "direction": "buy",
+          "volume": 27900,
+          "fees": {
+            "total": 867.69,
+            "commission": 867.69,
+            "stamp_duty": 0,
+            "transfer_fee": 0,
+            "slippage_cost": 0
+          },
+          "pnl": 0,
+          "pnl_pct": 0
         },
         {
           "date": "2026-03-09",
           "code": "300618.SZ",
           "name": "",
-          "action": "buy",
-          "shares": 9000,
           "price": 48.23,
           "amount": 434070.0,
-          "cost": 868.14,
-          "reason": "LightGBM weekly rebalance"
+          "reason": "LightGBM weekly rebalance",
+          "direction": "buy",
+          "volume": 9000,
+          "fees": {
+            "total": 868.14,
+            "commission": 868.14,
+            "stamp_duty": 0,
+            "transfer_fee": 0,
+            "slippage_cost": 0
+          },
+          "pnl": 0,
+          "pnl_pct": 0
         },
         {
           "date": "2026-03-09",
           "code": "600456.SH",
           "name": "",
-          "action": "buy",
-          "shares": 10700,
           "price": 40.33,
           "amount": 431531.0,
-          "cost": 863.06,
-          "reason": "LightGBM weekly rebalance"
+          "reason": "LightGBM weekly rebalance",
+          "direction": "buy",
+          "volume": 10700,
+          "fees": {
+            "total": 863.06,
+            "commission": 863.06,
+            "stamp_duty": 0,
+            "transfer_fee": 0,
+            "slippage_cost": 0
+          },
+          "pnl": 0,
+          "pnl_pct": 0
         },
         {
           "date": "2026-03-09",
           "code": "002176.SZ",
           "name": "",
-          "action": "buy",
-          "shares": 43500,
           "price": 9.98,
           "amount": 434130.0,
-          "cost": 868.26,
-          "reason": "LightGBM weekly rebalance"
+          "reason": "LightGBM weekly rebalance",
+          "direction": "buy",
+          "volume": 43500,
+          "fees": {
+            "total": 868.26,
+            "commission": 868.26,
+            "stamp_duty": 0,
+            "transfer_fee": 0,
+            "slippage_cost": 0
+          },
+          "pnl": 0,
+          "pnl_pct": 0
         },
         {
           "date": "2026-03-09",
           "code": "002182.SZ",
           "name": "",
-          "action": "buy",
-          "shares": 21600,
           "price": 20.06,
           "amount": 433296.0,
-          "cost": 866.59,
-          "reason": "LightGBM weekly rebalance"
+          "reason": "LightGBM weekly rebalance",
+          "direction": "buy",
+          "volume": 21600,
+          "fees": {
+            "total": 866.59,
+            "commission": 866.59,
+            "stamp_duty": 0,
+            "transfer_fee": 0,
+            "slippage_cost": 0
+          },
+          "pnl": 0,
+          "pnl_pct": 0
         },
         {
           "date": "2026-03-09",
           "code": "301175.SZ",
           "name": "",
-          "action": "buy",
-          "shares": 58900,
           "price": 7.38,
           "amount": 434682.0,
-          "cost": 869.36,
-          "reason": "LightGBM weekly rebalance"
+          "reason": "LightGBM weekly rebalance",
+          "direction": "buy",
+          "volume": 58900,
+          "fees": {
+            "total": 869.36,
+            "commission": 869.36,
+            "stamp_duty": 0,
+            "transfer_fee": 0,
+            "slippage_cost": 0
+          },
+          "pnl": 0,
+          "pnl_pct": 0
         },
         {
           "date": "2026-03-09",
           "code": "000899.SZ",
           "name": "",
-          "action": "buy",
-          "shares": 29900,
           "price": 14.53,
           "amount": 434447.0,
-          "cost": 868.89,
-          "reason": "LightGBM weekly rebalance"
+          "reason": "LightGBM weekly rebalance",
+          "direction": "buy",
+          "volume": 29900,
+          "fees": {
+            "total": 868.89,
+            "commission": 868.89,
+            "stamp_duty": 0,
+            "transfer_fee": 0,
+            "slippage_cost": 0
+          },
+          "pnl": 0,
+          "pnl_pct": 0
         },
         {
           "date": "2026-03-09",
           "code": "002326.SZ",
           "name": "",
-          "action": "buy",
-          "shares": 19000,
           "price": 22.79,
           "amount": 433010.0,
-          "cost": 866.02,
-          "reason": "LightGBM weekly rebalance"
+          "reason": "LightGBM weekly rebalance",
+          "direction": "buy",
+          "volume": 19000,
+          "fees": {
+            "total": 866.02,
+            "commission": 866.02,
+            "stamp_duty": 0,
+            "transfer_fee": 0,
+            "slippage_cost": 0
+          },
+          "pnl": 0,
+          "pnl_pct": 0
         },
         {
           "date": "2026-03-09",
           "code": "002378.SZ",
           "name": "",
-          "action": "buy",
-          "shares": 9700,
           "price": 44.7,
           "amount": 433590.0,
-          "cost": 867.18,
-          "reason": "LightGBM weekly rebalance"
+          "reason": "LightGBM weekly rebalance",
+          "direction": "buy",
+          "volume": 9700,
+          "fees": {
+            "total": 867.18,
+            "commission": 867.18,
+            "stamp_duty": 0,
+            "transfer_fee": 0,
+            "slippage_cost": 0
+          },
+          "pnl": 0,
+          "pnl_pct": 0
         },
         {
           "date": "2026-03-09",
           "code": "300182.SZ",
           "name": "",
-          "action": "buy",
-          "shares": 67000,
           "price": 6.49,
           "amount": 434830.0,
-          "cost": 869.66,
-          "reason": "LightGBM weekly rebalance"
+          "reason": "LightGBM weekly rebalance",
+          "direction": "buy",
+          "volume": 67000,
+          "fees": {
+            "total": 869.66,
+            "commission": 869.66,
+            "stamp_duty": 0,
+            "transfer_fee": 0,
+            "slippage_cost": 0
+          },
+          "pnl": 0,
+          "pnl_pct": 0
         },
         {
           "date": "2026-03-09",
           "code": "600206.SH",
           "name": "",
-          "action": "buy",
-          "shares": 18500,
           "price": 23.46,
           "amount": 434010.0,
-          "cost": 868.02,
-          "reason": "LightGBM weekly rebalance"
+          "reason": "LightGBM weekly rebalance",
+          "direction": "buy",
+          "volume": 18500,
+          "fees": {
+            "total": 868.02,
+            "commission": 868.02,
+            "stamp_duty": 0,
+            "transfer_fee": 0,
+            "slippage_cost": 0
+          },
+          "pnl": 0,
+          "pnl_pct": 0
         },
         {
           "date": "2026-03-09",
           "code": "300821.SZ",
           "name": "",
-          "action": "buy",
-          "shares": 31400,
           "price": 13.82,
           "amount": 433948.0,
-          "cost": 867.9,
-          "reason": "LightGBM weekly rebalance"
+          "reason": "LightGBM weekly rebalance",
+          "direction": "buy",
+          "volume": 31400,
+          "fees": {
+            "total": 867.9,
+            "commission": 867.9,
+            "stamp_duty": 0,
+            "transfer_fee": 0,
+            "slippage_cost": 0
+          },
+          "pnl": 0,
+          "pnl_pct": 0
         },
         {
           "date": "2026-03-09",
           "code": "688726.SH",
           "name": "",
-          "action": "buy",
-          "shares": 6800,
           "price": 63.29,
           "amount": 430372.0,
-          "cost": 860.74,
-          "reason": "LightGBM weekly rebalance"
+          "reason": "LightGBM weekly rebalance",
+          "direction": "buy",
+          "volume": 6800,
+          "fees": {
+            "total": 860.74,
+            "commission": 860.74,
+            "stamp_duty": 0,
+            "transfer_fee": 0,
+            "slippage_cost": 0
+          },
+          "pnl": 0,
+          "pnl_pct": 0
         },
         {
           "date": "2026-03-09",
           "code": "000762.SZ",
           "name": "",
-          "action": "buy",
-          "shares": 15000,
           "price": 28.85,
           "amount": 432750.0,
-          "cost": 865.5,
-          "reason": "LightGBM weekly rebalance"
+          "reason": "LightGBM weekly rebalance",
+          "direction": "buy",
+          "volume": 15000,
+          "fees": {
+            "total": 865.5,
+            "commission": 865.5,
+            "stamp_duty": 0,
+            "transfer_fee": 0,
+            "slippage_cost": 0
+          },
+          "pnl": 0,
+          "pnl_pct": 0
         },
         {
           "date": "2026-03-09",
           "code": "688205.SH",
           "name": "",
-          "action": "buy",
-          "shares": 2500,
           "price": 169.0,
           "amount": 422500.0,
-          "cost": 845.0,
-          "reason": "LightGBM weekly rebalance"
+          "reason": "LightGBM weekly rebalance",
+          "direction": "buy",
+          "volume": 2500,
+          "fees": {
+            "total": 845.0,
+            "commission": 845.0,
+            "stamp_duty": 0,
+            "transfer_fee": 0,
+            "slippage_cost": 0
+          },
+          "pnl": 0,
+          "pnl_pct": 0
         }
       ],
       "decisions": [
@@ -2336,7 +2916,7 @@
       "portfolio": {
         "cash": 9641272.190000001,
         "positions": {},
-        "total_value": 10000000.0,
+        "total_value": 9641272.19,
         "last_update": "2026-03-10 14:00:04"
       },
       "nav_history": {
@@ -2364,7 +2944,7 @@
           0.964127,
           0.964127,
           0.964127,
-          1.0
+          0.964127
         ],
         "cash_pct": [
           100.0,
@@ -4301,6 +4881,14 @@
           "type": "afternoon_scan",
           "action": "hold",
           "summary": "盘中跟踪：今日出现罕见日内V型反转！盘前温度36(退潮)→盘中温度70(高潮)，涨停从6家暴增至55家/跌停4/炸板23/封板率70.5%。连板梯队：5板×1(王力安防605268)+3板×1(宁波建工601789)+2板×4。王力安防(605268)5连板秒板一封不开封单10.07%score=230=绝对龙头。3/9设定的三条件全部达标(5连板✅+温度60+✅+封板率70%✅)。但存在矛盾：(1)温度70=高潮期，规则='只持有不追买、减至30%兑现'，当前空仓不应在高潮期建新仓；(2)即便要买，王力安防秒板无法上车；(3)日内从退潮到高潮的极端波动=资金集中抱团少数票而非真正的赚钱效应扩散(55涨停中23炸板=分歧大)；(4)温度走势68→53→36→70呈V型而非持续上升=不稳定。虽然scanner建议light_buy(30%仓位)，但情绪战神的核心规则：高潮期=兑现而非建仓，且连续波动的温度反映市场情绪不稳定。决策：继续空仓。理由：(a)高潮期不新建仓(b)王力安防秒板无法买入(c)温度剧烈波动不稳定。明日观察：若王力安防6连板+温度维持60+=可在开盘竞价建仓30%(高潮期轻仓)；若炸板或温度回落=确认退潮继续空仓。",
+          "detail": ""
+        },
+        {
+          "date": "2026-03-10",
+          "time": "15:06",
+          "type": "close_update",
+          "action": "hold",
+          "summary": "收盘更新：空仓维持。温度V型反转36→70(高潮期)，但极不稳定(68→53→36→70)。涨停56/跌停4/炸板22/封板率71.8%。连板梯队：5板×1(王力安防605268秒板一封不开封单9.55%score=230)+3板×1(宁波建工)+2板×4+首板×50。王力安防满足绝对龙头全部条件但秒板无法买入。高潮期核心规则='只持有不追买,兑现获利'，当前空仓不应在高潮期建新仓。温度剧烈波动(V型)反映市场情绪不稳定而非健康上升趋势。无持仓→无止损/止盈动作。决策：继续空仓。3/11观察：(1)王力安防6连板+温度稳定60+=可竞价轻仓30%试错(如非一字板能上车)；(2)温度回落<50=确认退潮继续空仓；(3)新龙头出现(非一字板可上车)+启动/发酵期=建仓机会。",
           "detail": ""
         }
       ],
