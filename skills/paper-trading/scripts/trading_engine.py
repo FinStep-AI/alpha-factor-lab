@@ -50,6 +50,12 @@ PLAYERS = {
         "emoji": "⚡",
         "style": "情绪周期 · 龙头战法 · 打板博弈",
         "description": "只看市场情绪温度和龙头连板高度，顺周期重仓龙头，退潮绝对空仓"
+    },
+    "hotspot": {
+        "name": "热点猎手",
+        "emoji": "📰",
+        "style": "新闻驱动 · 热点追踪 · 短线出击",
+        "description": "追踪市场热点新闻，挖掘受益标的，快进快出。3-5天周期，多热点分散持仓。"
     }
 }
 
@@ -555,7 +561,7 @@ def main():
     
     # trade
     sp_trade = subparsers.add_parser("trade", help="执行交易")
-    sp_trade.add_argument("--player", required=True, choices=["quant","trader","value","dwj","sentiment"])
+    sp_trade.add_argument("--player", required=True, choices=["quant","trader","value","dwj","sentiment","hotspot"])
     sp_trade.add_argument("--code", required=True)
     sp_trade.add_argument("--name", required=True)
     sp_trade.add_argument("--price", type=float, required=True)
@@ -574,12 +580,12 @@ def main():
     
     # summary
     sp_summary = subparsers.add_parser("summary", help="输出竞赛摘要")
-    sp_summary.add_argument("--player", choices=["quant","trader","value","dwj","sentiment"], help="指定选手（留空=全部）")
+    sp_summary.add_argument("--player", choices=["quant","trader","value","dwj","sentiment","hotspot"], help="指定选手（留空=全部）")
     sp_summary.add_argument("--data", default=DEFAULT_DATA_FILE)
     
     # decision
     sp_dec = subparsers.add_parser("decision", help="记录决策")
-    sp_dec.add_argument("--player", required=True, choices=["quant","trader","value","dwj","sentiment"])
+    sp_dec.add_argument("--player", required=True, choices=["quant","trader","value","dwj","sentiment","hotspot"])
     sp_dec.add_argument("--date", required=True)
     sp_dec.add_argument("--type", required=True)
     sp_dec.add_argument("--summary", required=True)
