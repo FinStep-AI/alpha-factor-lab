@@ -17,7 +17,7 @@
       "style": "LightGBM机器学习选股 · 99特征 · 中证1000 · 周度调仓",
       "description": "10因子+K线衍生→99维特征矩阵→LightGBM预测超额收益→风控过滤→TOP25组合",
       "portfolio": {
-        "cash": 38906.82,
+        "cash": 56941.36,
         "positions": {
           "600821.SH": {
             "code": "600821.SH",
@@ -284,7 +284,7 @@
             "entry_date": "2026-03-09"
           }
         },
-        "total_value": 11211624.82,
+        "total_value": 11229659.36,
         "last_update": "2026-03-10"
       },
       "nav_history": {
@@ -312,7 +312,7 @@
           1.018722,
           1.032019,
           1.047998,
-          1.121162
+          1.122966
         ],
         "cash_pct": [
           0.4,
@@ -2555,7 +2555,9 @@
         "total_trades": 58,
         "total_fees": 39167.52,
         "current_positions": 24,
-        "turnover_rate": 99.6
+        "turnover_rate": 99.6,
+        "total_return": 12.3,
+        "nav": 1.123
       },
       "cash": 56941.36,
       "positions": {
@@ -4973,7 +4975,9 @@
         "max_drawdown_pct": 4.49,
         "current_nav": 1.121162,
         "total_trades": 58,
-        "rank": 1
+        "rank": 1,
+        "nav": 1.123,
+        "total_return": "+12.30%"
       },
       {
         "player_id": "hotspot",
