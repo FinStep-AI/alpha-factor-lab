@@ -6,7 +6,7 @@
     "benchmark": "000300",
     "benchmark_name": "沪深300",
     "created_at": "2026-02-23 22:14:25",
-    "updated_at": "2026-03-10 09:31:24",
+    "updated_at": "2026-03-10 09:38:20",
     "status": "active",
     "players_count": 6
   },
@@ -2774,7 +2774,7 @@
       "style": "趋势跟踪 · 板块轮动 · 全A股扫描 · 中长线波段",
       "description": "BBI+MA60趋势判断，KDJ低位捕捉买点，板块轮动做趋势收益。核心逻辑：阳率×盈亏比最大化。",
       "portfolio": {
-        "cash": 3345733.409999999,
+        "cash": 996.539999999688,
         "positions": {
           "003036": {
             "code": "003036",
@@ -2786,7 +2786,7 @@
             "pnl": 62634.0,
             "pnl_pct": 4.03,
             "entry_date": "2026-03-09",
-            "max_pnl_pct": 0.22
+            "max_pnl_pct": 4.03
           },
           "600683": {
             "code": "600683",
@@ -2798,7 +2798,7 @@
             "pnl": 30982.0,
             "pnl_pct": 1.99,
             "entry_date": "2026-03-09",
-            "max_pnl_pct": 1.99
+            "max_pnl_pct": 3.56
           },
           "301268": {
             "code": "301268",
@@ -2822,10 +2822,76 @@
             "pnl": 37824.0,
             "pnl_pct": 2.45,
             "entry_date": "2026-03-09",
-            "max_pnl_pct": 1.92
+            "max_pnl_pct": 2.99
+          },
+          "603959": {
+            "code": "603959",
+            "name": "百利科技",
+            "volume": 86100,
+            "avg_cost": 6.47,
+            "current_price": 6.47,
+            "market_value": 557067.0,
+            "pnl": 0,
+            "pnl_pct": 0,
+            "entry_date": "2026-03-10"
+          },
+          "002989": {
+            "code": "002989",
+            "name": "中天精装",
+            "volume": 18100,
+            "avg_cost": 30.78,
+            "current_price": 30.78,
+            "market_value": 557118.0,
+            "pnl": 0,
+            "pnl_pct": 0,
+            "entry_date": "2026-03-10"
+          },
+          "002463": {
+            "code": "002463",
+            "name": "沪电股份",
+            "volume": 7300,
+            "avg_cost": 75.99,
+            "current_price": 75.99,
+            "market_value": 554727.0,
+            "pnl": 0,
+            "pnl_pct": 0,
+            "entry_date": "2026-03-10"
+          },
+          "603399": {
+            "code": "603399",
+            "name": "永杉锂业",
+            "volume": 48900,
+            "avg_cost": 11.4,
+            "current_price": 11.4,
+            "market_value": 557460.0,
+            "pnl": 0,
+            "pnl_pct": 0,
+            "entry_date": "2026-03-10"
+          },
+          "300258": {
+            "code": "300258",
+            "name": "精锻科技",
+            "volume": 36900,
+            "avg_cost": 15.09,
+            "current_price": 15.09,
+            "market_value": 556821.0,
+            "pnl": 0,
+            "pnl_pct": 0,
+            "entry_date": "2026-03-10"
+          },
+          "002634": {
+            "code": "002634",
+            "name": "棒杰股份",
+            "volume": 77600,
+            "avg_cost": 7.18,
+            "current_price": 7.18,
+            "market_value": 557168.0,
+            "pnl": 0,
+            "pnl_pct": 0,
+            "entry_date": "2026-03-10"
           }
         },
-        "total_value": 9701069.41,
+        "total_value": 9696693.54,
         "last_update": "2026-03-10 09:31:24"
       },
       "nav_history": {
@@ -3780,6 +3846,120 @@
           "pnl": 2168.0,
           "pnl_pct": 0.74,
           "reason": "破BBI清仓：价格10.90<BBI=11.04，此前已止盈1/2"
+        },
+        {
+          "date": "2026-03-10",
+          "code": "603959",
+          "name": "百利科技",
+          "direction": "buy",
+          "price": 6.47,
+          "volume": 86100,
+          "amount": 557067.0,
+          "fees": {
+            "commission": 167.12,
+            "stamp_duty": 0,
+            "transfer_fee": 5.57,
+            "slippage_cost": 557.07,
+            "total": 729.76
+          },
+          "pnl": 0,
+          "pnl_pct": 0,
+          "reason": "BBI金叉缩量回调score=93,板块集中(土木工程建筑业3只),量比3.1,金叉13天+缩量至半量"
+        },
+        {
+          "date": "2026-03-10",
+          "code": "002989",
+          "name": "中天精装",
+          "direction": "buy",
+          "price": 30.78,
+          "volume": 18100,
+          "amount": 557118.0,
+          "fees": {
+            "commission": 167.14,
+            "stamp_duty": 0,
+            "transfer_fee": 5.57,
+            "slippage_cost": 557.12,
+            "total": 729.82
+          },
+          "pnl": 0,
+          "pnl_pct": 0,
+          "reason": "BBI金叉缩量回调score=83,量比8.3异常放量,金叉8天+缩量至半量,建筑关联板块"
+        },
+        {
+          "date": "2026-03-10",
+          "code": "002463",
+          "name": "沪电股份",
+          "direction": "buy",
+          "price": 75.99,
+          "volume": 7300,
+          "amount": 554727.0,
+          "fees": {
+            "commission": 166.42,
+            "stamp_duty": 0,
+            "transfer_fee": 5.55,
+            "slippage_cost": 554.73,
+            "total": 726.69
+          },
+          "pnl": 0,
+          "pnl_pct": 0,
+          "reason": "BBI金叉缩量回调score=83,J=29.3低位,量比5.5,金叉8天+缩量至半量"
+        },
+        {
+          "date": "2026-03-10",
+          "code": "603399",
+          "name": "永杉锂业",
+          "direction": "buy",
+          "price": 11.4,
+          "volume": 48900,
+          "amount": 557460.0,
+          "fees": {
+            "commission": 167.24,
+            "stamp_duty": 0,
+            "transfer_fee": 5.57,
+            "slippage_cost": 557.46,
+            "total": 730.27
+          },
+          "pnl": 0,
+          "pnl_pct": 0,
+          "reason": "BBI金叉缩量回调score=83,J=29.0低位,量比3.7,金叉7天+缩量至半量"
+        },
+        {
+          "date": "2026-03-10",
+          "code": "300258",
+          "name": "精锻科技",
+          "direction": "buy",
+          "price": 15.09,
+          "volume": 36900,
+          "amount": 556821.0,
+          "fees": {
+            "commission": 167.05,
+            "stamp_duty": 0,
+            "transfer_fee": 5.57,
+            "slippage_cost": 556.82,
+            "total": 729.44
+          },
+          "pnl": 0,
+          "pnl_pct": 0,
+          "reason": "BBI金叉缩量回调score=83,J=24.3最低位,量比3.5,金叉11天+缩量至半量"
+        },
+        {
+          "date": "2026-03-10",
+          "code": "002634",
+          "name": "棒杰股份",
+          "direction": "buy",
+          "price": 7.18,
+          "volume": 77600,
+          "amount": 557168.0,
+          "fees": {
+            "commission": 167.15,
+            "stamp_duty": 0,
+            "transfer_fee": 5.57,
+            "slippage_cost": 557.17,
+            "total": 729.89
+          },
+          "pnl": 0,
+          "pnl_pct": 0,
+          "reason": "主策略信号score=63,J=11.9<13四大硬条件全满足,量比6.9异常放量,唯一主通道信号"
         }
       ],
       "decisions": [
@@ -3913,11 +4093,19 @@
           "action": "hold",
           "summary": "收盘更新：4只持仓均小幅盈利，无止盈止损触发。泰坦股份+0.22%、京投发展+1.99%、铭利达+1.88%、通用电梯+1.92%。NAV=0.964107，继续持有。",
           "detail": ""
+        },
+        {
+          "date": "2026-03-10",
+          "time": "09:38",
+          "type": "morning_scan",
+          "action": "buy",
+          "summary": "晨扫：全A扫描5085只→30候选(1主策略+3单针下30+26金叉缩量回调)。热门板块：土木工程建筑业。持仓4只均无止盈止损触发。新买入6只填满仓位至10只：百利科技(score93板块集中)、中天精装(VR8.3异常放量)、沪电股份(J29.3低位)、永杉锂业(J29.0低位)、精锻科技(J24.3最低)、棒杰股份(唯一主通道J=11.9)。",
+          "detail": ""
         }
       ],
       "rebalances": [],
       "stats": {
-        "total_trades": 46,
+        "total_trades": 52,
         "win_rate": 13.64,
         "max_drawdown_pct": 4.26,
         "sharpe_ratio": -6.12,
@@ -3925,7 +4113,7 @@
         "total_return_pct": -2.99,
         "annualized_return_pct": -60.19,
         "profit_loss_ratio": 1.52,
-        "total_fees": 79189.59,
+        "total_fees": 83565.46,
         "current_positions": 4,
         "turnover_rate": 0.0
       },
