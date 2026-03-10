@@ -381,5 +381,78 @@
     "reject_reason": "IC不显著(0.008, t=1.56), 单调性好(0.8)但G5 Sharpe极低(0.20), 信号太弱. 各种窗口参数扫描(3/10,3/20,5/20等)均无法同时满足IC>0.02+单调性>0.8",
     "notes": "5d rebal mono=0.8但IC差. 3_20_3: IC=0.018 t=3.16但mono=0.5. 核心矛盾: 短期反转信号IC弱但分层好, 无法兼得.",
     "session": "factor-mining-afternoon-2026-03-09"
+  },
+  {
+    "id": "realized_skew_v1",
+    "source_type": "论文",
+    "source_title": "Does realized skewness predict the cross-section of equity returns?",
+    "source_url": "https://www.sciencedirect.com/science/article/abs/pii/S0304405X15001257",
+    "source_author": "Amaya, Christoffersen, Jacobs, Vasquez",
+    "source_year": 2015,
+    "source_journal": "Journal of Financial Economics 118(1):135-167",
+    "original_metric": {
+      "universe": "US equities",
+      "ic_mean": "N/A (portfolio sort)",
+      "long_short_ret": "19 bps/week",
+      "sharpe": "N/A",
+      "note": "Buying lowest skewness decile, selling highest. Used intraday data for weekly moments."
+    },
+    "our_metric": {
+      "universe": "CSI1000",
+      "ic_mean": -0.0016,
+      "ic_t": -0.2,
+      "sharpe": -1.64,
+      "monotonicity": -0.2
+    },
+    "diff_notes": "Original used intraday data for realized moments; we only have daily close data. Daily-return skewness over 20 days is noisy and doesn't capture the same information. The factor completely fails on CSI1000 with daily data.",
+    "conclusion": "FAIL - not reproducible with daily OHLCV data",
+    "date_tested": "2026-03-10"
+  },
+  {
+    "id": "range_efficiency_v1",
+    "source_type": "自研",
+    "source_title": "Intraday Range Efficiency = |close-open|/(high-low)",
+    "source_url": "N/A (inspired by price efficiency literature)",
+    "source_author": "Self-developed",
+    "source_year": 2026,
+    "source_journal": "N/A",
+    "original_metric": {
+      "universe": "N/A",
+      "note": "Novel factor: measures directional efficiency of intraday price movement"
+    },
+    "our_metric": {
+      "universe": "CSI1000",
+      "ic_mean": 0.0088,
+      "ic_t": 0.99,
+      "sharpe": -0.28,
+      "monotonicity": -0.7,
+      "note": "Positive IC suggests direction matters, but reversed monotonicity. Low efficiency (choppy) stocks outperform. Tried both directions, neither passes thresholds."
+    },
+    "diff_notes": "Factor has weak, inconsistent signal. Reversed monotonicity suggests confounding with volatility or liquidity. Not independent enough from existing microstructure factors.",
+    "conclusion": "FAIL - IC not significant, poor monotonicity",
+    "date_tested": "2026-03-10"
+  },
+  {
+    "id": "vol_ret_diverge_v1",
+    "source_type": "自研",
+    "source_title": "Volume-Return Divergence (volume z-score minus |return| z-score)",
+    "source_url": "N/A (inspired by accumulation/distribution literature)",
+    "source_author": "Self-developed",
+    "source_year": 2026,
+    "source_journal": "N/A",
+    "original_metric": {
+      "universe": "N/A",
+      "note": "Hypothesis: high volume + low returns = accumulation → future outperformance"
+    },
+    "our_metric": {
+      "universe": "CSI1000",
+      "ic_mean": -0.0215,
+      "ic_t": -1.63,
+      "sharpe": -0.87,
+      "monotonicity": -0.3
+    },
+    "diff_notes": "IC is negative (t=-1.63, borderline), meaning high volume-return divergence predicts LOWER returns. This contradicts the accumulation hypothesis. Possibly high volume + low return is distribution/selling pressure, not accumulation. Also likely confounded with volatility.",
+    "conclusion": "FAIL - wrong direction, IC not significant",
+    "date_tested": "2026-03-10"
   }
 ]
