@@ -130,8 +130,33 @@ def load_data(filepath: str) -> dict:
 
 
 def save_data(data: dict, filepath: str):
-    """保存竞赛数据"""
+    """保存竞赛数据（含一致性自检）"""
     data["meta"]["updated_at"] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    
+    # ── 保存前一致性自检 ──
+    initial = data["meta"].get("initial_cash", 10_000_000)
+    for pid, player in data.get("players", {}).items():
+        port = player.get("portfolio", {})
+        positions = port.get("positions", {})
+        cash = port.get("cash", 0)
+        
+        # 清除 volume=0 的幽灵持仓
+        ghosts = [c for c, p in positions.items() if (p.get("volume", 0) or p.get("shares", 0)) <= 0]
+        for c in ghosts:
+            del positions[c]
+            print(f"  [WARN] 清除 {player.get('name',pid)} 的幽灵持仓: {c}")
+        
+        # 强制重算 total_value
+        pos_value = sum(
+            p.get("current_price", p.get("avg_cost", 0)) * (p.get("volume", 0) or p.get("shares", 0))
+            for p in positions.values()
+        )
+        correct_tv = round(cash + pos_value, 2)
+        stored_tv = port.get("total_value", 0)
+        if abs(stored_tv - correct_tv) > 1:
+            print(f"  [WARN] {player.get('name',pid)} total_value修正: {stored_tv:,.2f} → {correct_tv:,.2f}")
+            port["total_value"] = correct_tv
+    
     os.makedirs(os.path.dirname(filepath) or '.', exist_ok=True)
     with open(filepath, 'w', encoding='utf-8') as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
