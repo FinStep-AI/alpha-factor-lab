@@ -216,7 +216,46 @@ def rebalance(data: dict, player_id: str, target_codes: list, date: str,
         w = 1.0 / n if n > 0 else 0
         weight_map = {c: w for c in target_codes}
     
-    # ═══ 第三步：买入 ═══
+    # ═══ 第2.5步：保留股仓位调整 ═══
+    keep_results = []
+    if to_keep:
+        print(f"\n--- 保留股调整 {len(to_keep)} 只 ---")
+        for code in sorted(to_keep):
+            pos = current_positions[code]
+            cur_vol = pos.get("volume", 0)
+            cur_price_pos = pos.get("current_price", pos.get("avg_cost", 0))
+            
+            price_info = prices.get(code, {})
+            cur_price = price_info.get("price", cur_price_pos)
+            name = price_info.get("name", pos.get("name", ""))
+            
+            if cur_price <= 0:
+                print(f"  ⚠️ {code} 价格为0，保持不动")
+                continue
+            
+            target_value = total_value * weight_map.get(code, 0)
+            target_vol = int(target_value / cur_price / 100) * 100
+            
+            diff = target_vol - cur_vol
+            if abs(diff) < 100:
+                print(f"  ➡️  {code} {name} 保持 {cur_vol}股（目标{target_vol}，差异<100股）")
+                continue
+            
+            if diff < 0:
+                # 减仓
+                sell_vol = abs(diff)
+                result = execute_trade(data, player_id, code, name, cur_price, sell_vol, "sell", date, reason + " (trim)")
+                keep_results.append(result)
+                if result.get("status") != "error":
+                    print(f"  📉 减仓 {code} {name} {sell_vol}股 @ {cur_price:.2f} ({cur_vol}→{cur_vol-sell_vol})")
+                else:
+                    print(f"  ❌ 减仓 {code}: {result.get('message','')}")
+            else:
+                # 加仓 — 在买入阶段统一处理资金分配，这里先标记
+                print(f"  📈 {code} {name} 需加仓 {diff}股（{cur_vol}→{target_vol}），随买入阶段执行")
+                to_buy.add(code)  # 加入买入列表，买入时会根据target_weight计算
+    
+    # ═══ 第三步：买入（含保留股加仓）═══
     buy_results = []
     print(f"\n--- 买入 {len(to_buy)} 只 ---")
     
@@ -231,10 +270,26 @@ def rebalance(data: dict, player_id: str, target_codes: list, date: str,
         
         target_value = total_value * weight_map.get(code, 0)
         
-        # 计算股数（100股整数倍）
-        shares = int(target_value / buy_price / 100) * 100
+        # 计算目标股数（100股整数倍）
+        target_shares = int(target_value / buy_price / 100) * 100
+        
+        # 如果是保留股加仓，只买差额部分
+        existing_vol = 0
+        if code in current_positions:
+            existing_vol = current_positions[code].get("volume", 0)
+        
+        shares = target_shares - existing_vol
         if shares <= 0:
-            print(f"  ⚠️ {code} 计算股数为0（目标金额{target_value:,.0f}，价格{buy_price}），跳过")
+            if existing_vol > 0:
+                print(f"  ➡️  {code} {name} 已持有{existing_vol}股≥目标{target_shares}股，无需加仓")
+            else:
+                print(f"  ⚠️ {code} 计算股数为0（目标金额{target_value:,.0f}，价格{buy_price}），跳过")
+            continue
+        
+        # 取整到100股
+        shares = int(shares / 100) * 100
+        if shares <= 0:
+            print(f"  ➡️  {code} {name} 差额不足100股，保持不变")
             continue
         
         # 检查剩余资金
@@ -246,10 +301,12 @@ def rebalance(data: dict, player_id: str, target_codes: list, date: str,
                 print(f"  ⚠️ {code} 资金不足，跳过（需{cost:,.0f}，剩{portfolio['cash']:,.0f}）")
                 continue
         
+        label = "加仓" if existing_vol > 0 else "买入"
         result = execute_trade(data, player_id, code, name, buy_price, shares, "buy", date, reason)
         buy_results.append(result)
         if result.get("status") != "error":
-            print(f"  ✅ 买入 {code} {name} {shares}股 @ {buy_price:.2f}")
+            print(f"  ✅ {label} {code} {name} {shares}股 @ {buy_price:.2f}" +
+                  (f" ({existing_vol}→{existing_vol+shares})" if existing_vol > 0 else ""))
         else:
             print(f"  ❌ {code}: {result.get('message','')}")
     
