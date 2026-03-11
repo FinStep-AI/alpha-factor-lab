@@ -746,5 +746,25 @@
     "reject_reason": "IC显著(0.016 t=2.30)但经济意义极弱: 多空年化仅2.4%, Sharpe=0.22, 分组收益差<3pct. 统计显著但无实际选股价值",
     "notes": "负向(反转)IC=-0.016 t=-2.30也通过统计检验, 但同样无经济意义. VWAP趋势信息太弱",
     "session": "factor-mining-afternoon-2026-03-10"
+  },
+  {
+    "factor_name": "下行量价共振因子 (Downside Volume-Weighted Return)",
+    "factor_id": "downvol_v2",
+    "date": "2026-03-11",
+    "session": "factor-mining-noon",
+    "category": "微观结构/反转",
+    "barra_style": "Liquidity",
+    "description": "20日窗口中下跌日的成交量加权平均收益率(取反后做市值中性化)。高值=近期放量下跌程度大(超卖)。逻辑：放量杀跌后的超卖反弹。",
+    "formula": "-mean(daily_ret[ret<0] * volume[ret<0] / sum(volume[ret<0]), 20d), neutralized by log_amount",
+    "data_source": "csi1000_kline_raw.csv (OHLCV + turnover)",
+    "ic_mean": 0.0202,
+    "ic_t": 2.39,
+    "ic_significant": true,
+    "monotonicity": -0.9,
+    "g5_sharpe": 0.25,
+    "ls_sharpe": -0.31,
+    "conclusion": "淘汰。IC=0.020(t=2.39)在5%水平显著,但单调性=-0.9(方向完全反转),G5 Sharpe=0.25远低于0.8门槛。翻转后IC变为-0.020也无法使用。IC与分层排序方向矛盾,表明量价关系在截面上存在非线性——中等水平效果最好,极端值效果差。",
+    "notes": "同批还测试了: 吸筹因子(accumulation)、涨跌持续性(ret/sign consistency)、异常换手反转(abnormal turnover reversal)、Kyle价格冲击(price impact)、缺口-日内背离(gap-intra divergence)、开盘竞价强度(open power)、跳空缺口强度(gap intensity)、换手率衰减改进版(turnover decay v2a-v2e),均未达标。",
+    "status": "rejected"
   }
 ]
