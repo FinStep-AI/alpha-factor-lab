@@ -123,6 +123,8 @@ function escHtml(s) {
 
 function fmtVal(v, fmt) {
   if (v === null || v === undefined) return '<span class="val na">N/A</span>';
+  if (typeof v === 'string' || isNaN(v)) return `<span class="val na">${escHtml(String(v))}</span>`;
+  v = Number(v);
   if (fmt === 'pct') return `<span class="val ${v>0?'pos':'neg'}">${(v*100).toFixed(1)}%</span>`;
   if (fmt === 'f2') return `<span class="val ${v>0?'pos':v<0?'neg':'neutral'}">${v.toFixed(2)}</span>`;
   if (fmt === 'f3') return `<span class="val ${v>0?'pos':v<0?'neg':'neutral'}">${v.toFixed(3)}</span>`;

@@ -392,9 +392,9 @@
     "source_journal": "Journal of Financial Economics 118(1):135-167",
     "original_metric": {
       "universe": "US equities",
-      "ic_mean": "N/A (portfolio sort)",
+      "ic_mean": null,
       "long_short_ret": "19 bps/week",
-      "sharpe": "N/A",
+      "sharpe": null,
       "note": "Buying lowest skewness decile, selling highest. Used intraday data for weekly moments."
     },
     "our_metric": {
