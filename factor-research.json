@@ -29,35 +29,6 @@
     "status": "active"
   },
   {
-    "id": "idio_vol_v1",
-    "source_type": "论文",
-    "source_title": "The Cross-Section of Volatility and Expected Returns",
-    "source_url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=276076",
-    "source_author": "Ang, Hodrick, Xing, Zhang",
-    "source_year": 2006,
-    "source_journal": "Journal of Finance",
-    "original_metric": {
-      "market": "US All Stocks",
-      "period": "1963-2000",
-      "ic_mean": null,
-      "sharpe": null,
-      "description": "原文发现美股高特质波动率股票未来收益更低（低波异象），alpha约-1.06%/月"
-    },
-    "our_metric": {
-      "market": "中证1000",
-      "period": "2022-10 ~ 2026-02",
-      "ic_mean": 0.017,
-      "ic_t": 0.98,
-      "sharpe": 0.7,
-      "monotonicity": 0.7
-    },
-    "diff_notes": "⚠️ 方向相反！原文美股是低波异象（高idio_vol→低收益），中证1000是高波溢价（高idio_vol→高收益）。可能因为：A股散户多+小盘股+彩票效应。需用正向而非原文的负向",
-    "local_factor_id": "idio_vol_v1",
-    "conclusion": "入库（方向反转）",
-    "date": "2026-02-24",
-    "status": "active"
-  },
-  {
     "id": "overnight_momentum_v1",
     "source_type": "论文",
     "source_title": "A Tug of War: Overnight Versus Intraday Expected Returns",
@@ -87,6 +58,35 @@
     "status": "active"
   },
   {
+    "id": "idio_vol_v1",
+    "source_type": "论文",
+    "source_title": "The Cross-Section of Volatility and Expected Returns",
+    "source_url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=276076",
+    "source_author": "Ang, Hodrick, Xing, Zhang",
+    "source_year": 2006,
+    "source_journal": "Journal of Finance",
+    "original_metric": {
+      "market": "US All Stocks",
+      "period": "1963-2000",
+      "ic_mean": null,
+      "sharpe": null,
+      "description": "原文发现美股高特质波动率股票未来收益更低（低波异象），alpha约-1.06%/月"
+    },
+    "our_metric": {
+      "market": "中证1000",
+      "period": "2022-10 ~ 2026-02",
+      "ic_mean": 0.017,
+      "ic_t": 0.98,
+      "sharpe": 0.7,
+      "monotonicity": 0.7
+    },
+    "diff_notes": "⚠️ 方向相反！原文美股是低波异象（高idio_vol→低收益），中证1000是高波溢价（高idio_vol→高收益）。可能因为：A股散户多+小盘股+彩票效应。需用正向而非原文的负向",
+    "local_factor_id": "idio_vol_v1",
+    "conclusion": "入库",
+    "date": "2026-02-24",
+    "status": "active"
+  },
+  {
     "id": "pb_roe_residual_v1",
     "source_type": "研报",
     "source_title": "PB-ROE偏离度选股因子",
@@ -111,136 +111,37 @@
     },
     "diff_notes": "在中证1000几乎失效（IC不显著），可能因为小盘股PB/ROE数据质量差、波动大。研报通常在沪深300/500上验证，大盘股效果可能更好",
     "local_factor_id": "pb_roe_residual_v1",
-    "conclusion": "入库但标记弱",
+    "conclusion": "入库（弱）",
     "date": "2026-02-24",
     "status": "active"
   },
   {
     "id": "tail_risk_cvar_v1",
-    "date": "2026-03-08",
-    "status": "accepted",
-    "name": "尾部风险CVaR (Expected Shortfall)",
-    "category": "风险/尾部",
     "source_type": "论文复现+本土化",
     "source_title": "Bali, Cakici & Whitelaw (2011) \"Maxing Out: Stocks as Lotteries and the Cross-Section of Expected Returns\", JFE",
     "source_url": "https://doi.org/10.1016/j.jfineco.2010.08.014",
-    "additional_refs": [
-      "Ang, Chen & Xing (2006) \"Downside Risk\", RFS",
-      "Amaya, Christoffersen, Jacobs & Vasquez (2015) \"Does Realized Skewness Predict...\", JFE"
-    ],
-    "hypothesis": "近期经历极端下跌的股票面临连锁抛售压力(基本面恶化、机构止损、流动性危机)，后续持续承压。回避尾部风险=正alpha。",
-    "formula": "-mean(bottom_2(daily_return, 10d)), neutralize(log_amount_20d)",
-    "construction": {
-      "data": "日频OHLCV",
-      "window": 10,
-      "k_worst": 2,
-      "neutralize": "log(20d_avg_amount)",
-      "winsorize": "MAD 3x",
-      "standardize": "cross-section z-score"
+    "source_author": null,
+    "source_year": null,
+    "source_journal": null,
+    "date": "2026-03-08",
+    "original_metric": {
+      "market": "",
+      "period": "",
+      "ic_mean": null,
+      "sharpe": null,
+      "description": "近期经历极端下跌的股票面临连锁抛售压力(基本面恶化、机构止损、流动性危机)，后续持续承压。回避尾部风险=正alpha。"
     },
-    "backtest_config": {
-      "stock_pool": "CSI1000",
-      "forward_days": 5,
-      "rebalance_freq": 20,
-      "n_groups": 5,
-      "cost": 0.003
-    },
-    "results": {
+    "our_metric": {
+      "market": "中证1000",
+      "period": "2022-10 ~ 2026-03",
       "ic_mean": 0.0202,
       "ic_t": 2.3,
-      "ic_significant_5pct": true,
-      "rank_ic": 0.011,
-      "long_short_sharpe": 2.0364,
-      "long_short_ann_return": 0.2892,
-      "long_short_mdd": -0.1433,
-      "monotonicity": 1.0,
-      "g5_sharpe": 0.85,
-      "g5_ann_return": 0.2551,
-      "g1_ann_return": -0.0172
+      "sharpe": 2.0364,
+      "monotonicity": 1.0
     },
-    "correlations_with_existing": {
-      "amihud_illiq_v2": 0.2175,
-      "overnight_momentum_v1": 0.0127,
-      "close_vwap_dev_v1": -0.0228
-    },
-    "redundancy_check": "PASS (max |r| = 0.22 vs amihud)",
-    "verdict": "全部4项指标达标。IC>0.02✅ IC_t>2.0✅ G5_Sharpe>0.8✅ 单调性>0.8✅。多空Sharpe=2.04刷新全库纪录。",
-    "script": "scripts/compute_tail_risk_cvar.py",
-    "factor_file": "data/factor_tail_risk_cvar_v1.csv",
-    "notes": "同时测试了realized skewness(Amaya 2015)、MAX/MIN effect(原版)、downside variance ratio、volume concentration(HHI)、volume-return correlation等多种变体，均未达标。CVaR(Expected Shortfall)构造在A股CSI1000效果最佳。"
-  },
-  {
-    "id": "realized_skew_v1",
-    "date": "2026-03-08",
-    "status": "rejected",
-    "name": "Realized Skewness (日频近似)",
-    "source_type": "论文复现",
-    "source_title": "Amaya, Christoffersen, Jacobs & Vasquez (2015) JFE",
-    "source_url": "https://doi.org/10.1016/j.jfineco.2015.08.024",
-    "hypothesis": "低偏度股票被低估(投资者偏好正偏度/彩票型)，后续有超额收益",
-    "formula": "-skewness(daily_ret, 20d)",
-    "results": {
-      "ic_mean": 0.0013,
-      "ic_t": 0.26,
-      "long_short_sharpe": -0.28,
-      "monotonicity": 0.0
-    },
-    "failure_reason": "日频数据计算偏度噪声太大，原文用5分钟高频数据。正/反向、20d/60d窗口均无效。",
-    "notes": "测试了4个变体(正/负×20d/60d)，均IC≈0，完全无信号。需高频数据才能复现。"
-  },
-  {
-    "id": "down_var_ratio_v1",
-    "date": "2026-03-08",
-    "status": "rejected",
-    "name": "Downside Variance Ratio",
-    "source_type": "论文复现",
-    "source_title": "Ang, Chen & Xing (2006) \"Downside Risk\", RFS",
-    "source_url": "",
-    "hypothesis": "高下行方差比的股票被过度抛售，后续均值回复",
-    "formula": "mean(min(r,0)^2) / mean(r^2), 20d rolling",
-    "results": {
-      "ic_mean": 0.0054,
-      "ic_t": 0.35,
-      "long_short_sharpe": 0.07,
-      "monotonicity": 0.3
-    },
-    "failure_reason": "IC不显著，分层无单调性。下行方差比在日频CSI1000上无预测力。"
-  },
-  {
-    "id": "vol_hhi_v1",
-    "date": "2026-03-08",
-    "status": "rejected",
-    "name": "Volume Concentration (HHI)",
-    "source_type": "自研",
-    "source_title": "成交量集中度HHI",
-    "source_url": "",
-    "hypothesis": "成交量集中在少数交易日→知情交易信号",
-    "formula": "HHI(daily_volume, 20d)",
-    "results": {
-      "ic_mean": 0.006,
-      "ic_t": 0.59,
-      "long_short_sharpe": 0.16,
-      "monotonicity": 0.0
-    },
-    "failure_reason": "IC不显著，无单调性。日频成交量HHI噪声太大。"
-  },
-  {
-    "id": "vol_ret_corr_v1",
-    "date": "2026-03-08",
-    "status": "rejected",
-    "name": "Volume-Return Correlation",
-    "source_type": "自研",
-    "source_title": "量价相关性因子",
-    "source_url": "",
-    "hypothesis": "放量上涨(正相关)→动量延续",
-    "formula": "corr(ret, log_vol, 20d)",
-    "results": {
-      "ic_mean": -0.002,
-      "ic_t": -0.26,
-      "long_short_sharpe": 0.06,
-      "monotonicity": 0.1
-    },
-    "failure_reason": "IC≈0，完全无信号。量价相关性在CSI1000上无截面预测力。"
+    "conclusion": "入库",
+    "diff_notes": null,
+    "local_factor_id": "tail_risk_cvar_v1"
   },
   {
     "id": "pv_corr_v1",
@@ -273,140 +174,169 @@
     "status": "active"
   },
   {
-    "factor_id": "roe_momentum_v1",
-    "name": "ROE同比变化因子",
+    "id": "amp_compress_v1",
+    "source_type": "自研",
+    "source_title": "振幅压缩因子",
+    "source_url": null,
+    "source_author": null,
+    "source_year": null,
+    "source_journal": null,
     "date": "2026-03-09",
-    "barra_style": "Growth",
-    "source_type": "fundamental",
-    "description": "ROE YoY change with point-in-time mapping, 2-month lag for report availability",
-    "ic_mean": 0.016,
-    "ic_t": 2.26,
-    "monotonicity": 0.3,
-    "long_short_sharpe": 1.49,
-    "g5_sharpe": 1.08,
-    "status": "rejected",
-    "reject_reason": "单调性极差(0.3), G4组年化217%远超G5(66%), 分组结构混乱, 基本面数据对中证1000太嘈杂",
-    "session": "factor-mining-afternoon-2026-03-09"
-  },
-  {
-    "factor_id": "vol_term_structure_v1",
-    "name": "波动率期限结构因子",
-    "date": "2026-03-09",
-    "barra_style": "Volatility",
-    "source_type": "price",
-    "description": "-log(realized_vol_5d / realized_vol_20d), negative = high short-term vol spike",
-    "ic_mean": 0.003,
-    "ic_t": 0.52,
-    "monotonicity": 0.2,
-    "long_short_sharpe": 0.38,
-    "status": "rejected",
-    "reject_reason": "IC几乎为零(0.003), t=0.52无显著性, 波动率比值无预测力",
-    "session": "factor-mining-afternoon-2026-03-09"
-  },
-  {
-    "factor_id": "amihud_asym_v1",
-    "name": "Amihud不对称性因子",
-    "date": "2026-03-09",
-    "barra_style": "Liquidity",
-    "source_type": "price",
-    "description": "log(Amihud_down / Amihud_up), 上涨日vs下跌日流动性不对称",
-    "ic_mean": 0.008,
-    "ic_t": 1.33,
-    "monotonicity": -0.7,
-    "long_short_sharpe": -0.24,
-    "status": "rejected",
-    "reject_reason": "IC不显著(t=1.33), 方向反转(负单调性), 翻转后IC仍不够强",
-    "session": "factor-mining-afternoon-2026-03-09"
-  },
-  {
-    "factor_id": "price_efficiency_v1",
-    "name": "价格效率因子",
-    "date": "2026-03-09",
-    "barra_style": "Momentum",
-    "source_type": "price",
-    "description": "|net_change_20d| / sum(|daily_change|), 价格移动直线度",
-    "ic_mean": 0.009,
-    "ic_t": 1.42,
-    "monotonicity": 0.3,
-    "long_short_sharpe": 0.52,
-    "status": "rejected",
-    "reject_reason": "IC不显著(t=1.42), 单调性差(0.3)",
-    "session": "factor-mining-afternoon-2026-03-09"
-  },
-  {
-    "factor_id": "max5_lottery_v1",
-    "name": "彩票效应因子",
-    "date": "2026-03-09",
-    "barra_style": "尾部风险",
-    "source_type": "price",
-    "description": "-mean(top5 daily returns, 20d), 惩罚极端正收益的彩票型股票",
-    "ic_mean": -0.007,
-    "ic_t": -0.86,
-    "monotonicity": 0.1,
-    "long_short_sharpe": 0.01,
-    "status": "rejected",
-    "reject_reason": "IC为负(-0.007), 彩票效应在中证1000不成立, 小盘高波动反而被奖励",
-    "session": "factor-mining-afternoon-2026-03-09"
-  },
-  {
-    "factor_id": "amp_compress_v1",
-    "name": "振幅压缩因子",
-    "date": "2026-03-09",
-    "barra_style": "Volatility",
-    "source_type": "price",
-    "description": "-log(MA5_amplitude / MA20_amplitude), 振幅收缩信号",
-    "ic_mean": 0.022,
-    "ic_t": 2.06,
-    "monotonicity": 0.7,
-    "long_short_sharpe": 0.41,
-    "g5_sharpe": 1.08,
-    "status": "rejected",
-    "reject_reason": "接近达标但单调性差(0.7<0.8, 20d rebal下), 5d rebal下IC=0.014 t=2.35但mono=-0.3. 方向不稳定.",
-    "notes": "最接近达标的候选, 如果放宽标准可以考虑. 20d rebal: IC=0.022 t=2.06 mono=0.7",
-    "session": "factor-mining-afternoon-2026-03-09"
-  },
-  {
-    "factor_id": "turnover_accel_neg_v1",
-    "name": "换手率加速度反转因子",
-    "date": "2026-03-09",
-    "barra_style": "微观结构",
-    "source_type": "price",
-    "description": "-(MA5换手/MA20换手-1)×sign(5d收益), 量价确认反转信号",
-    "ic_mean": 0.008,
-    "ic_t": 1.56,
-    "monotonicity": 0.8,
-    "long_short_sharpe": 0.28,
-    "g5_sharpe": 0.2,
-    "status": "rejected",
-    "reject_reason": "IC不显著(0.008, t=1.56), 单调性好(0.8)但G5 Sharpe极低(0.20), 信号太弱. 各种窗口参数扫描(3/10,3/20,5/20等)均无法同时满足IC>0.02+单调性>0.8",
-    "notes": "5d rebal mono=0.8但IC差. 3_20_3: IC=0.018 t=3.16但mono=0.5. 核心矛盾: 短期反转信号IC弱但分层好, 无法兼得.",
-    "session": "factor-mining-afternoon-2026-03-09"
-  },
-  {
-    "id": "realized_skew_v1",
-    "source_type": "论文",
-    "source_title": "Does realized skewness predict the cross-section of equity returns?",
-    "source_url": "https://www.sciencedirect.com/science/article/abs/pii/S0304405X15001257",
-    "source_author": "Amaya, Christoffersen, Jacobs, Vasquez",
-    "source_year": 2015,
-    "source_journal": "Journal of Financial Economics 118(1):135-167",
     "original_metric": {
-      "universe": "US equities",
+      "market": "",
+      "period": "",
       "ic_mean": null,
-      "long_short_ret": "19 bps/week",
       "sharpe": null,
-      "note": "Buying lowest skewness decile, selling highest. Used intraday data for weekly moments."
+      "description": "-log(MA5_amplitude / MA20_amplitude), 振幅收缩信号"
     },
     "our_metric": {
-      "universe": "CSI1000",
-      "ic_mean": -0.0016,
-      "ic_t": -0.2,
-      "sharpe": -1.64,
-      "monotonicity": -0.2
+      "ic_mean": 0.022,
+      "ic_t": 2.06,
+      "monotonicity": 0.7,
+      "sharpe": 1.08,
+      "market": "中证1000",
+      "period": "2022-10 ~ 2026-03"
     },
-    "diff_notes": "Original used intraday data for realized moments; we only have daily close data. Daily-return skewness over 20 days is noisy and doesn't capture the same information. The factor completely fails on CSI1000 with daily data.",
-    "conclusion": "FAIL - not reproducible with daily OHLCV data",
-    "date_tested": "2026-03-10"
+    "conclusion": "待优化",
+    "diff_notes": "最接近达标的候选, 如果放宽标准可以考虑. 20d rebal: IC=0.022 t=2.06 mono=0.7",
+    "local_factor_id": null
+  },
+  {
+    "id": "roe_momentum_v1",
+    "source_type": "自研",
+    "source_title": "ROE同比变化因子",
+    "source_url": null,
+    "source_author": null,
+    "source_year": null,
+    "source_journal": null,
+    "date": "2026-03-09",
+    "original_metric": {
+      "market": "",
+      "period": "",
+      "ic_mean": null,
+      "sharpe": null,
+      "description": "ROE YoY change with point-in-time mapping, 2-month lag for report availability"
+    },
+    "our_metric": {
+      "ic_mean": 0.016,
+      "ic_t": 2.26,
+      "monotonicity": 0.3,
+      "sharpe": 1.08,
+      "market": "中证1000",
+      "period": "2022-10 ~ 2026-03"
+    },
+    "conclusion": "待优化",
+    "diff_notes": null,
+    "local_factor_id": null
+  },
+  {
+    "id": "overnight_vol_v1",
+    "source_type": "自研",
+    "source_title": "隔夜波动率(Overnight Volatility)",
+    "source_url": null,
+    "source_author": null,
+    "source_year": null,
+    "source_journal": null,
+    "date": "2026-03-10",
+    "original_metric": {
+      "market": "",
+      "period": "",
+      "ic_mean": null,
+      "sharpe": null,
+      "description": "std(overnight_ret, 20d), 隔夜收益波动率. 高→高预期收益(同idio_vol方向)"
+    },
+    "our_metric": {
+      "ic_mean": 0.02,
+      "ic_t": 2.94,
+      "monotonicity": 0.7,
+      "market": "中证1000",
+      "period": "2022-10 ~ 2026-03"
+    },
+    "conclusion": "待优化",
+    "diff_notes": "IC显著但分层G3=139%远超G4=79%G5=81%, 非线性关系. 翻转后mono=-0.7. 20d forward IC=-0.032 t=2.55但mono仍0.7",
+    "local_factor_id": null
+  },
+  {
+    "id": "ret_asym_v1",
+    "source_type": "自研",
+    "source_title": "收益极值不对称性",
+    "source_url": null,
+    "source_author": null,
+    "source_year": null,
+    "source_journal": null,
+    "date": "2026-03-10",
+    "original_metric": {
+      "market": "",
+      "period": "",
+      "ic_mean": null,
+      "sharpe": null,
+      "description": "10日内最好2天均值+最差2天均值, 衡量收益分布的极端不对称性"
+    },
+    "our_metric": {
+      "ic_mean": -0.0046,
+      "ic_t": -2.08,
+      "monotonicity": 0.3,
+      "market": "中证1000",
+      "period": "2022-10 ~ 2026-03"
+    },
+    "conclusion": "待优化",
+    "diff_notes": "IC有显著性但分层不单调, 信息被CVaR因子覆盖",
+    "local_factor_id": null
+  },
+  {
+    "id": "vwap_trend_v1",
+    "source_type": "自研",
+    "source_title": "VWAP偏离趋势(VWAP Deviation Trend)",
+    "source_url": null,
+    "source_author": null,
+    "source_year": null,
+    "source_journal": null,
+    "date": "2026-03-10",
+    "original_metric": {
+      "market": "",
+      "period": "",
+      "ic_mean": null,
+      "sharpe": null,
+      "description": "20d内(close-VWAP)/VWAP的线性回归斜率, VWAP偏离改善速度"
+    },
+    "our_metric": {
+      "ic_mean": 0.016,
+      "ic_t": 2.3,
+      "monotonicity": 0.6,
+      "market": "中证1000",
+      "period": "2022-10 ~ 2026-03"
+    },
+    "conclusion": "待优化",
+    "diff_notes": "负向(反转)IC=-0.016 t=-2.30也通过统计检验, 但同样无经济意义. VWAP趋势信息太弱",
+    "local_factor_id": null
+  },
+  {
+    "id": "downvol_v2",
+    "source_type": "自研",
+    "source_title": "下行量价共振因子 (Downside Volume-Weighted Return)",
+    "source_url": null,
+    "source_author": null,
+    "source_year": null,
+    "source_journal": null,
+    "date": "2026-03-11",
+    "original_metric": {
+      "market": "",
+      "period": "",
+      "ic_mean": null,
+      "sharpe": null,
+      "description": "20日窗口中下跌日的成交量加权平均收益率(取反后做市值中性化)。高值=近期放量下跌程度大(超卖)。逻辑：放量杀跌后的超卖反弹。"
+    },
+    "our_metric": {
+      "ic_mean": 0.0202,
+      "ic_t": 2.39,
+      "monotonicity": -0.9,
+      "sharpe": 0.25,
+      "market": "中证1000",
+      "period": "2022-10 ~ 2026-03"
+    },
+    "conclusion": "待优化",
+    "diff_notes": "同批还测试了: 吸筹因子(accumulation)、涨跌持续性(ret/sign consistency)、异常换手反转(abnormal turnover reversal)、Kyle价格冲击(price impact)、缺口-日内背离(gap-intra divergence)、开盘竞价强度(open power)、跳空缺口强度(gap intensity)、换手率衰减改进版(turnover decay v2a-v2e),均未达标。",
+    "local_factor_id": null
   },
   {
     "id": "range_efficiency_v1",
@@ -429,7 +359,7 @@
       "note": "Positive IC suggests direction matters, but reversed monotonicity. Low efficiency (choppy) stocks outperform. Tried both directions, neither passes thresholds."
     },
     "diff_notes": "Factor has weak, inconsistent signal. Reversed monotonicity suggests confounding with volatility or liquidity. Not independent enough from existing microstructure factors.",
-    "conclusion": "FAIL - IC not significant, poor monotonicity",
+    "conclusion": "淘汰",
     "date_tested": "2026-03-10"
   },
   {
@@ -452,319 +382,687 @@
       "monotonicity": -0.3
     },
     "diff_notes": "IC is negative (t=-1.63, borderline), meaning high volume-return divergence predicts LOWER returns. This contradicts the accumulation hypothesis. Possibly high volume + low return is distribution/selling pressure, not accumulation. Also likely confounded with volatility.",
-    "conclusion": "FAIL - wrong direction, IC not significant",
+    "conclusion": "淘汰",
     "date_tested": "2026-03-10"
   },
   {
-    "factor_id": "amt_weighted_mom_v1",
-    "name": "成交额加权动量",
-    "date": "2026-03-10",
-    "barra_style": "Momentum",
-    "source_type": "price",
-    "description": "成交额加权平均收益 vs 等权平均收益的差值, 高量日偏向涨=资金推升",
-    "ic_mean": 0.0032,
-    "ic_t": 1.4,
-    "monotonicity": 0.5,
-    "long_short_sharpe": 0.3,
-    "status": "rejected",
-    "reject_reason": "IC不显著(0.003, t=1.40), 单调性差(0.5), 高量日方向无截面预测力",
-    "session": "factor-mining-noon-2026-03-10"
-  },
-  {
-    "factor_id": "highvol_ret_dir_v1",
-    "name": "高量日收益方向",
-    "date": "2026-03-10",
-    "barra_style": "Momentum",
-    "source_type": "price",
-    "description": "过去20天中成交额>1.5倍中位数的异常高量日的平均收益方向",
-    "ic_mean": -0.0047,
-    "ic_t": -1.5,
-    "monotonicity": 0.6,
-    "long_short_sharpe": 0.24,
-    "status": "rejected",
-    "reject_reason": "IC为负(-0.005, t=-1.50), 方向错误, 高量日行为无稳定预测力",
-    "session": "factor-mining-noon-2026-03-10"
-  },
-  {
-    "factor_id": "ret_autocorr_v1",
-    "name": "收益率一阶自相关",
-    "date": "2026-03-10",
-    "barra_style": "Momentum",
-    "source_type": "price",
-    "description": "20日滚动corr(ret_t, ret_{t-1}), 正=趋势延续, 负=均值回复",
-    "ic_mean": 0.0038,
-    "ic_t": 1.57,
-    "monotonicity": 0.9,
-    "long_short_sharpe": 0.4,
-    "g5_sharpe": null,
-    "status": "rejected",
-    "reject_reason": "IC不显著(0.004, t=1.57), 单调性好(0.9)但IC太弱不达标. 5d和20d forward均不过",
-    "notes": "单调性0.9是亮点, 未来可考虑与其他因子组合增强",
-    "session": "factor-mining-noon-2026-03-10"
-  },
-  {
-    "factor_id": "down_day_ratio_v1",
-    "name": "下跌日占比反转",
-    "date": "2026-03-10",
-    "barra_style": "反转",
-    "source_type": "price",
-    "description": "过去20天中收益为负的天数占比, 高占比=连续下跌=反弹",
-    "ic_mean": 0.0,
-    "ic_t": 0.01,
-    "monotonicity": 0.8,
-    "long_short_sharpe": 0.33,
-    "status": "rejected",
-    "reject_reason": "IC=0, 完全无信号. 下跌天数频率太简单, 无预测力",
-    "session": "factor-mining-noon-2026-03-10"
-  },
-  {
-    "factor_id": "money_flow_cmf_v1",
-    "name": "Chaikin资金流(CMF)",
-    "date": "2026-03-10",
-    "barra_style": "微观结构",
-    "source_type": "price",
-    "description": "CLV加权成交额的20日累计 / 20日总成交额. 正向=资金流入, 负向=流出",
-    "ic_mean": -0.0029,
-    "ic_t": -1.3,
-    "monotonicity": -0.6,
-    "long_short_sharpe": -0.52,
-    "status": "rejected",
-    "reject_reason": "IC为负(方向反转), 反转后IC仍不显著(0.003 t=1.30). CMF正值预测低收益, 可能与close_location因子重叠",
-    "session": "factor-mining-noon-2026-03-10"
-  },
-  {
-    "factor_id": "gap_fill_ratio_v1",
-    "name": "缺口回补率",
-    "date": "2026-03-10",
-    "barra_style": "微观结构",
-    "source_type": "price",
-    "description": "日内反向回补跳空缺口的强度(开盘gap方向与日内走势相反的程度)",
-    "ic_mean": 0.0033,
-    "ic_t": 1.26,
-    "monotonicity": 0.1,
-    "long_short_sharpe": 0.37,
-    "status": "rejected",
-    "reject_reason": "IC不显著(0.003 t=1.26), 单调性极差(0.1), 缺口回补行为无截面预测力",
-    "session": "factor-mining-noon-2026-03-10"
-  },
-  {
-    "factor_id": "str_vol_adj_v1",
-    "name": "成交额加权短期反转(5d)",
-    "date": "2026-03-10",
-    "barra_style": "反转",
-    "source_type": "price",
-    "description": "5日成交额加权收益取反, 放量跌权重更大(恐慌卖出更可能反弹)",
-    "ic_mean": 0.0008,
-    "ic_t": 0.32,
-    "monotonicity": 0.1,
-    "long_short_sharpe": 0.32,
-    "status": "rejected",
-    "reject_reason": "IC≈0(0.001 t=0.32), 5日短期反转在中证1000不成立(20d rebal下)",
-    "session": "factor-mining-noon-2026-03-10"
-  },
-  {
-    "factor_id": "ret_asym_v1",
-    "name": "收益极值不对称性",
-    "date": "2026-03-10",
-    "barra_style": "尾部风险",
-    "source_type": "price",
-    "description": "10日内最好2天均值+最差2天均值, 衡量收益分布的极端不对称性",
-    "ic_mean": -0.0046,
-    "ic_t": -2.08,
-    "monotonicity": 0.3,
-    "long_short_sharpe": 0.32,
-    "status": "rejected",
-    "reject_reason": "IC显著但方向为负(t=-2.08), 单调性差(0.3), 可能与CVaR高度相关(都看极端值). 翻转后mono=-0.3",
-    "notes": "IC有显著性但分层不单调, 信息被CVaR因子覆盖",
-    "session": "factor-mining-noon-2026-03-10"
-  },
-  {
-    "factor_id": "intra_over_vol_ratio_v1",
-    "name": "日内/隔夜波动率比",
-    "date": "2026-03-10",
-    "barra_style": "Volatility",
-    "source_type": "price",
-    "description": "log(日内波动率/隔夜波动率), 高=散户噪声交易多, 低=信息驱动",
-    "ic_mean": 0.0016,
-    "ic_t": 0.83,
-    "monotonicity": 0.1,
-    "long_short_sharpe": 0.44,
-    "status": "rejected",
-    "reject_reason": "IC不显著(0.002 t=0.83), 日内vs隔夜波动率比值无截面选股能力",
-    "session": "factor-mining-noon-2026-03-10"
-  },
-  {
-    "factor_id": "williams_r_rev_v1",
-    "name": "Williams %R反转",
-    "date": "2026-03-10",
-    "barra_style": "反转",
-    "source_type": "price",
-    "description": "收盘价在20日最高-最低range中的位置, 接近低点=超卖做多",
-    "ic_mean": -0.0016,
-    "ic_t": -0.62,
-    "monotonicity": -0.4,
-    "long_short_sharpe": -0.55,
-    "status": "rejected",
-    "reject_reason": "IC不显著, 分层呈U型(G1高G5高中间低), 非线性关系无法用线性因子捕捉",
-    "notes": "经典技术指标在截面选股中失效, 可能因为所有人都在用",
-    "session": "factor-mining-noon-2026-03-10"
-  },
-  {
-    "factor_id": "low_turnover_mom_v1",
-    "name": "低换手动量(Turnover-Adjusted Momentum)",
-    "date": "2026-03-10",
-    "barra_style": "Momentum/Quality",
-    "source_type": "price",
-    "description": "20d累积收益/平均换手率, 高效率价格发现信号",
-    "ic_mean": -0.009,
-    "ic_t": -1.19,
-    "monotonicity": 0.6,
-    "long_short_sharpe": 0.32,
-    "status": "rejected",
-    "reject_reason": "IC不显著(-0.009 t=-1.19), 低换手+正动量无截面预测力",
-    "session": "factor-mining-afternoon-2026-03-10"
-  },
-  {
-    "factor_id": "down_vol_ratio_v1",
-    "name": "下跌日成交量比(Down-Day Volume Ratio)",
-    "date": "2026-03-10",
-    "barra_style": "微观结构",
-    "source_type": "price",
-    "description": "-log(avg_vol_down_days / avg_vol_up_days, 20d), 低比值=卖压枯竭",
-    "ic_mean": -0.001,
-    "ic_t": -0.36,
-    "monotonicity": 0.6,
-    "long_short_sharpe": 0.64,
-    "status": "rejected",
-    "reject_reason": "IC≈0(-0.001 t=-0.36), 上涨/下跌日成交量比值无截面预测力",
-    "session": "factor-mining-afternoon-2026-03-10"
-  },
-  {
-    "factor_id": "trend_quality_v1",
-    "name": "趋势质量(Trend Quality Score)",
-    "date": "2026-03-10",
-    "barra_style": "Momentum/Quality",
-    "source_type": "price",
-    "description": "sign(cum_ret_20d) × sqrt(R²_linear_fit) × |cum_ret|, 清洁趋势评分",
-    "ic_mean": -0.017,
-    "ic_t": -1.83,
-    "monotonicity": 0.3,
-    "long_short_sharpe": 0.51,
-    "status": "rejected",
-    "reject_reason": "IC不显著(-0.017 t=-1.83), 分层呈倒U型(G3最高). 清洁上涨趋势反而预测反转",
-    "notes": "5d rebal下mono=0.9但IC仍不显著. 趋势质量是反向指标但信号不够强",
-    "session": "factor-mining-afternoon-2026-03-10"
-  },
-  {
-    "factor_id": "intra_skew_v1",
-    "name": "日内收益偏度(Intraday Return Skewness)",
-    "date": "2026-03-10",
-    "barra_style": "微观结构",
-    "source_type": "price",
-    "description": "skewness(open→close returns, 20d), 日内收益分布不对称性",
-    "ic_mean": -0.001,
-    "ic_t": -0.12,
-    "monotonicity": 0.6,
-    "long_short_sharpe": 0.43,
-    "status": "rejected",
-    "reject_reason": "IC=0(-0.001 t=-0.12), 日内偏度完全无截面预测力. 与realized_skew(close→close)一样失败",
-    "session": "factor-mining-afternoon-2026-03-10"
-  },
-  {
-    "factor_id": "fip_v1",
-    "name": "信息离散度/温水青蛙(Frog-in-the-Pan)",
-    "date": "2026-03-10",
-    "barra_style": "Momentum",
+    "id": "down_var_ratio_v1",
     "source_type": "论文复现",
-    "description": "Da, Gurun & Warachka (2014) RFS. ID = sign(sum_ret)×(frac_pos-frac_neg), 连续小涨vs离散大涨",
-    "ic_mean": 0.006,
-    "ic_t": 1.17,
-    "monotonicity": 0.3,
-    "long_short_sharpe": 0.4,
-    "status": "rejected",
-    "reject_reason": "IC不显著(0.006 t=1.17), 正反方向均无效. FIP效应在A股中证1000不成立",
-    "session": "factor-mining-afternoon-2026-03-10"
+    "source_title": "Ang, Chen & Xing (2006) \"Downside Risk\", RFS",
+    "source_url": null,
+    "source_author": null,
+    "source_year": null,
+    "source_journal": null,
+    "date": "2026-03-08",
+    "original_metric": {
+      "market": "",
+      "period": "",
+      "ic_mean": null,
+      "sharpe": null,
+      "description": "高下行方差比的股票被过度抛售，后续均值回复"
+    },
+    "our_metric": {
+      "market": "中证1000",
+      "period": "2022-10 ~ 2026-03",
+      "ic_mean": 0.0054,
+      "ic_t": 0.35,
+      "sharpe": 0.07,
+      "monotonicity": 0.3
+    },
+    "conclusion": "淘汰",
+    "diff_notes": null,
+    "local_factor_id": null
   },
   {
-    "factor_id": "hv_close_strength_v1",
-    "name": "高量日收盘强度(High-Volume Close Strength)",
-    "date": "2026-03-10",
-    "barra_style": "微观结构",
-    "source_type": "price",
-    "description": "CLV仅在高于中位数成交量日计算, 放量时收盘位置信号",
-    "ic_mean": -0.009,
-    "ic_t": -1.86,
-    "monotonicity": 0.5,
-    "long_short_sharpe": 0.39,
-    "status": "rejected",
-    "reject_reason": "IC边缘显著但方向反(-0.009 t=-1.86), 分层非单调. 条件化CLV无增量信息",
-    "session": "factor-mining-afternoon-2026-03-10"
-  },
-  {
-    "factor_id": "overnight_vol_v1",
-    "name": "隔夜波动率(Overnight Volatility)",
-    "date": "2026-03-10",
-    "barra_style": "Volatility",
-    "source_type": "price",
-    "description": "std(overnight_ret, 20d), 隔夜收益波动率. 高→高预期收益(同idio_vol方向)",
-    "ic_mean": 0.02,
-    "ic_t": 2.94,
-    "monotonicity": 0.7,
-    "long_short_sharpe": 0.16,
-    "status": "rejected",
-    "reject_reason": "IC显著(0.020 t=2.94)但单调性差(0.7<0.8, G3异常高=倒U型). 且可能与idio_vol冗余(都是波动率溢价)",
-    "notes": "IC显著但分层G3=139%远超G4=79%G5=81%, 非线性关系. 翻转后mono=-0.7. 20d forward IC=-0.032 t=2.55但mono仍0.7",
-    "session": "factor-mining-afternoon-2026-03-10"
-  },
-  {
-    "factor_id": "dist_high_v1",
-    "name": "120日高点距离(Distance to 120d High)",
-    "date": "2026-03-10",
-    "barra_style": "Momentum",
+    "id": "realized_skew_v1",
     "source_type": "论文复现",
-    "description": "George & Hwang (2004). close/max(close,120d), 接近历史高点锚定效应",
-    "ic_mean": -0.013,
-    "ic_t": -1.38,
-    "monotonicity": 0.6,
-    "long_short_sharpe": 0.28,
-    "status": "rejected",
-    "reject_reason": "IC不显著(-0.013 t=-1.38), 分层非单调. 52周高点效应在中证1000不成立",
-    "session": "factor-mining-afternoon-2026-03-10"
+    "source_title": "Amaya, Christoffersen, Jacobs & Vasquez (2015) JFE",
+    "source_url": "https://doi.org/10.1016/j.jfineco.2015.08.024",
+    "source_author": null,
+    "source_year": null,
+    "source_journal": null,
+    "date": "2026-03-08",
+    "original_metric": {
+      "market": "",
+      "period": "",
+      "ic_mean": null,
+      "sharpe": null,
+      "description": "低偏度股票被低估(投资者偏好正偏度/彩票型)，后续有超额收益"
+    },
+    "our_metric": {
+      "market": "中证1000",
+      "period": "2022-10 ~ 2026-03",
+      "ic_mean": 0.0013,
+      "ic_t": 0.26,
+      "sharpe": -0.28,
+      "monotonicity": 0.0
+    },
+    "conclusion": "淘汰",
+    "diff_notes": null,
+    "local_factor_id": null
   },
   {
-    "factor_id": "vwap_trend_v1",
-    "name": "VWAP偏离趋势(VWAP Deviation Trend)",
+    "id": "vol_hhi_v1",
+    "source_type": "自研",
+    "source_title": "成交量集中度HHI",
+    "source_url": null,
+    "source_author": null,
+    "source_year": null,
+    "source_journal": null,
+    "date": "2026-03-08",
+    "original_metric": {
+      "market": "",
+      "period": "",
+      "ic_mean": null,
+      "sharpe": null,
+      "description": "成交量集中在少数交易日→知情交易信号"
+    },
+    "our_metric": {
+      "market": "中证1000",
+      "period": "2022-10 ~ 2026-03",
+      "ic_mean": 0.006,
+      "ic_t": 0.59,
+      "sharpe": 0.16,
+      "monotonicity": 0.0
+    },
+    "conclusion": "淘汰",
+    "diff_notes": null,
+    "local_factor_id": null
+  },
+  {
+    "id": "vol_ret_corr_v1",
+    "source_type": "自研",
+    "source_title": "量价相关性因子",
+    "source_url": null,
+    "source_author": null,
+    "source_year": null,
+    "source_journal": null,
+    "date": "2026-03-08",
+    "original_metric": {
+      "market": "",
+      "period": "",
+      "ic_mean": null,
+      "sharpe": null,
+      "description": "放量上涨(正相关)→动量延续"
+    },
+    "our_metric": {
+      "market": "中证1000",
+      "period": "2022-10 ~ 2026-03",
+      "ic_mean": -0.002,
+      "ic_t": -0.26,
+      "sharpe": 0.06,
+      "monotonicity": 0.1
+    },
+    "conclusion": "淘汰",
+    "diff_notes": null,
+    "local_factor_id": null
+  },
+  {
+    "id": "amihud_asym_v1",
+    "source_type": "自研",
+    "source_title": "Amihud不对称性因子",
+    "source_url": null,
+    "source_author": null,
+    "source_year": null,
+    "source_journal": null,
+    "date": "2026-03-09",
+    "original_metric": {
+      "market": "",
+      "period": "",
+      "ic_mean": null,
+      "sharpe": null,
+      "description": "log(Amihud_down / Amihud_up), 上涨日vs下跌日流动性不对称"
+    },
+    "our_metric": {
+      "ic_mean": 0.008,
+      "ic_t": 1.33,
+      "monotonicity": -0.7,
+      "market": "中证1000",
+      "period": "2022-10 ~ 2026-03"
+    },
+    "conclusion": "淘汰",
+    "diff_notes": null,
+    "local_factor_id": null
+  },
+  {
+    "id": "max5_lottery_v1",
+    "source_type": "自研",
+    "source_title": "彩票效应因子",
+    "source_url": null,
+    "source_author": null,
+    "source_year": null,
+    "source_journal": null,
+    "date": "2026-03-09",
+    "original_metric": {
+      "market": "",
+      "period": "",
+      "ic_mean": null,
+      "sharpe": null,
+      "description": "-mean(top5 daily returns, 20d), 惩罚极端正收益的彩票型股票"
+    },
+    "our_metric": {
+      "ic_mean": -0.007,
+      "ic_t": -0.86,
+      "monotonicity": 0.1,
+      "market": "中证1000",
+      "period": "2022-10 ~ 2026-03"
+    },
+    "conclusion": "淘汰",
+    "diff_notes": null,
+    "local_factor_id": null
+  },
+  {
+    "id": "price_efficiency_v1",
+    "source_type": "自研",
+    "source_title": "价格效率因子",
+    "source_url": null,
+    "source_author": null,
+    "source_year": null,
+    "source_journal": null,
+    "date": "2026-03-09",
+    "original_metric": {
+      "market": "",
+      "period": "",
+      "ic_mean": null,
+      "sharpe": null,
+      "description": "|net_change_20d| / sum(|daily_change|), 价格移动直线度"
+    },
+    "our_metric": {
+      "ic_mean": 0.009,
+      "ic_t": 1.42,
+      "monotonicity": 0.3,
+      "market": "中证1000",
+      "period": "2022-10 ~ 2026-03"
+    },
+    "conclusion": "淘汰",
+    "diff_notes": null,
+    "local_factor_id": null
+  },
+  {
+    "id": "turnover_accel_neg_v1",
+    "source_type": "自研",
+    "source_title": "换手率加速度反转因子",
+    "source_url": null,
+    "source_author": null,
+    "source_year": null,
+    "source_journal": null,
+    "date": "2026-03-09",
+    "original_metric": {
+      "market": "",
+      "period": "",
+      "ic_mean": null,
+      "sharpe": null,
+      "description": "-(MA5换手/MA20换手-1)×sign(5d收益), 量价确认反转信号"
+    },
+    "our_metric": {
+      "ic_mean": 0.008,
+      "ic_t": 1.56,
+      "monotonicity": 0.8,
+      "sharpe": 0.2,
+      "market": "中证1000",
+      "period": "2022-10 ~ 2026-03"
+    },
+    "conclusion": "淘汰",
+    "diff_notes": "5d rebal mono=0.8但IC差. 3_20_3: IC=0.018 t=3.16但mono=0.5. 核心矛盾: 短期反转信号IC弱但分层好, 无法兼得.",
+    "local_factor_id": null
+  },
+  {
+    "id": "vol_term_structure_v1",
+    "source_type": "自研",
+    "source_title": "波动率期限结构因子",
+    "source_url": null,
+    "source_author": null,
+    "source_year": null,
+    "source_journal": null,
+    "date": "2026-03-09",
+    "original_metric": {
+      "market": "",
+      "period": "",
+      "ic_mean": null,
+      "sharpe": null,
+      "description": "-log(realized_vol_5d / realized_vol_20d), negative = high short-term vol spike"
+    },
+    "our_metric": {
+      "ic_mean": 0.003,
+      "ic_t": 0.52,
+      "monotonicity": 0.2,
+      "market": "中证1000",
+      "period": "2022-10 ~ 2026-03"
+    },
+    "conclusion": "淘汰",
+    "diff_notes": null,
+    "local_factor_id": null
+  },
+  {
+    "id": "amt_weighted_mom_v1",
+    "source_type": "自研",
+    "source_title": "成交额加权动量",
+    "source_url": null,
+    "source_author": null,
+    "source_year": null,
+    "source_journal": null,
     "date": "2026-03-10",
-    "barra_style": "微观结构",
-    "source_type": "price",
-    "description": "20d内(close-VWAP)/VWAP的线性回归斜率, VWAP偏离改善速度",
-    "ic_mean": 0.016,
-    "ic_t": 2.3,
-    "monotonicity": 0.6,
-    "long_short_sharpe": 0.22,
-    "status": "rejected",
-    "reject_reason": "IC显著(0.016 t=2.30)但经济意义极弱: 多空年化仅2.4%, Sharpe=0.22, 分组收益差<3pct. 统计显著但无实际选股价值",
-    "notes": "负向(反转)IC=-0.016 t=-2.30也通过统计检验, 但同样无经济意义. VWAP趋势信息太弱",
-    "session": "factor-mining-afternoon-2026-03-10"
+    "original_metric": {
+      "market": "",
+      "period": "",
+      "ic_mean": null,
+      "sharpe": null,
+      "description": "成交额加权平均收益 vs 等权平均收益的差值, 高量日偏向涨=资金推升"
+    },
+    "our_metric": {
+      "ic_mean": 0.0032,
+      "ic_t": 1.4,
+      "monotonicity": 0.5,
+      "market": "中证1000",
+      "period": "2022-10 ~ 2026-03"
+    },
+    "conclusion": "淘汰",
+    "diff_notes": null,
+    "local_factor_id": null
   },
   {
-    "factor_name": "下行量价共振因子 (Downside Volume-Weighted Return)",
-    "factor_id": "downvol_v2",
-    "date": "2026-03-11",
-    "session": "factor-mining-noon",
-    "category": "微观结构/反转",
-    "barra_style": "Liquidity",
-    "description": "20日窗口中下跌日的成交量加权平均收益率(取反后做市值中性化)。高值=近期放量下跌程度大(超卖)。逻辑：放量杀跌后的超卖反弹。",
-    "formula": "-mean(daily_ret[ret<0] * volume[ret<0] / sum(volume[ret<0]), 20d), neutralized by log_amount",
-    "data_source": "csi1000_kline_raw.csv (OHLCV + turnover)",
-    "ic_mean": 0.0202,
-    "ic_t": 2.39,
-    "ic_significant": true,
-    "monotonicity": -0.9,
-    "g5_sharpe": 0.25,
-    "ls_sharpe": -0.31,
-    "conclusion": "淘汰。IC=0.020(t=2.39)在5%水平显著,但单调性=-0.9(方向完全反转),G5 Sharpe=0.25远低于0.8门槛。翻转后IC变为-0.020也无法使用。IC与分层排序方向矛盾,表明量价关系在截面上存在非线性——中等水平效果最好,极端值效果差。",
-    "notes": "同批还测试了: 吸筹因子(accumulation)、涨跌持续性(ret/sign consistency)、异常换手反转(abnormal turnover reversal)、Kyle价格冲击(price impact)、缺口-日内背离(gap-intra divergence)、开盘竞价强度(open power)、跳空缺口强度(gap intensity)、换手率衰减改进版(turnover decay v2a-v2e),均未达标。",
-    "status": "rejected"
+    "id": "dist_high_v1",
+    "source_type": "论文",
+    "source_title": "120日高点距离(Distance to 120d High)",
+    "source_url": null,
+    "source_author": null,
+    "source_year": null,
+    "source_journal": null,
+    "date": "2026-03-10",
+    "original_metric": {
+      "market": "",
+      "period": "",
+      "ic_mean": null,
+      "sharpe": null,
+      "description": "George & Hwang (2004). close/max(close,120d), 接近历史高点锚定效应"
+    },
+    "our_metric": {
+      "ic_mean": -0.013,
+      "ic_t": -1.38,
+      "monotonicity": 0.6,
+      "market": "中证1000",
+      "period": "2022-10 ~ 2026-03"
+    },
+    "conclusion": "淘汰",
+    "diff_notes": null,
+    "local_factor_id": null
+  },
+  {
+    "id": "down_day_ratio_v1",
+    "source_type": "自研",
+    "source_title": "下跌日占比反转",
+    "source_url": null,
+    "source_author": null,
+    "source_year": null,
+    "source_journal": null,
+    "date": "2026-03-10",
+    "original_metric": {
+      "market": "",
+      "period": "",
+      "ic_mean": null,
+      "sharpe": null,
+      "description": "过去20天中收益为负的天数占比, 高占比=连续下跌=反弹"
+    },
+    "our_metric": {
+      "ic_mean": 0.0,
+      "ic_t": 0.01,
+      "monotonicity": 0.8,
+      "market": "中证1000",
+      "period": "2022-10 ~ 2026-03"
+    },
+    "conclusion": "淘汰",
+    "diff_notes": null,
+    "local_factor_id": null
+  },
+  {
+    "id": "down_vol_ratio_v1",
+    "source_type": "自研",
+    "source_title": "下跌日成交量比(Down-Day Volume Ratio)",
+    "source_url": null,
+    "source_author": null,
+    "source_year": null,
+    "source_journal": null,
+    "date": "2026-03-10",
+    "original_metric": {
+      "market": "",
+      "period": "",
+      "ic_mean": null,
+      "sharpe": null,
+      "description": "-log(avg_vol_down_days / avg_vol_up_days, 20d), 低比值=卖压枯竭"
+    },
+    "our_metric": {
+      "ic_mean": -0.001,
+      "ic_t": -0.36,
+      "monotonicity": 0.6,
+      "market": "中证1000",
+      "period": "2022-10 ~ 2026-03"
+    },
+    "conclusion": "淘汰",
+    "diff_notes": null,
+    "local_factor_id": null
+  },
+  {
+    "id": "fip_v1",
+    "source_type": "论文",
+    "source_title": "信息离散度/温水青蛙(Frog-in-the-Pan)",
+    "source_url": null,
+    "source_author": null,
+    "source_year": null,
+    "source_journal": null,
+    "date": "2026-03-10",
+    "original_metric": {
+      "market": "",
+      "period": "",
+      "ic_mean": null,
+      "sharpe": null,
+      "description": "Da, Gurun & Warachka (2014) RFS. ID = sign(sum_ret)×(frac_pos-frac_neg), 连续小涨vs离散大涨"
+    },
+    "our_metric": {
+      "ic_mean": 0.006,
+      "ic_t": 1.17,
+      "monotonicity": 0.3,
+      "market": "中证1000",
+      "period": "2022-10 ~ 2026-03"
+    },
+    "conclusion": "淘汰",
+    "diff_notes": null,
+    "local_factor_id": null
+  },
+  {
+    "id": "gap_fill_ratio_v1",
+    "source_type": "自研",
+    "source_title": "缺口回补率",
+    "source_url": null,
+    "source_author": null,
+    "source_year": null,
+    "source_journal": null,
+    "date": "2026-03-10",
+    "original_metric": {
+      "market": "",
+      "period": "",
+      "ic_mean": null,
+      "sharpe": null,
+      "description": "日内反向回补跳空缺口的强度(开盘gap方向与日内走势相反的程度)"
+    },
+    "our_metric": {
+      "ic_mean": 0.0033,
+      "ic_t": 1.26,
+      "monotonicity": 0.1,
+      "market": "中证1000",
+      "period": "2022-10 ~ 2026-03"
+    },
+    "conclusion": "淘汰",
+    "diff_notes": null,
+    "local_factor_id": null
+  },
+  {
+    "id": "highvol_ret_dir_v1",
+    "source_type": "自研",
+    "source_title": "高量日收益方向",
+    "source_url": null,
+    "source_author": null,
+    "source_year": null,
+    "source_journal": null,
+    "date": "2026-03-10",
+    "original_metric": {
+      "market": "",
+      "period": "",
+      "ic_mean": null,
+      "sharpe": null,
+      "description": "过去20天中成交额>1.5倍中位数的异常高量日的平均收益方向"
+    },
+    "our_metric": {
+      "ic_mean": -0.0047,
+      "ic_t": -1.5,
+      "monotonicity": 0.6,
+      "market": "中证1000",
+      "period": "2022-10 ~ 2026-03"
+    },
+    "conclusion": "淘汰",
+    "diff_notes": null,
+    "local_factor_id": null
+  },
+  {
+    "id": "hv_close_strength_v1",
+    "source_type": "自研",
+    "source_title": "高量日收盘强度(High-Volume Close Strength)",
+    "source_url": null,
+    "source_author": null,
+    "source_year": null,
+    "source_journal": null,
+    "date": "2026-03-10",
+    "original_metric": {
+      "market": "",
+      "period": "",
+      "ic_mean": null,
+      "sharpe": null,
+      "description": "CLV仅在高于中位数成交量日计算, 放量时收盘位置信号"
+    },
+    "our_metric": {
+      "ic_mean": -0.009,
+      "ic_t": -1.86,
+      "monotonicity": 0.5,
+      "market": "中证1000",
+      "period": "2022-10 ~ 2026-03"
+    },
+    "conclusion": "淘汰",
+    "diff_notes": null,
+    "local_factor_id": null
+  },
+  {
+    "id": "intra_over_vol_ratio_v1",
+    "source_type": "自研",
+    "source_title": "日内/隔夜波动率比",
+    "source_url": null,
+    "source_author": null,
+    "source_year": null,
+    "source_journal": null,
+    "date": "2026-03-10",
+    "original_metric": {
+      "market": "",
+      "period": "",
+      "ic_mean": null,
+      "sharpe": null,
+      "description": "log(日内波动率/隔夜波动率), 高=散户噪声交易多, 低=信息驱动"
+    },
+    "our_metric": {
+      "ic_mean": 0.0016,
+      "ic_t": 0.83,
+      "monotonicity": 0.1,
+      "market": "中证1000",
+      "period": "2022-10 ~ 2026-03"
+    },
+    "conclusion": "淘汰",
+    "diff_notes": null,
+    "local_factor_id": null
+  },
+  {
+    "id": "intra_skew_v1",
+    "source_type": "自研",
+    "source_title": "日内收益偏度(Intraday Return Skewness)",
+    "source_url": null,
+    "source_author": null,
+    "source_year": null,
+    "source_journal": null,
+    "date": "2026-03-10",
+    "original_metric": {
+      "market": "",
+      "period": "",
+      "ic_mean": null,
+      "sharpe": null,
+      "description": "skewness(open→close returns, 20d), 日内收益分布不对称性"
+    },
+    "our_metric": {
+      "ic_mean": -0.001,
+      "ic_t": -0.12,
+      "monotonicity": 0.6,
+      "market": "中证1000",
+      "period": "2022-10 ~ 2026-03"
+    },
+    "conclusion": "淘汰",
+    "diff_notes": null,
+    "local_factor_id": null
+  },
+  {
+    "id": "low_turnover_mom_v1",
+    "source_type": "自研",
+    "source_title": "低换手动量(Turnover-Adjusted Momentum)",
+    "source_url": null,
+    "source_author": null,
+    "source_year": null,
+    "source_journal": null,
+    "date": "2026-03-10",
+    "original_metric": {
+      "market": "",
+      "period": "",
+      "ic_mean": null,
+      "sharpe": null,
+      "description": "20d累积收益/平均换手率, 高效率价格发现信号"
+    },
+    "our_metric": {
+      "ic_mean": -0.009,
+      "ic_t": -1.19,
+      "monotonicity": 0.6,
+      "market": "中证1000",
+      "period": "2022-10 ~ 2026-03"
+    },
+    "conclusion": "淘汰",
+    "diff_notes": null,
+    "local_factor_id": null
+  },
+  {
+    "id": "money_flow_cmf_v1",
+    "source_type": "自研",
+    "source_title": "Chaikin资金流(CMF)",
+    "source_url": null,
+    "source_author": null,
+    "source_year": null,
+    "source_journal": null,
+    "date": "2026-03-10",
+    "original_metric": {
+      "market": "",
+      "period": "",
+      "ic_mean": null,
+      "sharpe": null,
+      "description": "CLV加权成交额的20日累计 / 20日总成交额. 正向=资金流入, 负向=流出"
+    },
+    "our_metric": {
+      "ic_mean": -0.0029,
+      "ic_t": -1.3,
+      "monotonicity": -0.6,
+      "market": "中证1000",
+      "period": "2022-10 ~ 2026-03"
+    },
+    "conclusion": "淘汰",
+    "diff_notes": null,
+    "local_factor_id": null
+  },
+  {
+    "id": "ret_autocorr_v1",
+    "source_type": "自研",
+    "source_title": "收益率一阶自相关",
+    "source_url": null,
+    "source_author": null,
+    "source_year": null,
+    "source_journal": null,
+    "date": "2026-03-10",
+    "original_metric": {
+      "market": "",
+      "period": "",
+      "ic_mean": null,
+      "sharpe": null,
+      "description": "20日滚动corr(ret_t, ret_{t-1}), 正=趋势延续, 负=均值回复"
+    },
+    "our_metric": {
+      "ic_mean": 0.0038,
+      "ic_t": 1.57,
+      "monotonicity": 0.9,
+      "market": "中证1000",
+      "period": "2022-10 ~ 2026-03"
+    },
+    "conclusion": "淘汰",
+    "diff_notes": "单调性0.9是亮点, 未来可考虑与其他因子组合增强",
+    "local_factor_id": null
+  },
+  {
+    "id": "str_vol_adj_v1",
+    "source_type": "自研",
+    "source_title": "成交额加权短期反转(5d)",
+    "source_url": null,
+    "source_author": null,
+    "source_year": null,
+    "source_journal": null,
+    "date": "2026-03-10",
+    "original_metric": {
+      "market": "",
+      "period": "",
+      "ic_mean": null,
+      "sharpe": null,
+      "description": "5日成交额加权收益取反, 放量跌权重更大(恐慌卖出更可能反弹)"
+    },
+    "our_metric": {
+      "ic_mean": 0.0008,
+      "ic_t": 0.32,
+      "monotonicity": 0.1,
+      "market": "中证1000",
+      "period": "2022-10 ~ 2026-03"
+    },
+    "conclusion": "淘汰",
+    "diff_notes": null,
+    "local_factor_id": null
+  },
+  {
+    "id": "trend_quality_v1",
+    "source_type": "自研",
+    "source_title": "趋势质量(Trend Quality Score)",
+    "source_url": null,
+    "source_author": null,
+    "source_year": null,
+    "source_journal": null,
+    "date": "2026-03-10",
+    "original_metric": {
+      "market": "",
+      "period": "",
+      "ic_mean": null,
+      "sharpe": null,
+      "description": "sign(cum_ret_20d) × sqrt(R²_linear_fit) × |cum_ret|, 清洁趋势评分"
+    },
+    "our_metric": {
+      "ic_mean": -0.017,
+      "ic_t": -1.83,
+      "monotonicity": 0.3,
+      "market": "中证1000",
+      "period": "2022-10 ~ 2026-03"
+    },
+    "conclusion": "淘汰",
+    "diff_notes": "5d rebal下mono=0.9但IC仍不显著. 趋势质量是反向指标但信号不够强",
+    "local_factor_id": null
+  },
+  {
+    "id": "williams_r_rev_v1",
+    "source_type": "自研",
+    "source_title": "Williams %R反转",
+    "source_url": null,
+    "source_author": null,
+    "source_year": null,
+    "source_journal": null,
+    "date": "2026-03-10",
+    "original_metric": {
+      "market": "",
+      "period": "",
+      "ic_mean": null,
+      "sharpe": null,
+      "description": "收盘价在20日最高-最低range中的位置, 接近低点=超卖做多"
+    },
+    "our_metric": {
+      "ic_mean": -0.0016,
+      "ic_t": -0.62,
+      "monotonicity": -0.4,
+      "market": "中证1000",
+      "period": "2022-10 ~ 2026-03"
+    },
+    "conclusion": "淘汰",
+    "diff_notes": "经典技术指标在截面选股中失效, 可能因为所有人都在用",
+    "local_factor_id": null
   }
 ]
