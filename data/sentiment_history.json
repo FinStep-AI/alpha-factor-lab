@@ -144,7 +144,34 @@
       "seal_rate": 71.8,
       "leader": "王力安防(605268) 5连板 秒板一封不开 封单9.55% score=230",
       "note": "收盘数据。日内V型反转：盘前温度36(退潮)→收盘温度70(高潮)。涨停56/跌停4/炸板22/封板率71.8%。温度走势68→53→36→70极不稳定。高潮期不新建仓+龙头秒板无法上车。空仓维持。"
+    },
+    {
+      "date": "20260311",
+      "zt_count": 9,
+      "dt_count": 0,
+      "zb_count": 2,
+      "max_streak": 6,
+      "temperature": 51,
+      "phase": "ferment"
+    },
+    {
+      "date": "20260313",
+      "zt_count": 6,
+      "dt_count": 0,
+      "zb_count": 0,
+      "max_streak": 5,
+      "temperature": 51,
+      "phase": "ferment"
+    },
+    {
+      "date": "20260313",
+      "zt_count": 58,
+      "dt_count": 12,
+      "zb_count": 19,
+      "max_streak": 5,
+      "temperature": 58,
+      "phase": "ferment"
     }
   ],
-  "updated": "20260310"
+  "updated": "20260313"
 }

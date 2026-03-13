@@ -130,7 +130,9 @@ def execute_trades(data: dict, decision: dict) -> dict:
             print(f"  ⏭️  {code} 数量不足100股，跳过")
             continue
         
-        result = execute_trade(data, player_id, code, name, price, volume, action, date, reason)
+        # Use full code with .SH/.SZ suffix (portfolio keys include suffix)
+        trade_code = code
+        result = execute_trade(data, player_id, trade_code, name, price, volume, action, date, reason)
         
         if result.get("status") == "ok":
             results["success"].append({

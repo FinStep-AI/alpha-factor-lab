@@ -1064,5 +1064,168 @@
     "conclusion": "淘汰",
     "diff_notes": "经典技术指标在截面选股中失效, 可能因为所有人都在用",
     "local_factor_id": null
+  },
+  {
+    "factor_id": "roe_trend_v1",
+    "factor_name": "ROE趋势斜率(4季度回归)",
+    "status": "failed",
+    "date": "2026-03-13",
+    "category": "基本面/Quality",
+    "barra_style": "Growth",
+    "description": "对每只股票最近4季度ROE做OLS回归，斜率衡量盈利趋势。45天延迟避免前视偏差。市值中性化+MAD winsorize+z-score。",
+    "hypothesis": "ROE持续改善的公司基本面向好，未来收益更高",
+    "ic_mean": 0.0226,
+    "ic_t_stat": 3.66,
+    "rank_ic": 0.0355,
+    "monotonicity": 0.0,
+    "g5_sharpe": 0.49,
+    "g5_annual_ret": "165.3%",
+    "g1_annual_ret": "36.0%",
+    "long_short_sharpe": -0.29,
+    "failure_reason": "IC显著(0.0226,t=3.66)但单调性为0：G2(263%)>G3(233%)>G4(205%)>G5(165%)，G2而非G5最优。G1(36%)大幅落后说明负ROE趋势是强负信号，但因子整体呈非线性驼峰形。反向使用同样不单调。Rank transform提升IC到0.0281(t=4.08)但不改变分组。",
+    "lessons_learned": "季度基本面因子在中证1000中IC可以很强(t>3.6)，但分层效果非线性。可能需要与其他因子组合使用(如与动量/流动性交叉)，或做非线性建模。ROE趋势下降=强负信号(G1=36%)是明确发现。",
+    "data_files": [
+      "data/factor_roe_trend_v1.csv",
+      "output/roe_trend_v1/report.json"
+    ]
+  },
+  {
+    "factor_id": "roe_delta_yoy_v1",
+    "factor_name": "ROE同比变化",
+    "status": "failed",
+    "date": "2026-03-13",
+    "category": "基本面/Growth",
+    "barra_style": "Growth",
+    "description": "ROE与去年同期差值，45天延迟，市值中性化。",
+    "hypothesis": "ROE同比改善的公司盈利质量提升",
+    "ic_mean": 0.0213,
+    "ic_t_stat": 3.25,
+    "rank_ic": 0.0332,
+    "monotonicity": 0.3,
+    "g5_sharpe": null,
+    "failure_reason": "IC显著(0.0213,t=3.25)但单调性仅0.3。分层极度不均匀：G2(527%)远超其他组。与roe_trend类似的非线性问题。",
+    "data_files": [
+      "data/factor_roe_delta_yoy_v1.csv"
+    ]
+  },
+  {
+    "factor_id": "price_efficiency_v1",
+    "factor_name": "价格效率(位移/路径比)",
+    "status": "failed",
+    "date": "2026-03-13",
+    "category": "微观结构",
+    "description": "20日净价格位移/总路径之比。低效率=高噪音。",
+    "ic_mean": -0.0083,
+    "ic_t_stat": -1.06,
+    "monotonicity": 0.3,
+    "failure_reason": "IC不显著(-0.008,t=-1.06)。分层呈U型(G1=253%,G3=83%,G5=264%)，非线性。",
+    "data_files": [
+      "data/factor_price_efficiency_v1.csv"
+    ]
+  },
+  {
+    "factor_id": "turnover_vol_v1",
+    "factor_name": "换手率变异系数",
+    "status": "failed",
+    "date": "2026-03-13",
+    "category": "流动性",
+    "description": "20日换手率CV(std/mean)，反向使用。",
+    "ic_mean": 0.0055,
+    "ic_t_stat": 1.08,
+    "monotonicity": 0.1,
+    "failure_reason": "IC不显著(0.006,t=1.08)。分层无序。",
+    "data_files": [
+      "data/factor_turnover_vol_v1.csv"
+    ]
+  },
+  {
+    "factor_id": "bps_growth_v1",
+    "factor_name": "BPS同比增长率",
+    "status": "failed",
+    "date": "2026-03-13",
+    "category": "基本面/Growth",
+    "description": "每股净资产同比增长率，45天延迟，市值中性化。",
+    "ic_mean": -0.0092,
+    "ic_t_stat": -1.88,
+    "monotonicity": -0.2,
+    "failure_reason": "IC不显著(-0.009,t=-1.88)。G3异常高(1082%)，其他组100-230%。数据噪音大。",
+    "data_files": [
+      "data/factor_bps_growth_v1.csv"
+    ]
+  },
+  {
+    "factor_id": "amp_concentration_v1",
+    "factor_name": "振幅集中度(HHI)",
+    "status": "failed",
+    "date": "2026-03-13",
+    "category": "波动率",
+    "description": "20日振幅Herfindahl指数，反向使用(低集中度→高因子值)。",
+    "ic_mean": 0.0058,
+    "ic_t_stat": 1.09,
+    "monotonicity": 0.4,
+    "failure_reason": "IC不显著(0.006,t=1.09)。G5=394%远超其他组但G4=93%打断单调性。",
+    "data_files": [
+      "data/factor_amp_concentration_v1.csv"
+    ]
+  },
+  {
+    "factor_id": "vol_ret_asym_v1",
+    "factor_name": "量价非对称因子",
+    "status": "failed",
+    "date": "2026-03-13",
+    "category": "量价/资金流",
+    "description": "log(上涨日均量/下跌日均量)，20日窗口。",
+    "ic_mean": -0.0013,
+    "ic_t_stat": -0.33,
+    "monotonicity": 0.5,
+    "failure_reason": "IC不显著(-0.001,t=-0.33)。G3=586%异常高，整体无序。",
+    "data_files": [
+      "data/factor_vol_ret_asym_v1.csv"
+    ]
+  },
+  {
+    "factor_id": "max_ret_v1",
+    "factor_name": "最大日收益(MAX效应)",
+    "status": "failed",
+    "date": "2026-03-13",
+    "category": "波动率/反转",
+    "description": "过去20日最大单日收益率，反向使用(Bali et al. 2011)。",
+    "ic_mean": -0.01,
+    "ic_t_stat": -1.44,
+    "monotonicity": 0.4,
+    "failure_reason": "IC不显著(-0.01,t=-1.44)。可能与idio_vol_v1高度相关。",
+    "data_files": [
+      "data/factor_max_ret_v1.csv"
+    ]
+  },
+  {
+    "factor_id": "intraday_mom_v1",
+    "factor_name": "日内动量(收盘相对振幅)",
+    "status": "failed",
+    "date": "2026-03-13",
+    "category": "微观结构",
+    "description": "日内收益/振幅比值的20日均值。",
+    "ic_mean": 0.0018,
+    "ic_t_stat": 0.22,
+    "monotonicity": 0.6,
+    "failure_reason": "IC不显著(0.002,t=0.22)。分层趋势不错(mono=0.6)但IC太弱。可能与close_location_v1重叠。",
+    "data_files": [
+      "data/factor_intraday_mom_v1.csv"
+    ]
+  },
+  {
+    "factor_id": "bp_momentum_v1",
+    "factor_name": "BP比率60日动量",
+    "status": "failed",
+    "date": "2026-03-13",
+    "category": "Value/Growth",
+    "description": "BPS/Close比率的60日变化率，反向使用(BP下降=价格上涨=动量)。",
+    "ic_mean": -0.0031,
+    "ic_t_stat": -0.38,
+    "monotonicity": 0.9,
+    "failure_reason": "IC不显著(-0.003,t=-0.38)。反向使用时单调性达0.9(G1=182→G5=219%)，但IC太弱(实质是捕获了短期反转/动量，与现有因子冗余)。",
+    "data_files": [
+      "data/factor_bp_momentum_v1.csv"
+    ]
   }
 ]
