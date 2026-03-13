@@ -29,13 +29,30 @@ def fetch_kline_tencent_fallback(code, days=30):
     return fetch_kline_tencent(code, days)
 
 
+def _is_index_contaminated(code, klines):
+    """检测fintool是否返回了指数数据而非股票数据
+    fintool bug: 000xxx代码与指数代码冲突时可能返回指数行情
+    检测方式: 股价>500或单日涨幅>50%视为异常（中证1000成分股不可能）
+    """
+    for kl in klines:
+        close = kl.get('close', 0)
+        pct = abs(kl.get('pct_change', 0))
+        if close > 500 or pct > 50:
+            return True
+    return False
+
+
 def fetch_one(code, end_date, num, source):
     """获取单只K线，支持 fallback"""
     if source in ('fintool', 'auto'):
         try:
             klines = fetch_kline_fintool(code, end_date, num)
             if klines:
-                return code, klines, 'fintool'
+                if _is_index_contaminated(code, klines):
+                    # fintool返回了指数数据，强制fallback到腾讯
+                    pass
+                else:
+                    return code, klines, 'fintool'
         except Exception as e:
             if source == 'fintool':
                 return code, [], f'fintool_error: {str(e)[:60]}'
