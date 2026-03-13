@@ -1,0 +1,125 @@
+{
+  "factor_id": "neg_day_freq_v1",
+  "factor_name": "极端负收益日频率(正向) v1",
+  "factor_name_en": "Negative Day Frequency v1",
+  "category": "风险/反转",
+  "description": "过去10日中收益率<=-3%的天数占比。正向使用:做多高频率(短期反转效应)。",
+  "hypothesis": "频繁出现极端负收益的股票,说明近期遭受密集抛售,卖压释放后价格均值回复,产生反弹收益。",
+  "formula": "neutralize(mean(ret<=-0.03, 10d), log_amount_20d)",
+  "direction": 1,
+  "stock_pool": "中证1000",
+  "period": "2022-10-14 ~ 2026-03-06",
+  "n_dates": 822,
+  "n_stocks": 1000,
+  "n_groups": 5,
+  "rebalance_freq": 10,
+  "forward_days": 10,
+  "cost": 0.003,
+  "data_cutoff": "2026-03-07",
+  "correlation_with_cvar": 0.5453806965431768,
+  "metrics": {
+    "ic_mean": 0.02764059132329542,
+    "ic_std": 0.09931236621679593,
+    "ic_positive_pct": 0.5609756097560976,
+    "ic_count": 82,
+    "rank_ic_mean": 0.021479117361816496,
+    "rank_ic_std": 0.1106242427340475,
+    "ir": 0.27831973374752583,
+    "ic_t_stat": 2.942697151806454,
+    "ic_p_value": 0.00424261994314401,
+    "ic_significant_5pct": true,
+    "ic_significant_1pct": true,
+    "group_metrics": {
+      "group_1": {
+        "total_return": -0.16145990897892992,
+        "annualized_return": -0.05261567621167551,
+        "annualized_volatility": 0.24008804448023296,
+        "sharpe_ratio": -0.2191515880167348,
+        "max_drawdown": -0.5169947867794423,
+        "calmar_ratio": -0.10177216010133994
+      },
+      "group_2": {
+        "total_return": 0.21641934599657642,
+        "annualized_return": 0.06197845982752104,
+        "annualized_volatility": 0.2274351050272495,
+        "sharpe_ratio": 0.2725105247938539,
+        "max_drawdown": -0.39149707970063485,
+        "calmar_ratio": 0.15831142310158217
+      },
+      "group_3": {
+        "total_return": 0.3923715568574666,
+        "annualized_return": 0.10694132046998361,
+        "annualized_volatility": 0.23779582066722518,
+        "sharpe_ratio": 0.44971909165568896,
+        "max_drawdown": -0.3714836729688827,
+        "calmar_ratio": 0.28787623320107947
+      },
+      "group_4": {
+        "total_return": 0.3146565089219491,
+        "annualized_return": 0.08759843298768377,
+        "annualized_volatility": 0.26931582380752256,
+        "sharpe_ratio": 0.32526285217570255,
+        "max_drawdown": -0.4084809408312293,
+        "calmar_ratio": 0.21444925388545
+      },
+      "group_5": {
+        "total_return": 0.6316329865695223,
+        "annualized_return": 0.16215198497906735,
+        "annualized_volatility": 0.2909242813478974,
+        "sharpe_ratio": 0.5573683441883641,
+        "max_drawdown": -0.4088982088230066,
+        "calmar_ratio": 0.39655831568891897
+      },
+      "long_short": {
+        "total_return": 0.9846547490599451,
+        "annualized_return": 0.23416220783527608,
+        "annualized_volatility": 0.12102935602927543,
+        "sharpe_ratio": 1.9347554636135986,
+        "max_drawdown": -0.1311672996118539,
+        "calmar_ratio": 1.7852178746394982
+      }
+    },
+    "long_short_total_return": 0.9846547490599451,
+    "long_short_ann_return": 0.23416220783527608,
+    "long_short_sharpe": 1.9347554636135986,
+    "long_short_mdd": -0.1311672996118539,
+    "turnover_mean": 0.6889024390243903,
+    "turnover_std": 0.09765689187474955,
+    "group_returns_annualized": [
+      -0.05261567621167551,
+      0.06197845982752104,
+      0.10694132046998361,
+      0.08759843298768377,
+      0.16215198497906735
+    ],
+    "monotonicity": 0.8999999999999998,
+    "holdings_info": {
+      "group_1": {
+        "mean": 199.29841656516444,
+        "min": 146,
+        "max": 200
+      },
+      "group_2": {
+        "mean": 199.3130328867235,
+        "min": 171,
+        "max": 200
+      },
+      "group_3": {
+        "mean": 181.36540803897685,
+        "min": 123,
+        "max": 200
+      },
+      "group_4": {
+        "mean": 192.03045066991473,
+        "min": 128,
+        "max": 200
+      },
+      "group_5": {
+        "mean": 199.57125456760048,
+        "min": 170,
+        "max": 200
+      }
+    },
+    "holdings_imbalance_ratio": 1.1003821330951438
+  }
+}

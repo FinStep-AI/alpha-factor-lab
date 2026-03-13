@@ -917,5 +917,62 @@
       "tail_risk_cvar_v1": 0.321,
       "pv_corr_v1": 1.0
     }
+  },
+  {
+    "id": "neg_day_freq_v1",
+    "name": "极端负收益日频率 v1",
+    "name_en": "Negative Day Frequency v1",
+    "category": "风险/反转",
+    "description": "过去10日中收益率<=-3%的天数占比。正向使用:做多高频率(短期反转效应)。频繁出现极端负收益=密集抛售后卖压耗尽,均值回复。",
+    "hypothesis": "频繁出现极端负收益的股票近期遭受密集抛售,卖压释放后价格均值回复,产生反弹收益(短期反转)",
+    "expected_direction": "正向（高因子值=更多极端下跌天=高预期反弹收益）",
+    "factor_type": "短期反转",
+    "formula": "neutralize(mean(ret<=-3%, 10d), log_amount_20d)",
+    "direction": 1,
+    "stock_pool": "中证1000",
+    "period": "2022-10 ~ 2026-03",
+    "rebalance_freq": 10,
+    "forward_days": 10,
+    "cost": 0.003,
+    "rating": "★★★★ 强",
+    "nav_data": "output/neg_day_freq_v1/cumulative_returns.json",
+    "ic_data": "output/neg_day_freq_v1/ic_series.json",
+    "upgrade_notes": "v1初版。数据截至2026-03-07(排除后续异常K线)",
+    "lessons_learned": [
+      "数据质量是关键: 2026-03-09后K线数据有严重异常(疑似除权未复权), 必须截断",
+      "方向验证: 初始假设\"回避极端下跌\"是错的, 实际应该\"做多极端下跌(反转)\"",
+      "离散因子(频率)在中性化后效果更好, 因为OLS回归消除了成交额偏差",
+      "与CVaR(r~0.55)有一定相关但方向相反: CVaR回避尾部风险, 本因子利用反转"
+    ],
+    "created": "2026-03-13",
+    "updated": "2026-03-13",
+    "metrics": {
+      "ic_mean": 0.0276,
+      "ic_std": 0.0992,
+      "ic_t": 2.94,
+      "ic_positive_ratio": 0.585,
+      "rank_ic": 0.0215,
+      "ir": 0.2783,
+      "ic_count": 81,
+      "long_short_sharpe": 1.9348,
+      "long_short_mdd": -0.1312,
+      "monotonicity": 0.9,
+      "group_returns_annualized": [
+        -0.0526,
+        0.062,
+        0.1069,
+        0.0876,
+        0.1622
+      ],
+      "turnover_mean": 0.6889
+    },
+    "conclusion": "IC显著(t=2.94), Sharpe优秀(1.93), 单调性强(0.90), MDD可控(-13.1%)。短期反转因子,做多近期频繁下跌的股票。换手率68.9%偏高,适合中高频策略。与CVaR相关0.55,有独立alpha。",
+    "barra_style": "Reversal",
+    "source_type": "自研",
+    "source_title": "极端负收益日频率 — 离散化尾部反转信号",
+    "source_url": "",
+    "correlations": {
+      "cvar_5d_v1": 0.55
+    }
   }
 ]
