@@ -48,6 +48,9 @@ FEATURES_META = os.path.join(DATA_DIR, 'ml_features_meta.json')
 # 默认标签
 DEFAULT_LABEL = 'label_5d'
 
+# 标签前瞻期 (与 feature_engine.py 一致)
+FORWARD_DAYS = [5, 10, 20]
+
 # Walk-Forward 参数
 TRAIN_DAYS = 504      # 训练窗口 ~2年
 PREDICT_DAYS = 63     # 预测窗口 ~1季度
@@ -91,32 +94,42 @@ def load_features():
     return df, feature_cols
 
 
-def walk_forward_split(dates, train_days=TRAIN_DAYS, predict_days=PREDICT_DAYS, step_days=STEP_DAYS):
+def walk_forward_split(dates, train_days=TRAIN_DAYS, predict_days=PREDICT_DAYS,
+                       step_days=STEP_DAYS, gap_days=None):
     """
     Walk-Forward 滚动切分
     
+    修复(2026-03-14): 新增 gap_days 参数，训练集与测试集之间留出 gap
+    防止标签的前瞻期（如 label_5d 需要未来 5 天价格）与测试期重叠。
+    默认 gap = max(FORWARD_DAYS) = 20 天。
+    
     Returns: list of (train_dates, test_dates)
     """
+    if gap_days is None:
+        gap_days = max(FORWARD_DAYS) if FORWARD_DAYS else 20
+    
     unique_dates = sorted(dates.unique())
     n = len(unique_dates)
     
     splits = []
     start = 0
     
-    while start + train_days + predict_days <= n:
+    while start + train_days + gap_days + predict_days <= n:
         train_end = start + train_days
-        test_end = min(train_end + predict_days, n)
+        test_start = train_end + gap_days  # gap 跳过，避免标签泄漏
+        test_end = min(test_start + predict_days, n)
         
         train_dates = unique_dates[start:train_end]
-        test_dates = unique_dates[train_end:test_end]
+        test_dates = unique_dates[test_start:test_end]
         
         splits.append((train_dates, test_dates))
         start += step_days
     
     # 如果剩余数据不足一个完整窗口，但有足够训练数据
-    if len(splits) == 0 and n >= MIN_TRAIN_DAYS + 5:
-        train_dates = unique_dates[:n-5]
-        test_dates = unique_dates[n-5:]
+    if len(splits) == 0 and n >= MIN_TRAIN_DAYS + gap_days + 5:
+        train_end = n - gap_days - 5
+        train_dates = unique_dates[:train_end]
+        test_dates = unique_dates[train_end + gap_days:]
         splits.append((train_dates, test_dates))
     
     return splits
@@ -181,12 +194,23 @@ def backtest_ml(df, feature_cols, label_col=DEFAULT_LABEL, params=None, top_n=TO
         X_test = df.loc[test_mask, feature_cols].values
         y_test = df.loc[test_mask, label_col].values
         
-        # 验证集: 训练集最后20%
-        val_size = max(int(len(X_train) * 0.2), 1000)
-        X_val = X_train[-val_size:]
-        y_val = y_train[-val_size:]
-        X_train_sub = X_train[:-val_size]
-        y_train_sub = y_train[:-val_size]
+        # 验证集: 训练集最后20%，但去掉末尾 label_gap 天防止标签泄漏
+        # label_5d 需要未来5天价格，验证集末尾5天的标签会与测试期重叠
+        label_gap = int(DEFAULT_LABEL.replace('label_', '').replace('d', ''))
+        # 训练集按日期排序，找出需要排除的末尾样本
+        train_dates_sorted = sorted(df.loc[train_mask, 'date'].unique())
+        gap_cutoff_dates = set(train_dates_sorted[-label_gap:]) if len(train_dates_sorted) > label_gap else set()
+        
+        # 验证集从训练集末尾取20%，但排除最后 label_gap 天
+        usable_train_mask = train_mask & ~df['date'].isin(gap_cutoff_dates)
+        X_train_usable = df.loc[usable_train_mask, feature_cols].values
+        y_train_usable = df.loc[usable_train_mask, label_col].values
+        
+        val_size = max(int(len(X_train_usable) * 0.2), 1000)
+        X_val = X_train_usable[-val_size:]
+        y_val = y_train_usable[-val_size:]
+        X_train_sub = X_train_usable[:-val_size]
+        y_train_sub = y_train_usable[:-val_size]
         
         # 训练
         model = train_lgbm(X_train_sub, y_train_sub, X_val, y_val, params)
@@ -409,37 +433,56 @@ def predict_today(df, feature_cols, model_path=None, date=None, top_n=TOP_N):
 
 
 def tune_hyperparams(df, feature_cols, label_col=DEFAULT_LABEL, n_trials=30):
-    """Optuna 超参搜索"""
+    """
+    Optuna 超参搜索（多 fold 平均 IC）
+    
+    修复(2026-03-14): 用最后 N 个 fold 的平均 IC 作为目标，
+    避免单 fold 过拟合。默认用最后 3 个 fold（或全部 fold 如果不足 3 个）。
+    """
     import optuna
     optuna.logging.set_verbosity(optuna.logging.WARNING)
     
     print("\n" + "=" * 60)
-    print("🔍 Optuna 超参搜索")
+    print("🔍 Optuna 超参搜索 (多fold平均IC)")
     print(f"   trials: {n_trials}")
     print("=" * 60)
     
-    # 用最后一个 walk-forward fold 做调参
     splits = walk_forward_split(df['date'])
     if len(splits) < 2:
         print("❌ 数据不足以进行调参")
         return DEFAULT_PARAMS
     
-    # 用倒数第二个fold做调参，最后一个做验证
-    train_dates, test_dates = splits[-2]
+    # 用最后 N 个 fold 做交叉验证（避免单 fold 过拟合）
+    n_tune_folds = min(3, len(splits))
+    tune_splits = splits[-n_tune_folds:]
+    print(f"  使用最后 {n_tune_folds} 个 fold 做调参")
     
-    train_mask = df['date'].isin(train_dates)
-    test_mask = df['date'].isin(test_dates)
-    
-    X_train = df.loc[train_mask, feature_cols].values
-    y_train = df.loc[train_mask, label_col].values
-    X_test = df.loc[test_mask, feature_cols].values
-    y_test = df.loc[test_mask, label_col].values
-    
-    val_size = max(int(len(X_train) * 0.2), 1000)
-    X_val = X_train[-val_size:]
-    y_val = y_train[-val_size:]
-    X_train = X_train[:-val_size]
-    y_train = y_train[:-val_size]
+    # 预构建每个 fold 的数据（避免重复索引）
+    fold_data = []
+    label_gap = int(label_col.replace('label_', '').replace('d', ''))
+    for train_dates, test_dates in tune_splits:
+        train_mask = df['date'].isin(train_dates)
+        test_mask = df['date'].isin(test_dates)
+        
+        X_train_full = df.loc[train_mask, feature_cols].values
+        y_train_full = df.loc[train_mask, label_col].values
+        X_test = df.loc[test_mask, feature_cols].values
+        y_test = df.loc[test_mask, label_col].values
+        
+        # 验证集: 训练集末尾20%，去掉最后 label_gap 天
+        train_dates_sorted = sorted(df.loc[train_mask, 'date'].unique())
+        gap_cutoff = set(train_dates_sorted[-label_gap:]) if len(train_dates_sorted) > label_gap else set()
+        usable_mask = train_mask & ~df['date'].isin(gap_cutoff)
+        X_train_usable = df.loc[usable_mask, feature_cols].values
+        y_train_usable = df.loc[usable_mask, label_col].values
+        
+        val_size = max(int(len(X_train_usable) * 0.2), 1000)
+        X_val = X_train_usable[-val_size:]
+        y_val = y_train_usable[-val_size:]
+        X_train_sub = X_train_usable[:-val_size]
+        y_train_sub = y_train_usable[:-val_size]
+        
+        fold_data.append((X_train_sub, y_train_sub, X_val, y_val, X_test, y_test))
     
     def objective(trial):
         params = {
@@ -459,26 +502,29 @@ def tune_hyperparams(df, feature_cols, label_col=DEFAULT_LABEL, n_trials=30):
             'seed': 42,
         }
         
-        model = lgb.LGBMRegressor(n_estimators=500, **params)
-        model.fit(
-            X_train, y_train,
-            eval_set=[(X_val, y_val)],
-            callbacks=[
-                lgb.early_stopping(stopping_rounds=30, verbose=False),
-                lgb.log_evaluation(period=0),
-            ],
-        )
+        # 多 fold 平均 IC
+        ics = []
+        for X_tr, y_tr, X_v, y_v, X_te, y_te in fold_data:
+            model = lgb.LGBMRegressor(n_estimators=500, **params)
+            model.fit(
+                X_tr, y_tr,
+                eval_set=[(X_v, y_v)],
+                callbacks=[
+                    lgb.early_stopping(stopping_rounds=30, verbose=False),
+                    lgb.log_evaluation(period=0),
+                ],
+            )
+            pred = model.predict(X_te)
+            ic = calc_ic(pred, y_te)
+            if not np.isnan(ic):
+                ics.append(ic)
         
-        pred = model.predict(X_test)
-        
-        # 目标: 最大化 test IC
-        ic = calc_ic(pred, y_test)
-        return ic if not np.isnan(ic) else 0
+        return np.mean(ics) if ics else 0
     
     study = optuna.create_study(direction='maximize')
     study.optimize(objective, n_trials=n_trials, show_progress_bar=True)
     
-    print(f"\n  最优 IC: {study.best_value:.4f}")
+    print(f"\n  最优平均IC: {study.best_value:.4f} (across {n_tune_folds} folds)")
     print(f"  最优参数:")
     best = study.best_params
     for k, v in best.items():

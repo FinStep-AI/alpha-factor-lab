@@ -267,23 +267,29 @@ def add_interaction_features(df, factor_cols):
 
 
 def build_labels(kl, index_df):
-    """构建未来N日超额收益标签"""
-    print("🏷️  构建标签 (未来超额收益)...")
+    """构建未来N日超额收益标签
+    
+    修复(2026-03-14): 加1天gap避免前视偏差。
+    信号在T日收盘产生，最早T+1开盘才能交易，
+    因此标签收益从T+1收盘开始计算: close(T+1+n) / close(T+1) - 1
+    即 shift(-(n+1)) / shift(-1) - 1
+    """
+    print("🏷️  构建标签 (未来超额收益, T+1起算)...")
     
     df = kl[['date', 'stock_code', 'close']].copy()
     df = df.sort_values(['stock_code', 'date'])
     
-    # 个股未来收益
+    # 个股未来收益: 从T+1收盘到T+1+n收盘
+    # close(T+1+n) / close(T+1) - 1  =  shift(-(n+1)) / shift(-1) - 1
     for n in FORWARD_DAYS:
         df[f'fwd_ret_{n}d'] = df.groupby('stock_code')['close'].transform(
-            lambda x: x.shift(-n) / x - 1
+            lambda x, _n=n: x.shift(-(_n + 1)) / x.shift(-1) - 1
         )
     
-    # 合并指数收益
-    # 先计算指数未来N日收益
+    # 合并指数收益 (同样从T+1起算)
     idx = index_df.copy()
     for n in FORWARD_DAYS:
-        idx[f'idx_fwd_{n}d'] = idx['index_close'].shift(-n) / idx['index_close'] - 1
+        idx[f'idx_fwd_{n}d'] = idx['index_close'].shift(-(n + 1)) / idx['index_close'].shift(-1) - 1
     
     df = df.merge(idx[['date'] + [f'idx_fwd_{n}d' for n in FORWARD_DAYS]], on='date', how='left')
     
