@@ -1370,5 +1370,108 @@
       "data/factor_resid_reversal_tstat_v1.csv",
       "output/resid_reversal_tstat_v1_5d/report.json"
     ]
+  },
+  {
+    "factor_id": "vol_eff_ratio_v1",
+    "factor_name": "波动率效率比 (Volatility Efficiency Ratio)",
+    "status": "failed",
+    "date": "2026-03-14",
+    "category": "微观结构",
+    "barra_style": "Volatility",
+    "source_type": "论文",
+    "source_title": "On the Estimation of Security Price Volatilities from Historical Data",
+    "source_url": "https://www.jstor.org/stable/2352358",
+    "source_authors": "Garman & Klass (1980) Journal of Business",
+    "description": "CC波动率/GK波动率的比值。衡量close-to-close信息效率vs日内波动。20日滚动。成交额中性化+MAD+z-score。",
+    "hypothesis": "高VER(收盘效率高)= 信息传递更有效 = Quality proxy",
+    "ic_mean": 0.011,
+    "ic_t_stat": 1.66,
+    "rank_ic": 0.0081,
+    "monotonicity": -0.1,
+    "g5_sharpe": null,
+    "g5_annual_ret": "56.8%",
+    "failure_reason": "IC=0.011(t=1.66)不显著。分层高度非线性(G4=386%异常，其余50-200%)。正反方向均无效。",
+    "lessons_learned": "GK vs CC波动率比值的截面分布太集中(mean=1.04, std=0.22)，缺乏区分度。理论上漂亮但实际信号太弱。",
+    "data_files": [
+      "data/factor_vol_eff_ratio_v1.csv"
+    ]
+  },
+  {
+    "factor_id": "iovr_v1",
+    "factor_name": "日内/隔夜波动率比 (Intraday-Overnight Vol Ratio)",
+    "status": "failed",
+    "date": "2026-03-14",
+    "category": "微观结构",
+    "barra_style": "Volatility",
+    "source_type": "论文",
+    "source_title": "Why Do Option Returns Change Sign from Day to Night?",
+    "source_url": "https://academic.oup.com/jfqa/article/55/1/209/5625643",
+    "source_authors": "Muravyev & Ni (2020), Kelly & Clark (2011)",
+    "description": "log(日内方差/隔夜方差), 20d/60d窗口。衡量价格变动是日内驱动(散户)还是隔夜驱动(机构)。负值因子=低IOVR=机构主导。",
+    "hypothesis": "低IOVR(机构信息多)=更高Quality→更好收益",
+    "ic_mean": -0.0108,
+    "ic_t_stat": -2.25,
+    "rank_ic": -0.0116,
+    "monotonicity": -0.4,
+    "g5_sharpe": null,
+    "g5_annual_ret": "7.4% (20d窗口)",
+    "failure_reason": "IC=-0.011(t=-2.25)方向对(高IOVR/散户驱动→低收益)但绝对值太小(<0.02)。60d窗口IC=0.007(t=1.61),mono=0.8接近达标但IC进一步缩小。两个窗口都无法同时满足IC和mono门槛。",
+    "lessons_learned": "日内vs隔夜波动率分解方向正确(散户驱动→差表现)，但信号太弱。A股日内波动约为隔夜的4.5倍(合理)。60d窗口mono改善但IC下降——典型的smoothing vs signal tradeoff。",
+    "data_files": [
+      "data/factor_iovr_v1.csv",
+      "data/factor_iovr_60d_v1.csv"
+    ]
+  },
+  {
+    "factor_id": "ovn_var_share_v1",
+    "factor_name": "隔夜方差占比 (Overnight Variance Share)",
+    "status": "failed",
+    "date": "2026-03-14",
+    "category": "微观结构",
+    "barra_style": "Volatility",
+    "source_type": "IOVR变体",
+    "source_url": "https://academic.oup.com/jfqa/article/55/1/209/5625643",
+    "source_authors": "Muravyev & Ni (2020) 变体",
+    "description": "隔夜方差/(隔夜方差+日内方差), 40d窗口。占比映射到[0,1]。",
+    "hypothesis": "高隔夜占比=机构信息多=Quality",
+    "ic_mean": 0.0047,
+    "ic_t_stat": 1.12,
+    "rank_ic": 0.0134,
+    "monotonicity": -0.2,
+    "g5_sharpe": null,
+    "failure_reason": "IC=0.005(t=1.12)完全不显著。分层极度非线性(G4=651%异常突出)。",
+    "lessons_learned": "把IOVR改成占比形式并不能改善信号质量。核心问题是日内/隔夜波动率分解在截面上缺乏足够的选股区分度。",
+    "data_files": [
+      "data/factor_ovn_var_share_v1.csv"
+    ]
+  },
+  {
+    "factor_id": "downside_beta_v1",
+    "factor_name": "下行Beta (Downside Beta)",
+    "status": "failed",
+    "date": "2026-03-14",
+    "category": "风险",
+    "barra_style": "Risk",
+    "source_type": "论文",
+    "source_title": "Downside Risk",
+    "source_url": "https://academic.oup.com/rfs/article/19/4/1191/1568244",
+    "source_authors": "Ang, Chen & Xing (2006) Review of Financial Studies",
+    "description": "仅在市场下跌日(r_mkt<0)回归得到的Beta。60d/120d滚动窗口。也测试了Beta不对称性(down-up)变体。成交额中性化+MAD+z-score。",
+    "hypothesis": "高下行Beta=更大的下行风险暴露→应获得风险补偿(正向因子)",
+    "ic_mean": 0.032,
+    "ic_t_stat": 3.13,
+    "rank_ic": 0.018,
+    "monotonicity": -0.3,
+    "g5_sharpe": null,
+    "g5_annual_ret": "107.1%",
+    "long_short_sharpe": 0.51,
+    "failure_reason": "🔴 IC极佳(0.032, t=3.13)但分层完全不单调(mono=-0.3)！G2=456%最强，G3=41%最弱，G1/G5中等。120d窗口更极端(IC=0.036,t=3.08但mono=-0.2,G3=547%)。Beta不对称性(down-up)变体IC=0.010(t=1.10)无效。",
+    "lessons_learned": "【重要发现】下行Beta是目前发现的IC最强因子之一(0.032-0.036, t>3)，但grouping catastrophic。这再次证明A股CSI1000的风险因子存在严重非线性：线性相关性(IC)很好但排序(mono)失败。可能原因：(1)beta在中等区间有非线性bump; (2)低/高beta的极端股票有特殊风格(ST/大波动)干扰分层; (3)需要double-sort或条件回归才能提取信号。建议未来用组合方式(下行Beta×其他因子)或树模型使用。",
+    "data_files": [
+      "data/factor_downside_beta_v1.csv",
+      "data/factor_downside_beta_v1_asym.csv",
+      "data/factor_downside_beta_120d_v1.csv",
+      "output/downside_beta_v1_5d/report.json"
+    ]
   }
 ]
