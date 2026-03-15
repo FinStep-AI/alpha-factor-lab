@@ -270,24 +270,53 @@ def build_labels(kl, index_df):
     """构建未来N日超额收益标签
     
     修复(2026-03-14): 加1天gap避免前视偏差。
-    信号在T日收盘产生，最早T+1开盘才能交易，
-    因此标签收益从T+1收盘开始计算: close(T+1+n) / close(T+1) - 1
-    即 shift(-(n+1)) / shift(-1) - 1
-    """
-    print("🏷️  构建标签 (未来超额收益, T+1起算)...")
+    修复(2026-03-15): 用T+1开盘价作为买入价（更贴近实际成交），
+    标签收益 = close(T+1+n) / open(T+1) - 1
     
-    df = kl[['date', 'stock_code', 'close']].copy()
+    信号在T日收盘产生，T+1开盘买入，持有n天后以收盘价卖出。
+    """
+    print("🏷️  构建标签 (未来超额收益, T+1开盘买入)...")
+    
+    df = kl[['date', 'stock_code', 'open', 'close', 'pct_change', 'volume']].copy()
     df = df.sort_values(['stock_code', 'date'])
     
-    # 个股未来收益: 从T+1收盘到T+1+n收盘
-    # close(T+1+n) / close(T+1) - 1  =  shift(-(n+1)) / shift(-1) - 1
+    # T+1开盘价 = open.shift(-1)
+    df['next_open'] = df.groupby('stock_code')['open'].shift(-1)
+    # T+1涨跌幅(用于判断涨跌停)
+    df['next_pct'] = df.groupby('stock_code')['pct_change'].shift(-1)
+    # T+1成交量(用于判断停牌)
+    df['next_volume'] = df.groupby('stock_code')['volume'].shift(-1)
+    
+    # 个股未来收益: T+1开盘买入，T+1+n收盘卖出
+    # return = close(T+1+n) / open(T+1) - 1
     for n in FORWARD_DAYS:
         df[f'fwd_ret_{n}d'] = df.groupby('stock_code')['close'].transform(
-            lambda x, _n=n: x.shift(-(_n + 1)) / x.shift(-1) - 1
-        )
+            lambda x, _n=n: x.shift(-(_n + 1))
+        ) / df['next_open'] - 1
     
-    # 合并指数收益 (同样从T+1起算)
+    # 标记不可交易: T+1涨停(买不进) / T+1跌停(卖不出) / T+1停牌
+    # 涨停: pct_change >= 9.8% (考虑A股10%/20%涨跌幅，9.8%是保守阈值)
+    # 跌停: pct_change <= -9.8%
+    # 停牌: volume == 0
+    df['next_limit_up'] = df['next_pct'].fillna(0) >= 9.8  # T+1涨停，买不进
+    df['next_suspended'] = df['next_volume'].fillna(0) == 0  # T+1停牌
+    df['untradable'] = df['next_limit_up'] | df['next_suspended']
+    
+    # 不可交易的标签设为 NaN（回测时自动排除）
+    for n in FORWARD_DAYS:
+        df.loc[df['untradable'], f'fwd_ret_{n}d'] = np.nan
+    
+    n_untradable = df['untradable'].sum()
+    n_limit_up = df['next_limit_up'].sum()
+    n_suspended = df['next_suspended'].sum()
+    print(f"  不可交易过滤: 涨停{n_limit_up}条 + 停牌{n_suspended}条 = {n_untradable}条 "
+          f"({n_untradable/len(df)*100:.2f}%)")
+    
+    # 合并指数收益 (同样用T+1开盘买入)
     idx = index_df.copy()
+    idx = idx.sort_values('date')
+    idx['idx_next_open'] = idx['index_close'].shift(-1)  # 指数无开盘价，用前收近似
+    # 注: 如果有指数开盘价数据更好，这里用T+1收盘近似（指数不存在涨跌停）
     for n in FORWARD_DAYS:
         idx[f'idx_fwd_{n}d'] = idx['index_close'].shift(-(n + 1)) / idx['index_close'].shift(-1) - 1
     
@@ -298,7 +327,7 @@ def build_labels(kl, index_df):
         df[f'label_{n}d'] = df[f'fwd_ret_{n}d'] - df[f'idx_fwd_{n}d']
     
     label_cols = [f'label_{n}d' for n in FORWARD_DAYS]
-    result = df[['date', 'stock_code'] + label_cols]
+    result = df[['date', 'stock_code', 'untradable'] + label_cols]
     
     for n in FORWARD_DAYS:
         col = f'label_{n}d'

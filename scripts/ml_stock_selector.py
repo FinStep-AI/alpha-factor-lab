@@ -78,7 +78,19 @@ DEFAULT_PARAMS = {
 
 # 选股参数
 TOP_N = 25
-COST_RATE = 0.003  # 单边交易成本
+
+# 交易成本明细 (A股)
+COMMISSION_RATE = 0.00025   # 佣金 万2.5 (单边)
+STAMP_TAX_RATE = 0.0005     # 印花税 万5 (卖方单边)
+SLIPPAGE_RATE = 0.001       # 滑点/冲击成本 (单边估计)
+# 买入成本 = 佣金 + 滑点 = 0.125%
+# 卖出成本 = 佣金 + 印花税 + 滑点 = 0.175%
+# 单次换仓双边 = 买入 + 卖出 ≈ 0.3% (与旧 COST_RATE 一致，但更精确)
+BUY_COST = COMMISSION_RATE + SLIPPAGE_RATE
+SELL_COST = COMMISSION_RATE + STAMP_TAX_RATE + SLIPPAGE_RATE
+
+# 最少上市天数 (过滤次新股/新股，缓解幸存者偏差)
+MIN_LISTING_DAYS = 120
 
 
 def load_features():
@@ -262,6 +274,11 @@ def evaluate_predictions(pred_df, label_col, top_n):
     """
     评估预测结果
     
+    修复(2026-03-15):
+    - 涨跌停/停牌标的在选股时排除（label=NaN的自动排除）
+    - 真实换手率计算交易成本（逐期追踪持仓变动）
+    - 次新股过滤（上市不满MIN_LISTING_DAYS天的排除）
+    
     注意: label_5d 是未来5日累计超额收益，不是日度收益。
     回测逻辑: 每5个交易日调仓一次 (周度调仓)，持仓期收益 = label_5d。
     """
@@ -274,8 +291,20 @@ def evaluate_predictions(pred_df, label_col, top_n):
     hold_days = int(fwd_match)
     print(f"  持仓周期: {hold_days} 天")
     
-    # 1. 总体 IC (每日截面IC仍然有意义)
-    daily_ic = pred_df.groupby('date').apply(
+    # 过滤: 只保留可交易样本 (label非NaN说明可交易)
+    tradable_df = pred_df.dropna(subset=[label_col]).copy()
+    n_filtered = len(pred_df) - len(tradable_df)
+    print(f"  不可交易过滤: {n_filtered} 条 ({n_filtered/len(pred_df)*100:.2f}%)")
+    
+    # 次新股过滤: 每只股票在样本中出现不到 MIN_LISTING_DAYS 天的前 MIN_LISTING_DAYS 个观测不参与选股
+    stock_date_rank = tradable_df.groupby('stock_code')['date'].rank(method='first')
+    ipo_mask = stock_date_rank <= MIN_LISTING_DAYS
+    n_ipo_filtered = ipo_mask.sum()
+    tradable_df = tradable_df[~ipo_mask].copy()
+    print(f"  次新股过滤: {n_ipo_filtered} 条 (上市<{MIN_LISTING_DAYS}天)")
+    
+    # 1. 总体 IC (每日截面IC)
+    daily_ic = tradable_df.groupby('date').apply(
         lambda g: calc_ic(g['pred'].values, g[label_col].values),
         include_groups=False
     )
@@ -290,15 +319,14 @@ def evaluate_predictions(pred_df, label_col, top_n):
     print(f"  IC>0 比例: {ic_positive_rate:.1%}")
     
     # 2. 分组收益 (5组) — 用每个调仓日的分组
-    pred_df = pred_df.copy()
-    pred_df['group'] = pred_df.groupby('date')['pred'].transform(
+    tradable_df['group'] = tradable_df.groupby('date')['pred'].transform(
         lambda x: pd.qcut(x.rank(method='first'), 5, labels=['G1(低)', 'G2', 'G3', 'G4', 'G5(高)'])
     )
     
     # 只取调仓日 (每 hold_days 天取一次)
-    unique_dates = sorted(pred_df['date'].unique())
+    unique_dates = sorted(tradable_df['date'].unique())
     rebalance_dates = unique_dates[::hold_days]  # 每 hold_days 天调仓一次
-    rebal_df = pred_df[pred_df['date'].isin(rebalance_dates)]
+    rebal_df = tradable_df[tradable_df['date'].isin(rebalance_dates)]
     
     group_ret = rebal_df.groupby(['date', 'group'])[label_col].mean().unstack()
     group_avg = group_ret.mean()
@@ -312,52 +340,110 @@ def evaluate_predictions(pred_df, label_col, top_n):
     for g in group_daily_avg.index:
         print(f"    {g}: {group_daily_avg[g]*10000:.1f} bp/day")
     
-    # 3. TOP-N 组合收益 (周度调仓)
-    period_returns = rebal_df.groupby('date').apply(
-        lambda g: g.nlargest(top_n, 'pred')[label_col].mean(),
-        include_groups=False
+    # 3. TOP-N 组合收益 (周度调仓) — 含真实换手率交易成本
+    prev_holdings = set()  # 上期持仓股票代码
+    period_returns_list = []
+    period_dates_list = []
+    turnover_list = []
+    cost_list = []
+    
+    for dt in rebalance_dates:
+        day_df = rebal_df[rebal_df['date'] == dt]
+        top_stocks = day_df.nlargest(top_n, 'pred')
+        
+        if len(top_stocks) == 0:
+            continue
+        
+        # 当期持仓
+        curr_holdings = set(top_stocks['stock_code'].values)
+        
+        # 真实换手率计算
+        if len(prev_holdings) > 0:
+            # 卖出: 上期有但本期没有的
+            sold = prev_holdings - curr_holdings
+            # 买入: 本期有但上期没有的
+            bought = curr_holdings - prev_holdings
+            # 换手率 = (卖出 + 买入) / (2 * 持仓数)
+            turnover = (len(sold) + len(bought)) / (2 * max(len(curr_holdings), 1))
+            # 交易成本 = 卖出成本 + 买入成本 (按持仓等权)
+            sell_weight = len(sold) / max(len(prev_holdings), 1)
+            buy_weight = len(bought) / max(len(curr_holdings), 1)
+            period_cost = sell_weight * SELL_COST + buy_weight * BUY_COST
+        else:
+            # 首次建仓: 全部买入
+            turnover = 1.0
+            period_cost = BUY_COST  # 只有买入成本
+        
+        period_ret = top_stocks[label_col].mean()
+        # 扣除交易成本
+        period_ret_net = period_ret - period_cost
+        
+        period_returns_list.append(period_ret_net)
+        period_dates_list.append(dt)
+        turnover_list.append(turnover)
+        cost_list.append(period_cost)
+        
+        prev_holdings = curr_holdings
+    
+    period_returns = pd.Series(period_returns_list, index=period_dates_list)
+    # 也计算不扣费的用于对比
+    period_returns_gross = pd.Series(
+        [rebal_df[rebal_df['date'] == dt].nlargest(top_n, 'pred')[label_col].mean() 
+         for dt in period_dates_list],
+        index=period_dates_list
     )
     
-    # 累计收益 (每个hold_days为一期)
+    avg_turnover = np.mean(turnover_list[1:]) if len(turnover_list) > 1 else 0  # 排除首次建仓
+    avg_cost = np.mean(cost_list[1:]) if len(cost_list) > 1 else 0
+    
+    # 累计收益 (净值)
     nav = (1 + period_returns).cumprod()
+    nav_gross = (1 + period_returns_gross).cumprod()
     total_ret = nav.iloc[-1] - 1
+    total_ret_gross = nav_gross.iloc[-1] - 1
     n_periods = len(nav)
     periods_per_year = 252 / hold_days
     ann_ret = (1 + total_ret) ** (periods_per_year / n_periods) - 1 if n_periods > 0 else 0
+    ann_ret_gross = (1 + total_ret_gross) ** (periods_per_year / n_periods) - 1 if n_periods > 0 else 0
     
     # 最大回撤
     peak = nav.cummax()
     dd = (nav - peak) / peak
     max_dd = dd.min()
     
-    # Sharpe (用period return, 年化到252天)
+    # Sharpe (用净收益的period return)
     period_mean = period_returns.mean()
     period_std = period_returns.std()
     sharpe = (period_mean / period_std) * np.sqrt(periods_per_year) if period_std > 0 else 0
     
-    # 交易成本
-    estimated_turnover = 0.5  # 每次调仓约50%换手
-    cost_per_period = estimated_turnover * COST_RATE * 2  # 双边
-    cost_annual = cost_per_period * periods_per_year
-    adj_ann_ret = ann_ret - cost_annual
+    # Sharpe (毛收益)
+    sharpe_gross = (period_returns_gross.mean() / period_returns_gross.std()) * np.sqrt(periods_per_year) \
+        if period_returns_gross.std() > 0 else 0
     
     print(f"\n  TOP-{top_n} 组合 (每{hold_days}天调仓):")
     print(f"    调仓次数: {n_periods}")
-    print(f"    每期平均超额: {period_mean:.4f} ({period_mean*10000:.1f}bp)")
-    print(f"    累计超额: {total_ret:.2%}")
-    print(f"    年化超额: {ann_ret:.2%}")
-    print(f"    年化超额(扣费): {adj_ann_ret:.2%}")
-    print(f"    Sharpe: {sharpe:.2f}")
+    print(f"    平均换手率: {avg_turnover:.1%} (每期)")
+    print(f"    平均交易成本: {avg_cost*10000:.1f} bp/期")
+    print(f"    年化交易成本: {avg_cost * periods_per_year:.2%}")
+    print(f"    每期平均超额(毛): {period_returns_gross.mean():.4f} ({period_returns_gross.mean()*10000:.1f}bp)")
+    print(f"    每期平均超额(净): {period_mean:.4f} ({period_mean*10000:.1f}bp)")
+    print(f"    累计超额(毛): {total_ret_gross:.2%}")
+    print(f"    累计超额(净): {total_ret:.2%}")
+    print(f"    年化超额(毛): {ann_ret_gross:.2%}")
+    print(f"    年化超额(净): {ann_ret:.2%}")
+    print(f"    Sharpe(毛): {sharpe_gross:.2f}")
+    print(f"    Sharpe(净): {sharpe:.2f}")
     print(f"    最大回撤: {max_dd:.2%}")
     
     # Bottom-N (空头)
-    bottom_period = rebal_df.groupby('date').apply(
-        lambda g: g.nsmallest(top_n, 'pred')[label_col].mean(),
-        include_groups=False
+    bottom_period = pd.Series(
+        [rebal_df[rebal_df['date'] == dt].nsmallest(top_n, 'pred')[label_col].mean() 
+         for dt in period_dates_list],
+        index=period_dates_list
     )
     
     # 多空
-    ls_period = period_returns - bottom_period
+    ls_period = period_returns_gross - bottom_period
     ls_nav = (1 + ls_period).cumprod()
     ls_sharpe = (ls_period.mean() / ls_period.std()) * np.sqrt(periods_per_year) if ls_period.std() > 0 else 0
     
@@ -365,8 +451,7 @@ def evaluate_predictions(pred_df, label_col, top_n):
     print(f"    累计: {ls_nav.iloc[-1] - 1:.2%}")
     print(f"    Sharpe: {ls_sharpe:.2f}")
     
-    # 4. 与旧线性模型对比参考
-    # 旧模型G5 Sharpe约0.8~0.9, 这里的G5年化 Sharpe
+    # G5 Sharpe
     g5_period = rebal_df[rebal_df['group'] == 'G5(高)'].groupby('date')[label_col].mean()
     g5_sharpe = (g5_period.mean() / g5_period.std()) * np.sqrt(periods_per_year) if g5_period.std() > 0 else 0
     print(f"\n  📊 G5(高)组 Sharpe: {g5_sharpe:.2f} (旧线性模型参考: 0.8~0.9)")
@@ -380,14 +465,22 @@ def evaluate_predictions(pred_df, label_col, top_n):
         'top_n': top_n,
         'hold_days': hold_days,
         'n_rebalance': int(n_periods),
+        'avg_turnover': float(avg_turnover),
+        'avg_cost_per_period_bp': float(avg_cost * 10000),
+        'annual_cost': float(avg_cost * periods_per_year),
         'period_mean_excess': float(period_mean),
+        'period_mean_excess_gross': float(period_returns_gross.mean()),
         'total_excess_return': float(total_ret),
+        'total_excess_return_gross': float(total_ret_gross),
         'annual_excess_return': float(ann_ret),
-        'annual_excess_return_adj': float(adj_ann_ret),
+        'annual_excess_return_gross': float(ann_ret_gross),
         'sharpe': float(sharpe),
+        'sharpe_gross': float(sharpe_gross),
         'max_drawdown': float(max_dd),
         'ls_sharpe': float(ls_sharpe),
         'g5_sharpe': float(g5_sharpe),
+        'n_untradable_filtered': int(n_filtered),
+        'n_ipo_filtered': int(n_ipo_filtered),
         'group_returns_per_period': {str(k): float(v) for k, v in group_avg.items()},
         'group_returns_daily': {str(k): float(v) for k, v in group_daily_avg.items()},
     }
@@ -579,25 +672,50 @@ def save_model_and_results(model, results, pred_df, output_dir, feature_cols):
     pred_df.to_pickle(pred_path)
     print(f"  📦 预测数据: {pred_path}")
     
-    # NAV 曲线 (供前端) — 按调仓周期计算
+    # NAV 曲线 (供前端) — 按调仓周期计算，含交易成本
     hold_days = results.get('hold_days', 5)
     top_n_val = results.get('top_n', TOP_N)
     label_col_name = 'label_5d'
     
-    unique_dates = sorted(pred_df['date'].unique())
-    rebalance_dates = unique_dates[::hold_days]
-    rebal_pred = pred_df[pred_df['date'].isin(rebalance_dates)]
+    # 过滤不可交易
+    tradable_pred = pred_df.dropna(subset=[label_col_name]).copy()
+    # 次新股过滤
+    stock_date_rank = tradable_pred.groupby('stock_code')['date'].rank(method='first')
+    tradable_pred = tradable_pred[stock_date_rank > MIN_LISTING_DAYS]
     
-    period_ret = rebal_pred.groupby('date').apply(
-        lambda g: g.nlargest(top_n_val, 'pred')[label_col_name].mean(),
-        include_groups=False
-    )
-    nav = (1 + period_ret).cumprod()
-    nav_data = [{'date': str(d), 'nav': float(v)} for d, v in nav.items()]
+    unique_dates = sorted(tradable_pred['date'].unique())
+    rebalance_dates = unique_dates[::hold_days]
+    rebal_pred = tradable_pred[tradable_pred['date'].isin(rebalance_dates)]
+    
+    # 含真实换手率的净收益 NAV
+    prev_holdings = set()
+    nav_list = []
+    cum_nav = 1.0
+    for dt in rebalance_dates:
+        day_df = rebal_pred[rebal_pred['date'] == dt]
+        top_stocks = day_df.nlargest(top_n_val, 'pred')
+        if len(top_stocks) == 0:
+            continue
+        curr_holdings = set(top_stocks['stock_code'].values)
+        
+        if len(prev_holdings) > 0:
+            sold = prev_holdings - curr_holdings
+            bought = curr_holdings - prev_holdings
+            sell_weight = len(sold) / max(len(prev_holdings), 1)
+            buy_weight = len(bought) / max(len(curr_holdings), 1)
+            period_cost = sell_weight * SELL_COST + buy_weight * BUY_COST
+        else:
+            period_cost = BUY_COST
+        
+        period_ret = top_stocks[label_col_name].mean() - period_cost
+        cum_nav *= (1 + period_ret)
+        nav_list.append({'date': str(dt), 'nav': float(cum_nav)})
+        prev_holdings = curr_holdings
+    
     nav_path = os.path.join(output_dir, 'nav_curve.json')
     with open(nav_path, 'w') as f:
-        json.dump(nav_data, f)
-    print(f"  📈 NAV曲线: {nav_path}")
+        json.dump(nav_list, f)
+    print(f"  📈 NAV曲线: {nav_path} ({len(nav_list)}期)")
 
 
 def main():
