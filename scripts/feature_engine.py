@@ -410,9 +410,10 @@ def build_feature_matrix(output_path=None, refresh=False):
     labels = build_labels(kl, index_df)
     df = df.merge(labels, on=['date', 'stock_code'], how='left')
     
-    # 7. 特征列
+    # 7. 特征列 (排除标签、元数据、不可交易标记)
     label_cols = [f'label_{n}d' for n in FORWARD_DAYS]
-    feature_cols = [c for c in df.columns if c not in ['date', 'stock_code'] + label_cols]
+    exclude_cols = ['date', 'stock_code', 'untradable'] + label_cols
+    feature_cols = [c for c in df.columns if c not in exclude_cols]
     
     # 8. 预处理
     df = preprocess_features(df, feature_cols)
