@@ -471,5 +471,82 @@
     "correlations": {
       "cvar_5d_v1": 0.55
     }
+  },
+  {
+    "id": "turnover_level_v1",
+    "name": "换手率水平 v1",
+    "name_en": "Turnover Level v1",
+    "category": "流动性/活跃度",
+    "description": "20日平均换手率(对数), 成交额中性化。正向使用: 做多高换手率(成交额调整后)。高换手率=更多投资者参与=信息传播快=价格发现充分。剥离成交额后的纯换手率捕捉投资者关注度和参与广度。",
+    "hypothesis": "换手率高(成交额调整后)的股票投资者关注度高, 信息传播快, 价格发现充分, 后续收益更好(Merton投资者认知假说)",
+    "expected_direction": "正向（高换手率=高预期收益）",
+    "factor_type": "流动性/关注度",
+    "formula": "neutralize(log(MA20(turnover)), log_amount_20d)",
+    "direction": 1,
+    "stock_pool": "中证1000",
+    "period": "2022-10-21 ~ 2026-03-13",
+    "rebalance_freq": 5,
+    "forward_days": 5,
+    "cost": 0.003,
+    "rating": "★★★★★ 极强",
+    "nav_data": "output/turnover_level_v1/cumulative_returns.json",
+    "ic_data": "output/turnover_level_v1/ic_series.json",
+    "upgrade_notes": "首版即刷新全库纪录。IC=0.033(t=3.65)极显著, Sharpe=2.43全库最高, 单调性1.0完美, 换手率11.56%极低(每周仅调仓12%)。与现有因子相关性均<0.3, 独立性极强。",
+    "lessons_learned": [
+      "换手率经成交额中性化后, 捕捉的是size-normalized的交易活跃度, 即投资者参与广度",
+      "与Amihud(r=0.13)几乎不相关, 说明换手率和价格冲击是不同维度的流动性",
+      "单调性1.0完美: G1→G5年化收益从-0.7%线性增长到36.3%, 极其清晰",
+      "换手率11.56%极低, 说明因子信号非常稳定, 适合低频策略",
+      "Sharpe=2.43刷新全库纪录(超过CVaR的2.04)"
+    ],
+    "created": "2026-03-16",
+    "updated": "2026-03-16",
+    "metrics": {
+      "ic_mean": 0.03291474364289359,
+      "ic_std": 0.11626252218649942,
+      "ic_t": 3.650423245580328,
+      "ic_positive_ratio": 0.6341463414634146,
+      "rank_ic": 0.005529847576058163,
+      "rank_ic_std": 0.14682494155434225,
+      "ir": 0.28310708407043056,
+      "ic_count": 164,
+      "long_short_sharpe": 2.4252719557427374,
+      "long_short_mdd": -0.1904179210075278,
+      "monotonicity": 0.9999999999999999,
+      "group_sharpe": [
+        -0.03434370934273347,
+        0.2975082670717365,
+        0.4543721040588718,
+        0.7928968129525186,
+        1.2035816406107618
+      ],
+      "group_returns_annualized": [
+        -0.006918125799573738,
+        0.06684269436476153,
+        0.11315206188114124,
+        0.22285135062913963,
+        0.3629888929368932
+      ],
+      "group_mdd": [
+        -0.4151884914613655,
+        -0.3590108555381533,
+        -0.36871491624279307,
+        -0.38638802826077123,
+        -0.3533838090015207
+      ]
+    },
+    "conclusion": "全因子库最强因子！IC=0.033(t=3.65)极显著, Sharpe=2.43刷新全库纪录, 单调性1.0完美, G5年化36.3%。换手率经成交额中性化后捕捉投资者关注度/参与广度, 与现有因子低相关(<0.3), 独立性极强。换手率仅11.56%, 适合低频策略。推荐作为核心因子首选。",
+    "barra_style": "Liquidity",
+    "source_type": "自研(论文启发)",
+    "source_title": "Merton (1987) Investor Recognition + Lee & Swaminathan (2000) Volume & Momentum",
+    "source_url": "https://doi.org/10.1111/j.1540-6261.2000.tb02099.x",
+    "correlations": {
+      "amihud_illiq_v2": 0.125,
+      "shadow_pressure_v1": 0.114,
+      "overnight_momentum_v1": -0.115,
+      "tail_risk_cvar_v1": 0.274,
+      "neg_day_freq_v1": 0.232,
+      "turnover_level_v1": 1.0
+    }
   }
 ]
