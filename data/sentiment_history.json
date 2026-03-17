@@ -171,7 +171,52 @@
       "max_streak": 5,
       "temperature": 58,
       "phase": "ferment"
+    },
+    {
+      "date": "20260316",
+      "zt_count": 4,
+      "dt_count": 0,
+      "zb_count": 0,
+      "max_streak": 2,
+      "temperature": 30,
+      "phase": "startup"
+    },
+    {
+      "date": "20260316",
+      "zt_count": 45,
+      "dt_count": 7,
+      "zb_count": 23,
+      "max_streak": 3,
+      "temperature": 50,
+      "phase": "ferment"
+    },
+    {
+      "date": "20260316",
+      "zt_count": 44,
+      "dt_count": 5,
+      "zb_count": 24,
+      "max_streak": 3,
+      "temperature": 43,
+      "phase": "ferment"
+    },
+    {
+      "date": "20260317",
+      "zt_count": 6,
+      "dt_count": 2,
+      "zb_count": 1,
+      "max_streak": 2,
+      "temperature": 30,
+      "phase": "startup"
+    },
+    {
+      "date": "20260317",
+      "zt_count": 37,
+      "dt_count": 11,
+      "zb_count": 19,
+      "max_streak": 4,
+      "temperature": 49,
+      "phase": "ferment"
     }
   ],
-  "updated": "20260313"
+  "updated": "20260317"
 }
