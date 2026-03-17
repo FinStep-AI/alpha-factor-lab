@@ -199,6 +199,17 @@ def execute_trade(data: dict, player_id: str, code: str, name: str,
     player = data["players"][player_id]
     portfolio = player["portfolio"]
     
+    # --- code 格式兼容：统一匹配持仓 key ---
+    # 持仓 key 可能是纯数字 "600683" 或带后缀 "600683.SH"，传入 code 也可能是两种
+    # 优先用原始 code 匹配，匹配不到则尝试另一种格式
+    bare = code.split('.')[0]
+    suffixed = f"{bare}.SH" if bare.startswith('6') else f"{bare}.SZ"
+    if code not in portfolio["positions"]:
+        # 尝试另一种格式
+        alt = bare if '.' in code else suffixed
+        if alt in portfolio["positions"]:
+            code = alt  # 用实际存在的 key
+    
     fees = calc_fees(price, volume, direction)
     amount = price * volume
     
