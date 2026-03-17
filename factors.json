@@ -548,5 +548,85 @@
       "neg_day_freq_v1": 0.232,
       "turnover_level_v1": 1.0
     }
+  },
+  {
+    "id": "tae_v1",
+    "name": "换手率-振幅效率 v1",
+    "name_en": "Turnover Amplitude Efficiency v1",
+    "category": "量价/Quality代理",
+    "description": "log(MA20换手率/MA20振幅)，成交额中性化。衡量单位波动率下的交易活跃度。高TAE=换手高但波动小=分歧小参与度高=信息传播效率高，类似Barra Quality的量价代理。中证1000上效果极显著。",
+    "hypothesis": "换手率高但振幅低的股票，市场参与者分歧小但关注度高，信息传播效率高，价格发现有序，后续收益更好",
+    "expected_direction": "正向（高因子值=高预期收益）",
+    "factor_type": "Quality代理/量价",
+    "formula": "neutralize(log(MA20(turnover) / (MA20(amplitude) + 0.01)), log_amount_20d)",
+    "direction": 1,
+    "stock_pool": "中证1000",
+    "period": "2022-10-21 ~ 2026-03-17",
+    "rebalance_freq": 20,
+    "forward_days": 5,
+    "cost": 0.003,
+    "rating": "★★★★★ 极强",
+    "nav_data": "output/tae_v1/cumulative_returns.json",
+    "ic_data": "output/tae_v1/ic_series.json",
+    "upgrade_notes": "首版即达标。IC=0.023(t=3.41)极显著，单调性1.0完美，G5年化37.5%。与turnover_level相关0.50（不冗余），与其他因子相关性均<0.47。",
+    "lessons_learned": [
+      "换手率/振幅的比值是一个有效的Quality代理信号",
+      "与纯换手率(turnover_level)相关0.50，有独立alpha",
+      "与Amihud(流动性)负相关-0.46，逻辑自洽：高TAE≈低Amihud(流动性好)",
+      "G1年化4.5% vs G5年化37.5%，价差33%，分层极清晰",
+      "换手率33%中等偏低，适合月度调仓"
+    ],
+    "created": "2026-03-17",
+    "updated": "2026-03-17",
+    "metrics": {
+      "ic_mean": 0.0232,
+      "ic_std": 0.0894,
+      "ic_t": 3.41,
+      "ic_positive_ratio": 0.616,
+      "rank_ic": 0.0232,
+      "rank_ic_std": null,
+      "ir": 0.2598,
+      "ic_count": 164,
+      "long_short_sharpe": 1.8294,
+      "long_short_mdd": -0.1362,
+      "monotonicity": 1.0,
+      "group_sharpe": [
+        0.199,
+        0.309,
+        0.522,
+        0.84,
+        1.237
+      ],
+      "group_returns_annualized": [
+        0.045,
+        0.076,
+        0.129,
+        0.218,
+        0.375
+      ],
+      "group_mdd": [
+        -0.376,
+        -0.407,
+        -0.342,
+        -0.329,
+        -0.328
+      ]
+    },
+    "conclusion": "全面达标入库。TAE因子通过换手率/振幅比值衡量信息传播效率，本质是Quality的量价代理。IC=0.023(t=3.41)极显著，单调性1.0完美，G5年化37.5%，多空Sharpe=1.83。与现有因子低相关(max|r|=0.50)，填补了Quality风格空缺。",
+    "barra_style": "Quality",
+    "source_type": "自研",
+    "source_title": "换手率-振幅效率因子（信息传播效率代理）",
+    "source_url": "",
+    "correlations": {
+      "amihud_illiq_v2": -0.464,
+      "shadow_pressure_v1": 0.002,
+      "overnight_momentum_v1": -0.039,
+      "gap_momentum_v1": -0.078,
+      "tail_risk_cvar_v1": -0.005,
+      "neg_day_freq_v1": 0.024,
+      "turnover_level_v1": 0.5,
+      "pv_corr_v1": 0.076,
+      "tae_v1": 1.0
+    }
   }
 ]

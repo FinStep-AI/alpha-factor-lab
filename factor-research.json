@@ -1473,5 +1473,71 @@
       "data/factor_downside_beta_120d_v1.csv",
       "output/downside_beta_v1_5d/report.json"
     ]
+  },
+  {
+    "date": "2026-03-16",
+    "source_type": "自研",
+    "source_title": "日内收益偏度因子 (Intraday Return Skewness)",
+    "source_url": "基于学术文献 Realized Skewness 概念降维到日频",
+    "original_metric": {
+      "description": "学术文献中已实现偏度在中国市场有预测力"
+    },
+    "our_metric": {
+      "ic_mean": -0.0046,
+      "ic_tstat": -0.54,
+      "sharpe": 0.0285,
+      "monotonicity": -0.7,
+      "turnover": 0.7919
+    },
+    "diff_notes": "日频OHLCV近似的日内偏度因子在中证1000完全失效。IC接近0，单调性为负且不显著。可能原因：(1)日频OHLCV无法精确捕捉偏度信息，需分钟数据；(2)中证1000小盘股的偏度结构与大盘不同",
+    "conclusion": "不达标，不入库"
+  },
+  {
+    "id": "tae_v1",
+    "factor_id": "tae_v1",
+    "factor_name": "换手率-振幅效率 (Turnover Amplitude Efficiency)",
+    "status": "active",
+    "date": "2026-03-17",
+    "category": "量价/Quality代理",
+    "barra_style": "Quality",
+    "source_type": "自研",
+    "source_title": "换手率-振幅效率因子",
+    "source_url": null,
+    "source_author": null,
+    "source_year": 2026,
+    "source_journal": null,
+    "description": "log(MA20(turnover)/MA20(amplitude+0.01))，成交额OLS中性化+MAD winsorize+z-score。衡量单位波动率下的交易参与度。",
+    "hypothesis": "换手高但振幅低=分歧小参与度高=信息传播效率高→Quality代理",
+    "original_metric": {
+      "market": "",
+      "period": "",
+      "ic_mean": null,
+      "sharpe": null,
+      "description": "自研因子，无直接对应文献。灵感来自Merton(1987)投资者认知+turnover_level_v1成功经验。"
+    },
+    "our_metric": {
+      "market": "中证1000",
+      "period": "2022-10 ~ 2026-03",
+      "ic_mean": 0.0232,
+      "ic_t": 3.41,
+      "sharpe": 1.8294,
+      "monotonicity": 1.0,
+      "mdd": -0.1362
+    },
+    "diff_notes": "全面达标。换手率/振幅比值是一个创新构造。与turnover_level相关0.50说明有独立alpha。填补了因子库Quality风格空缺。",
+    "local_factor_id": "tae_v1",
+    "conclusion": "入库",
+    "ic_mean": 0.0232,
+    "ic_t_stat": 3.41,
+    "rank_ic": 0.0232,
+    "monotonicity": 1.0,
+    "g5_sharpe": 1.237,
+    "g5_annual_ret": "37.5%",
+    "g1_annual_ret": "4.5%",
+    "long_short_sharpe": 1.83,
+    "data_files": [
+      "data/factor_tae_v1.csv",
+      "output/tae_v1/report.json"
+    ]
   }
 ]

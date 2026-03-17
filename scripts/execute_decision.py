@@ -103,9 +103,24 @@ def execute_trades(data: dict, decision: dict) -> dict:
     
     results = {"success": [], "failed": [], "skipped": []}
     
-    # 收集所有需要的代码
-    codes = [t["code"] for t in trades]
-    prices = fetch_prices_tencent(codes)
+    # 收集所有需要的代码 — 标准化为 .SH/.SZ 格式供行情API使用
+    def _normalize_code(c: str) -> str:
+        """纯数字代码自动加后缀: 6开头→.SH, 其他→.SZ"""
+        if '.' not in c:
+            return f"{c}.SH" if c.startswith('6') else f"{c}.SZ"
+        return c
+
+    def _bare_code(c: str) -> str:
+        """去掉 .SH/.SZ 后缀，返回纯数字代码"""
+        return c.split('.')[0]
+
+    codes_for_api = [_normalize_code(t["code"]) for t in trades]
+    prices_raw = fetch_prices_tencent(codes_for_api)
+    # 建立 bare_code → price_info 映射，兼容两种格式查找
+    prices = {}
+    for k, v in prices_raw.items():
+        prices[k] = v
+        prices[_bare_code(k)] = v
     
     for trade in trades:
         code = trade["code"]
@@ -113,7 +128,7 @@ def execute_trades(data: dict, decision: dict) -> dict:
         volume = trade["volume"]
         reason = trade.get("reason", decision.get("summary", ""))
         
-        price_info = prices.get(code, {})
+        price_info = prices.get(code, prices.get(_normalize_code(code), {}))
         price = price_info.get("price", 0)
         if not name and price_info.get("name"):
             name = price_info["name"]
@@ -130,8 +145,8 @@ def execute_trades(data: dict, decision: dict) -> dict:
             print(f"  ⏭️  {code} 数量不足100股，跳过")
             continue
         
-        # Use full code with .SH/.SZ suffix (portfolio keys include suffix)
-        trade_code = code
+        # 使用带后缀的 code（如 600141.SH）匹配 portfolio positions key
+        trade_code = _normalize_code(code)
         result = execute_trade(data, player_id, trade_code, name, price, volume, action, date, reason)
         
         if result.get("status") == "ok":

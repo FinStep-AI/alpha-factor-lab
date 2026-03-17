@@ -1,125 +1,116 @@
 {
-  "factor_id": "neg_day_freq_v1",
-  "factor_name": "极端负收益日频率(正向) v1",
-  "factor_name_en": "Negative Day Frequency v1",
-  "category": "风险/反转",
-  "description": "过去10日中收益率<=-3%的天数占比。正向使用:做多高频率(短期反转效应)。",
-  "hypothesis": "频繁出现极端负收益的股票,说明近期遭受密集抛售,卖压释放后价格均值回复,产生反弹收益。",
-  "formula": "neutralize(mean(ret<=-0.03, 10d), log_amount_20d)",
-  "direction": 1,
-  "stock_pool": "中证1000",
-  "period": "2022-10-14 ~ 2026-03-06",
-  "n_dates": 822,
+  "factor_name": "neg_day_freq_v1",
+  "static_factor": false,
+  "period": "2022-10-14 ~ 2026-03-13",
+  "n_dates": 827,
   "n_stocks": 1000,
   "n_groups": 5,
   "rebalance_freq": 10,
   "forward_days": 10,
-  "cost": 0.003,
-  "data_cutoff": "2026-03-07",
-  "correlation_with_cvar": 0.5453806965431768,
+  "cost_per_trade": 0.003,
   "metrics": {
-    "ic_mean": 0.02764059132329542,
-    "ic_std": 0.09931236621679593,
-    "ic_positive_pct": 0.5609756097560976,
-    "ic_count": 82,
-    "rank_ic_mean": 0.021479117361816496,
-    "rank_ic_std": 0.1106242427340475,
-    "ir": 0.27831973374752583,
-    "ic_t_stat": 2.942697151806454,
-    "ic_p_value": 0.00424261994314401,
+    "ic_mean": 0.0399183525588398,
+    "ic_std": 0.1209664810540717,
+    "ic_positive_pct": 0.5945945945945946,
+    "ic_count": 37,
+    "rank_ic_mean": 0.030446500284470455,
+    "rank_ic_std": 0.14006080702487383,
+    "ir": 0.3299951541203914,
+    "ic_t_stat": 3.1700909831953608,
+    "ic_p_value": 0.0031072481374301297,
     "ic_significant_5pct": true,
     "ic_significant_1pct": true,
     "group_metrics": {
       "group_1": {
-        "total_return": -0.16145990897892992,
-        "annualized_return": -0.05261567621167551,
-        "annualized_volatility": 0.24008804448023296,
-        "sharpe_ratio": -0.2191515880167348,
-        "max_drawdown": -0.5169947867794423,
-        "calmar_ratio": -0.10177216010133994
+        "total_return": 0.08230632620702383,
+        "annualized_return": 0.024423944864196967,
+        "annualized_volatility": 0.21856190973961953,
+        "sharpe_ratio": 0.11174840526098107,
+        "max_drawdown": -0.34000925529787346,
+        "calmar_ratio": 0.07183317654926707
       },
       "group_2": {
-        "total_return": 0.21641934599657642,
-        "annualized_return": 0.06197845982752104,
-        "annualized_volatility": 0.2274351050272495,
-        "sharpe_ratio": 0.2725105247938539,
-        "max_drawdown": -0.39149707970063485,
-        "calmar_ratio": 0.15831142310158217
+        "total_return": 0.32266172277867544,
+        "annualized_return": 0.08906091445020081,
+        "annualized_volatility": 0.25192985052671296,
+        "sharpe_ratio": 0.35351473540749545,
+        "max_drawdown": -0.40104212028561464,
+        "calmar_ratio": 0.22207371731122233
       },
       "group_3": {
-        "total_return": 0.3923715568574666,
-        "annualized_return": 0.10694132046998361,
-        "annualized_volatility": 0.23779582066722518,
-        "sharpe_ratio": 0.44971909165568896,
-        "max_drawdown": -0.3714836729688827,
-        "calmar_ratio": 0.28787623320107947
+        "total_return": 0.4127956297259465,
+        "annualized_return": 0.11118640201514252,
+        "annualized_volatility": 0.26048153501296,
+        "sharpe_ratio": 0.4268494579072967,
+        "max_drawdown": -0.3978384143487757,
+        "calmar_ratio": 0.27947628485586107
       },
       "group_4": {
-        "total_return": 0.3146565089219491,
-        "annualized_return": 0.08759843298768377,
-        "annualized_volatility": 0.26931582380752256,
-        "sharpe_ratio": 0.32526285217570255,
-        "max_drawdown": -0.4084809408312293,
-        "calmar_ratio": 0.21444925388545
+        "total_return": 0.4471517849275335,
+        "annualized_return": 0.11936158571230981,
+        "annualized_volatility": 0.23696124804245672,
+        "sharpe_ratio": 0.503717745827046,
+        "max_drawdown": -0.3436949993750177,
+        "calmar_ratio": 0.3472892708051018
       },
       "group_5": {
-        "total_return": 0.6316329865695223,
-        "annualized_return": 0.16215198497906735,
-        "annualized_volatility": 0.2909242813478974,
-        "sharpe_ratio": 0.5573683441883641,
-        "max_drawdown": -0.4088982088230066,
-        "calmar_ratio": 0.39655831568891897
+        "total_return": 0.5016945183576271,
+        "annualized_return": 0.1320675744013715,
+        "annualized_volatility": 0.2954237379745862,
+        "sharpe_ratio": 0.447044558121232,
+        "max_drawdown": -0.4387575101161599,
+        "calmar_ratio": 0.30100356428407793
       },
       "long_short": {
-        "total_return": 0.9846547490599451,
-        "annualized_return": 0.23416220783527608,
-        "annualized_volatility": 0.12102935602927543,
-        "sharpe_ratio": 1.9347554636135986,
-        "max_drawdown": -0.1311672996118539,
-        "calmar_ratio": 1.7852178746394982
+        "total_return": 0.43429170524411664,
+        "annualized_return": 0.11631743525978577,
+        "annualized_volatility": 0.1378736138585846,
+        "sharpe_ratio": 0.8436526178177302,
+        "max_drawdown": -0.18968151736335462,
+        "calmar_ratio": 0.6132249302759829
       }
     },
-    "long_short_total_return": 0.9846547490599451,
-    "long_short_ann_return": 0.23416220783527608,
-    "long_short_sharpe": 1.9347554636135986,
-    "long_short_mdd": -0.1311672996118539,
-    "turnover_mean": 0.6889024390243903,
-    "turnover_std": 0.09765689187474955,
+    "long_short_total_return": 0.43429170524411664,
+    "long_short_ann_return": 0.11631743525978577,
+    "long_short_sharpe": 0.8436526178177302,
+    "long_short_mdd": -0.18968151736335462,
+    "turnover_mean": 0.5365705161246072,
+    "turnover_std": 0.3444176190544156,
     "group_returns_annualized": [
-      -0.05261567621167551,
-      0.06197845982752104,
-      0.10694132046998361,
-      0.08759843298768377,
-      0.16215198497906735
+      0.024423944864196967,
+      0.08906091445020081,
+      0.11118640201514252,
+      0.11936158571230981,
+      0.1320675744013715
     ],
-    "monotonicity": 0.8999999999999998,
+    "monotonicity": 0.9999999999999999,
     "holdings_info": {
       "group_1": {
-        "mean": 199.29841656516444,
-        "min": 146,
-        "max": 200
+        "mean": 193.39467312348668,
+        "min": 182,
+        "max": 199
       },
       "group_2": {
-        "mean": 199.3130328867235,
-        "min": 171,
+        "mean": 193.9588377723971,
+        "min": 182,
         "max": 200
       },
       "group_3": {
-        "mean": 181.36540803897685,
-        "min": 123,
+        "mean": 193.86682808716708,
+        "min": 183,
         "max": 200
       },
       "group_4": {
-        "mean": 192.03045066991473,
-        "min": 128,
+        "mean": 193.9588377723971,
+        "min": 182,
         "max": 200
       },
       "group_5": {
-        "mean": 199.57125456760048,
-        "min": 170,
+        "mean": 194.28571428571428,
+        "min": 183,
         "max": 200
       }
     },
-    "holdings_imbalance_ratio": 1.1003821330951438
+    "holdings_imbalance_ratio": 1.0046073717948718
   }
 }
