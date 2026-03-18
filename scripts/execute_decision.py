@@ -127,6 +127,8 @@ def execute_trades(data: dict, decision: dict) -> dict:
         name = trade.get("name", "")
         volume = trade["volume"]
         reason = trade.get("reason", decision.get("summary", ""))
+        # 支持 per-trade direction：优先用 trade 级别的 direction，fallback 到全局 action
+        trade_direction = trade.get("direction", action)
         
         price_info = prices.get(code, prices.get(_normalize_code(code), {}))
         price = price_info.get("price", 0)
@@ -147,14 +149,14 @@ def execute_trades(data: dict, decision: dict) -> dict:
         
         # 使用带后缀的 code（如 600141.SH）匹配 portfolio positions key
         trade_code = _normalize_code(code)
-        result = execute_trade(data, player_id, trade_code, name, price, volume, action, date, reason)
+        result = execute_trade(data, player_id, trade_code, name, price, volume, trade_direction, date, reason)
         
         if result.get("status") == "ok":
             results["success"].append({
                 "code": code, "name": name, "volume": volume,
-                "price": price, "direction": action
+                "price": price, "direction": trade_direction
             })
-            print(f"  ✅ {action} {code} {name} {volume}股 @ {price:.2f}")
+            print(f"  ✅ {trade_direction} {code} {name} {volume}股 @ {price:.2f}")
         else:
             results["failed"].append({"code": code, "error": result.get("message", "未知错误")})
             print(f"  ❌ {code}: {result.get('message', '未知错误')}")
