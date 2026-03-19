@@ -51,7 +51,8 @@ python3 $SCRIPTS/position_manager.py check --quotes /tmp/a_share_quotes.json
 4. **板块优先**：同板块出现3只以上信号 → 该板块优先
 
 ### 买入执行
-- 买入价：用开盘10分钟均价（VWAP近似=amount/volume）
+- **日内量价确认**（9:33-9:37）：候选票在开盘后第4-8分钟，需同时满足"单分钟量比递增"+"价格上升"才确认买入，否则放弃
+- 买入价：确认后在9:37附近价格买入
 - 止损：买入价往下5个价位
 - 在 paper-trading-data.json 中记录交易
 
