@@ -1612,5 +1612,54 @@
       "cost": 0.003
     },
     "fail_reason": "IC接近达标(0.023)但t值差一点(1.90<2.0), Sharpe(0.30)和单调性(0.70)均未达标, 可能与CVaR因子冗余"
+  },
+  {
+    "factor_id": "roe_accel_v1",
+    "name": "ROE改善加速度",
+    "description": "同比delta-ROE的环比变化(加速度)，捕捉盈利改善加速的信号。delta_ROE(t)=ROE(t)-ROE(t-4), accel=delta_ROE(t)-delta_ROE(t-1)。市值中性化后正向使用。",
+    "barra_style": "Growth",
+    "source_type": "fundamental",
+    "status": "failed",
+    "reject_reason": "IC=0.023(t=2.97)达标，G5 Sharpe=0.96达标，但单调性=0.8不严格>0.8（G4=33.2%>G5=26.2%）。多空Sharpe=1.11，分层整体递增但G4/G5反转。10d前瞻IC=0.023，20d前瞻IC=0.031。与已有因子相关性极低(<0.05)，信号独立但未过单调性硬门槛。v2(rank变换)和v3(2期加速度)改善了IC但单调性更差(0.7)。",
+    "metrics": {
+      "ic_mean_5d": 0.0161,
+      "ic_mean_10d": 0.0228,
+      "ic_mean_20d": 0.0312,
+      "ic_tstat_10d": 2.97,
+      "rank_ic_10d": 0.0319,
+      "g5_sharpe": 0.9642,
+      "long_short_sharpe": 1.1105,
+      "long_short_ann_return": 0.0742,
+      "long_short_mdd": -0.0813,
+      "monotonicity": 0.8,
+      "turnover_mean": 0.2087,
+      "group_ann_returns": [
+        0.163,
+        0.15,
+        0.228,
+        0.332,
+        0.262
+      ],
+      "correlations_with_existing": {
+        "amihud_illiq_v2": -0.009,
+        "shadow_pressure_v1": -0.016,
+        "overnight_momentum_v1": 0.013,
+        "gap_momentum_v1": 0.027,
+        "tail_risk_cvar_v1": -0.042,
+        "neg_day_freq_v1": -0.034,
+        "tae_v1": -0.011
+      }
+    },
+    "data_file": "data/factor_roe_accel.csv",
+    "variants_tested": [
+      "v1: 1期加速度(原始值) → IC@10d=0.023, mono=0.8",
+      "v2: 1期加速度(rank变换) → IC@10d=0.027, mono=0.7",
+      "v3: 2期加速度 → IC@10d=0.028, mono=0.7",
+      "delta_roe_v1: 一阶(同比ROE变化) → IC@5d=0.015, mono=0.0",
+      "quality_growth_v1: delta_roe+bps_growth复合 → IC=0.009, mono=-0.3"
+    ],
+    "notes": "非常接近达标的Growth风格因子。信号独立性极好(与所有已有因子相关性<0.05)。核心问题是G4>G5（最高加速度组不是收益最高组，可能是过度改善后均值回复）。建议方向：尝试sigmoid/truncation处理极端加速度值。",
+    "created_at": "2026-03-19 15:46",
+    "backtest_period": "2023-11-01 ~ 2026-03-19"
   }
 ]

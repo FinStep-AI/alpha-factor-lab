@@ -261,6 +261,24 @@
       "max_streak": 4,
       "temperature": 38,
       "phase": "startup"
+    },
+    {
+      "date": "20260319",
+      "zt_count": 28,
+      "dt_count": 6,
+      "zb_count": 10,
+      "max_streak": 4,
+      "temperature": 35,
+      "phase": "startup"
+    },
+    {
+      "date": "20260319",
+      "zt_count": 28,
+      "dt_count": 5,
+      "zb_count": 10,
+      "max_streak": 4,
+      "temperature": 43,
+      "phase": "ferment"
     }
   ],
   "updated": "20260319"
