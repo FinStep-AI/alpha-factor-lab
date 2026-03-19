@@ -1539,5 +1539,78 @@
       "data/factor_tae_v1.csv",
       "output/tae_v1/report.json"
     ]
+  },
+  {
+    "date": "2026-03-19",
+    "source_type": "自研 + 论文启发",
+    "source_title": "日内趋势强度因子 (Intraday Trend Strength, ITS)",
+    "source_url": "https://www.mdpi.com/2227-7072/14/2/47",
+    "factor_id_attempted": "intraday_trend_strength_v1",
+    "formula": "neutralize(MA20((close-open)/(high-low+eps)), log_amount_20d)",
+    "original_metric": "IVU论文: Sharpe 3.02 (CSI300日内策略), 但需要30min频率数据",
+    "our_metric": "IC=0.007(t=0.89), Sharpe=0.39, 单调性=0.3, 远不达标",
+    "diff_notes": "原论文IVU因子需要日内30分钟频率成交量数据，我们只有日线OHLCV。用日线构造的ITS（实体/全振幅比）无法捕捉日内信息不确定性。与shadow_pressure逻辑部分重叠但方向不同。",
+    "conclusion": "失败。日线ITS因子选股能力极弱，正向/反向均不达标。日内微观结构因子降频到日线后信息损失太大。",
+    "searched_sources": [
+      "国海证券 委托挂单手数因子（无法获取全文）",
+      "华泰 量价淘金系列（vzkoo被封）",
+      "MDPI: IVU proxy for Chinese stock market（日内30min数据，无法用日线复现）",
+      "掘金: 高频价量相关性趋势因子（需分钟级数据）",
+      "北大: 公司特征动态变化定价效应（PDF无法解析）"
+    ]
+  },
+  {
+    "factor_name": "ROE加速度 (ROE QoQ Acceleration)",
+    "status": "failed",
+    "barra_style": "Growth",
+    "source_type": "fundamental",
+    "date": "2026-03-19",
+    "description": "ROE二阶差分（环比变化的变化），捕捉ROE改善加速信号",
+    "construction": "delta2_ROE = (ROE_t - ROE_{t-1}) - (ROE_{t-1} - ROE_{t-2}), 季报数据+60天滞后映射到日频, 截面Z-score中性化",
+    "backtest_result": {
+      "ic_mean": 0.0024,
+      "ic_t": 0.63,
+      "sharpe": 0.0798,
+      "monotonicity": 0.8,
+      "forward_days": 5,
+      "cost": 0.003
+    },
+    "fail_reason": "IC极低(0.0024)且不显著(t=0.63), 多空Sharpe仅0.08, 二阶信号在季报频率上太稀疏"
+  },
+  {
+    "factor_name": "VWAP偏离率20日(负向)",
+    "status": "failed",
+    "barra_style": "Reversal",
+    "source_type": "price_volume",
+    "date": "2026-03-19",
+    "description": "20日VWAP与收盘价偏离率取负(低偏离=因子值高), 反转逻辑",
+    "construction": "VWAP_20=sum(amount)/(sum(volume)*100), dev=-(close-VWAP)/VWAP, 截面Z-score",
+    "backtest_result": {
+      "ic_mean": 0.0272,
+      "ic_t": 3.84,
+      "sharpe": -0.0465,
+      "monotonicity": 0.1,
+      "forward_days": 5,
+      "cost": 0.003
+    },
+    "fail_reason": "IC显著(0.027/t=3.84)但分层极不单调(0.1), 多空Sharpe为负, 换手率过高(67%)"
+  },
+  {
+    "factor_name": "特质波动率20日(负向, IVOL)",
+    "status": "failed",
+    "barra_style": "Volatility",
+    "source_type": "price_volume",
+    "date": "2026-03-19",
+    "description": "20日滚动窗口对市场收益回归残差标准差取负, 低IVOL异象",
+    "construction": "r_i=alpha+beta*r_m+eps, IVOL=std(eps), factor=-IVOL, 截面Z-score, clip[-3,3]",
+    "backtest_result": {
+      "ic_mean": 0.0229,
+      "ic_t": 1.9,
+      "sharpe": 0.2962,
+      "monotonicity": 0.7,
+      "forward_days": 5,
+      "cost": 0.003
+    },
+    "fail_reason": "IC接近达标(0.023)但t值差一点(1.90<2.0), Sharpe(0.30)和单调性(0.70)均未达标, 可能与CVaR因子冗余"
   }
 ]

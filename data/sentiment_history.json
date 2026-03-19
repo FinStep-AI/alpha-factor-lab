@@ -225,7 +225,43 @@
       "max_streak": 4,
       "temperature": 49,
       "phase": "ferment"
+    },
+    {
+      "date": "20260318",
+      "zt_count": 4,
+      "dt_count": 1,
+      "zb_count": 0,
+      "max_streak": 3,
+      "temperature": 38,
+      "phase": "startup"
+    },
+    {
+      "date": "20260318",
+      "zt_count": 57,
+      "dt_count": 4,
+      "zb_count": 21,
+      "max_streak": 5,
+      "temperature": 73,
+      "phase": "climax"
+    },
+    {
+      "date": "20260318",
+      "zt_count": 57,
+      "dt_count": 4,
+      "zb_count": 21,
+      "max_streak": 5,
+      "temperature": 73,
+      "phase": "climax"
+    },
+    {
+      "date": "20260319",
+      "zt_count": 4,
+      "dt_count": 0,
+      "zb_count": 0,
+      "max_streak": 4,
+      "temperature": 38,
+      "phase": "startup"
     }
   ],
-  "updated": "20260317"
+  "updated": "20260319"
 }
