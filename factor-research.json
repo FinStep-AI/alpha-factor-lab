@@ -1766,5 +1766,69 @@
     "data_files": [
       "data/factor_up_vol_ratio_v1_long.csv"
     ]
+  },
+  {
+    "factor_id": "upside_salience_v1",
+    "factor_name": "上行突显度因子 (Upside Salience)",
+    "status": "failed",
+    "date": "2026-03-22",
+    "category": "行为金融/动量",
+    "barra_style": "Sentiment",
+    "source_type": "论文复现",
+    "source_title": "Salience Theory and Stock Prices: Empirical Evidence",
+    "source_url": "https://doi.org/10.1016/j.jfineco.2020.12.005",
+    "source_authors": "Cosemans & Frehen (2021) JFE; Song, Zhang & Tang (2026) CJE (A股验证)",
+    "description": "基于Bordalo et al. (2012)突显理论。突显函数σ(r_i,r_m)=|r_i-r_m|/(|r_i|+|r_m|+θ), θ=0.1。计算60日窗口内个股超越市场时的突显度加权超额收益累计和。高上行突显度=过去有显著超越市场的表现。成交额OLS中性化+MAD winsorize+z-score。",
+    "hypothesis": "在A股中，高上行突显度股票（过去显著跑赢市场的股票）展现的是延续效应而非反转效应——与美股结论相反。A股散户偏多，信息传播慢，突显的正面表现后续延续。",
+    "original_metric": {
+      "market": "US All Stocks",
+      "period": "1963-2014",
+      "description": "原论文发现高ST(突显上行)股票被高估→后续低收益(反转)。在A股验证(Song et al. 2026)发现同样方向。"
+    },
+    "our_metric": {
+      "market": "中证1000",
+      "period": "2022-12 ~ 2026-03",
+      "ic_mean": 0.0135,
+      "ic_t": 1.73,
+      "rank_ic": -0.01,
+      "sharpe": 1.2218,
+      "monotonicity": 0.9,
+      "mdd": -0.1126,
+      "turnover": 0.4964,
+      "g5_ann_ret": "18.3%",
+      "g1_ann_ret": "4.2%",
+      "g5_sharpe": 0.6455
+    },
+    "ic_mean": 0.0135,
+    "ic_t_stat": 1.73,
+    "monotonicity": 0.9,
+    "g5_sharpe": 0.6455,
+    "long_short_sharpe": 1.2218,
+    "failure_reason": "IC=0.0135不达标(需>0.02), IC_t=1.73不达标(需>2.0), G5 Sharpe=0.645不达标(需>0.8)。多空Sharpe=1.22和单调性=0.9非常优秀，但IC和G5 Sharpe两项硬指标未过。典型的\"分层强、IC弱\"特征，说明因子有非线性选股能力但线性预测力不足。",
+    "variants_tested": [
+      "upsal_20d (20日窗口): IC=0.0039(5f), 0.0096(10f), 0.0222(20f)",
+      "upsal_40d (40日窗口): IC=0.0039(5f), 0.0096(10f), 0.0222(20f)",
+      "upsal_60d (60日窗口): IC=0.0117(5f), 0.0185(10f), 0.0308(20f) ← 最优",
+      "upsal_ewm30 (EWM halflife=30): LS Sharpe=1.27, mono=0.9, 换手更低(42.5%), 但IC=0.0076",
+      "sal_ivol_60d (突显度/特质波动率): LS Sharpe=0.96, mono=0.8, IC=0.0085",
+      "neg_st_20d (原始负ST, 论文公式): IC=0.0098, mono=-0.7, 方向反转",
+      "neg_st_60d_pos (60d正ST): IC=0.0157(20f), mono=0.8, LS Sharpe=0.48"
+    ],
+    "correlation_with_existing": {
+      "tail_risk_cvar_v1": 0.348,
+      "amihud_illiq_v2": 0.236,
+      "overnight_momentum_v1": -0.171,
+      "shadow_pressure_v1": 0.064,
+      "gap_momentum_v1": -0.015,
+      "tae_v1": -0.021
+    },
+    "diff_notes": "【重要发现】(1) A股CSI1000的突显理论效应方向与美股相反！高上行突显=延续(动量)而非反转。与散户主导市场的行为偏差一致。(2) 多空Sharpe极佳(1.22)但IC弱，典型的非线性信号。(3) 与现有因子低相关(最大0.35与CVaR)，如果放宽IC门槛可考虑入库。(4) EWM版本换手率更低且多空更强(1.27)，实战中可能更优。",
+    "lessons_learned": "突显理论因子在A股值得深挖。当前构造是\"上行突显度\"(单边)。未来可尝试：(1) 非对称权重(上行vs下行权重差异化); (2) 结合波动率regime(牛市vs熊市分开处理); (3) 用分钟级数据构造日内突显度。",
+    "data_files": [
+      "data/factor_upsal_60d.csv",
+      "data/factor_upsal_ewm30.csv",
+      "output/upsal_60d_5f/report.json",
+      "output/upsal_ewm30_5f/report.json"
+    ]
   }
 ]
