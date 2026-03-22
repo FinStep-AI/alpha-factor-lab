@@ -1661,5 +1661,110 @@
     "notes": "非常接近达标的Growth风格因子。信号独立性极好(与所有已有因子相关性<0.05)。核心问题是G4>G5（最高加速度组不是收益最高组，可能是过度改善后均值回复）。建议方向：尝试sigmoid/truncation处理极端加速度值。",
     "created_at": "2026-03-19 15:46",
     "backtest_period": "2023-11-01 ~ 2026-03-19"
+  },
+  {
+    "factor_id": "vw_clv_v1",
+    "factor_name": "成交量加权收盘位置 (Volume-Weighted CLV)",
+    "status": "failed",
+    "date": "2026-03-22",
+    "category": "量价/微观结构",
+    "barra_style": "Sentiment",
+    "source_type": "自研+经典启发",
+    "source_title": "Volume-Weighted Close Location Value",
+    "source_url": "inspired by Chaikin AD Line / CLV concept",
+    "description": "CLV=(2*close-high-low)/(high-low), 20日成交量加权平均。高VW-CLV=放量时收高位(买方主导)。成交额OLS中性化+MAD+z-score。",
+    "hypothesis": "放量收高位=主力买入=后续上涨",
+    "ic_mean": -0.0101,
+    "ic_t_stat": -1.4,
+    "monotonicity": 0.7,
+    "failure_reason": "IC极弱(-0.01,t=-1.40),两个方向都不显著。放量日收盘位置在截面上不具备选股能力。与之前的hv_close_strength_v1(IC=-0.009)、money_flow_cmf_v1(IC=-0.003)结论一致——CLV系列因子在中证1000截面选股中全面失效。",
+    "data_files": [
+      "data/factor_vw_clv_v1.csv"
+    ]
+  },
+  {
+    "factor_id": "vol_surge_v1",
+    "factor_name": "成交量激增动量 (Volume Surge Momentum)",
+    "status": "failed",
+    "date": "2026-03-22",
+    "category": "流动性/动量",
+    "barra_style": "Sentiment",
+    "source_type": "论文启发",
+    "source_title": "The High-Volume Return Premium",
+    "source_url": "Gervais, Kaniel & Mingelgrin (2001) JF",
+    "description": "log(MA20_current_volume / MA20_lag60d_volume), 成交额中性化+MAD+z-score。",
+    "hypothesis": "成交量显著放大→关注度提升→后续正超额",
+    "ic_mean": -0.0034,
+    "ic_t_stat": -0.43,
+    "monotonicity": 0.3,
+    "failure_reason": "IC≈0(-0.003,t=-0.43)完全无信号。可能因为中性化去掉成交额后，成交量变化本身不含额外选股信息。",
+    "data_files": [
+      "data/factor_vol_surge_v1_long.csv"
+    ]
+  },
+  {
+    "factor_id": "turnover_ratio_v1",
+    "factor_name": "换手率短长比 (Turnover Ratio MA5/MA60)",
+    "status": "failed",
+    "date": "2026-03-22",
+    "category": "流动性/动量",
+    "barra_style": "Liquidity",
+    "source_type": "论文启发",
+    "source_title": "Lee & Swaminathan (2000) Price Momentum and Trading Volume, JF",
+    "source_url": "https://doi.org/10.1111/0022-1082.00280",
+    "description": "log(MA5_turnover/MA60_turnover), 反向使用(低换手率比=因子高值)。成交额OLS中性化+MAD+z-score。",
+    "hypothesis": "换手率冷却(MA5<<MA60)=关注度退潮后反弹",
+    "ic_mean": 0.0199,
+    "ic_t_stat": 2.68,
+    "monotonicity": 0.7,
+    "g5_sharpe": null,
+    "g5_annual_ret": "17.0%",
+    "g1_annual_ret": "15.0%",
+    "long_short_sharpe": 0.13,
+    "failure_reason": "IC=0.02(t=2.68)勉强达标，但单调性0.7不达标(G1=15%打破递增趋势)，多空Sharpe仅0.13，实际选股能力极弱。z-score版本(tr_z_v1)更差(IC=0.017,mono=0.6)。",
+    "data_files": [
+      "data/factor_tr_v1_long.csv",
+      "data/factor_tr_z_v1_long.csv"
+    ]
+  },
+  {
+    "factor_id": "ret_hhi_v1",
+    "factor_name": "收益集中度HHI (Return Concentration)",
+    "status": "failed",
+    "date": "2026-03-22",
+    "category": "波动率/微观结构",
+    "barra_style": "Volatility",
+    "source_type": "自研",
+    "source_title": "收益率Herfindahl指数",
+    "source_url": null,
+    "description": "日收益绝对值HHI=sum((|r_i|/sum|r|)^2), 20日窗口。高HHI=跳跃式变动。反向使用(低集中度=均匀变动→高因子值)。成交额中性化+MAD+z-score。",
+    "hypothesis": "低收益集中度=渐进信息扩散=FIP效应",
+    "ic_mean": 0.0012,
+    "ic_t_stat": 0.23,
+    "monotonicity": 0.5,
+    "failure_reason": "IC≈0(0.001,t=0.23)完全无信号。收益分布的集中度在截面上不具备选股能力。",
+    "data_files": [
+      "data/factor_ret_hhi_v1_long.csv"
+    ]
+  },
+  {
+    "factor_id": "up_vol_ratio_v1",
+    "factor_name": "上涨日波动占比 (Upside Vol Ratio)",
+    "status": "failed",
+    "date": "2026-03-22",
+    "category": "波动率",
+    "barra_style": "Volatility",
+    "source_type": "自研",
+    "source_title": "上涨日波动率与总波动率之比",
+    "source_url": null,
+    "description": "std(positive_returns_20d)/std(all_returns_20d)。高比值=上行波动大。成交额中性化+MAD+z-score。",
+    "hypothesis": "高上行波动占比=看涨不确定性高→后续有正alpha",
+    "ic_mean": -0.0038,
+    "ic_t_stat": -0.68,
+    "monotonicity": 0.2,
+    "failure_reason": "IC≈0(-0.004,t=-0.68)无信号。上行/总波动比在截面上缺乏区分度。",
+    "data_files": [
+      "data/factor_up_vol_ratio_v1_long.csv"
+    ]
   }
 ]

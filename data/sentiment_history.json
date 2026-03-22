@@ -1,25 +1,6 @@
 {
   "history": [
     {
-      "date": "20260223",
-      "zt_count": 0,
-      "dt_count": 0,
-      "zb_count": 0,
-      "max_streak": 0,
-      "temperature": 0,
-      "phase": "ice",
-      "note": "休市"
-    },
-    {
-      "date": "20260224",
-      "zt_count": 92,
-      "dt_count": 15,
-      "zb_count": 42,
-      "max_streak": 4,
-      "temperature": 71,
-      "phase": "climax"
-    },
-    {
       "date": "20260225",
       "zt_count": 75,
       "dt_count": 3,
@@ -279,7 +260,34 @@
       "max_streak": 4,
       "temperature": 43,
       "phase": "ferment"
+    },
+    {
+      "date": "20260320",
+      "zt_count": 5,
+      "dt_count": 0,
+      "zb_count": 0,
+      "max_streak": 5,
+      "temperature": 51,
+      "phase": "ferment"
+    },
+    {
+      "date": "20260320",
+      "zt_count": 26,
+      "dt_count": 15,
+      "zb_count": 25,
+      "max_streak": 5,
+      "temperature": 31,
+      "phase": "startup"
+    },
+    {
+      "date": "20260320",
+      "zt_count": 28,
+      "dt_count": 13,
+      "zb_count": 23,
+      "max_streak": 5,
+      "temperature": 36,
+      "phase": "startup"
     }
   ],
-  "updated": "20260319"
+  "updated": "20260320"
 }
