@@ -492,7 +492,14 @@ def predict_today(df, feature_cols, model_path=None, date=None, top_n=TOP_N):
     """预测指定日期的选股结果"""
     
     if model_path is None:
-        model_path = os.path.join(MODELS_DIR, 'lgbm_v1', 'model.pkl')
+        # 优先使用最新版本模型
+        for ver in ['lgbm_v3', 'lgbm_v2', 'lgbm_v1']:
+            candidate = os.path.join(MODELS_DIR, ver, 'model.pkl')
+            if os.path.exists(candidate):
+                model_path = candidate
+                break
+        else:
+            model_path = os.path.join(MODELS_DIR, 'lgbm_v1', 'model.pkl')
     
     if not os.path.exists(model_path):
         print(f"❌ 模型文件不存在: {model_path}")

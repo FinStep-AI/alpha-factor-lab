@@ -1830,5 +1830,26 @@
       "output/upsal_60d_5f/report.json",
       "output/upsal_ewm30_5f/report.json"
     ]
+  },
+  {
+    "date": "2026-03-23",
+    "factor_id": "pv_divergence_v1",
+    "factor_name": "量价协同度",
+    "source_type": "self_constructed",
+    "source_title": "量价背离度因子 - 基于日线收益率与成交量变化率的Spearman秩相关",
+    "source_url": "https://juejin.cn/post/7586879894207168575 (参考高频价量相关性趋势因子的日线变体)",
+    "formula": "-neutralize(rolling_spearman(ret, vol_chg, 20), log_amount)",
+    "original_metric": "N/A (自研因子)",
+    "our_metric": {
+      "ic_mean": 0.0286,
+      "ic_t": 3.12,
+      "sharpe": 1.38,
+      "monotonicity": 0.7,
+      "turnover": 0.7778,
+      "mdd": -0.0519
+    },
+    "diff_notes": "IC和Sharpe达标，但单调性0.70<0.80（G3和G5错乱），换手率77.78%远超40%门槛。日线频率的量价Spearman相关性信号衰减快，换手过高。",
+    "conclusion": "FAIL - 换手率过高+单调性不足，不入库。可考虑：(1)延长回看窗口至40日降低换手，(2)用Pearson替代Spearman，(3)结合成交额加权。",
+    "barra_style": "微观结构"
   }
 ]
