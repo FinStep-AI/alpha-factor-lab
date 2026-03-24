@@ -17,256 +17,160 @@
       "style": "LightGBM机器学习选股 · 99特征 · 中证1000 · 周度调仓",
       "description": "10因子+K线衍生→99维特征矩阵→LightGBM预测超额收益→风控过滤→TOP25组合",
       "portfolio": {
-        "cash": -7905484.36,
+        "cash": 143261.88,
         "positions": {
-          "301175.SZ": {
-            "name": "",
-            "volume": 58900,
-            "cost_price": 7.39,
-            "avg_cost": 7.39
-          },
-          "000833.SZ": {
-            "name": "粤桂股份",
-            "volume": 14400,
-            "cost_price": 28.51,
-            "avg_cost": 28.51
-          },
-          "002099.SZ": {
-            "name": "海翔药业",
-            "volume": 56000,
-            "cost_price": 7.37,
-            "avg_cost": 7.37
-          },
-          "002149.SZ": {
-            "name": "西部材料",
-            "volume": 9400,
-            "cost_price": 43.54,
-            "avg_cost": 43.54
-          },
-          "002506.SZ": {
-            "name": "协鑫集成",
-            "volume": 140000,
-            "cost_price": 5.57,
-            "avg_cost": 5.57
-          },
-          "002716.SZ": {
-            "name": "湖南白银",
-            "volume": 63900,
-            "cost_price": 12.18,
-            "avg_cost": 12.18
-          },
-          "002897.SZ": {
-            "name": "意华股份",
-            "volume": 6300,
-            "cost_price": 64.85,
-            "avg_cost": 64.85
-          },
-          "300027.SZ": {
-            "name": "华谊兄弟",
-            "volume": 496300,
-            "cost_price": 1.57,
-            "avg_cost": 1.57
-          },
-          "300170.SZ": {
-            "name": "汉得信息",
-            "volume": 17700,
-            "cost_price": 23.28,
-            "avg_cost": 23.28
-          },
-          "300456.SZ": {
-            "name": "赛微电子",
-            "volume": 17000,
-            "cost_price": 45.41,
-            "avg_cost": 45.41
-          },
-          "300548.SZ": {
-            "name": "长芯博创",
-            "volume": 2500,
-            "cost_price": 159.28,
-            "avg_cost": 159.28
-          },
-          "300624.SZ": {
-            "name": "万兴科技",
-            "volume": 11100,
-            "cost_price": 69.82,
-            "avg_cost": 69.82
-          },
-          "300870.SZ": {
-            "name": "欧陆通",
-            "volume": 1500,
-            "cost_price": 260.07,
-            "avg_cost": 260.07
-          },
-          "301018.SZ": {
-            "name": "申菱环境",
-            "volume": 4000,
-            "cost_price": 101.48,
-            "avg_cost": 101.48
-          },
-          "301205.SZ": {
-            "name": "联特科技",
-            "volume": 1800,
-            "cost_price": 224.04,
-            "avg_cost": 224.04
-          },
-          "301262.SZ": {
-            "name": "海看股份",
-            "volume": 16600,
-            "cost_price": 24.76,
-            "avg_cost": 24.76
-          },
-          "600151.SH": {
-            "name": "航天机电",
-            "volume": 29700,
-            "cost_price": 13.88,
-            "avg_cost": 13.88
-          },
-          "600759.SH": {
-            "name": "洲际油气",
-            "volume": 112600,
-            "cost_price": 6.92,
-            "avg_cost": 6.92
-          },
-          "600986.SH": {
-            "name": "浙文互联",
-            "volume": 40100,
-            "cost_price": 10.29,
-            "avg_cost": 10.29
-          },
-          "601096.SH": {
-            "name": "宏盛华源",
-            "volume": 64400,
-            "cost_price": 6.41,
-            "avg_cost": 6.41
-          },
-          "603667.SH": {
-            "name": "五洲新春",
-            "volume": 5600,
-            "cost_price": 72.51,
-            "avg_cost": 72.51
-          },
-          "603698.SH": {
-            "name": "航天工程",
-            "volume": 13400,
-            "cost_price": 30.81,
-            "avg_cost": 30.81
-          },
-          "688523.SH": {
-            "name": "航天环宇",
-            "volume": 6000,
-            "cost_price": 65.23,
-            "avg_cost": 65.23
-          },
           "000681.SZ": {
             "name": "视觉中国",
             "volume": 18400,
-            "cost_price": 19.94,
-            "avg_cost": 19.94
+            "cost_price": 20.63,
+            "avg_cost": 20.63
           },
           "002038.SZ": {
             "name": "双鹭药业",
             "volume": 66600,
-            "cost_price": 5.51,
-            "avg_cost": 5.51
+            "cost_price": 5.8,
+            "avg_cost": 5.8
           },
           "002237.SZ": {
             "name": "恒邦股份",
             "volume": 26700,
-            "cost_price": 13.74,
-            "avg_cost": 13.74
+            "cost_price": 14.31,
+            "avg_cost": 14.31
+          },
+          "002506.SZ": {
+            "name": "协鑫集成",
+            "volume": 63200,
+            "cost_price": 5.37,
+            "avg_cost": 5.37
+          },
+          "002716.SZ": {
+            "name": "湖南白银",
+            "volume": 32900,
+            "cost_price": 13.21,
+            "avg_cost": 13.21
           },
           "002737.SZ": {
             "name": "葵花药业",
             "volume": 30800,
-            "cost_price": 11.91,
-            "avg_cost": 11.91
+            "cost_price": 12.26,
+            "avg_cost": 12.26
           },
           "002985.SZ": {
             "name": "北摩高科",
             "volume": 10800,
-            "cost_price": 33.89,
-            "avg_cost": 33.89
+            "cost_price": 35.49,
+            "avg_cost": 35.49
+          },
+          "300027.SZ": {
+            "name": "华谊兄弟",
+            "volume": 247700,
+            "cost_price": 1.66,
+            "avg_cost": 1.66
           },
           "300244.SZ": {
             "name": "迪安诊断",
             "volume": 21100,
-            "cost_price": 17.34,
-            "avg_cost": 17.34
+            "cost_price": 18.42,
+            "avg_cost": 18.42
           },
           "300398.SZ": {
             "name": "飞凯材料",
             "volume": 15200,
-            "cost_price": 24.14,
-            "avg_cost": 24.14
+            "cost_price": 25.51,
+            "avg_cost": 25.51
+          },
+          "300456.SZ": {
+            "name": "赛微电子",
+            "volume": 8500,
+            "cost_price": 48.03,
+            "avg_cost": 48.03
+          },
+          "300624.SZ": {
+            "name": "万兴科技",
+            "volume": 5500,
+            "cost_price": 73.01,
+            "avg_cost": 73.01
           },
           "301071.SZ": {
             "name": "力量钻石",
             "volume": 9100,
-            "cost_price": 40.11,
-            "avg_cost": 40.11
+            "cost_price": 41.37,
+            "avg_cost": 41.37
+          },
+          "301175.SZ": {
+            "name": "中科环保",
+            "volume": 58900,
+            "cost_price": 7.39,
+            "avg_cost": 7.39
           },
           "301392.SZ": {
             "name": "汇成真空",
             "volume": 3300,
-            "cost_price": 109.93,
-            "avg_cost": 109.93
+            "cost_price": 111.77,
+            "avg_cost": 111.77
           },
           "301511.SZ": {
             "name": "德福科技",
             "volume": 10600,
-            "cost_price": 34.39,
-            "avg_cost": 34.39
+            "cost_price": 35.53,
+            "avg_cost": 35.53
           },
           "600330.SH": {
             "name": "天通股份",
             "volume": 24100,
-            "cost_price": 15.21,
-            "avg_cost": 15.21
+            "cost_price": 15.79,
+            "avg_cost": 15.79
           },
           "600531.SH": {
             "name": "豫光金铅",
             "volume": 29800,
-            "cost_price": 12.32,
-            "avg_cost": 12.32
+            "cost_price": 12.98,
+            "avg_cost": 12.98
           },
           "600586.SH": {
             "name": "金晶科技",
             "volume": 61400,
-            "cost_price": 5.98,
-            "avg_cost": 5.98
+            "cost_price": 5.85,
+            "avg_cost": 5.85
+          },
+          "600759.SH": {
+            "name": "洲际油气",
+            "volume": 53700,
+            "cost_price": 7.0,
+            "avg_cost": 7.0
           },
           "600916.SH": {
             "name": "中国黄金",
             "volume": 41100,
-            "cost_price": 8.92,
-            "avg_cost": 8.92
+            "cost_price": 9.11,
+            "avg_cost": 9.11
           },
           "601890.SH": {
             "name": "亚星锚链",
             "volume": 37000,
-            "cost_price": 9.9,
-            "avg_cost": 9.9
+            "cost_price": 10.4,
+            "avg_cost": 10.4
           },
           "603083.SH": {
             "name": "剑桥科技",
             "volume": 3500,
-            "cost_price": 103.98,
-            "avg_cost": 103.98
+            "cost_price": 110.02,
+            "avg_cost": 110.02
           },
           "603162.SH": {
             "name": "海通发展",
             "volume": 28700,
-            "cost_price": 12.78,
-            "avg_cost": 12.78
+            "cost_price": 12.61,
+            "avg_cost": 12.61
           },
           "603533.SH": {
             "name": "掌阅科技",
             "volume": 15400,
-            "cost_price": 23.71,
-            "avg_cost": 23.71
+            "cost_price": 24.5,
+            "avg_cost": 24.5
           }
         },
-        "total_value": 10291163.64,
+        "total_value": 9283450.88,
         "last_update": "2026-03-24"
       },
       "nav_history": {
@@ -3253,896 +3157,823 @@
         },
         {
           "date": "2026-03-23",
-          "code": "000762.SZ",
-          "name": "西藏矿业",
+          "time": "09:30",
+          "code": "000833.SZ",
+          "name": "粤桂股份",
           "direction": "sell",
-          "price": 25.53,
-          "volume": 15000,
-          "amount": 382950.0,
+          "price": 24.5,
+          "volume": 14400,
+          "amount": 352800.0,
           "fees": {
-            "commission": 114.88,
-            "stamp_duty": 191.47,
-            "transfer_fee": 3.83,
-            "slippage_cost": 382.95,
-            "total": 693.14
+            "commission": 70.56,
+            "stamp_duty": 352.8,
+            "transfer_fee": 0,
+            "slippage_cost": 0,
+            "total": 423.36
           },
-          "pnl": -49800.0,
-          "pnl_pct": -11.51,
-          "reason": "LightGBM v3 weekly rebalance (91特征模型, 12-fold WF, Sharpe_net=1.06). 风控剔除2只(四川黄金/海看股份大额减持). 目标25只等权."
+          "reason": "LightGBM weekly rebalance",
+          "pnl": -57682.08,
+          "pnl_pct": -14.05
         },
         {
           "date": "2026-03-23",
-          "code": "000899.SZ",
-          "name": "赣能股份",
+          "time": "09:30",
+          "code": "002099.SZ",
+          "name": "海翔药业",
           "direction": "sell",
-          "price": 13.07,
-          "volume": 29900,
-          "amount": 390793.0,
+          "price": 6.6,
+          "volume": 56000,
+          "amount": 369600.0,
           "fees": {
-            "commission": 117.24,
-            "stamp_duty": 195.4,
-            "transfer_fee": 3.91,
-            "slippage_cost": 390.79,
-            "total": 707.34
+            "commission": 73.92,
+            "stamp_duty": 369.6,
+            "transfer_fee": 0,
+            "slippage_cost": 0,
+            "total": 443.52
           },
-          "pnl": -43654.0,
-          "pnl_pct": -10.05,
-          "reason": "LightGBM v3 weekly rebalance (91特征模型, 12-fold WF, Sharpe_net=1.06). 风控剔除2只(四川黄金/海看股份大额减持). 目标25只等权."
+          "reason": "LightGBM weekly rebalance",
+          "pnl": -43202.54,
+          "pnl_pct": -10.47
         },
         {
           "date": "2026-03-23",
-          "code": "002176.SZ",
-          "name": "江特电机",
+          "time": "09:30",
+          "code": "002149.SZ",
+          "name": "西部材料",
           "direction": "sell",
-          "price": 8.83,
-          "volume": 43500,
-          "amount": 384105.0,
+          "price": 41.97,
+          "volume": 9400,
+          "amount": 394518.0,
           "fees": {
-            "commission": 115.23,
-            "stamp_duty": 192.05,
-            "transfer_fee": 3.84,
-            "slippage_cost": 384.11,
-            "total": 695.23
+            "commission": 78.9,
+            "stamp_duty": 394.52,
+            "transfer_fee": 0,
+            "slippage_cost": 0,
+            "total": 473.42
           },
-          "pnl": -50025.0,
-          "pnl_pct": -11.52,
-          "reason": "LightGBM v3 weekly rebalance (91特征模型, 12-fold WF, Sharpe_net=1.06). 风控剔除2只(四川黄金/海看股份大额减持). 目标25只等权."
+          "reason": "LightGBM weekly rebalance",
+          "pnl": -14745.84,
+          "pnl_pct": -3.6
         },
         {
           "date": "2026-03-23",
-          "code": "002182.SZ",
-          "name": "宝武镁业",
+          "time": "09:30",
+          "code": "002897.SZ",
+          "name": "意华股份",
           "direction": "sell",
-          "price": 15.09,
-          "volume": 21600,
-          "amount": 325944.0,
+          "price": 62.0,
+          "volume": 6300,
+          "amount": 390600.0,
           "fees": {
-            "commission": 97.78,
-            "stamp_duty": 162.97,
-            "transfer_fee": 3.26,
-            "slippage_cost": 325.94,
-            "total": 589.96
+            "commission": 78.12,
+            "stamp_duty": 390.6,
+            "transfer_fee": 0,
+            "slippage_cost": 0,
+            "total": 468.72
           },
-          "pnl": -107352.0,
-          "pnl_pct": -24.78,
-          "reason": "LightGBM v3 weekly rebalance (91特征模型, 12-fold WF, Sharpe_net=1.06). 风控剔除2只(四川黄金/海看股份大额减持). 目标25只等权."
+          "reason": "LightGBM weekly rebalance",
+          "pnl": -17973.7,
+          "pnl_pct": -4.4
         },
         {
           "date": "2026-03-23",
-          "code": "002326.SZ",
-          "name": "永太科技",
+          "time": "09:30",
+          "code": "300170.SZ",
+          "name": "汉得信息",
           "direction": "sell",
-          "price": 20.9,
-          "volume": 19000,
-          "amount": 397100.0,
+          "price": 20.5,
+          "volume": 17700,
+          "amount": 362850.0,
           "fees": {
-            "commission": 119.13,
-            "stamp_duty": 198.55,
-            "transfer_fee": 3.97,
-            "slippage_cost": 397.1,
-            "total": 718.75
+            "commission": 72.57,
+            "stamp_duty": 362.85,
+            "transfer_fee": 0,
+            "slippage_cost": 0,
+            "total": 435.42
           },
-          "pnl": -35910.0,
-          "pnl_pct": -8.29,
-          "reason": "LightGBM v3 weekly rebalance (91特征模型, 12-fold WF, Sharpe_net=1.06). 风控剔除2只(四川黄金/海看股份大额减持). 目标25只等权."
+          "reason": "LightGBM weekly rebalance",
+          "pnl": -49288.41,
+          "pnl_pct": -11.96
         },
         {
           "date": "2026-03-23",
-          "code": "002378.SZ",
-          "name": "章源钨业",
-          "direction": "sell",
-          "price": 31.83,
-          "volume": 9700,
-          "amount": 308751.0,
-          "fees": {
-            "commission": 92.63,
-            "stamp_duty": 154.38,
-            "transfer_fee": 3.09,
-            "slippage_cost": 308.75,
-            "total": 558.84
-          },
-          "pnl": -124839.0,
-          "pnl_pct": -28.79,
-          "reason": "LightGBM v3 weekly rebalance (91特征模型, 12-fold WF, Sharpe_net=1.06). 风控剔除2只(四川黄金/海看股份大额减持). 目标25只等权."
-        },
-        {
-          "date": "2026-03-23",
-          "code": "300034.SZ",
-          "name": "钢研高纳",
-          "direction": "sell",
-          "price": 17.71,
-          "volume": 19400,
-          "amount": 343574.0,
-          "fees": {
-            "commission": 103.07,
-            "stamp_duty": 171.79,
-            "transfer_fee": 3.44,
-            "slippage_cost": 343.57,
-            "total": 621.87
-          },
-          "pnl": -90986.0,
-          "pnl_pct": -20.94,
-          "reason": "LightGBM v3 weekly rebalance (91特征模型, 12-fold WF, Sharpe_net=1.06). 风控剔除2只(四川黄金/海看股份大额减持). 目标25只等权."
-        },
-        {
-          "date": "2026-03-23",
+          "time": "09:30",
           "code": "300182.SZ",
           "name": "捷成股份",
           "direction": "sell",
-          "price": 5.54,
+          "price": 5.8,
           "volume": 67000,
-          "amount": 371180.0,
+          "amount": 388600.0,
           "fees": {
-            "commission": 111.35,
-            "stamp_duty": 185.59,
-            "transfer_fee": 3.71,
-            "slippage_cost": 371.18,
-            "total": 671.84
+            "commission": 77.72,
+            "stamp_duty": 388.6,
+            "transfer_fee": 0,
+            "slippage_cost": 0,
+            "total": 466.32
           },
-          "pnl": -63650.0,
-          "pnl_pct": -14.64,
-          "reason": "LightGBM v3 weekly rebalance (91特征模型, 12-fold WF, Sharpe_net=1.06). 风控剔除2只(四川黄金/海看股份大额减持). 目标25只等权."
+          "reason": "LightGBM weekly rebalance",
+          "pnl": -47099.66,
+          "pnl_pct": -10.81
         },
         {
           "date": "2026-03-23",
-          "code": "300475.SZ",
-          "name": "香农芯创",
+          "time": "09:30",
+          "code": "300548.SZ",
+          "name": "长芯博创",
           "direction": "sell",
-          "price": 143.19,
-          "volume": 2800,
-          "amount": 400932.0,
+          "price": 141.4,
+          "volume": 2500,
+          "amount": 353500.0,
           "fees": {
-            "commission": 120.28,
-            "stamp_duty": 200.47,
-            "transfer_fee": 4.01,
-            "slippage_cost": 400.93,
-            "total": 725.69
+            "commission": 70.7,
+            "stamp_duty": 353.5,
+            "transfer_fee": 0,
+            "slippage_cost": 0,
+            "total": 424.2
           },
-          "pnl": -33180.0,
-          "pnl_pct": -7.64,
-          "reason": "LightGBM v3 weekly rebalance (91特征模型, 12-fold WF, Sharpe_net=1.06). 风控剔除2只(四川黄金/海看股份大额减持). 目标25只等权."
+          "reason": "LightGBM weekly rebalance",
+          "pnl": -44704.62,
+          "pnl_pct": -11.23
         },
         {
           "date": "2026-03-23",
-          "code": "300618.SZ",
-          "name": "寒锐钴业",
+          "time": "09:30",
+          "code": "300870.SZ",
+          "name": "欧陆通",
           "direction": "sell",
-          "price": 39.98,
-          "volume": 9000,
-          "amount": 359820.0,
+          "price": 242.0,
+          "volume": 1500,
+          "amount": 363000.0,
           "fees": {
-            "commission": 107.95,
-            "stamp_duty": 179.91,
-            "transfer_fee": 3.6,
-            "slippage_cost": 359.82,
-            "total": 651.27
+            "commission": 72.6,
+            "stamp_duty": 363.0,
+            "transfer_fee": 0,
+            "slippage_cost": 0,
+            "total": 435.6
           },
-          "pnl": -74250.0,
-          "pnl_pct": -17.11,
-          "reason": "LightGBM v3 weekly rebalance (91特征模型, 12-fold WF, Sharpe_net=1.06). 风控剔除2只(四川黄金/海看股份大额减持). 目标25只等权."
+          "reason": "LightGBM weekly rebalance",
+          "pnl": -27108.01,
+          "pnl_pct": -6.95
         },
         {
           "date": "2026-03-23",
-          "code": "300666.SZ",
-          "name": "江丰电子",
+          "time": "09:30",
+          "code": "301018.SZ",
+          "name": "申菱环境",
           "direction": "sell",
-          "price": 125.71,
-          "volume": 2900,
-          "amount": 364559.0,
+          "price": 88.81,
+          "volume": 4000,
+          "amount": 355240.0,
           "fees": {
-            "commission": 109.37,
-            "stamp_duty": 182.28,
-            "transfer_fee": 3.65,
-            "slippage_cost": 364.56,
-            "total": 659.85
+            "commission": 71.05,
+            "stamp_duty": 355.24,
+            "transfer_fee": 0,
+            "slippage_cost": 0,
+            "total": 426.29
           },
-          "pnl": -65714.0,
-          "pnl_pct": -15.27,
-          "reason": "LightGBM v3 weekly rebalance (91特征模型, 12-fold WF, Sharpe_net=1.06). 风控剔除2只(四川黄金/海看股份大额减持). 目标25只等权."
+          "reason": "LightGBM weekly rebalance",
+          "pnl": -50681.17,
+          "pnl_pct": -12.49
         },
         {
           "date": "2026-03-23",
-          "code": "300821.SZ",
-          "name": "东岳硅材",
+          "time": "09:30",
+          "code": "301205.SZ",
+          "name": "联特科技",
           "direction": "sell",
-          "price": 11.14,
-          "volume": 31400,
-          "amount": 349796.0,
+          "price": 211.91,
+          "volume": 1800,
+          "amount": 381438.0,
           "fees": {
-            "commission": 104.94,
-            "stamp_duty": 174.9,
-            "transfer_fee": 3.5,
-            "slippage_cost": 349.8,
-            "total": 633.13
+            "commission": 76.29,
+            "stamp_duty": 381.44,
+            "transfer_fee": 0,
+            "slippage_cost": 0,
+            "total": 457.73
           },
-          "pnl": -84152.0,
-          "pnl_pct": -19.39,
-          "reason": "LightGBM v3 weekly rebalance (91特征模型, 12-fold WF, Sharpe_net=1.06). 风控剔除2只(四川黄金/海看股份大额减持). 目标25只等权."
+          "reason": "LightGBM weekly rebalance",
+          "pnl": -21842.64,
+          "pnl_pct": -5.42
         },
         {
           "date": "2026-03-23",
-          "code": "600206.SH",
-          "name": "有研新材",
+          "time": "09:30",
+          "code": "301262.SZ",
+          "name": "海看股份",
           "direction": "sell",
-          "price": 19.1,
-          "volume": 18500,
-          "amount": 353350.0,
+          "price": 23.48,
+          "volume": 16600,
+          "amount": 389768.0,
           "fees": {
-            "commission": 106.0,
-            "stamp_duty": 176.68,
-            "transfer_fee": 3.53,
-            "slippage_cost": 353.35,
-            "total": 639.56
+            "commission": 77.95,
+            "stamp_duty": 389.77,
+            "transfer_fee": 0,
+            "slippage_cost": 0,
+            "total": 467.72
           },
-          "pnl": -80660.0,
-          "pnl_pct": -18.58,
-          "reason": "LightGBM v3 weekly rebalance (91特征模型, 12-fold WF, Sharpe_net=1.06). 风控剔除2只(四川黄金/海看股份大额减持). 目标25只等权."
+          "reason": "LightGBM weekly rebalance",
+          "pnl": -21330.2,
+          "pnl_pct": -5.19
         },
         {
           "date": "2026-03-23",
-          "code": "600259.SH",
-          "name": "中稀有色",
+          "time": "09:30",
+          "code": "600151.SH",
+          "name": "航天机电",
           "direction": "sell",
-          "price": 77.88,
-          "volume": 4700,
-          "amount": 366036.0,
+          "price": 12.84,
+          "volume": 29700,
+          "amount": 381348.0,
           "fees": {
-            "commission": 109.81,
-            "stamp_duty": 183.02,
-            "transfer_fee": 3.66,
-            "slippage_cost": 366.04,
-            "total": 662.53
+            "commission": 76.27,
+            "stamp_duty": 381.35,
+            "transfer_fee": 0,
+            "slippage_cost": 0,
+            "total": 457.62
           },
-          "pnl": -65518.0,
-          "pnl_pct": -15.18,
-          "reason": "LightGBM v3 weekly rebalance (91特征模型, 12-fold WF, Sharpe_net=1.06). 风控剔除2只(四川黄金/海看股份大额减持). 目标25只等权."
+          "reason": "LightGBM weekly rebalance",
+          "pnl": -30970.45,
+          "pnl_pct": -7.51
         },
         {
           "date": "2026-03-23",
-          "code": "600452.SH",
-          "name": "涪陵电力",
-          "direction": "sell",
-          "price": 12.06,
-          "volume": 27900,
-          "amount": 336474.0,
-          "fees": {
-            "commission": 100.94,
-            "stamp_duty": 168.24,
-            "transfer_fee": 3.36,
-            "slippage_cost": 336.47,
-            "total": 609.02
-          },
-          "pnl": -97371.0,
-          "pnl_pct": -22.44,
-          "reason": "LightGBM v3 weekly rebalance (91特征模型, 12-fold WF, Sharpe_net=1.06). 风控剔除2只(四川黄金/海看股份大额减持). 目标25只等权."
-        },
-        {
-          "date": "2026-03-23",
-          "code": "600456.SH",
-          "name": "宝钛股份",
-          "direction": "sell",
-          "price": 31.25,
-          "volume": 10700,
-          "amount": 334375.0,
-          "fees": {
-            "commission": 100.31,
-            "stamp_duty": 167.19,
-            "transfer_fee": 3.34,
-            "slippage_cost": 334.38,
-            "total": 605.22
-          },
-          "pnl": -97156.0,
-          "pnl_pct": -22.51,
-          "reason": "LightGBM v3 weekly rebalance (91特征模型, 12-fold WF, Sharpe_net=1.06). 风控剔除2只(四川黄金/海看股份大额减持). 目标25只等权."
-        },
-        {
-          "date": "2026-03-23",
-          "code": "600744.SH",
-          "name": "华银电力",
-          "direction": "sell",
-          "price": 7.97,
-          "volume": 47900,
-          "amount": 381763.0,
-          "fees": {
-            "commission": 114.53,
-            "stamp_duty": 190.88,
-            "transfer_fee": 3.82,
-            "slippage_cost": 381.76,
-            "total": 690.99
-          },
-          "pnl": -53169.0,
-          "pnl_pct": -12.22,
-          "reason": "LightGBM v3 weekly rebalance (91特征模型, 12-fold WF, Sharpe_net=1.06). 风控剔除2只(四川黄金/海看股份大额减持). 目标25只等权."
-        },
-        {
-          "date": "2026-03-23",
+          "time": "09:30",
           "code": "600821.SH",
           "name": "金开新能",
           "direction": "sell",
-          "price": 10.06,
+          "price": 10.38,
           "volume": 50500,
-          "amount": 508030.0,
+          "amount": 524190.0,
           "fees": {
-            "commission": 152.41,
-            "stamp_duty": 254.02,
-            "transfer_fee": 5.08,
-            "slippage_cost": 508.03,
-            "total": 919.53
+            "commission": 104.84,
+            "stamp_duty": 524.19,
+            "transfer_fee": 0,
+            "slippage_cost": 0,
+            "total": 629.03
           },
-          "pnl": 134835.0,
-          "pnl_pct": 36.13,
-          "reason": "LightGBM v3 weekly rebalance (91特征模型, 12-fold WF, Sharpe_net=1.06). 风控剔除2只(四川黄金/海看股份大额减持). 目标25只等权."
+          "reason": "LightGBM weekly rebalance",
+          "pnl": 150506.12,
+          "pnl_pct": 40.28
         },
         {
           "date": "2026-03-23",
-          "code": "601208.SH",
-          "name": "东材科技",
+          "time": "09:30",
+          "code": "600986.SH",
+          "name": "浙文互联",
           "direction": "sell",
-          "price": 28.85,
-          "volume": 14100,
-          "amount": 406785.0,
+          "price": 9.71,
+          "volume": 40100,
+          "amount": 389371.0,
           "fees": {
-            "commission": 122.04,
-            "stamp_duty": 203.39,
-            "transfer_fee": 4.07,
-            "slippage_cost": 406.79,
-            "total": 736.28
+            "commission": 77.87,
+            "stamp_duty": 389.37,
+            "transfer_fee": 0,
+            "slippage_cost": 0,
+            "total": 467.25
           },
-          "pnl": -25662.0,
-          "pnl_pct": -5.93,
-          "reason": "LightGBM v3 weekly rebalance (91特征模型, 12-fold WF, Sharpe_net=1.06). 风控剔除2只(四川黄金/海看股份大额减持). 目标25只等权."
+          "reason": "LightGBM weekly rebalance",
+          "pnl": -23340.53,
+          "pnl_pct": -5.66
         },
         {
           "date": "2026-03-23",
-          "code": "688205.SH",
-          "name": "德科立",
+          "time": "09:30",
+          "code": "601096.SH",
+          "name": "宏盛华源",
           "direction": "sell",
-          "price": 167.71,
-          "volume": 2500,
-          "amount": 419275.0,
+          "price": 5.76,
+          "volume": 64400,
+          "amount": 370944.0,
           "fees": {
-            "commission": 125.78,
-            "stamp_duty": 209.64,
-            "transfer_fee": 4.19,
-            "slippage_cost": 419.28,
-            "total": 758.89
+            "commission": 74.19,
+            "stamp_duty": 370.94,
+            "transfer_fee": 0,
+            "slippage_cost": 0,
+            "total": 445.13
           },
-          "pnl": -3225.0,
-          "pnl_pct": -0.76,
-          "reason": "LightGBM v3 weekly rebalance (91特征模型, 12-fold WF, Sharpe_net=1.06). 风控剔除2只(四川黄金/海看股份大额减持). 目标25只等权."
+          "reason": "LightGBM weekly rebalance",
+          "pnl": -41942.56,
+          "pnl_pct": -10.16
         },
         {
           "date": "2026-03-23",
-          "code": "688343.SH",
-          "name": "云天励飞-U",
+          "time": "09:30",
+          "code": "603667.SH",
+          "name": "五洲新春",
           "direction": "sell",
-          "price": 75.81,
-          "volume": 4400,
-          "amount": 333564.0,
+          "price": 64.52,
+          "volume": 5600,
+          "amount": 361312.0,
           "fees": {
-            "commission": 100.07,
-            "stamp_duty": 166.78,
-            "transfer_fee": 3.34,
-            "slippage_cost": 333.56,
-            "total": 603.75
+            "commission": 72.26,
+            "stamp_duty": 361.31,
+            "transfer_fee": 0,
+            "slippage_cost": 0,
+            "total": 433.57
           },
-          "pnl": -97064.0,
-          "pnl_pct": -22.54,
-          "reason": "LightGBM v3 weekly rebalance (91特征模型, 12-fold WF, Sharpe_net=1.06). 风控剔除2只(四川黄金/海看股份大额减持). 目标25只等权."
+          "reason": "LightGBM weekly rebalance",
+          "pnl": -44769.2,
+          "pnl_pct": -11.02
         },
         {
           "date": "2026-03-23",
-          "code": "688503.SH",
-          "name": "聚和材料",
+          "time": "09:30",
+          "code": "603698.SH",
+          "name": "航天工程",
           "direction": "sell",
-          "price": 81.79,
-          "volume": 4800,
-          "amount": 392592.0,
+          "price": 29.0,
+          "volume": 13400,
+          "amount": 388600.0,
           "fees": {
-            "commission": 117.78,
-            "stamp_duty": 196.3,
-            "transfer_fee": 3.93,
-            "slippage_cost": 392.59,
-            "total": 710.59
+            "commission": 77.72,
+            "stamp_duty": 388.6,
+            "transfer_fee": 0,
+            "slippage_cost": 0,
+            "total": 466.32
           },
-          "pnl": -36576.0,
-          "pnl_pct": -8.52,
-          "reason": "LightGBM v3 weekly rebalance (91特征模型, 12-fold WF, Sharpe_net=1.06). 风控剔除2只(四川黄金/海看股份大额减持). 目标25只等权."
+          "reason": "LightGBM weekly rebalance",
+          "pnl": -24202.54,
+          "pnl_pct": -5.86
         },
         {
           "date": "2026-03-23",
-          "code": "688726.SH",
-          "name": "拉普拉斯",
+          "time": "09:30",
+          "code": "688523.SH",
+          "name": "航天环宇",
           "direction": "sell",
-          "price": 64.88,
-          "volume": 6800,
-          "amount": 441184.0,
+          "price": 59.76,
+          "volume": 6000,
+          "amount": 358560.0,
           "fees": {
-            "commission": 132.36,
-            "stamp_duty": 220.59,
-            "transfer_fee": 4.41,
-            "slippage_cost": 441.18,
-            "total": 798.54
+            "commission": 71.71,
+            "stamp_duty": 358.56,
+            "transfer_fee": 0,
+            "slippage_cost": 0,
+            "total": 430.27
           },
-          "pnl": 10812.0,
-          "pnl_pct": 2.51,
-          "reason": "LightGBM v3 weekly rebalance (91特征模型, 12-fold WF, Sharpe_net=1.06). 风控剔除2只(四川黄金/海看股份大额减持). 目标25只等权."
+          "reason": "LightGBM weekly rebalance",
+          "pnl": -32838.26,
+          "pnl_pct": -8.39
         },
         {
           "date": "2026-03-23",
+          "time": "09:30",
+          "code": "002506.SZ",
+          "name": "协鑫集成",
+          "direction": "sell",
+          "price": 5.2,
+          "volume": 13600,
+          "amount": 70720.0,
+          "fees": {
+            "commission": 14.14,
+            "stamp_duty": 70.72,
+            "transfer_fee": 0,
+            "slippage_cost": 0,
+            "total": 84.86
+          },
+          "reason": "LightGBM weekly rebalance (减仓)",
+          "pnl": -2326.61,
+          "pnl_pct": -3.19
+        },
+        {
+          "date": "2026-03-23",
+          "time": "09:30",
+          "code": "300027.SZ",
+          "name": "华谊兄弟",
+          "direction": "sell",
+          "price": 1.51,
+          "volume": 900,
+          "amount": 1359.0,
+          "fees": {
+            "commission": 5.0,
+            "stamp_duty": 1.36,
+            "transfer_fee": 0,
+            "slippage_cost": 0,
+            "total": 6.36
+          },
+          "reason": "LightGBM weekly rebalance (减仓)",
+          "pnl": -135.3,
+          "pnl_pct": -9.05
+        },
+        {
+          "date": "2026-03-23",
+          "time": "09:30",
+          "code": "300624.SZ",
+          "name": "万兴科技",
+          "direction": "sell",
+          "price": 69.79,
+          "volume": 100,
+          "amount": 6979.0,
+          "fees": {
+            "commission": 5.0,
+            "stamp_duty": 6.98,
+            "transfer_fee": 0,
+            "slippage_cost": 0,
+            "total": 11.98
+          },
+          "reason": "LightGBM weekly rebalance (减仓)",
+          "pnl": -322.46,
+          "pnl_pct": -4.42
+        },
+        {
+          "date": "2026-03-23",
+          "time": "09:30",
+          "code": "600759.SH",
+          "name": "洲际油气",
+          "direction": "sell",
+          "price": 6.7,
+          "volume": 5200,
+          "amount": 34840.0,
+          "fees": {
+            "commission": 6.97,
+            "stamp_duty": 34.84,
+            "transfer_fee": 0,
+            "slippage_cost": 0,
+            "total": 41.81
+          },
+          "reason": "LightGBM weekly rebalance (减仓)",
+          "pnl": -1567.28,
+          "pnl_pct": -4.3
+        },
+        {
+          "date": "2026-03-23",
+          "time": "09:30",
           "code": "000681.SZ",
           "name": "视觉中国",
           "direction": "buy",
-          "price": 19.91,
+          "price": 20.63,
           "volume": 18400,
-          "amount": 366344.0,
+          "amount": 379592.0,
           "fees": {
-            "commission": 109.9,
+            "commission": 75.92,
             "stamp_duty": 0,
-            "transfer_fee": 3.66,
-            "slippage_cost": 366.34,
-            "total": 479.91
+            "transfer_fee": 0,
+            "slippage_cost": 0,
+            "total": 75.92
           },
+          "reason": "LightGBM weekly rebalance",
           "pnl": 0,
-          "pnl_pct": 0,
-          "reason": "LightGBM v3 weekly rebalance (91特征模型, 12-fold WF, Sharpe_net=1.06). 风控剔除2只(四川黄金/海看股份大额减持). 目标25只等权."
+          "pnl_pct": 0
         },
         {
           "date": "2026-03-23",
+          "time": "09:30",
           "code": "002038.SZ",
           "name": "双鹭药业",
           "direction": "buy",
-          "price": 5.5,
+          "price": 5.8,
           "volume": 66600,
-          "amount": 366300.0,
+          "amount": 386280.0,
           "fees": {
-            "commission": 109.89,
+            "commission": 77.26,
             "stamp_duty": 0,
-            "transfer_fee": 3.66,
-            "slippage_cost": 366.3,
-            "total": 479.85
+            "transfer_fee": 0,
+            "slippage_cost": 0,
+            "total": 77.26
           },
+          "reason": "LightGBM weekly rebalance",
           "pnl": 0,
-          "pnl_pct": 0,
-          "reason": "LightGBM v3 weekly rebalance (91特征模型, 12-fold WF, Sharpe_net=1.06). 风控剔除2只(四川黄金/海看股份大额减持). 目标25只等权."
+          "pnl_pct": 0
         },
         {
           "date": "2026-03-23",
+          "time": "09:30",
           "code": "002237.SZ",
           "name": "恒邦股份",
           "direction": "buy",
-          "price": 13.72,
+          "price": 14.31,
           "volume": 26700,
-          "amount": 366324.0,
+          "amount": 382077.0,
           "fees": {
-            "commission": 109.9,
+            "commission": 76.42,
             "stamp_duty": 0,
-            "transfer_fee": 3.66,
-            "slippage_cost": 366.32,
-            "total": 479.88
+            "transfer_fee": 0,
+            "slippage_cost": 0,
+            "total": 76.42
           },
+          "reason": "LightGBM weekly rebalance",
           "pnl": 0,
-          "pnl_pct": 0,
-          "reason": "LightGBM v3 weekly rebalance (91特征模型, 12-fold WF, Sharpe_net=1.06). 风控剔除2只(四川黄金/海看股份大额减持). 目标25只等权."
+          "pnl_pct": 0
         },
         {
           "date": "2026-03-23",
-          "code": "002506.SZ",
-          "name": "协鑫集成",
-          "direction": "buy",
-          "price": 5.8,
-          "volume": 63200,
-          "amount": 366560.0,
-          "fees": {
-            "commission": 109.97,
-            "stamp_duty": 0,
-            "transfer_fee": 3.67,
-            "slippage_cost": 366.56,
-            "total": 480.19
-          },
-          "pnl": 0,
-          "pnl_pct": 0,
-          "reason": "LightGBM v3 weekly rebalance (91特征模型, 12-fold WF, Sharpe_net=1.06). 风控剔除2只(四川黄金/海看股份大额减持). 目标25只等权."
-        },
-        {
-          "date": "2026-03-23",
+          "time": "09:30",
           "code": "002716.SZ",
           "name": "湖南白银",
           "direction": "buy",
-          "price": 11.13,
-          "volume": 32900,
-          "amount": 366177.0,
+          "price": 11.95,
+          "volume": 1900,
+          "amount": 22705.0,
           "fees": {
-            "commission": 109.85,
+            "commission": 5.0,
             "stamp_duty": 0,
-            "transfer_fee": 3.66,
-            "slippage_cost": 366.18,
-            "total": 479.69
+            "transfer_fee": 0,
+            "slippage_cost": 0,
+            "total": 5.0
           },
+          "reason": "LightGBM weekly rebalance",
           "pnl": 0,
-          "pnl_pct": 0,
-          "reason": "LightGBM v3 weekly rebalance (91特征模型, 12-fold WF, Sharpe_net=1.06). 风控剔除2只(四川黄金/海看股份大额减持). 目标25只等权."
+          "pnl_pct": 0
         },
         {
           "date": "2026-03-23",
+          "time": "09:30",
           "code": "002737.SZ",
           "name": "葵花药业",
           "direction": "buy",
-          "price": 11.89,
+          "price": 12.26,
           "volume": 30800,
-          "amount": 366212.0,
+          "amount": 377608.0,
           "fees": {
-            "commission": 109.86,
+            "commission": 75.52,
             "stamp_duty": 0,
-            "transfer_fee": 3.66,
-            "slippage_cost": 366.21,
-            "total": 479.74
+            "transfer_fee": 0,
+            "slippage_cost": 0,
+            "total": 75.52
           },
+          "reason": "LightGBM weekly rebalance",
           "pnl": 0,
-          "pnl_pct": 0,
-          "reason": "LightGBM v3 weekly rebalance (91特征模型, 12-fold WF, Sharpe_net=1.06). 风控剔除2只(四川黄金/海看股份大额减持). 目标25只等权."
+          "pnl_pct": 0
         },
         {
           "date": "2026-03-23",
+          "time": "09:30",
           "code": "002985.SZ",
           "name": "北摩高科",
           "direction": "buy",
-          "price": 33.85,
+          "price": 35.48,
           "volume": 10800,
-          "amount": 365580.0,
+          "amount": 383184.0,
           "fees": {
-            "commission": 109.67,
+            "commission": 76.64,
             "stamp_duty": 0,
-            "transfer_fee": 3.66,
-            "slippage_cost": 365.58,
-            "total": 478.91
+            "transfer_fee": 0,
+            "slippage_cost": 0,
+            "total": 76.64
           },
+          "reason": "LightGBM weekly rebalance",
           "pnl": 0,
-          "pnl_pct": 0,
-          "reason": "LightGBM v3 weekly rebalance (91特征模型, 12-fold WF, Sharpe_net=1.06). 风控剔除2只(四川黄金/海看股份大额减持). 目标25只等权."
+          "pnl_pct": 0
         },
         {
           "date": "2026-03-23",
-          "code": "300027.SZ",
-          "name": "华谊兄弟",
-          "direction": "buy",
-          "price": 1.48,
-          "volume": 247700,
-          "amount": 366596.0,
-          "fees": {
-            "commission": 109.98,
-            "stamp_duty": 0,
-            "transfer_fee": 3.67,
-            "slippage_cost": 366.6,
-            "total": 480.24
-          },
-          "pnl": 0,
-          "pnl_pct": 0,
-          "reason": "LightGBM v3 weekly rebalance (91特征模型, 12-fold WF, Sharpe_net=1.06). 风控剔除2只(四川黄金/海看股份大额减持). 目标25只等权."
-        },
-        {
-          "date": "2026-03-23",
+          "time": "09:30",
           "code": "300244.SZ",
           "name": "迪安诊断",
           "direction": "buy",
-          "price": 17.32,
+          "price": 18.42,
           "volume": 21100,
-          "amount": 365452.0,
+          "amount": 388662.0,
           "fees": {
-            "commission": 109.64,
+            "commission": 77.73,
             "stamp_duty": 0,
-            "transfer_fee": 3.65,
-            "slippage_cost": 365.45,
-            "total": 478.74
+            "transfer_fee": 0,
+            "slippage_cost": 0,
+            "total": 77.73
           },
+          "reason": "LightGBM weekly rebalance",
           "pnl": 0,
-          "pnl_pct": 0,
-          "reason": "LightGBM v3 weekly rebalance (91特征模型, 12-fold WF, Sharpe_net=1.06). 风控剔除2只(四川黄金/海看股份大额减持). 目标25只等权."
+          "pnl_pct": 0
         },
         {
           "date": "2026-03-23",
+          "time": "09:30",
           "code": "300398.SZ",
           "name": "飞凯材料",
           "direction": "buy",
-          "price": 24.11,
+          "price": 25.5,
           "volume": 15200,
-          "amount": 366472.0,
+          "amount": 387600.0,
           "fees": {
-            "commission": 109.94,
+            "commission": 77.52,
             "stamp_duty": 0,
-            "transfer_fee": 3.66,
-            "slippage_cost": 366.47,
-            "total": 480.08
+            "transfer_fee": 0,
+            "slippage_cost": 0,
+            "total": 77.52
           },
+          "reason": "LightGBM weekly rebalance",
           "pnl": 0,
-          "pnl_pct": 0,
-          "reason": "LightGBM v3 weekly rebalance (91特征模型, 12-fold WF, Sharpe_net=1.06). 风控剔除2只(四川黄金/海看股份大额减持). 目标25只等权."
+          "pnl_pct": 0
         },
         {
           "date": "2026-03-23",
-          "code": "300456.SZ",
-          "name": "赛微电子",
-          "direction": "buy",
-          "price": 42.74,
-          "volume": 8500,
-          "amount": 363290.0,
-          "fees": {
-            "commission": 108.99,
-            "stamp_duty": 0,
-            "transfer_fee": 3.63,
-            "slippage_cost": 363.29,
-            "total": 475.91
-          },
-          "pnl": 0,
-          "pnl_pct": 0,
-          "reason": "LightGBM v3 weekly rebalance (91特征模型, 12-fold WF, Sharpe_net=1.06). 风控剔除2只(四川黄金/海看股份大额减持). 目标25只等权."
-        },
-        {
-          "date": "2026-03-23",
-          "code": "300624.SZ",
-          "name": "万兴科技",
-          "direction": "buy",
-          "price": 66.49,
-          "volume": 5500,
-          "amount": 365695.0,
-          "fees": {
-            "commission": 109.71,
-            "stamp_duty": 0,
-            "transfer_fee": 3.66,
-            "slippage_cost": 365.69,
-            "total": 479.06
-          },
-          "pnl": 0,
-          "pnl_pct": 0,
-          "reason": "LightGBM v3 weekly rebalance (91特征模型, 12-fold WF, Sharpe_net=1.06). 风控剔除2只(四川黄金/海看股份大额减持). 目标25只等权."
-        },
-        {
-          "date": "2026-03-23",
+          "time": "09:30",
           "code": "301071.SZ",
           "name": "力量钻石",
           "direction": "buy",
-          "price": 40.06,
+          "price": 41.36,
           "volume": 9100,
-          "amount": 364546.0,
+          "amount": 376376.0,
           "fees": {
-            "commission": 109.36,
+            "commission": 75.28,
             "stamp_duty": 0,
-            "transfer_fee": 3.65,
-            "slippage_cost": 364.55,
-            "total": 477.56
+            "transfer_fee": 0,
+            "slippage_cost": 0,
+            "total": 75.28
           },
+          "reason": "LightGBM weekly rebalance",
           "pnl": 0,
-          "pnl_pct": 0,
-          "reason": "LightGBM v3 weekly rebalance (91特征模型, 12-fold WF, Sharpe_net=1.06). 风控剔除2只(四川黄金/海看股份大额减持). 目标25只等权."
+          "pnl_pct": 0
         },
         {
           "date": "2026-03-23",
+          "time": "09:30",
           "code": "301392.SZ",
           "name": "汇成真空",
           "direction": "buy",
-          "price": 109.79,
+          "price": 111.75,
           "volume": 3300,
-          "amount": 362307.0,
+          "amount": 368775.0,
           "fees": {
-            "commission": 108.69,
+            "commission": 73.76,
             "stamp_duty": 0,
-            "transfer_fee": 3.62,
-            "slippage_cost": 362.31,
-            "total": 474.62
+            "transfer_fee": 0,
+            "slippage_cost": 0,
+            "total": 73.76
           },
+          "reason": "LightGBM weekly rebalance",
           "pnl": 0,
-          "pnl_pct": 0,
-          "reason": "LightGBM v3 weekly rebalance (91特征模型, 12-fold WF, Sharpe_net=1.06). 风控剔除2只(四川黄金/海看股份大额减持). 目标25只等权."
+          "pnl_pct": 0
         },
         {
           "date": "2026-03-23",
+          "time": "09:30",
           "code": "301511.SZ",
           "name": "德福科技",
           "direction": "buy",
-          "price": 34.35,
+          "price": 35.52,
           "volume": 10600,
-          "amount": 364110.0,
+          "amount": 376512.0,
           "fees": {
-            "commission": 109.23,
+            "commission": 75.3,
             "stamp_duty": 0,
-            "transfer_fee": 3.64,
-            "slippage_cost": 364.11,
-            "total": 476.98
+            "transfer_fee": 0,
+            "slippage_cost": 0,
+            "total": 75.3
           },
+          "reason": "LightGBM weekly rebalance",
           "pnl": 0,
-          "pnl_pct": 0,
-          "reason": "LightGBM v3 weekly rebalance (91特征模型, 12-fold WF, Sharpe_net=1.06). 风控剔除2只(四川黄金/海看股份大额减持). 目标25只等权."
+          "pnl_pct": 0
         },
         {
           "date": "2026-03-23",
+          "time": "09:30",
           "code": "600330.SH",
           "name": "天通股份",
           "direction": "buy",
-          "price": 15.19,
+          "price": 15.79,
           "volume": 24100,
-          "amount": 366079.0,
+          "amount": 380539.0,
           "fees": {
-            "commission": 109.82,
+            "commission": 76.11,
             "stamp_duty": 0,
-            "transfer_fee": 3.66,
-            "slippage_cost": 366.08,
-            "total": 479.56
+            "transfer_fee": 0,
+            "slippage_cost": 0,
+            "total": 76.11
           },
+          "reason": "LightGBM weekly rebalance",
           "pnl": 0,
-          "pnl_pct": 0,
-          "reason": "LightGBM v3 weekly rebalance (91特征模型, 12-fold WF, Sharpe_net=1.06). 风控剔除2只(四川黄金/海看股份大额减持). 目标25只等权."
+          "pnl_pct": 0
         },
         {
           "date": "2026-03-23",
+          "time": "09:30",
           "code": "600531.SH",
           "name": "豫光金铅",
           "direction": "buy",
-          "price": 12.3,
+          "price": 12.98,
           "volume": 29800,
-          "amount": 366540.0,
+          "amount": 386804.0,
           "fees": {
-            "commission": 109.96,
+            "commission": 77.36,
             "stamp_duty": 0,
-            "transfer_fee": 3.67,
-            "slippage_cost": 366.54,
-            "total": 480.17
+            "transfer_fee": 0,
+            "slippage_cost": 0,
+            "total": 77.36
           },
+          "reason": "LightGBM weekly rebalance",
           "pnl": 0,
-          "pnl_pct": 0,
-          "reason": "LightGBM v3 weekly rebalance (91特征模型, 12-fold WF, Sharpe_net=1.06). 风控剔除2只(四川黄金/海看股份大额减持). 目标25只等权."
+          "pnl_pct": 0
         },
         {
           "date": "2026-03-23",
+          "time": "09:30",
           "code": "600586.SH",
           "name": "金晶科技",
           "direction": "buy",
-          "price": 5.97,
+          "price": 5.85,
           "volume": 61400,
-          "amount": 366558.0,
+          "amount": 359190.0,
           "fees": {
-            "commission": 109.97,
+            "commission": 71.84,
             "stamp_duty": 0,
-            "transfer_fee": 3.67,
-            "slippage_cost": 366.56,
-            "total": 480.19
+            "transfer_fee": 0,
+            "slippage_cost": 0,
+            "total": 71.84
           },
+          "reason": "LightGBM weekly rebalance",
           "pnl": 0,
-          "pnl_pct": 0,
-          "reason": "LightGBM v3 weekly rebalance (91特征模型, 12-fold WF, Sharpe_net=1.06). 风控剔除2只(四川黄金/海看股份大额减持). 目标25只等权."
+          "pnl_pct": 0
         },
         {
           "date": "2026-03-23",
-          "code": "600759.SH",
-          "name": "洲际油气",
-          "direction": "buy",
-          "price": 6.82,
-          "volume": 53700,
-          "amount": 366234.0,
-          "fees": {
-            "commission": 109.87,
-            "stamp_duty": 0,
-            "transfer_fee": 3.66,
-            "slippage_cost": 366.23,
-            "total": 479.77
-          },
-          "pnl": 0,
-          "pnl_pct": 0,
-          "reason": "LightGBM v3 weekly rebalance (91特征模型, 12-fold WF, Sharpe_net=1.06). 风控剔除2只(四川黄金/海看股份大额减持). 目标25只等权."
-        },
-        {
-          "date": "2026-03-23",
+          "time": "09:30",
           "code": "600916.SH",
           "name": "中国黄金",
           "direction": "buy",
-          "price": 8.91,
+          "price": 9.11,
           "volume": 41100,
-          "amount": 366201.0,
+          "amount": 374421.0,
           "fees": {
-            "commission": 109.86,
+            "commission": 74.88,
             "stamp_duty": 0,
-            "transfer_fee": 3.66,
-            "slippage_cost": 366.2,
-            "total": 479.72
+            "transfer_fee": 0,
+            "slippage_cost": 0,
+            "total": 74.88
           },
+          "reason": "LightGBM weekly rebalance",
           "pnl": 0,
-          "pnl_pct": 0,
-          "reason": "LightGBM v3 weekly rebalance (91特征模型, 12-fold WF, Sharpe_net=1.06). 风控剔除2只(四川黄金/海看股份大额减持). 目标25只等权."
+          "pnl_pct": 0
         },
         {
           "date": "2026-03-23",
+          "time": "09:30",
           "code": "601890.SH",
           "name": "亚星锚链",
           "direction": "buy",
-          "price": 9.89,
+          "price": 10.4,
           "volume": 37000,
-          "amount": 365930.0,
+          "amount": 384800.0,
           "fees": {
-            "commission": 109.78,
+            "commission": 76.96,
             "stamp_duty": 0,
-            "transfer_fee": 3.66,
-            "slippage_cost": 365.93,
-            "total": 479.37
+            "transfer_fee": 0,
+            "slippage_cost": 0,
+            "total": 76.96
           },
+          "reason": "LightGBM weekly rebalance",
           "pnl": 0,
-          "pnl_pct": 0,
-          "reason": "LightGBM v3 weekly rebalance (91特征模型, 12-fold WF, Sharpe_net=1.06). 风控剔除2只(四川黄金/海看股份大额减持). 目标25只等权."
+          "pnl_pct": 0
         },
         {
           "date": "2026-03-23",
+          "time": "09:30",
           "code": "603083.SH",
           "name": "剑桥科技",
           "direction": "buy",
-          "price": 103.84,
+          "price": 110.0,
           "volume": 3500,
-          "amount": 363440.0,
+          "amount": 385000.0,
           "fees": {
-            "commission": 109.03,
+            "commission": 77.0,
             "stamp_duty": 0,
-            "transfer_fee": 3.63,
-            "slippage_cost": 363.44,
-            "total": 476.11
+            "transfer_fee": 0,
+            "slippage_cost": 0,
+            "total": 77.0
           },
+          "reason": "LightGBM weekly rebalance",
           "pnl": 0,
-          "pnl_pct": 0,
-          "reason": "LightGBM v3 weekly rebalance (91特征模型, 12-fold WF, Sharpe_net=1.06). 风控剔除2只(四川黄金/海看股份大额减持). 目标25只等权."
+          "pnl_pct": 0
         },
         {
           "date": "2026-03-23",
+          "time": "09:30",
           "code": "603162.SH",
           "name": "海通发展",
           "direction": "buy",
-          "price": 12.76,
+          "price": 12.61,
           "volume": 28700,
-          "amount": 366212.0,
+          "amount": 361907.0,
           "fees": {
-            "commission": 109.86,
+            "commission": 72.38,
             "stamp_duty": 0,
-            "transfer_fee": 3.66,
-            "slippage_cost": 366.21,
-            "total": 479.74
+            "transfer_fee": 0,
+            "slippage_cost": 0,
+            "total": 72.38
           },
+          "reason": "LightGBM weekly rebalance",
           "pnl": 0,
-          "pnl_pct": 0,
-          "reason": "LightGBM v3 weekly rebalance (91特征模型, 12-fold WF, Sharpe_net=1.06). 风控剔除2只(四川黄金/海看股份大额减持). 目标25只等权."
+          "pnl_pct": 0
         },
         {
           "date": "2026-03-23",
+          "time": "09:30",
           "code": "603533.SH",
           "name": "掌阅科技",
           "direction": "buy",
-          "price": 23.68,
+          "price": 24.5,
           "volume": 15400,
-          "amount": 364672.0,
+          "amount": 377300.0,
           "fees": {
-            "commission": 109.4,
+            "commission": 75.46,
             "stamp_duty": 0,
-            "transfer_fee": 3.65,
-            "slippage_cost": 364.67,
-            "total": 477.72
+            "transfer_fee": 0,
+            "slippage_cost": 0,
+            "total": 75.46
           },
+          "reason": "LightGBM weekly rebalance",
           "pnl": 0,
-          "pnl_pct": 0,
-          "reason": "LightGBM v3 weekly rebalance (91特征模型, 12-fold WF, Sharpe_net=1.06). 风控剔除2只(四川黄金/海看股份大额减持). 目标25只等权."
+          "pnl_pct": 0
         }
       ],
       "decisions": [
