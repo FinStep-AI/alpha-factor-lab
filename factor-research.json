@@ -1944,5 +1944,92 @@
     },
     "diff_notes": "偏度溢价在CSI1000中不显著。可能原因：(1)20日窗口太短；(2)A股中证1000散户彩票效应不如美股/台股清晰；(3)市值中性化后信号消失。",
     "conclusion": "FAILED - IC不显著(t=0.27)，Sharpe为负，不入库。"
+  },
+  {
+    "date": "2026-03-25",
+    "factor_id": "vol_adj_mom_v1",
+    "factor_name": "波动率调整动量 v1",
+    "status": "淘汰",
+    "reason": "IC=-0.014(t=-1.54)不显著，方向反了。20日收益/20日波动率(个股Sharpe)无截面预测力。",
+    "metrics": {
+      "ic_mean": -0.0139,
+      "ic_t": -1.54,
+      "monotonicity": 0.7,
+      "long_short_sharpe": 0.45
+    },
+    "source": "cron:因子猎人午间挖矿"
+  },
+  {
+    "date": "2026-03-25",
+    "factor_id": "intra_reversal_v1",
+    "factor_name": "日内回补强度 v1",
+    "status": "淘汰",
+    "reason": "IC=0.013(t=2.49)但不达标(需>0.02)，翻转后单调性0.7不达标。日内回补逻辑在截面上区分度不够。",
+    "metrics": {
+      "ic_mean": 0.0126,
+      "ic_t": 2.49,
+      "monotonicity": 0.7,
+      "long_short_sharpe": 0.41
+    },
+    "source": "cron:因子猎人午间挖矿"
+  },
+  {
+    "date": "2026-03-25",
+    "factor_id": "turnover_trend_v1",
+    "factor_name": "换手率趋势 v1",
+    "status": "淘汰",
+    "reason": "IC=-0.017(t=-2.82)方向反了。换手率上升趋势的股票反而后续表现差。翻转后单调性0.6不达标。",
+    "metrics": {
+      "ic_mean": -0.017,
+      "ic_t": -2.82,
+      "monotonicity": 0.6,
+      "long_short_sharpe": 0.07
+    },
+    "source": "cron:因子猎人午间挖矿"
+  },
+  {
+    "date": "2026-03-25",
+    "factor_id": "cavr_v1",
+    "factor_name": "收盘VWAP偏离比例 v1",
+    "status": "淘汰",
+    "reason": "IC≈0(-0.001, t=-0.15)完全无线性预测力。分层呈驼峰形(G3最高)非单调。",
+    "metrics": {
+      "ic_mean": -0.001,
+      "ic_t": -0.15,
+      "monotonicity": 0.6,
+      "long_short_sharpe": 1.14
+    },
+    "source": "cron:因子猎人午间挖矿"
+  },
+  {
+    "date": "2026-03-25",
+    "factor_id": "vol_skew_v1",
+    "factor_name": "成交量偏度 v1",
+    "status": "淘汰",
+    "reason": "IC≈0(-0.001, t=-0.30)无信号。成交量分布偏度在截面上无区分度。",
+    "metrics": {
+      "ic_mean": -0.001,
+      "ic_t": -0.3,
+      "monotonicity": -0.8,
+      "long_short_sharpe": -0.97
+    },
+    "source": "cron:因子猎人午间挖矿"
+  },
+  {
+    "date": "2026-03-25",
+    "factor_id": "amp_level_v2",
+    "factor_name": "振幅水平 v2",
+    "status": "入库",
+    "reason": "IC=0.022(t=1.98, 5%显著), 单调性=0.9, G5 Sharpe=0.80, 多空Sharpe=1.11, 换手率27%。60日窗口信号稳定。填补Barra Volatility风格空白。与已有因子最高相关0.49不冗余。",
+    "metrics": {
+      "ic_mean": 0.022,
+      "ic_t": 1.98,
+      "monotonicity": 0.9,
+      "long_short_sharpe": 1.11,
+      "g5_sharpe": 0.8,
+      "turnover": 0.27
+    },
+    "barra_style": "Volatility",
+    "source": "cron:因子猎人午间挖矿"
   }
 ]

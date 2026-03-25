@@ -628,5 +628,88 @@
       "pv_corr_v1": 0.076,
       "tae_v1": 1.0
     }
+  },
+  {
+    "id": "amp_level_v2",
+    "name": "振幅水平 v2",
+    "name_en": "Amplitude Level v2",
+    "category": "波动率/活跃度",
+    "description": "60日平均振幅(对数)，成交额中性化。正向使用：做多高振幅(成交额调整后)。高振幅=价格波动活跃=市场分歧大/信息事件密集=风险溢价补偿。类似realized volatility但用(high-low)/prev_close衡量日内价格范围。中证1000上效果显著。",
+    "hypothesis": "高振幅(成交额调整后)的股票承受更高波动风险，获得波动率风险溢价补偿(Volatility Risk Premium)",
+    "expected_direction": "正向（高振幅=高预期收益）",
+    "factor_type": "波动率/风险溢价",
+    "formula": "neutralize(log(MA60((high-low)/prev_close)), log_amount_60d)",
+    "direction": 1,
+    "stock_pool": "中证1000",
+    "period": "2022-12-12 ~ 2026-03-24",
+    "rebalance_freq": 20,
+    "forward_days": 5,
+    "cost": 0.003,
+    "rating": "★★★ 可用",
+    "nav_data": "output/amp_level_v2_5d/cumulative_returns.json",
+    "ic_data": "output/amp_level_v2_5d/ic_series.json",
+    "upgrade_notes": "v2使用60日窗口(vs v1的20日)，IC从0.020提升到0.022，换手率从48%降低到27%。60日窗口信号更稳定。",
+    "lessons_learned": [
+      "振幅水平因子方向与直觉相反：高振幅→高收益（风险溢价逻辑，非低波稳健逻辑）",
+      "窗口越长IC越高（10d:0.016→20d:0.023→40d:0.026→60d:0.029），信号稳定性随窗口增加",
+      "与idio_vol(0.46)和CVaR(0.49)有中等相关，逻辑一致（都是波动率维度）但不冗余",
+      "与TAE(-0.10)几乎不相关，TAE做多低振幅高换手，本因子做多高振幅，角度互补",
+      "换手率27%低频友好，适合月度调仓",
+      "填补Barra Volatility风格空白"
+    ],
+    "created": "2026-03-25",
+    "updated": "2026-03-25",
+    "metrics": {
+      "ic_mean": 0.022050874991762226,
+      "ic_std": 0.14224,
+      "ic_t": 1.9751756145498085,
+      "ic_positive_ratio": 0.532,
+      "rank_ic": -0.0207,
+      "rank_ic_std": 0.148,
+      "ir": 0.1551,
+      "ic_count": 158,
+      "long_short_sharpe": 1.1086,
+      "long_short_mdd": -0.2041,
+      "monotonicity": 0.9,
+      "group_sharpe": [
+        0.298,
+        0.283,
+        0.599,
+        0.496,
+        0.8
+      ],
+      "group_returns_annualized": [
+        0.06,
+        0.067,
+        0.171,
+        0.135,
+        0.25
+      ],
+      "group_mdd": [
+        -0.341,
+        -0.379,
+        -0.399,
+        -0.381,
+        -0.371
+      ]
+    },
+    "conclusion": "达标入库。振幅水平因子通过60日平均日内价格范围衡量个股波动活跃度，市值中性化后捕捉纯波动率风险溢价。IC=0.022(t=1.98, 5%显著)，单调性0.9，G5年化25.0%，多空Sharpe=1.11。换手率仅27%低频友好。填补Barra Volatility风格空白，与现有因子最高相关仅0.49，独立性好。",
+    "barra_style": "Volatility",
+    "source_type": "自研",
+    "source_title": "日内价格范围波动率因子 (Parkinson 1980 Range-Based Volatility变体)",
+    "source_url": "https://doi.org/10.1016/0148-6195(80)90026-8",
+    "correlations": {
+      "amihud_illiq_v2": 0.247,
+      "shadow_pressure_v1": 0.172,
+      "overnight_momentum_v1": -0.143,
+      "gap_momentum_v1": -0.022,
+      "tail_risk_cvar_v1": 0.492,
+      "neg_day_freq_v1": 0.305,
+      "turnover_level_v1": "未计算",
+      "tae_v1": -0.095,
+      "pv_corr_v1": 0.064,
+      "idio_vol_v1": 0.461,
+      "amp_level_v2": 1.0
+    }
   }
 ]

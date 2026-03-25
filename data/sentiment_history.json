@@ -10,15 +10,6 @@
       "phase": "ferment"
     },
     {
-      "date": "20260303",
-      "zt_count": 82,
-      "dt_count": 53,
-      "zb_count": 24,
-      "max_streak": 3,
-      "temperature": 58,
-      "phase": "ferment"
-    },
-    {
       "date": "20260304",
       "zt_count": 43,
       "dt_count": 13,
@@ -281,7 +272,16 @@
       "max_streak": 7,
       "temperature": 85,
       "phase": "overheated"
+    },
+    {
+      "date": "20260325",
+      "zt_count": 13,
+      "dt_count": 1,
+      "zb_count": 4,
+      "max_streak": 2,
+      "temperature": 37,
+      "phase": "startup"
     }
   ],
-  "updated": "20260324"
+  "updated": "20260325"
 }
