@@ -6,7 +6,7 @@
     "benchmark": "000300",
     "benchmark_name": "沪深300",
     "created_at": "2026-02-23 22:14:25",
-    "updated_at": "2026-03-25 09:40:54",
+    "updated_at": "2026-03-25 09:42:53",
     "status": "active",
     "players_count": 6
   },
@@ -5245,7 +5245,7 @@
       "style": "趋势跟踪 · 板块轮动 · 全A股扫描 · 中长线波段",
       "description": "BBI+MA60趋势判断，KDJ低位捕捉买点，板块轮动做趋势收益。核心逻辑：阳率×盈亏比最大化。",
       "portfolio": {
-        "cash": 5420470.13,
+        "cash": 2380300.71,
         "positions": {
           "003036": {
             "code": "003036",
@@ -5330,9 +5330,42 @@
             "pnl_pct": 1.99,
             "entry_date": "2026-03-24",
             "max_pnl_pct": 2.62
+          },
+          "002652.SZ": {
+            "code": "002652.SZ",
+            "name": "扬子新材",
+            "volume": 207900,
+            "avg_cost": 4.84,
+            "current_price": 4.84,
+            "market_value": 1006236.0,
+            "pnl": 0,
+            "pnl_pct": 0,
+            "entry_date": "2026-03-25"
+          },
+          "603629.SH": {
+            "code": "603629.SH",
+            "name": "利通电子",
+            "volume": 16700,
+            "avg_cost": 60.43,
+            "current_price": 60.43,
+            "market_value": 1009181.0,
+            "pnl": 0,
+            "pnl_pct": 0,
+            "entry_date": "2026-03-25"
+          },
+          "688097.SH": {
+            "code": "688097.SH",
+            "name": "博众精工",
+            "volume": 17500,
+            "avg_cost": 58.33,
+            "current_price": 58.33,
+            "market_value": 1020775.0,
+            "pnl": 0,
+            "pnl_pct": 0,
+            "entry_date": "2026-03-25"
           }
         },
-        "total_value": 10123802.13,
+        "total_value": 10119824.71,
         "last_update": "2026-03-25"
       },
       "nav_history": {
@@ -7666,17 +7699,66 @@
           "pnl": 27664.0,
           "pnl_pct": 13.9,
           "reason": "止盈第一档：实时价4.53，盈利+12.4%≥7%，卖出1/2锁定利润"
+        },
+        {
+          "date": "2026-03-25",
+          "code": "002652.SZ",
+          "name": "扬子新材",
+          "direction": "buy",
+          "price": 4.84,
+          "volume": 207900,
+          "amount": 1006236.0,
+          "fees": {
+            "commission": 301.87,
+            "stamp_duty": 0,
+            "transfer_fee": 10.06,
+            "slippage_cost": 1006.24,
+            "total": 1318.17
+          },
+          "pnl": 0,
+          "pnl_pct": 0,
+          "reason": "主策略信号(main通道): J=10.1<13极低位+上升趋势，量比5.0放量+金属制品业板块，与利通电子形成板块共振，score=63"
+        },
+        {
+          "date": "2026-03-25",
+          "code": "603629.SH",
+          "name": "利通电子",
+          "direction": "buy",
+          "price": 60.43,
+          "volume": 16700,
+          "amount": 1009181.0,
+          "fees": {
+            "commission": 302.75,
+            "stamp_duty": 0,
+            "transfer_fee": 10.09,
+            "slippage_cost": 1009.18,
+            "total": 1322.03
+          },
+          "pnl": 0,
+          "pnl_pct": 0,
+          "reason": "主策略信号(main通道): J=8.8<13极低位+上升趋势，量比4.9放量+金属制品业板块，与扬子新材形成板块共振，score=63"
+        },
+        {
+          "date": "2026-03-25",
+          "code": "688097.SH",
+          "name": "博众精工",
+          "direction": "buy",
+          "price": 58.33,
+          "volume": 17500,
+          "amount": 1020775.0,
+          "fees": {
+            "commission": 306.23,
+            "stamp_duty": 0,
+            "transfer_fee": 10.21,
+            "slippage_cost": 1020.77,
+            "total": 1337.22
+          },
+          "pnl": 0,
+          "pnl_pct": 0,
+          "reason": "主策略信号(main通道): J=8.5<13极低位+上升趋势，量比4.8放量，score=63，高端制造装备"
         }
       ],
       "decisions": [
-        {
-          "date": "2026-03-10",
-          "time": "14:51",
-          "type": "afternoon_scan",
-          "action": "sell_stop_loss:603399",
-          "summary": "尾盘扫描14:50：全A扫描5085只→38候选(5主策略+2单针下30+31金叉缩量回调)。板块集中:土木工程建筑业(3只)。止损卖出永杉锂业(603399)@11.21（成本11.40-5tick=11.35触发止损，亏损-1.67%）。其余9只持仓无止盈止损触发。高分候选中百利科技score80已持有、中船科技score80但3/9刚止损过不宜追回、逸豪新材涨幅+14.77%追高风险大，不追入新标的。当前持仓9只+现金55万。",
-          "detail": ""
-        },
         {
           "date": "2026-03-10",
           "time": "15:12",
@@ -7901,6 +7983,14 @@
           "detail": "华新环保跌破止损线清仓止损；泰坦股份(+25.2%)、京投发展(+34.3%)、华塑控股(+12.4%)三只触发7%止盈一档线，各卖出一半锁定利润。蓝焰控股BBI预警(9.81<9.85)叠加-6.39%大跌，密切关注但暂不操作。",
           "recommendation": "先执行卖出操作，释放资金后再考虑新建仓",
           "exec_summary": "成功4笔，失败0笔"
+        },
+        {
+          "date": "2026-03-25",
+          "action": "buy",
+          "summary": "新建仓3只：扬子新材+利通电子（金属制品板块共振）+博众精工，均为J<13极低位主策略信号",
+          "detail": "三只均为主策略main通道信号，J值8.5-10.1处于极低位，BBI>MA60趋势确认，量比均超4.5显示资金关注。扬子新材和利通电子同属金属制品业形成板块小共振。博众精工为高端制造装备，J=8.5最低。单票仓位约100万，控制在总资产10%以内。",
+          "recommendation": "买入后持仓10只，达到目标上限，后续以持有观察为主",
+          "exec_summary": "成功3笔，失败0笔"
         }
       ],
       "rebalances": [],
@@ -7912,8 +8002,8 @@
         "calmar_ratio": 4.67,
         "win_rate": 32.79,
         "profit_loss_ratio": 2.4,
-        "total_trades": 117,
-        "total_fees": 151183.87000000005,
+        "total_trades": 120,
+        "total_fees": 155161.29000000007,
         "current_positions": 8,
         "turnover_rate": 0.0
       },
