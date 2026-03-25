@@ -9014,6 +9014,13 @@
         "date": "2026-03-10",
         "type": "factor_scan",
         "detail": "因子扫描日报: 测试3个因子方向均未达标。(1) realized_skew_v1 (Amaya 2015 JFE): IC=-0.0016 t=-0.20, 原文用日内高频数据, 日线数据无法复现; (2) range_efficiency_v1 (自研): IC=0.009 t=0.99, 单调性-0.7, 与波动率高度相关; (3) vol_ret_diverge_v1 (自研): IC=-0.022 t=-1.63, 方向相反, 高成交量低收益反而预测下跌。今日无新因子入库。"
+      },
+      {
+        "date": "2026-03-25",
+        "action": "scan",
+        "recommendation": "无新因子入库",
+        "summary": "因子扫描日: 测试pvd_volatility_v1(达标但与Amihud冗余)和neg_skewness_v1(不显著)",
+        "detail": "1) pvd_volatility_v1: IC=0.037(t=2.55), Sharpe=1.61, 单调性0.9, 但与amihud_illiq_v2 IC相关性0.82, 判定冗余不入库. 2) neg_skewness_v1: IC=0.002(t=0.27), 不达标, 偏度溢价在CSI1000不显著."
       }
     ]
   },

@@ -1,57 +1,6 @@
 {
   "history": [
     {
-      "date": "20260225",
-      "zt_count": 75,
-      "dt_count": 3,
-      "zb_count": 35,
-      "max_streak": 5,
-      "temperature": 73,
-      "phase": "climax"
-    },
-    {
-      "date": "20260226",
-      "zt_count": 61,
-      "dt_count": 3,
-      "zb_count": 23,
-      "max_streak": 6,
-      "temperature": 73,
-      "phase": "climax"
-    },
-    {
-      "date": "20260227",
-      "zt_count": 75,
-      "dt_count": 0,
-      "zb_count": 15,
-      "max_streak": 7,
-      "temperature": 90,
-      "phase": "overheated",
-      "seal_rate": 83.3,
-      "leader": "豫能控股(001896) 7连板 炸板3次",
-      "note": "收盘数据。盘前温度63(涨停仅21)→收盘温度90(涨停暴增至75)。过热末期特征明确。"
-    },
-    {
-      "date": "20260302",
-      "zt_count": 70,
-      "dt_count": 6,
-      "zb_count": 24,
-      "max_streak": 3,
-      "temperature": 65,
-      "phase": "climax",
-      "seal_rate": 74.5,
-      "leader": "泰嘉股份(002843) 3连板 一封不开",
-      "note": "盘中补扫描。温度从2/27的90降至65，最高连板从7降至3，退潮但未冰。"
-    },
-    {
-      "date": "20260303",
-      "zt_count": 33,
-      "dt_count": 0,
-      "zb_count": 8,
-      "max_streak": 4,
-      "temperature": 68,
-      "phase": "climax"
-    },
-    {
       "date": "20260303",
       "zt_count": 82,
       "dt_count": 53,
@@ -287,7 +236,52 @@
       "max_streak": 5,
       "temperature": 36,
       "phase": "startup"
+    },
+    {
+      "date": "20260323",
+      "zt_count": 28,
+      "dt_count": 79,
+      "zb_count": 15,
+      "max_streak": 6,
+      "temperature": 33,
+      "phase": "startup"
+    },
+    {
+      "date": "20260323",
+      "zt_count": 28,
+      "dt_count": 71,
+      "zb_count": 15,
+      "max_streak": 6,
+      "temperature": 33,
+      "phase": "startup"
+    },
+    {
+      "date": "20260324",
+      "zt_count": 3,
+      "dt_count": 0,
+      "zb_count": 0,
+      "max_streak": 3,
+      "temperature": 38,
+      "phase": "startup"
+    },
+    {
+      "date": "20260324",
+      "zt_count": 83,
+      "dt_count": 1,
+      "zb_count": 22,
+      "max_streak": 7,
+      "temperature": 85,
+      "phase": "overheated"
+    },
+    {
+      "date": "20260324",
+      "zt_count": 83,
+      "dt_count": 1,
+      "zb_count": 22,
+      "max_streak": 7,
+      "temperature": 85,
+      "phase": "overheated"
     }
   ],
-  "updated": "20260320"
+  "updated": "20260324"
 }

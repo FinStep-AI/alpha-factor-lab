@@ -1851,5 +1851,98 @@
     "diff_notes": "IC和Sharpe达标，但单调性0.70<0.80（G3和G5错乱），换手率77.78%远超40%门槛。日线频率的量价Spearman相关性信号衰减快，换手过高。",
     "conclusion": "FAIL - 换手率过高+单调性不足，不入库。可考虑：(1)延长回看窗口至40日降低换手，(2)用Pearson替代Spearman，(3)结合成交额加权。",
     "barra_style": "微观结构"
+  },
+  {
+    "date": "2026-03-24",
+    "factor_id": "return_skewness_neg_20d",
+    "source_type": "学术文献+研报扫描",
+    "source_title": "日内收益偏度因子 / Rolling Return Skewness",
+    "source_url": "https://juejin.cn/post/7515689901745618970",
+    "original_metric": {
+      "note": "日内偏度IC约0.03-0.05（文献报告），但需高频数据"
+    },
+    "our_metric": {
+      "ic_mean": 0.0014,
+      "t_stat": 0.17,
+      "sharpe": -0.26,
+      "monotonicity": -0.1
+    },
+    "diff_notes": "日线级别的20日收益偏度在中证1000上完全无效。原因：(1)日间偏度信息含量远低于日内偏度；(2)中证1000小盘股高偏度并非彩票效应的简单体现",
+    "conclusion": "不达标，不入库"
+  },
+  {
+    "date": "2026-03-24",
+    "factor_id": "pv_alignment_20d",
+    "source_type": "研报复现",
+    "source_title": "量价相关性因子（量价背离/同向）",
+    "source_url": "华西证券-细颗粒度量价系列之一",
+    "original_metric": {
+      "note": "分钟级量价背离IC约0.03-0.04，中证1000多头超额约10%"
+    },
+    "our_metric": {
+      "ic_mean": 0.0092,
+      "t_stat": 0.9,
+      "sharpe": 0.66,
+      "monotonicity": 0.7
+    },
+    "diff_notes": "日线级别量价同向方向正确（正IC），但幅度不足，t值不显著。中证1000上量价同向>量价背离，但日线粒度信息损失大。需分钟数据才能达标",
+    "conclusion": "不达标，不入库。方向有潜力但需更高频数据"
+  },
+  {
+    "date": "2026-03-24",
+    "factor_id": "vol_concentration_20d",
+    "source_type": "自创+微观结构理论",
+    "source_title": "成交额集中度因子（Volume HHI）",
+    "source_url": "N/A - 自创因子",
+    "original_metric": {
+      "note": "理论假设：成交集中=机构大单→正面信号"
+    },
+    "our_metric": {
+      "ic_mean": 0.004,
+      "t_stat": 0.44,
+      "sharpe": -0.14,
+      "monotonicity": 0.6
+    },
+    "diff_notes": "日线成交额的Herfindahl集中度在中证1000上基本无区分力。可能因为：(1)日线粒度太粗，无法区分机构/散户；(2)1000成分股流动性差异大，HHI被噪声淹没",
+    "conclusion": "不达标，不入库"
+  },
+  {
+    "date": "2026-03-25",
+    "factor_id": "pvd_volatility_v1",
+    "source_type": "研报解读",
+    "source_title": "实战因子365: 价量偏离波动率因子",
+    "source_url": "https://zhuanlan.zhihu.com/p/1933158730352001357",
+    "original_metric": {
+      "IC": 0.061,
+      "pool": "中证全指",
+      "period": "2020-2025"
+    },
+    "our_metric": {
+      "IC": 0.0372,
+      "t": 2.55,
+      "sharpe": 1.605,
+      "monotonicity": 0.9
+    },
+    "diff_notes": "原文IC 0.061在中证全指日频，我们0.0372在CSI1000月频（20日调仓）。方向需翻转：高PVD波动→高收益。达标但与amihud_illiq_v2 IC相关性0.82，判定冗余。",
+    "conclusion": "REDUNDANT - 与Amihud流动性因子高度冗余(IC_corr=0.82)，本质都在捕捉流动性溢价。不入库。"
+  },
+  {
+    "date": "2026-03-25",
+    "factor_id": "neg_skewness_v1",
+    "source_type": "学术论文",
+    "source_title": "Idiosyncratic Skewness and Cross-Section of Stock Returns (Bali et al.)",
+    "source_url": "https://www.sciencedirect.com/science/article/abs/pii/S1057521921001514",
+    "original_metric": {
+      "IC": "negative premium in US/Taiwan markets",
+      "pool": "US/Taiwan all stocks"
+    },
+    "our_metric": {
+      "IC": 0.0018,
+      "t": 0.27,
+      "sharpe": -0.576,
+      "monotonicity": -0.7
+    },
+    "diff_notes": "偏度溢价在CSI1000中不显著。可能原因：(1)20日窗口太短；(2)A股中证1000散户彩票效应不如美股/台股清晰；(3)市值中性化后信号消失。",
+    "conclusion": "FAILED - IC不显著(t=0.27)，Sharpe为负，不入库。"
   }
 ]
