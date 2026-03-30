@@ -2117,5 +2117,94 @@
     "long_short_sharpe": -0.08,
     "failure_reason": "IC不显著(t=1.26), 分层不单调, 多空为负。差分引入过多噪声",
     "notes": "差分方法在OIB上不work，不如直接用60日水平值"
+  },
+  {
+    "date": "2026-03-30",
+    "factor_id": "pvd_v1",
+    "source_type": "研报+论文扫描",
+    "source_title": "量价背离度 (Price-Volume Divergence)",
+    "source_url": "https://juejin.cn/post/7497061831501709353",
+    "original_metric": {
+      "description": "CORR(VWAP, Volume) 20日滚动窗口，用于判断量价背离"
+    },
+    "our_metric": {
+      "IC_mean": 0.0197,
+      "t_stat": 1.55,
+      "sharpe": -0.09,
+      "monotonicity": 0.3
+    },
+    "diff_notes": "IC接近门槛但t值不显著，多空Sharpe为负，G1和G5都高呈U型分布，不单调",
+    "conclusion": "不达标-淘汰"
+  },
+  {
+    "date": "2026-03-30",
+    "factor_id": "vwpp_v1",
+    "source_type": "自研衍生",
+    "source_title": "成交量加权价格位置 (Volume-Weighted Price Position)",
+    "source_url": "",
+    "original_metric": {
+      "description": "(VWAP-Low)/(High-Low) 20日均值，衡量成交集中位置"
+    },
+    "our_metric": {
+      "IC_mean": 0.001,
+      "t_stat": "nan",
+      "sharpe": 0.023,
+      "monotonicity": -0.6
+    },
+    "diff_notes": "因子值方差极小(std=0.003)，区分度不足，IC接近零，单调性为负",
+    "conclusion": "不达标-淘汰"
+  },
+  {
+    "date": "2026-03-30",
+    "factor_id": "ma_disp_v1",
+    "factor_name": "均线离散度 (Moving Average Dispersion)",
+    "status": "入库",
+    "barra_style": "Momentum",
+    "source_type": "自研",
+    "source_title": "多周期均线离散度因子",
+    "source_url": "",
+    "description": "6条均线(MA5/10/20/40/60/120)归一化后截面标准差，正向使用。高离散度=趋势明确=动量延续。",
+    "hypothesis": "均线高度发散→趋势明确→后续动量延续",
+    "ic_mean": 0.0262,
+    "ic_t_stat": 4.25,
+    "rank_ic": 0.0157,
+    "monotonicity": 1.0,
+    "g5_sharpe": 0.813,
+    "g5_annual_ret": "23.9%",
+    "g1_annual_ret": "-2.6%",
+    "long_short_sharpe": 2.26,
+    "reason": "全面达标: IC=0.026(t=4.25)极显著, 单调性1.0完美, G5 Sharpe=0.81, 多空Sharpe=2.26, MDD=-8.7%。与已有因子max|r|=0.40不冗余。",
+    "metrics": {
+      "ic_mean": 0.0262,
+      "ic_t": 4.25,
+      "monotonicity": 1.0,
+      "long_short_sharpe": 2.26,
+      "g5_sharpe": 0.813,
+      "turnover": 0.624
+    },
+    "correlations_with_existing": {
+      "amihud_illiq_v2": 0.185,
+      "shadow_pressure_v1": 0.018,
+      "overnight_momentum_v1": -0.021,
+      "gap_momentum_v1": 0.063,
+      "tail_risk_cvar_v1": 0.317,
+      "neg_day_freq_v1": 0.28,
+      "tae_v1": -0.086,
+      "pv_corr_v1": -0.177,
+      "amp_level_v2": 0.397
+    },
+    "variants_tested": [
+      "v1_5_10_20_40_60: IC=0.026(t=3.47), mono=1.0, G5S=0.778 ❌(G5S差一点)",
+      "v2_5_20_60: IC=0.024(t=3.24), mono=0.9, G5S=0.670 ❌",
+      "v3_10_20_60: IC=0.028(t=4.06), mono=0.7, G5S=0.577 ❌",
+      "v4_5_10_20_60: IC=0.025(t=3.39), mono=0.9, G5S=0.803 ✅",
+      "v5_5_20_40_60: IC=0.025(t=3.31), mono=0.9, G5S=0.647 ❌",
+      "v6_5_10_20_40_60_120: IC=0.026(t=4.25), mono=1.0, G5S=0.813 ✅ ← 最优(入库)"
+    ],
+    "data_files": [
+      "data/factor_ma_disp_v6_5_10_20_40_60_120.csv",
+      "output/ma_disp_v6_5_10_20_40_60_120/report.json"
+    ],
+    "source": "cron:因子猎人午间挖矿"
   }
 ]

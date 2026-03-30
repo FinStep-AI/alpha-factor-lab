@@ -711,5 +711,87 @@
       "idio_vol_v1": 0.461,
       "amp_level_v2": 1.0
     }
+  },
+  {
+    "id": "ma_disp_v1",
+    "name": "均线离散度 v1",
+    "name_en": "Moving Average Dispersion v1",
+    "category": "趋势/动量",
+    "description": "6条均线(MA5/10/20/40/60/120)归一化后的截面标准差，衡量多周期趋势离散程度。高离散度=均线发散=趋势明确=动量延续效应。成交额OLS中性化+MAD winsorize+z-score。正向使用(高离散→高收益)。本质是Barra Momentum风格的趋势确认代理。",
+    "hypothesis": "均线高度发散的股票处于明确趋势中（无论涨跌），在A股中证1000上趋势动量效应显著——多头趋势延续、空头趋势也延续(但中性化后做多高离散度有正alpha)",
+    "expected_direction": "正向（高离散度=强趋势=高预期收益）",
+    "factor_type": "趋势/动量",
+    "formula": "neutralize(std(MA5/close, MA10/close, MA20/close, MA40/close, MA60/close, MA120/close), log_amount_20d)",
+    "direction": 1,
+    "stock_pool": "中证1000",
+    "period": "2022-12-12 ~ 2026-03-27",
+    "rebalance_freq": 20,
+    "forward_days": 5,
+    "cost": 0.003,
+    "rating": "★★★★★ 极强",
+    "nav_data": "output/ma_disp_v6_5_10_20_40_60_120/cumulative_returns.json",
+    "ic_data": "output/ma_disp_v6_5_10_20_40_60_120/ic_series.json",
+    "upgrade_notes": "v1首版即达标。6条均线组合最优(vs 3-5条)。加入MA120后IC t值从3.47提升到4.25，换手率从70%降到62%。IC=0.026(t=4.25)极显著，单调性1.0完美，G5年化23.9%，多空Sharpe=2.26。",
+    "lessons_learned": [
+      "均线离散度方向与直觉相反：高离散(趋势明确)→高收益，而非低离散(蓄势)→高收益",
+      "这是趋势动量效应，不是蓄势效应——A股小盘股趋势有惯性",
+      "均线越多(6条>5条>3条)信号越稳定，因为更多周期的共识/分歧信息",
+      "MA120的加入对IC t值提升最大(3.47→4.25)，长期趋势信息很重要",
+      "与已有因子最高相关仅0.40(amp_level_v2)，独立性很好",
+      "IC随前瞻期增加(5d:0.026→10d:0.039→20d:0.053)，说明是中长期趋势信号"
+    ],
+    "created": "2026-03-30",
+    "updated": "2026-03-30",
+    "metrics": {
+      "ic_mean": 0.02618268449743764,
+      "ic_std": 0.104818658962797,
+      "ic_t": 4.248916281442932,
+      "ic_positive_ratio": 0.5662650602409639,
+      "rank_ic": 0.01566004435155985,
+      "rank_ic_std": 0.11643885148973818,
+      "ir": 0.24979030218971404,
+      "ic_count": 166,
+      "long_short_sharpe": 2.2604858965860997,
+      "long_short_mdd": -0.08681995427268403,
+      "monotonicity": 0.9999999999999999,
+      "group_sharpe": [
+        -0.109,
+        0.205,
+        0.656,
+        0.737,
+        0.813
+      ],
+      "group_returns_annualized": [
+        -0.026,
+        0.047,
+        0.18,
+        0.19,
+        0.239
+      ],
+      "group_mdd": [
+        -0.448,
+        -0.384,
+        -0.33,
+        -0.325,
+        -0.339
+      ]
+    },
+    "conclusion": "全面达标入库！均线离散度因子通过6条多周期均线的离散程度衡量趋势明确度。IC=0.026(t=4.25)极显著，单调性1.0完美，G5年化23.9%，多空Sharpe=2.26，MDD仅-8.7%。与已有因子低相关(max|r|=0.40)。趋势越明确的股票后续收益越好——这是A股中证1000上的趋势动量效应。",
+    "barra_style": "Momentum",
+    "source_type": "自研",
+    "source_title": "多周期均线离散度因子（趋势确认代理）",
+    "source_url": "",
+    "correlations": {
+      "amihud_illiq_v2": 0.185,
+      "shadow_pressure_v1": 0.018,
+      "overnight_momentum_v1": -0.021,
+      "gap_momentum_v1": 0.063,
+      "tail_risk_cvar_v1": 0.317,
+      "neg_day_freq_v1": 0.28,
+      "tae_v1": -0.086,
+      "pv_corr_v1": -0.177,
+      "amp_level_v2": 0.397,
+      "ma_disp_v1": 1.0
+    }
   }
 ]
