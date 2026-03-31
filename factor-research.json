@@ -2206,5 +2206,17 @@
       "output/ma_disp_v6_5_10_20_40_60_120/report.json"
     ],
     "source": "cron:因子猎人午间挖矿"
+  },
+  {
+    "date": "2026-03-31",
+    "factor_id": "vol_cv_neg_v1",
+    "name": "成交量变异系数(反) v1",
+    "source_type": "self_research",
+    "source_title": "自研：成交量稳定性与预期收益的截面关系",
+    "source_url": "",
+    "original_metric": "无原文（自研因子）",
+    "our_metric": "IC=0.0211(t=2.37), Sharpe=1.10, 单调性=0.80, MDD=-7.0%",
+    "diff_notes": "自研因子，无对比基准",
+    "conclusion": "达标入库。低成交量波动的股票在中证1000中有显著正向收益预测力，与现有因子相关性极低（最大|corr|=0.12）。"
   }
 ]

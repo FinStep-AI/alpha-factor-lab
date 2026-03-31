@@ -793,5 +793,47 @@
       "amp_level_v2": 0.397,
       "ma_disp_v1": 1.0
     }
+  },
+  {
+    "factor_id": "vol_cv_neg_v1",
+    "name": "成交量变异系数(反) v1",
+    "description": "20日成交量变异系数取负。低成交量波动→稳定交易模式→更高预期收益。逻辑：成交量稳定的股票信息不对称性低，散户噪音小，机构持仓更稳定。",
+    "formula": "-CV(Volume_20d) = -std(Vol_20d)/mean(Vol_20d)，市值中性化",
+    "lookback": 20,
+    "barra_style": "Liquidity",
+    "source_type": "self_research",
+    "source_url": "",
+    "source_title": "自研：成交量稳定性与预期收益的截面关系",
+    "ic_mean": 0.0211,
+    "ic_std": 0.0731,
+    "t_value": 2.37,
+    "sharpe": 1.0988,
+    "monotonicity": 0.8,
+    "mdd": -0.0702,
+    "turnover": 0.7765,
+    "nav_data": "output/vol_cv_neg/cumulative_returns.json",
+    "ic_data": "output/vol_cv_neg/ic_series.json",
+    "factor_csv": "data/factor_vol_cv_neg.csv",
+    "group_returns_annualized": [
+      0.087,
+      0.1319,
+      0.1309,
+      0.2029,
+      0.1809
+    ],
+    "group_sharpe": [],
+    "group_mdd": [],
+    "correlations": {
+      "amihud_illiq_v2": -0.0369,
+      "shadow_pressure_v1": -0.016,
+      "overnight_momentum_v1": 0.1161,
+      "gap_momentum_v1": 0.0126,
+      "tail_risk_cvar_v1": -0.1078,
+      "neg_day_freq_v1": -0.0458,
+      "tae_v1": -0.0098,
+      "ma_disp_v6": 0.0398
+    },
+    "created_at": "2026-03-31",
+    "status": "active"
   }
 ]
