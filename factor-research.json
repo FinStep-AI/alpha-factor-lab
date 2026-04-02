@@ -2218,5 +2218,84 @@
     "our_metric": "IC=0.0211(t=2.37), Sharpe=1.10, 单调性=0.80, MDD=-7.0%",
     "diff_notes": "自研因子，无对比基准",
     "conclusion": "达标入库。低成交量波动的股票在中证1000中有显著正向收益预测力，与现有因子相关性极低（最大|corr|=0.12）。"
+  },
+  {
+    "date": "2026-04-02",
+    "factor_id": "vol_wt_price_skew_v1",
+    "source_type": "自研",
+    "source_title": "成交量加权价格偏度因子(60日)",
+    "source_url": "",
+    "original_metric": "N/A(自研方向,灵感来源:知乎高频因子对比+昨日筹码位置因子教训)",
+    "our_metric": "IC=0.0035(t=0.80), Sharpe=0.45, 单调性=0.5, 换手=79%",
+    "diff_notes": "60日窗口的成交量加权价格分布偏度无截面预测力。筹码分布方向在日线层面效果差,可能需要分钟级数据才能捕捉真实的资金流分布",
+    "conclusion": "失败"
+  },
+  {
+    "date": "2026-04-02",
+    "factor_id": "ret_skew_neg_v1",
+    "source_type": "学术文献改良",
+    "source_title": "收益率负偏度因子(40日,Bali et al. 2011彩票效应)",
+    "source_url": "Bali, Cakici, Whitelaw (2011) JFE",
+    "original_metric": "原文:美股截面中高正偏度股票月均低收益约0.67%",
+    "our_metric": "IC=0.004(t=0.68), Sharpe=1.06, 单调性=0.5, 换手=78%",
+    "diff_notes": "IC不显著且单调性差(G3最高非G5),说明中证1000小盘股的偏度定价效应不强。可能因为A股散户主导,彩票偏好普遍存在导致截面区分度不足",
+    "conclusion": "失败"
+  },
+  {
+    "factor_id": "turnover_decel_v1",
+    "factor_name": "换手率减速因子 (Turnover Deceleration)",
+    "status": "active",
+    "date": "2026-04-02",
+    "category": "流动性/情绪",
+    "barra_style": "Sentiment",
+    "source_type": "自研",
+    "source_title": "换手率动量反转——短期换手加速是散户噪声信号",
+    "description": "-log(MA5_turnover / MA20_turnover)，成交额中性化。换手缩量=噪声退出=正信号。",
+    "hypothesis": "短期换手骤增=散户噪声交易→后续回吐；换手缩量=筹码稳定→后续更好",
+    "ic_mean": 0.02164,
+    "ic_t_stat": 3.294,
+    "rank_ic": 0.04056,
+    "monotonicity": 0.9,
+    "g5_sharpe": 0.176,
+    "g5_annual_ret": "4.5%",
+    "g1_annual_ret": "-11.3%",
+    "long_short_sharpe": 1.4766,
+    "failure_reason": null,
+    "lessons_learned": "换手率的三个正交维度(水平/稳定性/变化方向)在A股中证1000上都有独立alpha。加速放量是负信号(散户)，缩量是正信号(噪声退出)。纯短期因子，5d有效20d衰减。",
+    "data_files": [
+      "data/factor_turnover_decel_v1.csv",
+      "output/turnover_mom_neg_v1_5d/report.json"
+    ],
+    "correlations": {
+      "vol_cv_neg_v1": 0.204,
+      "overnight_momentum_v1": 0.119,
+      "pv_corr_v1": -0.115,
+      "gap_momentum_v1": -0.099,
+      "amihud_illiq_v2": -0.067,
+      "ma_disp_v1": -0.059,
+      "tae_v1": 0.045,
+      "tail_risk_cvar_v1": -0.038,
+      "shadow_pressure_v1": -0.033,
+      "amp_level_v2": 0.022,
+      "neg_day_freq_v1": 0.014
+    }
+  },
+  {
+    "factor_id": "ret_ir_v1",
+    "factor_name": "收益率信息比率 (Return IR)",
+    "status": "failed",
+    "date": "2026-04-02",
+    "category": "动量",
+    "barra_style": "Momentum",
+    "source_type": "自研",
+    "description": "mean(daily_ret, 20d) / std(daily_ret, 20d)，成交额中性化。风险调整后的短期动量。",
+    "hypothesis": "高收益率IR=持续稳定上涨=趋势可靠",
+    "ic_mean": -0.0144,
+    "ic_t_stat": -1.55,
+    "monotonicity": -0.4,
+    "failure_reason": "IC=-0.014不显著(t=-1.55)，单调性-0.4。G1(低IR)最好(6.2%)但G5(高IR)也还行(2.2%)，中间G3(-3.2%)垫底。非线性关系不适合5分组框架。",
+    "data_files": [
+      "data/factor_ret_ir_v1.csv"
+    ]
   }
 ]

@@ -7,6 +7,7 @@
     "f_tail_risk_cvar_v1",
     "f_neg_day_freq_v1",
     "f_tae_v1",
+    "f_amp_level_v2",
     "ret_1d",
     "turnover",
     "amplitude",
@@ -79,6 +80,11 @@
     "f_tae_v1_chg5",
     "f_tae_v1_lag20",
     "f_tae_v1_chg20",
+    "f_amp_level_v2_rank",
+    "f_amp_level_v2_lag5",
+    "f_amp_level_v2_chg5",
+    "f_amp_level_v2_lag20",
+    "f_amp_level_v2_chg20",
     "inter_f_amihud_illiq_v2xf_shadow_pressure_v1_prod",
     "inter_f_amihud_illiq_v2xf_shadow_pressure_v1_diff",
     "inter_f_amihud_illiq_v2xf_overnight_momentum_v1_prod",
@@ -97,11 +103,11 @@
     "label_10d",
     "label_20d"
   ],
-  "n_features": 91,
-  "n_samples": 794981,
+  "n_features": 97,
+  "n_samples": 813541,
   "date_range": [
     "2022-10-10",
-    "2026-03-13"
+    "2026-03-24"
   ],
-  "built_at": "2026-03-24T09:19:43.521017"
+  "built_at": "2026-03-30T09:10:23.337708"
 }

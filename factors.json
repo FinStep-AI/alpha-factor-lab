@@ -835,5 +835,88 @@
     },
     "created_at": "2026-03-31",
     "status": "active"
+  },
+  {
+    "id": "turnover_decel_v1",
+    "name": "换手率减速因子 v1",
+    "name_en": "Turnover Deceleration v1",
+    "category": "流动性/情绪",
+    "description": "-log(MA5_turnover / MA20_turnover)，成交额OLS中性化。衡量短期换手率相对长期的减速程度。高因子值=近期换手缩量=噪声交易退出+筹码稳定。低因子值=换手骤增=散户追高/恐慌交易→后续回吐。",
+    "hypothesis": "短期换手率骤增意味着散户噪声交易（追高或恐慌），后续回吐；换手缩量意味着噪声退出，筹码稳定在理性投资者手中，后续收益更好",
+    "expected_direction": "正向（高因子值=换手减速=高预期收益）",
+    "factor_type": "流动性/情绪反转",
+    "formula": "neutralize(-log(MA5(turnover) / MA20(turnover)), log_amount_20d)",
+    "direction": 1,
+    "stock_pool": "中证1000",
+    "period": "2022-10-21 ~ 2026-02-27",
+    "rebalance_freq": 5,
+    "forward_days": 5,
+    "cost": 0.003,
+    "rating": "★★★★ 强",
+    "nav_data": "output/turnover_mom_neg_v1_5d/cumulative_returns.json",
+    "ic_data": "output/turnover_mom_neg_v1_5d/ic_series.json",
+    "upgrade_notes": "首版即达标。IC=0.022(t=3.29)极显著，单调性0.9，多空Sharpe=1.48，MDD仅-7.8%。与所有入库因子相关性均<0.21，独立性极强。",
+    "lessons_learned": [
+      "换手率加速方向（放量）是负信号，减速方向（缩量）是正信号——与turnover_level(高换手→高收益)看似矛盾但角度不同",
+      "turnover_level衡量换手率水平(高=关注度高)，turnover_decel衡量变化方向(缩量=噪声退出)",
+      "和vol_cv_neg(换手率稳定性)相关仅0.20，三个换手率维度(水平/稳定性/变化方向)互相独立",
+      "纯短期因子：5d有效但20d衰减(IC从0.022降到0.016不显著)，信号半衰期约1周",
+      "换手率70%偏高，适合周度调仓"
+    ],
+    "created": "2026-04-02",
+    "updated": "2026-04-02",
+    "metrics": {
+      "ic_mean": 0.02164,
+      "ic_std": 0.10093,
+      "ic_t": 3.294,
+      "ic_positive_ratio": 0.568,
+      "rank_ic": 0.04056,
+      "rank_ic_std": 0.10912,
+      "ir": 0.2144,
+      "ic_count": 162,
+      "long_short_sharpe": 1.4766,
+      "long_short_mdd": -0.0779,
+      "monotonicity": 0.9,
+      "group_sharpe": [
+        -0.434,
+        -0.088,
+        -0.151,
+        -0.062,
+        0.176
+      ],
+      "group_returns_annualized": [
+        -0.113,
+        -0.022,
+        -0.037,
+        -0.016,
+        0.045
+      ],
+      "group_mdd": [
+        -0.546,
+        -0.484,
+        -0.494,
+        -0.464,
+        -0.375
+      ]
+    },
+    "conclusion": "全面达标入库。换手率减速因子通过-log(MA5/MA20)衡量短期换手缩量程度。IC=0.022(t=3.29)在1%水平显著，单调性0.9，多空Sharpe=1.48，MDD仅-7.8%。与所有入库因子相关性均<0.21(max=vol_cv_neg:0.20)，独立性极强。三个换手率维度(水平/稳定性/变化方向)互补。",
+    "barra_style": "Sentiment",
+    "source_type": "自研",
+    "source_title": "换手率动量反转——短期换手加速是散户噪声信号",
+    "source_url": "",
+    "correlations": {
+      "amihud_illiq_v2": -0.067,
+      "shadow_pressure_v1": -0.033,
+      "overnight_momentum_v1": 0.119,
+      "gap_momentum_v1": -0.099,
+      "tail_risk_cvar_v1": -0.038,
+      "neg_day_freq_v1": 0.014,
+      "tae_v1": 0.045,
+      "pv_corr_v1": -0.115,
+      "amp_level_v2": 0.022,
+      "ma_disp_v1": -0.059,
+      "vol_cv_neg_v1": 0.204,
+      "turnover_decel_v1": 1.0
+    }
   }
 ]

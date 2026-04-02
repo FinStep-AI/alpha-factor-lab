@@ -1,180 +1,6 @@
 {
   "history": [
     {
-      "date": "20260303",
-      "zt_count": 82,
-      "dt_count": 53,
-      "zb_count": 24,
-      "max_streak": 3,
-      "temperature": 58,
-      "phase": "ferment"
-    },
-    {
-      "date": "20260304",
-      "zt_count": 43,
-      "dt_count": 13,
-      "zb_count": 20,
-      "max_streak": 4,
-      "temperature": 49,
-      "phase": "ferment"
-    },
-    {
-      "date": "20260304",
-      "zt_count": 43,
-      "dt_count": 13,
-      "zb_count": 20,
-      "max_streak": 4,
-      "temperature": 49,
-      "phase": "ferment",
-      "seal_rate": 68.3,
-      "leader": "亚盛集团(600108) 4连板 早封 炸板1次 封单0.99%",
-      "note": "PM盘中跟踪。温度从3/3的58继续降至49。封板率68.3%偏弱。龙头均不满足强封确认。跌停13家有亏钱效应。空仓观望。"
-    },
-    {
-      "date": "20260306",
-      "zt_count": 74,
-      "dt_count": 0,
-      "zb_count": 26,
-      "max_streak": 3,
-      "temperature": 68,
-      "phase": "climax",
-      "seal_rate": 74.0,
-      "leader": "王力安防(605268) 3连板 秒板一封不开 封单9.22% score=170",
-      "note": "收盘数据。温度从3/4的49回升至68，进入高潮期。涨停74家跌停0家，赚钱效应极强。3板梯队4只(王力安防/顺钠股份/卓郎智能/汉缆股份)。电网设备板块最活跃(4只涨停)。空仓观望：高潮期不追买，等待退潮后重新入场。"
-    },
-    {
-      "date": "20260309",
-      "zt_count": 42,
-      "dt_count": 3,
-      "zb_count": 34,
-      "max_streak": 4,
-      "temperature": 53,
-      "phase": "ferment",
-      "seal_rate": 55.3,
-      "leader": "王力安防(605268) 4连板 秒板一封不开 封单9.25% score=200",
-      "note": "收盘数据。温度从3/6高潮(68)下行至53。封板率仅55.3%极低(34/76炸板)。4板x2(王力安防/顺钠)+3板x1(美利云)+2板x8。电力板块活跃(电网设备6只涨停)。下行发酵非新周期,空仓观望。"
-    },
-    {
-      "date": "20260310",
-      "zt_count": 56,
-      "dt_count": 4,
-      "zb_count": 22,
-      "max_streak": 5,
-      "temperature": 70,
-      "phase": "climax",
-      "seal_rate": 71.8,
-      "leader": "王力安防(605268) 5连板 秒板一封不开 封单9.55% score=230",
-      "note": "收盘数据。日内V型反转：盘前温度36(退潮)→收盘温度70(高潮)。涨停56/跌停4/炸板22/封板率71.8%。温度走势68→53→36→70极不稳定。高潮期不新建仓+龙头秒板无法上车。空仓维持。"
-    },
-    {
-      "date": "20260311",
-      "zt_count": 9,
-      "dt_count": 0,
-      "zb_count": 2,
-      "max_streak": 6,
-      "temperature": 51,
-      "phase": "ferment"
-    },
-    {
-      "date": "20260313",
-      "zt_count": 6,
-      "dt_count": 0,
-      "zb_count": 0,
-      "max_streak": 5,
-      "temperature": 51,
-      "phase": "ferment"
-    },
-    {
-      "date": "20260313",
-      "zt_count": 58,
-      "dt_count": 12,
-      "zb_count": 19,
-      "max_streak": 5,
-      "temperature": 58,
-      "phase": "ferment"
-    },
-    {
-      "date": "20260316",
-      "zt_count": 4,
-      "dt_count": 0,
-      "zb_count": 0,
-      "max_streak": 2,
-      "temperature": 30,
-      "phase": "startup"
-    },
-    {
-      "date": "20260316",
-      "zt_count": 45,
-      "dt_count": 7,
-      "zb_count": 23,
-      "max_streak": 3,
-      "temperature": 50,
-      "phase": "ferment"
-    },
-    {
-      "date": "20260316",
-      "zt_count": 44,
-      "dt_count": 5,
-      "zb_count": 24,
-      "max_streak": 3,
-      "temperature": 43,
-      "phase": "ferment"
-    },
-    {
-      "date": "20260317",
-      "zt_count": 6,
-      "dt_count": 2,
-      "zb_count": 1,
-      "max_streak": 2,
-      "temperature": 30,
-      "phase": "startup"
-    },
-    {
-      "date": "20260317",
-      "zt_count": 37,
-      "dt_count": 11,
-      "zb_count": 19,
-      "max_streak": 4,
-      "temperature": 49,
-      "phase": "ferment"
-    },
-    {
-      "date": "20260317",
-      "zt_count": 39,
-      "dt_count": 10,
-      "zb_count": 17,
-      "max_streak": 4,
-      "temperature": 49,
-      "phase": "ferment"
-    },
-    {
-      "date": "20260318",
-      "zt_count": 4,
-      "dt_count": 1,
-      "zb_count": 0,
-      "max_streak": 3,
-      "temperature": 38,
-      "phase": "startup"
-    },
-    {
-      "date": "20260318",
-      "zt_count": 57,
-      "dt_count": 4,
-      "zb_count": 21,
-      "max_streak": 5,
-      "temperature": 73,
-      "phase": "climax"
-    },
-    {
-      "date": "20260318",
-      "zt_count": 57,
-      "dt_count": 4,
-      "zb_count": 21,
-      "max_streak": 5,
-      "temperature": 73,
-      "phase": "climax"
-    },
-    {
       "date": "20260319",
       "zt_count": 4,
       "dt_count": 0,
@@ -281,7 +107,169 @@
       "max_streak": 2,
       "temperature": 37,
       "phase": "startup"
+    },
+    {
+      "date": "20260325",
+      "zt_count": 84,
+      "dt_count": 1,
+      "zb_count": 14,
+      "max_streak": 8,
+      "temperature": 96,
+      "phase": "overheated"
+    },
+    {
+      "date": "20260325",
+      "zt_count": 84,
+      "dt_count": 1,
+      "zb_count": 14,
+      "max_streak": 8,
+      "temperature": 96,
+      "phase": "overheated"
+    },
+    {
+      "date": "20260326",
+      "zt_count": 5,
+      "dt_count": 0,
+      "zb_count": 0,
+      "max_streak": 3,
+      "temperature": 46,
+      "phase": "ferment"
+    },
+    {
+      "date": "20260326",
+      "zt_count": 40,
+      "dt_count": 9,
+      "zb_count": 17,
+      "max_streak": 9,
+      "temperature": 59,
+      "phase": "ferment"
+    },
+    {
+      "date": "20260326",
+      "zt_count": 39,
+      "dt_count": 8,
+      "zb_count": 18,
+      "max_streak": 3,
+      "temperature": 45,
+      "phase": "ferment"
+    },
+    {
+      "date": "20260327",
+      "zt_count": 3,
+      "dt_count": 0,
+      "zb_count": 0,
+      "max_streak": 2,
+      "temperature": 30,
+      "phase": "startup"
+    },
+    {
+      "date": "20260327",
+      "zt_count": 79,
+      "dt_count": 2,
+      "zb_count": 15,
+      "max_streak": 4,
+      "temperature": 76,
+      "phase": "climax"
+    },
+    {
+      "date": "20260327",
+      "zt_count": 78,
+      "dt_count": 2,
+      "zb_count": 16,
+      "max_streak": 4,
+      "temperature": 76,
+      "phase": "climax"
+    },
+    {
+      "date": "20260330",
+      "zt_count": 9,
+      "dt_count": 2,
+      "zb_count": 0,
+      "max_streak": 3,
+      "temperature": 38,
+      "phase": "startup"
+    },
+    {
+      "date": "20260330",
+      "zt_count": 63,
+      "dt_count": 10,
+      "zb_count": 16,
+      "max_streak": 5,
+      "temperature": 63,
+      "phase": "climax"
+    },
+    {
+      "date": "20260330",
+      "zt_count": 62,
+      "dt_count": 10,
+      "zb_count": 17,
+      "max_streak": 5,
+      "temperature": 63,
+      "phase": "climax"
+    },
+    {
+      "date": "20260331",
+      "zt_count": 1,
+      "dt_count": 1,
+      "zb_count": 0,
+      "max_streak": 1,
+      "temperature": 25,
+      "phase": "startup"
+    },
+    {
+      "date": "20260331",
+      "zt_count": 53,
+      "dt_count": 1,
+      "zb_count": 17,
+      "max_streak": 4,
+      "temperature": 65,
+      "phase": "climax"
+    },
+    {
+      "date": "20260331",
+      "zt_count": 53,
+      "dt_count": 1,
+      "zb_count": 17,
+      "max_streak": 4,
+      "temperature": 65,
+      "phase": "climax"
+    },
+    {
+      "date": "20260401",
+      "zt_count": 30,
+      "dt_count": 1,
+      "zb_count": 17,
+      "max_streak": 4,
+      "temperature": 50,
+      "phase": "ferment"
+    },
+    {
+      "date": "20260401",
+      "zt_count": 55,
+      "dt_count": 7,
+      "zb_count": 38,
+      "max_streak": 4,
+      "temperature": 51,
+      "phase": "ferment"
+    },
+    {
+      "date": "20260401",
+      "zt_count": 56,
+      "dt_count": 6,
+      "zb_count": 38,
+      "max_streak": 4,
+      "temperature": 51,
+      "phase": "ferment"
+    },
+    {
+      "date": "20260402",
+      "zt_count": 3,
+      "dt_count": 1,
+      "zb_count": 0,
+      "max_streak": 5,
+      "temperature": 43,
+      "phase": "ferment"
     }
   ],
-  "updated": "20260325"
+  "updated": "20260402"
 }

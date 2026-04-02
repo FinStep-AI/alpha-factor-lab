@@ -418,8 +418,12 @@ def build_feature_matrix(output_path=None, refresh=False):
     # 8. 预处理
     df = preprocess_features(df, feature_cols)
     
-    # 9. 删除标签全空的行 (最后N天)
-    df = df.dropna(subset=['label_5d']).reset_index(drop=True)
+    # 9. 分离：有标签(train) + 无标签(predict)，都保留
+    # 不再删除无标签行，predict模式需要最新数据
+    n_with_label = df['label_5d'].notna().sum()
+    n_no_label = df['label_5d'].isna().sum()
+    print(f"  有标签行: {n_with_label:,}, 无标签行(最近): {n_no_label:,}")
+    df = df.reset_index(drop=True)
     
     # 10. 统计
     print("\n" + "=" * 60)
