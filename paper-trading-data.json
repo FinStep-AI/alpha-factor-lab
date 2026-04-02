@@ -6,7 +6,7 @@
     "benchmark": "000300",
     "benchmark_name": "沪深300",
     "created_at": "2026-02-23 22:14:25",
-    "updated_at": "2026-04-02 08:31:21",
+    "updated_at": "2026-04-02 09:09:54",
     "status": "active",
     "players_count": 6
   },
@@ -4274,6 +4274,13 @@
           "summary": "新因子入库：成交量变异系数(反) v1",
           "detail": "构建20日成交量变异系数(取负)因子，市值中性化后回测：IC=0.0211(t=2.37)，Sharpe=1.10，单调性=0.80，MDD=-7.0%。与现有10个因子最大相关性仅0.12，独立性极好。入库factors.json。CLV收盘位置因子不达标(IC=-0.01)。",
           "recommendation": "持仓不变，周一调仓时纳入新因子"
+        },
+        {
+          "date": "2026-04-02",
+          "action": "hold",
+          "summary": "日常因子扫描：2个新因子均不达标，维持现有因子库",
+          "detail": "1) vol_wt_price_skew_v1(60日成交量加权价格偏度): IC=0.004 t=0.8 Sharpe=0.45 单调性=0.5。2) ret_skew_neg_v1(40日收益率负偏度/彩票效应): IC=0.004 t=0.68 Sharpe=1.06 单调性=0.5。两个因子截面区分度不足，不入库。当前因子库11个不变。",
+          "recommendation": "维持"
         }
       ],
       "rebalances": [
