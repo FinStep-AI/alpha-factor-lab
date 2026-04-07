@@ -6,7 +6,7 @@
     "benchmark": "000300",
     "benchmark_name": "沪深300",
     "created_at": "2026-02-23 22:14:25",
-    "updated_at": "2026-04-07 09:25:37",
+    "updated_at": "2026-04-07 09:37:26",
     "status": "active",
     "players_count": 6
   },
@@ -24,40 +24,40 @@
             "volume": 18400,
             "cost_price": 20.63,
             "avg_cost": 20.63,
-            "current_price": 19.16,
-            "market_value": 352544.0,
-            "pnl": -27048.0,
-            "pnl_pct": -7.13
+            "current_price": 19.28,
+            "market_value": 354752.0,
+            "pnl": -24840.0,
+            "pnl_pct": -6.54
           },
           "002038.SZ": {
             "name": "双鹭药业",
             "volume": 66600,
             "cost_price": 5.8,
             "avg_cost": 5.8,
-            "current_price": 8.98,
-            "market_value": 598068.0,
-            "pnl": 211788.0,
-            "pnl_pct": 54.83
+            "current_price": 8.69,
+            "market_value": 578754.0,
+            "pnl": 192474.0,
+            "pnl_pct": 49.83
           },
           "002237.SZ": {
             "name": "恒邦股份",
             "volume": 26700,
             "cost_price": 14.31,
             "avg_cost": 14.31,
-            "current_price": 14.43,
-            "market_value": 385281.0,
-            "pnl": 3204.0,
-            "pnl_pct": 0.84
+            "current_price": 14.49,
+            "market_value": 386883.0,
+            "pnl": 4806.0,
+            "pnl_pct": 1.26
           },
           "002506.SZ": {
             "name": "协鑫集成",
             "volume": 63200,
             "cost_price": 5.37,
             "avg_cost": 5.37,
-            "current_price": 4.21,
-            "market_value": 266072.0,
-            "pnl": -73312.0,
-            "pnl_pct": -21.6
+            "current_price": 4.33,
+            "market_value": 273656.0,
+            "pnl": -65728.0,
+            "pnl_pct": -19.37
           },
           "002716.SZ": {
             "name": "湖南白银",
@@ -74,130 +74,130 @@
             "volume": 30800,
             "cost_price": 12.26,
             "avg_cost": 12.26,
-            "current_price": 12.4,
-            "market_value": 381920.0,
-            "pnl": 4312.0,
-            "pnl_pct": 1.14
+            "current_price": 12.45,
+            "market_value": 383460.0,
+            "pnl": 5852.0,
+            "pnl_pct": 1.55
           },
           "002985.SZ": {
             "name": "北摩高科",
             "volume": 10800,
             "cost_price": 35.49,
             "avg_cost": 35.49,
-            "current_price": 35.03,
-            "market_value": 378324.0,
-            "pnl": -4968.0,
-            "pnl_pct": -1.3
+            "current_price": 35.1,
+            "market_value": 379080.0,
+            "pnl": -4212.0,
+            "pnl_pct": -1.1
           },
           "300027.SZ": {
             "name": "华谊兄弟",
             "volume": 247700,
             "cost_price": 1.66,
             "avg_cost": 1.66,
-            "current_price": 1.49,
-            "market_value": 369073.0,
-            "pnl": -42109.0,
-            "pnl_pct": -10.24
+            "current_price": 1.47,
+            "market_value": 364119.0,
+            "pnl": -47063.0,
+            "pnl_pct": -11.45
           },
           "300244.SZ": {
             "name": "迪安诊断",
             "volume": 21100,
             "cost_price": 18.42,
             "avg_cost": 18.42,
-            "current_price": 18.2,
-            "market_value": 384020.0,
-            "pnl": -4642.0,
-            "pnl_pct": -1.19
+            "current_price": 18.3,
+            "market_value": 386130.0,
+            "pnl": -2532.0,
+            "pnl_pct": -0.65
           },
           "300398.SZ": {
             "name": "飞凯材料",
             "volume": 15200,
             "cost_price": 25.51,
             "avg_cost": 25.51,
-            "current_price": 25.98,
-            "market_value": 394896.0,
-            "pnl": 7144.0,
-            "pnl_pct": 1.84
+            "current_price": 26.15,
+            "market_value": 397480.0,
+            "pnl": 9728.0,
+            "pnl_pct": 2.51
           },
           "300456.SZ": {
             "name": "赛微电子",
             "volume": 8500,
             "cost_price": 48.03,
             "avg_cost": 48.03,
-            "current_price": 48.7,
-            "market_value": 413950.0,
-            "pnl": 5695.0,
-            "pnl_pct": 1.39
+            "current_price": 49.8,
+            "market_value": 423300.0,
+            "pnl": 15045.0,
+            "pnl_pct": 3.69
           },
           "300624.SZ": {
             "name": "万兴科技",
             "volume": 5500,
             "cost_price": 73.01,
             "avg_cost": 73.01,
-            "current_price": 65.1,
-            "market_value": 358050.0,
-            "pnl": -43505.0,
-            "pnl_pct": -10.83
+            "current_price": 65.57,
+            "market_value": 360635.0,
+            "pnl": -40920.0,
+            "pnl_pct": -10.19
           },
           "301071.SZ": {
             "name": "力量钻石",
             "volume": 9100,
             "cost_price": 41.37,
             "avg_cost": 41.37,
-            "current_price": 39.32,
-            "market_value": 357812.0,
-            "pnl": -18655.0,
-            "pnl_pct": -4.96
+            "current_price": 39.28,
+            "market_value": 357448.0,
+            "pnl": -19019.0,
+            "pnl_pct": -5.05
           },
           "301175.SZ": {
             "name": "中科环保",
             "volume": 58900,
             "cost_price": 7.39,
             "avg_cost": 7.39,
-            "current_price": 5.95,
-            "market_value": 350455.0,
-            "pnl": -84816.0,
-            "pnl_pct": -19.49
+            "current_price": 5.99,
+            "market_value": 352811.0,
+            "pnl": -82460.0,
+            "pnl_pct": -18.94
           },
           "301392.SZ": {
             "name": "汇成真空",
             "volume": 3300,
             "cost_price": 111.77,
             "avg_cost": 111.77,
-            "current_price": 121.88,
-            "market_value": 402204.0,
-            "pnl": 33363.0,
-            "pnl_pct": 9.05
+            "current_price": 127.51,
+            "market_value": 420783.0,
+            "pnl": 51942.0,
+            "pnl_pct": 14.08
           },
           "301511.SZ": {
             "name": "德福科技",
             "volume": 10600,
             "cost_price": 35.53,
             "avg_cost": 35.53,
-            "current_price": 37.81,
-            "market_value": 400786.0,
-            "pnl": 24168.0,
-            "pnl_pct": 6.42
+            "current_price": 38.95,
+            "market_value": 412870.0,
+            "pnl": 36252.0,
+            "pnl_pct": 9.63
           },
           "600330.SH": {
             "name": "天通股份",
             "volume": 24100,
             "cost_price": 15.79,
             "avg_cost": 15.79,
-            "current_price": 17.01,
-            "market_value": 409941.0,
-            "pnl": 29402.0,
-            "pnl_pct": 7.73
+            "current_price": 17.18,
+            "market_value": 414038.0,
+            "pnl": 33499.0,
+            "pnl_pct": 8.8
           },
           "600531.SH": {
             "name": "豫光金铅",
             "volume": 29800,
             "cost_price": 12.98,
             "avg_cost": 12.98,
-            "current_price": 12.75,
-            "market_value": 379950.0,
-            "pnl": -6854.0,
-            "pnl_pct": -1.77
+            "current_price": 12.71,
+            "market_value": 378758.0,
+            "pnl": -8046.0,
+            "pnl_pct": -2.08
           },
           "600586.SH": {
             "name": "金晶科技",
@@ -214,63 +214,63 @@
             "volume": 53700,
             "cost_price": 7.0,
             "avg_cost": 7.0,
-            "current_price": 5.71,
-            "market_value": 306627.0,
-            "pnl": -69273.0,
-            "pnl_pct": -18.43
+            "current_price": 5.6,
+            "market_value": 300720.0,
+            "pnl": -75180.0,
+            "pnl_pct": -20.0
           },
           "600916.SH": {
             "name": "中国黄金",
             "volume": 41100,
             "cost_price": 9.11,
             "avg_cost": 9.11,
-            "current_price": 9.26,
-            "market_value": 380586.0,
-            "pnl": 6165.0,
-            "pnl_pct": 1.65
+            "current_price": 9.23,
+            "market_value": 379353.0,
+            "pnl": 4932.0,
+            "pnl_pct": 1.32
           },
           "601890.SH": {
             "name": "亚星锚链",
             "volume": 37000,
             "cost_price": 10.4,
             "avg_cost": 10.4,
-            "current_price": 9.91,
-            "market_value": 366670.0,
-            "pnl": -18130.0,
-            "pnl_pct": -4.71
+            "current_price": 9.95,
+            "market_value": 368150.0,
+            "pnl": -16650.0,
+            "pnl_pct": -4.33
           },
           "603083.SH": {
             "name": "剑桥科技",
             "volume": 3500,
             "cost_price": 110.02,
             "avg_cost": 110.02,
-            "current_price": 102.99,
-            "market_value": 360465.0,
-            "pnl": -24605.0,
-            "pnl_pct": -6.39
+            "current_price": 103.0,
+            "market_value": 360500.0,
+            "pnl": -24570.0,
+            "pnl_pct": -6.38
           },
           "603162.SH": {
             "name": "海通发展",
             "volume": 28700,
             "cost_price": 12.61,
             "avg_cost": 12.61,
-            "current_price": 14.0,
-            "market_value": 401800.0,
-            "pnl": 39893.0,
-            "pnl_pct": 11.02
+            "current_price": 14.05,
+            "market_value": 403235.0,
+            "pnl": 41328.0,
+            "pnl_pct": 11.42
           },
           "603533.SH": {
             "name": "掌阅科技",
             "volume": 15400,
             "cost_price": 24.5,
             "avg_cost": 24.5,
-            "current_price": 23.89,
-            "market_value": 367906.0,
-            "pnl": -9394.0,
-            "pnl_pct": -2.49
+            "current_price": 23.86,
+            "market_value": 367444.0,
+            "pnl": -9856.0,
+            "pnl_pct": -2.61
           }
         },
-        "total_value": 9602040.88,
+        "total_value": 9638999.88,
         "last_update": "2026-04-07"
       },
       "nav_history": {
@@ -4559,14 +4559,14 @@
             "name": "东诚药业",
             "volume": 300000,
             "avg_cost": 14.48,
-            "current_price": 14.58,
-            "market_value": 4374000.0,
-            "pnl": 30000.0,
-            "pnl_pct": 0.69,
+            "current_price": 14.1,
+            "market_value": 4230000.0,
+            "pnl": -114000.0,
+            "pnl_pct": -2.62,
             "entry_date": "2026-03-30"
           }
         },
-        "total_value": 9165066.12,
+        "total_value": 9021066.12,
         "last_update": "2026-04-07"
       },
       "nav_history": {
@@ -5442,22 +5442,88 @@
       "style": "趋势跟踪 · 板块轮动 · 全A股扫描 · 中长线波段",
       "description": "BBI+MA60趋势判断，KDJ低位捕捉买点，板块轮动做趋势收益。核心逻辑：阳率×盈亏比最大化。",
       "portfolio": {
-        "cash": 9133211.729999995,
+        "cash": 397728.2199999951,
         "positions": {
           "300981.SZ": {
             "code": "300981.SZ",
             "name": "中红医疗",
-            "volume": 56500,
-            "avg_cost": 13.97,
-            "current_price": 14.21,
-            "market_value": 802865.0,
-            "pnl": 13560.0,
-            "pnl_pct": 1.72,
+            "volume": 141400,
+            "avg_cost": 14.366280056577086,
+            "current_price": 14.26,
+            "market_value": 805690.0,
+            "pnl": 16385.0,
+            "pnl_pct": 2.08,
             "entry_date": "2026-04-02",
-            "max_pnl_pct": 1.72
+            "max_pnl_pct": 5.3
+          },
+          "688519.SH": {
+            "code": "688519.SH",
+            "name": "南亚新材",
+            "volume": 9600,
+            "avg_cost": 130.96,
+            "current_price": 130.96,
+            "market_value": 1257216.0,
+            "pnl": 0,
+            "pnl_pct": 0,
+            "entry_date": "2026-04-07"
+          },
+          "002350.SZ": {
+            "code": "002350.SZ",
+            "name": "北京科锐",
+            "volume": 89200,
+            "avg_cost": 13.94,
+            "current_price": 13.94,
+            "market_value": 1243448.0,
+            "pnl": 0,
+            "pnl_pct": 0,
+            "entry_date": "2026-04-07"
+          },
+          "001309.SZ": {
+            "code": "001309.SZ",
+            "name": "德明利",
+            "volume": 3400,
+            "avg_cost": 367.56,
+            "current_price": 367.56,
+            "market_value": 1249704.0,
+            "pnl": 0,
+            "pnl_pct": 0,
+            "entry_date": "2026-04-07"
+          },
+          "000423.SZ": {
+            "code": "000423.SZ",
+            "name": "东阿阿胶",
+            "volume": 22200,
+            "avg_cost": 55.95,
+            "current_price": 55.95,
+            "market_value": 1242090.0,
+            "pnl": 0,
+            "pnl_pct": 0,
+            "entry_date": "2026-04-07"
+          },
+          "301587.SZ": {
+            "code": "301587.SZ",
+            "name": "中瑞股份",
+            "volume": 48800,
+            "avg_cost": 25.39,
+            "current_price": 25.39,
+            "market_value": 1239032.0,
+            "pnl": 0,
+            "pnl_pct": 0,
+            "entry_date": "2026-04-07"
+          },
+          "300432.SZ": {
+            "code": "300432.SZ",
+            "name": "富临精工",
+            "volume": 55800,
+            "avg_cost": 22.41,
+            "current_price": 22.41,
+            "market_value": 1250478.0,
+            "pnl": 0,
+            "pnl_pct": 0,
+            "entry_date": "2026-04-07"
           }
         },
-        "total_value": 9936076.73,
+        "total_value": 9896060.22,
         "last_update": "2026-04-07"
       },
       "nav_history": {
@@ -8825,16 +8891,142 @@
           "pnl": 616.0,
           "pnl_pct": 34.03,
           "reason": "止盈第一档：累计盈利+34%远超7%阈值，仅余100股残仓全部清仓"
+        },
+        {
+          "date": "2026-04-07",
+          "code": "688519.SH",
+          "name": "南亚新材",
+          "direction": "buy",
+          "price": 130.96,
+          "volume": 9600,
+          "amount": 1257216.0,
+          "fees": {
+            "commission": 377.16,
+            "stamp_duty": 0,
+            "transfer_fee": 12.57,
+            "slippage_cost": 1257.22,
+            "total": 1646.95
+          },
+          "pnl": 0,
+          "pnl_pct": 0,
+          "reason": "主策略信号: J=12.8<13 + 确认N型上升趋势 + 量比6.0异常放量，四条件齐备"
+        },
+        {
+          "date": "2026-04-07",
+          "code": "002350.SZ",
+          "name": "北京科锐",
+          "direction": "buy",
+          "price": 13.94,
+          "volume": 89200,
+          "amount": 1243448.0,
+          "fees": {
+            "commission": 373.03,
+            "stamp_duty": 0,
+            "transfer_fee": 12.43,
+            "slippage_cost": 1243.45,
+            "total": 1628.92
+          },
+          "pnl": 0,
+          "pnl_pct": 0,
+          "reason": "主策略信号: J=7.5<13 + 确认N型上升趋势 + 量比4.4，低J值买入"
+        },
+        {
+          "date": "2026-04-07",
+          "code": "001309.SZ",
+          "name": "德明利",
+          "direction": "buy",
+          "price": 367.56,
+          "volume": 3400,
+          "amount": 1249704.0,
+          "fees": {
+            "commission": 374.91,
+            "stamp_duty": 0,
+            "transfer_fee": 12.5,
+            "slippage_cost": 1249.7,
+            "total": 1637.11
+          },
+          "pnl": 0,
+          "pnl_pct": 0,
+          "reason": "主策略信号: J=-2.6<13 + 确认N型上升趋势 + 量比4.4，J值极低超卖"
+        },
+        {
+          "date": "2026-04-07",
+          "code": "000423.SZ",
+          "name": "东阿阿胶",
+          "direction": "buy",
+          "price": 55.95,
+          "volume": 22200,
+          "amount": 1242090.0,
+          "fees": {
+            "commission": 372.63,
+            "stamp_duty": 0,
+            "transfer_fee": 12.42,
+            "slippage_cost": 1242.09,
+            "total": 1627.14
+          },
+          "pnl": 0,
+          "pnl_pct": 0,
+          "reason": "主策略信号: J=7.2<13 + 确认N型上升趋势，低J值经典买入"
+        },
+        {
+          "date": "2026-04-07",
+          "code": "300981.SZ",
+          "name": "中红医疗",
+          "direction": "buy",
+          "price": 14.63,
+          "volume": 84900,
+          "amount": 1242087.0,
+          "fees": {
+            "commission": 372.63,
+            "stamp_duty": 0,
+            "transfer_fee": 12.42,
+            "slippage_cost": 1242.09,
+            "total": 1627.13
+          },
+          "pnl": 0,
+          "pnl_pct": 0,
+          "reason": "金叉缩量回调: BBI金叉18天+放量13.78x+缩量回调46.2%至半量以下，Score=83最高分"
+        },
+        {
+          "date": "2026-04-07",
+          "code": "301587.SZ",
+          "name": "中瑞股份",
+          "direction": "buy",
+          "price": 25.39,
+          "volume": 48800,
+          "amount": 1239032.0,
+          "fees": {
+            "commission": 371.71,
+            "stamp_duty": 0,
+            "transfer_fee": 12.39,
+            "slippage_cost": 1239.03,
+            "total": 1623.13
+          },
+          "pnl": 0,
+          "pnl_pct": 0,
+          "reason": "金叉缩量回调: BBI金叉9天+放量9.03x+缩量回调48.3%至半量以下，Score=83最高分"
+        },
+        {
+          "date": "2026-04-07",
+          "code": "300432.SZ",
+          "name": "富临精工",
+          "direction": "buy",
+          "price": 22.41,
+          "volume": 55800,
+          "amount": 1250478.0,
+          "fees": {
+            "commission": 375.14,
+            "stamp_duty": 0,
+            "transfer_fee": 12.5,
+            "slippage_cost": 1250.48,
+            "total": 1638.13
+          },
+          "pnl": 0,
+          "pnl_pct": 0,
+          "reason": "金叉缩量回调: BBI金叉17天+放量2.95x+缩量回调57.2%，J=-10.9超低极度超卖"
         }
       ],
       "decisions": [
-        {
-          "date": "2026-03-19",
-          "action": "hold",
-          "summary": "收盘持仓检查：8只持仓全部收盘价>BBI>MA60，趋势完好无止损/止盈触发。泰坦股份+13.0%/京投发展+18.9%/沪电股份+7.3%已完成止盈1（今晨卖半仓），进入止盈2阶段（不破BBI持有）。华塑+2.5%/佳创+1.7%/蓝焰+6.3%/陕天然气+1.5%/新奥+1.8%均正常持有。组合总值约1011.2万（+1.12%），现金534.0万+持仓477.3万。",
-          "detail": "【收盘持仓逐一检查】\n\n1.泰坦股份(003036) 成本18.10→收盘20.45(+12.98%)，BBI=18.81，价>BBI✅，入场3/9，今晨已执行止盈1卖半仓(21400股@20.94)，剩余21500股进入止盈2。\n2.京投发展(600683) 成本8.30→收盘9.87(+18.92%)，BBI=8.88，价>BBI✅，入场3/9，今晨已执行止盈1卖半仓(13800股@9.98)，剩余13900股进入止盈2。\n3.沪电股份(002463) 成本80.48→收盘86.33(+7.27%)，BBI=82.45，价>BBI✅，入场3/10，今晨已执行止盈1卖半仓(900股@88.80)，剩余1000股进入止盈2。\n4.华塑控股(000509.SZ) 成本4.03→收盘4.13(+2.48%)，BBI=3.94，价>BBI✅，入场3/18（T+1观察期结束），趋势健康。\n5.佳创视讯(300264.SZ) 成本10.20→收盘10.37(+1.67%)，BBI=10.16，价>BBI✅，入场3/18，趋势健康。\n6.蓝焰控股(000968.SZ) 成本9.23→收盘9.81(+6.28%)，BBI=9.21，价>BBI✅，入场3/19（今日新建仓T+0观察期），能源板块共振，表现优异。\n7.陕天然气(002267.SZ) 成本8.01→收盘8.13(+1.50%)，BBI=8.01，价>BBI✅，入场3/19（T+0），能源板块共振。\n8.新奥股份(600803.SH) 成本22.60→收盘23.01(+1.81%)，BBI=21.82，价>BBI✅，入场3/19（T+0），金叉缩量回调信号，能源板块共振。\n\n【组合状态】\n现金: 5,339,947元 (52.8%)\n持仓市值: 4,772,543元 (47.2%)\n组合总值: 10,112,490元 (+1.12%)\n持仓8只，目标区间5-10只，结构合理。\n\n【今日操作回顾】\n晨扫：止盈3笔（泰坦/京投/沪电各卖半仓），止损2笔（海鸥/江钨全清），新买3只（蓝焰/陕天然气/新奥，能源天然气板块共振）。\n午盘：止损1笔（恒华科技）。\n收盘：无新操作。\n全天交易9笔，净卖出释放现金约227万。",
-          "recommendation": "全部持有。明日关注：1)泰坦/京投/沪电是否跌破BBI（止盈2触发线）；2)蓝焰控股逼近+7%止盈1线(9.88)，明日可能触发；3)陕天然气/新奥趋势起步，给予观察时间。"
-        },
         {
           "date": "2026-03-20",
           "action": "sell",
@@ -9058,6 +9250,14 @@
           "summary": "午盘维持持仓不变。持仓中红医疗+1.72%无止盈止损触发。扫描3只候选（中红已持有，美利云/华电辽能score仅50），新候选信号弱且无板块集中，不新建仓。",
           "detail": "午盘扫描全A5093只，过漏斗剩3只候选。1）中红医疗（已持有）pullback信号score=75，BBI金叉17天+放量13.78x+缩量回调48.6%，当前+1.72%浮盈，价格14.21>BBI13.95，继续持有。2）美利云sz000815主策略J=3，但今日-1.48%，价格19.37仅略高于BBI19.32（差0.05元），随时可能破位，不宜追入。3）华电辽能sh600396主策略J=-20.2，今日-3.54%大跌，价格7.08=BBI7.08已贴线，量比0.85缩量下跌，不符合买入条件。三只候选分属3个不同行业，无板块集中度。持仓止损止盈检查0条触发。综合判断：市场信号偏弱，维持现有1只持仓观望。",
           "recommendation": "继续持有中红医疗，关注BBI线13.95的支撑。若尾盘或明日跌破BBI则需警惕。新候选信号质量不足，等待更好机会。"
+        },
+        {
+          "date": "2026-04-07",
+          "action": "buy",
+          "summary": "全仓空仓状态，扫描全A获20只候选（4主策略+3单针下30+13金叉缩量回调），无板块集中度。选择4只主策略信号（J<13+确认上升趋势）+ 4只高分金叉缩量回调，共8只均配约125万/只，分散持仓降低单只风险。",
+          "detail": "当前NAV=0.9936（-0.64%），全现金10,000,000。扫描5094只股票，通过五级漏斗：L1基础4932只→L2趋势457只→排除46只长阴放量→L3硬过滤出20只候选。主策略4只全部入选（南亚新材/北京科锐/德明利/东阿阿胶），均满足J<13+N型上升趋势+P>BBI+BBI>MA60四条件。金叉缩量回调选择得分最高的4只（中红医疗83/中瑞股份83/富临精工68/富祥药业68），均有明显的放量突破后缩量回调至半量模式。无热门板块集中，个股分散配置。持仓检查：无止损止盈触发（空仓）。",
+          "recommendation": "建议8只等权买入，每只约125万。主策略信号优先级最高（确认上升趋势+J低位超卖），金叉缩量回调作为补充。注意德明利股价366元较高、单手仓位较大，需关注流动性。今日开盘后关注各股10分钟VWAP作为买入价基准。",
+          "exec_summary": "成功7笔，失败1笔"
         }
       ],
       "rebalances": [],
@@ -9069,8 +9269,8 @@
         "calmar_ratio": -1.23,
         "win_rate": 44.66,
         "profit_loss_ratio": 1.35,
-        "total_trades": 170,
-        "total_fees": 206087.2700000001,
+        "total_trades": 177,
+        "total_fees": 217515.78000000014,
         "current_positions": 1,
         "turnover_rate": 0.0
       },
@@ -9090,14 +9290,14 @@
             "name": "津药药业",
             "volume": 429600,
             "avg_cost": 5.76,
-            "current_price": 6.97,
-            "market_value": 2994312.0,
-            "pnl": 519816.0,
-            "pnl_pct": 21.01,
+            "current_price": 7.34,
+            "market_value": 3153264.0,
+            "pnl": 678768.0,
+            "pnl_pct": 27.43,
             "entry_date": "2026-04-01"
           }
         },
-        "total_value": 9342980.19,
+        "total_value": 9501932.19,
         "last_update": "2026-04-07"
       },
       "trades": [
@@ -9556,17 +9756,17 @@
       "description": "追踪市场热点新闻，挖掘受益标的，快进快出。3-5天周期，多热点分散持仓。",
       "portfolio": {
         "cash": 4488656.090000002,
-        "total_value": 9410056.09,
+        "total_value": 9401916.09,
         "positions": {
           "300347.SZ": {
             "code": "300347.SZ",
             "name": "泰格医药",
             "volume": 33400,
             "avg_cost": 57.05,
-            "current_price": 55.3,
-            "market_value": 1847020.0,
-            "pnl": -58450.0,
-            "pnl_pct": -3.07,
+            "current_price": 55.6,
+            "market_value": 1857040.0,
+            "pnl": -48430.0,
+            "pnl_pct": -2.54,
             "entry_date": "2026-04-01"
           },
           "603456.SH": {
@@ -9574,10 +9774,10 @@
             "name": "九洲药业",
             "volume": 107600,
             "avg_cost": 17.74,
-            "current_price": 17.05,
-            "market_value": 1834580.0,
-            "pnl": -74244.0,
-            "pnl_pct": -3.89,
+            "current_price": 16.95,
+            "market_value": 1823820.0,
+            "pnl": -85004.0,
+            "pnl_pct": -4.45,
             "entry_date": "2026-04-01"
           },
           "300709.SZ": {
@@ -9585,10 +9785,10 @@
             "name": "精研科技",
             "volume": 20000,
             "avg_cost": 39.97,
-            "current_price": 39.97,
-            "market_value": 799400.0,
-            "pnl": 0,
-            "pnl_pct": 0,
+            "current_price": 40.65,
+            "market_value": 813000.0,
+            "pnl": 13600.0,
+            "pnl_pct": 1.7,
             "entry_date": "2026-04-07"
           },
           "002866.SZ": {
@@ -9596,10 +9796,10 @@
             "name": "传艺科技",
             "volume": 20000,
             "avg_cost": 22.02,
-            "current_price": 22.02,
-            "market_value": 440400.0,
-            "pnl": 0,
-            "pnl_pct": 0,
+            "current_price": 20.97,
+            "market_value": 419400.0,
+            "pnl": -21000.0,
+            "pnl_pct": -4.77,
             "entry_date": "2026-04-07"
           }
         },
@@ -10425,7 +10625,7 @@
       0.951433,
       0.943336,
       0.943336,
-      0.943336
+      0.944413
     ],
     "start_value": 4707.54
   },
@@ -10472,7 +10672,7 @@
         "sharpe_ratio": -4.78,
         "max_drawdown_pct": 7.41,
         "current_nav": 0.941168,
-        "total_trades": 20,
+        "total_trades": 22,
         "rank": 4
       },
       {
@@ -10498,7 +10698,7 @@
         "rank": 6
       }
     ],
-    "updated_at": "2026-04-07 09:01:02",
+    "updated_at": "2026-04-07 09:30:04",
     "benchmark_nav": 0.992552
   },
   "quant": {
