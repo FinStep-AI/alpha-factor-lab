@@ -2297,5 +2297,207 @@
     "data_files": [
       "data/factor_ret_ir_v1.csv"
     ]
+  },
+  {
+    "factor_id": "amt_trend_slope_v1",
+    "factor_name": "成交额增长斜率 (Amount Trend Slope)",
+    "status": "failed",
+    "date": "2026-04-03",
+    "category": "资金流/趋势",
+    "barra_style": "Sentiment",
+    "source_type": "自研",
+    "source_title": "成交额20日OLS线性回归标准化斜率",
+    "description": "对过去20日成交额做OLS回归,取slope/mean(amount)。成交额中性化。高斜率=资金持续流入。",
+    "hypothesis": "成交额持续放大的股票获得更多资金关注,后续收益更高",
+    "ic_mean": -0.0197,
+    "ic_t_stat": -3.01,
+    "monotonicity": 0.0,
+    "failure_reason": "IC显著(t=-3.01)但方向反(缩量更好)。翻转后IC=0.020但单调性=0(G1=14%跳出,G2-G5混乱)。非线性分层。",
+    "data_files": [
+      "data/factor_amt_trend_slope_v1.csv"
+    ]
+  },
+  {
+    "factor_id": "vol_wt_skew_v1",
+    "factor_name": "成交额加权收益偏度 (Volume-Weighted Return Skewness)",
+    "status": "failed",
+    "date": "2026-04-03",
+    "category": "量价/分布",
+    "barra_style": "Sentiment",
+    "source_type": "自研",
+    "source_title": "成交额加权的日收益率偏度(20日)",
+    "description": "用成交额作权重计算日收益率偏度。高正偏度=大成交额日集中在正收益。",
+    "hypothesis": "大资金日偏向上涨的股票看多力量占优",
+    "ic_mean": -0.0006,
+    "ic_t_stat": -0.13,
+    "monotonicity": 0.2,
+    "failure_reason": "IC≈0(t=-0.13)完全无信号。截面上成交额加权偏度无选股能力。",
+    "data_files": [
+      "data/factor_vol_wt_skew_v1.csv"
+    ]
+  },
+  {
+    "factor_id": "ret_accel_v1",
+    "factor_name": "收益率加速度 (Return Acceleration)",
+    "status": "failed",
+    "date": "2026-04-03",
+    "category": "动量",
+    "barra_style": "Momentum",
+    "source_type": "自研",
+    "source_title": "后10天累计收益-前10天累计收益(20日窗口)",
+    "description": "衡量收益率加速度:近10天vs远10天的累计收益差。高加速=动量增强。",
+    "hypothesis": "收益率加速(减速)的股票有动量(反转)延续",
+    "ic_mean": -0.0193,
+    "ic_t_stat": -2.35,
+    "monotonicity": -0.4,
+    "failure_reason": "IC显著(t=-2.35)方向反(减速更好)。翻转后IC=0.019不达标(需>0.02),单调性=0.4(G4=16%跳出,G5=9%掉回)。",
+    "data_files": [
+      "data/factor_ret_accel_v1.csv"
+    ]
+  },
+  {
+    "factor_id": "ma_align_v1",
+    "factor_name": "均线多头排列度 (MA Alignment Score)",
+    "status": "failed",
+    "date": "2026-04-03",
+    "category": "趋势",
+    "barra_style": "Momentum",
+    "source_type": "自研",
+    "source_title": "MA5/10/20/60 pair-wise多头排列一致性比例",
+    "description": "计算4条均线所有配对中短MA>长MA的比例。1.0=完美多头,0.0=完美空头。",
+    "hypothesis": "多头排列(趋势向上)的股票有动量延续效应",
+    "ic_mean": -0.0058,
+    "ic_t_stat": -0.67,
+    "monotonicity": 0.3,
+    "failure_reason": "IC≈0(t=-0.67)无显著性。G5=15%跳出但整体无序。多头排列度作为截面因子无效——可能因为排列方向在截面上被中性化后信息消失(与ma_disp衡量发散度不同)。",
+    "lessons_learned": "ma_disp(离散度)有效但ma_align(方向一致性)无效,说明均线系统中\"趋势有多明确\"比\"趋势是否向上\"更有截面选股价值。",
+    "data_files": [
+      "data/factor_ma_align_v1.csv"
+    ]
+  },
+  {
+    "factor_id": "amp_cv_neg_v1",
+    "factor_name": "振幅变异系数(反) (Amplitude CV Negative)",
+    "status": "failed",
+    "date": "2026-04-03",
+    "category": "波动率",
+    "barra_style": "Volatility",
+    "source_type": "自研",
+    "source_title": "-std(amplitude)/mean(amplitude), 20日窗口",
+    "description": "振幅的变异系数取负。低CV=振幅稳定=价格行为有规律。",
+    "hypothesis": "振幅稳定(vol_cv_neg的amplitude版)的股票有更高预期收益",
+    "ic_mean": 0.0097,
+    "ic_t_stat": 1.77,
+    "monotonicity": 0.4,
+    "failure_reason": "IC=0.010不达标(需>0.02),mono=0.4(G4=20%跳出,G5=10%掉回)。vol_cv_neg用成交量有效(IC=0.021),但振幅版本信号更弱。",
+    "data_files": [
+      "data/factor_amp_cv_neg_v1.csv"
+    ]
+  },
+  {
+    "factor_id": "gap_asym_v1",
+    "factor_name": "涨跌缺口不对称性 (Gap Asymmetry)",
+    "status": "failed",
+    "date": "2026-04-03",
+    "category": "量价/微观结构",
+    "barra_style": "Sentiment",
+    "source_type": "自研",
+    "source_title": "log(上涨日跳空均值/下跌日跳空均值), 20日窗口",
+    "description": "衡量上涨日和下跌日跳空幅度的不对称性。正=上涨日跳空更大。",
+    "hypothesis": "上涨日跳空大/下跌日跳空小=看多力量在集合竞价占优",
+    "ic_mean": -0.0021,
+    "ic_t_stat": -0.51,
+    "monotonicity": -0.3,
+    "failure_reason": "IC≈0(t=-0.51)完全无信号。涨跌日的跳空幅度不对称性在截面上无选股能力。",
+    "data_files": [
+      "data/factor_gap_asym_v1.csv"
+    ]
+  },
+  {
+    "factor_id": "hlpvr_v1",
+    "factor_name": "高低价位成交额比 (High-Low Price Volume Ratio)",
+    "status": "failed",
+    "date": "2026-04-03",
+    "category": "量价/资金流",
+    "barra_style": "Sentiment",
+    "source_type": "自研",
+    "source_title": "log(收盘>MA20日均额 / 收盘<MA20日均额)",
+    "description": "比较价格高于和低于MA20时的平均成交额。高=高位时放量=上方有资金支撑。",
+    "hypothesis": "高于均线时放量的股票有资金支撑,后续收益更好",
+    "ic_mean": -0.0011,
+    "ic_t_stat": -0.18,
+    "monotonicity": -0.3,
+    "failure_reason": "IC≈0(t=-0.18)完全无信号。且样本量偏小(持仓仅130vs正常193)——要求至少3天above和3天below导致过滤太多。",
+    "data_files": [
+      "data/factor_hlpvr_v1.csv"
+    ]
+  },
+  {
+    "date": "2026-04-06",
+    "source_type": "研报",
+    "source_title": "【方正金工】成交量激增时刻蕴含的alpha信息——多因子选股系列研究之一",
+    "source_url": "https://bigquant.com/wiki/doc/mVbNMncBPm",
+    "factor_name": "适度冒险因子（日线近似版）",
+    "factor_id": "moderate_risk_v1",
+    "original_metric": {
+      "RankIC": -0.0889,
+      "ICIR": -4.84,
+      "sharpe_long_short": 4.1,
+      "note": "原文使用分钟级数据"
+    },
+    "our_metric": {
+      "IC_raw": -0.0442,
+      "t_raw": -2.8,
+      "IC_neutral": -0.011,
+      "t_neutral": -0.89,
+      "sharpe_neutral": 0.004,
+      "monotonicity_neutral": 0.1
+    },
+    "diff_notes": "日线近似vs原文分钟级：原始IC绝对值|0.044|尚可但主要来自市值暴露。市值中性化后IC降至-0.011（不显著），因子完全失效。日线无法捕捉日内成交量激增的微观结构信息。",
+    "conclusion": "不入库。日线数据无法有效近似分钟级成交量激增因子，中性化后无增量alpha。"
+  },
+  {
+    "date": "2026-04-07",
+    "source_type": "SSRN论文",
+    "source_title": "Bali, Cakici & Whitelaw (2011) MAX Effect + Maxing Out Short-term Reversals",
+    "source_url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4622831",
+    "factor_tested": "max_ret_10d",
+    "original_metric": "MAX因子在美股周频反转中显著(long-short月化alpha 1%+)",
+    "our_metric": "IC=0.011(t=0.79), Sharpe=1.07, 单调性=0.6",
+    "diff_notes": "MAX因子在A股中证1000上不显著。分组不单调(G3>G5)。彩票效应在A股小盘股不明显，可能因为涨跌停板限制极端收益。",
+    "conclusion": "不达标，不入库"
+  },
+  {
+    "date": "2026-04-07",
+    "source_type": "SSRN论文变体",
+    "source_title": "neg_min_ret_10d (-MIN factor, 回避最大单日亏损)",
+    "source_url": "https://doi.org/10.1016/j.jfineco.2010.08.014",
+    "factor_tested": "neg_min_ret_10d",
+    "original_metric": "MIN effect在美股显著",
+    "our_metric": "IC=0.026(t=2.12), Sharpe=1.62, 单调性=0.7",
+    "diff_notes": "与已有tail_risk_cvar_v1高度相似(同为下跌尾部因子)。单调性0.7不达标(需>0.8)。G2-G5区分度差。",
+    "conclusion": "不达标(单调性不足)，且与CVaR冗余"
+  },
+  {
+    "date": "2026-04-07",
+    "source_type": "自研",
+    "source_title": "Information Discreteness (Lou, Polk & Skouras 2019)",
+    "source_url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2856453",
+    "factor_tested": "info_disc_v1",
+    "original_metric": "信息离散度在美股预测动量反转,long-short显著",
+    "our_metric": "IC=-0.004(t=-0.58), Sharpe=0.17",
+    "diff_notes": "A股中证1000上完全无效，正反方向均不显著。可能因为A股散户主导,动量/反转机制不同",
+    "conclusion": "完全不达标，废弃"
+  },
+  {
+    "date": "2026-04-07",
+    "source_type": "自研",
+    "source_title": "量价协同度因子 Volume-Price Synchronicity",
+    "source_url": "",
+    "factor_tested": "vp_sync_v1 / vp_wsync_20d",
+    "original_metric": "自研因子,无原文对比",
+    "our_metric": "v1: IC=0.018(t=2.10),Sharpe=0.95,单调性=1.0 | v2加权: IC=0.021(t=1.74),Sharpe=1.29,单调性=0.9",
+    "diff_notes": "有潜力的新方向。v1单调性完美但IC=0.018略低于0.02门槛; v2加权版IC达标但t值不足。两版各有一项边界不达标。40日窗口反而更差。换手率偏高(~75%)。建议后续用换手率/成交额变化替代成交量变化再试。",
+    "conclusion": "边界不达标，暂不入库。记录为候选方向"
   }
 ]
