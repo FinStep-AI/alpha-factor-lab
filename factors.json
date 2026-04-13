@@ -918,5 +918,90 @@
       "vol_cv_neg_v1": 0.204,
       "turnover_decel_v1": 1.0
     }
+  },
+  {
+    "id": "informed_flow_v1",
+    "name": "知情交易强度 v1",
+    "name_en": "Informed Flow Intensity v1",
+    "category": "量价/微观结构",
+    "description": "|ret|/turnover的20日均值(对数), 衡量每单位换手的价格冲击。高值=知情交易者主导, 价格向信息方向移动。",
+    "hypothesis": "知情交易强度高的股票, 价格向信息方向移动, 动量延续。Kyle(1985) lambda的实证版。",
+    "expected_direction": "反向（低知情交易强度=高预期收益）",
+    "factor_type": "成交量/价格冲击",
+    "formula": "neutralize(log(MA20(|ret|/turnover)), log_amount_20d)",
+    "direction": -1,
+    "stock_pool": "中证1000",
+    "period": "2022-10-24 ~ 2026-03-13",
+    "rebalance_freq": 5,
+    "forward_days": 5,
+    "cost": 0.003,
+    "rating": "★★★★★ 极强",
+    "nav_data": "output/informed_flow_v1/cumulative_returns.json",
+    "ic_data": "output/informed_flow_v1/ic_series.json",
+    "upgrade_notes": "历史产出回测入库。IC=0.022(t=3.33)极显著, Sharpe=2.02全库第二(turnover_level 2.43后), Mono=0.90优秀。与现有因子低-中相关(max=0.68), 从价格冲击角度补充alpha。",
+    "lessons_learned": [
+      "知情交易强度(-|ret|/turnover)方向与直觉相反：低强度反而有正alpha",
+      "与turnover_level(r=0.62)和tae_v1(r=0.68)有中等相关，三者从不同角度衡量交易活跃度",
+      "Sharpe=2.02仅次于turnover_level_v1(2.43)，是库中最强因子之一",
+      "MDD仅-10.5%，风险控制优秀",
+      "|ret|/turnover本质上是unit price impact，Kyle(1985)的微观结构理论实证验证"
+    ],
+    "created": "2026-04-13",
+    "updated": "2026-04-13",
+    "metrics": {
+      "ic_mean": 0.02154,
+      "ic_std": 0.07798,
+      "ic_t": 3.33,
+      "ic_positive_ratio": 0.622,
+      "rank_ic": 0.0181,
+      "rank_ic_std": 0.0914,
+      "ir": 0.276,
+      "ic_count": 164,
+      "long_short_sharpe": 2.024,
+      "long_short_mdd": -0.105,
+      "monotonicity": 0.9,
+      "group_sharpe": [
+        0.178,
+        0.11,
+        0.246,
+        0.433,
+        0.914
+      ],
+      "group_returns_annualized": [
+        0.041,
+        0.026,
+        0.062,
+        0.113,
+        0.248
+      ],
+      "group_mdd": [
+        -0.391,
+        -0.416,
+        -0.413,
+        -0.376,
+        -0.32
+      ]
+    },
+    "conclusion": "极强因子入库。知情交易强度因子通过|ret|/turnover衡量单位换手价格冲击, 反向使用(低强度=高收益)。IC=0.022(t=3.33, p<0.01), Sharpe=2.02全库第二, Mono=0.90, MDD仅-10.5%。与现有因子相关性可控(max=0.68), 从PIM微观结构角度提供独立alpha。",
+    "barra_style": "MICRO",
+    "source_type": "自研(论文启发)",
+    "source_title": "Kyle (1985) \"Continuous Auctions and Insider Trading\" + Amihud Mendelson (1986) Asset Pricing",
+    "source_url": "https://doi.org/10.1016/0148-6195(85)90028-5",
+    "correlations": {
+      "amihud_illiq_v2": -0.393,
+      "shadow_pressure_v1": 0.108,
+      "overnight_momentum_v1": 0.039,
+      "gap_momentum_v1": -0.005,
+      "tail_risk_cvar_v1": 0.071,
+      "neg_day_freq_v1": -0.023,
+      "turnover_level_v1": 0.621,
+      "tae_v1": 0.677,
+      "pv_divergence_v1": null,
+      "amp_level_v2": null,
+      "ma_disp_v1": null,
+      "vol_cv_neg_v1": null,
+      "turnover_decel_v1": 0.542,
+      "informed_flow_v1": 1.0
+    }
   }
 ]
