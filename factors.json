@@ -1003,5 +1003,86 @@
       "turnover_decel_v1": 0.542,
       "informed_flow_v1": 1.0
     }
+  },
+  {
+    "id": "price_mom_5d_v1",
+    "name": "5日价格反转 v1",
+    "name_en": "5-Day Price Reversal v1",
+    "category": "动量/反转",
+    "description": "5日累计收益率, 成交额中性化。反向使用(低动量→高收益)。短期反转效应, 仅最底部 quintile 极端反转显著, 其余组接近盈亏平衡。",
+    "hypothesis": "近期跌幅最深的股票承受过度抛售, 短期出现均值回复反弹效应。在A股中证1000小盘股上, 散户追涨杀跌加剧短期反转。",
+    "expected_direction": "反向（低动量=高预期收益）",
+    "factor_type": "短期反转",
+    "formula": "neutralize(sum(daily_ret, 5d), log_amount_20d), 反向使用",
+    "direction": -1,
+    "stock_pool": "中证1000",
+    "period": "2022-10-13 ~ 2026-03-27",
+    "rebalance_freq": 5,
+    "forward_days": 5,
+    "cost": 0.003,
+    "rating": "★★★ 可用",
+    "nav_data": "output/price_mom_5d_v1/cumulative_returns.json",
+    "ic_data": "output/price_mom_5d_v1/ic_series.json",
+    "upgrade_notes": "v1初版。IC=0.018(t=2.39)显著, Sharpe=0.83达标, 但单调性仅0.3(仅G1极端反转显著)。与现有因子低相关(max=0.23)。",
+    "lessons_learned": [
+      "仅最底部quintile(5日跌幅最大)有强反转, G2-G4接近盈亏平衡",
+      "与overnight_momentum相关仅0.23, 角度不同(纯日收益vs隔夜vs日内分解)",
+      "Sharpe=0.83虽达标但低于主要因子(Amihud:1.21, turnover_level:2.43, CVaR:1.49)",
+      "换手率78%偏高, 适合中频周度调仓"
+    ],
+    "created": "2026-04-14",
+    "updated": "2026-04-14",
+    "metrics": {
+      "ic_mean": 0.0184,
+      "ic_std": 0.1409,
+      "ic_t": 2.39,
+      "ic_positive_ratio": 0.533,
+      "rank_ic": 0.0357,
+      "rank_ic_std": 0.1594,
+      "ir": 0.131,
+      "ic_count": 167,
+      "long_short_sharpe": 0.825,
+      "long_short_mdd": -0.144,
+      "monotonicity": 0.3,
+      "group_sharpe": [
+        -0.576,
+        -0.057,
+        -0.141,
+        -0.273,
+        -0.099
+      ],
+      "group_returns_annualized": [
+        -0.152,
+        -0.016,
+        -0.034,
+        -0.071,
+        -0.029
+      ],
+      "group_mdd": [
+        -0.56,
+        -0.467,
+        -0.443,
+        -0.493,
+        -0.49
+      ]
+    },
+    "conclusion": "有效但强度中等。IC=0.018(t=2.39), t在5%水平显著。Sharpe=0.83达标。特点：仅底部极端quintile有强反转信号（年化-15%→做多后反弹），其余组接近盈亏平衡。换手率78%偏高。适合作为辅助反转因子使用。",
+    "barra_style": "Reversal",
+    "source_type": "自研",
+    "source_title": "短期反转因子（Jegadeesh 1990, Lehmann 1990）本土化",
+    "source_url": "",
+    "correlations": {
+      "amihud_illiq_v2": -0.058,
+      "shadow_pressure_v1": -0.046,
+      "overnight_momentum_v1": 0.234,
+      "tail_risk_cvar_v1": 0.199,
+      "neg_day_freq_v1": 0.2,
+      "turnover_level_v1": 0.005,
+      "amp_level_v2": 0.018,
+      "tae_v1": 0.061,
+      "ma_disp_v1": 0.103,
+      "turnover_decel_v1": 0.023,
+      "informed_flow_v1": 0.097
+    }
   }
 ]
