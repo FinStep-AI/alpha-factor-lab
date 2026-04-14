@@ -11411,6 +11411,19 @@
         "detail": "IC_raw=-0.044(t=-2.8) 但市值中性化后IC=-0.011(不显著) Sharpe=0.004 单调性0.1 原文用分钟数据IC=-8.89% 日线无法复现",
         "action": "no_action",
         "recommendation": "需分钟级数据才能有效构造此类因子"
+      },
+      {
+        "date": "2026-04-14",
+        "type": "factor_scan",
+        "summary": "测试3个新因子方向: 成交量加速/量价背离/跳空连续, 均未达标",
+        "detail": "1) vol_accel(MA5/MA60): IC=-0.011(t=-1.21),Sharpe=0.12,单调性0→淘汰  2) pv_divergence(量价背离): IC=0.015(t=1.48),Sharpe=0.59,单调性1.0但信号弱→方向正确可辅助  3) gap_consec(跳空一致性): IC=-0.008(t=-1.63)完全无效",
+        "action": "no_action",
+        "recommendation": "继续探索其他方向, 明日可试价格-成交量相关因子",
+        "factors_tested": [
+          "vol_accel_v1",
+          "pv_divergence_v1",
+          "gap_consec_v1"
+        ]
       }
     ]
   },

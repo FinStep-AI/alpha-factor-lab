@@ -1,0 +1,50 @@
+[
+  {
+    "factor_id": "vol_accel_v1",
+    "date": "2026-04-14",
+    "source_type": "自研(学术启发)",
+    "source_title": "成交量加速度因子 — MA5/MA60比值衡量交易兴趣短期爆发",
+    "source_url": "",
+    "original_metric": "N/A (自研)",
+    "our_metric": {
+      "ic_mean": -0.011,
+      "ic_t": -1.21,
+      "sharpe": 0.12,
+      "monotonicity": 0.0
+    },
+    "diff_notes": "IC=-0.011,单调性0.00,G5(20.24%)>G1(16.47%)但路径非单调。成交量加速在中证1000无显著alpha。方向与假设相反(小盘股放量=散户追高=反转)",
+    "conclusion": "不达标,淘汰。因子方向与理论假设相反且单调性为零。"
+  },
+  {
+    "factor_id": "pv_divergence_v1",
+    "date": "2026-04-14",
+    "source_type": "论文启发",
+    "source_title": "Chordia & Subrahmanyam (2004) Order Imbalance / 量价背离效应",
+    "source_url": "https://doi.org/10.1016/j.jfineco.2003.07.001",
+    "original_metric": "量价背离预测未来收益 (论文发现 +corr(ret,vol/sign) → lower future returns)",
+    "our_metric": {
+      "ic_mean": 0.015,
+      "ic_t": 1.48,
+      "sharpe": 0.59,
+      "monotonicity": 1.0
+    },
+    "diff_notes": "单调性1.0完美(G1=6.9%→G5=20.1%),但IC=0.015低,t=1.48不显著,Sharpe=0.59<0.8。效应存在但太弱,交易成本后抵消",
+    "conclusion": "不达标,但方向正确。可作为辅助信息(单调性优秀),需更精细构造(如只取极端值组)"
+  },
+  {
+    "factor_id": "gap_consec_v1",
+    "date": "2026-04-14",
+    "source_type": "自研(学术启发)",
+    "source_title": "隔夜跳空方向一致性因子",
+    "source_url": "",
+    "original_metric": "N/A (自研)",
+    "our_metric": {
+      "ic_mean": -0.008,
+      "ic_t": -1.63,
+      "sharpe": -0.47,
+      "monotonicity": -0.5
+    },
+    "diff_notes": "IC=-0.008,t=-1.63完全无信号。隔夜跳空方向一致性在中证1000无预测力,G3(19.5%)异常高但G5仅11%",
+    "conclusion": "淘汰。跳空方向一致性未验证有效。"
+  }
+]
