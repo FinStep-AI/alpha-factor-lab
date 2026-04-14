@@ -1,0 +1,28 @@
+Loading fundamental data...
+Fund: 13960 rows, 1000 stocks
+Computing 8Q rolling ROE slope...
+Slope rows: 6927
+Loading kline...
+Aligning to daily dates...
+FF over 1000 stocks...
+  0/1000
+  200/1000
+  400/1000
+  600/1000
+  800/1000
+After FF: 4977
+After merge: 4940
+Neutralizing per date...
+
+Done: 4940 rows
+Dates: 2024-09-30 - 2025-09-30
+Stats:
+count    4940.000000
+mean       -0.042750
+std         1.000225
+min        -2.630177
+25%        -0.533065
+50%         0.000000
+75%         0.454565
+max         2.630177
+Name: factor_value, dtype: float64
