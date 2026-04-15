@@ -4322,6 +4322,15 @@
           "summary": "因子扫描：3个方向全部失败，维持现状",
           "detail": "1)收益率负偏度(neg_skew_20d): IC=0.0007(t=0.14)无效; 2)涨跌天数比(neg_up_ratio_20d): IC=0.0088(t=1.36)弱信号不达标; 3)成交量HHI(neg_vol_hhi_20d): IC=0.008(t=1.34)分层无序。无新因子入库。K线已更新到2026-04-07。",
           "recommendation": "hold"
+        },
+        {
+          "date": "2026-04-15",
+          "type": "factor_scan",
+          "summary": "因子扫描日：方正金工「适度冒险因子」复现失败，日度近似无信号。因子库保持12个活跃因子。",
+          "detail": "研报来源：方正金工(2022)「成交量激增时刻蕴含的alpha信息」。试验两种日度构造方法均失败(IC≈0,Sharpe<0)。原因：日内分钟级 microstructure alpha在日频OHLCV上不可还原。建议：除非获取分钟数据否则暂不深入。",
+          "action": "hold",
+          "reason": "无新达标因子，因子库不动",
+          "recommendation": "维持现有因子排名选股（tail_risk_cvar+turnover_level+tae_v1为核心）"
         }
       ],
       "rebalances": [

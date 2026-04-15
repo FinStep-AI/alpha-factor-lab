@@ -46,5 +46,22 @@
     },
     "diff_notes": "IC=-0.008,t=-1.63完全无信号。隔夜跳空方向一致性在中证1000无预测力,G3(19.5%)异常高但G5仅11%",
     "conclusion": "淘汰。跳空方向一致性未验证有效。"
+  },
+  {
+    "factor_id": "vss_v1",
+    "date": "2026-04-15",
+    "source_type": "研报启发",
+    "source_title": "方正金工「成交量激增时刻蕴含的alpha信息」多因子选股系列研究之一(2022)",
+    "source_url": "https://bigquant.com/wiki/doc/mVbNMncBPm",
+    "original_metric": "Rank IC=-8.89%, RankICIR=-4.84, 多空年化37.46%, 月度胜率87.74%",
+    "our_metric": {
+      "ic_mean": -0.0046,
+      "ic_t": -0.87,
+      "sharpe": -0.11,
+      "monotonicity": -0.1,
+      "note": "日度近似版，覆盖率1000只，两次构造均失败"
+    },
+    "diff_notes": "首次构造(vol_shock_mod_v1)用成交量异常日收益率均值：IC=0.003,t=0.18,Sharpe=-0.48。二次构造(VSS)用成交量激增日波动率：IC=-0.005,t=-0.87。原因分析：日内分钟级效应在日频完全消失，适度冒险是高频量价 microstructure 信号，日线OHLCV无法有效代理。",
+    "conclusion": "不达标,因子在日频数据上无效非自身问题。原文IC=-8.89%极强的因子（基于分钟高频），其alpha主要来自intraday microstructure信号，日频OHLCV无法还原。建议：减少研究关注（除非未来获取分钟数据）。"
   }
 ]
