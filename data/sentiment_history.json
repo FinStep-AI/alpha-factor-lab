@@ -1,240 +1,6 @@
 {
   "history": [
     {
-      "date": "20260319",
-      "zt_count": 4,
-      "dt_count": 0,
-      "zb_count": 0,
-      "max_streak": 4,
-      "temperature": 38,
-      "phase": "startup"
-    },
-    {
-      "date": "20260319",
-      "zt_count": 28,
-      "dt_count": 6,
-      "zb_count": 10,
-      "max_streak": 4,
-      "temperature": 35,
-      "phase": "startup"
-    },
-    {
-      "date": "20260319",
-      "zt_count": 28,
-      "dt_count": 5,
-      "zb_count": 10,
-      "max_streak": 4,
-      "temperature": 43,
-      "phase": "ferment"
-    },
-    {
-      "date": "20260320",
-      "zt_count": 5,
-      "dt_count": 0,
-      "zb_count": 0,
-      "max_streak": 5,
-      "temperature": 51,
-      "phase": "ferment"
-    },
-    {
-      "date": "20260320",
-      "zt_count": 26,
-      "dt_count": 15,
-      "zb_count": 25,
-      "max_streak": 5,
-      "temperature": 31,
-      "phase": "startup"
-    },
-    {
-      "date": "20260320",
-      "zt_count": 28,
-      "dt_count": 13,
-      "zb_count": 23,
-      "max_streak": 5,
-      "temperature": 36,
-      "phase": "startup"
-    },
-    {
-      "date": "20260323",
-      "zt_count": 28,
-      "dt_count": 79,
-      "zb_count": 15,
-      "max_streak": 6,
-      "temperature": 33,
-      "phase": "startup"
-    },
-    {
-      "date": "20260323",
-      "zt_count": 28,
-      "dt_count": 71,
-      "zb_count": 15,
-      "max_streak": 6,
-      "temperature": 33,
-      "phase": "startup"
-    },
-    {
-      "date": "20260324",
-      "zt_count": 3,
-      "dt_count": 0,
-      "zb_count": 0,
-      "max_streak": 3,
-      "temperature": 38,
-      "phase": "startup"
-    },
-    {
-      "date": "20260324",
-      "zt_count": 83,
-      "dt_count": 1,
-      "zb_count": 22,
-      "max_streak": 7,
-      "temperature": 85,
-      "phase": "overheated"
-    },
-    {
-      "date": "20260324",
-      "zt_count": 83,
-      "dt_count": 1,
-      "zb_count": 22,
-      "max_streak": 7,
-      "temperature": 85,
-      "phase": "overheated"
-    },
-    {
-      "date": "20260325",
-      "zt_count": 13,
-      "dt_count": 1,
-      "zb_count": 4,
-      "max_streak": 2,
-      "temperature": 37,
-      "phase": "startup"
-    },
-    {
-      "date": "20260325",
-      "zt_count": 84,
-      "dt_count": 1,
-      "zb_count": 14,
-      "max_streak": 8,
-      "temperature": 96,
-      "phase": "overheated"
-    },
-    {
-      "date": "20260325",
-      "zt_count": 84,
-      "dt_count": 1,
-      "zb_count": 14,
-      "max_streak": 8,
-      "temperature": 96,
-      "phase": "overheated"
-    },
-    {
-      "date": "20260326",
-      "zt_count": 5,
-      "dt_count": 0,
-      "zb_count": 0,
-      "max_streak": 3,
-      "temperature": 46,
-      "phase": "ferment"
-    },
-    {
-      "date": "20260326",
-      "zt_count": 40,
-      "dt_count": 9,
-      "zb_count": 17,
-      "max_streak": 9,
-      "temperature": 59,
-      "phase": "ferment"
-    },
-    {
-      "date": "20260326",
-      "zt_count": 39,
-      "dt_count": 8,
-      "zb_count": 18,
-      "max_streak": 3,
-      "temperature": 45,
-      "phase": "ferment"
-    },
-    {
-      "date": "20260327",
-      "zt_count": 3,
-      "dt_count": 0,
-      "zb_count": 0,
-      "max_streak": 2,
-      "temperature": 30,
-      "phase": "startup"
-    },
-    {
-      "date": "20260327",
-      "zt_count": 79,
-      "dt_count": 2,
-      "zb_count": 15,
-      "max_streak": 4,
-      "temperature": 76,
-      "phase": "climax"
-    },
-    {
-      "date": "20260327",
-      "zt_count": 78,
-      "dt_count": 2,
-      "zb_count": 16,
-      "max_streak": 4,
-      "temperature": 76,
-      "phase": "climax"
-    },
-    {
-      "date": "20260330",
-      "zt_count": 9,
-      "dt_count": 2,
-      "zb_count": 0,
-      "max_streak": 3,
-      "temperature": 38,
-      "phase": "startup"
-    },
-    {
-      "date": "20260330",
-      "zt_count": 63,
-      "dt_count": 10,
-      "zb_count": 16,
-      "max_streak": 5,
-      "temperature": 63,
-      "phase": "climax"
-    },
-    {
-      "date": "20260330",
-      "zt_count": 62,
-      "dt_count": 10,
-      "zb_count": 17,
-      "max_streak": 5,
-      "temperature": 63,
-      "phase": "climax"
-    },
-    {
-      "date": "20260331",
-      "zt_count": 1,
-      "dt_count": 1,
-      "zb_count": 0,
-      "max_streak": 1,
-      "temperature": 25,
-      "phase": "startup"
-    },
-    {
-      "date": "20260331",
-      "zt_count": 53,
-      "dt_count": 1,
-      "zb_count": 17,
-      "max_streak": 4,
-      "temperature": 65,
-      "phase": "climax"
-    },
-    {
-      "date": "20260331",
-      "zt_count": 53,
-      "dt_count": 1,
-      "zb_count": 17,
-      "max_streak": 4,
-      "temperature": 65,
-      "phase": "climax"
-    },
-    {
       "date": "20260401",
       "zt_count": 30,
       "dt_count": 1,
@@ -269,7 +35,241 @@
       "max_streak": 5,
       "temperature": 43,
       "phase": "ferment"
+    },
+    {
+      "date": "20260402",
+      "zt_count": 27,
+      "dt_count": 7,
+      "zb_count": 18,
+      "max_streak": 5,
+      "temperature": 36,
+      "phase": "startup"
+    },
+    {
+      "date": "20260402",
+      "zt_count": 28,
+      "dt_count": 5,
+      "zb_count": 18,
+      "max_streak": 5,
+      "temperature": 44,
+      "phase": "ferment"
+    },
+    {
+      "date": "20260403",
+      "zt_count": 4,
+      "dt_count": 0,
+      "zb_count": 0,
+      "max_streak": 2,
+      "temperature": 30,
+      "phase": "startup"
+    },
+    {
+      "date": "20260403",
+      "zt_count": 35,
+      "dt_count": 23,
+      "zb_count": 12,
+      "max_streak": 6,
+      "temperature": 42,
+      "phase": "ferment"
+    },
+    {
+      "date": "20260406",
+      "zt_count": 36,
+      "dt_count": 24,
+      "zb_count": 12,
+      "max_streak": 6,
+      "temperature": 42,
+      "phase": "ferment"
+    },
+    {
+      "date": "20260406",
+      "zt_count": 36,
+      "dt_count": 24,
+      "zb_count": 12,
+      "max_streak": 6,
+      "temperature": 42,
+      "phase": "ferment"
+    },
+    {
+      "date": "20260406",
+      "zt_count": 36,
+      "dt_count": 24,
+      "zb_count": 12,
+      "max_streak": 6,
+      "temperature": 42,
+      "phase": "ferment"
+    },
+    {
+      "date": "20260407",
+      "zt_count": 2,
+      "dt_count": 5,
+      "zb_count": 0,
+      "max_streak": 3,
+      "temperature": 28,
+      "phase": "startup"
+    },
+    {
+      "date": "20260407",
+      "zt_count": 90,
+      "dt_count": 4,
+      "zb_count": 29,
+      "max_streak": 7,
+      "temperature": 88,
+      "phase": "overheated"
+    },
+    {
+      "date": "20260407",
+      "zt_count": 93,
+      "dt_count": 4,
+      "zb_count": 26,
+      "max_streak": 7,
+      "temperature": 88,
+      "phase": "overheated"
+    },
+    {
+      "date": "20260408",
+      "zt_count": 4,
+      "dt_count": 4,
+      "zb_count": 0,
+      "max_streak": 4,
+      "temperature": 33,
+      "phase": "startup"
+    },
+    {
+      "date": "20260408",
+      "zt_count": 120,
+      "dt_count": 5,
+      "zb_count": 19,
+      "max_streak": 4,
+      "temperature": 83,
+      "phase": "overheated"
+    },
+    {
+      "date": "20260408",
+      "zt_count": 123,
+      "dt_count": 4,
+      "zb_count": 16,
+      "max_streak": 4,
+      "temperature": 83,
+      "phase": "overheated"
+    },
+    {
+      "date": "20260409",
+      "zt_count": 5,
+      "dt_count": 1,
+      "zb_count": 0,
+      "max_streak": 4,
+      "temperature": 46,
+      "phase": "ferment"
+    },
+    {
+      "date": "20260409",
+      "zt_count": 53,
+      "dt_count": 1,
+      "zb_count": 16,
+      "max_streak": 5,
+      "temperature": 70,
+      "phase": "climax"
+    },
+    {
+      "date": "20260409",
+      "zt_count": 53,
+      "dt_count": 1,
+      "zb_count": 16,
+      "max_streak": 5,
+      "temperature": 70,
+      "phase": "climax"
+    },
+    {
+      "date": "20260410",
+      "zt_count": 59,
+      "dt_count": 8,
+      "zb_count": 27,
+      "max_streak": 4,
+      "temperature": 61,
+      "phase": "climax"
+    },
+    {
+      "date": "20260410",
+      "zt_count": 59,
+      "dt_count": 8,
+      "zb_count": 27,
+      "max_streak": 4,
+      "temperature": 61,
+      "phase": "climax"
+    },
+    {
+      "date": "20260413",
+      "zt_count": 59,
+      "dt_count": 4,
+      "zb_count": 15,
+      "max_streak": 5,
+      "temperature": 73,
+      "phase": "climax"
+    },
+    {
+      "date": "20260413",
+      "zt_count": 59,
+      "dt_count": 4,
+      "zb_count": 15,
+      "max_streak": 5,
+      "temperature": 73,
+      "phase": "climax"
+    },
+    {
+      "date": "20260414",
+      "zt_count": 1,
+      "dt_count": 0,
+      "zb_count": 0,
+      "max_streak": 2,
+      "temperature": 25,
+      "phase": "startup"
+    },
+    {
+      "date": "20260414",
+      "zt_count": 55,
+      "dt_count": 4,
+      "zb_count": 18,
+      "max_streak": 6,
+      "temperature": 73,
+      "phase": "climax"
+    },
+    {
+      "date": "20260414",
+      "zt_count": 55,
+      "dt_count": 4,
+      "zb_count": 18,
+      "max_streak": 6,
+      "temperature": 73,
+      "phase": "climax"
+    },
+    {
+      "date": "20260415",
+      "zt_count": 1,
+      "dt_count": 1,
+      "zb_count": 0,
+      "max_streak": 1,
+      "temperature": 25,
+      "phase": "startup"
+    },
+    {
+      "date": "20260415",
+      "zt_count": 57,
+      "dt_count": 8,
+      "zb_count": 24,
+      "max_streak": 5,
+      "temperature": 66,
+      "phase": "climax"
+    },
+    {
+      "date": "20260415",
+      "zt_count": 57,
+      "dt_count": 8,
+      "zb_count": 24,
+      "max_streak": 5,
+      "temperature": 66,
+      "phase": "climax"
     }
   ],
-  "updated": "20260402"
+  "updated": "20260415"
 }

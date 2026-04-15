@@ -1170,5 +1170,74 @@
       "turnover_decel_v1": -0.011,
       "pv_corr_v1": 0.326
     }
+  },
+  {
+    "id": "vwap_dev_v1",
+    "name": "VWAP偏离 v1",
+    "name_en": "VWAP Deviation v1",
+    "category": "量价/微观结构",
+    "description": "20日(close-VWAP)/ATR均值。高偏离=持续主动买入/卖出=方向性信息流。ATR标准化消除个股波动率差异。中证1000小盘股尾盘效应强。",
+    "hypothesis": "持续正VWAP偏离=尾盘收盘前主动买入推动价格高于全天均价=信息流入/知情买入=动量延续。持续负偏离=尾盘抛售=价格承压。ATR标准化后在单一水平上衡量纯粹的方向性交易强度。",
+    "expected_direction": "正向（高VWAP偏离=高预期收益，尾盘主动买入→动量延续）",
+    "factor_type": "量价/微观结构",
+    "formula": "neutralize(MA20((close-VWAP)/ATR20), log_amount_20d)",
+    "direction": 1,
+    "stock_pool": "中证1000",
+    "period": "2022-11-03 ~ 2026-04-15",
+    "rebalance_freq": 5,
+    "forward_days": 5,
+    "cost": 0.003,
+    "rating": "★★★ 可用",
+    "nav_data": "output/vwap_dev_v1/cumulative_returns.json",
+    "ic_data": "output/vwap_dev_v1/ic_series.json",
+    "upgrade_notes": "首版即达标。IC=0.024(t=2.82), Sharpe=1.07, 单调性1.0完美, 换手率仅8.8%极低频。与所有入库因子低相关(max|r|=0.10), 独立性极强。",
+    "lessons_learned": [
+      "ATR标准化是关键: 直接用close-VWAP不稳定, 用ATR归一化后信号极强",
+      "单调性1.0完美: G1→G5年化3.8%→28.0%线性增长, 定性线索清晰",
+      "换手率仅8.8%: 信号非常稳定, 适合月度调仓",
+      "与现有因子低相关(max=0.10 with ma_disp): 完全独立新维度",
+      "正向有效: 高VWAP偏离=持续主动买入→动量延续(而非反转)",
+      "中证1000小盘股尾盘效应(微量资金推动大波动)增强此因子效果"
+    ],
+    "created": "2026-04-15",
+    "updated": "2026-04-15",
+    "metrics": {
+      "ic_mean": 0.024319,
+      "ic_std": 0.119342,
+      "ic_t": 2.8185,
+      "ic_positive_ratio": 0.5964,
+      "rank_ic": 0.028781,
+      "rank_ic_std": 0.149304,
+      "ir": 0.2038,
+      "ic_count": 166,
+      "long_short_sharpe": 1.0743,
+      "long_short_mdd": -0.1496,
+      "monotonicity": 1.0,
+      "group_sharpe": [],
+      "group_returns_annualized": [
+        0.0379,
+        0.1195,
+        0.1495,
+        0.1668,
+        0.2784
+      ],
+      "group_mdd": []
+    },
+    "conclusion": "全面达标入库。VWAP偏离因子通过(close-VWAP)/ATR衡量持续主动买入/卖出强度。IC=0.024(t=2.82), Sharpe=1.07, 单调性1.0完美, G5年化27.8%, 换手率8.8%极低频。与所有入库因子极低相关(max|r|=0.10), 完全独立。是中证1000小盘股尾盘效应的优秀量价代理。",
+    "barra_style": "MICRO",
+    "source_type": "自研+论文启发",
+    "source_title": "Brenner, Pasquariello & Subrahmanyam (2006) VWAP + Kissell et al. (2005) Dynamic VWAP + Chordia & Subrahmanyam (2004) Order Imbalance",
+    "source_url": "https://doi.org/10.1016/j.jfineco.2006.01.002",
+    "correlations": {
+      "amihud_illiq_v2": -0.052,
+      "shadow_pressure_v1": -0.065,
+      "overnight_momentum_v1": 0.005,
+      "tail_risk_cvar_v1": -0.099,
+      "neg_day_freq_v1": -0.084,
+      "turnover_level_v1": -0.056,
+      "tae_v1": -0.003,
+      "ma_disp_v1": -0.1,
+      "vwap_dev_v1": 1.0
+    }
   }
 ]

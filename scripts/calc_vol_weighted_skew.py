@@ -1,164 +1,184 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 """
-成交量加权收益偏度因子 (Volume-Weighted Return Skewness) - 优化版
+因子：成交额加权收益偏度 (Volume-Weighted Return Skewness)
+ID: vol_w_skew_v1
 
-来源：Boyer, Mitton & Vorkink (2010, RFS) "Expected Idiosyncratic Skewness"
-      
-构造：20日滚动窗口中，成交量加权收益率的偏度
-      使用向量化滚动矩计算（不用apply）
+逻辑：
+  普通偏度=每天同等权重。但不同天信息含量不同。
+  成交额加权：高成交额天对偏度贡献更大。
+  - 正偏度 → 放量时涨>放量时跌 → 资金推升意愿强 → 正向信号
+  - 负偏度 → 放量时跌>放量时涨 → 资金出逃 → 负向信号
+
+公式：
+  对每只股票过去20天：
+    w_t = amount_t / sum(amount)  (成交额权重)
+    weighted_mean = sum(w * ret)
+    weighted_var = sum(w * (ret - wmean)^2)
+    weighted_skew = sum(w * (ret - wmean)^3) / weighted_var^1.5
+
+  然后做成交额OLS中性化 + MAD winsorize + z-score
 """
 
 import sys
 import numpy as np
 import pandas as pd
+from pathlib import Path
 
-def rolling_skewness_vectorized(series, window=20, min_periods=15):
-    """用滚动中心矩公式计算偏度，避免逐行apply"""
-    # 先做rolling统计量
-    r_mean = series.rolling(window, min_periods=min_periods).mean()
-    r_std = series.rolling(window, min_periods=min_periods).std()
-    r_count = series.rolling(window, min_periods=min_periods).count()
-    
-    # 三阶中心矩: E[(x-mu)^3]
-    dev = series - r_mean
-    m3 = (dev**3).rolling(window, min_periods=min_periods).mean()
-    
-    # 偏度 = m3 / std^3  (adjusted)
-    # 使用 pandas 调整公式: n/((n-1)(n-2)) * sum((x-mu)/s)^3
-    n = r_count
-    skew = (n * (n - 1)).pow(0.5) / (n - 2) * m3 / (r_std ** 3)
-    
-    # 样本量不足时设为NaN
-    skew[r_count < min_periods] = np.nan
-    skew[r_std < 1e-10] = np.nan
-    
-    return skew
+WINDOW = 20
 
-def main():
-    print("Reading data...")
-    kline = pd.read_csv("data/csi1000_kline_raw.csv", parse_dates=["date"])
-    kline.sort_values(["stock_code", "date"], inplace=True)
-    
-    # 收益率
-    kline["ret"] = kline["pct_change"] / 100.0
-    kline["ret"] = kline["ret"].fillna(0)
-    kline["volume"] = kline["volume"].fillna(0)
-    
-    print(f"Total rows: {len(kline)}, stocks: {kline['stock_code'].nunique()}")
+def calc_vol_weighted_skew(df_stock):
+    """对单只股票计算滚动成交额加权偏度"""
+    ret = df_stock['pct_change'].values / 100.0  # 转为小数
+    amt = df_stock['amount'].values
+    dates = df_stock['date'].values
+    n = len(ret)
     
     results = []
-    stocks = kline["stock_code"].unique()
+    for i in range(WINDOW - 1, n):
+        r = ret[i - WINDOW + 1: i + 1]
+        a = amt[i - WINDOW + 1: i + 1]
+        
+        # 过滤NaN
+        mask = ~(np.isnan(r) | np.isnan(a) | (a <= 0))
+        if mask.sum() < 10:  # 至少10天有效数据
+            results.append((dates[i], np.nan))
+            continue
+        
+        r_valid = r[mask]
+        a_valid = a[mask]
+        
+        # 成交额权重
+        w = a_valid / a_valid.sum()
+        
+        # 加权均值
+        wmean = np.sum(w * r_valid)
+        
+        # 加权方差
+        wvar = np.sum(w * (r_valid - wmean) ** 2)
+        
+        if wvar < 1e-16:
+            results.append((dates[i], np.nan))
+            continue
+        
+        # 加权偏度
+        wskew = np.sum(w * (r_valid - wmean) ** 3) / (wvar ** 1.5)
+        
+        results.append((dates[i], wskew))
+    
+    return results
+
+
+def neutralize_ols(df, factor_col, neutral_col):
+    """OLS中性化"""
+    from numpy.linalg import lstsq
+    result = df[factor_col].copy()
+    for date in df['date'].unique():
+        mask = df['date'] == date
+        sub = df.loc[mask, [factor_col, neutral_col]].dropna()
+        if len(sub) < 30:
+            continue
+        y = sub[factor_col].values
+        X = np.column_stack([np.ones(len(y)), sub[neutral_col].values])
+        try:
+            beta, _, _, _ = lstsq(X, y, rcond=None)
+            residual = y - X @ beta
+            result.loc[sub.index] = residual
+        except:
+            pass
+    return result
+
+
+def mad_winsorize(s, n_mad=5):
+    """MAD winsorize"""
+    median = s.median()
+    mad = (s - median).abs().median()
+    if mad < 1e-10:
+        return s
+    upper = median + n_mad * 1.4826 * mad
+    lower = median - n_mad * 1.4826 * mad
+    return s.clip(lower, upper)
+
+
+def zscore(s):
+    """z-score标准化"""
+    mu = s.mean()
+    sd = s.std()
+    if sd < 1e-10:
+        return s * 0
+    return (s - mu) / sd
+
+
+def main():
+    base = Path(__file__).resolve().parent.parent
+    data_dir = base / 'data'
+    
+    print("读取K线数据...")
+    df = pd.read_csv(data_dir / 'csi1000_kline_raw.csv')
+    df['date'] = pd.to_datetime(df['date'])
+    df = df.sort_values(['stock_code', 'date']).reset_index(drop=True)
+    
+    # 过滤pct_change为NaN的行
+    df = df.dropna(subset=['pct_change'])
+    
+    print(f"股票数: {df['stock_code'].nunique()}, 行数: {len(df)}")
+    
+    # 计算每只股票的滚动成交额加权偏度
+    all_results = []
+    stocks = df['stock_code'].unique()
+    print(f"计算成交额加权偏度 (窗口={WINDOW})...")
     
     for i, code in enumerate(stocks):
-        if (i+1) % 200 == 0:
-            print(f"  Processing {i+1}/{len(stocks)}...")
-        
-        grp = kline[kline["stock_code"] == code].sort_values("date").copy()
-        
-        if len(grp) < 20:
+        if (i + 1) % 100 == 0:
+            print(f"  进度: {i+1}/{len(stocks)}")
+        sub = df[df['stock_code'] == code].copy()
+        if len(sub) < WINDOW:
             continue
-        
-        # MA20(volume)
-        vol_ma20 = grp["volume"].rolling(20, min_periods=15).mean()
-        
-        # 相对成交量权重
-        vol_weight = grp["volume"] / vol_ma20.replace(0, np.nan)
-        
-        # 成交量加权收益
-        ret_vw = grp["ret"] * vol_weight
-        
-        # 20日滚动偏度（向量化）
-        vw_skew = rolling_skewness_vectorized(ret_vw, window=20, min_periods=15)
-        
-        mask = vw_skew.notna()
-        if mask.sum() == 0:
-            continue
-        
-        tmp = pd.DataFrame({
-            "date": grp.loc[mask.index[mask], "date"].values,
-            "stock_code": code,
-            "factor_value": vw_skew[mask].values
-        })
-        results.append(tmp)
+        res = calc_vol_weighted_skew(sub)
+        for date, val in res:
+            all_results.append({'date': date, 'stock_code': code, 'factor': val})
     
-    df = pd.concat(results, ignore_index=True)
+    factor_df = pd.DataFrame(all_results)
+    factor_df['date'] = pd.to_datetime(factor_df['date'])
+    print(f"因子记录数: {len(factor_df)}, 非NaN: {factor_df['factor'].notna().sum()}")
     
-    print(f"\nRaw factor: {len(df)} observations, {df['stock_code'].nunique()} stocks")
-    print(f"Date range: {df['date'].min()} ~ {df['date'].max()}")
-    print(f"Factor stats: mean={df['factor_value'].mean():.4f}, std={df['factor_value'].std():.4f}")
+    # 计算20日平均成交额用于中性化
+    print("计算20日平均成交额...")
+    df['log_amount_20d'] = df.groupby('stock_code')['amount'].transform(
+        lambda x: np.log(x.rolling(20, min_periods=10).mean() + 1)
+    )
     
-    # ---- 成交额中性化 ----
-    amt = kline[["date", "stock_code", "amount"]].drop_duplicates()
-    amt["log_amount"] = np.log(amt["amount"].replace(0, np.nan))
-    df = df.merge(amt[["date", "stock_code", "log_amount"]], on=["date", "stock_code"], how="left")
+    # 合并
+    factor_df = factor_df.merge(
+        df[['date', 'stock_code', 'log_amount_20d']],
+        on=['date', 'stock_code'],
+        how='left'
+    )
     
-    def neutralize(group):
-        y = group["factor_value"].values
-        x = group["log_amount"].values
-        mask = np.isfinite(y) & np.isfinite(x)
-        if mask.sum() < 30:
-            group["factor_value"] = np.nan
-            return group
-        
-        y_m, x_m = y[mask], x[mask]
-        x_mat = np.column_stack([np.ones(len(x_m)), x_m])
-        try:
-            beta = np.linalg.lstsq(x_mat, y_m, rcond=None)[0]
-            residuals = y_m - x_mat @ beta
-            result = np.full(len(y), np.nan)
-            result[mask] = residuals
-            group["factor_value"] = result
-        except:
-            group["factor_value"] = np.nan
-        return group
+    # OLS中性化
+    print("成交额OLS中性化...")
+    factor_df['factor'] = neutralize_ols(factor_df, 'factor', 'log_amount_20d')
     
-    print("Neutralizing by log_amount...")
-    df = df.groupby("date", group_keys=False).apply(neutralize)
-    
-    # ---- MAD Winsorize ----
-    def mad_winsorize(group, n_mad=5):
-        v = group["factor_value"].values
-        mask = np.isfinite(v)
-        if mask.sum() < 10:
-            return group
-        v_valid = v[mask]
-        med = np.median(v_valid)
-        mad = np.median(np.abs(v_valid - med)) * 1.4826
-        if mad < 1e-10:
-            return group
-        lower = med - n_mad * mad
-        upper = med + n_mad * mad
-        v_clipped = np.clip(v, lower, upper)
-        group["factor_value"] = v_clipped
-        return group
-    
-    df = df.groupby("date", group_keys=False).apply(mad_winsorize)
-    
-    # ---- Z-score ----
-    def zscore(group):
-        v = group["factor_value"].values
-        mask = np.isfinite(v)
-        if mask.sum() < 10:
-            group["factor_value"] = 0
-            return group
-        mu = np.nanmean(v)
-        sigma = np.nanstd(v)
-        if sigma < 1e-10:
-            group["factor_value"] = 0
-        else:
-            group["factor_value"] = (v - mu) / sigma
-        return group
-    
-    df = df.groupby("date", group_keys=False).apply(zscore)
+    # 按日MAD winsorize + z-score
+    print("MAD winsorize + z-score...")
+    factor_df['factor'] = factor_df.groupby('date')['factor'].transform(
+        lambda x: zscore(mad_winsorize(x))
+    )
     
     # 输出
-    out = df[["date", "stock_code", "factor_value"]].copy()
-    out["date"] = pd.to_datetime(out["date"]).dt.strftime("%Y-%m-%d")
-    out.to_csv("data/factor_vol_weighted_skew_v1.csv", index=False)
+    output = factor_df[['date', 'stock_code', 'factor']].copy()
+    output['date'] = output['date'].dt.strftime('%Y-%m-%d')
+    output = output.dropna(subset=['factor'])
     
-    print(f"\nFinal: {out['factor_value'].notna().sum()} valid values")
-    print(f"Saved to data/factor_vol_weighted_skew_v1.csv")
+    out_path = data_dir / 'factor_vol_w_skew_v1.csv'
+    output.to_csv(out_path, index=False)
+    print(f"因子文件保存到: {out_path}")
+    print(f"记录数: {len(output)}, 日期范围: {output['date'].min()} ~ {output['date'].max()}")
+    print(f"因子统计: mean={output['factor'].mean():.4f}, std={output['factor'].std():.4f}")
+    
+    # 检查截面覆盖率
+    date_counts = output.groupby('date')['stock_code'].count()
+    print(f"每日平均覆盖股票数: {date_counts.mean():.0f}")
+    
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()

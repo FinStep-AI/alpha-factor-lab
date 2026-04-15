@@ -1,36 +1,36 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-因子: deep_reversal_v1 — 深度反转强度因子
-============================================
-方向: 短期反转 / 量价复合
+因子: ret_asym_v1 — 日内收益不对称性因子
+==========================================
+
+方向: 量价/信息
 
 构造:
-  综合三个维度筛选"跌深反弹"机会:
-  1. 反转幅度: -ret_5d (近5日累计收益取负，跌越多分数越高)
-  2. 成交额集中: log(MA5_amount / MA20_amount) (近5日成交额相对20日均值的放大倍数)
-  3. 波动率膨胀: log(std5 / std20) (近5日波动率相对20日波动率的膨胀程度)
-  
-  各成分截面z-score后等权复合:
-  factor = z(-ret_5d) + z(amt_ratio) + z(vol_ratio)
-  
-  成交额OLS中性化 + 5%缩尾
+  1. 计算每日日内收益 intraday_ret = close/open - 1
+  2. 20日滚动窗口内:
+     - pos_mean = mean(intraday_ret where intraday_ret > 0) 正收益日均值
+     - neg_mean = mean(|intraday_ret| where intraday_ret < 0) 负收益日均值  
+     - asymmetry = pos_mean / (pos_mean + neg_mean) - 0.5
+  3. 成交额OLS中性化
+  4. 5%缩尾 + z-score标准化
 
 逻辑:
-  单纯的短期反转(跌深反弹)在A股有效但不稳定。
-  加入成交额放大和波动率膨胀两个维度后:
-  - 成交额放大 = 近期有密集抛售，卖压释放
-  - 波动率膨胀 = 刚经历高波动，即将均值回复
-  - 三者叠加 = 跌幅大+放量抛售+波动率膨胀 → 恐慌性下跌后的深度反弹信号
+  日内收益不对称性衡量的是买方vs卖方的力量对比。
+  当一只股票的正收益日均幅度显著大于负收益日均幅度时，
+  说明买方（可能是知情交易者）出手更凶猛，每次上涨幅度大于下跌幅度。
+  这种不对称模式在A股中证1000小盘股上可能产生动量延续效应。
   
-  与 neg_day_freq_v1 的区别:
-  - neg_day_freq: 只看极端负收益日频率(离散化)
-  - 本因子: 看总跌幅×成交额集中度×波动率膨胀(连续化+多维)
+  与已有因子的区别:
+  - 隔夜动量: 衡量close→open vs open→close (隔夜vs日内)
+  - 上影线卖压: 衡量K线形态（影线比率）
+  - 本因子: 衡量日内收益正负分布的不对称性
   
-参考:
-  - Jegadeesh (1990) "Short-Horizon Return Reversals"
-  - Cooper (1999) "Filter Rules Based on Price and Volume"
-  - Avramov, Chordia & Goyal (2006) "Liquidity and Autocorrelations"
+理论:
+  - Amaya et al. (2015) "Does Realized Skewness Predict the Cross-Section of Equity Returns?"
+    日内高频偏度与未来收益正相关
+  - Bali, Engle & Murray (2016) RIX/realized skewness
+  - 本因子用低频日线近似实现偏度效应
 """
 
 import json
@@ -45,15 +45,14 @@ from scipy import stats as sp_stats
 warnings.filterwarnings("ignore")
 
 # ────────────────── 参数 ──────────────────
-WINDOW_SHORT = 5      # 短期窗口
-WINDOW_LONG = 20      # 长期窗口
-FORWARD_DAYS = 5      # 前瞻5日
-REBALANCE_FREQ = 5    # 每5日调仓
+WINDOW = 20
+FORWARD_DAYS = 5
+REBALANCE_FREQ = 5
 N_GROUPS = 5
 COST = 0.003
 WINSORIZE_PCT = 0.05
-DATA_CUTOFF = "2026-04-15"
-FACTOR_ID = "deep_reversal_v1"
+DATA_CUTOFF = "2026-03-13"
+FACTOR_ID = "ret_asym_v1"
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent.parent
 DATA_PATH = BASE_DIR / "data" / "csi1000_kline_raw.csv"
@@ -69,55 +68,39 @@ df = df[df["date"] <= DATA_CUTOFF]
 df = df.sort_values(["stock_code", "date"]).reset_index(drop=True)
 
 close_piv = df.pivot_table(index="date", columns="stock_code", values="close")
+open_piv = df.pivot_table(index="date", columns="stock_code", values="open")
+high_piv = df.pivot_table(index="date", columns="stock_code", values="high")
+low_piv = df.pivot_table(index="date", columns="stock_code", values="low")
 amount_piv = df.pivot_table(index="date", columns="stock_code", values="amount")
 
 ret_piv = close_piv.pct_change()
-log_amt = np.log(amount_piv.rolling(WINDOW_LONG).mean().clip(lower=1))
+log_amt = np.log(amount_piv.rolling(20).mean().clip(lower=1))
 
 dates = close_piv.index.tolist()
 stocks = close_piv.columns.tolist()
 print(f"   {len(dates)} 日, {len(stocks)} 股")
 
 # ────────────────── 因子构造 ──────────────────
-print(f"[2] 构造深度反转强度因子...")
+print(f"[2] 构造日内收益不对称性因子...")
 
-# 成分1: 近5日累计收益取负 (跌越多分数越高)
-ret_5d = ret_piv.rolling(WINDOW_SHORT, min_periods=3).sum()
-reversal_raw = -ret_5d
+# 日内收益
+intraday_ret = close_piv / open_piv - 1
 
-# 成分2: 成交额集中度 = log(MA5_amt / MA20_amt)
-ma5_amt = amount_piv.rolling(WINDOW_SHORT, min_periods=3).mean()
-ma20_amt = amount_piv.rolling(WINDOW_LONG, min_periods=10).mean()
-amt_ratio = np.log((ma5_amt / ma20_amt.clip(lower=1)).clip(lower=0.01))
+# 正收益和负收益分开
+pos_ret = intraday_ret.where(intraday_ret > 0)
+neg_ret = intraday_ret.where(intraday_ret < 0).abs()
 
-# 成分3: 波动率膨胀 = log(std5 / std20)
-std5 = ret_piv.rolling(WINDOW_SHORT, min_periods=3).std()
-std20 = ret_piv.rolling(WINDOW_LONG, min_periods=10).std()
-vol_ratio = np.log((std5 / std20.clip(lower=1e-8)).clip(lower=0.01))
+# 20日滚动窗口的正收益日均值和负收益日均值
+pos_mean = pos_ret.rolling(WINDOW, min_periods=8).mean()
+neg_mean = neg_ret.rolling(WINDOW, min_periods=8).mean()
 
-# 截面z-score各成分
-print(f"[2b] 截面z-score各成分...")
-def cross_section_zscore(matrix):
-    """逐日截面标准化"""
-    result = matrix.copy()
-    for date in matrix.index:
-        row = matrix.loc[date].dropna()
-        if len(row) < 10:
-            continue
-        mu = row.mean()
-        sigma = row.std()
-        if sigma > 1e-8:
-            result.loc[date] = (matrix.loc[date] - mu) / sigma
-    return result
-
-reversal_z = cross_section_zscore(reversal_raw)
-amt_ratio_z = cross_section_zscore(amt_ratio)
-vol_ratio_z = cross_section_zscore(vol_ratio)
-
-# 等权复合
-factor_raw = (reversal_z + amt_ratio_z + vol_ratio_z) / 3.0
+# 不对称性 = pos_mean / (pos_mean + neg_mean) - 0.5
+# 范围: (-0.5, 0.5), 0表示对称, 正值表示正收益幅度更大
+denom = (pos_mean + neg_mean).clip(lower=1e-8)
+factor_raw = pos_mean / denom - 0.5
 
 print(f"   非空率: {factor_raw.notna().mean().mean():.2%}")
+print(f"   均值: {factor_raw.stack().mean():.6f}, std: {factor_raw.stack().std():.6f}")
 
 # ────────────────── 缩尾 ──────────────────
 print(f"[3] 缩尾 ({WINSORIZE_PCT*100:.0f}%)...")
@@ -182,11 +165,11 @@ pos_sh = metrics.get("long_short_sharpe", 0) or 0
 neg_sh = m_neg.get("long_short_sharpe", 0) or 0
 print(f"   正向Sharpe={pos_sh:.4f}, 反向Sharpe={neg_sh:.4f}")
 
-# 自动选择更好的方向
+# 选择更优方向
 if neg_sh > pos_sh:
-    print(f"   → 反向更好! 切换为反向...")
+    print(f"   → 反向更优，翻转因子")
     fa = -fa
-    ic_series = ic_neg
+    ic_series = compute_ic_dynamic(fa, ra, FORWARD_DAYS, "pearson")
     rank_ic_series = compute_ic_dynamic(fa, ra, FORWARD_DAYS, "spearman")
     group_returns, turnovers, holdings_info = compute_group_returns(
         fa, ra, N_GROUPS, REBALANCE_FREQ, COST
@@ -196,23 +179,35 @@ if neg_sh > pos_sh:
         holdings_info=holdings_info
     )
     direction = -1
-    direction_desc = "反向（低因子值=高预期收益）"
+    direction_desc = "反向（低不对称/负不对称=高预期收益，均值回复逻辑）"
 else:
     direction = 1
-    direction_desc = "正向（高因子值=高预期收益）"
-    print(f"   → 使用正向 ✓")
+    direction_desc = "正向（高正向不对称=高预期收益，买方力量动量延续）"
+print(f"   → 使用{'正向' if direction == 1 else '反向'} ✓")
+
+# ────────────────── 也测试不同窗口 ──────────────────
+print(f"\n[6c] 参数敏感性分析...")
+for test_fwd in [5, 10, 20]:
+    test_ic = compute_ic_dynamic(fa, ra, test_fwd, "pearson")
+    test_gr, _, _ = compute_group_returns(fa, ra, N_GROUPS, test_fwd, COST)
+    test_m = compute_metrics(test_gr, test_ic, test_ic, [], N_GROUPS)
+    ic_m = test_m.get("ic_mean", 0) or 0
+    ic_t = test_m.get("ic_t_stat", 0) or 0
+    sh = test_m.get("long_short_sharpe", 0) or 0
+    mono = test_m.get("monotonicity", 0) or 0
+    print(f"   fwd={test_fwd:2d}d: IC={ic_m:.4f}(t={ic_t:.2f}), Sharpe={sh:.4f}, Mono={mono:.2f}")
 
 # ────────────────── 相关性 ──────────────────
-print(f"[7] 与现有因子相关性...")
+print(f"\n[7] 与现有因子相关性...")
+
+# 构造常用参考因子
+turnover_piv = df.pivot_table(index="date", columns="stock_code", values="turnover")
 
 # Amihud
 amihud_raw = (ret_piv.abs() / (amount_piv / 1e8).clip(lower=1e-8))
 amihud_factor = np.log(amihud_raw.rolling(20, min_periods=10).mean().clip(lower=1e-12))
 
 # Shadow pressure
-open_piv = df.pivot_table(index="date", columns="stock_code", values="open")
-high_piv = df.pivot_table(index="date", columns="stock_code", values="high")
-low_piv = df.pivot_table(index="date", columns="stock_code", values="low")
 upper_sr = (high_piv - np.maximum(close_piv, open_piv)) / (high_piv - low_piv).clip(lower=1e-8)
 lower_sr = (np.minimum(close_piv, open_piv) - low_piv) / (high_piv - low_piv).clip(lower=1e-8)
 shadow = (upper_sr - lower_sr).rolling(20, min_periods=10).mean()
@@ -239,39 +234,35 @@ cvar_df = pd.DataFrame(cvar_mat, index=dates, columns=stocks)
 neg_freq = (ret_piv <= -0.03).astype(float).rolling(10, min_periods=5).mean()
 
 # Turnover level
-turnover_piv = df.pivot_table(index="date", columns="stock_code", values="turnover")
-turnover_factor = np.log(turnover_piv.rolling(20, min_periods=10).mean().clip(lower=1e-8))
+turnover_level = np.log(turnover_piv.rolling(20, min_periods=10).mean().clip(lower=1e-8))
 
 # TAE
-amp_piv = df.pivot_table(index="date", columns="stock_code", values="amplitude") / 100
-tae_factor = np.log((turnover_piv.rolling(20, min_periods=10).mean() / (amp_piv.rolling(20, min_periods=10).mean() + 0.01)).clip(lower=1e-8))
+amplitude_piv = (high_piv - low_piv) / close_piv.shift(1).clip(lower=0.01)
+tae = np.log(turnover_piv.rolling(20, min_periods=10).mean().clip(lower=1e-8) / 
+             (amplitude_piv.rolling(20, min_periods=10).mean().clip(lower=1e-8) + 0.01))
 
-# MA Dispersion
+# MA dispersion (simplified - use 5/10/20/60 MAs)
 ma5 = close_piv.rolling(5).mean() / close_piv
 ma10 = close_piv.rolling(10).mean() / close_piv
 ma20 = close_piv.rolling(20).mean() / close_piv
-ma40 = close_piv.rolling(40).mean() / close_piv
 ma60 = close_piv.rolling(60).mean() / close_piv
-ma120 = close_piv.rolling(120).mean() / close_piv
-ma_stack = np.stack([ma5.values, ma10.values, ma20.values, ma40.values, ma60.values, ma120.values], axis=0)
-ma_disp_vals = np.nanstd(ma_stack, axis=0)
-ma_disp_factor = pd.DataFrame(ma_disp_vals, index=close_piv.index, columns=close_piv.columns)
+ma_stack = pd.concat([ma5, ma10, ma20, ma60], keys=['ma5','ma10','ma20','ma60'])
+# Per-date, per-stock std of MA ratios
+ma_disp = pd.DataFrame(index=close_piv.index, columns=close_piv.columns, dtype=float)
+for d in close_piv.index:
+    vals = np.array([ma5.loc[d].values, ma10.loc[d].values, 
+                     ma20.loc[d].values, ma60.loc[d].values])
+    ma_disp.loc[d] = np.nanstd(vals, axis=0)
 
 correlations = {}
-for name, other in [
-    ('amihud_illiq_v2', amihud_factor),
-    ('shadow_pressure_v1', shadow),
-    ('overnight_momentum_v1', overnight_mom),
-    ('tail_risk_cvar_v1', cvar_df),
-    ('neg_day_freq_v1', neg_freq),
-    ('turnover_level_v1', turnover_factor),
-    ('tae_v1', tae_factor),
-    ('ma_disp_v1', ma_disp_factor),
-]:
+for name, other in [('amihud_illiq_v2', amihud_factor), ('shadow_pressure_v1', shadow),
+                     ('overnight_momentum_v1', overnight_mom), ('tail_risk_cvar_v1', cvar_df),
+                     ('neg_day_freq_v1', neg_freq), ('turnover_level_v1', turnover_level),
+                     ('tae_v1', tae), ('ma_disp_v1', ma_disp)]:
     corrs = []
     for d in common_dates[::10]:
         f1 = fa.loc[d].dropna()
-        f2 = other.loc[d].reindex(f1.index).dropna()
+        f2 = other.loc[d].reindex(f1.index).dropna() if d in other.index else pd.Series(dtype=float)
         c = f1.index.intersection(f2.index)
         if len(c) > 50:
             r, _ = sp_stats.spearmanr(f1[c], f2[c])
@@ -302,12 +293,12 @@ def nan_to_none(obj):
 
 report = {
     "factor_id": FACTOR_ID,
-    "factor_name": "深度反转强度 v1",
-    "factor_name_en": "Deep Reversal Strength v1",
-    "category": "短期反转/量价复合",
-    "description": "近5日跌幅×成交额放大×波动率膨胀的三维复合信号。筛选'恐慌性下跌后的深度反弹'机会。成交额OLS中性化。",
-    "hypothesis": "跌幅大+放量抛售+波动率膨胀的三重叠加信号=恐慌性下跌，卖压耗尽后反弹力度最强。",
-    "formula": "neutralize(z(-ret_5d) + z(log(MA5_amt/MA20_amt)) + z(log(std5/std20)), log_amount_20d) / 3",
+    "factor_name": "日内收益不对称性 v1",
+    "factor_name_en": "Intraday Return Asymmetry v1",
+    "category": "量价/信息",
+    "description": f"20日窗口内日内收益正负分布的不对称性。pos_mean/(pos_mean+neg_mean)-0.5。高不对称=正收益幅度>负收益幅度=买方力量更强。",
+    "hypothesis": "日内正收益幅度显著大于负收益幅度的股票，买方力量更强（可能是知情交易者），后续有动量延续效应。",
+    "formula": f"neutralize(MA{WINDOW}(pos_ret_mean/(pos_ret_mean+neg_ret_mean))-0.5, log_amount_20d)",
     "direction": direction,
     "direction_desc": direction_desc,
     "stock_pool": "中证1000",
@@ -335,7 +326,7 @@ mono = metrics.get("monotonicity", 0) or 0
 sig = "✓" if metrics.get("ic_significant_5pct") else "✗"
 
 print(f"\n{'='*60}")
-print(f"  {FACTOR_ID}: 深度反转强度因子")
+print(f"  {FACTOR_ID}: 日内收益不对称性因子")
 print(f"  方向: {direction_desc}")
 print(f"{'='*60}")
 print(f"  区间:     {report['period']}")
@@ -359,10 +350,6 @@ for i, r in enumerate(metrics.get("group_returns_annualized", []), 1):
 for key in sorted(group_returns.keys(), key=lambda x: str(x)):
     cum = (1 + group_returns[key]).cumprod()
     print(f"  {key} NAV: {cum.iloc[-1]:.4f}")
-
-print(f"  相关性:")
-for name, r in correlations.items():
-    print(f"    vs {name}: {r:.3f}")
 
 print(f"{'='*60}")
 is_valid = abs(ic_m) > 0.015 and abs(ic_t) > 2 and abs(ls_sh) > 0.5
