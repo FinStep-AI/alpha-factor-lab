@@ -2,15 +2,6 @@
   "history": [
     {
       "date": "20260401",
-      "zt_count": 30,
-      "dt_count": 1,
-      "zb_count": 17,
-      "max_streak": 4,
-      "temperature": 50,
-      "phase": "ferment"
-    },
-    {
-      "date": "20260401",
       "zt_count": 55,
       "dt_count": 7,
       "zb_count": 38,
@@ -269,7 +260,16 @@
       "max_streak": 5,
       "temperature": 66,
       "phase": "climax"
+    },
+    {
+      "date": "20260416",
+      "zt_count": 3,
+      "dt_count": 2,
+      "zb_count": 0,
+      "max_streak": 4,
+      "temperature": 33,
+      "phase": "startup"
     }
   ],
-  "updated": "20260415"
+  "updated": "20260416"
 }

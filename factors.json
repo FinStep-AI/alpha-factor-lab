@@ -1239,5 +1239,19 @@
       "ma_disp_v1": -0.1,
       "vwap_dev_v1": 1.0
     }
+  },
+  {
+    "name": "vol_ext_cm_v1",
+    "barra_style": "MICRO",
+    "tag": "minor_style",
+    "description": "成交量极值回归因子: 20日成交量分布的70分位 vs 30分位, 极端放量日后续5日收益 - 极端缩量日后续5日收益。正=信息确认, 负=噪音回吐。成交额OLS中性化+MAD+z-score。",
+    "barra_explanation": "MICRO: 微观结构风格——捕捉成交量极端事件的信息确认速度。超高成交量日内往往反映知情交易者破冰(黄俊&韩立岩2013情绪假说)。低成交量日=信息静默期。两极差距反映市场信息效率。",
+    "formula": "factor_raw = rolling_mean(cont_ret_highq) - rolling_mean(cont_ret_lowq), 其中highq=volume≥70%分位, lowq=volume≤30%分位",
+    "source_type": "价格/量",
+    "direction": 1,
+    "correlations": {},
+    "detail": "intraday volume extremes: high_q=0.7, low_q=0.3, forward_days=5, window=20d, amount neutralized, MAD winsorized, z-scored. IC=0.0595(t=4.46), G5 sharpe≈0.79",
+    "current_status": "待入库",
+    "suggested_portfolio_weight": 0.6
   }
 ]

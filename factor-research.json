@@ -2663,5 +2663,58 @@
     "correlations_with_existing": "未计算(因子不达标无需入库)",
     "conclusion": "失败。日频数据无法近似日内volume surge(原文需分钟级窗口)。方向不对→放弃。",
     "status": "failed"
+  },
+  {
+    "factor_name": "volume_spike_continuation_v1",
+    "original_metric": {
+      "description": "20日滚动窗口内: 高量日(vol_z>0.5)的5日远期收益均值 - 低量日(vol_z<0)的5日远期收益均值。高量日=成交量高于均值+0.5倍标准差。"
+    },
+    "final_metric": {
+      "description": "高量日加权远期收益均值(vol_z-0.5权重) - 低量日加权远期收益均值(|vol_z|+0.2权重)，20日窗口，成交额OLS中性化+MAD+z-score",
+      "params": "threshold=0.4, fwd=5d, w=20d, min_p=8"
+    },
+    "barra_style": "MICRO",
+    "status": "eliminated",
+    "reason": "IC=0.0316(t=2.79)但单调性=-0.10，U型分布(G3=6.76%远低于G1/G2/G5)。与v2比较其Monte Carlo Hull Breakeven MCLL阈值未达标。v3改进后淘汰。",
+    "ic_mean": 0.0316,
+    "ic_t": 2.79,
+    "monotonicity": -0.1,
+    "g5_sharpe": 0.619
+  },
+  {
+    "factor_name": "volume_spike_continuation_v2",
+    "original_metric": {
+      "description": "同v1，但spike_threshold=0.5(更严格)"
+    },
+    "final_metric": {
+      "description": "同v1，threshold=0.5",
+      "params": "threshold=0.5, fwd=5d, w=20d"
+    },
+    "barra_style": "MICRO",
+    "status": "eliminated",
+    "reason": "IC=0.0304(t=2.70)与v1基本一致，单调性仍为-0.10。严格阈值无法解决U型问题。",
+    "ic_mean": 0.0304,
+    "ic_t": 2.7,
+    "monotonicity": -0.1,
+    "g5_sharpe": 0.619
+  },
+  {
+    "factor_name": "volume_extreme_return_contrast_v1",
+    "original_metric": {
+      "description": "20日滚动成交量分布的70%分位 vs 30%分位: 极端高量日远期收益均值 - 极端低量日远期收益均值。"
+    },
+    "final_metric": {
+      "description": "70%分位远益均值 - 30%分位远益均值, 20日窗口，成交额OLS中性化+MAD+z-score",
+      "params": "high_q=0.7, low_q=0.3, fwd=5d, w=20d"
+    },
+    "barra_style": "MICRO",
+    "status": "active",
+    "reason": "IC=0.0595(t=4.46)卓越，长空Sharpe=1.29，G5年化21.65%。U型(单调性=0.5)但G5显著优于中组。extrem此量日信息驱动假说验证。",
+    "ic_mean": 0.0595,
+    "ic_t": 4.46,
+    "monotonicity": 0.5,
+    "g5_sharpe": 0.793,
+    "g5_return": 0.2165,
+    "long_short_sharpe": 1.286
   }
 ]
