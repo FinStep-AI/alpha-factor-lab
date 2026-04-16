@@ -2613,5 +2613,55 @@
     },
     "conclusion": "入库。量价信号一致性因子通过波动率标准化(除以MA20|ret|)+rank变换，将非线性的G5极端优势(27%)转化为线性显著alpha(IC=0.024,t=2.11)。20d前瞻最优。与入库因子最高相关0.36(不冗余)。G5年化26.9%，Sharpe=1.04。Barra风格: MICRO(微观结构)。Major upgrade vs raw sign alignment v0(IC=0.00).",
     "status": "active"
+  },
+  {
+    "date": "2026-04-16",
+    "factor_id": "research_scan_20260416",
+    "factor_name": "研报+论文扫描 2026-04-16",
+    "source_type": "研报+论文扫描",
+    "source_title": "扫描: 成交量激增alpha(方正金工) | 日内成交量熵因子 | Monetary Policy Surprises | Peer Effects",
+    "source_url": "- 方正金工: BigQuant研报(需登录)\n- SSRN 6251079: Monetary Policy Surprises\n- SSRN 6469201: Autopilot Alpha",
+    "category": "信息扫描",
+    "barra_style": "N/A",
+    "description": "扫描3个方向：方正金工成交量激增moment因子(需分钟kline)、日内相对成交量熵因子(BigQuant高频)、Monetary Policy Surprises/Peer Index(SSRN)。",
+    "hypothesis": "成交量激增时刻反映知情交易行为的alpha信息。",
+    "variants_tested": [],
+    "our_metric": {
+      "decision": "研报全文需登录无法获取公式，不浪费时间。日频近似volume_spike_freq_v1实验失败(IC=-0.01,t=-1.52)。"
+    },
+    "conclusion": "下次优先：1)从BigQuant获取研报复现代码 2)尝试close-to-open成交量比率代理日内信号。",
+    "status": "research_scan"
+  },
+  {
+    "date": "2026-04-16",
+    "factor_id": "vol_spike_freq_v1",
+    "factor_name": "成交量激增频率 v1",
+    "source_type": "自研(方正金工启发)",
+    "source_title": "方正金工启发-日常频近似实现",
+    "source_url": "",
+    "category": "量价/微观结构",
+    "barra_style": "MICRO",
+    "description": "日频近似日内量能激增。20日滚动，spike=vol>ma+1.5*std，因子=20日内spike天数占比，对数成交额中性化+z-score。",
+    "hypothesis": "成交量激增频率高→知情交易活跃→短期正收益。",
+    "variants_tested": [
+      "v1 (threshold=1.5x): IC=-0.01(t=-1.52), Sharpe=-1.49, mono=-0.09 ← 失败"
+    ],
+    "original_metric": {
+      "note": "原文需分钟kline，非日频复现范围"
+    },
+    "our_metric": {
+      "market": "中证1000",
+      "period": "2022-10-31 ~ 2026-03-09",
+      "ic_mean": -0.01,
+      "ic_t_stat": -1.52,
+      "rank_ic": -0.023,
+      "sharpe": -1.49,
+      "monotonicity": -0.09,
+      "g1_vs_g10": "G1=82%, G10=68%, 反向",
+      "turnover": 0.91
+    },
+    "correlations_with_existing": "未计算(因子不达标无需入库)",
+    "conclusion": "失败。日频数据无法近似日内volume surge(原文需分钟级窗口)。方向不对→放弃。",
+    "status": "failed"
   }
 ]

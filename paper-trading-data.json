@@ -11620,6 +11620,17 @@
           "pv_divergence_v1",
           "gap_consec_v1"
         ]
+      },
+      {
+        "date": "2026-04-16",
+        "type": "factor_scan",
+        "summary": "扫描研报+论文: 方正金工成交量激增alpha(需日内数据)、日内成交量熵因子、Monetary Policy Surprises(SSRN)。日频近似volume_spike_freq_v1失败(IC=-0.01)",
+        "detail": "文献扫描:\n1. 方正金工《成交量激增时刻蕴含的alpha信息》- 需分钟kline识别单日量能窗口 → 日频无法复现\n2. BigQuant高频因子系列-日内相对成交量熵因子 → 同样需分钟数据\n3. SSRN: Monetary Policy Surprises对因子收益的预测力 → 需宏观变量，暂不实施\n4. SSRN: Delayed Channel of CP Surprises and Stock Return → 同上\n实验: volume_spike_freq_v1 = 20日内成交量>MA20+1.5*std的天数占比，中性化后IC=-0.01(t=-1.52)，单调性-0.09，完全失效",
+        "action": "no_action (周一调仓见周一cron)",
+        "factors_tested": [
+          "vol_spike_freq_v1"
+        ],
+        "factors_research": []
       }
     ]
   },
