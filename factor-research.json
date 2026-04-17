@@ -2716,5 +2716,52 @@
     "g5_sharpe": 0.793,
     "g5_return": 0.2165,
     "long_short_sharpe": 1.286
+  },
+  {
+    "factor_name": "vw_autocorr_v1",
+    "original_metric": {
+      "description": "20日滚动成交量加权收益率自相关: signed_ret = ret * sign(volume - MA20_volume), factor_raw = autocorr_1(signed_ret, 20d)。"
+    },
+    "final_metric": {
+      "description": "20日lag-1成交量加权有向收益率自相关, 对数流通市值代理(amt/turnover) OLS中性化 + MAD缩尾 + z-score",
+      "params": "window=20d, volume_signal=sign(volume-MA20_volume), rebalance=5d/20d, forward=5d/20d"
+    },
+    "barra_style": "MICRO",
+    "status": "failed",
+    "reason": "完全不达标。5日回测IC=-0.0006(t=-0.16), 多空Sharpe=0.14, 单调性=0.30; 20日回测IC=0.0009(t=0.13), 多空Sharpe=0.19, 单调性=0.30。分组呈U型/中间峰值而非线性排序，说明'成交量方向持续性'在本样本里不是稳定线性alpha，更像条件型或非线性信号。",
+    "ic_mean": -0.0006,
+    "ic_t": -0.16,
+    "monotonicity": 0.3,
+    "g5_sharpe": 0.14,
+    "g5_return": 0.0398,
+    "long_short_sharpe": 0.1375
+  },
+  {
+    "date": "2026-04-17",
+    "source_type": "券商研报",
+    "source_title": "方正金工：成交量激增时刻蕴含的alpha信息——多因子选股系列研究之一",
+    "source_url": "https://bigquant.com/wiki/doc/mVbNMncBPm",
+    "factor_id": "vsv_daily_surge_v1",
+    "factor_name": "Volume Surge Volatility（日线适配版）",
+    "original_metric": "Rank IC=-8.89%, Rank ICIR=-4.84(rank), 多空年化37.46%, Sharpe=4.10, 月度胜率87.74%",
+    "our_metric": "IC=-0.013(t=-1.14), Sharpe=-0.43, 单调性=-0.1",
+    "diff_notes": "原文用分钟级数据（成交量激增时刻+5分钟窗口），我们仅用日线OHLCV近似。核心机制差异：原文在日内捕捉'成交量激增→价格反应'的瞬时偏离，日线版仅能捕捉跨日HL spread偏离，丢失了关键信息层。失败原因：数据频率严重不匹配",
+    "conclusion": "❌ 不达标。该因子需要分钟/逐笔成交数据，日线OHLCV无法可靠复现。建议：获取分钟级数据后再试，或放弃此方向",
+    "barra_style": "微观结构",
+    "neutralized_by": "log_amount"
+  },
+  {
+    "date": "2026-04-17",
+    "source_type": "自研探索",
+    "source_title": "日内幅度扩张因子 Range Expansion (基于方正金工启发)",
+    "source_url": "",
+    "factor_id": "range_expansion_v1",
+    "factor_name": "Range Expansion v1",
+    "original_metric": "N/A（自研衍生）",
+    "our_metric": "IC=0.007(t=0.55), Sharpe=0.44, 单调性=0.8（非线性），多空年化=6.88%",
+    "diff_notes": "试图用HL spread的20日均值偏离度替代日内'耀眼光芒波动率'。高HL spread=日内过度交易=短期反转。结果IC不显著，但单调性0.8",
+    "conclusion": "❌ 不达标。IC=0.007远低于0.02门槛，不显著。中层收益不一致，非单调因子。建议：放弃",
+    "barra_style": "Volatility",
+    "neutralized_by": "log_amount"
   }
 ]
