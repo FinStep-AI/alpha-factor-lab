@@ -1,0 +1,34 @@
+🔍 数据一致性检查...
+
+  发现 4 个问题:
+    ⚠️ 因子猎人: NAV不一致 stored=1.067314 expected=1.0806
+    ⚠️ 技术猎手: NAV不一致 stored=0.853025 expected=0.907275
+    ⚠️ 情绪战神: NAV不一致 stored=1.077192 expected=1.092786
+    ⚠️ 热点猎手: NAV不一致 stored=0.945863 expected=0.94737
+  已自动修复可修复的问题
+
+📊 更新净值 (2026-04-20，盘中)
+  总持仓代码: 36 只
+  获取到 36 个价格
+  沪深300: 4758.86, 基准NAV: 1.010902
+
+🔍 最终一致性检查...
+  ⚠️ 仍有 5 个问题:
+    ⚠️ 因子猎人: NAV不一致 stored=1.067314 expected=1.082273
+    ⚠️ 技术猎手: NAV不一致 stored=0.853025 expected=0.907275
+    ⚠️ 巴菲特门徒: NAV不一致 stored=1.0 expected=1.002075
+    ⚠️ 情绪战神: NAV不一致 stored=1.077192 expected=1.092786
+    ⚠️ 热点猎手: NAV不一致 stored=0.945863 expected=0.947903
+[OK] 数据已保存: /home/sunrui/.openclaw/workspace-buffett/alpha-factor-lab/paper-trading-data.json
+
+💾 数据已保存到 /home/sunrui/.openclaw/workspace-buffett/alpha-factor-lab/paper-trading-data.json
+
+============================================================
+🏆 排行榜
+============================================================
+  #1 ⚡ 情绪战神: NAV=1.0772 (+7.72%)
+  #2 🔢 因子猎人: NAV=1.0673 (+6.73%)
+  #3 🏛️ 巴菲特门徒: NAV=1.0000 (+0.00%)
+  #4 🏄 趋势游侠: NAV=0.9893 (-1.07%)
+  #5 📰 热点猎手: NAV=0.9459 (-5.41%)
+  #6 📊 技术猎手: NAV=0.8530 (-14.70%)
