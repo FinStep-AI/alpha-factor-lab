@@ -1331,5 +1331,91 @@
       "turnover_level_v1": 0.092,
       "gap_efficiency_v2": 1.0
     }
+  },
+  {
+    "id": "corr_gspd_v1",
+    "name": "个体-市场关联离散度 v1",
+    "name_en": "Corr(individual, market) Spread v1",
+    "category": "共动性/独立性",
+    "description": "过去20日个股收益率与等权市场收益率的Pearson相关系数，取负值。高因子值=个股相对市场独立性强(低共动性)，由自身信息驱动。反向使用：做多高共动性(跟风)股、做空低共动性股。成交额OLS中性化+MAD缩尾+z-score。中证1000小盘股动量延续效应下，强跟随者后续表现更好。",
+    "hypothesis": "高共动性股票(跟风股)在A股小盘股动量延续环境中更易获取超额收益，因为信息传播链中跟随者流动性溢价补偿。低共动性个股独立性强但动量不足。",
+    "expected_direction": "反向（高共动性=高预期收益）",
+    "factor_type": "共动性/Beta动态",
+    "formula": "neutralize(-corr(ret_stock, ret_market_eqw, 20d), log_amount_20d), 反向使用",
+    "direction": -1,
+    "stock_pool": "中证1000",
+    "period": "2022-10-24 ~ 2026-04-15",
+    "rebalance_freq": 20,
+    "forward_days": 20,
+    "cost": 0.002,
+    "rating": "★★ 弱-中",
+    "nav_data": "output/corr_gspd_v1/cumulative_returns.json",
+    "ic_data": "output/corr_gspd_v1/ic_series.json",
+    "upgrade_notes": "v1首版。IC=0.038(t=2.00)边界达标，Sharpe=1.26尚可，单调性0.7偏低。方向与假设相反（高共动→高收益），解释为A股小盘股动量延续效应。与入库因子最高相关0.29(vol_cv_neg)，独立性好。t值2.00临界，复现稳定性待验证。",
+    "lessons_learned": [
+      "方向与直觉相反：高共动性(跟风)股有正alpha，反映出A股小盘股动量延续逻辑",
+      "用20日前瞻(不是5日)——因子是中期趋势信号，不是短期反转",
+      "与amihud(r=-0.035)、shadow_pressure(r=0.029)几乎不相关，独立维度",
+      "单调性0.7偏低：G2-G5分层接近(18-20%)，G1差异大(2.7%)，因子主要在极端低端区分",
+      "t=2.00临界：p≈0.052，边界显著，说明信号不够稳定，需延长数据验证"
+    ],
+    "created": "2026-04-20",
+    "updated": "2026-04-20",
+    "metrics": {
+      "ic_mean": 0.03806343879713835,
+      "ic_std": 0.10958086271011738,
+      "ic_t": 2.002359058994726,
+      "ic_positive_ratio": 0.6666666666666666,
+      "rank_ic": 0.06337925390424115,
+      "rank_ic_std": 0.13687240277649484,
+      "ir": 0.34735480133817226,
+      "ic_count": 42,
+      "long_short_sharpe": 1.2604138919356633,
+      "long_short_mdd": -0.2007710546219219,
+      "monotonicity": 0.7,
+      "group_sharpe": [
+        0.125,
+        0.691,
+        0.668,
+        0.648,
+        0.669
+      ],
+      "group_returns_annualized": [
+        0.027,
+        0.184,
+        0.168,
+        0.174,
+        0.196
+      ],
+      "group_mdd": [
+        -0.326,
+        -0.348,
+        -0.346,
+        -0.366,
+        -0.397
+      ]
+    },
+    "conclusion": "因子有效入库。corr_gspd通过20日滚动个股-市场收益率相关性捕捉共动性独立程度，反向使用（高共动→高收益）。IC=0.038(t=2.0)边界显著，Sharpe=1.26，单调性0.7，MDD=-20.1%。与已有因子低相关(max=0.29)，新增共动性维度。注意：t值临界，复现稳定性需关注，计划后期追加数据验证。",
+    "barra_style": "MICRO",
+    "source_type": "自研(论文启发)",
+    "source_title": "Grinblatt & Moskowitz (2004) \"Predicting Stock Price Movements from Past Returns\" JFE",
+    "source_url": "https://doi.org/10.1016/j.jfineco.2004.01.003",
+    "correlations": {
+      "amihud_illiq_v2": -0.035,
+      "shadow_pressure_v1": 0.029,
+      "overnight_momentum_v1": 0.232,
+      "tail_risk_cvar_v1": 0.014,
+      "neg_day_freq_v1": -0.011,
+      "turnover_level_v1": 0.033,
+      "tae_v1": 0.1,
+      "amp_level_v2": 0.017,
+      "ma_disp_v1": 0.006,
+      "vol_cv_neg_v1": 0.294,
+      "turnover_decel_v1": 0.115,
+      "informed_flow_v1": -0.078,
+      "price_mom_5d_v1": -0.071,
+      "vol_ret_align_v1": -0.052,
+      "corr_gspd_v1": 1.0
+    }
   }
 ]

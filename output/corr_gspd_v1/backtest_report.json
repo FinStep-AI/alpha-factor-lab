@@ -1,0 +1,149 @@
+{
+  "factor_id": "corr_gspd_v1",
+  "factor_name": "个体-市场关联离散度 v1",
+  "factor_name_en": "Corr(individual, market) Spread v1",
+  "category": "共动性/独立性",
+  "description": "过去20日个股收益率与等权市场收益率的Pearson相关系数，取负值。高因子值=个股相对市场独立性强（低共动性）——由个股自身信息驱动，减少市场系统噪音。成交额OLS中性化+MAD缩尾+z-score。中证1000小盘股差异化alpha强。",
+  "hypothesis": "低共动性的股票(Beta低但非传统 Schwert 式 beta)由个股特异信息主导，市场噪音影响小，信息定价效率高，后续有独立alpha。高共动性股票(跟风股)受市场情绪主导，超额收益困难。",
+  "expected_direction": "正向(高因子值=低相关性=高预期收益，个股独立性强)",
+  "factor_type": "共动性/独立性",
+  "barra_style": "MICRO",
+  "formula": "neutralize(-corr(ret_stock, ret_market_eqw, 20d), log_amount_20d)",
+  "direction": -1,
+  "direction_desc": "反向（高共动性=高预期收益）",
+  "stock_pool": "中证1000",
+  "period": "2022-10-24 ~ 2026-04-15",
+  "n_dates": 843,
+  "n_stocks": 1000,
+  "n_groups": 5,
+  "rebalance_freq": 20,
+  "forward_days": 20,
+  "cost": 0.002,
+  "data_cutoff": "2026-04-15",
+  "source_type": "自研(论文启发)",
+  "source_title": "Grinblatt & Moskowitz (2004) 'Predicting Stock Price Movements from Past Returns' JFE",
+  "source_url": "https://doi.org/10.1016/j.jfineco.2004.01.003",
+  "correlations": {
+    "amihud_illiq_v2": -0.035,
+    "shadow_pressure_v1": 0.029,
+    "overnight_momentum_v1": 0.232,
+    "gap_momentum_v1": null,
+    "tail_risk_cvar_v1": 0.014,
+    "neg_day_freq_v1": -0.011,
+    "turnover_level_v1": 0.033,
+    "tae_v1": 0.1,
+    "amp_level_v2": 0.017,
+    "ma_disp_v1": 0.006,
+    "vol_cv_neg_v1": 0.294,
+    "turnover_decel_v1": 0.115,
+    "informed_flow_v1": -0.078,
+    "price_mom_5d_v1": -0.071,
+    "vol_ret_align_v1": -0.052,
+    "corr_gspd_v1": 1.0
+  },
+  "metrics": {
+    "ic_mean": 0.03806343879713835,
+    "ic_std": 0.10958086271011738,
+    "ic_positive_pct": 0.6666666666666666,
+    "ic_count": 42,
+    "rank_ic_mean": 0.06337925390424115,
+    "rank_ic_std": 0.13687240277649484,
+    "ir": 0.34735480133817226,
+    "ic_t_stat": 2.002359058994726,
+    "ic_p_value": 0.05189007748670105,
+    "ic_significant_5pct": false,
+    "ic_significant_1pct": false,
+    "group_metrics": {
+      "group_1": {
+        "total_return": 0.09220956853814766,
+        "annualized_return": 0.026749492027280386,
+        "annualized_volatility": 0.2134936681050276,
+        "sharpe_ratio": 0.12529407670358192,
+        "max_drawdown": -0.3263060273341236,
+        "calmar_ratio": 0.08197670219523721
+      },
+      "group_2": {
+        "total_return": 0.7578793087447244,
+        "annualized_return": 0.18391940730978007,
+        "annualized_volatility": 0.2659952341196602,
+        "sharpe_ratio": 0.6914387316693139,
+        "max_drawdown": -0.3479287791160732,
+        "calmar_ratio": 0.528612228563083
+      },
+      "group_3": {
+        "total_return": 0.68138758026586,
+        "annualized_return": 0.16826009400877373,
+        "annualized_volatility": 0.2519146193465511,
+        "sharpe_ratio": 0.6679250868616861,
+        "max_drawdown": -0.34599339293566794,
+        "calmar_ratio": 0.48631013610152685
+      },
+      "group_4": {
+        "total_return": 0.7075354217803507,
+        "annualized_return": 0.17366818548435248,
+        "annualized_volatility": 0.26791614301490196,
+        "sharpe_ratio": 0.6482184445104257,
+        "max_drawdown": -0.3661824452537226,
+        "calmar_ratio": 0.4742668244623804
+      },
+      "group_5": {
+        "total_return": 0.8207630583148178,
+        "annualized_return": 0.19643904154884684,
+        "annualized_volatility": 0.29347616425696593,
+        "sharpe_ratio": 0.6693526271416237,
+        "max_drawdown": -0.3968101181665859,
+        "calmar_ratio": 0.4950454450518302
+      },
+      "long_short": {
+        "total_return": 0.7259350812148335,
+        "annualized_return": 0.17743905180338237,
+        "annualized_volatility": 0.1407784006021092,
+        "sharpe_ratio": 1.2604138919356633,
+        "max_drawdown": -0.2007710546219219,
+        "calmar_ratio": 0.8837880148486706
+      }
+    },
+    "long_short_total_return": 0.7259350812148335,
+    "long_short_ann_return": 0.17743905180338237,
+    "long_short_sharpe": 1.2604138919356633,
+    "long_short_mdd": -0.2007710546219219,
+    "turnover_mean": 0.7173917003628096,
+    "turnover_std": 0.023822725551416388,
+    "group_returns_annualized": [
+      0.026749492027280386,
+      0.18391940730978007,
+      0.16826009400877373,
+      0.17366818548435248,
+      0.19643904154884684
+    ],
+    "monotonicity": 0.7,
+    "holdings_info": {
+      "group_1": {
+        "mean": 193.72209026128266,
+        "min": 182,
+        "max": 200
+      },
+      "group_2": {
+        "mean": 194.270783847981,
+        "min": 183,
+        "max": 200
+      },
+      "group_3": {
+        "mean": 194.12589073634203,
+        "min": 182,
+        "max": 200
+      },
+      "group_4": {
+        "mean": 194.270783847981,
+        "min": 183,
+        "max": 200
+      },
+      "group_5": {
+        "mean": 194.57957244655583,
+        "min": 183,
+        "max": 200
+      }
+    },
+    "holdings_imbalance_ratio": 1.004426352121829
+  }
+}
