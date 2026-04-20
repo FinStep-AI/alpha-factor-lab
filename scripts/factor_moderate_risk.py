@@ -1,103 +1,138 @@
 """
-适度冒险因子（日线近似版 v1）
-来源：方正金工"成交量激增时刻蕴含的alpha信息"
-用日线OHLCV近似构造，向量化实现。
+适度冒险因子 (moderate_risk_v1)
+来源：方正金工《成交量激增时刻蕴含的alpha信息》2022
 
-逻辑：
-1. 成交量激增日：日成交量增量 > 过去20日增量均值 + 1倍标准差
-2. 激增日耀眼收益率 = 当日收益率
-3. 激增日耀眼波动率 = 当日日内波动率 (high-low)/close
-4. 适度偏离 = |个股耀眼指标 - 截面均值|
-5. 过去20个交易日：对激增日求平均适度偏离
-6. 因子 = 适度收益率偏离 + 适度波动率偏离（等权）
-7. 负向因子：值越高越不适度，预期收益越低
+日频近似版本（原始研报使用分钟频数据）：
+核心逻辑：成交量激增后价格的"适度波动"→ 过小(反应不足)或过大(反应过度)都不可取
+
+构建步骤（日频重构）：
+1. 识别成交量激增日：当日volume > 过去20日均值 + 1倍标准差
+2. 计算成交额比例：volume_surge_ratio = volume / MA20(volume) - 1
+3. 计算激增日的近5日绝对收益标准差（反应过度？）& 近5日收益绝对均值（反应方向）
+4. 适度因子 = |激增日收益均值 - 截面均值|（希望适度）
+5. 月频合成 = MA20(适度因子) / std20(适度因子)
+6. 市值中性化
 """
-
-import pandas as pd
 import numpy as np
-import os, sys
+import pandas as pd
 
-def compute_factor(kline_path, output_path, lookback=20, surge_window=20):
-    print(f"读取K线: {kline_path}")
-    df = pd.read_csv(kline_path)
+def calc_moderate_risk_factor(df_kline: pd.DataFrame, window: int = 20) -> pd.DataFrame:
+    """
+    计算适度冒险因子
     
-    # 标准化列名
-    col_map = {}
-    for c in df.columns:
-        cl = c.lower()
-        if cl in ('code', 'stock_code', 'symbol'): col_map[c] = 'code'
-        elif cl in ('date', 'trade_date'): col_map[c] = 'date'
-        elif cl in ('close',): col_map[c] = 'close'
-        elif cl in ('volume', 'vol'): col_map[c] = 'volume'
-        elif cl in ('high',): col_map[c] = 'high'
-        elif cl in ('low',): col_map[c] = 'low'
-    df = df.rename(columns=col_map)
-    df['date'] = pd.to_datetime(df['date'])
-    df = df.sort_values(['code', 'date']).reset_index(drop=True)
+    Parameters:
+    - df_kline: DataFrame with columns [date, stock_code, open, close, high, low, volume, amount, pct_change]
+    - window: 回看窗口，默认20日
     
-    print(f"股票数: {df['code'].nunique()}, 总行数: {len(df)}")
+    Returns:
+    - DataFrame with columns [date, stock_code, factor_value]
+    """
+    df = df_kline.copy()
     
-    # 1. 计算基础指标（向量化，按code分组）
-    df['ret'] = df.groupby('code')['close'].pct_change()
-    df['vol_delta'] = df.groupby('code')['volume'].diff()
-    df['intraday_vol'] = (df['high'] - df['low']) / df['close']
-    
-    # 2. 滚动统计判断激增
-    df['vd_mean'] = df.groupby('code')['vol_delta'].transform(
-        lambda x: x.rolling(surge_window, min_periods=10).mean()
+    # 1. 成交量特征
+    df['volume_ma20'] = df.groupby('stock_code')['volume'].transform(
+        lambda x: x.rolling(window, min_periods=window).mean()
     )
-    df['vd_std'] = df.groupby('code')['vol_delta'].transform(
-        lambda x: x.rolling(surge_window, min_periods=10).std()
-    )
-    df['is_surge'] = (df['vol_delta'] > (df['vd_mean'] + df['vd_std'])).astype(int)
-    
-    print(f"激增日比例: {df['is_surge'].mean():.3f}")
-    
-    # 3. 激增日的耀眼指标（直接用当日）
-    df['dazzle_ret'] = np.where(df['is_surge'] == 1, df['ret'], np.nan)
-    df['dazzle_vol'] = np.where(df['is_surge'] == 1, df['intraday_vol'], np.nan)
-    
-    # 4. 截面均值（每日所有激增股的均值）
-    daily_means = df[df['is_surge'] == 1].groupby('date').agg(
-        ret_xmean=('dazzle_ret', 'mean'),
-        vol_xmean=('dazzle_vol', 'mean')
-    ).reset_index()
-    
-    df = df.merge(daily_means, on='date', how='left')
-    
-    # 5. 适度偏离（仅激增日有值）
-    df['mod_ret'] = np.where(df['is_surge'] == 1,
-        (df['dazzle_ret'] - df['ret_xmean']).abs(), np.nan)
-    df['mod_vol'] = np.where(df['is_surge'] == 1,
-        (df['dazzle_vol'] - df['vol_xmean']).abs(), np.nan)
-    
-    # 6. 过去lookback个交易日内，激增日适度偏离的均值
-    # 用rolling + min_periods=1, 对NaN自动跳过
-    df['factor_ret'] = df.groupby('code')['mod_ret'].transform(
-        lambda x: x.rolling(lookback, min_periods=3).mean()
-    )
-    df['factor_vol'] = df.groupby('code')['mod_vol'].transform(
-        lambda x: x.rolling(lookback, min_periods=3).mean()
+    df['volume_std20'] = df.groupby('stock_code')['volume'].transform(
+        lambda x: x.rolling(window, min_periods=window).std()
     )
     
-    # 7. 合成因子
-    df['factor_value'] = (df['factor_ret'].fillna(0) + df['factor_vol'].fillna(0)) / 2
+    # 成交量偏离度（日频激增代理）
+    # volume_ma20 > 0 才有意义，避免除零
+    df['volume_surge_ratio'] = np.where(
+        df['volume_ma20'] > 0,
+        df['volume'] / df['volume_ma20'] - 1,
+        np.nan
+    )
     
-    # 只保留有有效因子值的
-    valid = df[df['factor_value'] > 0][['code', 'date', 'factor_value']].copy()
-    valid = valid.dropna()
+    # 2. 激增识别：volume_surge_ratio > 1 （即成交量>均值+1倍std的近似）
+    df['is_surge'] = df['volume_surge_ratio'] > 1.0
     
-    print(f"有效因子记录数: {len(valid)}")
-    print(f"覆盖股票数: {valid['code'].nunique()}")
-    print(f"日期范围: {valid['date'].min()} ~ {valid['date'].max()}")
+    # 3. 在激增日，看后续的收益行为
+    # 计算20日滚动收益std（对应"耀眼波动率"）
+    df['ret_abs'] = df['pct_change'].abs() / 100  # 日绝对收益
+    df['ret_std_20'] = df.groupby('stock_code')['ret_abs'].transform(
+        lambda x: x.rolling(window, min_periods=window).std()
+    )
     
-    valid.to_csv(output_path, index=False)
-    print(f"因子已保存: {output_path}")
-    return valid
-
+    # 4. 计算日频"适度因子"
+    # 当成交量大时，我们希望收益波动适中
+    # 适度 = |绝对收益 - 截面均值| （偏离越大，越不"适度"）
+    # 但原文是"越小越好"，所以我们的因子方向需要测试
+    # 价格变化后的绝对值偏离度：|abs(ret) - median_ret_abs|
+    # 这反映激增日价格是否反应"过度"或"不足"
+    df['abs_return'] = df['pct_change'].abs() / 100
+    
+    # 5. 核心因子构造：
+    # F1: volume-driven volatility = volume_surge_ratio * ret_std_20
+    # 高成交量且高波动 → 过度冒险
+    df['f_vol_vol'] = df['volume_surge_ratio'] * df['ret_std_20']
+    
+    # F2: normality deviation = abs(volume_surge_ratio - 1) * abs_return
+    # 成交量偏离越大+价格变动越大 → 信号越强
+    df['f_vol_dev'] = np.abs(df['volume_surge_ratio'] - 1) * df['abs_return']
+    
+    # 6. 取滚动20日均值合成月频因子
+    for fcol in ['f_vol_vol', 'f_vol_dev']:
+        df[f'{fcol}_ma20'] = df.groupby('stock_code')[fcol].transform(
+            lambda x: x.rolling(window, min_periods=window).mean()
+        )
+    
+    # 因子1和因子2组合 → 适度冒险因子（等权）
+    # 因子值越低越好(IC为负表明低值→高收益)
+    df['moderate_risk_raw'] = -(df['f_vol_vol_ma20'] + df['f_vol_dev_ma20']) / 2
+    
+    # 7. 对数市值中性化
+    # 需要amount作为市值的代理(中证1000的成分股市值)
+    # 或者用 amount * 某个因子
+    df['log_amount'] = np.log(df['amount'].clip(lower=1e6))
+    
+    # 按截面做中性化
+    factor_col = 'moderate_risk_raw'
+    
+    def neutralize(group):
+        y = group[factor_col].values
+        x = group['log_amount'].values
+        mask = np.isfinite(y) & np.isfinite(x)
+        if mask.sum() < 30:
+            group[f'{factor_col}_neu'] = np.nan
+            return group
+        slope = np.cov(x[mask], y[mask])[0, 1] / (np.var(x[mask]) + 1e-10)
+        intercept = np.mean(y[mask]) - slope * np.mean(x[mask])
+        residual = y.copy()
+        residual[mask] = y[mask] - (slope * x[mask] + intercept)
+        group[f'{factor_col}_neu'] = residual
+        return group
+    
+    df = df.groupby('date', group_keys=False).apply(neutralize)
+    
+    # 输出
+    out_cols = ['date', 'stock_code', f'{factor_col}_neu', 'volume_surge_ratio', 'is_surge']
+    result = df[out_cols].dropna(subset=[f'{factor_col}_neu']).copy()
+    result.columns = ['date', 'stock_code', 'factor_value', 'volume_surge_ratio', 'is_surge_flag']
+    result['date'] = pd.to_datetime(result['date'])
+    return result
 
 if __name__ == '__main__':
-    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    kline_path = os.path.join(base_dir, 'data', 'csi1000_kline_raw.csv')
-    output_path = os.path.join(base_dir, 'data', 'factor_moderate_risk_v1.csv')
-    compute_factor(kline_path, output_path)
+    import sys
+    
+    kline_path = 'data/csi1000_kline_raw.csv'
+    output_path = 'data/moderate_risk_v1.csv'
+    
+    print(f"读取K线数据: {kline_path}")
+    df = pd.read_csv(kline_path)
+    print(f"原始数据: {df.shape[0]} 行, {df['stock_code'].nunique()} 只股票")
+    
+    print(f"\n计算适度冒险因子(moderate_risk_v1)...")
+    result = calc_moderate_risk_factor(df, window=20)
+    
+    print(f"\n因子值形状: {result.shape}")
+    print(f"日期范围: {result['date'].min()} ~ {result['date'].max()}")
+    print(f"非空因子值: {result['factor_value'].notna().sum()}")
+    print(f"激增日标记: {result['is_surge_flag'].sum()} 条")
+    print(f"\n因子值统计:")
+    print(result['factor_value'].describe())
+    
+    # 保存
+    result.to_csv(output_path, index=False)
+    print(f"\n因子已保存到: {output_path}")

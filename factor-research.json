@@ -2763,5 +2763,34 @@
     "conclusion": "❌ 不达标。IC=0.007远低于0.02门槛，不显著。中层收益不一致，非单调因子。建议：放弃",
     "barra_style": "Volatility",
     "neutralized_by": "log_amount"
+  },
+  {
+    "date": "2026-04-17",
+    "source_type": "自研探索",
+    "source_title": "Candle Body Intensity（高成交量实体K线强度）",
+    "source_url": "",
+    "factor_id": "cbi_v1",
+    "factor_name": "Candle Body Intensity v1",
+    "original_metric": "N/A（自研）",
+    "our_metric": "5d前瞻: IC=-0.005(t=-0.68), G5 Sharpe=0.94, 单调性=1.0；20d前瞻: IC=0.028(t=2.05), G5 Sharpe=1.03, 单调性=1.0",
+    "diff_notes": "因子定义为20日滚动均值: sign((close-open)/(high-low)) * |close-open|/(high-low) * log(1+volume/MA20(volume))，并做log_amount OLS中性化。5日回测下分组收益极其单调（G1 5.8% → G5 26.2%），但IC接近0，说明中间组排序信息不足；20日前瞻下IC与Sharpe显著改善，说明更像中频趋势确认因子，而非5日短期alpha。",
+    "conclusion": "❌ 本轮不入库。按任务门槛以5日前瞻为准，IC=-0.005远低于0.02且t=-0.68不显著，虽G5 Sharpe=0.94、单调性=1.0，但横截面排序能力不足。建议保留为20日中频候选，后续可测试更长窗口/方向拆分（仅上实体或仅下实体）。",
+    "barra_style": "Momentum",
+    "neutralized_by": "log_amount",
+    "status": "failed_5d_keep_for_20d_followup"
+  },
+  {
+    "date": "2026-04-20",
+    "source_type": "券商研报",
+    "source_title": "方正金工 成交量激增时刻蕴含的alpha信息",
+    "source_url": "https://bigquant.com/wiki/doc/mVbNMncBPm",
+    "factor_id": "moderate_risk_v3",
+    "factor_name": "适度冒险 v3",
+    "original_metric": "Rank IC=-8.89%, Rank ICIR=-4.84, 多空年化37.46%, 月度胜率87.74% (全A,月频)",
+    "our_metric": "IC=-0.014(t=-2.02), 多空Sharpe=-0.82, 单调性=-0.7, 20d前瞻, 998股, 816截面",
+    "diff_notes": "日频近似 vs 分钟频激增时刻识别。原始研报使用分钟级数据精确捕捉'激增时刻及其后4分钟'的收益率标准差(耀眼波动率)，我们以日频成交量偏离MA20+1std × 收益std20替代(volume_spike×ret_std20)。信号强度显著打折但方向一致。v3构造=-(log(volume/MA20+std)×ret_std20)滚动20日均值×log_amount中性化。与现有因子的IC序列相关性最高仅0.48(turnover_decel_v1)，无冗余",
+    "conclusion": "❌ 不达标。IC=-0.014 < 0.02，但t=-2.02刚过2.0显著性边界。作为方向探索有价值，日频近似信号太弱。建议：(1)升频到5min/15min量价数据；(2)适度冒险因子与上影线/成交量变异系数等微观结构因子做多因子合成；(3)用振幅压缩因子作为'波动率约束'代理与量比合成",
+    "barra_style": "Momentum",
+    "neutralized_by": "log_amount"
   }
 ]

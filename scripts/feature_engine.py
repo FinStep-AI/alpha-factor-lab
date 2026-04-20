@@ -65,7 +65,9 @@ def load_active_factors():
     
     factor_map = {}
     for fac in factors:
-        fid = fac['id']
+        fid = fac.get('id', fac.get('factor_id', fac.get('name', '')))
+        if not fid:
+            continue
         csv_path = os.path.join(DATA_DIR, f'factor_{fid}.csv')
         if os.path.exists(csv_path):
             factor_map[fid] = csv_path
