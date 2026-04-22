@@ -1,33 +1,6 @@
 {
   "history": [
     {
-      "date": "20260407",
-      "zt_count": 90,
-      "dt_count": 4,
-      "zb_count": 29,
-      "max_streak": 7,
-      "temperature": 88,
-      "phase": "overheated"
-    },
-    {
-      "date": "20260407",
-      "zt_count": 93,
-      "dt_count": 4,
-      "zb_count": 26,
-      "max_streak": 7,
-      "temperature": 88,
-      "phase": "overheated"
-    },
-    {
-      "date": "20260408",
-      "zt_count": 4,
-      "dt_count": 4,
-      "zb_count": 0,
-      "max_streak": 4,
-      "temperature": 33,
-      "phase": "startup"
-    },
-    {
       "date": "20260408",
       "zt_count": 120,
       "dt_count": 5,
@@ -269,7 +242,34 @@
       "max_streak": 4,
       "temperature": 69,
       "phase": "climax"
+    },
+    {
+      "date": "20260422",
+      "zt_count": 4,
+      "dt_count": 3,
+      "zb_count": 0,
+      "max_streak": 4,
+      "temperature": 33,
+      "phase": "startup"
+    },
+    {
+      "date": "20260422",
+      "zt_count": 57,
+      "dt_count": 3,
+      "zb_count": 19,
+      "max_streak": 4,
+      "temperature": 68,
+      "phase": "climax"
+    },
+    {
+      "date": "20260422",
+      "zt_count": 55,
+      "dt_count": 3,
+      "zb_count": 21,
+      "max_streak": 4,
+      "temperature": 65,
+      "phase": "climax"
     }
   ],
-  "updated": "20260421"
+  "updated": "20260422"
 }

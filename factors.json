@@ -1417,5 +1417,155 @@
       "vol_ret_align_v1": -0.052,
       "corr_gspd_v1": 1.0
     }
+  },
+  {
+    "id": "neg_min_ret_10d",
+    "name": "10日极端最低收益 v1",
+    "name_en": "10-Day Minimum Return v1",
+    "category": "反转/尾部风险",
+    "description": "过去10日中最低单日收益率(取负高值=极端下跌)。与CVaR(平均最差2日)互补，捕捉单日极端抛售信号。成交额OLS中性化。",
+    "hypothesis": "过去10日经历过极端单日下跌(如-7%以上)的股票，在A股中证1000小盘股上短期内发生反弹(均值回复)。区别于CVaR的平滑尾部，本因子捕捉最极端事件。",
+    "expected_direction": "正向（高因子值=高预期收益，反转/反弹逻辑）",
+    "factor_type": "反转/尾部风险",
+    "formula": "neutralize(-min(ret, 10d), log_amount_20d)",
+    "direction": 1,
+    "stock_pool": "中证1000",
+    "period": "2022-10-24 ~ 2026-04-22",
+    "rebalance_freq": 20,
+    "forward_days": 20,
+    "cost": 0.002,
+    "rating": "★★★★ 强",
+    "nav_data": "output/neg_min_ret_10d/cumulative_returns.json",
+    "ic_data": "output/neg_min_ret_10d/ic_series.json",
+    "upgrade_notes": "首版即达标。与CVaR(0.755)中等相关但捕捉不同尾部特征：单日最差vs平均最差2日。Sharpe=1.42, 单调性0.9。",
+    "lessons_learned": [
+      "10日极端最低收益(单日)与CVaR(平均最差2日)相关性0.755，捕获不同尾部特征",
+      "与neg_day_freq(0.585)中等相关，一个看幅度一个看频率",
+      "IC=0.035(t=2.33)显著，Sharpe=1.42优秀，5组单调性0.9",
+      "与大多数现有因子低相关(max=0.755)，从单日极端事件角度补充alpha",
+      "20d前瞻+20d调仓，低频友好"
+    ],
+    "created": "2026-04-22",
+    "updated": "2026-04-22",
+    "metrics": {
+      "ic_mean": 0.03482173582268961,
+      "ic_std": 0.10961370240702735,
+      "ic_positive_pct": 0.6428571428571429,
+      "ic_count": 42,
+      "rank_ic_mean": 0.027506315836642415,
+      "rank_ic_std": 0.1383253252836903,
+      "ir": 0.31767685114208116,
+      "ic_t_stat": 2.333804296465614,
+      "ic_p_value": 0.024587832051166547,
+      "ic_significant_5pct": true,
+      "ic_significant_1pct": false,
+      "group_metrics": {
+        "group_1": {
+          "total_return": 0.13048915302298503,
+          "annualized_return": 0.03716500413973378,
+          "annualized_volatility": 0.22494060602243612,
+          "sharpe_ratio": 0.1652214102065096,
+          "max_drawdown": -0.37897143016582924,
+          "calmar_ratio": 0.09806808952187035
+        },
+        "group_2": {
+          "total_return": 0.708582011272427,
+          "annualized_return": 0.1727730186403189,
+          "annualized_volatility": 0.2615700455029854,
+          "sharpe_ratio": 0.6605229521143582,
+          "max_drawdown": -0.31909735603831496,
+          "calmar_ratio": 0.5414429651982875
+        },
+        "group_3": {
+          "total_return": 0.6849475879768399,
+          "annualized_return": 0.16792279373924024,
+          "annualized_volatility": 0.24851253593432665,
+          "sharpe_ratio": 0.6757115616236619,
+          "max_drawdown": -0.3522749967146604,
+          "calmar_ratio": 0.47668098873124454
+        },
+        "group_4": {
+          "total_return": 0.8244278512072709,
+          "annualized_return": 0.19588821601379935,
+          "annualized_volatility": 0.26091248465561545,
+          "sharpe_ratio": 0.7507813061239934,
+          "max_drawdown": -0.3655856602001575,
+          "calmar_ratio": 0.5358202942274894
+        },
+        "group_5": {
+          "total_return": 0.9291770855612302,
+          "annualized_return": 0.21591745874650892,
+          "annualized_volatility": 0.29565948113611923,
+          "sharpe_ratio": 0.7302910020568637,
+          "max_drawdown": -0.3957373786917694,
+          "calmar_ratio": 0.5456079470185251
+        },
+        "long_short": {
+          "total_return": 0.7639171245867578,
+          "annualized_return": 0.1839472416116794,
+          "annualized_volatility": 0.12994070154015053,
+          "sharpe_ratio": 1.4156245074207279,
+          "max_drawdown": -0.1258314514207098,
+          "calmar_ratio": 1.4618542465719717
+        }
+      },
+      "long_short_total_return": 0.7639171245867578,
+      "long_short_ann_return": 0.1839472416116794,
+      "long_short_sharpe": 1.4156245074207279,
+      "long_short_mdd": -0.1258314514207098,
+      "turnover_mean": 0.7339588932242772,
+      "turnover_std": 0.023276746497523624,
+      "group_returns_annualized": [
+        0.03716500413973378,
+        0.1727730186403189,
+        0.16792279373924024,
+        0.19588821601379935,
+        0.21591745874650892
+      ],
+      "monotonicity": 0.8999999999999998,
+      "holdings_info": {
+        "group_1": {
+          "mean": 193.76623376623377,
+          "min": 182,
+          "max": 200
+        },
+        "group_2": {
+          "mean": 194.33293978748523,
+          "min": 183,
+          "max": 200
+        },
+        "group_3": {
+          "mean": 194.23848878394332,
+          "min": 183,
+          "max": 200
+        },
+        "group_4": {
+          "mean": 194.33293978748523,
+          "min": 183,
+          "max": 200
+        },
+        "group_5": {
+          "mean": 194.63990554899647,
+          "min": 183,
+          "max": 200
+        }
+      },
+      "holdings_imbalance_ratio": 1.0045088959298074
+    },
+    "conclusion": "IC=0.035(t=2.33)显著，Sharpe=1.42，多空MDD=-12.6%，单调性0.9。单日极端下跌后的短期反弹效应，尾部风险α。",
+    "barra_style": "Reversal",
+    "source_type": "自研(论文启发)",
+    "source_title": "Bali et al. (2011) \"Maxing Out: Stocks as Lotteries\" + 单日极端事件反转",
+    "source_url": "https://doi.org/10.1016/j.jfineco.2010.08.014",
+    "correlations": {
+      "amihud_illiq_v2": 0.292,
+      "shadow_pressure_v1": 0.037,
+      "overnight_momentum_v1": 0.04,
+      "tail_risk_cvar_v1": 0.755,
+      "neg_day_freq_v1": 0.585,
+      "turnover_level_v1": 0.144,
+      "tae_v1": -0.021,
+      "neg_min_ret_10d": 1.0
+    }
   }
 ]
