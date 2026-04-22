@@ -1,51 +1,6 @@
 {
   "history": [
     {
-      "date": "20260403",
-      "zt_count": 35,
-      "dt_count": 23,
-      "zb_count": 12,
-      "max_streak": 6,
-      "temperature": 42,
-      "phase": "ferment"
-    },
-    {
-      "date": "20260406",
-      "zt_count": 36,
-      "dt_count": 24,
-      "zb_count": 12,
-      "max_streak": 6,
-      "temperature": 42,
-      "phase": "ferment"
-    },
-    {
-      "date": "20260406",
-      "zt_count": 36,
-      "dt_count": 24,
-      "zb_count": 12,
-      "max_streak": 6,
-      "temperature": 42,
-      "phase": "ferment"
-    },
-    {
-      "date": "20260406",
-      "zt_count": 36,
-      "dt_count": 24,
-      "zb_count": 12,
-      "max_streak": 6,
-      "temperature": 42,
-      "phase": "ferment"
-    },
-    {
-      "date": "20260407",
-      "zt_count": 2,
-      "dt_count": 5,
-      "zb_count": 0,
-      "max_streak": 3,
-      "temperature": 28,
-      "phase": "startup"
-    },
-    {
       "date": "20260407",
       "zt_count": 90,
       "dt_count": 4,
@@ -269,7 +224,52 @@
       "max_streak": 3,
       "temperature": 33,
       "phase": "startup"
+    },
+    {
+      "date": "20260420",
+      "zt_count": 77,
+      "dt_count": 6,
+      "zb_count": 13,
+      "max_streak": 8,
+      "temperature": 90,
+      "phase": "overheated"
+    },
+    {
+      "date": "20260420",
+      "zt_count": 75,
+      "dt_count": 6,
+      "zb_count": 15,
+      "max_streak": 6,
+      "temperature": 81,
+      "phase": "overheated"
+    },
+    {
+      "date": "20260421",
+      "zt_count": 5,
+      "dt_count": 5,
+      "zb_count": 0,
+      "max_streak": 4,
+      "temperature": 33,
+      "phase": "startup"
+    },
+    {
+      "date": "20260421",
+      "zt_count": 51,
+      "dt_count": 8,
+      "zb_count": 9,
+      "max_streak": 4,
+      "temperature": 69,
+      "phase": "climax"
+    },
+    {
+      "date": "20260421",
+      "zt_count": 53,
+      "dt_count": 9,
+      "zb_count": 10,
+      "max_streak": 4,
+      "temperature": 69,
+      "phase": "climax"
     }
   ],
-  "updated": "20260420"
+  "updated": "20260421"
 }

@@ -2975,5 +2975,16 @@
     "our_metric": "pos_day_freq: IC=0.007, t=0.81, Sharpe=0.09 | neg_day_freq: IC=-0.006, t=-0.70 | net: IC=0.006, t=0.76 — All FAIL",
     "diff_notes": "与neg_day_freq_v1(IC=0.039, 强信号)对比: 旧数据截至2026-03-13, 新数据截至2026-04-20含3月剧震。信号从正变负。原因: 1)数据窗口不一致 2)20日内瞻太长, 极端频率信号更适5d前瞻 3)市场微观结构可能变化",
     "conclusion": "FAILED — 极端收益日频率因子10日窗口+20日前瞻下无助选股。3个版本(pos/neg/net)均未通过门槛。建议后续尝试5日前瞻(与neg_day_freq_v1保持相同前瞻)重新验证。原neg_day_freq_v1推荐保留 monitoring(信号衰减)。"
+  },
+  {
+    "date": "2026-04-22",
+    "type": "weekly_rebalance",
+    "source_type": "own_factors",
+    "source_title": "7因子rank_sum排名调仓",
+    "source_url": "",
+    "original_metric": "N/A (原有因子)",
+    "our_metric": "rank_sum排名，TOP25→风控→8只买入",
+    "diff_notes": "SH股票价格数据=0未成交，仅SZ 8只买入，现金68%",
+    "conclusion": "等权调仓部分执行，等待盘中价格补全后可补下单"
   }
 ]
