@@ -2,15 +2,6 @@
   "history": [
     {
       "date": "20260408",
-      "zt_count": 120,
-      "dt_count": 5,
-      "zb_count": 19,
-      "max_streak": 4,
-      "temperature": 83,
-      "phase": "overheated"
-    },
-    {
-      "date": "20260408",
       "zt_count": 123,
       "dt_count": 4,
       "zb_count": 16,
@@ -269,7 +260,16 @@
       "max_streak": 4,
       "temperature": 65,
       "phase": "climax"
+    },
+    {
+      "date": "20260423",
+      "zt_count": 8,
+      "dt_count": 5,
+      "zb_count": 0,
+      "max_streak": 3,
+      "temperature": 33,
+      "phase": "startup"
     }
   ],
-  "updated": "20260422"
+  "updated": "20260423"
 }

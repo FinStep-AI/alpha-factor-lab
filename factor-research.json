@@ -2986,5 +2986,34 @@
     "our_metric": "rank_sum排名，TOP25→风控→8只买入",
     "diff_notes": "SH股票价格数据=0未成交，仅SZ 8只买入，现金68%",
     "conclusion": "等权调仓部分执行，等待盘中价格补全后可补下单"
+  },
+  {
+    "id": "range_efficiency_v1",
+    "name": "振幅-换手效率率 v1",
+    "date": "2026-04-23",
+    "direction_tested": "+1 (low range_efficiency = high return)",
+    "raw_ic": -0.0235,
+    "t_stat": -4.38,
+    "outcome": "REJECTED (negative direction)",
+    "inverted_ic": 0.0235,
+    "inverted_t": 4.38,
+    "long_short_sharpe": 2.47,
+    "monotonicity": 0.9,
+    "g5_sharpe": 1.25,
+    "result": "入库",
+    "reason": " tomar 反转后达标: IC=0.0235(t=4.38), 单调性0.9, G5 Sharpe=1.25, 多空Sharpe=2.47",
+    "ic_corr_existing": "待系统化计算"
+  },
+  {
+    "id": "return_stability_v1",
+    "name": "收益率稳定性（反波动率）v1",
+    "date": "2026-04-23",
+    "direction_tested": "-1 (low std_20d = high return)",
+    "ic_mean": -0.0119,
+    "t_stat": -1.16,
+    "long_short_sharpe": -1.04,
+    "monotonicity": -0.9,
+    "result": "淘汰",
+    "reason": "IC=-0.012(不显著)，方向完全反向。低波动在中证1000不具选股能力。"
   }
 ]

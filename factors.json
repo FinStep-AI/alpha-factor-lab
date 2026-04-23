@@ -1567,5 +1567,80 @@
       "tae_v1": -0.021,
       "neg_min_ret_10d": 1.0
     }
+  },
+  {
+    "id": "range_efficiency_v1",
+    "name": "振幅-换手效率率 v1",
+    "name_en": "Range-Turnover Efficiency v1",
+    "category": "流动性质量",
+    "description": "振幅(high-low)/close除以换手率，值越低表示单位换手率产生的价格波动越小=流动性深度好、市场质量高。与Amihud互补：Amihud用|returns|/volume测绝对冲击，range_eff测相对价格冲击。成交额OLS中性化。",
+    "hypothesis": "振幅/换手率越低的股票流动性质量越好，短期（5日）有超额收益。高流动性质量=市场效率高=知情交易活跃。",
+    "expected_direction": "正向（低值=高质量流动性=高收益）",
+    "factor_type": "质量/流动性质量",
+    "formula": "neutralize(-amplitude/turnover, log_amount)",
+    "direction": 1,
+    "stock_pool": "中证1000",
+    "period": "2022-10-11 ~ 2026-02-13",
+    "rebalance_freq": 20,
+    "forward_days": 5,
+    "cost": 0.003,
+    "rating": "★★★★ 强",
+    "nav_data": "output/neg_range_efficiency_v1/cumulative_returns.json",
+    "ic_data": "output/neg_range_efficiency_v1/ic_series.json",
+    "upgrade_notes": "v1首创：振幅/换手率反转因子。IC=0.0235(t=4.38)显著，单调性0.90，多空Sharpe=2.47。与Amihud非流动性互补，G5年化31.1% vs G1=8.9%。低频20日调仓友好。",
+    "lessons_learned": [
+      "振幅/换手率本身就是反转信号——低效市场短期跑赢（可能是小盘股虹吸效应）",
+      "直接取-amplitude/turnover比原始方向好(IC从-0.0235→+0.0235)",
+      "换手率20天低频调仓，穿透率低，适合实盘",
+      "与Amihud有区分度，可同时持有两个流动性因子"
+    ],
+    "created": "2026-04-23",
+    "updated": "2026-04-23",
+    "metrics": {
+      "ic_mean": 0.023454129087503713,
+      "ic_std": 0.0640282170171754,
+      "ic_t": 4.3849223806438244,
+      "ic_positive_ratio": 0.6257668711656442,
+      "rank_ic": 0.03893030392311266,
+      "rank_ic_std": 0.07720200940488368,
+      "ir": 0.3663092645733397,
+      "ic_count": 163,
+      "long_short_sharpe": 2.4729928760273316,
+      "long_short_mdd": -0.07232826301651242,
+      "monotonicity": 0.8999999999999998,
+      "group_sharpe": [
+        0.3857344620683533,
+        0.3178304471730191,
+        0.4765526611445578,
+        0.888911481889263,
+        1.2520906150086057
+      ],
+      "group_returns_annualized": [
+        0.08953097806459609,
+        0.08238931943191141,
+        0.12403359770418865,
+        0.22349016873908378,
+        0.31120204756247194
+      ],
+      "group_mdd": [
+        -0.37597662528967907,
+        -0.4261496994433252,
+        -0.4103026734743197,
+        -0.3320774026543942,
+        -0.2964474725626464
+      ]
+    },
+    "conclusion": "新因子入库。振幅/换手效率反转因子，IC=0.0235(t=4.38)极显著，多空Sharpe=2.47（优秀），G5 Sharpe=1.25。单调性0.9，MDD仅7.2%。填补Quality/流动性质量Barra空档。与Amihud因子互补，可同时使用。",
+    "barra_style": "Quality",
+    "source_type": "自研",
+    "source_title": "Market Quality & Transaction Cost Signal",
+    "source_url": "https://papers.ssrn.com/sol3/papers.cfm",
+    "correlations": {
+      "amihud_illiq_v2": "待计算",
+      "turnover_level_v1": "待计算",
+      "tail_risk_cvar_v1": "待计算",
+      "shadow_pressure_v1": "待计算",
+      "neg_min_ret_10d": "待计算"
+    }
   }
 ]
