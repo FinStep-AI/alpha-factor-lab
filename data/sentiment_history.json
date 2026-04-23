@@ -1,24 +1,6 @@
 {
   "history": [
     {
-      "date": "20260408",
-      "zt_count": 123,
-      "dt_count": 4,
-      "zb_count": 16,
-      "max_streak": 4,
-      "temperature": 83,
-      "phase": "overheated"
-    },
-    {
-      "date": "20260409",
-      "zt_count": 5,
-      "dt_count": 1,
-      "zb_count": 0,
-      "max_streak": 4,
-      "temperature": 46,
-      "phase": "ferment"
-    },
-    {
       "date": "20260409",
       "zt_count": 53,
       "dt_count": 1,
@@ -269,6 +251,24 @@
       "max_streak": 3,
       "temperature": 33,
       "phase": "startup"
+    },
+    {
+      "date": "20260423",
+      "zt_count": 49,
+      "dt_count": 15,
+      "zb_count": 21,
+      "max_streak": 5,
+      "temperature": 50,
+      "phase": "ferment"
+    },
+    {
+      "date": "20260423",
+      "zt_count": 50,
+      "dt_count": 15,
+      "zb_count": 20,
+      "max_streak": 5,
+      "temperature": 58,
+      "phase": "ferment"
     }
   ],
   "updated": "20260423"

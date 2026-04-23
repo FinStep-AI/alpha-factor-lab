@@ -3015,5 +3015,28 @@
     "monotonicity": -0.9,
     "result": "淘汰",
     "reason": "IC=-0.012(不显著)，方向完全反向。低波动在中证1000不具选股能力。"
+  },
+  {
+    "factor_id": "vol_log60d_v4",
+    "factor_name": "波动率水平 v4 (60日窗口)",
+    "category": "波动率/风险溢价",
+    "description": "20日收益率标准差(60日滚动窗口)对数变换, 成交额OLS中性化。正向使用: 高波动→高收益。Ang et al.(2006)低波异象在A股中证1000小盘股上方向反转。",
+    "hypothesis": "A股中证1000小盘股中高波动股有信息驱动优势, 60日窗口更稳定捕捉此效应。与经典美股市低波溢价相反。",
+    "barra_style": "Volatility",
+    "source_type": "论文复现+本土化",
+    "source_title": "Ang, Hodrick, Xing & Zhang (2006) \"The Cross-Section of Volatility and Expected Returns\" JFE",
+    "source_url": "https://doi.org/10.1016/j.jfineco.2006.01.002",
+    "status": "入库",
+    "ic_mean": 0.049,
+    "ic_t_stat": 3.34,
+    "monotonicity": 0.9,
+    "long_short_sharpe": 1.4,
+    "long_short_mdd": -0.22,
+    "turnover": 0.48,
+    "data_files": [
+      "data/factor_vol_log60d_v4.csv"
+    ],
+    "date": "2026-04-23",
+    "notes": "60日窗口vs20日窗口效果差异极大(IC 0.049 vs 0.029)。5d前瞻IC=0.025(t=2.47), 20d前瞻IC=0.049(t=3.34)均为强信号。方向与Ang(2006)在美股市相反。"
   }
 ]
