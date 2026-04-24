@@ -3067,5 +3067,32 @@
     "conclusion": "入库",
     "date": "2026-04-24",
     "status": "active"
+  },
+  {
+    "id": "amount_ratio_cv_v1",
+    "source_type": "自主挖掘",
+    "source_title": "成交额相对波动率CV",
+    "source_url": "",
+    "source_author": "古城飞雪",
+    "source_year": 2026,
+    "source_journal": "内部因子挖掘",
+    "original_metric": {
+      "market": "中证1000",
+      "period": "2022-11-03 ~ 2026-04-24",
+      "description": "因子定义为 amount / MA20(amount) 的20日滚动变异系数(CV)，并做20日平均成交额对数的横截面OLS中性化、MAD去极值和z-score标准化。"
+    },
+    "our_metric": {
+      "market": "中证1000",
+      "period": "2022-11-03 ~ 2026-04-24",
+      "ic_mean": -0.0029,
+      "ic_t": -0.51,
+      "sharpe": -0.5185,
+      "monotonicity": -0.8
+    },
+    "diff_notes": "研究主题选择量价背离/成交额异常方向。构造相对成交额比值 amt_ratio=amount/MA20(amount)，再取其20日滚动CV，试图刻画资金流入流出的不稳定性。结果显示信号整体较弱且方向偏反转：低CV组表现明显优于高CV组，但IC接近0且t值不显著，说明该构造更多反映噪声而非稳定alpha。",
+    "local_factor_id": "amount_ratio_cv_v1",
+    "conclusion": "淘汰",
+    "date": "2026-04-24",
+    "status": "inactive"
   }
 ]
