@@ -6,7 +6,7 @@
     "benchmark": "000300",
     "benchmark_name": "沪深300",
     "created_at": "2026-02-23 22:14:25",
-    "updated_at": "2026-04-24 08:30:55",
+    "updated_at": "2026-04-24 09:13:32",
     "status": "active",
     "players_count": 6
   },
@@ -5766,6 +5766,13 @@
           "cash_pct": 0.681,
           "positions_count": 8,
           "recommendation": "调仓"
+        },
+        {
+          "date": "2026-04-24",
+          "action": "hold",
+          "summary": "日度因子扫描：新增成交量放大确认因子 vssignal_v1 并入库",
+          "detail": "完成数据刷新（fintool失败后fallback到auto，K线最新至2026-04-23）。扫描方正金工《成交量激增时刻蕴含的alpha信息》后，因原文依赖分钟级激增时刻与耀眼5分钟窗口，无法用当前日线数据严格复现。先尝试日线近似版volume_neutrality_v1失败（IC=-0.0052 / -0.0039，Sharpe 0.75 / 0.35，不达标）；随后按‘成交量激增后的价格响应’主线本土化为日线放量确认因子 vssignal_v1：20日滚动量能识别放量日，结合未来3日绝对收益响应，截面排序后20日平滑并做成交额OLS中性化。回测结果：IC=0.0237，t=2.38，Sharpe=1.23，单调性=1.00，多空年化20.39%。按IC序列相关性检查，与现有因子最高相关约0.31（tae_v1 / turnover_level_v1），无>0.7冗余，已更新factors.json与factor-research.json。",
+          "recommendation": "新增vssignal_v1作为量价/微观结构候选主力因子，非周一不调仓，仅记录扫描结果。"
         }
       ],
       "rebalances": [

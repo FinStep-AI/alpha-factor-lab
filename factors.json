@@ -75,7 +75,8 @@
       "close_location_v1": null,
       "pb_roe_residual_v1": null,
       "beta_elasticity_v1": null,
-      "close_vwap_dev_v1": 0.24
+      "close_vwap_dev_v1": 0.24,
+      "vssignal_v1": null
     }
   },
   {
@@ -155,7 +156,8 @@
       "close_location_v1": null,
       "pb_roe_residual_v1": null,
       "beta_elasticity_v1": null,
-      "close_vwap_dev_v1": -0.341
+      "close_vwap_dev_v1": -0.341,
+      "vssignal_v1": 0.0618
     }
   },
   {
@@ -235,7 +237,8 @@
       "close_location_v1": null,
       "pb_roe_residual_v1": null,
       "beta_elasticity_v1": null,
-      "close_vwap_dev_v1": null
+      "close_vwap_dev_v1": null,
+      "vssignal_v1": null
     }
   },
   {
@@ -316,7 +319,8 @@
       "close_location_v1": null,
       "pb_roe_residual_v1": -0.233,
       "beta_elasticity_v1": 0.048,
-      "close_vwap_dev_v1": null
+      "close_vwap_dev_v1": null,
+      "vssignal_v1": null
     }
   },
   {
@@ -398,7 +402,8 @@
       "pb_roe_residual_v1": null,
       "beta_elasticity_v1": null,
       "close_vwap_dev_v1": -0.0228,
-      "tail_risk_cvar_v1": 1.0
+      "tail_risk_cvar_v1": 1.0,
+      "vssignal_v1": null
     }
   },
   {
@@ -469,7 +474,8 @@
     "source_title": "极端负收益日频率 — 离散化尾部反转信号",
     "source_url": "",
     "correlations": {
-      "cvar_5d_v1": 0.55
+      "cvar_5d_v1": 0.55,
+      "vssignal_v1": null
     }
   },
   {
@@ -546,7 +552,8 @@
       "overnight_momentum_v1": -0.115,
       "tail_risk_cvar_v1": 0.274,
       "neg_day_freq_v1": 0.232,
-      "turnover_level_v1": 1.0
+      "turnover_level_v1": 1.0,
+      "vssignal_v1": 0.3029
     }
   },
   {
@@ -626,7 +633,8 @@
       "neg_day_freq_v1": 0.024,
       "turnover_level_v1": 0.5,
       "pv_corr_v1": 0.076,
-      "tae_v1": 1.0
+      "tae_v1": 1.0,
+      "vssignal_v1": 0.3053
     }
   },
   {
@@ -709,7 +717,8 @@
       "tae_v1": -0.095,
       "pv_corr_v1": 0.064,
       "idio_vol_v1": 0.461,
-      "amp_level_v2": 1.0
+      "amp_level_v2": 1.0,
+      "vssignal_v1": null
     }
   },
   {
@@ -791,7 +800,8 @@
       "tae_v1": -0.086,
       "pv_corr_v1": -0.177,
       "amp_level_v2": 0.397,
-      "ma_disp_v1": 1.0
+      "ma_disp_v1": 1.0,
+      "vssignal_v1": 0.2376
     }
   },
   {
@@ -831,7 +841,8 @@
       "tail_risk_cvar_v1": -0.1078,
       "neg_day_freq_v1": -0.0458,
       "tae_v1": -0.0098,
-      "ma_disp_v6": 0.0398
+      "ma_disp_v6": 0.0398,
+      "vssignal_v1": null
     },
     "created_at": "2026-03-31",
     "status": "active"
@@ -916,7 +927,8 @@
       "amp_level_v2": 0.022,
       "ma_disp_v1": -0.059,
       "vol_cv_neg_v1": 0.204,
-      "turnover_decel_v1": 1.0
+      "turnover_decel_v1": 1.0,
+      "vssignal_v1": 0.1184
     }
   },
   {
@@ -1001,7 +1013,8 @@
       "ma_disp_v1": null,
       "vol_cv_neg_v1": null,
       "turnover_decel_v1": 0.542,
-      "informed_flow_v1": 1.0
+      "informed_flow_v1": 1.0,
+      "vssignal_v1": null
     }
   },
   {
@@ -1082,7 +1095,8 @@
       "tae_v1": 0.061,
       "ma_disp_v1": 0.103,
       "turnover_decel_v1": 0.023,
-      "informed_flow_v1": 0.097
+      "informed_flow_v1": 0.097,
+      "vssignal_v1": null
     }
   },
   {
@@ -1168,7 +1182,8 @@
       "ma_disp_v1": -0.069,
       "vol_cv_neg_v1": 0.011,
       "turnover_decel_v1": -0.011,
-      "pv_corr_v1": 0.326
+      "pv_corr_v1": 0.326,
+      "vssignal_v1": null
     }
   },
   {
@@ -1237,7 +1252,8 @@
       "turnover_level_v1": -0.056,
       "tae_v1": -0.003,
       "ma_disp_v1": -0.1,
-      "vwap_dev_v1": 1.0
+      "vwap_dev_v1": 1.0,
+      "vssignal_v1": null
     }
   },
   {
@@ -1249,7 +1265,9 @@
     "formula": "factor_raw = rolling_mean(cont_ret_highq) - rolling_mean(cont_ret_lowq), 其中highq=volume≥70%分位, lowq=volume≤30%分位",
     "source_type": "价格/量",
     "direction": 1,
-    "correlations": {},
+    "correlations": {
+      "vssignal_v1": null
+    },
     "detail": "intraday volume extremes: high_q=0.7, low_q=0.3, forward_days=5, window=20d, amount neutralized, MAD winsorized, z-scored. IC=0.0595(t=4.46), G5 sharpe≈0.79",
     "current_status": "待入库",
     "suggested_portfolio_weight": 0.6
@@ -1329,7 +1347,8 @@
       "tail_risk_cvar_v1": 0.128,
       "neg_day_freq_v1": 0.101,
       "turnover_level_v1": 0.092,
-      "gap_efficiency_v2": 1.0
+      "gap_efficiency_v2": 1.0,
+      "vssignal_v1": null
     }
   },
   {
@@ -1415,7 +1434,8 @@
       "informed_flow_v1": -0.078,
       "price_mom_5d_v1": -0.071,
       "vol_ret_align_v1": -0.052,
-      "corr_gspd_v1": 1.0
+      "corr_gspd_v1": 1.0,
+      "vssignal_v1": null
     }
   },
   {
@@ -1565,7 +1585,8 @@
       "neg_day_freq_v1": 0.585,
       "turnover_level_v1": 0.144,
       "tae_v1": -0.021,
-      "neg_min_ret_10d": 1.0
+      "neg_min_ret_10d": 1.0,
+      "vssignal_v1": null
     }
   },
   {
@@ -1640,7 +1661,8 @@
       "turnover_level_v1": "待计算",
       "tail_risk_cvar_v1": "待计算",
       "shadow_pressure_v1": "待计算",
-      "neg_min_ret_10d": "待计算"
+      "neg_min_ret_10d": "待计算",
+      "vssignal_v1": null
     }
   },
   {
@@ -1727,7 +1749,99 @@
       "price_mom_5d_v1": null,
       "vol_ret_align_v1": null,
       "vwap_dev_v1": null,
-      "vol_log60d_v4": 1.0
+      "vol_log60d_v4": 1.0,
+      "vssignal_v1": null
+    }
+  },
+  {
+    "id": "vssignal_v1",
+    "name": "成交量放大确认 v1",
+    "name_en": "Volume Surge Confirmation v1",
+    "category": "量价/微观结构",
+    "description": "以20日滚动均量与标准差识别放量日(vol_zscore>1)，结合放量后未来3日绝对收益响应，在截面排序后做20日平滑并进行成交额OLS中性化。捕捉“放量后价格是否有效响应”的确认效应。",
+    "hypothesis": "中证1000里，放量后若短期价格响应更充分，往往意味着信息被持续消化而非一次性冲击，后续20日仍有超额收益。",
+    "expected_direction": "正向（高因子值=高预期收益）",
+    "factor_type": "量价/微观结构",
+    "formula": "neutralize(MA20(0.4*rank(volume/cross_median_volume)+0.6*rank(fwd_abs_ret_3d) on surge days), log_amount)",
+    "direction": 1,
+    "stock_pool": "中证1000",
+    "period": "2022-10-21 ~ 2026-04-23",
+    "rebalance_freq": 20,
+    "forward_days": 20,
+    "cost": 0.002,
+    "rating": "★★★★ 强",
+    "nav_data": "output/vssignal_v1/cumulative_returns.json",
+    "ic_data": "output/vssignal_v1/ic_series.json",
+    "upgrade_notes": "原始方正金工“适度冒险因子”需要分钟数据，日线无法严格复现；本版本保留“成交量激增后的价格响应”主线，改写为日线可落地的放量确认因子。",
+    "lessons_learned": [
+      "直接日线去近似“适中冒险”效果一般，转为“放量后价格确认”后显著提升",
+      "单调性1.0，说明该信号在中证1000横截面排序非常稳定",
+      "与shadow_pressure、turnover_level、tae仅中低相关，补充量价微观结构alpha",
+      "Sharpe 1.23 但换手率77%，更适合月频而非更高频使用"
+    ],
+    "created": "2026-04-24",
+    "updated": "2026-04-24",
+    "metrics": {
+      "ic_mean": 0.02366005255362407,
+      "ic_std": 0.08690600507804301,
+      "ic_t": 2.3830523645331403,
+      "ic_positive_ratio": 0.5952380952380952,
+      "rank_ic": 0.017519441707799382,
+      "rank_ic_std": 0.09900236471603548,
+      "ir": 0.27224876500049633,
+      "ic_count": 42,
+      "long_short_sharpe": 1.2256132156362884,
+      "long_short_mdd": -0.07440472209331912,
+      "monotonicity": 0.9999999999999999,
+      "group_sharpe": [
+        0.18100908595784707,
+        0.5215983555782091,
+        0.5831701342823911,
+        0.6503030694936437,
+        0.8692038817517413
+      ],
+      "group_returns_annualized": [
+        0.045673425924694255,
+        0.12752063797972757,
+        0.1428912265842428,
+        0.161107689021736,
+        0.2600113492599465
+      ],
+      "group_mdd": [
+        -0.43353001481697395,
+        -0.3637367072485998,
+        -0.35940678965388667,
+        -0.33965836960484597,
+        -0.3512639663446887
+      ]
+    },
+    "conclusion": "达标入库。IC=0.0237(t=2.38)显著，多空Sharpe=1.23，单调性1.0，G5年化26.0%显著高于G1的4.6%。原始分钟级研报无法严格复现时，日线“放量确认”本土化方案在中证1000上表现稳定。",
+    "barra_style": "微观结构",
+    "source_type": "研报复现+本土化",
+    "source_title": "方正金工《成交量激增时刻蕴含的alpha信息——多因子选股系列研究之一》日线本土化",
+    "source_url": "https://bigquant.com/wiki/doc/mVbNMncBPm",
+    "correlations": {
+      "amihud_illiq_v2": null,
+      "shadow_pressure_v1": 0.0618,
+      "overnight_momentum_v1": null,
+      "gap_momentum_v1": null,
+      "tail_risk_cvar_v1": null,
+      "neg_day_freq_v1": null,
+      "turnover_level_v1": 0.3029,
+      "tae_v1": 0.3053,
+      "amp_level_v2": null,
+      "ma_disp_v1": 0.2376,
+      "turnover_decel_v1": 0.1184,
+      "informed_flow_v1": null,
+      "price_mom_5d_v1": null,
+      "vol_ret_align_v1": null,
+      "vwap_dev_v1": null,
+      "gap_efficiency_v2": null,
+      "corr_gspd_v1": null,
+      "neg_min_ret_10d": null,
+      "range_efficiency_v1": null,
+      "vol_log60d_v4": null,
+      "vssignal_v1": 1.0
     }
   }
 ]

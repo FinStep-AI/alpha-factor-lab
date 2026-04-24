@@ -3038,5 +3038,34 @@
     ],
     "date": "2026-04-23",
     "notes": "60日窗口vs20日窗口效果差异极大(IC 0.049 vs 0.029)。5d前瞻IC=0.025(t=2.47), 20d前瞻IC=0.049(t=3.34)均为强信号。方向与Ang(2006)在美股市相反。"
+  },
+  {
+    "id": "vssignal_v1",
+    "source_type": "研报复现+本土化",
+    "source_title": "成交量激增时刻蕴含的alpha信息——多因子选股系列研究之一",
+    "source_url": "https://bigquant.com/wiki/doc/mVbNMncBPm",
+    "source_author": "方正证券金工团队",
+    "source_year": 2022,
+    "source_journal": "金工研报",
+    "original_metric": {
+      "market": "全A/中证500/中证1000",
+      "period": "2013-04 ~ 2022-02",
+      "ic_mean": -0.0889,
+      "sharpe": 4.1,
+      "description": "原文分钟级“适度冒险因子”= 月耀眼波动率因子与月耀眼收益率因子等权合成；Rank IC=-8.89%，信息比4.10，月度胜率87.74%。"
+    },
+    "our_metric": {
+      "market": "中证1000",
+      "period": "2022-10-21 ~ 2026-04-23",
+      "ic_mean": 0.0237,
+      "ic_t": 2.38,
+      "sharpe": 1.2256,
+      "monotonicity": 1.0
+    },
+    "diff_notes": "原文依赖分钟级“激增时刻”与耀眼5分钟窗口，当前数据仅有日线OHLCV，无法严格按原文参数复现。先尝试“适中冒险”的日线近似版失败，随后保留“成交量激增后的价格响应”核心思想，改写为日线放量确认因子：以20日滚动量能识别放量日，叠加未来3日绝对收益响应并做截面排序/成交额OLS中性化。效果虽弱于原文分钟级结果，但在中证1000上达到入库门槛。",
+    "local_factor_id": "vssignal_v1",
+    "conclusion": "入库",
+    "date": "2026-04-24",
+    "status": "active"
   }
 ]
