@@ -6,7 +6,7 @@
     "benchmark": "000300",
     "benchmark_name": "沪深300",
     "created_at": "2026-02-23 22:14:25",
-    "updated_at": "2026-04-24 13:35:06",
+    "updated_at": "2026-04-24 14:54:08",
     "status": "active",
     "players_count": 6
   },
@@ -24,10 +24,10 @@
             "name": "深圳机场",
             "volume": 62000,
             "avg_cost": 6.87,
-            "current_price": 7.0,
-            "market_value": 434000.0,
-            "pnl": 8060.0,
-            "pnl_pct": 1.89,
+            "current_price": 7.01,
+            "market_value": 434620.0,
+            "pnl": 8680.0,
+            "pnl_pct": 2.04,
             "entry_date": "2026-04-22"
           },
           "002320.SZ": {
@@ -35,10 +35,10 @@
             "name": "海峡股份",
             "volume": 50400,
             "avg_cost": 8.44,
-            "current_price": 8.19,
-            "market_value": 412776.0,
-            "pnl": -12600.0,
-            "pnl_pct": -2.96,
+            "current_price": 8.23,
+            "market_value": 414792.0,
+            "pnl": -10584.0,
+            "pnl_pct": -2.49,
             "entry_date": "2026-04-22"
           },
           "002507.SZ": {
@@ -79,10 +79,10 @@
             "name": "匠心家居",
             "volume": 5700,
             "avg_cost": 73.86,
-            "current_price": 71.53,
-            "market_value": 407721.0,
-            "pnl": -13281.0,
-            "pnl_pct": -3.15,
+            "current_price": 73.09,
+            "market_value": 416613.0,
+            "pnl": -4389.0,
+            "pnl_pct": -1.04,
             "entry_date": "2026-04-22"
           },
           "301087.SZ": {
@@ -90,10 +90,10 @@
             "name": "可孚医疗",
             "volume": 7400,
             "avg_cost": 57.0,
-            "current_price": 54.16,
-            "market_value": 400784.0,
-            "pnl": -21016.0,
-            "pnl_pct": -4.98,
+            "current_price": 54.08,
+            "market_value": 400192.0,
+            "pnl": -21608.0,
+            "pnl_pct": -5.12,
             "entry_date": "2026-04-22"
           },
           "301267.SZ": {
@@ -101,14 +101,14 @@
             "name": "华厦眼科",
             "volume": 24800,
             "avg_cost": 17.12,
-            "current_price": 18.05,
-            "market_value": 447640.0,
-            "pnl": 23064.0,
-            "pnl_pct": 5.43,
+            "current_price": 18.23,
+            "market_value": 452104.0,
+            "pnl": 27528.0,
+            "pnl_pct": 6.48,
             "entry_date": "2026-04-22"
           }
         },
-        "total_value": 10624524.5,
+        "total_value": 10639924.5,
         "last_update": "2026-04-24"
       },
       "nav_history": {
@@ -6035,14 +6035,14 @@
             "name": "粤桂股份",
             "volume": 15000,
             "avg_cost": 26.01,
-            "current_price": 25.61,
-            "market_value": 384150.0,
-            "pnl": -6000.0,
-            "pnl_pct": -1.54,
+            "current_price": 25.86,
+            "market_value": 387900.0,
+            "pnl": -2250.0,
+            "pnl_pct": -0.58,
             "entry_date": "2026-04-24"
           }
         },
-        "total_value": 9993488.9,
+        "total_value": 9997238.9,
         "last_update": "2026-04-24"
       },
       "nav_history": {
@@ -6137,10 +6137,10 @@
             "name": "招商银行",
             "volume": 100000,
             "avg_cost": 39.52,
-            "current_price": 39.44,
-            "market_value": 3944000.0,
-            "pnl": -8000.0,
-            "pnl_pct": -0.2,
+            "current_price": 39.39,
+            "market_value": 3939000.0,
+            "pnl": -13000.0,
+            "pnl_pct": -0.33,
             "entry_date": "2026-04-20"
           },
           "601318.SH": {
@@ -6148,10 +6148,10 @@
             "name": "中国平安",
             "volume": 35000,
             "avg_cost": 57.92,
-            "current_price": 57.4,
-            "market_value": 2009000.0,
-            "pnl": -18200.0,
-            "pnl_pct": -0.9,
+            "current_price": 57.77,
+            "market_value": 2021950.0,
+            "pnl": -5250.0,
+            "pnl_pct": -0.26,
             "entry_date": "2026-04-20"
           },
           "600519.SH": {
@@ -6159,10 +6159,10 @@
             "name": "贵州茅台",
             "volume": 500,
             "avg_cost": 1407.24,
-            "current_price": 1447.08,
-            "market_value": 723540.0,
-            "pnl": 19920.0,
-            "pnl_pct": 2.83,
+            "current_price": 1449.88,
+            "market_value": 724940.0,
+            "pnl": 21320.0,
+            "pnl_pct": 3.03,
             "entry_date": "2026-04-20"
           },
           "600887.SH": {
@@ -6177,7 +6177,7 @@
             "entry_date": "2026-04-20"
           }
         },
-        "total_value": 9981700.29,
+        "total_value": 9991050.29,
         "last_update": "2026-04-24"
       },
       "nav_history": {
@@ -6690,12 +6690,12 @@
             "name": "苏泊尔",
             "volume": 20000,
             "avg_cost": 45.68,
-            "current_price": 47.15,
-            "market_value": 943000.0,
-            "pnl": 29400.0,
-            "pnl_pct": 3.22,
+            "current_price": 47.42,
+            "market_value": 948400.0,
+            "pnl": 34800.0,
+            "pnl_pct": 3.81,
             "entry_date": "2026-04-16",
-            "max_pnl_pct": 3.72
+            "max_pnl_pct": 3.79
           },
           "sh688710.SH": {
             "code": "sh688710.SH",
@@ -6720,7 +6720,7 @@
             "entry_date": "2026-04-24"
           }
         },
-        "total_value": 9906809.44,
+        "total_value": 9912209.44,
         "last_update": "2026-04-24"
       },
       "nav_history": {
@@ -11721,6 +11721,13 @@
           "detail": "今日全A扫描5093只：Level1→4929, Level2→1079, 长阴放量排除125→954, 最终61候选(0主通道+2单针下30+59金叉回调)。唯一J<13→益诺思(J=11.7,score75,score/K线形态均达标)，但BBI金叉已20天，时效略差。金属制品业板块集中度最高(5只)且全为优质pullback信号，优先买入盛德鑫泰(score88,VR3.55,缩量至半量以下,BBB金叉10天前)作为主建仓。当前持仓苏泊尔+3.24%，未触发止盈(-7%未到)/止损(-5tick未破)，继续持有。本次买入2只，目标持仓数3/10，仓位合理偏低，后续充足资金可补仓。",
           "recommendation": "买入 益诺思(sh688710) 11600股@¥68.50 + 盛德鑫泰(sz300881) 17000股@¥46.83，总建仓约¥158万。苏泊尔继续持有(+3.24%)。",
           "exec_summary": "成功2笔，失败0笔"
+        },
+        {
+          "date": "2026-04-24",
+          "action": "hold",
+          "summary": "午盘扫描58只候选，主通道仅浙江黎明(J=12.3)一枚信号，热点板块汽车制造业，但主力标的中午大幅走弱(-3.78%)，暂不追入。持仓3只：苏泊尔+3.81%持有，益诺思略亏-0.6%未触发止损，盛德鑫泰刚建仓持有。等14:50尾盘再定。",
+          "detail": "午盘扫描5093只全A股，漏斗过滤后58只候选：主通道2只(J<13)+单针下302只+金叉回调54只。热点板块：汽车制造业、金属制品业、电气机械。重点是汽车制造业，宁波高发(上午top1)下午跌-3.78%已走弱，浙江黎明(J=12.3)仍守主通道信号但仅跌-0.27%微幅回调。当前持仓3只：苏泊尔+3.81%未触发7%止盈(需+7%卖半仓)；益诺思成本¥68.16/现价¥67.75，亏损-0.6%未到5tick止损(¥67.65)；盛德鑫泰今天早盘买入仍持平。逢低建仓仍以尾盘14:50最终信号为准。",
+          "recommendation": "维持观察等待14:50尾盘扫描后再做最终仓位决策。若尾盘主通道信号更明确且零售波动率逆势性价比上升，可追加浙江黎明或汽车板块标的；持仓继续观望，苏泊尔即将止盈1条件时可卖半仓。"
         }
       ],
       "rebalances": [],
@@ -12458,17 +12465,17 @@
       "description": "追踪市场热点新闻，挖掘受益标的，快进快出。3-5天周期，多热点分散持仓。",
       "portfolio": {
         "cash": 8372352.820000002,
-        "total_value": 9445007.82,
+        "total_value": 9462537.82,
         "positions": {
           "002881.SZ": {
             "code": "002881.SZ",
             "name": "美格智能",
             "volume": 26000,
             "avg_cost": 38.4,
-            "current_price": 39.1,
-            "market_value": 1016600.0,
-            "pnl": 18200.0,
-            "pnl_pct": 1.82,
+            "current_price": 39.78,
+            "market_value": 1034280.0,
+            "pnl": 35880.0,
+            "pnl_pct": 3.59,
             "entry_date": "2026-04-09"
           },
           "688100.SH": {
@@ -12476,10 +12483,10 @@
             "name": "威胜信息",
             "volume": 1500,
             "avg_cost": 37.37,
-            "current_price": 37.37,
-            "market_value": 56055.0,
-            "pnl": 0.0,
-            "pnl_pct": 0.0,
+            "current_price": 37.27,
+            "market_value": 55905.0,
+            "pnl": -150.0,
+            "pnl_pct": -0.27,
             "entry_date": "2026-04-15"
           }
         },
@@ -13597,7 +13604,7 @@
       1.012843,
       1.019562,
       1.016737,
-      1.010145
+      1.015271
     ],
     "start_value": 4707.54
   },
@@ -13670,7 +13677,7 @@
         "rank": 6
       }
     ],
-    "updated_at": "2026-04-24 13:30:08",
+    "updated_at": "2026-04-24 14:30:05",
     "benchmark_nav": 0.992552
   },
   "quant": {
