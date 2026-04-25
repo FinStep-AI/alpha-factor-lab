@@ -3094,5 +3094,71 @@
     "conclusion": "淘汰",
     "date": "2026-04-24",
     "status": "inactive"
+  },
+  {
+    "date": "2026-04-25",
+    "source": {},
+    "factor_id": "body_strength_v1",
+    "factor_name": "实体强度因子（K线实体比例，20日均值）",
+    "source_type": "自研",
+    "source_title": "日内实体强度因子（Body Ratio）",
+    "original_formula": "(close - open) / (high - low), 20日滚动均值",
+    "source_url": "",
+    "original_metric": {
+      "description": "日内实体比例衡量价格方向明确度。高实体=强趋势信号。"
+    },
+    "our_metric": {
+      "ic_mean": -0.0073,
+      "ic_t": -0.49,
+      "sharpe": -0.23,
+      "monotonicity": 0.2,
+      "market": "中证1000",
+      "period": "2022-10-21 ~ 2026-04-24"
+    },
+    "failure_reason": "IC均值≈0（-0.007, t=-0.49），正反方向均无信号。分层不单调（mono=0.2），多空Sharpe=-0.23。20日前瞻不达标。",
+    "status": "eliminated",
+    "hypothesis": "强实体（高body_ratio）=主体延续，弱实体=不确定性+反转"
+  },
+  {
+    "date": "2026-04-25",
+    "source": {},
+    "factor_id": "turnover_recent_v1",
+    "factor_name": "换手率相对近期变化",
+    "source_type": "自研",
+    "source_title": "MA20(turnover/MA5(turnover))-1 换手率相对近期变化",
+    "original_formula": "MA20(turnover / MA5(turnover)) - 1，成交额OLS中性化",
+    "source_url": "",
+    "our_metric": {
+      "ic_mean": 0.0079,
+      "ic_t": 0.58,
+      "sharpe": 0.38,
+      "monotonicity": 0.6,
+      "market": "中证1000",
+      "period": "2022-10-21 ~ 2026-04-24"
+    },
+    "failure_reason": "IC均值≈0（0.008, t=0.58），方向不清晰。分层G1=7.75% vs G5=15.52%中间G3=12.13%非单调结构，换手率80.6%过高。",
+    "status": "eliminated",
+    "hypothesis": "近期换手率相对MA20提升=资金关注度变化"
+  },
+  {
+    "date": "2026-04-25",
+    "source": {},
+    "factor_id": "price_rank_v1",
+    "factor_name": "价格20日区间位置（反转方向）",
+    "source_type": "自研",
+    "source_title": "价格在20日高/低区间位置反转因子",
+    "original_formula": "(close - low_20d) / (high_20d - low_20d), 成交额OLS中性化，反转方向使用",
+    "source_url": "灵感来自 George & Hwang (2004) 52周高点动量",
+    "our_metric": {
+      "ic_mean": 0.0196,
+      "ic_t": 0.99,
+      "sharpe": 0.44,
+      "monotonicity": 0.4,
+      "market": "中证1000",
+      "period": "2022-10-21 ~ 2026-04-24"
+    },
+    "failure_reason": "IC均值接近0.02但t=0.99完全不达标(需>2.0)。分层不单调，G1=7.69%最低，G5=15.18%但中间G2=18.8%打破单调。与amihud_illiq预期相关(低流动性+均值回复)但信号太弱。",
+    "status": "eliminated",
+    "lessons_learned": "价格区间位置反转因子在中证1000有G5>G1方向，但非线性分层急剧（G2=18.8%最高），IC不显著。可能是价格在宽幅区间中间时的信息被噪声淹没，极端分组效果更好。"
   }
 ]

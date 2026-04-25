@@ -52,11 +52,14 @@ def fetch_prices_tencent(codes: list) -> dict:
         return {}
     
     def to_tencent_code(code: str) -> str:
+        # Handles: 'sh688710.SH'->'sh688710', '688710.SH'->'sh688710', '300881.SZ'->'sz300881'
         parts = code.split('.')
         if len(parts) == 2:
             num, ex = parts
+            # Strip existing sh/sz prefix if present (e.g. 'sh688710' -> '688710')
+            num_clean = num[2:] if (num.startswith('sh') or num.startswith('sz')) else num
             prefix = 'sh' if ex in ('SH', 'SS') else 'sz'
-            return f"{prefix}{num}"
+            return f"{prefix}{num_clean}"
         return code
     
     tc_codes = [to_tencent_code(c) for c in codes]
@@ -88,8 +91,11 @@ def fetch_prices_tencent(codes: list) -> dict:
                 price = float(parts[3]) if parts[3] else 0
                 
                 # Map back to original code format
+                # code_raw from Tencent is bare numeric code (e.g. 688710)
+                # orig may have .SH/.SZ suffix, so strip prefix too
                 for orig in batch_original:
-                    if orig.split('.')[0] == code_raw:
+                    bare = orig.split('.')[0].lstrip('sh').lstrip('sz')
+                    if bare == code_raw:
                         if price > 0:
                             prices[orig] = {"price": price, "name": name}
                         break
