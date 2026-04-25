@@ -3181,5 +3181,29 @@
     "failure_reason": "IC几乎为0（0.006, t=0.56），分层极不单调（mono=0.1），G3=20.7%最高。原始信号方向: 量价同号天数→对未来收益预测力极弱。可能是sign(ret)==sign(vol_chg)在日频下分辨力不足（缺少幅度维度）。与pv_corr的差异在于pv_corr是幅度相关性，本因子是符号一致性。",
     "status": "eliminated",
     "hypothesis": "价格与成交量同日同向（量价同步）的股票有信息驱动信号→后续正收益"
+  },
+  {
+    "date": "2026-04-25",
+    "id": "roe_persistence_neg_v1",
+    "factor_id": "roe_persistence_neg_v1",
+    "factor_name": "ROE持续性反转因子",
+    "source_type": "论文复现+本土化",
+    "source_title": "Profit Persistence and Stock Returns: Does the Market Care?",
+    "original_formula": "profit persistence / earnings persistence，高持续性盈利对应更高定价质量；本地近似为 mean(ROE_8q) / std(ROE_8q)",
+    "source_url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3211826",
+    "source_author": "H. Chahine et al.",
+    "source_year": 2018,
+    "our_metric": {
+      "ic_mean": 0.0227,
+      "ic_t": 2.42,
+      "sharpe": 2.265,
+      "monotonicity": 1.0,
+      "market": "中证1000",
+      "period": "2024-05-15 ~ 2026-02-10"
+    },
+    "diff_notes": "论文语义偏向‘高盈利持续性更优’，但在中证1000上原始方向显著为负(IC=-0.0227, t=-2.42, mono=-1.0)。本地采用反向后全面达标，说明A股小盘更像困境反转/高弹性补偿，而非稳定盈利溢价。实现上用ROE的8季度均值/标准差近似profit persistence，并做报告日+45天滞后与成交额OLS中性化。",
+    "conclusion": "入库",
+    "status": "active",
+    "hypothesis": "低ROE持续性股票在中证1000中具有更高后续收益，反映小盘股中的基本面波动补偿和困境反转效应。"
   }
 ]

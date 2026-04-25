@@ -1843,5 +1843,31 @@
       "vol_log60d_v4": null,
       "vssignal_v1": 1.0
     }
+  },
+  {
+    "id": "roe_persistence_neg_v1",
+    "name": "ROE持续性反转 v1",
+    "name_en": "ROE Persistence Reversal v1",
+    "category": "质量/成长",
+    "description": "过去8个季度ROE持续性因子，定义为 mean(ROE_8q)/std(ROE_8q)，采用论文中的 profit persistence 语义先复现，再在中证1000上做A股本土化反向使用。成交额20日均值OLS中性化。",
+    "hypothesis": "原始论文语义是高盈利持续性对应更高定价质量；但在中证1000小盘股中，低ROE持续性股票反而获得更高未来5日收益，可能反映困境反转与高弹性风险补偿。",
+    "expected_direction": "正向（低ROE持续性=高预期收益，因子已取反后入库）",
+    "factor_type": "质量/成长",
+    "formula": "neutralize(-mean(ROE_8q)/(std(ROE_8q)+1e-6), log_amount_20d)",
+    "direction": 1,
+    "stock_pool": "中证1000",
+    "period": "2024-05-15 ~ 2026-02-10",
+    "rebalance_freq": 20,
+    "forward_days": 5,
+    "cost": 0.003,
+    "rating": "★★★★ 强",
+    "nav_data": "output/roe_persistence_neg_v1/cumulative_returns.json",
+    "ic_data": "output/roe_persistence_neg_v1/ic_series.csv",
+    "turnover": 0.1608,
+    "ic_mean": 0.0227,
+    "ic_t": 2.42,
+    "sharpe": 2.265,
+    "monotonicity": 1.0,
+    "status": "active"
   }
 ]
