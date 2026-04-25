@@ -3160,5 +3160,26 @@
     "failure_reason": "IC均值接近0.02但t=0.99完全不达标(需>2.0)。分层不单调，G1=7.69%最低，G5=15.18%但中间G2=18.8%打破单调。与amihud_illiq预期相关(低流动性+均值回复)但信号太弱。",
     "status": "eliminated",
     "lessons_learned": "价格区间位置反转因子在中证1000有G5>G1方向，但非线性分层急剧（G2=18.8%最高），IC不显著。可能是价格在宽幅区间中间时的信息被噪声淹没，极端分组效果更好。"
+  },
+  {
+    "date": "2026-04-25",
+    "source": {},
+    "factor_id": "com_pol_vol_v1",
+    "factor_name": "量价同号一致性 (Co-polarity Volume-Return)",
+    "source_type": "自研",
+    "source_title": "20日滚动中收益率与成交量变化同号天数占比",
+    "original_formula": "(sign(ret) == sign(vol_chg)) 的20日占比，成交额OLS中性化",
+    "source_url": "受 Llorente et al. (2002) 量价自相关研究启发",
+    "our_metric": {
+      "ic_mean": 0.0057,
+      "ic_t": 0.56,
+      "sharpe": 0.38,
+      "monotonicity": 0.1,
+      "market": "中证1000",
+      "period": "2022-10-27 ~ 2026-04-24"
+    },
+    "failure_reason": "IC几乎为0（0.006, t=0.56），分层极不单调（mono=0.1），G3=20.7%最高。原始信号方向: 量价同号天数→对未来收益预测力极弱。可能是sign(ret)==sign(vol_chg)在日频下分辨力不足（缺少幅度维度）。与pv_corr的差异在于pv_corr是幅度相关性，本因子是符号一致性。",
+    "status": "eliminated",
+    "hypothesis": "价格与成交量同日同向（量价同步）的股票有信息驱动信号→后续正收益"
   }
 ]
