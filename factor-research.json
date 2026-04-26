@@ -3205,5 +3205,117 @@
     "conclusion": "入库",
     "status": "active",
     "hypothesis": "低ROE持续性股票在中证1000中具有更高后续收益，反映小盘股中的基本面波动补偿和困境反转效应。"
+  },
+  {
+    "date": "2026-04-26",
+    "factor_id": "vol_ret_coskew_v1",
+    "factor_name": "量价协偏度因子",
+    "source_type": "论文灵感+本土化",
+    "source_title": "Conditional Expected Returns and the Cross-Section of Stock Returns / Order Imbalance and Individual Stock Returns",
+    "original_formula": "co_skew_20 = mean(ret^2 * sign(volume / MA20(volume) - 1), 20d)，之后按日做成交额OLS中性化",
+    "source_url": "https://ideas.repec.org/a/bla/jfinan/v54y1999i3p1263-1295.html ; https://ideas.repec.org/a/eee/jfinec/v65y2002i1p111-130.html",
+    "source_author": "Harvey & Siddique (1999); Llorente et al. (2002)",
+    "our_metric": {
+      "ic_mean": -0.0019,
+      "ic_t": -0.3,
+      "sharpe": 0.7846,
+      "monotonicity": 0.5,
+      "market": "中证1000",
+      "period": "2022-11-04 ~ 2026-03-20"
+    },
+    "failure_reason": "未过门槛。IC接近0且不显著，分层不单调（G3最高，G5并非最佳），说明ret^2与成交量方向的20日协偏度在中证1000上更像噪音放大器，而非稳定alpha。成交额中性化后仍未改善，推测该信号与已有量价相关/微观结构因子相比信息增量不足。",
+    "status": "eliminated",
+    "hypothesis": "若大波动更多发生在放量方向一致的交易日，则代表知情资金主导，未来应有延续收益。",
+    "barra_style": "微观结构"
+  },
+  {
+    "factor_id": "tbr_v1",
+    "factor_name": "Turnover Block Ratio (TBR) v1",
+    "source_type": "自研(换手率集中度)",
+    "source_title": "换手率峰值集中度因子 (Turnover Block Ratio)",
+    "source_url": "灵感: Garch-M block effect + 换手率极端集中度",
+    "date": "2026-04-26",
+    "hypothesis": "高换手率集中度(stock-specific block) → 知情交易冲击 → 后续正收益",
+    "formula": "max(turnover,20)/MA(turnover,20), 成交额OLS中性化+MAD+z-score",
+    "backtest": {
+      "ic_mean": -0.0047,
+      "ic_t": -1.0,
+      "sharpe_ls": -0.55,
+      "monotonicity": -0.1
+    },
+    "status": "eliminated",
+    "failure_reason": "IC=-0.005(t=-1.00)完全不显著, 单调性=-0.1, 多空Sharpe=-0.55. 因子方向与预期相反: 换手峰值集中度越高(高TBR)后续收益越差。说明单纯换手率峰值集中不反映知情交易信号, 可能是散户脉冲行为。"
+  },
+  {
+    "factor_id": "turnover_cv_neg_v1",
+    "factor_name": "换手率变异系数(负) v1",
+    "source_type": "自研(vol_cv_neg变体,以换手率代替成交量)",
+    "source_title": "Turnover CV Negative 换手率稳定性因子",
+    "source_url": "类比 vol_cv_neg_v1 (成交量变异系数负向)",
+    "date": "2026-04-26",
+    "hypothesis": "换手率稳定性高(Low CV, 负向因子高值) → 信息对称/稳定 → 后续正收益",
+    "formula": "-std(turnover,20d)/mean(turnover,20d), 成交额OLS中性化+MAD+z-score",
+    "backtest": {
+      "ic_mean": 0.0028,
+      "ic_t": 0.46,
+      "sharpe_ls": -0.14,
+      "monotonicity": -0.2
+    },
+    "status": "eliminated",
+    "failure_reason": "IC=0.003(t=0.46)完全不显著, 多空Sharpe=-0.14, 单调性=-0.2. 换手率CV与收益率截面相关性极弱, 且分层无序(G1=5.31%最高而非G5). 与vol_cv_neg_v1(成交量CV)效果不同, 说明换手率和成交量的稳定性影响市场机制不同."
+  },
+  {
+    "factor_id": "turnover_skew_v1",
+    "factor_name": "换手率偏度(负向) v1",
+    "source_type": "自研(换手率分布形状)",
+    "source_title": "Turnover Skewness Negative 换手率分布偏度因子",
+    "source_url": "灵感: 偏度论文 + 换手率稳定性思想",
+    "date": "2026-04-26",
+    "hypothesis": "低换手率偏度(对称分布)=稳定关注=高Quality。取负后高因子值=高预定收益",
+    "formula": "-skewness(turnover,20d), 成交额OLS中性化+MAD+z-score",
+    "backtest": {
+      "ic_mean": 0.0046,
+      "ic_t": 1.11,
+      "sharpe_ls": 0.67,
+      "monotonicity": 0.5
+    },
+    "status": "eliminated",
+    "failure_reason": "IC=0.005(t=1.11)不显著, Sharpe=0.67(边际), 单调性0.5。分层非线性(G1=-1.99%最低,G5=2.32%最高)但中间组混乱。换手率偏度作为纯分布形状信号在截面上区分度不足。相关测试(turnover_cv_neg r=0.577, turnover_block_ratio r=-0.797)均高度冗余."
+  },
+  {
+    "factor_id": "osri_v1",
+    "factor_name": "单边范围指标(OSRI) v1",
+    "source_type": "自研(日内范围不对称性)",
+    "source_title": "One-Sided Range Indicator (OSRI) 日内上下跳空不对称因子",
+    "source_url": "自研(clv/隔夜方向启发)",
+    "date": "2026-04-26",
+    "hypothesis": "日内下行压力持续 > 上行压力持续 → 正/负 OSRI → 后续反转或延续效应(假设负OSRI=正向alpha). Takes -OSRI for positive factor value.",
+    "formula": "-((low-prev_close)/(high-prev_close)), 20日均值, 成交额中性化+MAD+z-score",
+    "backtest": {
+      "ic_mean": -0.002,
+      "ic_t": -0.31,
+      "sharpe_ls": -0.41,
+      "monotonicity": -0.4
+    },
+    "status": "eliminated",
+    "failure_reason": "IC=-0.002(t=-0.31)完全不显著, 多空Sharpe=-0.41, 单调性=-0.4. OSRI在高换手率/高波动股票中的分布决定因子区分度。G1=9.88%表现失控但中间组,G5=4.72%单调性差。隔夜/日内不对称性信号强非线性."
+  },
+  {
+    "factor_id": "cwv_v1",
+    "factor_name": "成交确认度(CWV) v1",
+    "source_type": "自研(成交量×价格方向合成)",
+    "source_title": "Conviction-Weighted Volume (CWV) 知情成交量加权因子",
+    "source_url": "灵感: 放量日方向性加权",
+    "date": "2026-04-26",
+    "hypothesis": "上涨日大成交量 > 下跌日大成交量(20日累计) → 知情交易者倾向乐观 → 后续正收益。累积 conviction = volume × sign(pct_change).",
+    "formula": "sum(volume × sign(pct_change), 20d) /mean(volume,20d), 成交额中性化+MAD+z-score",
+    "backtest": {
+      "ic_mean": -0.0028,
+      "ic_t": -0.44,
+      "sharpe_ls": -0.22,
+      "monotonicity": -0.1
+    },
+    "status": "eliminated",
+    "failure_reason": "IC=-0.003(t=-0.44)完全不显著, 多空Sharpe=-0.22, 单调性=-0.1. 成交量方向性加权在日频下无截面选股力, 日均化消除任何时序信号。换手率58%过高, 与taker_decel_v1方向感对应度-0.22不显著."
   }
 ]
