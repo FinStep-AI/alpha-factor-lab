@@ -6,7 +6,7 @@
     "benchmark": "000300",
     "benchmark_name": "沪深300",
     "created_at": "2026-04-27 09:25:16",
-    "updated_at": "2026-04-27 09:25:23"
+    "updated_at": "2026-04-27 09:36:05"
   },
   "players": {
     "quant": {
@@ -114,9 +114,54 @@
       "style": "趋势跟踪 · 板块轮动 · BBI/KDJ选股",
       "description": "全A股五级漏斗过滤，捕捉趋势启动点，板块集中度加权",
       "portfolio": {
-        "cash": 10000000.0,
-        "positions": {},
-        "total_value": 10000000.0,
+        "cash": 1993334.9899999995,
+        "positions": {
+          "sz300881.SZ": {
+            "code": "sz300881.SZ",
+            "name": "盛德鑫泰",
+            "volume": 42600,
+            "avg_cost": 46.94,
+            "current_price": 46.94,
+            "market_value": 1999644.0,
+            "pnl": 0,
+            "pnl_pct": 0,
+            "entry_date": "2026-04-27"
+          },
+          "sh600847.SH": {
+            "code": "sh600847.SH",
+            "name": "万里股份",
+            "volume": 139200,
+            "avg_cost": 14.39,
+            "current_price": 14.39,
+            "market_value": 2003088.0,
+            "pnl": 0,
+            "pnl_pct": 0,
+            "entry_date": "2026-04-27"
+          },
+          "sz002132.SZ": {
+            "code": "sz002132.SZ",
+            "name": "恒星科技",
+            "volume": 438000,
+            "avg_cost": 4.58,
+            "current_price": 4.58,
+            "market_value": 2006040.0,
+            "pnl": 0,
+            "pnl_pct": 0,
+            "entry_date": "2026-04-27"
+          },
+          "sh603063.SH": {
+            "code": "sh603063.SH",
+            "name": "禾望电气",
+            "volume": 50200,
+            "avg_cost": 39.59,
+            "current_price": 39.59,
+            "market_value": 1987418.0000000002,
+            "pnl": 0,
+            "pnl_pct": 0,
+            "entry_date": "2026-04-27"
+          }
+        },
+        "total_value": 9989524.99,
         "last_update": "2026-04-27"
       },
       "nav_history": {
@@ -124,8 +169,94 @@
         "nav": [],
         "cash_pct": []
       },
-      "trades": [],
-      "decisions": [],
+      "trades": [
+        {
+          "date": "2026-04-27",
+          "code": "sz300881.SZ",
+          "name": "盛德鑫泰",
+          "direction": "buy",
+          "price": 46.94,
+          "volume": 42600,
+          "amount": 1999644.0,
+          "fees": {
+            "commission": 599.89,
+            "stamp_duty": 0,
+            "transfer_fee": 20.0,
+            "slippage_cost": 1999.64,
+            "total": 2619.53
+          },
+          "pnl": 0,
+          "pnl_pct": 0,
+          "reason": "pullback, score93, J=28.9, 金属制品业板块集中(5只), 放量2.18x缩量回调至半量"
+        },
+        {
+          "date": "2026-04-27",
+          "code": "sh600847.SH",
+          "name": "万里股份",
+          "direction": "buy",
+          "price": 14.39,
+          "volume": 139200,
+          "amount": 2003088.0,
+          "fees": {
+            "commission": 600.93,
+            "stamp_duty": 0,
+            "transfer_fee": 20.03,
+            "slippage_cost": 2003.09,
+            "total": 2624.05
+          },
+          "pnl": 0,
+          "pnl_pct": 0,
+          "reason": "pullback, score83, J=51.9, 电气机械热门板块, 量比3.8"
+        },
+        {
+          "date": "2026-04-27",
+          "code": "sz002132.SZ",
+          "name": "恒星科技",
+          "direction": "buy",
+          "price": 4.58,
+          "volume": 438000,
+          "amount": 2006040.0,
+          "fees": {
+            "commission": 601.81,
+            "stamp_duty": 0,
+            "transfer_fee": 20.06,
+            "slippage_cost": 2006.04,
+            "total": 2627.91
+          },
+          "pnl": 0,
+          "pnl_pct": 0,
+          "reason": "pullback, score73, J=71.4, 金属制品业(5只板块集中), 低价弹性标的"
+        },
+        {
+          "date": "2026-04-27",
+          "code": "sh603063.SH",
+          "name": "禾望电气",
+          "direction": "buy",
+          "price": 39.59,
+          "volume": 50200,
+          "amount": 1987418.0,
+          "fees": {
+            "commission": 596.23,
+            "stamp_duty": 0,
+            "transfer_fee": 19.87,
+            "slippage_cost": 1987.42,
+            "total": 2603.52
+          },
+          "pnl": 0,
+          "pnl_pct": 0,
+          "reason": "pullback, score70, J=64.0, 电气机械热门板块, 市值适中~180亿"
+        }
+      ],
+      "decisions": [
+        {
+          "date": "2026-04-27",
+          "action": "buy",
+          "summary": "首日建仓：5只pullback信号，覆盖3个热门板块(金属制品5只+电气机械3只+非金属矿物3只)，等权建仓各200万，初始NAV=1.0观望市场热量",
+          "detail": "晨扫结果：全A扫描5090只，漏斗通过61只候选(level1→4920→1038→121→917→61)。热门板块：金属制品业(5只信号)、电气机械(3只)、非金属矿物(3只)。无止损止盈信号(首日无持仓)。is_uptrend全为false，说明市场整体仍处震荡，BBI金叉缩量回调作为当前最可靠买入通道。精选5只：盛德鑫泰(score93,J=28.9,最佳标的)+万里股份(score83,J=52,电气机械)+恒星科技(score73,J=71,金属低价)+禾望电气(score70,J=64,电气)+瑞泰科技(score70,J=55,非金属矿物)。各仓位1/5=200万，目标持仓5-10只。",
+          "recommendation": "尾盘14:50再扫描一次更新信号。若BBI突破MA60在股中，加码黄金仓。若5只全部触发5tick止损(-0.5%)，说明今日策略有效性低，明日降仓至50%。",
+          "exec_summary": "成功4笔，失败1笔"
+        }
+      ],
       "rebalances": [],
       "stats": {
         "total_return_pct": 0.0,
@@ -135,8 +266,8 @@
         "calmar_ratio": 0.0,
         "win_rate": 0.0,
         "profit_loss_ratio": 0.0,
-        "total_trades": 0,
-        "total_fees": 0.0,
+        "total_trades": 4,
+        "total_fees": 10475.01,
         "current_positions": 0,
         "turnover_rate": 0.0
       }
@@ -156,8 +287,8 @@
             "avg_cost": 10.12,
             "current_price": 10.12,
             "market_value": 4999280.0,
-            "pnl": 0,
-            "pnl_pct": 0,
+            "pnl": 0.0,
+            "pnl_pct": 0.0,
             "entry_date": "2026-04-27"
           }
         },
@@ -250,11 +381,82 @@
     }
   },
   "benchmark": {
-    "dates": [],
-    "nav": []
+    "dates": [
+      "2026-04-27"
+    ],
+    "nav": [
+      1.014664
+    ]
   },
   "leaderboard": {
-    "rankings": [],
-    "updated_at": null
+    "rankings": [
+      {
+        "player_id": "quant",
+        "name": "因子猎人",
+        "emoji": "🔢",
+        "total_return_pct": 0.0,
+        "sharpe_ratio": 0.0,
+        "max_drawdown_pct": 0.0,
+        "current_nav": 1.0,
+        "total_trades": 0,
+        "rank": 1
+      },
+      {
+        "player_id": "trader",
+        "name": "技术猎手",
+        "emoji": "📊",
+        "total_return_pct": 0.0,
+        "sharpe_ratio": 0.0,
+        "max_drawdown_pct": 0.0,
+        "current_nav": 1.0,
+        "total_trades": 0,
+        "rank": 2
+      },
+      {
+        "player_id": "value",
+        "name": "巴菲特门徒",
+        "emoji": "🏛️",
+        "total_return_pct": 0.0,
+        "sharpe_ratio": 0.0,
+        "max_drawdown_pct": 0.0,
+        "current_nav": 1.0,
+        "total_trades": 0,
+        "rank": 3
+      },
+      {
+        "player_id": "dwj",
+        "name": "趋势游侠",
+        "emoji": "🏄",
+        "total_return_pct": 0.0,
+        "sharpe_ratio": 0.0,
+        "max_drawdown_pct": 0.0,
+        "current_nav": 1.0,
+        "total_trades": 0,
+        "rank": 4
+      },
+      {
+        "player_id": "sentiment",
+        "name": "情绪战神",
+        "emoji": "⚡",
+        "total_return_pct": 0.0,
+        "sharpe_ratio": 0.0,
+        "max_drawdown_pct": 0.0,
+        "current_nav": 1.0,
+        "total_trades": 1,
+        "rank": 5
+      },
+      {
+        "player_id": "hotspot",
+        "name": "热点猎手",
+        "emoji": "📰",
+        "total_return_pct": 0.0,
+        "sharpe_ratio": 0.0,
+        "max_drawdown_pct": 0.0,
+        "current_nav": 1.0,
+        "total_trades": 0,
+        "rank": 6
+      }
+    ],
+    "updated_at": "2026-04-27 09:30:04"
   }
 }
