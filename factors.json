@@ -2032,5 +2032,32 @@
     "source_title": "ROE同比变化率：本土A股成长因子",
     "source_url": "",
     "correlations": {}
+  },
+  {
+    "id": "neg_range_efficiency_v1",
+    "name": "反转日内价格效率(反向) v1",
+    "name_en": "Neg Range Efficiency v1",
+    "category": "反转/尾部风险",
+    "description": "反转日内价格效率: |close-open|/(high-low)的20日滚动均值，反向使用。低日内效率(震荡/无明确方向) → 随后反转向上。",
+    "hypothesis": "日内价格效率低的股票(高振幅但方向混乱) → 信息未充分消化 → 价格发现进行中 → 后续方向性调整 → 正alpha。",
+    "formula": "neutralize(-mean(|close-open|/(high-low), 20d), log_amount_20d)",
+    "direction": -1,
+    "script": "skills/alpha-factor-lab/scripts/factor_range_efficiency.py",
+    "backtest_script": "scripts/backtest_range_efficiency_v1.py",
+    "metrics": {
+      "ic_mean": 0.029,
+      "ic_t": 3.97,
+      "ls_sharpe": 2.473,
+      "monotonicity": 0.9,
+      "ls_mdd": -0.0723
+    },
+    "stock_pool": "中证1000",
+    "period": "2022-10-11 ~ 2026-02-13",
+    "n_groups": 5,
+    "rebalance_freq": 20,
+    "forward_days": 10,
+    "cost": 0.003,
+    "output_dir": "output/neg_range_efficiency_v1",
+    "notes": "IC=0.029,t=3.97,Sharpe=2.47,Mono=0.90 全部达标 std=0.029"
   }
 ]
