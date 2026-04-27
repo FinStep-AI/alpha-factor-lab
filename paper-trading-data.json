@@ -6,7 +6,7 @@
     "benchmark": "000300",
     "benchmark_name": "沪深300",
     "created_at": "2026-04-27 09:25:16",
-    "updated_at": "2026-04-27 09:36:24"
+    "updated_at": "2026-04-27 10:30:06"
   },
   "players": {
     "quant": {
@@ -423,7 +423,7 @@
       "2026-04-27"
     ],
     "nav": [
-      1.014664
+      1.016463
     ]
   },
   "leaderboard": {
@@ -469,7 +469,7 @@
         "sharpe_ratio": 0.0,
         "max_drawdown_pct": 0.0,
         "current_nav": 1.0,
-        "total_trades": 0,
+        "total_trades": 5,
         "rank": 4
       },
       {
@@ -495,6 +495,6 @@
         "rank": 6
       }
     ],
-    "updated_at": "2026-04-27 09:30:04"
+    "updated_at": "2026-04-27 10:30:06"
   }
 }
