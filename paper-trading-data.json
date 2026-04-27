@@ -6,7 +6,7 @@
     "benchmark": "000300",
     "benchmark_name": "沪深300",
     "created_at": "2026-04-27 09:25:16",
-    "updated_at": "2026-04-27 10:30:06"
+    "updated_at": "2026-04-27 13:35:09"
   },
   "players": {
     "quant": {
@@ -48,9 +48,21 @@
       "style": "技术面择时 · 单标的 · 日内决策",
       "description": "盯一只高波动高换手标的，MACD/KDJ/RSI/BOLL综合分析，择时进出",
       "portfolio": {
-        "cash": 10000000.0,
-        "positions": {},
-        "total_value": 10000000.0,
+        "cash": 5285482.06,
+        "positions": {
+          "603501.SH": {
+            "code": "603501.SH",
+            "name": "豪威集团",
+            "volume": 45000,
+            "avg_cost": 104.63,
+            "current_price": 104.63,
+            "market_value": 4708350.0,
+            "pnl": 0,
+            "pnl_pct": 0,
+            "entry_date": "2026-04-27"
+          }
+        },
+        "total_value": 9993832.06,
         "last_update": "2026-04-27"
       },
       "nav_history": {
@@ -58,8 +70,37 @@
         "nav": [],
         "cash_pct": []
       },
-      "trades": [],
-      "decisions": [],
+      "trades": [
+        {
+          "date": "2026-04-27",
+          "code": "603501.SH",
+          "name": "豪威集团",
+          "direction": "buy",
+          "price": 104.63,
+          "volume": 45000,
+          "amount": 4708350.0,
+          "fees": {
+            "commission": 1412.5,
+            "stamp_duty": 0,
+            "transfer_fee": 47.08,
+            "slippage_cost": 4708.35,
+            "total": 6167.94
+          },
+          "pnl": 0,
+          "pnl_pct": 0,
+          "reason": "午盘分析：综合得分40分。MA5×MA10今日(4/27)二次金叉确认+MACD金叉(4/10)+放量大涨(2.7倍量)+涨停+均线多头排列。选股得分为4候选最高(+40)，确认买入信号。止损-7%=97.30，止盈+20%=125.55减仓"
+        }
+      ],
+      "decisions": [
+        {
+          "date": "2026-04-27",
+          "action": "buy",
+          "summary": "买入503501.SH 豪威集团半仓(45000股@104.63=470.8万)。技术面确认：MA5×MA10今日金叉+MACD金叉+均线多头排列+大幅放量。综合打分40分，符合半仓条件。目标止盈+20%，止损-7%。",
+          "detail": "综合性较强:MA5×MA10今日确认(4/27),MACD金叉(4/10),均线多头(MA5=95.85>MA10=94.67>MA20=94.51),大幅放量2.7倍,涨停+10%突破前期平台(95-100区间)。技术形态多重确认，信号可信度高。RSI6=84预警超买，MA60=107.94中期压力需关注。风险双向，仓位50%。",
+          "recommendation": "执行买入503501.SH 豪威集团半仓(500万)，当前价104.63。止损线97.30(-7%)，止盈线125.55(+20%减至半仓)。RSI超买警惕回调，MA60=107.94突破后可上调目标价。",
+          "exec_summary": "成功1笔，失败0笔"
+        }
+      ],
       "rebalances": [],
       "stats": {
         "total_return_pct": 0.0,
@@ -69,8 +110,8 @@
         "calmar_ratio": 0.0,
         "win_rate": 0.0,
         "profit_loss_ratio": 0.0,
-        "total_trades": 0,
-        "total_fees": 0.0,
+        "total_trades": 1,
+        "total_fees": 6167.94,
         "current_positions": 0,
         "turnover_rate": 0.0
       }
@@ -423,7 +464,7 @@
       "2026-04-27"
     ],
     "nav": [
-      1.016463
+      1.016068
     ]
   },
   "leaderboard": {
@@ -495,6 +536,6 @@
         "rank": 6
       }
     ],
-    "updated_at": "2026-04-27 10:30:06"
+    "updated_at": "2026-04-27 13:30:10"
   }
 }
