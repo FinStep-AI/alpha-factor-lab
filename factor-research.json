@@ -3339,5 +3339,38 @@
     },
     "status": "active",
     "rating": "★★★★ 强"
+  },
+  {
+    "factor_id": "roe_delta_yoy_v1",
+    "factor_name": "ROE年同比增长因子",
+    "factor_tested": "roe_delta_yoy_v1",
+    "category": "基本面/成长",
+    "barra_style": "Growth",
+    "description": "为核心成长类 Barra 因子。基于每季财报ROE：取最新一个可披露季度的ROE同比ROE(t)-ROE(t-4)，log(1+py_change)后进行成交额OLS中性化、MAD winsorize+z-score标准化。5日前瞻收益率验证。",
+    "hypothesis": "ROE实现同比增长的个股具有盈利质量改善，中证1000中小成长股中盈利改善的溢价显著。高ROE增长股票因成长性溢价受青睐，更容易获得超额收益；低ROE增长股票具有基准暴露，短期被压价后具有修复空间。",
+    "expected_direction": "正向（高ROE增长=高预期收益）",
+    "formula": "neutralize(ts_diff(ROE_current_q, ROE_4q_ago_q, neutralizer=log_amount, method=mad+ols), log_amount)",
+    "source_type": "自研(基本面因子启发)",
+    "source_title": "ROE同比增长率：本土A股盈利质量成长因子",
+    "source_author": "自研（Russell/Jegadeesh et al. 基准）",
+    "source_url": "",
+    "date": "2026-04-27",
+    "status": "active",
+    "rating": "★★★★ 强",
+    "backtest_result": {
+      "ic_mean": 0.0213,
+      "ic_t_stat": 3.24,
+      "long_short_sharpe": 1.461,
+      "long_short_mdd": -0.129,
+      "g5_sharpe": 1.014,
+      "g5_annual_return": 0.263,
+      "g1_annual_return": 0.101,
+      "monotonicity": 1.0,
+      "turnover": 0.279,
+      "period": "2023-08-14 ~ 2026-03-13",
+      "n_dates": 623,
+      "n_stocks": 1000,
+      "conclusion": "达标入库。IC=0.021(t=3.24)1%显著, LS Sharpe=1.462, G5 Sharpe=1.014, G5 年化26.3% vs G1年化10.1%, 单调性1.0。填补Barra Growth空白，推荐作为成长类主力因子。"
+    }
   }
 ]

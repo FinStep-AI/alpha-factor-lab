@@ -1964,5 +1964,73 @@
       "pv_corr_v1": "N/A",
       "price_sync_v3_fwd5": 1.0
     }
+  },
+  {
+    "id": "roe_delta_yoy_v1",
+    "name": "ROE同比增长因子",
+    "name_en": "ROE Year-Over-Year Growth Factor",
+    "category": "基本面/成长",
+    "description": "近两个可披露季度的ROE同比变化率（ROE_t - ROE_{t-4}），取log(1+变化率)，对数变换后做成交额中性化（MAD winsorize + OLS残差 + z-score）。高ROE增长意味着盈利改善、成长质量提升。",
+    "hypothesis": "ROE同比增长的股票具有盈利质量改善的趋势性信号，未来5日收益更高",
+    "expected_direction": "正向（高ROE增长=高预期收益）",
+    "factor_type": "风险溢价/成长",
+    "formula": "neutralize(ts_diff(ma(report_ROE_q, 4), neutralizer=log_amount), log_amount)",
+    "direction": 1,
+    "stock_pool": "中证1000",
+    "period": "2023-08-14 ~ 2026-03-13",
+    "rebalance_freq": 20,
+    "forward_days": 5,
+    "cost": 0.003,
+    "rating": "",
+    "nav_data": "output/roe_yoy_growth_v1/cumulative_returns.json",
+    "ic_data": "output/roe_yoy_growth_v1/ic_series.json",
+    "upgrade_notes": "",
+    "lessons_learned": [
+      "ROE增长因子在中证1000有效",
+      "季报信息滞后30天后可生效",
+      "成交额中性化效果良好，Sharpe > 1.4"
+    ],
+    "created": "2026-04-27",
+    "updated": "2026-04-27",
+    "metrics": {
+      "ic_mean": 0.02129528527444173,
+      "ic_std": 0.07169118633731357,
+      "ic_t": 3.2439747237439573,
+      "ic_positive_ratio": 0.6048387096774194,
+      "rank_ic": 0.03317401240633516,
+      "rank_ic_std": 0.093761886031258,
+      "ir": 0.2970418870493434,
+      "ic_count": 124,
+      "long_short_sharpe": 1.4606063880807134,
+      "long_short_mdd": -0.12857280422059444,
+      "monotonicity": 1.0,
+      "group_sharpe": [
+        0.33918311929688466,
+        0.5079985528835729,
+        0.555312208169279,
+        0.8925045216222164,
+        1.0140543710961578
+      ],
+      "group_returns_annualized": [
+        0.10125729347180257,
+        0.14364099193301727,
+        0.1452908275346465,
+        0.23160263603299147,
+        0.26290872688685973
+      ],
+      "group_mdd": [
+        -0.36116796169596105,
+        -0.33650340063630735,
+        -0.3255555842023274,
+        -0.29657002882566463,
+        -0.25515246864972774
+      ]
+    },
+    "conclusion": "成长类因子，ROE年同比增长率。IC显著(t=3.24)，多空Sharpe=1.46，单调性1.0。G5年化26.3% vs G1年化10.1%，分差16.2pct。填补Barra Growth空白，单调性完美。推荐使用。",
+    "barra_style": "Growth",
+    "source_type": "自研",
+    "source_title": "ROE同比变化率：本土A股成长因子",
+    "source_url": "",
+    "correlations": {}
   }
 ]
