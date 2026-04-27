@@ -6,7 +6,7 @@
     "benchmark": "000300",
     "benchmark_name": "沪深300",
     "created_at": "2026-04-27 09:25:16",
-    "updated_at": "2026-04-27 09:36:05"
+    "updated_at": "2026-04-27 09:36:24"
   },
   "players": {
     "quant": {
@@ -114,7 +114,7 @@
       "style": "趋势跟踪 · 板块轮动 · BBI/KDJ选股",
       "description": "全A股五级漏斗过滤，捕捉趋势启动点，板块集中度加权",
       "portfolio": {
-        "cash": 1993334.9899999995,
+        "cash": 5424.229999999516,
         "positions": {
           "sz300881.SZ": {
             "code": "sz300881.SZ",
@@ -159,9 +159,20 @@
             "pnl": 0,
             "pnl_pct": 0,
             "entry_date": "2026-04-27"
+          },
+          "sz002066.SZ": {
+            "code": "sz002066.SZ",
+            "name": "瑞泰科技",
+            "volume": 85500,
+            "avg_cost": 23.22,
+            "current_price": 23.22,
+            "market_value": 1985310.0,
+            "pnl": 0,
+            "pnl_pct": 0,
+            "entry_date": "2026-04-27"
           }
         },
-        "total_value": 9989524.99,
+        "total_value": 9986924.23,
         "last_update": "2026-04-27"
       },
       "nav_history": {
@@ -245,6 +256,25 @@
           "pnl": 0,
           "pnl_pct": 0,
           "reason": "pullback, score70, J=64.0, 电气机械热门板块, 市值适中~180亿"
+        },
+        {
+          "date": "2026-04-27",
+          "code": "sz002066.SZ",
+          "name": "瑞泰科技",
+          "direction": "buy",
+          "price": 23.22,
+          "volume": 85500,
+          "amount": 1985310.0,
+          "fees": {
+            "commission": 595.59,
+            "stamp_duty": 0,
+            "transfer_fee": 19.85,
+            "slippage_cost": 1985.31,
+            "total": 2600.76
+          },
+          "pnl": 0,
+          "pnl_pct": 0,
+          "reason": "pullback, score70, J=55.1, 非金属矿物制品业热门板块, 用剩余资金建仓"
         }
       ],
       "decisions": [
@@ -255,6 +285,14 @@
           "detail": "晨扫结果：全A扫描5090只，漏斗通过61只候选(level1→4920→1038→121→917→61)。热门板块：金属制品业(5只信号)、电气机械(3只)、非金属矿物(3只)。无止损止盈信号(首日无持仓)。is_uptrend全为false，说明市场整体仍处震荡，BBI金叉缩量回调作为当前最可靠买入通道。精选5只：盛德鑫泰(score93,J=28.9,最佳标的)+万里股份(score83,J=52,电气机械)+恒星科技(score73,J=71,金属低价)+禾望电气(score70,J=64,电气)+瑞泰科技(score70,J=55,非金属矿物)。各仓位1/5=200万，目标持仓5-10只。",
           "recommendation": "尾盘14:50再扫描一次更新信号。若BBI突破MA60在股中，加码黄金仓。若5只全部触发5tick止损(-0.5%)，说明今日策略有效性低，明日降仓至50%。",
           "exec_summary": "成功4笔，失败1笔"
+        },
+        {
+          "date": "2026-04-27",
+          "action": "buy",
+          "summary": "补仓：以剩余资金完成第5只持仓 瑞泰科技(85500股)，等权配置完成",
+          "detail": "资金精算：首轮4笔共约9,986,165元，剩余约199万，可买入瑞泰科技85500股(@23.30=1,992,150)，最终持仓5只，各约200万，现金余额约1,185元。",
+          "recommendation": "首日建仓5只完成，总仓位约99.99%，待尾盘14:50再做第二次扫描确认信号强度。",
+          "exec_summary": "成功1笔，失败0笔"
         }
       ],
       "rebalances": [],
@@ -266,8 +304,8 @@
         "calmar_ratio": 0.0,
         "win_rate": 0.0,
         "profit_loss_ratio": 0.0,
-        "total_trades": 4,
-        "total_fees": 10475.01,
+        "total_trades": 5,
+        "total_fees": 13075.77,
         "current_positions": 0,
         "turnover_rate": 0.0
       }
