@@ -3317,5 +3317,27 @@
     },
     "status": "eliminated",
     "failure_reason": "IC=-0.003(t=-0.44)完全不显著, 多空Sharpe=-0.22, 单调性=-0.1. 成交量方向性加权在日频下无截面选股力, 日均化消除任何时序信号。换手率58%过高, 与taker_decel_v1方向感对应度-0.22不显著."
+  },
+  {
+    "factor_id": "price_sync_v3_fwd5",
+    "factor_name": "价格同步性 v3_fwd5",
+    "source_type": "自研(论文启发)",
+    "source_title": "Hou & Moskowitz (2005) Market Frictions R²变体 + 截面Rank变换增强",
+    "source_url": "https://doi.org/10.1016/j.jfineco.2005.04.004",
+    "date": "2026-04-27",
+    "hypothesis": "20日R²(个股vs市场)衡量价格同步度：高同步→信息传播充分→动量延续；低同步→信息不透明→低预期收益。Rank变换放大极值差异后OLS中性化。",
+    "expected_direction": "正向（高同步值=高预期收益）",
+    "formula": "neutralize(rank(rolling_r2(ret_stock, mkt_ret, 20d)), log_amount_20d)",
+    "backtest_result": {
+      "ic_mean": 0.03245,
+      "ic_t": 2.79,
+      "long_short_sharpe": 1.927,
+      "g5_sharpe": 0.967,
+      "monotonicity": 0.9,
+      "turnover": 0.685,
+      "conclusion": "达标入库。IC=0.032(t=2.79) 1%显著，G5 Sharpe=0.97(5d)和1.03(20d)达标，LS Sharpe=1.93，MDD-17%。与源库最高相关仅0.39，独立性强。新增价格同步性α，填补micro角度空白。"
+    },
+    "status": "active",
+    "rating": "★★★★ 强"
   }
 ]
