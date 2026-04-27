@@ -24,11 +24,18 @@
     "微观结构": 0.18
   },
   "risk_summary": {
-    "turnover_ratio": 0.42,
+    "turnover_ratio": "~100%（全换）",
     "max_position_weight": 0.058,
     "herfindahl_index": 0.042,
     "beta_pool": 1.02,
     "avg_turnover_freq": "中",
-    "position_stability": "高"
-  }
+    "position_stability": "高",
+    "max_position_weight_pct": 4.0,
+    "cash_pct": 0.3,
+    "last_check": "2026-04-27"
+  },
+  "last_updated": "2026-04-27 09:04",
+  "rebalance_date": "2026-04-24",
+  "latest_nav": 1.063103,
+  "latest_total_value": 10611044.44
 }
