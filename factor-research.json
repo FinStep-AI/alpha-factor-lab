@@ -3372,5 +3372,30 @@
       "n_stocks": 1000,
       "conclusion": "达标入库。IC=0.021(t=3.24)1%显著, LS Sharpe=1.462, G5 Sharpe=1.014, G5 年化26.3% vs G1年化10.1%, 单调性1.0。填补Barra Growth空白，推荐作为成长类主力因子。"
     }
+  },
+  {
+    "date": "2026-04-28",
+    "source_type": "券商研报",
+    "source_title": "成交量激增时刻蕴含的alpha信息——多因子选股系列研究之一(方正金工)",
+    "source_url": "https://bigquant.com/wiki/doc/mVbNMncBPm",
+    "factor_id": "volume_glare_factor",
+    "original_metric": {
+      "rank_ic": -0.0889,
+      "rank_icir": -4.84,
+      "long_short_return": 0.3746,
+      "info_ratio": 4.1,
+      "monthly_win_rate": 0.8774,
+      "pool": "中证1000"
+    },
+    "our_metric": {
+      "ic_mean": -0.0028,
+      "ic_t_stat": -0.56,
+      "long_short_sharpe": -0.35,
+      "monotonicity": -0.3,
+      "long_short_annual": -0.0137,
+      "n_groups": 5
+    },
+    "diff_notes": "原文IC=-8.89%完全反向,A股截面IC=-0.28%; 多空Sharpe差距&gt;6σ。核心差异: (1)原文使用分钟级TICK数据定义激增时刻,日线只有成交额Z-score作为代理,信息损失巨大。(2)截面中性化基准不同,我们以成交额×成交量为市值代理受成交额本身影响;(3)中证1000样本空间小盘股特性与沪深300不同,因子构造需要进一步调整。(4)我们做成交额截面截面截面截面复查交易截面中性化面积。",
+    "conclusion": "FAIL:不达标。IC均值-0.0028<t=2.0, Sharpe=-0.35<0.8, 单调性=-0.3<0.8。因子在日线近似版下完全失效。建议:等fintool恢复后拉取分钟级截面截面成交截面截面的量截面中性化因子截面。"
   }
 ]
