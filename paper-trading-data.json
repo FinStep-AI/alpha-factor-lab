@@ -6,7 +6,7 @@
     "benchmark": "000300",
     "benchmark_name": "沪深300",
     "created_at": "2026-02-23 22:14:25",
-    "updated_at": "2026-04-28 09:16:28",
+    "updated_at": "2026-04-28 13:39:20",
     "status": "active",
     "players_count": 6
   },
@@ -24,10 +24,10 @@
             "name": "深圳机场",
             "volume": 62000,
             "avg_cost": 6.87,
-            "current_price": 7.01,
-            "market_value": 434620.0,
-            "pnl": 8680.0,
-            "pnl_pct": 2.04,
+            "current_price": 7.11,
+            "market_value": 440820.0,
+            "pnl": 14880.0,
+            "pnl_pct": 3.49,
             "entry_date": "2026-04-22"
           },
           "002320.SZ": {
@@ -35,10 +35,10 @@
             "name": "海峡股份",
             "volume": 50400,
             "avg_cost": 8.44,
-            "current_price": 8.22,
-            "market_value": 414288.0,
-            "pnl": -11088.0,
-            "pnl_pct": -2.61,
+            "current_price": 8.3,
+            "market_value": 418320.0,
+            "pnl": -7056.0,
+            "pnl_pct": -1.66,
             "entry_date": "2026-04-22"
           },
           "002507.SZ": {
@@ -46,10 +46,10 @@
             "name": "涪陵榨菜",
             "volume": 34600,
             "avg_cost": 12.31,
-            "current_price": 12.38,
-            "market_value": 428348.0,
-            "pnl": 2422.0,
-            "pnl_pct": 0.57,
+            "current_price": 12.56,
+            "market_value": 434576.0,
+            "pnl": 8650.0,
+            "pnl_pct": 2.03,
             "entry_date": "2026-04-22"
           },
           "002668.SZ": {
@@ -57,10 +57,10 @@
             "name": "TCL智家",
             "volume": 43000,
             "avg_cost": 9.9,
-            "current_price": 9.73,
-            "market_value": 418390.0,
-            "pnl": -7310.0,
-            "pnl_pct": -1.72,
+            "current_price": 9.62,
+            "market_value": 413660.0,
+            "pnl": -12040.0,
+            "pnl_pct": -2.83,
             "entry_date": "2026-04-22"
           },
           "002936.SZ": {
@@ -68,10 +68,10 @@
             "name": "郑州银行",
             "volume": 234000,
             "avg_cost": 1.82,
-            "current_price": 1.81,
-            "market_value": 423540.0,
-            "pnl": -2340.0,
-            "pnl_pct": -0.55,
+            "current_price": 1.8,
+            "market_value": 421200.0,
+            "pnl": -4680.0,
+            "pnl_pct": -1.1,
             "entry_date": "2026-04-22"
           },
           "301061.SZ": {
@@ -79,10 +79,10 @@
             "name": "匠心家居",
             "volume": 5700,
             "avg_cost": 73.86,
-            "current_price": 72.45,
-            "market_value": 412965.0,
-            "pnl": -8037.0,
-            "pnl_pct": -1.91,
+            "current_price": 75.85,
+            "market_value": 432345.0,
+            "pnl": 11343.0,
+            "pnl_pct": 2.69,
             "entry_date": "2026-04-22"
           },
           "301087.SZ": {
@@ -90,10 +90,10 @@
             "name": "可孚医疗",
             "volume": 7400,
             "avg_cost": 57.0,
-            "current_price": 53.95,
-            "market_value": 399230.0,
-            "pnl": -22570.0,
-            "pnl_pct": -5.35,
+            "current_price": 52.49,
+            "market_value": 388426.0,
+            "pnl": -33374.0,
+            "pnl_pct": -7.91,
             "entry_date": "2026-04-22"
           },
           "301267.SZ": {
@@ -101,15 +101,15 @@
             "name": "华厦眼科",
             "volume": 24800,
             "avg_cost": 17.12,
-            "current_price": 18.14,
-            "market_value": 449872.0,
-            "pnl": 25296.0,
-            "pnl_pct": 5.96,
+            "current_price": 18.24,
+            "market_value": 452352.0,
+            "pnl": 27776.0,
+            "pnl_pct": 6.54,
             "entry_date": "2026-04-22"
           }
         },
-        "total_value": 10631026.5,
-        "last_update": "2026-04-24"
+        "total_value": 10651472.5,
+        "last_update": "2026-04-28"
       },
       "nav_history": {
         "dates": [
@@ -5794,10 +5794,10 @@
       ],
       "stats": {
         "total_return_pct": 6.31,
-        "annualized_return_pct": 32.25,
+        "annualized_return_pct": 31.43,
         "max_drawdown_pct": 13.91,
-        "sharpe_ratio": 1.0,
-        "calmar_ratio": 2.32,
+        "sharpe_ratio": 0.99,
+        "calmar_ratio": 2.26,
         "win_rate": 37.12,
         "profit_loss_ratio": 1.88,
         "total_trades": 232,
@@ -6041,10 +6041,10 @@
             "name": "粤桂股份",
             "volume": 15000,
             "avg_cost": 26.01,
-            "current_price": 25.79,
-            "market_value": 386850.0,
-            "pnl": -3300.0,
-            "pnl_pct": -0.85,
+            "current_price": 27.74,
+            "market_value": 416100.0,
+            "pnl": 25950.0,
+            "pnl_pct": 6.65,
             "entry_date": "2026-04-24"
           },
           "603501.SH": {
@@ -6053,16 +6053,16 @@
             "volume": 45000,
             "amount": 4708350.0,
             "avg_cost": 104.63,
-            "current_price": 104.63,
-            "market_value": 4708350.0,
-            "pnl": 0,
-            "pnl_pct": 0,
+            "current_price": 104.19,
+            "market_value": 4688550.0,
+            "pnl": -19800.0,
+            "pnl_pct": -0.42,
             "date": "2026-04-27",
             "note": "4/27建仓"
           }
         },
-        "total_value": 9990020.96,
-        "last_update": "2026-04-24"
+        "total_value": 9999470.96,
+        "last_update": "2026-04-28"
       },
       "nav_history": {
         "dates": [
@@ -6151,13 +6151,20 @@
           "summary": "午盘技术打分+70（均线多头+MACD正柱+OBV持续流入），但KDJ的J=-7短线动能弱+量能略缩，继续观察。止损(7%→24.19)安全(今日最低25.19)，止盈未触发(+20%→31.21)。",
           "detail": "【标的】000833.SZ 粤桂股份 当前价25.64(04/24午盘)\n\n【风控检查】\n入场均价=26.01 | 浮亏=-1.42% | 止损线=24.19(-7%) → 今日最低25.19, 距止损仅1.00元, 安全 | 止盈线=31.21(+20%), 距今日最高26.60尚远, 未触发\n\n【趋势】+30\n  MA5=25.88 > MA10=25.20 > MA20=25.03 > MA60=24.06, 多头排列\n  当前价25.64略低于MA5(25.88), 价格在均线组上方摩擦\n  BOLL(20): 上轨26.98 中轨25.03 下轨23.09, 位置约66%偏上\n\n【动量】+20\n  MACD: DIF=0.245 > DEA=0.162 (零轴上方), HIST=+0.083正柱放大, 多头动能\n  RSI6=64.9, 中性偏强未超买(80以下), RSI12=61\n  KDJ: K=68(中性) D=35(偏低) J=-7(负值=短线偏空信号待修复)\n\n【量价】+10\n  当前量3967手, 5日均4187手, 20日均4364手, 量能略有缩减\n  OBV=9,267,909(高位), 近5日激增+6,948,032, 资金持续有力流入, 抵消量缩担忧\n\n【早盘验证】+5\n  04/24早盘高开已回落, 收盘回正至+2.68%, 未破前日低点24.54\n  颈线24.50支撑确认, 日线收小阳线(长下影到下轨25.19)\n\n【信号统计】+10\n  近5日新买信号: 4 (MA5上穿4/17, MACD金叉4/20等)\n  近5日新卖信号: 2 (MA5下穿4/7等)\n  信号面4:2偏多\n\n【扣分因素】\n  量能缩减 -5 (5日均减少6%, 若无放量, 上攻乏力)\n  KDJ J=-7 -10 (短线动能偏弱, 价格小幅回落可能)\n\n【综合打分】+70\n  趋势(+30) + 动量(+20) + 量价(+10) + 早盘验证(+5) + 信号面(+10) + 量能(-5) + KDJ(-10)\n\n【操作理由】\n综合+70分, 技术面整体偏多。均线多头+MACD+OBV持续性良好。但J值负、缩量警告短线动能不足。已有仓位(50%虚拟仓=15,000股@26.01), 等量缩止跌或KDJ修正后再择机加仓。周五流动性一般, 持守不动。",
           "recommendation": "HOLD — 技术面偏多(+70), 继续观察。止损安全(距止损1.00元)。绿色量能(OBV持续增长)是主要支撑信号。关注14:00后尾盘放量情况, 若尾盘放量上攻突破26.60(今日最高), 可考虑下周一加仓。"
+        },
+        {
+          "date": "2026-04-28",
+          "action": "hold",
+          "summary": "技术猎手午盘分析(4/28 13:30): 双标的全数突破BOLL上轨但放量分化显著。粤桂+40分续持(KDJ J=94.6超买区+BOLL突破+均线多头)；豪威+50分续持(MACD金叉+但RSI=80.9超买+BOLL突破关键支撑104)。两标的浮盈浮亏均在安全区间，未触发7%止损或+20%止盈，继续持有观望。",
+          "detail": "【标的1】粤桂股份 000833.SZ 现价27.74 持仓+6.65%\n  均线: MA5=26.40>MA10=25.84>MA20=25.18>MA60=24.23 多头排列\n  MACD: DIF=0.362>DEA=-0.173 HIST=1.069(正柱) → 金叉多头完好\n  KDJ: K=81.4 D=74.8 J=94.6 → 超买区边缘(pre-overbought)\n  RSI6=66.7 中性偏强\n  BOLL: 上轨27.51 ⚡ 突破(27.74) → 回调压力大\n  量能: 5日均44万手 今日36万手(缩量)\n  早盘走势验证: 早盘冲高28.14后回落，收盘27.74(+0.02%)，冲高回落卖出信号\n  打分:+40(趋势+25 MACD+20 KDJ-5 量能-5 RSI+5)\n\n【标的2】豪威集团 603501.SH 现价104.12 持仓-0.49%\n  均线: MA5=98.10>MA10=95.62>MA20=94.70 多头，但MA60=107.52仍压顶\n  MACD: DIF=0.485>DEA=-3.246 HIST=7.46 → 极其强势的金叉\n  KDJ: K=69.5 D=55.5 J=97.5 → 高区接近超买\n  RSI6=80.9 → 超买区域 ⚠️\n  BOLL: 上轨101.87 ⚡ 突破(104.12) → 严重突破上轨，强烈回调信号\n  量能: 5日均33万手 今日42万手(放量) ⚠️ 放量突破BOLL上轨，需警惕冲顶\n  量化打分:+50(趋势+25 MACD+25 KDJ-5 量能+5)\n  隐患: 放量突破BOLL上轨+RSI超买，上影线压力大\n\n【风控检查】\n  粤桂: +6.65% → 未触发止盈(20%)/止损(-7%)\n  豪威: -0.49% → 未触发\n\n【早盘参考】\n  今日(4/28)未找到明确的早盘分析记录(早盘cron可能尚未运行)\n  午盘判断: 两标的BOLL突破上轨但量价配合分化，不宜追高加仓。",
+          "recommendation": "HOLD 双标的。整体仓位50%，继续持有。密切关注：①粤桂27.74(达BOLL上轨+KDJ Ju=94.6)，突破28.14可能加速但追高风险大；②豪威104.12 BOLL上轨101.87，放量突破需警惕回落至100下方。若尾盘14:30后放量突破28.50(粤桂)或放量突破106(豪威)可考虑下周一加仓。今日午盘保持中性偏多观察，不逆势操作。"
         }
       ],
       "rebalances": [],
       "stats": {
-        "total_return_pct": -0.04,
-        "annualized_return_pct": -4.69,
-        "max_drawdown_pct": 0.04,
+        "total_return_pct": -0.1,
+        "annualized_return_pct": -8.05,
+        "max_drawdown_pct": 0.1,
         "sharpe_ratio": 0,
         "calmar_ratio": 0,
         "win_rate": 0,
@@ -6181,10 +6188,10 @@
             "name": "招商银行",
             "volume": 100000,
             "avg_cost": 39.52,
-            "current_price": 39.38,
-            "market_value": 3938000.0,
-            "pnl": -14000.0,
-            "pnl_pct": -0.35,
+            "current_price": 39.37,
+            "market_value": 3937000.0,
+            "pnl": -15000.0,
+            "pnl_pct": -0.38,
             "entry_date": "2026-04-20"
           },
           "601318.SH": {
@@ -6192,10 +6199,10 @@
             "name": "中国平安",
             "volume": 35000,
             "avg_cost": 57.92,
-            "current_price": 57.78,
-            "market_value": 2022300.0,
-            "pnl": -4900.0,
-            "pnl_pct": -0.24,
+            "current_price": 57.51,
+            "market_value": 2012850.0,
+            "pnl": -14350.0,
+            "pnl_pct": -0.71,
             "entry_date": "2026-04-20"
           },
           "600519.SH": {
@@ -6203,10 +6210,10 @@
             "name": "贵州茅台",
             "volume": 500,
             "avg_cost": 1407.24,
-            "current_price": 1458.49,
-            "market_value": 729245.0,
-            "pnl": 25625.0,
-            "pnl_pct": 3.64,
+            "current_price": 1401.04,
+            "market_value": 700520.0,
+            "pnl": -3100.0,
+            "pnl_pct": -0.44,
             "entry_date": "2026-04-20"
           },
           "600887.SH": {
@@ -6214,15 +6221,15 @@
             "name": "伊利股份",
             "volume": 20000,
             "avg_cost": 25.39,
-            "current_price": 25.25,
-            "market_value": 505000.0,
-            "pnl": -2800.0,
-            "pnl_pct": -0.55,
+            "current_price": 25.27,
+            "market_value": 505400.0,
+            "pnl": -2400.0,
+            "pnl_pct": -0.47,
             "entry_date": "2026-04-20"
           }
         },
-        "total_value": 9994505.29,
-        "last_update": "2026-04-24"
+        "total_value": 9955730.29,
+        "last_update": "2026-04-28"
       },
       "nav_history": {
         "dates": [
@@ -6662,7 +6669,7 @@
         "total_return_pct": -0.05,
         "annualized_return_pct": -0.31,
         "max_drawdown_pct": 0.57,
-        "sharpe_ratio": -1.5,
+        "sharpe_ratio": -1.51,
         "calmar_ratio": -0.55,
         "win_rate": 0,
         "profit_loss_ratio": 0.0,
@@ -6740,10 +6747,10 @@
             "name": "苏泊尔",
             "volume": 20000,
             "avg_cost": 45.68,
-            "current_price": 47.46,
-            "market_value": 949200.0,
-            "pnl": 35600.0,
-            "pnl_pct": 3.9,
+            "current_price": 47.57,
+            "market_value": 951400.0,
+            "pnl": 37800.0,
+            "pnl_pct": 4.14,
             "entry_date": "2026-04-16",
             "max_pnl_pct": 3.9
           },
@@ -6770,8 +6777,8 @@
             "entry_date": "2026-04-24"
           }
         },
-        "total_value": 9913009.44,
-        "last_update": "2026-04-24"
+        "total_value": 9915209.44,
+        "last_update": "2026-04-28"
       },
       "nav_history": {
         "dates": [
@@ -11863,10 +11870,10 @@
       "rebalances": [],
       "stats": {
         "total_return_pct": -0.87,
-        "annualized_return_pct": -4.88,
+        "annualized_return_pct": -4.77,
         "max_drawdown_pct": 6.04,
         "sharpe_ratio": -0.39,
-        "calmar_ratio": -0.81,
+        "calmar_ratio": -0.79,
         "win_rate": 52.29,
         "profit_loss_ratio": 0.98,
         "total_trades": 242,
@@ -11890,15 +11897,15 @@
             "name": "泰慕士",
             "volume": 304100,
             "avg_cost": 35.77,
-            "current_price": 35.77,
-            "market_value": 10877657.0,
-            "pnl": 0.0,
-            "pnl_pct": 0.0,
+            "current_price": 31.47,
+            "market_value": 9570027.0,
+            "pnl": -1307630.0,
+            "pnl_pct": -12.02,
             "entry_date": "2026-04-24"
           }
         },
-        "total_value": 10919710.53,
-        "last_update": "2026-04-24"
+        "total_value": 9612080.53,
+        "last_update": "2026-04-28"
       },
       "trades": [
         {
@@ -12628,10 +12635,10 @@
       "latest_news": "2/27收盘：过热期(温度90)。涨停75/跌停0/炸板15。豫能控股7板弱封，金正大4板极弱封。空仓观望等退潮。",
       "stats": {
         "total_return_pct": 9.2,
-        "annualized_return_pct": 65.52,
+        "annualized_return_pct": 63.67,
         "max_drawdown_pct": 17.47,
-        "sharpe_ratio": 1.45,
-        "calmar_ratio": 3.75,
+        "sharpe_ratio": 1.44,
+        "calmar_ratio": 3.65,
         "win_rate": 55.56,
         "profit_loss_ratio": 0.65,
         "total_trades": 18,
@@ -12648,17 +12655,17 @@
       "description": "追踪市场热点新闻，挖掘受益标的，快进快出。3-5天周期，多热点分散持仓。",
       "portfolio": {
         "cash": 8372352.82,
-        "total_value": 9455017.82,
+        "total_value": 9418992.82,
         "positions": {
           "002881.SZ": {
             "code": "002881.SZ",
             "name": "美格智能",
             "volume": 26000,
             "avg_cost": 38.4,
-            "current_price": 39.5,
-            "market_value": 1027000.0,
-            "pnl": 28600.0,
-            "pnl_pct": 2.86,
+            "current_price": 38.22,
+            "market_value": 993720.0,
+            "pnl": -4680.0,
+            "pnl_pct": -0.47,
             "entry_date": "2026-04-09"
           },
           "688100.SH": {
@@ -12666,14 +12673,14 @@
             "name": "威胜信息",
             "volume": 1500,
             "avg_cost": 37.37,
-            "current_price": 37.11,
-            "market_value": 55665.0,
-            "pnl": -390.0,
-            "pnl_pct": -0.7,
+            "current_price": 35.28,
+            "market_value": 52920.0,
+            "pnl": -3135.0,
+            "pnl_pct": -5.59,
             "entry_date": "2026-04-15"
           }
         },
-        "last_update": "2026-04-24"
+        "last_update": "2026-04-28"
       },
       "trades": [
         {
@@ -13687,10 +13694,10 @@
       "latest_news": "3/9午盘扫描：AI+油气双热点爆发，首日观察不追高，计划明日分化后建仓",
       "stats": {
         "total_return_pct": -5.45,
-        "annualized_return_pct": -27.45,
+        "annualized_return_pct": -26.93,
         "max_drawdown_pct": 8.17,
-        "sharpe_ratio": -3.49,
-        "calmar_ratio": -3.36,
+        "sharpe_ratio": -3.45,
+        "calmar_ratio": -3.3,
         "win_rate": 29.41,
         "profit_loss_ratio": 0.44,
         "total_trades": 34,
@@ -13746,7 +13753,8 @@
       "2026-04-21",
       "2026-04-22",
       "2026-04-23",
-      "2026-04-24"
+      "2026-04-24",
+      "2026-04-28"
     ],
     "nav": [
       1.0,
@@ -13792,7 +13800,8 @@
       1.012843,
       1.019562,
       1.016737,
-      1.013134
+      1.013134,
+      1.012246
     ],
     "start_value": 4707.54
   },
@@ -13803,7 +13812,7 @@
         "name": "情绪战神",
         "emoji": "⚡",
         "total_return_pct": 9.2,
-        "sharpe_ratio": 1.45,
+        "sharpe_ratio": 1.44,
         "max_drawdown_pct": 17.47,
         "current_nav": 1.091971,
         "total_trades": 18,
@@ -13814,32 +13823,32 @@
         "name": "因子猎人",
         "emoji": "🔢",
         "total_return_pct": 6.31,
-        "sharpe_ratio": 1.0,
+        "sharpe_ratio": 0.99,
         "max_drawdown_pct": 13.91,
         "current_nav": 1.063103,
         "total_trades": 232,
         "rank": 2
       },
       {
-        "player_id": "trader",
-        "name": "技术猎手",
-        "emoji": "📊",
-        "total_return_pct": -0.04,
-        "sharpe_ratio": 0,
-        "max_drawdown_pct": 0.04,
-        "current_nav": 0.999619,
-        "total_trades": 1,
-        "rank": 3
-      },
-      {
         "player_id": "value",
         "name": "巴菲特门徒",
         "emoji": "🏛️",
         "total_return_pct": -0.05,
-        "sharpe_ratio": -1.5,
+        "sharpe_ratio": -1.51,
         "max_drawdown_pct": 0.57,
         "current_nav": 0.999451,
         "total_trades": 4,
+        "rank": 3
+      },
+      {
+        "player_id": "trader",
+        "name": "技术猎手",
+        "emoji": "📊",
+        "total_return_pct": -0.1,
+        "sharpe_ratio": 0,
+        "max_drawdown_pct": 0.1,
+        "current_nav": 0.999002,
+        "total_trades": 1,
         "rank": 4
       },
       {
@@ -13858,14 +13867,14 @@
         "name": "热点猎手",
         "emoji": "📰",
         "total_return_pct": -5.45,
-        "sharpe_ratio": -3.49,
+        "sharpe_ratio": -3.45,
         "max_drawdown_pct": 8.17,
         "current_nav": 0.945502,
         "total_trades": 34,
         "rank": 6
       }
     ],
-    "updated_at": "2026-04-24 15:22:43",
+    "updated_at": "2026-04-28 13:30:06",
     "benchmark_nav": 0.992552
   },
   "quant": {
