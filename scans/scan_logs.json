@@ -1,0 +1,48 @@
+[
+  {
+    "date": "2026-04-29",
+    "session": "daily_scan",
+    "status": "done_no_new_factor",
+    "data_refresh": {
+      "source": "auto (tencent fallback)",
+      "latest_date": "2026-04-28",
+      "rows_added": 998,
+      "note": "fintool全部失败, tencent fallback成功, 数据滞后2天"
+    },
+    "scan_results": {
+      "chinese_reports_topics": [
+        "方正金工-成交量激增时刻alpha(与vssignal重复)",
+        "华泰-AI量化当下与未来(宏观趋势, 无具体因子公式)",
+        "知乎-HIST合成因子中证1000有效(具体公式无法获取)",
+        "知乎-全市场对冲中证1000选股模型(不够具体)"
+      ],
+      "academic_papers_topics": [
+        "Monetary Policy Surprises cross-sectional return predictability (scientific direct, 理论性)",
+        "Dual peer effects cross-stock predictability (Sciencedirect, SSR 2600)",
+        "Autopilot Alpha: Anomalies Move (SSRN, 共同基金异象)"
+      ],
+      "selected_direction": "Dual Peer Effects - 同行跨股票预测"
+    },
+    "analysis": {
+      "decided": "skip_factor_construction",
+      "reason": "Dual Peer Effects方向有潜力(SSR论文, 新维度), 但无法在5分钟内获取完整构造公式(基于经济网络的peer index), 不满足严格复现条件, 决定今日记录日志跳过",
+      "current_factor_count": 15,
+      "coverage": [
+        "Liquidity(2)",
+        "Momentum(3)",
+        "Reversal(3)",
+        "Volatility(2)",
+        "Quality(2)",
+        "MICRO(9)",
+        "Sentiment(1)",
+        "Growth(1)"
+      ],
+      "missing_styles": [
+        "Value",
+        " macroeconomic/risk premium"
+      ]
+    },
+    "time_cost_min": 3,
+    "next_action": "明日扫描时获取Dual Peer Effects论文全文, 尝试实现peer factor"
+  }
+]
