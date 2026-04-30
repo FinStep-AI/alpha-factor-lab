@@ -1,24 +1,6 @@
 {
   "history": [
     {
-      "date": "20260415",
-      "zt_count": 57,
-      "dt_count": 8,
-      "zb_count": 24,
-      "max_streak": 5,
-      "temperature": 66,
-      "phase": "climax"
-    },
-    {
-      "date": "20260416",
-      "zt_count": 3,
-      "dt_count": 2,
-      "zb_count": 0,
-      "max_streak": 4,
-      "temperature": 33,
-      "phase": "startup"
-    },
-    {
       "date": "20260416",
       "zt_count": 80,
       "dt_count": 1,
@@ -269,6 +251,24 @@
       "max_streak": 1,
       "temperature": 30,
       "phase": "startup"
+    },
+    {
+      "date": "20260430",
+      "zt_count": 78,
+      "dt_count": 11,
+      "zb_count": 14,
+      "max_streak": 4,
+      "temperature": 69,
+      "phase": "climax"
+    },
+    {
+      "date": "20260430",
+      "zt_count": 79,
+      "dt_count": 11,
+      "zb_count": 14,
+      "max_streak": 4,
+      "temperature": 69,
+      "phase": "climax"
     }
   ],
   "updated": "20260430"

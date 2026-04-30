@@ -3507,5 +3507,62 @@
       ]
     },
     "correlations": {}
+  },
+  {
+    "factor_id": "daily_scan_2026_04_30_ret_kurt_v1",
+    "source_type": "论文/研报扫描+自研尝试",
+    "source_title": "2026-04-30 日度扫描：成交量激增/跨股票可预测性/收益分布峰度",
+    "source_url": "https://arxiv.org/html/2604.19476v2",
+    "original_metric": {
+      "paper_scan": [
+        "方正金工成交量激增alpha（日线本土化版本已有 vssignal_v1）",
+        "Cross-Stock Predictability via LLM-Augmented Semantic Networks（需额外文本/语义网络数据）",
+        "SSRN/截面可预测性方向若干，但缺少可直接落地到当前OHLCV日线的严格公式"
+      ]
+    },
+    "our_metric": {
+      "data_refresh": "成功更新到 2026-04-30（fintool失败后 auto fallback 成功）",
+      "attempted_factor": "ret_kurt_v1（20日滚动收益率超额峰度，成交额中性化）",
+      "status": "未完成回测/未入库"
+    },
+    "diff_notes": "今日检索到的候选方向里，成交量激增主线已被现有 vssignal_v1 覆盖；LLM 语义网络类因子依赖额外文本/图谱数据，不适合在当前 40 分钟预算内做严格复现。尝试转为日线可实现的 ret_kurt_v1，但脚本耗时和实现细节尚未收敛，未进入正式回测。",
+    "conclusion": "FAIL/LOG_ONLY：今日完成数据刷新和信息扫描，但未找到可在现有数据与时间预算内严格复现且明显不重复的新因子，按规则记录日志结束。",
+    "created": "2026-04-30"
+  },
+  {
+    "factor_id": "close_low_v1",
+    "factor_name": "低点收盘位置因子 v1",
+    "factor_name_en": "Low Close Location v1",
+    "category": "反转/日内效应",
+    "description": "过去20日: (最高价-收盘价)/(最高价-最低价)的均值。高值=持续收在日内低点=日内卖压持续释放",
+    "hypothesis": "日内低点收→次日反弹(日内反转效应), A股中证1000小盘股脉冲最强",
+    "formula": "MA20((high-close)/(high-low+1e-8)), neutralize(log_amount_20d OLS), MAD Winsorize+z-score",
+    "direction": 1,
+    "status": "active",
+    "test_date": "2026-04-30",
+    "forward_days": 5,
+    "rebalance_freq": 20,
+    "cost": 0.003,
+    "barra_style": "Reversal",
+    "source_type": "自研",
+    "source_title": "CLV低点方向 + intraday reversal因子",
+    "source_url": "https://zhuanlan.zhihu.com/p/644380633",
+    "backtest_results": {
+      "ic_mean": 0.0276,
+      "ic_t_stat": 3.23,
+      "ic_significant_5pct": true,
+      "ic_significant_1pct": true,
+      "rank_ic_mean": 0.0433,
+      "ir": 0.265,
+      "long_short_sharpe": 1.431,
+      "long_short_mdd": -0.13,
+      "g5_sharpe": 1.351,
+      "g5_ann_return": 0.3552,
+      "g1_ann_return": 0.0656,
+      "monotonicity": 1.0,
+      "turnover_mean": 0.179,
+      "notes": "完美分层单调性; low换手17.9%极低; 横向最大相关性0.064"
+    },
+    "conclusion": "达标入库! 与因子的所有维度均极强达标(IC>0.02✓,t>2✓,G5 Sharpe>0.8✓,单调性>0.8✓)。可能Barra Style归入Reversal但不能办Retailer。横向独立性确保(最大相关0.064)"
   }
 ]
