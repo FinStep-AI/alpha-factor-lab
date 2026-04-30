@@ -63,5 +63,69 @@
     },
     "diff_notes": "首次构造(vol_shock_mod_v1)用成交量异常日收益率均值：IC=0.003,t=0.18,Sharpe=-0.48。二次构造(VSS)用成交量激增日波动率：IC=-0.005,t=-0.87。原因分析：日内分钟级效应在日频完全消失，适度冒险是高频量价 microstructure 信号，日线OHLCV无法有效代理。",
     "conclusion": "不达标,因子在日频数据上无效非自身问题。原文IC=-8.89%极强的因子（基于分钟高频），其alpha主要来自intraday microstructure信号，日频OHLCV无法还原。建议：减少研究关注（除非未来获取分钟数据）。"
+  },
+  {
+    "factor_id": "vol_up_conc_v1",
+    "date": "2026-04-30",
+    "source_type": "自研(量价微观结构)",
+    "source_title": "涨日成交量集中度因子 — 上涨日volume占比更高=知情买入强",
+    "source_url": "",
+    "original_metric": "N/A (自研)",
+    "our_metric": {
+      "ic_mean": 0.0125,
+      "ic_t": 1.25,
+      "sharpe": 0.558,
+      "monotonicity": 0.8
+    },
+    "diff_notes": "IC=0.0125,t=1.25不显著, Sharpe=0.56<0.8。单调性0.8方向正确(G1=7.3%<G5=15.2%)但分层幅度弱。失败原因：量价同向时成交量占比高，但该信号在中证1000截面alpha太弱。",
+    "conclusion": "不达标,淘汰。信号方向正确但IC/Sharpe双不达标。"
+  },
+  {
+    "factor_id": "ret_ud_skew_v1",
+    "date": "2026-04-30",
+    "source_type": "自研(效应启发)",
+    "source_title": "涨跌分布不对称度因子 — 偏离均值的正负收益偏度",
+    "source_url": "",
+    "original_metric": "N/A (自研)",
+    "our_metric": {
+      "ic_mean": 0.0057,
+      "ic_t": 0.78,
+      "sharpe": -0.325,
+      "monotonicity": 0.0
+    },
+    "diff_notes": "完全失败。IC=0.006不显著,Sharpe=-0.32,多空总收益-9.52%。分层单调性0(G2最高-G5反而低)。说明涨跌分布不对称在20日前瞻期无选股力。",
+    "conclusion": "不达标,淘汰。因子逻辑失效,多空负收益。"
+  },
+  {
+    "factor_id": "turnover_skew_v1",
+    "date": "2026-04-30",
+    "source_type": "自研(流动性)",
+    "source_title": "换手率偏度因子 — 换手率序列的截面偏度",
+    "source_url": "",
+    "original_metric": "N/A (自研)",
+    "our_metric": {
+      "ic_mean": -0.0014,
+      "ic_t": -0.22,
+      "sharpe": 0.0835,
+      "monotonicity": 0.1
+    },
+    "diff_notes": "完全无信号。IC≈0,IC≈0,t=0,Sharpe=0.08,分层单调性0.1。资金流动动性分布偏度在截面无预测力。",
+    "conclusion": "不达标,淘汰。因子无信号。"
+  },
+  {
+    "factor_id": "vol_contract_v1",
+    "date": "2026-04-30",
+    "source_type": "自研(波动率)",
+    "source_title": "波动率收缩因子 — 20日vol-40日vol差值，收缩=利多",
+    "source_url": "",
+    "original_metric": "N/A (自研)",
+    "our_metric": {
+      "ic_mean": 0.0055,
+      "ic_t": 0.48,
+      "sharpe": 0.636,
+      "monotonicity": 0.9
+    },
+    "diff_notes": "单调性0.9方向正确(G1=6.6%<G5=18.6%),但IC=0.0055极弱,t=0.48不显著,Sharpe=0.64<0.8。失败原因:波动率收缩信号虽方向正确但强度低,交易成本后损耗超alpha。",
+    "conclusion": "不达标,暂淘汰。方向正确但IC/Sharpe双不达标,换手率83.5%太高。建议:拉长窗口(40d vs 120d)或与其他收缩特征复合后重测。"
   }
 ]

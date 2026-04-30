@@ -14027,8 +14027,17 @@
         "detail": "研报搜索5篇(方正金工适度冒险/BigQuant复现/知乎HIST模型等),二次试错均失败。适度冒险因子v1 IC=-0.0027,t=-0.55; v2改进中性化后 IC=-0.0028,t=-0.56,单调性=-0.3。根本原因:日线代替分钟级成交量激增定义太粗糙,截面中性化基准(成交额/市值)选择不当。建议下次fintool恢复后直接拉分钟级TICK数据重试。",
         "recommendation": "维持现有因子体系不变。增量性因子建议等待fintool恢复或基本面数据更新后再试。",
         "timestamp": "2026-04-28T09:04:50.307794"
+      },
+      {
+        "date": "2026-04-30",
+        "player": "quant",
+        "action": "daily_scan",
+        "summary": "因子猎人之每日扫描 | 2026-04-30\n数据刷新: K线已更新到2026-04-29(自动fallback tencent源)\n扫描方向: 研报(方正金工/量化选股2026)+论文(SSRN/高频A股/CVaR)+高频因子搜索\n─────────────────────────────────────────────────\n今日测试因子(4个,全部未达标):\n 1. vol_up_conc_v1 — 涨日成交量集中度 IC=0.0125 Sharpe=0.56不达标\n 2. ret_ud_skew_v1 — 涨跌分布不对称 IC=-0.001 Sharpe=-0.32方向错误\n 3. turnover_skew_v1 — 换手率偏度 IC≈0, 无信号\n 4. vol_contract_v1 — 波动率收缩 IC=0.0055 Sharpe=0.64 monotonicy=0.9\n─────────────────────────────────────────────────\n因子库: 28因子保持, 最强:\n  turnovel_level_v1 Sharpe=2.43 (Liquidity, 换手率水平v1)\n  tail_risk_cvar_v1 Sharpe=2.04 (尾部风险)\n  ma_disp_v1 Sharpe=2.26 (Momentum, 均线离散度v1)\n  ma_disp_v6 Sharpe=1.83 (Quality, 换手振幅效率)\n不足: Value/Size完全空缺; Idio Skewness待测。\n下一步: 测试EP/价值因子(需基本面数据强化), 或换手率相对坏格布检验。",
+        "detail": "{\"data_refreshed\": \"2026-04-29 (auto fallback tencent, 997条新增)\", \"factors_tested_count\": 4, \"factors_passed\": 0, \"factors_rejected\": [\"vol_up_conc_v1\", \"ret_ud_skew_v1\", \"turnover_skew_v1\", \"vol_contract_v1\"], \"library_count\": 28, \"library_strength_top3\": [\"turnover_level_v1(S=2.43,Liquidity)\", \"ma_disp_v1(S=2.26,Momentum)\", \"tail_risk_cvar_v1(S=2.04,尾部风险)\"], \"library_gaps\": [\"Value(PB/PE)\", \"Size\", \"Idiosyncratic Skewness\"], \"next_priority\": \"测试EP/盈利收益率因子（需扩展基本面数据）或特质偏度因子（论文方向）\"}",
+        "recommendation": "无新因子入库,因子库保持28个。继续等待机会,下次扫描聚焦加宽基本面数据维度。"
       }
-    ]
+    ],
+    "last_update": "2026-04-30"
   },
   "value": {
     "decisions": [
