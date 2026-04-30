@@ -2126,5 +2126,67 @@
     "nav_data": "output/vwr_dev_v1_20d/cumulative_returns.json",
     "ic_data": "output/vwr_dev_v1_20d/ic_series.json",
     "correlations": {}
+  },
+  {
+    "id": "roe_trend_quality_v1",
+    "name": "ROE时序趋势质量 v1",
+    "name_en": "ROE Trend Quality v1",
+    "category": "基本面/成长",
+    "description": "ROE时序趋势质量因子(β×R²反向): 过去12季度ROE线性回归斜率(R^×R²)，反转使用。β>0+强趋势 = 高ROE加速上升→未来稀释/均值回归→反向做空；β<0+强趋势 = ROE加速恶化→已充分预期→反转做多。反向逻辑：ROE趋势极强的股票市场已充分预期，超额补偿低反而在趋势温和/反转者。",
+    "hypothesis": "ROE趋势强度β×R²高的股票已被市场充分预期，超额收益在趋势中等/反转组更高。反向使用：高趋势强度=已定价→后续不足；低趋势强度=尚未充分反应→后续有补偿空间。",
+    "expected_direction": "反向（低ROE趋势β×R²值→高预期收益）",
+    "factor_type": "风险溢价/成长反转",
+    "formula": "neutralize(-(β_ROE×R²_12q), log_amount_20d)",
+    "direction": -1,
+    "stock_pool": "中证1000",
+    "period": "2025-05-15 ~ 2026-02-10",
+    "rebalance_freq": 20,
+    "forward_days": 20,
+    "cost": 0.002,
+    "rating": "★★★★ 强",
+    "nav_data": "output/roe_trend_quality_rev_20d/cumulative_returns.json",
+    "ic_data": "output/roe_trend_quality_rev_20d/ic_series.json",
+    "upgrade_notes": "v2: 全量扩展报告期→增加样本覆盖。核心逻辑：ROE时序趋势质量=β×R²，反转使用。IC=0.024(t=2.17)，LS Sharpe=1.41，MDD仅-3.3%，G5 Sharpe=2.81。单调性0.7，G2/G3中段略有起伏，待数据延长后优化。",
+    "lessons_learned": [
+      "ROE时序斜率β×趋势拟合度R²，反向使用在中证1000有显著alpha",
+      "基本面数据频次低(季度)，因子生成本身需45天延迟，有效样本期约半年",
+      "单调性0.7仅在中间G2/G3分层有噪音，G1/G5分层清晰(G1=38%,G5=88%)",
+      "调仓频率(fwd:20d, rb:20d)组合在当前样本下最优，换手率8%低频友好",
+      "低IC_p值(0.055)临界，稳定复现需延长数据至2026年Q1+Q2后验证"
+    ],
+    "created": "2026-04-30",
+    "updated": "2026-04-30",
+    "metrics": {
+      "ic_mean": 0.02345893663853311,
+      "ic_std": 0.037388141927509916,
+      "ic_t": 2.1668640019459127,
+      "ic_positive_ratio": 0.7272727272727273,
+      "rank_ic": 0.029263885109705078,
+      "ir": 0.6274432327772941,
+      "ic_count": 11,
+      "long_short_sharpe": 1.4114172779975815,
+      "long_short_mdd": -0.033102226473052956,
+      "monotonicity": 0.7,
+      "group_sharpe": [
+        2.2159775237463695,
+        1.6462534478109434,
+        1.8762935728700578,
+        2.2485181905000737,
+        2.8096794845760824
+      ],
+      "group_returns_annualized": [
+        0.38877155348612535,
+        0.283465901195733,
+        0.351009625957144,
+        0.44132466204697907,
+        0.8844153162953681
+      ]
+    },
+    "barra_style": "Growth",
+    "source_type": "自研",
+    "source_title": "ROE时序趋势质量 — β×R²反向因子",
+    "source_url": "",
+    "conclusion": "反向因子：高ROE时序趋势（β×R²）→ 已充分预期→后续收益低；低ROE时序趋势→市场未充分反应→后续收益高。IC=0.024(t=2.17), LS Sharpe=1.41, MDD=-3.3%, G5 Sharpe=2.81。为中证1000提供ROE时序维度alpha，中档单调性0.7。",
+    "correlations": {}
   }
 ]
