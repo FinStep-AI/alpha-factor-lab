@@ -3606,5 +3606,87 @@
       "conclusion": "因子方向性信号清晰（t统计&IC均显著），但单因子复现指标未完整通过入库门槛。需进一步优化构造逻辑（如用60d窗口、换log(volume)替代pct_chg、引入波动率协调整）后重新测试。"
     },
     "conclusion": "方向性信号确认，但不达门槛——不入库，继续优化"
+  },
+  {
+    "date": "2026-05-01",
+    "source_type": "网络检索",
+    "source_title": "主力资金因子再分析 / 资金流因子 A股 量化选股 主力资金 净流入",
+    "source_url": "https://zhuanlan.zhihu.com/p/588017897",
+    "factor_id": "ifi_v1",
+    "factor_name": "日内资金流不均衡因子",
+    "source_factor_concept": "用 sign(close-open) × amount 近似日内净资金流，考察过去20日方向性积累强度",
+    "original_metric": {
+      "note": "参考资料强调大单净占比/主力资金净流入方向可能具备选股能力，但未给出可直接复刻的中证1000日频指标阈值"
+    },
+    "our_metric": {
+      "best_config": {
+        "fwd": 5,
+        "rebalance": 5,
+        "groups": 5,
+        "sorted": "原方向"
+      },
+      "ic_mean": -0.0205,
+      "ic_t": -3.17,
+      "long_short_sharpe": -0.8915,
+      "monotonicity": -0.5,
+      "total_long_short": -0.3019,
+      "annualized_long_short": -0.1017,
+      "turnover": 0.4834,
+      "group_returns": [
+        0.0429,
+        0.0066,
+        0.0602,
+        0.0191,
+        -0.0487
+      ]
+    },
+    "diff_notes": {
+      "IC_FAIL": "IC均值=-0.0205，方向显著为负，不符合正向入库门槛",
+      "SHARPE_FAIL": "G5端收益为负，多空Sharpe=-0.89，交易后表现较差",
+      "MONOTONICITY_FAIL": "单调性=-0.50，分层断裂明显，G3收益最高而非G5",
+      "hypothesis": "日内资金流 proxy 过于粗糙，sign(close-open) × amount 更像短期反转/噪声信号；且未区分跳空、趋势日与尾盘驱动",
+      "next_step": "后续可尝试引入 CLV/振幅/波动率协同过滤，或改成资金流背离而非绝对水平"
+    },
+    "conclusion": "不达门槛——淘汰，不入库"
+  },
+  {
+    "factor_id": "bp_rank_v1",
+    "name": "BP Rank v1 (淘汰)",
+    "category": "基本面/价值",
+    "test_date": "2026-05-01",
+    "test_period": "2022-10-27 ~ 2026-04-30",
+    "description": "BPS/close经截面Rank变换后成交额中性化。目标: 价值因子，Barra Value风格",
+    "metrics_5d": {
+      "ic_mean": 0.0058,
+      "ic_t": 0.6,
+      "rank_ic": 0.0308,
+      "long_short_sharpe": 0.148,
+      "monotonicity": 0.9,
+      "g5_ann_return": 0.2135,
+      "g1_ann_return": 0.1486,
+      "cost": 0.003,
+      "rebalance_freq": 20
+    },
+    "metrics_20d": {
+      "ic_mean": 0.0066,
+      "ic_t": 0.42,
+      "rank_ic": 0.037,
+      "long_short_sharpe": 0.149,
+      "monotonicity": 0.9,
+      "g5_ann_return": 0.2175,
+      "g1_ann_return": 0.1521,
+      "cost": 0.002,
+      "rebalance_freq": 20
+    },
+    "threshold_check": {
+      "ic_mean_gt_002": false,
+      "ic_t_gt_20": false,
+      "g5_sharpe_gt_08": false,
+      "monotonicity_gt_08": true
+    },
+    "result": "淘汰_IC极弱",
+    "reason": "单调性0.9达标，但IC均值仅0.0058-0.0066，t值0.4-0.6完全不显著，多空Sharpe=0.15远低于阈值0.8。季报BPS数据低频导致截面因子信号过弱。BP价值因子逻辑方向一致（G5=21.5%>G1=15%），但强度严重不足。",
+    "barra_style": "Value",
+    "direction": "正向（高BP=高收益，G5>G1）"
   }
 ]
