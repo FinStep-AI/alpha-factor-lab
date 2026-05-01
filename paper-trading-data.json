@@ -6,7 +6,7 @@
     "benchmark": "000300",
     "benchmark_name": "沪深300",
     "created_at": "2026-02-23 22:14:25",
-    "updated_at": "2026-05-01 15:11:16",
+    "updated_at": "2026-05-01 15:15:01",
     "status": "active",
     "players_count": 6
   },
@@ -160,7 +160,8 @@
           "2026-04-27",
           "2026-04-28",
           "2026-04-29",
-          "2026-04-30"
+          "2026-04-30",
+          "2026-05-01"
         ],
         "nav": [
           1.012459,
@@ -210,6 +211,7 @@
           1.063103,
           1.066157,
           1.061043,
+          1.059237,
           1.059237
         ],
         "cash_pct": [
@@ -260,6 +262,7 @@
           68.19,
           68.0,
           68.33,
+          68.44,
           68.44
         ]
       },
@@ -5810,10 +5813,10 @@
       ],
       "stats": {
         "total_return_pct": 5.92,
-        "annualized_return_pct": 26.76,
+        "annualized_return_pct": 26.15,
         "max_drawdown_pct": 13.91,
-        "sharpe_ratio": 0.89,
-        "calmar_ratio": 1.92,
+        "sharpe_ratio": 0.87,
+        "calmar_ratio": 1.88,
         "win_rate": 37.12,
         "profit_loss_ratio": 1.88,
         "total_trades": 232,
@@ -6098,7 +6101,8 @@
           "2026-04-27",
           "2026-04-28",
           "2026-04-29",
-          "2026-04-30"
+          "2026-04-30",
+          "2026-05-01"
         ],
         "nav": [
           1.0,
@@ -6106,7 +6110,8 @@
           0.999002,
           0.998192,
           0.98985,
-          0.961032
+          0.961032,
+          0.961016
         ],
         "cash_pct": [
           100.0,
@@ -6114,7 +6119,8 @@
           49.0,
           49.04,
           51.63,
-          1.4
+          1.4,
+          2.33
         ]
       },
       "trades": [
@@ -6356,9 +6362,9 @@
       "rebalances": [],
       "stats": {
         "total_return_pct": -3.9,
-        "annualized_return_pct": -81.16,
+        "annualized_return_pct": -76.11,
         "max_drawdown_pct": 3.9,
-        "sharpe_ratio": -11.4,
+        "sharpe_ratio": -10.02,
         "calmar_ratio": 0,
         "win_rate": 100.0,
         "profit_loss_ratio": 0,
@@ -6473,7 +6479,8 @@
           "2026-04-27",
           "2026-04-28",
           "2026-04-29",
-          "2026-04-30"
+          "2026-04-30",
+          "2026-05-01"
         ],
         "nav": [
           1.0,
@@ -6523,6 +6530,7 @@
           0.999451,
           0.998931,
           0.9962,
+          0.994651,
           0.994651
         ],
         "cash_pct": [
@@ -6573,6 +6581,7 @@
           28.01,
           28.03,
           28.11,
+          28.15,
           28.15
         ]
       },
@@ -6870,10 +6879,10 @@
       "rebalances": [],
       "stats": {
         "total_return_pct": -0.53,
-        "annualized_return_pct": -2.78,
+        "annualized_return_pct": -2.72,
         "max_drawdown_pct": 1.04,
         "sharpe_ratio": -2.96,
-        "calmar_ratio": -2.66,
+        "calmar_ratio": -2.6,
         "win_rate": 0,
         "profit_loss_ratio": 0.0,
         "total_trades": 4,
@@ -7021,7 +7030,8 @@
           "2026-04-27",
           "2026-04-28",
           "2026-04-29",
-          "2026-04-30"
+          "2026-04-30",
+          "2026-05-01"
         ],
         "nav": [
           1.0,
@@ -7071,6 +7081,7 @@
           0.991301,
           0.991281,
           0.991561,
+          0.989075,
           0.989075
         ],
         "cash_pct": [
@@ -7121,6 +7132,7 @@
           74.41,
           74.41,
           74.39,
+          82.42,
           82.42
         ]
       },
@@ -12086,10 +12098,10 @@
       "rebalances": [],
       "stats": {
         "total_return_pct": -1.09,
-        "annualized_return_pct": -5.6,
+        "annualized_return_pct": -5.49,
         "max_drawdown_pct": 6.04,
-        "sharpe_ratio": -0.47,
-        "calmar_ratio": -0.93,
+        "sharpe_ratio": -0.46,
+        "calmar_ratio": -0.91,
         "win_rate": 51.95,
         "profit_loss_ratio": 0.98,
         "total_trades": 243,
@@ -12569,7 +12581,8 @@
           "2026-04-27",
           "2026-04-28",
           "2026-04-29",
-          "2026-04-30"
+          "2026-04-30",
+          "2026-05-01"
         ],
         "nav": [
           1.0,
@@ -12619,6 +12632,7 @@
           1.091971,
           0.949044,
           0.930335,
+          0.92997,
           0.92997
         ],
         "cash_pct": [
@@ -12669,6 +12683,7 @@
           0.39,
           0.44,
           100.0,
+          69.99,
           69.99
         ]
       },
@@ -12898,10 +12913,10 @@
       "latest_news": "2/27收盘：过热期(温度90)。涨停75/跌停0/炸板15。豫能控股7板弱封，金正大4板极弱封。空仓观望等退潮。",
       "stats": {
         "total_return_pct": -7.0,
-        "annualized_return_pct": -31.69,
+        "annualized_return_pct": -31.16,
         "max_drawdown_pct": 17.47,
-        "sharpe_ratio": -0.59,
-        "calmar_ratio": -1.81,
+        "sharpe_ratio": -0.58,
+        "calmar_ratio": -1.78,
         "win_rate": 50.0,
         "profit_loss_ratio": 0.5,
         "total_trades": 20,
@@ -13695,7 +13710,8 @@
           "2026-04-27",
           "2026-04-28",
           "2026-04-29",
-          "2026-04-30"
+          "2026-04-30",
+          "2026-05-01"
         ],
         "nav": [
           1.0,
@@ -13745,7 +13761,8 @@
           0.945502,
           0.94179,
           0.94343,
-          0.899721
+          0.899721,
+          0.899537
         ],
         "cash_pct": [
           100.0,
@@ -13795,7 +13812,8 @@
           88.55,
           88.9,
           89.3,
-          88.71
+          88.71,
+          100.0
         ]
       },
       "decisions": [
@@ -14020,11 +14038,11 @@
       ],
       "latest_news": "3/9午盘扫描：AI+油气双热点爆发，首日观察不追高，计划明日分化后建仓",
       "stats": {
-        "total_return_pct": -10.03,
-        "annualized_return_pct": -42.58,
-        "max_drawdown_pct": 11.49,
-        "sharpe_ratio": -4.11,
-        "calmar_ratio": -3.71,
+        "total_return_pct": -10.05,
+        "annualized_return_pct": -41.99,
+        "max_drawdown_pct": 11.51,
+        "sharpe_ratio": -4.08,
+        "calmar_ratio": -3.65,
         "win_rate": 30.0,
         "profit_loss_ratio": 0.29,
         "total_trades": 38,
@@ -14145,7 +14163,7 @@
         "name": "因子猎人",
         "emoji": "🔢",
         "total_return_pct": 5.92,
-        "sharpe_ratio": 0.89,
+        "sharpe_ratio": 0.87,
         "max_drawdown_pct": 13.91,
         "current_nav": 1.059237,
         "total_trades": 232,
@@ -14167,7 +14185,7 @@
         "name": "趋势游侠",
         "emoji": "🏄",
         "total_return_pct": -1.09,
-        "sharpe_ratio": -0.47,
+        "sharpe_ratio": -0.46,
         "max_drawdown_pct": 6.04,
         "current_nav": 0.989075,
         "total_trades": 243,
@@ -14178,9 +14196,9 @@
         "name": "技术猎手",
         "emoji": "📊",
         "total_return_pct": -3.9,
-        "sharpe_ratio": -11.4,
+        "sharpe_ratio": -10.02,
         "max_drawdown_pct": 3.9,
-        "current_nav": 0.961032,
+        "current_nav": 0.961016,
         "total_trades": 6,
         "rank": 4
       },
@@ -14189,7 +14207,7 @@
         "name": "情绪战神",
         "emoji": "⚡",
         "total_return_pct": -7.0,
-        "sharpe_ratio": -0.59,
+        "sharpe_ratio": -0.58,
         "max_drawdown_pct": 17.47,
         "current_nav": 0.92997,
         "total_trades": 20,
@@ -14199,15 +14217,15 @@
         "player_id": "hotspot",
         "name": "热点猎手",
         "emoji": "📰",
-        "total_return_pct": -10.03,
-        "sharpe_ratio": -4.11,
-        "max_drawdown_pct": 11.49,
-        "current_nav": 0.899721,
+        "total_return_pct": -10.05,
+        "sharpe_ratio": -4.08,
+        "max_drawdown_pct": 11.51,
+        "current_nav": 0.899537,
         "total_trades": 38,
         "rank": 6
       }
     ],
-    "updated_at": "2026-05-01 14:30:02",
+    "updated_at": "2026-05-01 15:15:01",
     "benchmark_nav": 0.992552
   },
   "quant": {
