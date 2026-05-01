@@ -3564,5 +3564,47 @@
       "notes": "完美分层单调性; low换手17.9%极低; 横向最大相关性0.064"
     },
     "conclusion": "达标入库! 与因子的所有维度均极强达标(IC>0.02✓,t>2✓,G5 Sharpe>0.8✓,单调性>0.8✓)。可能Barra Style归入Reversal但不能办Retailer。横向独立性确保(最大相关0.064)"
+  },
+  {
+    "date": "2026-05-01",
+    "source_type": "券商研报",
+    "source_title": "国金证券-高频因子跟踪：价格区间因子表现优异（2026-04-30）",
+    "source_url": "https://finance.sina.com.cn/money/fund/jjgsgd/2026-04-30/doc-inhwhraf1293349.shtml",
+    "factor_id": "pvdiv_corr_v1",
+    "factor_name": "量价背离度因子",
+    "source_factor_concept": "国金CorrPV因子（价格与快照成交量皮尔逊相关，背离→看涨）",
+    "original_metric": {
+      "note": "国金研报未给日频具体数字，仅给周频中性化后IC均值=6.27%、SHARPE=4.08"
+    },
+    "our_metric": {
+      "best_config": {
+        "fwd": 20,
+        "rebalance": 20,
+        "groups": 5,
+        "sorted": "取相反数"
+      },
+      "ic_mean": 0.0487,
+      "ic_t": 3.29,
+      "long_short_sharpe": 0.68,
+      "monotonicity": 0.7,
+      "total_long_short": 0.27,
+      "annualized_long_short": 0.071,
+      "turnover": 0.79,
+      "group_returns": [
+        0.052,
+        0.118,
+        0.148,
+        0.217,
+        0.126
+      ]
+    },
+    "diff_notes": {
+      "IC_OK": "IC均值=0.049 > 0.02 ✓ | t=3.29 > 2.0 ✓",
+      "SHARPE_FAIL": "Sharpe=0.68 < 0.8 ✗",
+      "MONOTONICITY_FAIL": "单调性=0.70 < 0.8 ✗，G4(21.7%)>G5(12.6%)导致层级断裂",
+      "turnovers_warn": "换手率=79%过高，增加摩擦成本",
+      "conclusion": "因子方向性信号清晰（t统计&IC均显著），但单因子复现指标未完整通过入库门槛。需进一步优化构造逻辑（如用60d窗口、换log(volume)替代pct_chg、引入波动率协调整）后重新测试。"
+    },
+    "conclusion": "方向性信号确认，但不达门槛——不入库，继续优化"
   }
 ]
