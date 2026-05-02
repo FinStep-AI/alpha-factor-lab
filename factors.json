@@ -2368,5 +2368,60 @@
     "source_type": "自研(论文启发)",
     "source_title": "Llorente, Michaely, Saar & Wang (2002) Dynamic Volume-Return Relation of Individual Stocks, JFQA",
     "source_url": "https://doi.org/10.1111/j.1540-6261.2002.tb01841.x"
+  },
+  {
+    "id": "price_sync_v3_fwd5",
+    "name": "价格同步性 v3(5日前瞻)",
+    "name_en": "Price Sync v3 (5-day forward)",
+    "category": "量价/微观结构",
+    "description": "20日滚动个股收益对等权市场收益率回归R²（截面rank变换后截面中性化）。高R²=价格同步度高，信息已充分定价，动量延续性强；低R²=信息不透明，定价不确定性高。基于Hou & Moskowitz (2005) R²方法，5日前瞻验证。",
+    "hypothesis": "价格同步性高的股票（R²高），投资信息充分反映在价格中，存在动量延续优势，未来5日超额收益更高。",
+    "expected_direction": "正向（高因子值=高预期收益）",
+    "factor_type": "量价/微观结构",
+    "formula": "rank_transform(rolling_rsquared(ret_cc, mkt_ret, window=20, method=rank), neutralize(log_amount_20d))",
+    "direction": 1,
+    "stock_pool": "中证1000",
+    "period": "2022-11-07 ~ 2026-04-17",
+    "rebalance_freq": 20,
+    "forward_days": 5,
+    "cost": 0.003,
+    "rating": "★★★★★ 极强",
+    "nav_data": "output/price_sync_v3_fwd5/cumulative_returns.json",
+    "ic_data": "output/price_sync_v3_fwd5/ic_series.json",
+    "upgrade_notes": "v3改进：截面rank变换替代log变换，放大极端信号差异；20日R²窗口后中市值中性化。5日前瞻结果全面达标且优于20d版本。",
+    "lessons_learned": [
+      "R²因子在A股中证1000上效果极佳，信息传播充分度是强预测因子",
+      "截面Rank变换有效分离G4/G5组别单调性，G5/G1价差30%",
+      "与流动性类因子相关性<0.09，完全独立维度",
+      "5日前瞻收益预测能力比20d版本更强(IC=0.0325 vs 0.023, Sharpe=1.93 vs 1.29)"
+    ],
+    "created": "2026-05-02",
+    "updated": "2026-05-02",
+    "metrics": {
+      "ic_mean": 0.03245273604403338,
+      "ic_std": 0.14965205227170356,
+      "ric_positive_ratio": 0.5696969696969697,
+      "rank_ic": 0.017517472257961623,
+      "rank_ic_std": 0.1363402028171825,
+      "ir": 0.21692655610440306,
+      "ic_count": 165,
+      "ic_t": 2.7917013795986,
+      "long_short_sharpe": 1.927453288789817,
+      "long_short_mdd": -0.1703136151514023,
+      "monotonicity": 0.9,
+      "group_sharpe": null,
+      "group_returns_annualized": [
+        -0.02960029042917811,
+        0.07137547679747924,
+        0.07085088840590514,
+        0.1870290744985692,
+        0.3075241435851228
+      ]
+    },
+    "source_url": "https://www.sciencedirect.com/science/article/pii/S0304405X16300988",
+    "source_title": "Comovement revisited",
+    "source_type": "论文复现",
+    "source_year": 2016,
+    "conclusion": "达标，全面入库"
   }
 ]

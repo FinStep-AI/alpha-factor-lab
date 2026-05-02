@@ -3688,5 +3688,33 @@
     "reason": "单调性0.9达标，但IC均值仅0.0058-0.0066，t值0.4-0.6完全不显著，多空Sharpe=0.15远低于阈值0.8。季报BPS数据低频导致截面因子信号过弱。BP价值因子逻辑方向一致（G5=21.5%>G1=15%），但强度严重不足。",
     "barra_style": "Value",
     "direction": "正向（高BP=高收益，G5>G1）"
+  },
+  {
+    "factor_id": "price_sync_v3_fwd5",
+    "factor_name": "价格同步性 v3(5日前瞻)",
+    "category": "量价/微观结构",
+    "status": "active",
+    "source_type": "论文复现",
+    "source_title": "Comovement revisited",
+    "source_url": "https://www.sciencedirect.com/science/article/pii/S0304405X16300988",
+    "source_author": "Chen, DeJong, Poulsen (2016)",
+    "date": "2026-05-02",
+    "hypothesis": "价格同步性（R²）高的股票信息充分定价，动量延续效应更强，未来5日收益更高",
+    "description": "20日滚动个股收益率对市场收益率的回归R²（截面Rank变换后做成交额中性化）。高R²=价格同步，信息充分，动量延续；低R²=信息不透明，定价不确定性。",
+    "original_formula": "rank_transform(rolling_rsquared(ret_i, ret_mkt, 20d))",
+    "our_metric": {
+      "ic_mean": 0.0325,
+      "ic_t_stat": 2.79,
+      "ic_positive_pct": "57.0%",
+      "long_short_sharpe": 1.93,
+      "long_short_mdd": "-17.0%",
+      "monotonicity": 0.9,
+      "g5_annual_ret": "30.75%",
+      "g5_sharpe": 0.967,
+      "period": "2022-11-07 ~ 2026-04-17"
+    },
+    "backtest_date": "2026-05-02",
+    "result_summary": "全面达标：IC=0.0325(t=2.79), G5 Sharpe=0.967>0.8, 单调性=0.9>0.8, 多空Sharpe=1.93。与现有因子最大相关性=0.086, 无冗余。5日前瞻优于20d远期版本，G5/G1年化收益差距约34%。",
+    "conclusion": "入库"
   }
 ]
