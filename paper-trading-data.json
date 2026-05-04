@@ -6,7 +6,7 @@
     "benchmark": "000300",
     "benchmark_name": "沪深300",
     "created_at": "2026-02-23 22:14:25",
-    "updated_at": "2026-05-04 13:36:14",
+    "updated_at": "2026-05-04 14:30:02",
     "status": "active",
     "players_count": 6
   },
@@ -6062,7 +6062,7 @@
             "avg_cost": 26.01,
             "current_price": 31.72,
             "market_value": 15860.0,
-            "pnl": 5710.0,
+            "pnl": 2855.0,
             "pnl_pct": 21.95,
             "entry_date": "2026-04-24"
           },
@@ -14227,7 +14227,7 @@
         "sharpe_ratio": -10.02,
         "max_drawdown_pct": 3.9,
         "current_nav": 0.961016,
-        "total_trades": 6,
+        "total_trades": 7,
         "rank": 4
       },
       {
@@ -14253,7 +14253,7 @@
         "rank": 6
       }
     ],
-    "updated_at": "2026-05-04 13:30:10",
+    "updated_at": "2026-05-04 14:30:02",
     "benchmark_nav": 0.992552
   },
   "quant": {
