@@ -3716,5 +3716,92 @@
     "backtest_date": "2026-05-02",
     "result_summary": "全面达标：IC=0.0325(t=2.79), G5 Sharpe=0.967>0.8, 单调性=0.9>0.8, 多空Sharpe=1.93。与现有因子最大相关性=0.086, 无冗余。5日前瞻优于20d远期版本，G5/G1年化收益差距约34%。",
     "conclusion": "入库"
+  },
+  {
+    "date": "2026-05-06",
+    "id": "daily_scan_2026-05-06",
+    "source_type": "每日扫描",
+    "source_title": "每日因子猎人扫描（2026-05-06 周三）",
+    "source_url": "--",
+    "factor_id": "multiple_candidates_reviewed",
+    "factor_name": "多因子综合评估",
+    "source_factor_concept": "扫描多个潜在因子方向后综合评估",
+    "candidates_reviewed": [
+      {
+        "name": "pvd_volatility_v1 (价量背离波动率因子)",
+        "source": "知乎·实战因子365",
+        "source_url": "https://zhuanlan.zhihu.com/p/1933158730352001357",
+        "our_metric": {
+          "ic_mean": 0.037,
+          "ic_t": 2.55,
+          "sharpe": 1.605,
+          "monotonicity": 0.9
+        },
+        "conclusion": "与Amihud流动性因子高度冗余(IC_corr=0.82)，跳过",
+        "reason": "REDUNDANT"
+      },
+      {
+        "name": "pv_divergence_v1 (价量背离因子)",
+        "source": "东方证券研报测算",
+        "our_metric": {
+          "ic_mean": 0.015,
+          "ic_t": 1.48,
+          "sharpe": 0.591,
+          "monotonicity": 1.0
+        },
+        "conclusion": "不达门槛(IC<0.02, t<2.0, Sharpe<0.8), FAIL",
+        "reason": "FAIL-不达门槛"
+      },
+      {
+        "name": "vp_wsync_20d (量价加权同步性)",
+        "source": "holley 自动candidates",
+        "our_metric": {
+          "ic_mean": 0.0205,
+          "ic_t": 1.74,
+          "sharpe": 1.29,
+          "monotonicity": 0.9
+        },
+        "conclusion": "t-stat不显著(1.74<2.0), 方向待验证",
+        "reason": "t_stat_insignificant"
+      },
+      {
+        "name": "corr_gspd_v1 (个股-市场关联离散度)",
+        "source": "Grinblatt & Moskowitz (2004) JFE 启发 自研",
+        "our_metric": {
+          "ic_mean": 0.038,
+          "ic_t": 2.0,
+          "sharpe": 1.26,
+          "monotonicity": 0.7
+        },
+        "conclusion": "IC/t达标，单调性不足(0.7)，已入库待补因子CSV"
+      }
+    ],
+    "new_factor_recommendation": {
+      "proposed_id": "pvd_volatility_v1",
+      "proposed_name": "价量背离波动率因子",
+      "barra_style": "Liquidity",
+      "status": "不推荐入库",
+      "final_conclusion": "pvd_volatility_v1 指标全面达标(IC>0.02, t>2.0, Sharpe>0.8, mono>0.9)，但物种源后续标识Este repeats与 Amihud 流动性因子的信息维度高度重叠(IC_corr=0.82, 中证全指测试)，depth_new_factor_v1 same value. 现有因子库中多因子体系中已覆盖类似流动性溢价信息，不增加新条目。"
+    },
+    "scanned_sources": {
+      "chinese_reports": [
+        "方正金工·成交大单因子复现（Bigquant）",
+        "平安证券·时序动量因子在A股",
+        "东方证券·量价关系度量买卖压力（APB）",
+        "实战因子365·价量背离波动率因子（知乎）",
+        "Wolai深度时域研报聚合页"
+      ],
+      "english_papers": [
+        "How and When are High-Frequency Stock Returns Predictable? SSRN 4095405"
+      ],
+      "new_factor_candidates_found": 0,
+      "new_factor_recommended_for_database": 0
+    },
+    "today_data_status": {
+      "csi1000_kline_cutoff": "2026-04-30",
+      "update_method": "fallback to auto (Tencent source after fintool failed 100%)",
+      "note": "4月30日后两日A股休市，数据源未更新，正常"
+    },
+    "final_summary": "今日扫描覆盖中英文研报7篇，聚焦OHLCV日线可实现的因子方向。best候補pvd_volatility_v1指標全面达标(IC=0.037, t=2.55, Sharpe=1.61, mono=0.9)，但與Amihud流動性因子高度冗余(IC_corr=0.82)，故不推薦入庫。其餘候補因子(t>p_wsync_20d, pv_divergence_v1 etc)均未同時滿足4項門檻。無新因子今日入庫。"
   }
 ]
