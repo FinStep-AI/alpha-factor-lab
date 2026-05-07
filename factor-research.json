@@ -3803,5 +3803,36 @@
       "note": "4月30日后两日A股休市，数据源未更新，正常"
     },
     "final_summary": "今日扫描覆盖中英文研报7篇，聚焦OHLCV日线可实现的因子方向。best候補pvd_volatility_v1指標全面达标(IC=0.037, t=2.55, Sharpe=1.61, mono=0.9)，但與Amihud流動性因子高度冗余(IC_corr=0.82)，故不推薦入庫。其餘候補因子(t>p_wsync_20d, pv_divergence_v1 etc)均未同時滿足4項門檻。無新因子今日入庫。"
+  },
+  {
+    "id": "vol_spike_continuation_v1",
+    "source_type": "研报复现+本土化失败",
+    "source_title": "成交量激增时刻蕴含的alpha信息 / 适度冒险因子（日线近似复现）",
+    "source_url": "",
+    "source_author": "方正金工等日线近似思路",
+    "source_year": 2025,
+    "source_journal": "金工研报",
+    "date": "2026-05-07",
+    "original_metric": {
+      "market": "A股/分钟级或更细颗粒度研究语境",
+      "period": "原文未直接给出中证1000日线版统一口径",
+      "ic_mean": null,
+      "sharpe": null,
+      "description": "原始思路强调成交量激增后的价格响应与信息扩散，通常依赖更细粒度成交/盘口数据；本次仅做日线严格近似。"
+    },
+    "our_metric": {
+      "market": "中证1000",
+      "period": "2024-10 ~ 2024-10",
+      "ic_mean": null,
+      "ic_t": null,
+      "sharpe": null,
+      "monotonicity": null,
+      "sample_days": 3,
+      "sample_stocks": 44
+    },
+    "diff_notes": "现成原型 `calc_vol_spike_continuation_v1.py` 按20日量能z-score、5日前瞻收益和20日滚动均值构造，但最终仅产出3个交易日、44只股票的有效样本，无法满足回测要求；同时现有因子 `vssignal_v1` 已覆盖‘放量后价格确认/成交量激增’主线，概念重合度高。",
+    "local_factor_id": "vol_spike_continuation_v1",
+    "conclusion": "不入库",
+    "status": "inactive"
   }
 ]

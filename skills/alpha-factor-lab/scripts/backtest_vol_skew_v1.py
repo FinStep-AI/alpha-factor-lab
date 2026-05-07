@@ -1,25 +1,26 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-因子: vol_skew_v1 — 收益率偏度因子
+因子: vol_skew_v1 — 波动率偏度因子
 ==========================================
-方向: 波动率/偏度
+方向: 波动率偏度（收益分布尾部不对称）
 
 构造:
-  1. 计算过去20日日收益率的偏度(skewness)
-  2. 成交额中性化(OLS)
-  3. 5%缩尾
-  4. 正向和反向都测试，取更优方向
+  1. 过去20日日收益率的 Fisher-Pearson 偏度
+  2. 成交额OLS中性化 + 5%截尾Winsorize
 
-逻辑:
-  收益率正偏(高偏度)的股票具有"彩票特征"——小概率大涨、
-  大概率微跌。散户偏好这类股票导致高估,后续收益差。
+逻辑 (反向):
+  正偏（右尾肥）= "彩票特征"，散户高估 → 后续收益差
+  负偏（左尾肥）= 频繁小涨偶尔大跌，风险溢价补偿 → 后续收益好
   
-  理论依据:
-  - Harvey & Siddique (2000): 收益率偏度是定价因子
-  - Boyer, Mitton & Vorkink (2010): 高预期偏度→低后续收益
-  - Bali, Cakici & Whitelaw (2011): MAX effect = 极端正收益→低后续
-  - A股散户占比高, 彩票偏好更强, 偏度效应可能更显著
+A股中证1000散户比例高，彩票偏好效应更强
+→ 高偏度（正偏）被高估 → 后续收益差
+→ 低偏度（负偏）后续收益好
+
+理论:
+  - Boyer, Mitton & Vorkink (2010) "Expected Idiosyncratic Skewness" RFS
+  - Bali, Cakici & Whitelaw (2011) "Maxing Out" JFE
+  - Harvey & Siddique (2000) Conditional Skewness → JFE
 """
 
 import json
@@ -40,13 +41,14 @@ REBALANCE_FREQ = 5
 N_GROUPS = 5
 COST = 0.003
 WINSORIZE_PCT = 0.05
-DATA_CUTOFF = "2026-03-17"
+DATA_CUTOFF = "2026-05-01"
 FACTOR_ID = "vol_skew_v1"
 
-BASE_DIR = Path(__file__).resolve().parent.parent.parent.parent
-DATA_PATH = BASE_DIR / "data" / "csi1000_kline_raw.csv"
-SCRIPTS_DIR = BASE_DIR / "skills" / "alpha-factor-lab" / "scripts"
-OUTPUT_DIR = BASE_DIR / "output" / FACTOR_ID
+SCRIPT_DIR = Path(__file__).resolve().parent
+PROJECT_ROOT = SCRIPT_DIR.parent.parent.parent
+DATA_PATH = PROJECT_ROOT / "data" / "csi1000_kline_raw.csv"
+SCRIPTS_DIR = PROJECT_ROOT / "skills" / "alpha-factor-lab" / "scripts"
+OUTPUT_DIR = PROJECT_ROOT / "output" / FACTOR_ID
 REPORT_PATH = OUTPUT_DIR / "backtest_report.json"
 
 # ────────────────── 数据加载 ──────────────────
@@ -65,30 +67,28 @@ log_amt = np.log(amount_piv.rolling(20).mean().clip(lower=1))
 
 dates = close_piv.index.tolist()
 stocks = close_piv.columns.tolist()
-print(f"   {len(dates)} 日, {len(stocks)} 股")
+print(f"   {len(dates)} 日, {len(stocks)} 股, 截至 {max(dates).strftime('%Y-%m-%d')}")
 
 # ────────────────── 因子构造 ──────────────────
-print(f"[2] 构造收益率偏度因子 (window={WINDOW})...")
+print(f"[2] 计算 {WINDOW}日收益率偏度...")
 
-# 使用rolling skewness
-# pandas rolling.skew() 计算的是 Fisher-Pearson 标准化矩系数
 factor_raw = ret_piv.rolling(WINDOW, min_periods=15).skew()
 
 print(f"   非空率: {factor_raw.notna().mean().mean():.2%}")
 print(f"   均值: {factor_raw.stack().mean():.4f}, std: {factor_raw.stack().std():.4f}")
 
 # ────────────────── 缩尾 ──────────────────
-print(f"[3] 缩尾 ({WINSORIZE_PCT*100:.0f}%)...")
+print(f"[3] 5%截尾Winsorize...")
 for date in dates:
     row = factor_raw.loc[date].dropna()
     if len(row) < 10:
         continue
-    lo = row.quantile(WINSORIZE_PCT)
-    hi = row.quantile(1 - WINSORIZE_PCT)
+    lo = row.quantile(0.05)
+    hi = row.quantile(0.95)
     factor_raw.loc[date] = factor_raw.loc[date].clip(lo, hi)
 
 # ────────────────── 中性化 ──────────────────
-print(f"[4] 成交额中性化 (OLS)...")
+print(f"[4] 成交额OLS中性化...")
 factor_neutral = factor_raw.copy()
 for date in dates:
     f = factor_raw.loc[date].dropna()
@@ -102,16 +102,13 @@ for date in dates:
     try:
         beta = np.linalg.lstsq(X, f_c, rcond=None)[0]
         factor_neutral.loc[date, common] = f_c - X @ beta
-    except:
+    except Exception:
         pass
 
-# ────────────────── 回测 ──────────────────
-print(f"[5] 回测: {N_GROUPS}组, {REBALANCE_FREQ}d调仓, {COST*100:.1f}%成本...")
+print(f"   中性化后均值: {factor_neutral.stack().mean():.5f}, std: {factor_neutral.stack().std():.5f}")
 
-common_dates = sorted(factor_neutral.dropna(how="all").index.intersection(ret_piv.dropna(how="all").index))
-common_stocks = sorted(factor_neutral.columns.intersection(ret_piv.columns))
-fa = factor_neutral.loc[common_dates, common_stocks]
-ra = ret_piv.loc[common_dates, common_stocks]
+# ────────────────── 回测 ──────────────────
+print(f"[5] 回测 ({N_GROUPS}组, {REBALANCE_FREQ}d调仓, {COST*100:.1f}%成本)...")
 
 sys.path.insert(0, str(SCRIPTS_DIR))
 from factor_backtest import (
@@ -119,26 +116,31 @@ from factor_backtest import (
     compute_metrics, save_backtest_data
 )
 
-print(f"[6] IC (forward={FORWARD_DAYS}d)...")
-# 正向
+common_dates = sorted(factor_neutral.dropna(how="all").index.intersection(ret_piv.dropna(how="all").index))
+common_stocks = sorted(factor_neutral.columns.intersection(ret_piv.columns))
+fa = factor_neutral.loc[common_dates, common_stocks]
+ra = ret_piv.loc[common_dates, common_stocks]
+
+# ────────────────── 方向确认 ──────────────────
+print(f"[6] 方向确认...")
 ic_pos = compute_ic_dynamic(fa, ra, FORWARD_DAYS, "pearson")
 rank_ic_pos = compute_ic_dynamic(fa, ra, FORWARD_DAYS, "spearman")
-gr_pos, tn_pos, hi_pos = compute_group_returns(fa, ra, N_GROUPS, REBALANCE_FREQ, COST)
-m_pos = compute_metrics(gr_pos, ic_pos, rank_ic_pos, tn_pos, N_GROUPS, holdings_info=hi_pos)
+gr_pos, tv_pos, hi_pos = compute_group_returns(fa, ra, N_GROUPS, REBALANCE_FREQ, COST)
+m_pos = compute_metrics(gr_pos, ic_pos, rank_ic_pos, tv_pos, N_GROUPS, holdings_info=hi_pos)
 
-# 反向
 fa_neg = -fa
 ic_neg = compute_ic_dynamic(fa_neg, ra, FORWARD_DAYS, "pearson")
 rank_ic_neg = compute_ic_dynamic(fa_neg, ra, FORWARD_DAYS, "spearman")
-gr_neg, tn_neg, hi_neg = compute_group_returns(fa_neg, ra, N_GROUPS, REBALANCE_FREQ, COST)
-m_neg = compute_metrics(gr_neg, ic_neg, rank_ic_neg, tn_neg, N_GROUPS, holdings_info=hi_neg)
+gr_neg, tv_neg, hi_neg = compute_group_returns(fa_neg, ra, N_GROUPS, REBALANCE_FREQ, COST)
+m_neg = compute_metrics(gr_neg, ic_neg, rank_ic_neg, tv_neg, N_GROUPS, holdings_info=hi_neg)
 
 pos_sh = m_pos.get("long_short_sharpe", 0) or 0
 neg_sh = m_neg.get("long_short_sharpe", 0) or 0
+pos_t = m_pos.get("ic_t_stat", 0) or 0
+neg_t = m_neg.get("ic_t_stat", 0) or 0
 
-print(f"[6b] 方向确认...")
-print(f"   正向Sharpe={pos_sh:.4f} (高偏度→高收益)")
-print(f"   反向Sharpe={neg_sh:.4f} (低偏度→高收益)")
+print(f"   正向Sharpe={pos_sh:.4f} (高偏度→高收益, t={pos_t:.2f})")
+print(f"   反向Sharpe={neg_sh:.4f} (低偏度→高收益, t={neg_t:.2f})")
 
 if neg_sh > pos_sh:
     direction = -1
@@ -146,44 +148,44 @@ if neg_sh > pos_sh:
     ic_series = ic_neg
     rank_ic_series = rank_ic_neg
     group_returns = gr_neg
-    turnovers = tn_neg
+    turnovers = tv_neg
     metrics = m_neg
     holdings_info = hi_neg
     fa_final = fa_neg
-    print(f"   → 使用反向 ✓ (高偏度被高估,低偏度后续更好)")
+    print(f"   → 反向胜 ✓ (彩票偏好效应 → 高偏度被高估 → 低偏度后续更好)")
 else:
     direction = 1
     direction_desc = "正向（高偏度=高预期收益）"
     ic_series = ic_pos
     rank_ic_series = rank_ic_pos
     group_returns = gr_pos
-    turnovers = tn_pos
+    turnovers = tv_pos
     metrics = m_pos
     holdings_info = hi_pos
     fa_final = fa
-    print(f"   → 使用正向 ✓")
+    print(f"   → 正向胜 ✓")
 
-# ────────────────── 也测20d调仓 ──────────────────
-print(f"[6c] 测试20d调仓周期...")
-gr_20d, tn_20d, hi_20d = compute_group_returns(fa_final, ra, N_GROUPS, 20, COST)
-ic_20d = compute_ic_dynamic(fa_final, ra, 20, "pearson")
-rank_ic_20d = compute_ic_dynamic(fa_final, ra, 20, "spearman")
-m_20d = compute_metrics(gr_20d, ic_20d, rank_ic_20d, tn_20d, N_GROUPS, holdings_info=hi_20d)
-sh_20d = m_20d.get("long_short_sharpe", 0) or 0
-print(f"   5d调仓 Sharpe={metrics.get('long_short_sharpe',0):.4f}")
-print(f"   20d调仓 Sharpe={sh_20d:.4f}")
-
-# 选用更好的调仓周期
-if sh_20d > (metrics.get("long_short_sharpe", 0) or 0) * 1.05:
+# ────────────────── 20d调仓测试 ──────────────────
+print(f"[6b] 测试20d调仓周期...")
+gr_20, tv_20, hi_20 = compute_group_returns(fa_final, ra, N_GROUPS, 20, COST)
+ic_20 = compute_ic_dynamic(fa_final, ra, 20, "pearson")
+rank_ic_20 = compute_ic_dynamic(fa_final, ra, 20, "spearman")
+m_20 = compute_metrics(gr_20, ic_20, rank_ic_20, tv_20, N_GROUPS, holdings_info=hi_20)
+sh_20 = m_20.get("long_short_sharpe", 0) or 0
+t_20 = m_20.get("ic_t_stat", 0) or 0
+print(f"   20d调仓: Sharpe={sh_20:.4f} t={t_20:.2f}")
+if sh_20 > (metrics.get("long_short_sharpe", 0) or 0) * 1.05:
     print(f"   → 20d调仓更优，切换")
-    group_returns = gr_20d
-    turnovers = tn_20d
-    metrics = m_20d
-    holdings_info = hi_20d
-    ic_series = ic_20d
-    rank_ic_series = rank_ic_20d
+    group_returns = gr_20
+    turnovers = tv_20
+    metrics = m_20
+    holdings_info = hi_20
+    ic_series = ic_20
+    rank_ic_series = rank_ic_20
     REBALANCE_FREQ = 20
     FORWARD_DAYS = 20
+else:
+    print(f"   → 保持5d调仓")
 
 # ────────────────── 相关性 ──────────────────
 print(f"[7] 与现有因子相关性...")
@@ -201,8 +203,8 @@ lower_sr = (np.minimum(close_piv, open_piv) - low_piv) / (high_piv - low_piv).cl
 shadow = (upper_sr - lower_sr).rolling(20, min_periods=10).mean()
 
 # Overnight momentum
-oret = open_piv / close_piv.shift(1) - 1
-iret = close_piv / open_piv - 1
+oret = (open_piv / close_piv.shift(1)).clip(lower=0.001, upper=2.0) - 1
+iret = (close_piv / open_piv).clip(lower=0.001, upper=2.0) - 1
 overnight_mom = oret.rolling(20, min_periods=10).sum() - iret.rolling(20, min_periods=10).sum()
 
 # CVaR
@@ -228,18 +230,27 @@ turnover_level = np.log(turnover_piv.rolling(20, min_periods=10).mean().clip(low
 amplitude_piv = df.pivot_table(index="date", columns="stock_code", values="amplitude")
 tae = np.log(turnover_piv.rolling(20, min_periods=10).mean().clip(lower=1e-8) / (amplitude_piv.rolling(20, min_periods=10).mean().clip(lower=0.01)))
 
+# vol_log60d
+vol_log60d = np.log(1 + ret_piv.rolling(60, min_periods=30).std())
+
 correlations = {}
-for name, other in [('amihud_illiq_v2', amihud_factor), ('shadow_pressure_v1', shadow),
-                     ('overnight_momentum_v1', overnight_mom), ('tail_risk_cvar_v1', cvar_df),
-                     ('neg_day_freq_v1', neg_freq), ('turnover_level_v1', turnover_level),
-                     ('tae_v1', tae)]:
+for name, other in [
+    ('amihud_illiq_v2', amihud_factor),
+    ('shadow_pressure_v1', shadow),
+    ('overnight_momentum_v1', overnight_mom),
+    ('tail_risk_cvar_v1', cvar_df),
+    ('neg_day_freq_v1', neg_freq),
+    ('turnover_level_v1', turnover_level),
+    ('tae_v1', tae),
+    ('vol_log60d_v4', vol_log60d),
+]:
     corrs = []
     for d in common_dates[::10]:
-        f1 = fa_final.loc[d].dropna()
-        f2 = other.loc[d].reindex(f1.index).dropna()
-        c = f1.index.intersection(f2.index)
+        val = fa_final.loc[d].dropna()
+        oth = other.loc[d].reindex(val.index).dropna()
+        c = val.index.intersection(oth.index)
         if len(c) > 50:
-            r, _ = sp_stats.spearmanr(f1[c], f2[c])
+            r, _ = sp_stats.spearmanr(val[c], oth[c])
             if not np.isnan(r):
                 corrs.append(r)
     avg = float(np.mean(corrs)) if corrs else 0
@@ -267,11 +278,11 @@ def nan_to_none(obj):
 
 report = {
     "factor_id": FACTOR_ID,
-    "factor_name": "收益率偏度 v1",
+    "factor_name": "波动率偏度 v1",
     "factor_name_en": "Return Skewness v1",
     "category": "波动率/偏度",
-    "description": f"过去{WINDOW}日日收益率偏度(Fisher-Pearson), 成交额中性化。衡量收益分布不对称性。",
-    "hypothesis": "高偏度(正偏)股票具有彩票特征, 被散户高估, 后续收益差(Boyer et al. 2010)。低偏度股票定价更合理, 后续收益好。",
+    "description": f"过去{WINDOW}日收益率Fisher-Pearson偏度, 成交额OLS中性化+5%截尾。衡量收益分布尾部不对称性(正偏=彩票特征, 负偏=风险暴露)。",
+    "hypothesis": "A股中证1000散户占比高, 彩票偏好效应显著: 正偏度(右尾肥)股票被散户追捧高估→后续收益差; 负偏度(左尾肥)股价风险补偿→后续收益好。",
     "formula": f"neutralize(skew(daily_ret, {WINDOW}), log_amount_20d)",
     "direction": direction,
     "direction_desc": direction_desc,
@@ -291,6 +302,17 @@ report = {
 with open(REPORT_PATH, "w", encoding="utf-8") as f:
     json.dump(nan_to_none(report), f, indent=2, ensure_ascii=False)
 
+# ────────────────── 因子CSV ──────────────────
+print(f"[8] 导出因子数据CSV...")
+factor_csv = PROJECT_ROOT / "data" / f"factor_{FACTOR_ID}.csv"
+rows = []
+for date in fa_final.index:
+    s = fa_final.loc[date].dropna()
+    for code, val in s.items():
+        rows.append({"date": date.strftime("%Y-%m-%d"), "stock_code": code, "factor_value": round(float(val), 6)})
+pd.DataFrame(rows).to_csv(factor_csv, index=False)
+print(f"   写入: {factor_csv} ({len(rows):,} 行)")
+
 # ────────────────── 摘要 ──────────────────
 ic_m = metrics.get("ic_mean", 0) or 0
 ic_t = metrics.get("ic_t_stat", 0) or 0
@@ -299,35 +321,39 @@ ls_md = metrics.get("long_short_mdd", 0) or 0
 mono = metrics.get("monotonicity", 0) or 0
 sig = "✓" if metrics.get("ic_significant_5pct") else "✗"
 
-print(f"\n{'='*60}")
-print(f"  {FACTOR_ID}: 收益率偏度因子")
+print(f"\n{'═'*64}")
+print(f"  {FACTOR_ID}: 波动率偏度因子 (Return Skewness)")
 print(f"  方向: {direction_desc}")
-print(f"{'='*60}")
+print(f"{'═'*64}")
 print(f"  区间:     {report['period']}")
-print(f"  股票:     {len(common_stocks)}")
-print(f"  IC均值:     {ic_m:.4f}  (t={ic_t:.2f}, {sig})")
-print(f"  Rank IC:    {metrics.get('rank_ic_mean', 0):.4f}")
-print(f"  IR:         {metrics.get('ir', 0):.4f}")
-print(f"  IC>0占比:   {metrics.get('ic_positive_pct', 0):.1%}")
-print(f"  IC观测数:   {metrics.get('ic_count', 0)}")
+print(f"  股票数:  {len(common_stocks)}")
+print(f"  IC均值:  {ic_m:.4f}   (t={ic_t:.2f}, {sig})")
+print(f"  Rank IC: {metrics.get('rank_ic_mean', 0):.4f}")
+print(f"  IR:      {metrics.get('ir', 0):.4f}")
+print(f"  IC>0占比:{metrics.get('ic_positive_pct', 0):.1%}")
+print(f"  IC观察数:{metrics.get('ic_count', 0)}")
 print(f"  多空Sharpe: {ls_sh:.4f}")
-print(f"  多空MDD:    {ls_md:.2%}")
-print(f"  单调性:     {mono:.4f}")
-print(f"  换手率:     {metrics.get('turnover_mean', 0):.2%}")
-print(f"{'─'*60}")
+print(f"  多空MDD:   {ls_md:.2%}")
+print(f"  单调性:    {mono:.4f}")
+print(f"  换手率:    {metrics.get('turnover_mean', 0):.2%}")
+print(f"{'─'*64}")
 print(f"  分层年化收益:")
 for i, r in enumerate(metrics.get("group_returns_annualized", []), 1):
     r_str = f"{r:.2%}" if r is not None else "N/A"
-    bar = "█" * max(int((r or 0) * 100), 0)
+    bar = "█" * max(int((r or 0) * 200), 0)
     print(f"    G{i}: {r_str}  {bar}")
 
-for key in sorted(group_returns.keys(), key=lambda x: str(x)):
-    cum = (1 + group_returns[key]).cumprod()
-    print(f"  {key} NAV: {cum.iloc[-1]:.4f}")
+print(f"{'─'*64}")
+print(f"  与入库因子相关性:")
+for name, corr in sorted(correlations.items()):
+    print(f"    vs {name}: {corr:.3f}")
 
-print(f"{'='*60}")
-is_valid = abs(ic_m) > 0.015 and abs(ic_t) > 2 and abs(ls_sh) > 0.5
-print(f"\n  ➤ 因子{'有效 ✓' if is_valid else '无效 ✗'}")
-print(f"  评估标准: |IC|>0.015, |t|>2, |Sharpe|>0.5")
+print(f"{'═'*64}")
+is_valid = abs(ic_m) > 0.015 and abs(ic_t) > 2 and abs(ls_sh) > 0.5 and mono >= 0.8
+print(f"\n  ➤ 因子{'✅ 有效' if is_valid else '❌ 无效'}")
+print(f"  标准: |IC|>0.015(|{ic_m:.4f}|>{'✓' if abs(ic_m)>0.015 else '✗'})")
+print(f"       |t|>2      (|{ic_t:.2f}|  {'✓' if abs(ic_t)>2 else '✗'})")
+print(f"       |Sharpe|>0.5({abs(ls_sh):.4f} {'✓' if abs(ls_sh)>0.5 else '✗'})")
+print(f"       单调性≥0.8 ({mono:.3f} {'✓' if mono>=0.8 else '✗'})")
 if is_valid:
-    print(f"  → 准备写入factors.json并git提交")
+    print(f"  → 入库: 写入 factors.json, git add+commit+push")

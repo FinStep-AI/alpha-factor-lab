@@ -385,5 +385,38 @@
       "ths": false
     },
     "chart": "charts/002594_consensus.png"
+  },
+  {
+    "date": "20260507",
+    "timestamp": "2026-05-07T09:29:08.287032",
+    "phase": "ferment",
+    "temperature": 51,
+    "zt": 7,
+    "dt": 0,
+    "zb": 0,
+    "seal_rate": 100.0,
+    "max_streak": 5,
+    "ladder": {
+      "5": 1,
+      "3": 1,
+      "2": 3,
+      "1": 2
+    },
+    "leaders": [
+      {
+        "code": "600379",
+        "name": "宝光股份",
+        "streak": 5,
+        "tags": [
+          "绝对龙头",
+          "秒板",
+          "一封不开"
+        ],
+        "score": 212.4,
+        "seal_ratio": 2.47
+      }
+    ],
+    "decision": "hold",
+    "action_detail": "已持仓宝光股份498100股(成本18.46)，发酵期满仓不动，明日低开>3%或未封板则止损"
   }
 ]
