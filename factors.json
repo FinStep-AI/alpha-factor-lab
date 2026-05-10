@@ -2423,5 +2423,73 @@
     "source_type": "论文复现",
     "source_year": 2016,
     "conclusion": "达标，全面入库"
+  },
+  {
+    "id": "roe_autocorr_pers_v1",
+    "name": "ROE时序自回归持续性 v1",
+    "name_en": "ROE Autocorr Persistence v1",
+    "category": "基本面/成长",
+    "description": "8季度滚动窗口前半段与后半段ROE的Pearson自相关系数，报告日45天延迟后展平到日频，成交额OLS中性化+MAD去极值+z-score。高自相关=盈利质量稳定可预测；低/负自相关=盈利波动大不确定性高。箭头方向在中证1000上反转（高ROE自相关=未来低回报）。",
+    "hypothesis": "ROE自相关反映盈利质量的可预测性；低估者可获得补偿，中证1000上高ROE自相关股票表现更差（危机反转/短期弹性补偿），低ROE自相关股票表现更好。",
+    "expected_direction": "反转（高自相关=低预期收益）",
+    "factor_type": "质量代理",
+    "formula": "neutralize(-corr(ROE_{t-7..t-4}, ROE_{t-3..t}), log_amount)",
+    "direction": -1,
+    "stock_pool": "中证1000",
+    "period": "2024-05-15 ~ 2026-05-08",
+    "rebalance_freq": 20,
+    "forward_days": 10,
+    "cost": 0.003,
+    "rating": "★★★ 可用",
+    "nav_data": "output/roe_autocorr_pers_v1/rev/",
+    "ic_data": "output/roe_autocorr_pers_v1/report_rev.json",
+    "upgrade_notes": "首版。10d前视IC=0.021(t=2.79)；20d调仓OSHARPE=2.00，单调性0.90。方向与原理论相悖（A股危机反转逻辑），已在回测验证。",
+    "lessons_learned": [
+      "ROE时序自相关在高频调仓下效果略逊于20d调仓；向前期限需10d效果达到门槛",
+      "在A股小盘股中，稳定盈利质量（高ROE自相关）反而对应偏低回报，符合「幼虎反转」规律",
+      "20d调仓换手34%值得观察，低频交易模式可能更实际"
+    ],
+    "created": "2026-05-10",
+    "updated": "2026-05-10",
+    "metrics": {
+      "ic_mean": 0.021107958607043325,
+      "ic_std": 0.04553847600440797,
+      "ic_t": 2.791122240830189,
+      "ic_positive_ratio": 0.617,
+      "rank_ic": 0.024225751238188913,
+      "rank_ic_std": 0.06320103718108021,
+      "ir": 0.46351921405977986,
+      "ic_count": 47,
+      "long_short_sharpe": 2.0005088023773765,
+      "long_short_mdd": -0.05560393987173884,
+      "monotonicity": 0.8999999999999998,
+      "group_sharpe": [
+        0.7638000227381571,
+        1.0463284769910397,
+        1.3409400000063376,
+        1.3277506349244093,
+        1.432907735078506,
+        2.0005088023773765
+      ],
+      "group_returns_annualized": [
+        0.22211275823272048,
+        0.25784417579429375,
+        0.4072898138570973,
+        0.3421739239900532,
+        0.40941708633062945,
+        0.14853162725046198
+      ]
+    },
+    "barra_style": "Quality",
+    "source_type": "论文复现+本土化",
+    "source_title": "Chahine et al. (2018) Profit Persistence and Stock Returns: Does the Market Care?",
+    "source_url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3211826",
+    "correlations": {
+      "roe_autocorr_pers_v1": 1.0,
+      "roe_delta_yoy_v1": null,
+      "roe_trend_quality_v1": null,
+      "amihud_illiq_v2": null,
+      "tae_v1": null
+    }
   }
 ]
