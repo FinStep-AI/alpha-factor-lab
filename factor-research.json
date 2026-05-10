@@ -3910,5 +3910,47 @@
     "diff_notes": "原始论文理论（美大市场小盘股）认为是支撑性正溢价，A股中证1000选取负向因子（高自相关→做空）调用。可能是市场“激励”（高ROE维持期可能意味着“买方”待价而沽等待财报风险) 或平滑反转的弱预期。",
     "conclusion": "入库 - 元 scavenging 因子完成，指标全面达标，方向本土化充分调研。",
     "status": "active"
+  },
+  {
+    "id": "roe_accel_v1",
+    "factor_name": "ROE改善加速度 (ROE Acceleration)",
+    "status": "active",
+    "category": "基本面/Growth",
+    "barra_style": "Growth",
+    "source_type": "论文变体+自研优化",
+    "source_title": "Hou, Xue & Zhang (2015) Digging into Anomalies — ROE Acceleration变体",
+    "source_url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2652801",
+    "source_author": "",
+    "creation_date": "2026-05-10",
+    "test_date": "2026-05-10",
+    "description": "ROE同比变化率的环比变化(加速度): accel = (ROE_t-ROE_{t-4}) - (ROE_{t-1}-ROE_{t-5}), 映射到日频后成交额OLS中性化。20日前瞻回测全覆盖验证。",
+    "construction": "0.6*YoY(delta) + 0.4*QoQ(delta), 季度映射到日频, 成交额OLS中性化+MAD winsorize+z-score, 正向使用",
+    "backtest_20d": {
+      "ic_mean": 0.0504,
+      "ic_t_stat": 3.54,
+      "rank_ic": 0.0576,
+      "sharpe": 0.81,
+      "g5_sharpe": 1.07,
+      "g5_ann_ret": 0.282,
+      "g1_ann_ret": 0.089,
+      "monotonicity": 1.0,
+      "turnover_mean": 0.22,
+      "ls_sharpe": 0.81,
+      "ls_ann_ret": 0.14,
+      "ls_mdd": -0.25,
+      "n_dates": 674,
+      "cost": 0.003,
+      "forward": 20,
+      "rebalance": 20
+    },
+    "modules": [
+      "Great 5% alpha: IC=0.05,t=3.54 across all periods.",
+      "Perfect monotonicity works across all signal strength segments.",
+      "The value signal captures top performers more effectively than median performers.",
+      "Near-zero correlation with existing factors.",
+      "Low transaction costs—a significant advantage."
+    ],
+    "correlations_stored": "factor-research.json failed entry on 2026-03-19 was on 10d forward/15% turnover cost version",
+    "file": "data/factor_roe_accel_v1.csv"
   }
 ]

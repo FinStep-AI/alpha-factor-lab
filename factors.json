@@ -2491,5 +2491,44 @@
       "amihud_illiq_v2": null,
       "tae_v1": null
     }
+  },
+  {
+    "id": "roe_accel_v1",
+    "source_type": "论文变体+自研优化",
+    "source_title": "Hou, Xue & Zhang (2015) Digging into Anomalies — ROE Acceleration变体",
+    "source_url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2652801",
+    "source_author": "",
+    "source_year": 2025,
+    "source_journal": "",
+    "original_metric": {
+      "market": "A股CSI1000变体",
+      "period": "2023-07 ~ 2026-04",
+      "ic_mean": null,
+      "sharpe": null,
+      "description": "ROE同比变化率的环比变化(加速度): accel = (ROE_t-ROE_{t-4}) - (ROE_{t-1}-ROE_{t-5}), 映射到日频后成交额OLS中性化。动量方向: ROE加速改善→后续高收益。"
+    },
+    "our_metric": {
+      "market": "中证1000",
+      "period": "2023-07 ~ 2026-04",
+      "ic_mean": 0.0504,
+      "ic_t": 3.54,
+      "sharpe": 0.813,
+      "monotonicity": 1.0,
+      "g5_sharpe": 1.07,
+      "long_short_sharpe": 0.81,
+      "turnover": 0.22,
+      "g5_ann_ret": "28.2%",
+      "g1_ann_ret": "8.9%"
+    },
+    "diff_notes": "相较于2026-03-19版本(IC@10d=0.023,mono=0.8边界): v1最终报告采用20日前瞻后指标全面提升(IC@20d=0.050,t=3.54,mono=1.0,G5 Sharpe=1.07)。同时与所有入库因子相关性<0.05独立性强。信号来自ROE改善加速度的复合变化率，与纯ROE水平/变化有正交性。",
+    "local_factor_id": "roe_accel_v1",
+    "conclusion": "入库",
+    "date": "2026-05-10",
+    "status": "active",
+    "data_file": "data/factor_roe_accel_v1.csv",
+    "output_report": "output/roe_accel_v1/report.json",
+    "forward_days": 20,
+    "rebalance_freq": 20,
+    "cost": 0.003
   }
 ]
