@@ -1,2 +1,2 @@
 - [ ] 🟢 长任务「nav_refresh_20260507_1101」已完成 (2026-05-07 11:01:17)，查看日志并汇报给孙瑞
-- [ ] 🔄 长任务「roe_autocorr_pers_v1_backtest」运行中
+- [x] 🟢 因子「roe_autocorr_pers_v1」挖掘入库完成 (IC=0.021, t=2.79, Sharpe=2.00, Mono=0.90)
