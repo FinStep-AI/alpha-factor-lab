@@ -4171,5 +4171,106 @@
       "period": "2022-10-26 ~ 2026-05-08"
     },
     "failure_reason": "IC=0.006(t=1.20)最弱。分层单调性0.9是亮点(LSS=1.23很好)，但IC线性预测力为零。换手率80%过高。"
+  },
+  {
+    "date": "2026-05-12",
+    "factor_id": "ctp_v1",
+    "factor_name": "下影线×收盘位置反转因子",
+    "status": "failed",
+    "reason": "IC=0.001(t=0.18)完全不显著，Sharpe=0.44，单调性=0.0。下影线*CLV乘积在截面无选股能力。",
+    "metrics": {
+      "ic_mean": 0.001,
+      "ic_t": 0.18,
+      "sharpe": 0.44,
+      "monotonicity": 0.0
+    },
+    "source": "cron:因子猎人午间挖矿"
+  },
+  {
+    "date": "2026-05-12",
+    "factor_id": "dev_skew_v1",
+    "factor_name": "MA20偏离度偏度因子",
+    "status": "failed",
+    "reason": "IC=-0.010(t=-1.71)不显著，Sharpe≈0，单调性=0.3，分层极不单调(G2=G3=G5≈13%, G1=12%, G4=12%)",
+    "metrics": {
+      "ic_mean": -0.0102,
+      "ic_t": -1.71,
+      "sharpe": 0.041,
+      "monotonicity": 0.3
+    },
+    "source": "cron:因子猎人午间挖矿"
+  },
+  {
+    "date": "2026-05-12",
+    "factor_id": "amt_accel_v1",
+    "factor_name": "成交额加速因子 (MA5/MA20-1)",
+    "status": "failed",
+    "reason": "IC=-0.021(t=-3.25)方向完全相反，Sharpe=-0.51，单调性=-0.7。资金快速放大的股票后续表现更差，存在反转。",
+    "metrics": {
+      "ic_mean": -0.0212,
+      "ic_t": -3.25,
+      "sharpe": -0.51,
+      "monotonicity": -0.7
+    },
+    "source": "cron:因子猎人午间挖矿"
+  },
+  {
+    "date": "2026-05-12",
+    "factor_id": "clv_ma20_v1",
+    "factor_name": "CLV水平因子 (20日均值收盘位置)",
+    "status": "failed",
+    "reason": "IC=-0.013(t=-1.80)不显著，Sharpe=-0.87，单调性=-0.3。20日CLV均值与未来5日收益呈显著负相关(收盘低位=后续更好)，与预期正方向相反。",
+    "metrics": {
+      "ic_mean": -0.0129,
+      "ic_t": -1.8,
+      "sharpe": -0.87,
+      "monotonicity": -0.3
+    },
+    "source": "cron:因子猎人午间挖矿"
+  },
+  {
+    "date": "2026-05-12",
+    "factor_id": "rsi20_v1",
+    "factor_name": "RSI(20日)反转因子",
+    "status": "failed",
+    "reason": "IC=-0.011(t=-1.25)不显著，Sharpe=-0.08，单调性=-0.6。换20日窗口后方向与14日一致(均失效)，A股中证1000中RSI(反转逻辑)完全无效。",
+    "metrics": {
+      "ic_mean": -0.0105,
+      "ic_t": -1.25,
+      "sharpe": -0.08,
+      "monotonicity": -0.6
+    },
+    "source": "cron:因子猎人午间挖矿"
+  },
+  {
+    "date": "2026-05-12",
+    "factor_id": "sturn_cv20_v1",
+    "factor_name": "换手率变异系数反向因子",
+    "status": "failed",
+    "reason": "IC=0.004(t=0.63)不显著，Sharpe=0.15，单调性=0.6，分层极弱(G4突出G5回落)。换手率稳定性的纯分布形状在截面上无选股能力。",
+    "metrics": {
+      "ic_mean": 0.0036,
+      "ic_t": 0.63,
+      "sharpe": 0.15,
+      "monotonicity": 0.6
+    },
+    "source": "cron:因子猎人午间挖矿"
+  },
+  {
+    "date": "2026-05-12",
+    "factor_id": "tcf_v1",
+    "factor_name": "成交额波动率系数反向因子",
+    "status": "borderline_not_in",
+    "reason": "接近但未达标：G5 Sharpe=0.775(缺0.025), Rank IC=0.021尚可，但IC_t=1.04<2.0。单调性=0.7(G3突出打破递增)。方向正确(G5=21%, G1=9%)，换手率84%过高。G5 Sharpe接近0.8门槛。",
+    "metrics": {
+      "ic_mean": 0.0059,
+      "ic_t": 1.04,
+      "rank_ic": 0.021,
+      "sharpe": 0.718,
+      "monotonicity": 0.7,
+      "g5_sharpe": 0.775,
+      "turnover": 0.8
+    },
+    "source": "cron:因子猎人午间挖矿"
   }
 ]
