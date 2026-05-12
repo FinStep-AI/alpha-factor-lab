@@ -6664,6 +6664,15 @@
             "002901.SZ",
             "301602.SZ"
           ]
+        },
+        {
+          "date": "2026-05-12",
+          "player": "quant",
+          "type": "factor_scan",
+          "action": "hold",
+          "summary": "周二因子日扫：数据刷新至2026-05-11，搜索无有效结果，未构建新因子",
+          "detail": "K线刷新成功：fintool失败后fallback auto（tencent数据源），最新数据至2026-05-11。研报扫描：StepSearch staging+Brave均无新研报结果，StepSearch返回所有query空结果。因子评估：当前因子库35个，核心因子amihud_illiq_v2(Sharpe=1.21)、turnover_level_v1(Sharpe=2.43)、informed_flow_v1(Sharpe=2.02)表现稳定。昨日测试的vol_slope_v1、clv_skew_v1、entropy_fwd5_v1均失败。本轮未发现有价值新因子方向，Waiting for next scan cycle。",
+          "conclusion": "今日扫描无新因子入库，等待数据更新后下一轮扫描。"
         }
       ],
       "rebalances": [
