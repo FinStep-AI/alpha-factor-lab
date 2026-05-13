@@ -4293,5 +4293,42 @@
     },
     "diff_notes": "市值中性化后指标全面提升：IC 0.021→0.029, t 2.60→3.80(5%显著), Sharpe 1.243→1.829。换手率76.4%偏高，建议换仓周期拉长到40天。",
     "conclusion": "达标入库！与所有入库因子低相关|r|<0.3，互补性好。Smart Money Ratio在中证1000具有独立alpha。"
+  },
+  {
+    "factor_id": "hvcs_v1",
+    "factor_name": "高量日收盘强度",
+    "direction_tested": "+1 (高量日CLV均值正向)",
+    "test_date": "2026-05-13",
+    "status": "eliminated",
+    "reason": "IC=-0.005(t=-0.93, 方向全错), -0.011(t=-1.06 20d), 单调性=-0.1, Sharpe=-0.29。翻转后IC=+0.011(t=1.06 n.s.), mono=0.0。因子方向(高量日收盘位置)在A股截面没有任何预测力，换手率90%极高。",
+    "metrics": {
+      "ic_mean_5d": -0.0046,
+      "t_5d": -0.93,
+      "sharpe_5d": -0.29,
+      "mono_5d": -0.1,
+      "turnover_5d": 0.9,
+      "ic_mean_20d": -0.0108,
+      "t_20d": -1.06
+    },
+    "lessons": "仅在高量日CLV均值不足以区分截面选股力; CLV本身不是有用因子; 换手率过渡报险依然过高"
+  },
+  {
+    "factor_id": "pmom5d_v1",
+    "factor_name": "短期价格偏离率(5日相对偏离)",
+    "direction_tested": "+1 反转方向",
+    "test_date": "2026-05-13",
+    "status": "eliminated",
+    "reason": "总计失败。5d IC=-0.013(t=-1.33, n.s.), Sharpe=-0.34, G5=7.7%被G4(21%)压制, mono=0.0。20d IC=-0.020(t=-1.20), sha-rpe=-0.34, mono=-0.1, G5=9.8%vs G4=23.8%非单调。价格/MA5偏离度在A股截面无效。",
+    "metrics": {
+      "ic_mean_5d": -0.0127,
+      "t_5d": -1.33,
+      "sharpe_5d": -0.34,
+      "mono_5d": 0.0,
+      "ic_mean_20d": -0.0199,
+      "t_20d": -1.2,
+      "sharpe_20d": -0.34,
+      "mono_20d": -0.1
+    },
+    "lessons": "价率偏差(close/MA5-1)在A股截面端无选股能力; 需BPS/估值因子才能验证价值。"
   }
 ]
