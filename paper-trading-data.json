@@ -6,7 +6,7 @@
     "benchmark": "000300",
     "benchmark_name": "沪深300",
     "created_at": "2026-02-23 22:14:25",
-    "updated_at": "2026-05-13 15:13:19",
+    "updated_at": "2026-05-13 15:13:39",
     "status": "active",
     "players_count": 6
   },
@@ -14446,16 +14446,16 @@
       "style": "新闻驱动 · 热点追踪 · 短线出击",
       "description": "追踪市场热点新闻，挖掘受益标的，快进快出。3-5天周期，多热点分散持仓。",
       "portfolio": {
-        "cash": 8983223.94,
-        "total_value": 8985649.94,
+        "cash": 8984430.11,
+        "total_value": 8985643.11,
         "positions": {
           "002747.SZ": {
             "code": "002747.SZ",
             "name": "埃斯顿",
-            "volume": 100,
+            "volume": 50,
             "avg_cost": 21.87,
             "current_price": 24.26,
-            "market_value": 2426.0,
+            "market_value": 1213.0,
             "pnl": 239.0,
             "pnl_pct": 10.93,
             "entry_date": "2026-05-06"
@@ -15584,6 +15584,25 @@
           "pnl": 165.0,
           "pnl_pct": 21.15,
           "reason": "止盈2: 盈利+21.15% > 20%阈值，触发全部清仓规则锁定利润"
+        },
+        {
+          "date": "2026-05-13",
+          "code": "002747.SZ",
+          "name": "埃斯顿",
+          "direction": "sell",
+          "price": 24.26,
+          "volume": 50,
+          "amount": 1213.0,
+          "fees": {
+            "commission": 5.0,
+            "stamp_duty": 0.61,
+            "transfer_fee": 0.01,
+            "slippage_cost": 1.21,
+            "total": 6.83
+          },
+          "pnl": 119.5,
+          "pnl_pct": 10.93,
+          "reason": "止盈1: 卖出半仓(50股)锁定+10.93%利润"
         }
       ],
       "nav_history": {
@@ -16001,8 +16020,8 @@
         "calmar_ratio": -3.29,
         "win_rate": 58.33,
         "profit_loss_ratio": 0.12,
-        "total_trades": 59,
-        "total_fees": 92980.06,
+        "total_trades": 60,
+        "total_fees": 92986.89,
         "current_positions": 2,
         "turnover_rate": 0.0
       },
