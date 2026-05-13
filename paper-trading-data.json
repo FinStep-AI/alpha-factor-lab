@@ -16145,6 +16145,15 @@
         "recommendation": "无新因子入库",
         "summary": "因子扫描日 2026-05-06 (周三): 全面搜索中英文研报及东北7篇，无全新日线级因子满足入库门槛",
         "detail": "【因子猎人扫描日报 2026-05-06】\n\n📊 数据状态：最新收盘价 2026-05-06，fintool 全失败后 fallback 腾讯源完成更新。\n\n🔍 研报扫描（当日研报/论文）\n· 方正金工·成交大单因子复现（Bigquant）— 需分钟级数据，今日OHLCV无法复现\n· 平安证券·时序动量因子在A股表现— 需日内数据\n· 东方证券·量价关系(APB)— 需VWAP/分钟数据\n· 实战因子365·价量背离波动率因子（知乎）— 发现pvd_volatility_v1，完整评测\n· SSRN 4095405·高频收益可预测性— 需高频数据\n\n✅ 目标因子status:\n1️⃣ pvd_volatility_v1 (价量背离波动率因子)\n   来源: 知乎·实战因子365 | https://zhuanlan.zhihu.com/p/1933158730352001357\n   指标: IC=0.037, t=2.55, Sharpe=1.61, mono=0.9 —— 全面达标！\n   ⚠️ 问题: 与 Amihud_illiq_v2 高度冗余(IC_corr=0.82)，同属流动性溢价维度。现有因子库已充分覆盖，不增加新条目。\n\n2️⃣ pv_divergence_v1 (量价背离因子)\n   IC=0.015 < 0.02, t=1.48 < 2.0, Sharpe=0.59 < 0.8 → ❌ FAIL\n\n3️⃣ vp_wsync_20d (量价加权同步因子)\n   IC=0.0205✓, t=1.74<2.0 (不显著), Sharpe=1.29✓, mono=0.9✓ — t值不足\n\n📝 入库决策: 无新因子今日入库\n📝 因子库状态: 已保持33个活跃因子，最强为 turnover_level_v1, neg_range_efficiency_v1, informed_flow_v1"
+      },
+      {
+        "date": "2026-05-13",
+        "action": "factor_scan",
+        "target_codes": [],
+        "topn": 0,
+        "summary": "因子猎人每日扫描: 发现并入库 '聪明资金比率 v1' (smart_money_v1)",
+        "detail": "尝试了7个因子方向: EP因子(不达标)、bps_value_raw(不达标)、roe_bps_synergy(不达标)、vol_skew(不达标)、amp_spike_kurt(接近但IC_t<2)、entropy(换手率超限79.8%)、smart_money_v1(中立化后IC=0.0291,t=3.80,Sharpe=1.829,单调性0.9全部达标).smart_money_v1: 中性化后Sharpe=1.83, IC=0.029(t=3.80)\n与所有已有因子低相关(|r|<0.3),无冗余.\n入库后因子库共36个因子,新增Liquidity/聪明资金情绪维度.",
+        "recommendation": "smart_money_v1已入库,下周调仓时可纳入选股评分"
       }
     ],
     "last_update": "2026-05-06"

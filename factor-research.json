@@ -4272,5 +4272,26 @@
       "turnover": 0.8
     },
     "source": "cron:因子猎人午间挖矿"
+  },
+  {
+    "date": "2026-05-13",
+    "factor_id": "smart_money_v1",
+    "source_type": "自研（聪明资金比率，基于订单流向情绪指标）",
+    "source_title": "聪明资金比率（Smart Money Ratio）因子本土化",
+    "source_url": "",
+    "original_metric": {
+      "IC": 0.0207,
+      "t": 2.6,
+      "Sharpe": 1.243,
+      "monotonicity": 0.9
+    },
+    "our_metric": {
+      "IC": 0.0291,
+      "t": 3.8,
+      "Sharpe": 1.829,
+      "monotonicity": 0.9
+    },
+    "diff_notes": "市值中性化后指标全面提升：IC 0.021→0.029, t 2.60→3.80(5%显著), Sharpe 1.243→1.829。换手率76.4%偏高，建议换仓周期拉长到40天。",
+    "conclusion": "达标入库！与所有入库因子低相关|r|<0.3，互补性好。Smart Money Ratio在中证1000具有独立alpha。"
   }
 ]

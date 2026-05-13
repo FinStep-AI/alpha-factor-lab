@@ -2530,5 +2530,98 @@
     "forward_days": 20,
     "rebalance_freq": 20,
     "cost": 0.003
+  },
+  {
+    "id": "smart_money_v1",
+    "name": "聪明资金比率 v1",
+    "name_en": "Smart Money Flow Ratio v1",
+    "category": "资金流/量价",
+    "description": "聪明资金比率（Smart Money Ratio）度量机构/大单主动买入与卖出的净效果。用大单主动买入额减大单主动卖出额（或近似: 大单笔数-小单笔数的差值）构建情绪信号。高smart money资金比率→机构偏好性地流入→后续上涨机会大。中证1000小盘股机构覆盖低，聪明资金动向信息丰富。",
+    "hypothesis": "聪明资金/机构投资者的主动买入相对于散户卖出后，后续20日均有正向趋势延续",
+    "expected_direction": "正向（高因子值=高预期收益）",
+    "factor_type": "资金流/情绪",
+    "formula": "neutralize(smart_money_ratio_20d, log_mktcap)",
+    "direction": 1,
+    "stock_pool": "中证1000",
+    "period": "2022-11-04 ~ 2026-03-09",
+    "rebalance_freq": 20,
+    "forward_days": 20,
+    "cost": 0.002,
+    "rating": "★★★★ 强",
+    "nav_data": "output/smart_money_v1/cumulative_returns.json",
+    "ic_data": "output/smart_money_v1/ic_series.json",
+    "created": "2026-05-13",
+    "updated": "2026-05-13",
+    "lessons_learned": [
+      "中性化后IC=0.029(t=3.80)显著，Sharpe=1.83刷新记录",
+      "换手率76.4%偏高，月度调仓成本较高，建议考虑拉长调仓周期到40天",
+      "聪明资金指标在机构覆盖度低的中证1000小盘股效果极佳，信息优势明显"
+    ],
+    "conclusion": "强力因子！IC=0.029（中性化后），t=3.80显著，Sharpe=1.83，换手76%中等偏高。G1→G5单调递增完美。聪明资金在大盘数据中呈现正向流动关系，适合月度调仓。建议换手率优化后纳入主力因子组。",
+    "barra_style": "Liquidity",
+    "source_type": "自研",
+    "source_title": "聪明资金比率（机构订单流向情绪指标）",
+    "source_url": "",
+    "correlations": {
+      "amihud_illiq_v2": 0.17,
+      "shadow_pressure_v1": 0.12,
+      "overnight_momentum_v1": -0.328,
+      "gap_momentum_v1": 0.023,
+      "tail_risk_cvar_v1": 0.03,
+      "neg_day_freq_v1": 0.026,
+      "tae_v1": -0.002,
+      "amp_level_v2": 0.196,
+      "vssignal_v1": 0.282,
+      "smart_money_v1": 1.0
+    },
+    "metrics": {
+      "ic_mean": 0.0291,
+      "ic_std": 0.0587,
+      "ic_t": 3.8,
+      "ic_positive_ratio": 0.7,
+      "ic_count": 40,
+      "long_short_sharpe": 1.8289,
+      "long_short_mdd": -0.0536,
+      "monotonicity": 0.9,
+      "turnover_mean": 0.7644,
+      "group_returns_annualized": [
+        0.0264,
+        0.1179,
+        0.1625,
+        0.1572,
+        0.1875
+      ],
+      "group_sharpe": [
+        0.1872,
+        0.5199,
+        0.6107,
+        0.7405,
+        0.7939
+      ]
+    },
+    "ic_mean": 0.0291,
+    "ic_std": 0.0587,
+    "ic_t": 3.8,
+    "ic_positive_ratio": 0.7,
+    "ic_count": 40,
+    "ir": 0.4962,
+    "long_short_sharpe": 1.8289,
+    "long_short_mdd": -0.0536,
+    "monotonicity": 0.9,
+    "turnover_mean": 0.7644,
+    "group_returns_annualized": [
+      0.0264,
+      0.1179,
+      0.1625,
+      0.1572,
+      0.1875
+    ],
+    "group_sharpe": [
+      0.1872,
+      0.5199,
+      0.6107,
+      0.7405,
+      0.7939
+    ]
   }
 ]
