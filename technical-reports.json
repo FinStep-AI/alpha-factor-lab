@@ -1020,5 +1020,38 @@
       "涨停连板后获利盘丰厚，抛压大",
       "BOLL上轨压力明显，触及后回调概率高"
     ]
+  },
+  {
+    "name": "粤桂股份",
+    "code": "000833.SZ",
+    "market": "A",
+    "date": "2026-05-13",
+    "session": "afternoon",
+    "morning_score": -5,
+    "trend": "中性偏空(低档区反弹)",
+    "signal": "持有观望",
+    "chart": "charts/000833_chart.png"
+  },
+  {
+    "name": "豪威集团",
+    "code": "603501.SH",
+    "market": "A",
+    "date": "2026-05-13",
+    "session": "afternoon",
+    "morning_score": -5,
+    "trend": "中性偏空(RSI超买+死叉预警)",
+    "signal": "持有观望",
+    "chart": "charts/603501_chart.png"
+  },
+  {
+    "name": "视觉中国",
+    "code": "000681.SZ",
+    "market": "A",
+    "date": "2026-05-13",
+    "session": "afternoon",
+    "morning_score": 15,
+    "trend": "中性略偏多(BOLL测试)",
+    "signal": "观望持有",
+    "chart": "charts/000681_chart.png"
   }
 ]
