@@ -52,11 +52,14 @@ def format_code(code):
 
 
 def reverse_code(formatted_code):
-    """601777.SH → sh601777, or bare 601777/002040 → sh601777/sz002040"""
+    """601777.SH → sh601777, or bare 601777/002040 → sh601777/sz002040
+    同时兼容 sz/ sh 前缀格式，如 sz300881.SZ → sz300881"""
     if formatted_code.endswith(".SH"):
-        return f"sh{formatted_code[:-3]}"
+        stripped = formatted_code[:-3]
+        return stripped if stripped.startswith("sh") else f"sh{stripped}"
     elif formatted_code.endswith(".SZ"):
-        return f"sz{formatted_code[:-3]}"
+        stripped = formatted_code[:-3]
+        return stripped if stripped.startswith("sz") else f"sz{stripped}"
     # Handle bare numeric codes (e.g. "002040", "600072")
     if formatted_code.isdigit():
         if formatted_code.startswith("6"):
