@@ -16545,6 +16545,14 @@
         "summary": "因子猎人每日扫描: 发现并入库 '聪明资金比率 v1' (smart_money_v1)",
         "detail": "尝试了7个因子方向: EP因子(不达标)、bps_value_raw(不达标)、roe_bps_synergy(不达标)、vol_skew(不达标)、amp_spike_kurt(接近但IC_t<2)、entropy(换手率超限79.8%)、smart_money_v1(中立化后IC=0.0291,t=3.80,Sharpe=1.829,单调性0.9全部达标).smart_money_v1: 中性化后Sharpe=1.83, IC=0.029(t=3.80)\n与所有已有因子低相关(|r|<0.3),无冗余.\n入库后因子库共36个因子,新增Liquidity/聪明资金情绪维度.",
         "recommendation": "smart_money_v1已入库,下周调仓时可纳入选股评分"
+      },
+      {
+        "date": "2026-05-15",
+        "type": "factor_scan_fail",
+        "action": "log",
+        "summary": "今日未发现新因子方向，数据刷新正常，尝试vol_acf_v1不达标",
+        "detail": "Step0 数据刷新正常（最新2026-05-14, auto源1000条）。一轮搜索后选择「成交量自相关因子vol_acf_v1」尝试构建。回测结果：20d前提前IC=0.011(t=1.25), Sharpe=0.93, 单调性=0.50；5d前提前IC=0.005(t=0.92), Sharpe=0.41, 单调性=0.70。三次均未达门槛（IC需>0.02, t需>2.0, 单调性需>0.8），淘汰。原因：成交量自相关在横截面区分度弱，未能有效转化为后续收益预测能力。",
+        "recommendation": "持续扫描，寻找新因子方向"
       }
     ],
     "last_update": "2026-05-06"

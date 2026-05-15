@@ -4330,5 +4330,89 @@
       "mono_20d": -0.1
     },
     "lessons": "价率偏差(close/MA5-1)在A股截面端无选股能力; 需BPS/估值因子才能验证价值。"
+  },
+  {
+    "factor_id": "amp_conc_v1",
+    "name": "振幅集中度v1",
+    "status": "淘汰",
+    "eliminated_at": "2026-05-14",
+    "eliminated_reason": "每日分位数切分导致动态边界噪声过多，双向测试IC≈0.0045均不显著(t=0.73)，HHI集中度指标无效。问题根因：分档阈值每日漂移，日内资金分布不稳定。",
+    "ic_mean": 0.0045,
+    "ic_t": 0.73,
+    "sheets": "output/amp_conc_neg_v1/"
+  },
+  {
+    "factor_id": "amp_stability_v1",
+    "name": "振幅稳定性v1",
+    "status": "达标",
+    "metric_date": "2026-05-14",
+    "period": "2022-10-21 ~ 2026-03-12",
+    "ic_mean": 0.0565,
+    "ic_std": 0.0804,
+    "ic_t_stat": 8.984,
+    "rank_ic_mean": 0.0199,
+    "rank_ic_std": 0.0802,
+    "ir": 0.7019,
+    "ic_positive_pct": 0.7988,
+    "long_short_sharpe": 5.183,
+    "long_short_mdd": -0.0708,
+    "monotonicity": 0.9,
+    "turnover_mean": 0.5144,
+    "group_returns_annualized": [
+      -0.0891,
+      -0.0767,
+      -0.0857,
+      0.0261,
+      0.3949
+    ],
+    "group_sharpe": [
+      -0.3675,
+      -0.3059,
+      -0.3414,
+      0.1037,
+      1.5356
+    ],
+    "pass": true,
+    "pass_notes": "IC=0.0565(t=8.98!)极显著, G5 Sharpe=1.54✓, 单调性0.9✓, 全套达标。振幅日内稳定(低CV)的股票具有信息质量优势,说明走势有序知情交易主导。",
+    "qualitative": "低振幅日内价格波动 → 日内走势有序 → 信息参与度高 → 后续收益更好。G5年化39.5% vs G1/G2/G3均负,信号集中在G5尾部。",
+    "caveats": "G1/G2/G3年化均为负(-8~-9%),说明市场整体下行期非稳定组承受超额损失。换手率51%偏高,需关注成本。多空Sharpe=5.18极高,需确认是否过度分形。"
+  },
+  {
+    "id": "vol_acf_v1",
+    "factor_id": "vol_acf_v1",
+    "name": "成交量自相关因子 v1",
+    "status": "淘汰",
+    "eliminated_at": "2026-05-15",
+    "eliminated_reason": "成交量自相关(20日lag-1 ACF)在中证1000上两次均未达标：20d前提前IC=0.011(t=1.25), 单调性=0.50; 5d前提前IC=0.005(t=0.92), Sharpe=0.41。单调性严重不足(0.5)，IC均值、t值双双未达门槛(0.02/2.0)。价格序列的自相关是已知有效信号，但成交量自相关体现在横截面上效果偏弱。",
+    "ic_mean": 0.0107,
+    "ic_t": 1.25,
+    "sharpe": 0.9289,
+    "monotonicity": 0.5,
+    "sheets": "output/vol_acf_v1/",
+    "source_type": "自研(论文启发)",
+    "source_title": "Chordia, Roll & Subrahmanyam (2001) Market Liquidity and Trading Activity JOF",
+    "source_url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=276983",
+    "source_author": "Chordia, Roll & Subrahmanyam",
+    "source_year": 2001,
+    "source_journal": "Journal of Finance",
+    "original_metric": {
+      "market": "US Stocks",
+      "period": "1974-1998",
+      "ic_mean": "N/A (原文关注自相关与价格发现效率的关系)",
+      "sharpe": "N/A",
+      "description": "成交量自相关反映信息驱动的持续性，高自相关=信息流稳定=价格发现效率高"
+    },
+    "our_metric": {
+      "market": "中证1000",
+      "period": "2022-11 ~ 2026-05",
+      "ic_mean": 0.0107,
+      "ic_t": 1.25,
+      "sharpe": 0.93,
+      "monotonicity": 0.5,
+      "notes": "两次回测（20d/5d前提前）均不达门槛，失败"
+    },
+    "diff_notes": "20d前提前指标远未达标（IC需>0.02, t需>2.0, 单调性需>0.8）；5d前提前更差。 hypothesised: 成交量自相关在横截面上区分度不足，个股层面交易的持续性差异未能有效转化为后续收益差异。",
+    "conclusion": "不达标，淘汰。需另寻方向。",
+    "date": "2026-05-15"
   }
 ]
