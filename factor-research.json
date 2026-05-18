@@ -4485,5 +4485,53 @@
     "trial_count": 1,
     "verdict": "达标入库",
     "notes": "换手率家族第7个新维度（水平/加速/衰减/CV/偏度/尖度/数量残差）。Turnover系因子首次引入OLS残差形态，提出独立信号。各前瞻窗口单调性=1.0，LS Sharpe=2.14，可入库。"
+  },
+  {
+    "factor_id": "ret_skew_voladj_v1",
+    "factor_name": "收益率峰度调整后的收益率偏度交叉 v1",
+    "barra_style": "MICRO",
+    "status": "failed",
+    "date": "2026-05-18",
+    "description": "20d rolling ret skew × ret vol 交叉，成交额中性化+MAD+z-score",
+    "hypothesis": "高偏度高波动股票价格发现更不稳定，可产生预测信号",
+    "forward_days": 20,
+    "rebalance_freq": 20,
+    "cost": 0.002,
+    "our_metric": {
+      "ic_mean": -0.0005,
+      "ic_t": -0.09,
+      "monotonicity": -0.1,
+      "long_short_sharpe": -0.15,
+      "period": "2022-10-31~2026-05-15"
+    },
+    "failure_reason": "IC≈0(t=-0.09), 单调性≈0, 完全无预测力。5d前瞻IC无方向。G3非结构性峰值(23%)但非线性不做有效分层。直接淘汰。",
+    "data_files": [
+      "data/factor_ret_skew_voladj_v1.csv"
+    ],
+    "note": "前序因子: bias_reversal(tested 2026-05-18) 也 G5 Sharpe=0.64淘汰，偏度/峰度类在5d前瞻上在此数据池效果均不强"
+  },
+  {
+    "name": "ROE显著性趋势 v1",
+    "id": "roe_sigtrend_v1",
+    "created": "2026-05-18",
+    "barra_style": "Growth",
+    "description": "ROE 8Q 滚动 β×tstat（有统计意义的趋势强度），成交额OLS中性化+MAD z-score",
+    "formula": "neutralize(beta_8Q_ROE × tstat_8Q, log_amount_20d); zscore",
+    "period": "2024-03-04 ~ 2025-11-14",
+    "dates": 414,
+    "stocks_per_day_min": 965,
+    "stocks_per_day_max": 999,
+    "ic_mean": 0.0087,
+    "ic_t": 1.34,
+    "ic_positive_ratio": 0.598,
+    "ic_count": 82,
+    "monotonicity": 0.9,
+    "G5_sharpe": 1.281,
+    "LS_sharpe": 1.489,
+    "LS_MDD": -0.064,
+    "verdict": "淘汰",
+    "fail_reason": "IC均值=0.0087不足0.02门槛，IC_t=1.34低于t>2.0要求；单调性0.90、G5 Shapiro=1.28达标但关键门槛不满足",
+    "ref_file": "data/factor_roe_sigtrend_v1.csv",
+    "ref_output": "output/roe_sigtrend_v1/"
   }
 ]
