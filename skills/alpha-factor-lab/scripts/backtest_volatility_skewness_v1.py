@@ -211,9 +211,18 @@ ic_mean  = ic_arr.mean()
 ic_std   = ic_arr.std(ddof=1)
 ic_pos   = (ic_arr > 0).mean()
 ic_t     = ic_mean / (ic_std / np.sqrt(len(ic_arr))) if ic_std > 0 else 0
-ranks_ic = np.array([fac[com].rank().corr(fr[com].rank()) for dt in fwd_ret_dict
-                     if dt in pivot.index
-                     for com in [fac[com]]]).ravel()
+# Pre-compute facets for ranks_ic (valid cross-section pairs)
+_facets = {}
+for _dt in fwd_ret_dict:
+    if _dt in pivot.index:
+        _fac = pivot.loc[_dt].dropna()
+        _fr  = fwd_ret_dict[_dt].dropna()
+        _com = _fac.index.intersection(_fr.index)
+        if len(_com) > 1:
+            _facets[_dt] = (_fac[_com], _fr[_com])
+
+ranks_ic = np.array([_fa.rank().corr(_fr.rank())
+                     for _dt, (_fa, _fr) in _facets.items()])
 
 print("\n" + "=" * 60)
 print("回测结果摘要")

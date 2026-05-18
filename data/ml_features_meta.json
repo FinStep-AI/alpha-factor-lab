@@ -21,6 +21,9 @@
     "f_close_low_v1",
     "f_roe_autocorr_pers_v1",
     "f_roe_accel_v1",
+    "f_smart_money_v1",
+    "f_amp_stability_v1",
+    "f_turnover_vol_resid_v1",
     "ret_1d",
     "turnover",
     "amplitude",
@@ -163,6 +166,21 @@
     "f_roe_accel_v1_chg5",
     "f_roe_accel_v1_lag20",
     "f_roe_accel_v1_chg20",
+    "f_smart_money_v1_rank",
+    "f_smart_money_v1_lag5",
+    "f_smart_money_v1_chg5",
+    "f_smart_money_v1_lag20",
+    "f_smart_money_v1_chg20",
+    "f_amp_stability_v1_rank",
+    "f_amp_stability_v1_lag5",
+    "f_amp_stability_v1_chg5",
+    "f_amp_stability_v1_lag20",
+    "f_amp_stability_v1_chg20",
+    "f_turnover_vol_resid_v1_rank",
+    "f_turnover_vol_resid_v1_lag5",
+    "f_turnover_vol_resid_v1_chg5",
+    "f_turnover_vol_resid_v1_lag20",
+    "f_turnover_vol_resid_v1_chg20",
     "inter_f_amihud_illiq_v2xf_shadow_pressure_v1_prod",
     "inter_f_amihud_illiq_v2xf_shadow_pressure_v1_diff",
     "inter_f_amihud_illiq_v2xf_overnight_momentum_v1_prod",
@@ -189,11 +207,11 @@
     "label_10d",
     "label_20d"
   ],
-  "n_features": 183,
+  "n_features": 201,
   "n_samples": 842253,
   "date_range": [
     "2022-10-10",
     "2026-05-08"
   ],
-  "built_at": "2026-05-11T09:02:38.019950"
+  "built_at": "2026-05-18T09:04:37.666087"
 }

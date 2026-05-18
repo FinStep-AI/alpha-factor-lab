@@ -129,17 +129,19 @@ def get_constituent_snapshot(index_name: str = "中证1000", page: int = 1,
 
 # ===== MARKET QUOTE =====
 
-def get_kline(code: str, end_date: str, num: int = 100,
+def get_kline(code: str, start_date: str, end_date: str, num: int = 100,
               kline_type: int = 1, reinstatement: int = 2) -> List[Dict]:
     """获取K线数据
     code: 股票代码（纯6位）
+    start_date: 开始日期 YYYY-MM-DD
     end_date: 截止日期 YYYY-MM-DD
-    num: 条数（最多100）
+    num: 条数（最多100，受start_date/end_date限制）
     kline_type: 1=日K 2=周K 3=月K
     reinstatement: 1=不复权 2=前复权 3=后复权
     """
     resp = _call("market_quote", "get_kline", {
         "keyword": code,
+        "start_date": start_date,
         "end_date": end_date,
         "kline_num": min(num, 100),
         "kline_type": kline_type,
@@ -173,7 +175,7 @@ def get_kline_history(code: str, start_date: str, end_date: str,
     current_end = end_date
 
     for _ in range(20):  # 最多20段 = 2000天
-        batch = get_kline(code, current_end, 100, kline_type, reinstatement)
+        batch = get_kline(code, start_date, current_end, 100, kline_type, reinstatement)
         if not batch:
             break
 
@@ -371,7 +373,7 @@ def get_plate_list(keyword: str = "", sector_type: str = "1") -> List[Dict]:
 
 # ===== BATCH OPERATIONS =====
 
-def batch_get_kline(codes: List[str], end_date: str, num: int = 100,
+def batch_get_kline(codes: List[str], start_date: str, end_date: str, num: int = 100,
                     max_workers: int = 10, delay: float = 0,
                     progress_fn=None) -> Dict[str, List[Dict]]:
     """批量获取K线（多线程）
@@ -382,7 +384,7 @@ def batch_get_kline(codes: List[str], end_date: str, num: int = 100,
 
     def _fetch_one(code):
         try:
-            klines = get_kline(code, end_date, num)
+            klines = get_kline(code, start_date, end_date, num)
             return code, klines, None
         except Exception as e:
             return code, [], str(e)
@@ -442,7 +444,8 @@ if __name__ == "__main__":
     ])
     parser.add_argument("--code", default="600519")
     parser.add_argument("--index", default="中证1000")
-    parser.add_argument("--end-date", default="2026-03-07")
+    parser.add_argument("--end-date", default="2026-05-14")
+    parser.add_argument("--start-date", default="2025-12-15")
     parser.add_argument("--num", type=int, default=5)
     args = parser.parse_args()
 
@@ -453,7 +456,7 @@ if __name__ == "__main__":
             print(f"  {s['security_code']} {s['security_name']}")
 
     elif args.action == "kline":
-        klines = get_kline(args.code, args.end_date, args.num)
+        klines = get_kline(args.code, args.start_date, args.end_date, args.num)
         print(f"K线({args.code}): {len(klines)} 条")
         for k in klines[-3:]:
             print(f"  {k['date']} O={k['open']} C={k['close']} H={k['high']} L={k['low']} V={k['volume']:.0f}")
@@ -494,7 +497,7 @@ if __name__ == "__main__":
         stocks = get_constituents("中证1000")
         print(f"✅ 成分股: {len(stocks)}")
         # K线
-        klines = get_kline("600519", "2026-03-07", 3)
+        klines = get_kline("600519", "2026-02-28", "2026-03-07", 3)
         print(f"✅ K线: {len(klines)} 条, 最新={klines[-1]['date'] if klines else 'N/A'}")
         # 行业
         ind = get_industry_sws("600519")
