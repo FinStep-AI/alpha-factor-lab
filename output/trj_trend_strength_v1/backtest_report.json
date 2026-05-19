@@ -1,0 +1,128 @@
+{
+  "factor_id": "trj_trend_strength_v1",
+  "factor_name": "趋势强度(trj_5_20) v1",
+  "factor_name_en": "Trend Strength (trj_5_20) v1",
+  "category": "量价/趋势",
+  "description": "趋势强度因子(trj_5_20): 量价趋势综合强度指标,5/20参数版本。中性化后分层回测。",
+  "expected_direction": "正向(高trj=强趋势→高未来收益)",
+  "factor_type": "趋势强度类/量价复合",
+  "formula": "neutralize(factor_trj_5_20)[cxn, stock], log_amount_20d OLS 截面",
+  "direction": 1,
+  "stock_pool": "中证1000",
+  "period": "2022-11-04 ~ 2026-03-06",
+  "n_dates": 807,
+  "n_stocks": 984,
+  "best_config": {
+    "forward": 5,
+    "rebalance": 20,
+    "cost": 0.002
+  },
+  "source_type": "自研(量价趋势)",
+  "source_title": "趋势强度指标(5-20参数版本)",
+  "source_url": "",
+  "metrics": {
+    "ic_mean": 0.0014318094871887924,
+    "ic_std": 0.03442532173897446,
+    "ic_positive_pct": 0.5403726708074534,
+    "ic_count": 161,
+    "rank_ic_mean": 0.0017955871325522122,
+    "rank_ic_std": 0.034951011993895734,
+    "ir": 0.041591753246209354,
+    "ic_t_stat": 0.5575017635512698,
+    "ic_p_value": 0.5779637821008321,
+    "ic_significant_5pct": false,
+    "ic_significant_1pct": false,
+    "group_metrics": {
+      "group_1": {
+        "total_return": 0.4327369447124929,
+        "annualized_return": 0.11899008408628631,
+        "annualized_volatility": 0.24748699893621137,
+        "sharpe_ratio": 0.4807932723648059,
+        "max_drawdown": -0.36381919958530157,
+        "calmar_ratio": 0.3270582867037167
+      },
+      "group_2": {
+        "total_return": 0.475535185522574,
+        "annualized_return": 0.12933540214960804,
+        "annualized_volatility": 0.24953786385043003,
+        "sharpe_ratio": 0.5182997087252863,
+        "max_drawdown": -0.3695401293381424,
+        "calmar_ratio": 0.3499901414800381
+      },
+      "group_3": {
+        "total_return": 0.47601312214395786,
+        "annualized_return": 0.1294497586461807,
+        "annualized_volatility": 0.24792053171611803,
+        "sharpe_ratio": 0.5221421467198507,
+        "max_drawdown": -0.3476822330619576,
+        "calmar_ratio": 0.3723220410377211
+      },
+      "group_4": {
+        "total_return": 0.49188478417440296,
+        "annualized_return": 0.13323302009951243,
+        "annualized_volatility": 0.247431534845663,
+        "sharpe_ratio": 0.5384641863965213,
+        "max_drawdown": -0.3487600942076485,
+        "calmar_ratio": 0.3820191080123598
+      },
+      "group_5": {
+        "total_return": 0.5170167561832033,
+        "annualized_return": 0.13916743723758396,
+        "annualized_volatility": 0.24868007128382832,
+        "sharpe_ratio": 0.5596244062466377,
+        "max_drawdown": -0.36565693075171424,
+        "calmar_ratio": 0.3805956500030911
+      },
+      "long_short": {
+        "total_return": 0.057005899692533335,
+        "annualized_return": 0.0174847883415008,
+        "annualized_volatility": 0.04010446218818023,
+        "sharpe_ratio": 0.43598111999252787,
+        "max_drawdown": -0.04554355907484522,
+        "calmar_ratio": 0.38391352579113786
+      }
+    },
+    "long_short_total_return": 0.057005899692533335,
+    "long_short_ann_return": 0.0174847883415008,
+    "long_short_sharpe": 0.43598111999252787,
+    "long_short_mdd": -0.04554355907484522,
+    "turnover_mean": 0.794179772925006,
+    "turnover_std": 0.01286993429123694,
+    "group_returns_annualized": [
+      0.11899008408628631,
+      0.12933540214960804,
+      0.1294497586461807,
+      0.13323302009951243,
+      0.13916743723758396
+    ],
+    "monotonicity": 0.9999999999999999,
+    "holdings_info": {
+      "group_1": {
+        "mean": 189.3424317617866,
+        "min": 177,
+        "max": 196
+      },
+      "group_2": {
+        "mean": 189.82133995037222,
+        "min": 178,
+        "max": 196
+      },
+      "group_3": {
+        "mean": 189.82133995037222,
+        "min": 178,
+        "max": 197
+      },
+      "group_4": {
+        "mean": 189.82133995037222,
+        "min": 178,
+        "max": 196
+      },
+      "group_5": {
+        "mean": 190.16873449131515,
+        "min": 178,
+        "max": 197
+      }
+    },
+    "holdings_imbalance_ratio": 1.0043640652643995
+  }
+}
