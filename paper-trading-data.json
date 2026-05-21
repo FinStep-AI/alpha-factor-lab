@@ -6,7 +6,7 @@
     "benchmark": "000300",
     "benchmark_name": "沪深300",
     "created_at": "2026-02-23 22:14:25",
-    "updated_at": "2026-05-21 15:06:09",
+    "updated_at": "2026-05-21 15:11:53",
     "status": "active",
     "players_count": 6
   },
@@ -8183,31 +8183,19 @@
       "style": "趋势跟踪 · 板块轮动 · 全A股扫描 · 中长线波段",
       "description": "BBI+MA60趋势判断，KDJ低位捕捉买点，板块轮动做趋势收益。核心逻辑：阳率×盈亏比最大化。",
       "portfolio": {
-        "cash": 361922.6999999976,
+        "cash": 6909027.939999998,
         "positions": {
           "002032.SZ": {
             "code": "002032.SZ",
             "name": "苏泊尔",
-            "volume": 2500,
+            "volume": 1300,
             "avg_cost": 45.68,
             "current_price": 50.1,
-            "market_value": 125250.0,
+            "market_value": 65130.0,
             "pnl": 11050.0,
             "pnl_pct": 9.68,
             "entry_date": "2026-04-16",
             "max_pnl_pct": 6.9
-          },
-          "sh688239.SH": {
-            "code": "sh688239.SH",
-            "name": "航宇科技",
-            "volume": 12500,
-            "avg_cost": 68.28,
-            "current_price": 68.28,
-            "market_value": 853500.0,
-            "pnl": 0,
-            "pnl_pct": 0,
-            "entry_date": "2026-05-07",
-            "max_pnl_pct": 6.72
           },
           "sh603190.SH": {
             "code": "sh603190.SH",
@@ -8221,17 +8209,6 @@
             "entry_date": "2026-05-15",
             "max_pnl_pct": 4.13
           },
-          "sh688115.SH": {
-            "code": "sh688115.SH",
-            "name": "思林杰",
-            "volume": 32900,
-            "avg_cost": 60.76,
-            "current_price": 60.76,
-            "market_value": 1999004.0,
-            "pnl": 0,
-            "pnl_pct": 0,
-            "entry_date": "2026-05-21"
-          },
           "sh603070.SH": {
             "code": "sh603070.SH",
             "name": "万控智造",
@@ -8242,32 +8219,10 @@
             "pnl": 0,
             "pnl_pct": 0,
             "entry_date": "2026-05-21",
-            "max_pnl_pct": 1.98
-          },
-          "sz300422.SZ": {
-            "code": "sz300422.SZ",
-            "name": "博世科",
-            "volume": 339500,
-            "avg_cost": 5.89,
-            "current_price": 5.89,
-            "market_value": 1999655.0,
-            "pnl": 0,
-            "pnl_pct": 0,
-            "entry_date": "2026-05-21"
-          },
-          "sz001336.SZ": {
-            "code": "sz001336.SZ",
-            "name": "楚环科技",
-            "volume": 65700,
-            "avg_cost": 30.3,
-            "current_price": 30.3,
-            "market_value": 1990710.0,
-            "pnl": 0,
-            "pnl_pct": 0,
-            "entry_date": "2026-05-21"
+            "max_pnl_pct": 2.29
           }
         },
-        "total_value": 10154361.7,
+        "total_value": 9798477.94,
         "last_update": "2026-05-21"
       },
       "nav_history": {
@@ -14086,16 +14041,104 @@
           "pnl": 9825.0,
           "pnl_pct": 8.6,
           "reason": "止盈第一档：盯仓检查浮盈8.49%（成本45.68 现价49.91），≥7%触发半仓止盈，卖出2500股"
+        },
+        {
+          "date": "2026-05-21",
+          "code": "002032.SZ",
+          "name": "苏泊尔",
+          "direction": "sell",
+          "price": 50.05,
+          "volume": 1200,
+          "amount": 60060.0,
+          "fees": {
+            "commission": 18.02,
+            "stamp_duty": 30.03,
+            "transfer_fee": 0.6,
+            "slippage_cost": 60.06,
+            "total": 108.71
+          },
+          "pnl": 5244.0,
+          "pnl_pct": 9.57,
+          "reason": "止盈1：浮盈+9.6%≥7%阈值，卖半仓锁利；剩余1250股以BBI线为持有底线"
+        },
+        {
+          "date": "2026-05-21",
+          "code": "sh688239.SH",
+          "name": "航宇科技",
+          "direction": "sell",
+          "price": 65.01,
+          "volume": 12500,
+          "amount": 812625.0,
+          "fees": {
+            "commission": 243.79,
+            "stamp_duty": 406.31,
+            "transfer_fee": 8.13,
+            "slippage_cost": 812.63,
+            "total": 1470.85
+          },
+          "pnl": -40875.0,
+          "pnl_pct": -4.79,
+          "reason": "止损清仓：现价65.01≤止损线68.23(成本68.28-5tick)，生物医疗上游调仓下跌，破位全出"
+        },
+        {
+          "date": "2026-05-21",
+          "code": "sh688115.SH",
+          "name": "思林杰",
+          "direction": "sell",
+          "price": 57.06,
+          "volume": 32900,
+          "amount": 1877274.0,
+          "fees": {
+            "commission": 563.18,
+            "stamp_duty": 938.64,
+            "transfer_fee": 18.77,
+            "slippage_cost": 1877.27,
+            "total": 3397.87
+          },
+          "pnl": -121730.0,
+          "pnl_pct": -6.09,
+          "reason": "止损清仓：现价57.06≤止损线60.71(成本60.76-5tick)，破位即走，不留幻想"
+        },
+        {
+          "date": "2026-05-21",
+          "code": "sz300422.SZ",
+          "name": "博世科",
+          "direction": "sell",
+          "price": 5.59,
+          "volume": 339500,
+          "amount": 1897805.0,
+          "fees": {
+            "commission": 569.34,
+            "stamp_duty": 948.9,
+            "transfer_fee": 18.98,
+            "slippage_cost": 1897.81,
+            "total": 3435.03
+          },
+          "pnl": -101850.0,
+          "pnl_pct": -5.09,
+          "reason": "止损清仓：现价5.59≤止损线5.84(成本5.89-5tick)，中小盘环保首日建仓即破位"
+        },
+        {
+          "date": "2026-05-21",
+          "code": "sz001336.SZ",
+          "name": "楚环科技",
+          "direction": "sell",
+          "price": 29.09,
+          "volume": 65700,
+          "amount": 1911213.0,
+          "fees": {
+            "commission": 573.36,
+            "stamp_duty": 955.61,
+            "transfer_fee": 19.11,
+            "slippage_cost": 1911.21,
+            "total": 3459.3
+          },
+          "pnl": -79497.0,
+          "pnl_pct": -3.99,
+          "reason": "止损清仓：现价29.09≤止损线30.25(成本30.30-5tick)，首日建仓即破5tick，止损"
         }
       ],
       "decisions": [
-        {
-          "date": "2026-05-06",
-          "action": "hold",
-          "summary": "收盘扫描38只候选（4主策略+1单针下30+33金叉回调），热门板块集中度不足，不开新仓。苏泊尔+0.25%趋势完好、盛德鑫泰+2.00%继续上行，两只均未触发止损/止盈条件，维持现有持仓观望。",
-          "detail": "收盘全A扫描：5015只股票→基础过滤4861→BBI>MA60趋势过滤1709→长阴放量排除99只剩1610→最终38只候选（4主策略+1单针下30+33金叉回调）。热门板块无明显3只以上聚集，无法形成开仓共识。持仓方面：苏泊尔002032收盘47.21（+0.25%），距7%止盈线+6.28%尚有空间；盛德鑫泰300881收盘51.00（+2.00%），浮盈+8.9%，均处于趋势完好但不过热阶段。当前仓位17.6%，无调仓必要。",
-          "recommendation": "维持2只持仓观望，持续跟踪苏泊尔（≈+6.3%距止盈线）、盛德鑫泰（≈+8.9%）。明日若热门板块出现3只以上集中的强信号候选，考虑择机开新仓小幅加仓至20-25%"
-        },
         {
           "date": "2026-05-07",
           "action": "buy",
@@ -14317,6 +14360,14 @@
           "detail": "existing holdings 苏泊尔 was bought Apr 16 at 45.68, just inspected after the morning scan. Price 49.91 ⇒ PnL +8.49%, which clears the +7% first station. half_profit_taken is currently False, so per rule-1: sell 50% of the position. Remaining 2500 shares stay in place, keep tracking; second station at +15% or a hard stop at -5% if price breaks that line. The 4 new buys from this morning (思林杰 / 万控智造 / 博世科 / 楚环科技) are fresh entries with no stop/profit to touch yet.",
           "recommendation": "卖出 002032.SZ 苏泊尔 2500股（半仓止盈），剩余 2500股继续持有；4 只新建仓今日不动，明日收盘后继续复扫同日标位。",
           "exec_summary": "成功1笔，失败0笔"
+        },
+        {
+          "date": "2026-05-21",
+          "action": "sell",
+          "summary": "收盘止盈清仓：苏泊尔浮盈+9.6%触发止盈1卖半仓锁利；航宇科技/思林杰/博世科/楚环科技四只全部破止损线（最新价≤成本-5tick）清仓出局，均为当日首次建仓即破位。今日5建仓现仅存亚通精工、万控智造2只未触发信号，当前无新入场信号，扫描top12中无同时满足is_uptrend=True+price>BBI+BBI>MA60的强势股。继续持有亚通精工/万控智造，留现金约¥67万待市场企稳后再择机加仓。",
+          "detail": "持仓收盘检查（使用realtime_quotes收盘价确认）：\n• 苏泊尔002032.SZ：收盘50.05，浮盈+9.6%，触发止盈第一档+7%。剩余1250股以BBI线为移动止盈基准（不破BBI Holding，破BBI清）。\n• 航宇科技sh688239.SH：收盘65.01，破止损线68.23（亏-4.79%），清仓。\n• 思林杰sh688115.SH：收盘57.06，破止损线60.71（亏-6.09%），清仓。\n• 博世科sz300422.SZ：收盘5.59，破止损线5.84（亏-5.09%），清仓。\n• 楚环科技sz001336.SZ：收盘29.09，破止损线30.25（亏-3.99%），清仓。\n• 亚通精工sh603190.SH：持仓29800股账面基本持平，未触发任何止盈止损，维持持有。\n• 万控智造sh603070.SH：持仓122800股账面基本持平，未触发任何止盈止损，维持持有。\n\n扫描结果：主策略2只+单针下30_5只+金叉缩量回调5只，top12里价格均满足price>bbi，但不满足bistrict uptrend=True，其中仅有sz000783长江证券(证券市场服务)同时is_uptrend=True（J=6.6，VR=1.5），有待进一步判断。今日5笔止损4笔，跨行业无板块集中效应，整体属于弱修复震荡期。建议下个交易日以MA20之上加仓方针跟进扫描。",
+          "recommendation": "思考：明日以防御性持仓为主，关注苏泊尔BBI线保利、亚通精工/万控智造趋势稳固情况；若无明确is_uptrend=True + price>BBI + BBI>MA60强势标的出现，不开新仓；关注sh500961/沪深300/中证1000指数是否高于MA60/MA20确认技术面企稳。",
+          "exec_summary": "成功5笔，失败0笔"
         }
       ],
       "rebalances": [],
@@ -14328,8 +14379,8 @@
         "calmar_ratio": 1.13,
         "win_rate": 54.89,
         "profit_loss_ratio": 1.02,
-        "total_trades": 290,
-        "total_fees": 338501.30000000016,
+        "total_trades": 295,
+        "total_fees": 350373.0600000002,
         "current_positions": 3,
         "turnover_rate": 0.0
       },
