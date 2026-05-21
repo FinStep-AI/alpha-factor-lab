@@ -6,7 +6,7 @@
     "benchmark": "000300",
     "benchmark_name": "沪深300",
     "created_at": "2026-02-23 22:14:25",
-    "updated_at": "2026-05-21 09:36:18",
+    "updated_at": "2026-05-21 09:38:52",
     "status": "active",
     "players_count": 6
   },
@@ -8183,15 +8183,15 @@
       "style": "趋势跟踪 · 板块轮动 · 全A股扫描 · 中长线波段",
       "description": "BBI+MA60趋势判断，KDJ低位捕捉买点，板块轮动做趋势收益。核心逻辑：阳率×盈亏比最大化。",
       "portfolio": {
-        "cash": 238122.18999999762,
+        "cash": 361922.6999999976,
         "positions": {
           "002032.SZ": {
             "code": "002032.SZ",
             "name": "苏泊尔",
-            "volume": 5000,
+            "volume": 2500,
             "avg_cost": 45.68,
             "current_price": 49.56,
-            "market_value": 247800.0,
+            "market_value": 123900.0,
             "pnl": 19400.0,
             "pnl_pct": 8.49,
             "entry_date": "2026-04-16",
@@ -8266,7 +8266,7 @@
             "entry_date": "2026-05-21"
           }
         },
-        "total_value": 10153111.19,
+        "total_value": 10153011.7,
         "last_update": "2026-05-21"
       },
       "nav_history": {
@@ -14066,16 +14066,28 @@
           "pnl": 0,
           "pnl_pct": 0,
           "reason": "BBI趋势分1.0 + 品类领先集合中，热门环境保护领域配合，稳健设于同一选型组合"
+        },
+        {
+          "date": "2026-05-21",
+          "code": "002032.SZ",
+          "name": "苏泊尔",
+          "direction": "sell",
+          "price": 49.61,
+          "volume": 2500,
+          "amount": 124025.0,
+          "fees": {
+            "commission": 37.21,
+            "stamp_duty": 62.01,
+            "transfer_fee": 1.24,
+            "slippage_cost": 124.03,
+            "total": 224.49
+          },
+          "pnl": 9825.0,
+          "pnl_pct": 8.6,
+          "reason": "止盈第一档：盯仓检查浮盈8.49%（成本45.68 现价49.91），≥7%触发半仓止盈，卖出2500股"
         }
       ],
       "decisions": [
-        {
-          "date": "2026-05-06",
-          "action": "hold",
-          "summary": "午盘扫描61只候选（金叉缩量回调56+主策略4+单针下30），热门板块集中：汽车制造业3只+金属制品业3只，宁波高发/昇兴股份双80分领衔。但当前已有2只持仓，无止损/止盈触发信号，上班流动性较差信号质量中等，继续持仓观望。",
-          "detail": "全A实时行情5015只经漏斗过滤：基础筛选→4862→BBI/MA60趋势过滤→1705→排除48只长阴放量→1657→主策略4只(J<13+上升趋势，未进Top30)+单针下30 1只+金叉缩量回调56只。热门板块：汽车制造业(宁波高发/等3只score80/75/70)、金属制品业(昇兴股份/等3只score80/75/70)。当前持仓2只检查：苏泊尔+3.06%(47.08/买入45.68)趋势完好未触发+7%止盈线，盛德鑫泰0%平仓无私损信号。可开仓资金815万，剩余开仓位8席，单只上限80万。宁波高发(J=12.4 VR=0.6 缩量33.4%)和昇兴股份(J=47.7 VR=0.6 缩量39.8%)板块集中但信号类型均为pullback(非J<13主策略)，午盘时段流动性下降，信号执行质量风险上升，维持现有17.7%仓位不变。",
-          "recommendation": "HOLD 继续持有苏泊尔和盛德鑫泰，不开新仓。重点关注：1）苏泊尔突破47.7(约+5%)关注趋势延续性；2）盛德鑫泰若回升至BBI上方形成趋势则考虑增仓；3）宁波高发/昇兴股份若尾盘(14:50)前score≥65+板块集中度保持3只以上则考虑建仓；4）收盘后复盘扫描，明日早盘视信号质量决定是否加仓至汽车/金属板块。"
-        },
         {
           "date": "2026-05-06",
           "action": "hold",
@@ -14296,6 +14308,14 @@
           "detail": "【扫描结果】全A 5029只有效报价，漏斗筛选1707→163只，pullback信号93只。热板块前四：汽车制造/仪器仪表/电气机械/环保各3只。账户无持仓无需卖出。【买入逻辑】（1）思林杰——综合评分最高88，缩量回调最干净，仪器仪表集中度最高；（2）万控智造——BBI金叉最年轻仅6天，信号时效性最强，放量4.41x历史峰值说明积累了足够筹码，回调缩量后弹性大；（3）博世科——BBI趋势分1.0满分，环保板块持续轮动发力；（4）楚环科技——同属环保趋势分1.0，持仓组合中有环保板块连续性；（5）北玻股份——缩量回调最深46.8%，价格最低有弹性，成交密集区明显。全部采用pullback缩量入场，严格按各自止损线（stop_loss字段）设保护。",
           "recommendation": "当前持仓5只均为BBI金叉+缩量回调pullback信号，行情未触发任何止盈止损条件，今日以持有开盘为主。后续重点盯：①万控智造（缩量后若有放量立即跟进），②力芯微/湘潭电化替补观察。明日收盘后继续复扫；若出现异动信号按止盈1档（+7%/卖半）→止盈2档（+15%/全卖）→止损（-5%/全卖）执行。",
           "exec_summary": "成功4笔，失败1笔"
+        },
+        {
+          "date": "2026-05-21",
+          "action": "mixed",
+          "summary": "止盈操作：苏泊尔 002032.SZ 当前浮盈+8.49%（成本45.68 现价49.91），触发止盈第一档，卖出半仓2500股",
+          "detail": "existing holdings 苏泊尔 was bought Apr 16 at 45.68, just inspected after the morning scan. Price 49.91 ⇒ PnL +8.49%, which clears the +7% first station. half_profit_taken is currently False, so per rule-1: sell 50% of the position. Remaining 2500 shares stay in place, keep tracking; second station at +15% or a hard stop at -5% if price breaks that line. The 4 new buys from this morning (思林杰 / 万控智造 / 博世科 / 楚环科技) are fresh entries with no stop/profit to touch yet.",
+          "recommendation": "卖出 002032.SZ 苏泊尔 2500股（半仓止盈），剩余 2500股继续持有；4 只新建仓今日不动，明日收盘后继续复扫同日标位。",
+          "exec_summary": "成功1笔，失败0笔"
         }
       ],
       "rebalances": [],
@@ -14307,8 +14327,8 @@
         "calmar_ratio": 1.13,
         "win_rate": 54.64,
         "profit_loss_ratio": 1.02,
-        "total_trades": 289,
-        "total_fees": 338276.8100000002,
+        "total_trades": 290,
+        "total_fees": 338501.30000000016,
         "current_positions": 3,
         "turnover_rate": 0.0
       },
