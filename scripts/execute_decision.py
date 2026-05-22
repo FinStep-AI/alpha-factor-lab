@@ -82,6 +82,8 @@ def validate_decision(decision: dict) -> list:
             errors.append("action=rebalance 但 target_codes 为空")
     elif action == "hold":
         pass  # hold 不需要额外字段
+    elif action == "mixed":
+        pass
     else:
         errors.append(f"未知 action: {action}")
     
@@ -273,13 +275,14 @@ def main():
         print("📝 仅记录决策日志")
     elif args.dry_run:
         print("🔍 Dry run 模式，不执行交易")
-        if action in ("buy", "sell"):
+        if action in ("buy", "sell", "mixed"):
             for t in decision.get("trades", []):
-                print(f"  [DRY] {action} {t['code']} {t.get('name','')} {t['volume']}股")
+                td = t.get("direction", action)
+                print(f"  [DRY] {td} {t['code']} {t.get('name','')} {t['volume']}股")
         elif action == "rebalance":
             print(f"  [DRY] 调仓目标: {decision.get('target_codes', [])}")
     else:
-        if action in ("buy", "sell"):
+        if action in ("buy", "sell", "mixed"):
             print(f"\n🔄 执行 {action} 交易...")
             exec_results = execute_trades(data, decision)
         elif action == "rebalance":

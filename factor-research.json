@@ -4533,5 +4533,79 @@
     "fail_reason": "IC均值=0.0087不足0.02门槛，IC_t=1.34低于t>2.0要求；单调性0.90、G5 Shapiro=1.28达标但关键门槛不满足",
     "ref_file": "data/factor_roe_sigtrend_v1.csv",
     "ref_output": "output/roe_sigtrend_v1/"
+  },
+  {
+    "id": "ret_autocorr_v1",
+    "name": "收益自相关 v1",
+    "name_en": "Return Autocorrelation v1",
+    "category": "时序持久性",
+    "barra_style": "Reversal",
+    "description": "20日滚动 1阶收益自相关，成交额OLS中性化+MAD缩尾+z-score。高AC=趋势持续/动量延续；低AC=随机游走/反转。",
+    "formula": "neutralize(autocorr(ret, lag=1, 20d), log_amount_20d)",
+    "direction": 1,
+    "status": "eliminated",
+    "dates_tested": [
+      "2022-10-31 ~ 2026-05-19"
+    ],
+    "forward_days_tested": [
+      5,
+      10,
+      20
+    ],
+    "failed_reason": "三档前瞻全部IC≈0（5d:0.0015/t=0.24；10d:-0.0008/t=-0.11；20d:0.0006/t=0.06），Sharpe/单调性/分层均归零。中证1000日度收益序列1阶自相关极弱，无法构建有效截面信号。",
+    "metrics": {
+      "fwd5": {
+        "ic_mean": 0.0015,
+        "ic_t": 0.24,
+        "sharpe": 0.083,
+        "monotonicity": 0.2
+      },
+      "fwd10": {
+        "ic_mean": -0.0008,
+        "ic_t": -0.11,
+        "sharpe": 0.083,
+        "monotonicity": 0.2
+      },
+      "fwd20": {
+        "ic_mean": 0.0006,
+        "ic_t": 0.06,
+        "sharpe": 0.083,
+        "monotonicity": 0.2
+      }
+    },
+    "eliminated_at": "2026-05-20",
+    "files_created": [
+      "data/factor_ret_autocorr_v1_fwd5.csv",
+      "data/factor_ret_autocorr_v1_fwd10.csv",
+      "data/factor_ret_autocorr_v1_fwd20.csv",
+      "output/ret_autocorr_v1_fwd5/report.json",
+      "output/ret_autocorr_v1_fwd10/report.json",
+      "output/ret_autocorr_v1_fwd20/report.json"
+    ],
+    "lesson": "单独1阶日收益自相关在中证1000截面无选股力，收益率日度序列接近白噪声，lag-1自相关没有稳定截面差异。此方向关闭。"
+  },
+  {
+    "scan_date": "2026-05-22",
+    "factor_id": "gap_coherence_v1",
+    "source_type": "自研",
+    "source_title": "缺口同向一致性因子 — 自研（新角度）",
+    "source_url": "",
+    "source_inspiration": "开盘跳空信号（set 取 gap_momentum_v1）迈向同一方向相关区间和成交空间的一半进行判别。",
+    "original_metric": "假设 IC>0.02、Sharpe>0.8 方向先未验证",
+    "our_metric": "IC≈0.0035 / t≈1.28 / LS Sharpe≈-0.48 / 单调性≈-0.7",
+    "diff_notes": "5d/20d 两个 forward 版本效果一致差；单调性为负、Sharpe 为负，构造的日隔方向自身方向错误。",
+    "conclusion": "不达标，废弃，原因是在研究数据条件下这类样本文章结果可信度极低。详细见 paper-trading-data.json quant.decisions 最新条。"
+  },
+  {
+    "scan_date": "2026-05-22",
+    "factor_id": "volume_clock_vwap_v1",
+    "source_type": "自研（vwap_dev_v1 变体，重构TP加权版）",
+    "source_title": "成交量时钟 VWAP 偏离因子 — volume-clock average price vs day close 差值",
+    "source_url": "",
+    "source_inspiration": "vwap_dev_v1 以传统 VWAP=Σ(P×V)/Σ(V) 衡量，但收盘主要依赖 TP(高频代理 VWAP/OHLCV)。由此改为用 typical price = SMA(TP×voll + ATR20 度量。",
+    "original_metric": "预期 IC>0.02 / Sharpe>0.8",
+    "our_metric": "IC = -0.0023(t=-0.90) / 20d：IC = -0.0094(t=-2.48) / LS Sharpe = -0.74 / 单调性 = -0.9",
+    "diff_notes": "与 vwap_dev_v1 形式表面上改变参数，结果数据上负号相反（vwap_dev_v1 为 + 场合，本因子在同样子部跨度所求出的适当的均线当中》，基本符合构造原因，但表现从此最糟糕。",
+    "conclusion": "不达标，废弃，构筑因子储蓄失败due to redundant construct具体阐述见 paper-trading-data.json"
   }
 ]
