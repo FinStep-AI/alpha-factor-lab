@@ -6,7 +6,7 @@
     "benchmark": "000300",
     "benchmark_name": "沪深300",
     "created_at": "2026-02-23 22:14:25",
-    "updated_at": "2026-05-22 15:11:23",
+    "updated_at": "2026-05-22 15:16:25",
     "status": "active",
     "players_count": 6
   },
@@ -17096,14 +17096,6 @@
       },
       "decisions": [
         {
-          "date": "2026-05-08",
-          "action": "sell",
-          "summary": "埃斯顿触发10%止盈线，卖出一半锁定利润。金开新能源+12.4%持有等待冲高。无新热点建仓。",
-          "detail": "午盘扫描29条，全部≥50分但达标质量差：80分(新质生产力)时间戳为2025-01-02属旧闻；78分绿电/创新药均已发酵≥3周；60分光通信5月7日爆发最新鲜但可交易性5分；73分四稳政策+物联网宏观利好。当前金开新能源+12.4%(之前已执行过止盈)持有待观察，埃斯顿今日+10.06%首次突破止盈线执行半仓止盈。",
-          "recommendation": "埃斯顿减仓至半仓锁定利润；金开新能源+东北证券继续持有。明日重点关注:①光通信概念5/7爆发持续性(5/8如有资金承接关注杭电股份/特发信息)②四稳政策+科技创新主线发酵③埃斯顿明日开盘若冲高回落超3%清仓剩余半仓",
-          "exec_summary": "成功1笔，失败0笔"
-        },
-        {
           "date": "2026-05-11",
           "action": "sell",
           "summary": "晨扫：三热点评分均超70。持仓执行止盈+时间止损清仓，回笼资金约460万。绿电(算电协同+两办发文78分)和商业航天(可回收火箭首飞潮78分)是新主线。",
@@ -17320,6 +17312,13 @@
           "summary": "午盘空仓不开仓。今日4只旧仓（埃斯顿+19%/新松+6%/双环+1%/苏泊尔+3%）均按时止损清仓，当前总资产约892万、回撤约-10.75%。PM扫描29条中没有任何一条是今日新增、score真值>=70且A股有明确可交易标的的新催化，继续观望，下周一再决策。",
           "detail": "【清仓核算】今日4只持仓已全部清仓，均为时间止损触发：\n埃斯顿(002747): 持有7日+19.07%，触TP1但因余50股不足100股最低交易整数倍无法执行半仓止盈，兜底清仓约+19%\n新松(300024): 持有>5日+6.22%，时间止损清仓\n双环传动(002472): 持有>5日+1.28%，时间止损清仓\n苏泊尔(002032): 持有>5日+2.98%，时间止损清仓\n\n【午盘热点复盘】PM扫描29条，逐条审核后结论：\n最高项88分「国常会推动房地产市场止跌回稳」：实为2025年7月旧闻，消息库陈旧误打分，排除。\n两条75分：2月两会年度策略（生物医药/算电协同）、港科政策 — 均为3月初旧题材，今日无新增催化，排除。\n「上海低空/机器人/商业航天」75分：来自2026-01-09，距今约5个月，不算今日新增催化，排除。\n欧央行通胀78分（tradability=5）、英国财政68分：海外宏观，无A股可操作标的，排除。50分档均为国内股市一般新闻/海外地缘，全部排除。\n\n【今日仅有的增量信号】英伟达财报超预期 -> 科创芯片午后反弹+约2%，机器人ETF 159770亦有资金流入。但这是5月初已交易过的驱动旧题材再炒一轮，无新增订单/合作催化，周一前不追。\n\n【风控状态】总资产约8,919,399，回撤-10.75%已踩10%红线；按规则总回撤>10%单热点仓位上限降至20%，当前空仓符合风控，低于阈值不交易。\n\n【下周一观察清单】量子主线（75分来自5/17峰会后热度维持，若周一量能正常+有新催化可低吸小仓）/ 机器人算力（等新增催化确认后择机介入，仓位降档）。",
           "recommendation": "继续空仓保持观望，16:00前不建新仓。下周一主要盯两点：一是英伟达效应下国内算力/AI位是否有持续量能确认；二是量子主线若周末再出新催化、周一能否形成分歧转一致。任一满足且仓位降档后可试仓，否则继续持有现金等待明确升温信号。"
+        },
+        {
+          "date": "2026-05-22",
+          "action": "hold",
+          "summary": "Close review hotspot player 2026-05-22.Position summary: SSE +0.87% to 4112.90, early session big drop recovered by V-bounce, intraday low 4067.75, closed near day high, total turnover 2.09T yuan. Estun (002747.SZ) closed at 29.07 (+1.29%), intraday swing 6.38% high 29.33 low 27.50, rebounded 2 yuan from session low to close. Robot ETF 159770 +1.87% with net fund inflows, STAR board +2.2%, Nvidia earnings + Alibaba chip double-triggered AI-compute theme at strongest theme today. Morning executed three time-stop sells on-disk: Xinsong robot +6.22%, Shuanghuan +1.28%, Supor +2.98%. Cash approx 8.918M, remaining single holding Estun 50 shares frozen trailing vest, account drawdown about -10.75%. No >=70 new catalyst in today news scan — continue hold.",
+          "detail": "Market: SSE +0.87%, SZSE +0.57%, ChiNext +1.37%, STAR +2.2%. Three catalysts for afternoon V-recovery: Nvidia Q1 earnings beat (+3.7% pre-close) boosting global compute chain sentiment, Alibaba domestic chip progress, and after-lunch fund rotation into AI-hardware. Robot ETF 159770 +1.87%, algo-trade buying net flow. Posture: SSE dropped 2.04% yesterday, today +0.87% = partial recovery but still above the 4067 low from four hours ago. Positions check: Estun (002747.SZ) 50 shares cost 21.87, live close 29.07, live unrealized +360 yuan (+32.92%). The line closed from its intraday high of 29.33 down nearly 2 yuan, no new golden volume/price push. Stop-loss at cost-5% 20.78 is far protected; take-profit-1 at 50% rule (25 shares / 50 at +10%) resolves to less than 100 shares so skip, 5-day time-stop already well-passed on May 12. No sell trigger for the trailing 50. News-scan 29 headlines today, max score 88 (but source is Jul-2025 old story) plus 83 points all old March-before red herrings. No fresh, verifiable >=70-point new hotspot. Risk: portfolio drawdown -10.75% already crossed 10% guard-rail, per rule any new single-position max cap today is 20%. With conditions flatline and no fresh catalyst, still standing in low trade position, wait for Monday's morning fresh scan to re-evaluate.",
+          "recommendation": "Hold. SSE partially recovered V-bounce but daily session still out of base, no generated fresh >=70 hotspot catalyst scan today. Monday morning re-scan for quantum / AI hardware / robot sector plus SSE follow-through decides new position."
         }
       ],
       "latest_news": "3/9午盘扫描：AI+油气双热点爆发，首日观察不追高，计划明日分化后建仓",
