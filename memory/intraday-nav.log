@@ -1,0 +1,3 @@
+2026-05-22 11:30 intraday refresh — 32/34 价格取到，沪深300 4816.70。仍残留 3 条 NAV 不一致：因子猎人 / 技术猎手 / 巴菲特门徒，待后续收盘后二次确认。
+2026-05-22 11:30 — setsid bg run: exit=0, DONE marker written. 32/34 prices pulled (2 tickers had no intraday quote). 3 NAV inconsistency warnings persisted (stale stored values): 因子猎人, 技术猎手, 巴菲特门徒 — not a blocker, just pre-loaded history not overwritten. Rankings saved as-is.
+2026-05-22 14:30 — exit=0；32/34 价格取到；沪深300=4844.03；同3条遗留NAV不一致（因子猎人 +0.76%、技术猎手 -2.42%、巴菲特门徒 -6.16%）。两学时级别再次同报，结论未变。今日全部3次 refresh 轨迹：11:30 / 13:00 / 14:30 — no new data, stale expected_nav still not written by intraday path.
