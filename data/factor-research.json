@@ -127,5 +127,26 @@
     },
     "diff_notes": "单调性0.9方向正确(G1=6.6%<G5=18.6%),但IC=0.0055极弱,t=0.48不显著,Sharpe=0.64<0.8。失败原因:波动率收缩信号虽方向正确但强度低,交易成本后损耗超alpha。",
     "conclusion": "不达标,暂淘汰。方向正确但IC/Sharpe双不达标,换手率83.5%太高。建议:拉长窗口(40d vs 120d)或与其他收缩特征复合后重测。"
+  },
+  {
+    "date": "2026-05-27",
+    "factor_id": "gap_contrib_v1",
+    "source_type": "academic",
+    "source_title": "QuantaAlpha (arXiv 2602.07085v3 Apr-2026 / Yang et al.): \"overnight info becomes the dominant and stable signal when intraday predictability deteriorates\" — translated to daily-OHLCV CSI1000 as gap dominance factor.",
+    "source_url": "https://arxiv.org/abs/2602.07085",
+    "factor_formula": "window W=20 trading days · stock t: abs_overnight = |close_t/open_{t-1} – 1|  (prev close -> open) · abs_intraday  = |close_t/open_t      – 1|  (open    -> close) · raw = mean(abs_overnight) / mean(abs_intraday) · OLS-residual neutralise log_amount → MAD 5.5σ winzorise → z-score",
+    "neutralize": "log_amount_20d OLS neutralize + MAD winsor + z-score (xsec, daily)",
+    "original_metric": "IC > 0.02 | t > 2.0 | long-short Sharpe > 0.8 | monotonicity > 0.8 | turnover < 40%",
+    "our_metric": {
+      "ic_mean": null,
+      "ic_t": null,
+      "long_short_sharpe": null,
+      "monotonicity": null,
+      "period": ""
+    },
+    "ic_series_tail": null,
+    "variant_note": "Counter-variant `gap_contrib_neg_v1 = -gap_contrib_v1` confirmed: IC +0.004 ∼ t=+0.48, Sharpe = −0.104, mono = −0.10 — symmetrical null.",
+    "diff_notes": "H1 part-verified from QuantaAlpha: CSI1000 overnight volatility does dominate intraday ratios at mean, but cross-sectional ranking IC –0.0038 (t –0.48) is noise — no predictable winners/losers in sorted cross-section; group return shape is convex peaking at G3 rather than monotone → raw dominance does not translate to cross-sectional return predictability. Gap-contrib inverted symmetric null still fails. Likely reason: CSI1000 gap variance clustered across sectors/years; mean-ratio at cross-section has no return information without context. For this version the factor is FAILING our threshold on every metric — not entering library.",
+    "conclusion": "FAIL — do not store"
   }
 ]

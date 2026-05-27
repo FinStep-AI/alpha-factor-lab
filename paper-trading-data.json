@@ -6706,6 +6706,13 @@
           "summary": "周二因子日扫：数据刷新至2026-05-11，搜索无有效结果，未构建新因子",
           "detail": "K线刷新成功：fintool失败后fallback auto（tencent数据源），最新数据至2026-05-11。研报扫描：StepSearch staging+Brave均无新研报结果，StepSearch返回所有query空结果。因子评估：当前因子库35个，核心因子amihud_illiq_v2(Sharpe=1.21)、turnover_level_v1(Sharpe=2.43)、informed_flow_v1(Sharpe=2.02)表现稳定。昨日测试的vol_slope_v1、clv_skew_v1、entropy_fwd5_v1均失败。本轮未发现有价值新因子方向，Waiting for next scan cycle。",
           "conclusion": "今日扫描无新因子入库，等待数据更新后下一轮扫描。"
+        },
+        {
+          "date": "2026-05-27",
+          "title": "周三维度因子扫描",
+          "summary": "gap_contrib_v1 复现失败 IC=-0.004 t=-0.48 Sharpe 0.04 mono 0.1；负向变体对称失效；不入因子库，最强仍为 amihud_illiq_v2",
+          "detail": "今日扫描走4条文献路径：\n  1. QuantaAlpha arXiv 2602.07085v3 提出'日内可预测性退化后隔夜成为主导信号'，据此按gap贡献率gap_contrib_v1 = MA20(|ovret|)/MA20(|idret|) 构造日频因子，成交额OLS中性化 → MAD winsor → z-score。\n  2. 国海20260128金工系列委托挂单手数方向、方正金工成交量激增方向两路均因数据位级不足未能落地复现。\n回测结果：截面830×1000，IC=-0.0038,t=-0.48，多空Sharpe=0.04，单调性=0.10；反项gap_contrib_neg_v1对称证伪IC=+0.004,t=+0.48,Sharpe=-0.104。分组 G3最高19.3% G1/G5均约9%，凸形非单调，截面无排序列选股能力。结论：不入factor库，仅记factor-research.json已处理。非调仓日，不执行rebalance。",
+          "source": "paper_scan 2026-05-27"
         }
       ],
       "rebalances": [
