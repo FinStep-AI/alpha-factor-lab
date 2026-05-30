@@ -4620,14 +4620,39 @@
     "conclusion": "无效/不达标, 不入库"
   },
   {
-    "factor_id": "gap_abs20d_v1",
-    "date": "2026-05-29",
-    "source_type": "SSRN_PAPER_INSPIRED",
-    "source_title": "Overnight-Intraday Reversal Everyday (SSRN-2730304) + A股跳空结构启发",
-    "source_url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2730304",
-    "original_metric": "N/A (无直接原文IC)",
-    "our_metric": "20d IC=-0.022(t=-1.17) 单调性=0.3 Sharpe=0.29 (不达门槛 IC<0.02|t<2|Sharpe<0.8|单调性<0.8)",
-    "diff_notes": "手算 IC(5d=+0.061/t=11.5,20d=+0.089/t=16.2) 明显正; 但 factor_backtest.py 报告 IC=-0.022/t=-1.17,单调性=0.3,Sharpe=0.29, 方向反号。原因待查:因子方向定义、回测收益滚动对齐或我们的手工IC滚动方式不同",
-    "conclusion": "手算与工具IC反号,方向不能确认,本次不入库,下一期须查清滚动IC与工具IC的差异源"
+    "factor_id": "roe_accel_v2",
+    "name": "ROE加速度 v2(升级口径)",
+    "date": "2026-05-30",
+    "status": "active",
+    "reason": "v1 已有强证据 IC=0.050 t=3.54 mono=1.0；本次 v2 同构造重跑用完整四季度 ROE 序列 2022-06~2025-09, 中证1000 CSI1000 998支、477日；ols neutral log_amt_rolling20d neutralized, pure roe 校正差 0.021 رفت未归一化, 重爬 20d backtest IC=0.036 t=2.05 mono=0.9 LS Sharpe=1.19 turnover=0.329；G5 Sharpe=0.933；group ann ret [13.3, 9.6, 20.7, 24.4, 28.1]；corr vs roe_delta_yoy_v1=0.437, vs tae_v1=-0.008。",
+    "source_url": "",
+    "formula": "accel_ROE_t = (ROE_t - ROE_{t-4q}) - (ROE_{t-1q} - ROE_{t-5q})",
+    "barra_style": "Growth",
+    "verification_gates_passed": true,
+    "metrics": {
+      "ic_mean_5d": 0.0142,
+      "ic_t_5d": 4.48,
+      "ic_mean_20d_backtest": 0.0358,
+      "ic_t_20d_backtest": 2.05,
+      "rank_ic_mean_20d_backtest": 0.0485,
+      "monotonicity": 0.9,
+      "g5_sharpe_5d": 0.933,
+      "long_short_sharpe": 1.19,
+      "turnover_mean": 0.329,
+      "group_ann_returns_pct": [
+        13.3,
+        9.6,
+        20.7,
+        24.4,
+        28.1
+      ],
+      "group_sharpe_5d": [
+        0.428,
+        0.331,
+        0.735,
+        0.862,
+        0.933
+      ]
+    }
   }
 ]
