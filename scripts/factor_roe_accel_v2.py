@@ -1,149 +1,111 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 """
-ROE Acceleration Factor v2
-==========================
-用最近 9 个季度 ROE 构造两个「同比改善幅度」，
-加速度 = yoy_0（最新一期同比）- yoy_1（上一期同比），正向=加速改善。
+factor_roe_accel_v2.py
+----------------------
+ROE 加速度因子 v2 — 更贴近 Hou-Xue-Zhang (2015) 构造
 
-输出：data/factor_roe_accel_v2.csv  (date, stock_code, factor)
+构造步骤
+~~~~~~~~
+1. 读 csi1000_fundamental_cache.csv，取得 stock_code / report_date / roe
+2. 将季度 ROE 展开到日度（report 日向前展，报告日后 45 天生效）
+3. 构造：
+     roe_yoy     = ROE_t - ROE_{t-4}       # 同比变化（4个季度前）
+     roe_accel   = roe_yoy_t - roe_yoy_{t-4}  # 加速度（yoy 环比变化）
+4. 成交额 OLS 中性化 + MAD 缩尾 + zscore
+5. 输出 factor_roe_accel_v2.csv
+
+与 roe_accel_v1 的区别
+~~~~~~~~~~~~~~~~~~~~~~~
+v1 用的是 diff(ma(ROE, 4)) 做近似，拾取的是 ROE 趋势斜率；
+v2 严格区分两步：先算同比变化率的序列，再对变化率本身做一阶差分，
+   符合 HXZ 论文中" profitability acceleration / change in profitability "语义。
 """
 
-import warnings
+import numpy as np, pandas as pd, warnings, json
 warnings.filterwarnings("ignore")
 
-import numpy as np
-import pandas as pd
-from pathlib import Path
+FUND  = "data/csi1000_fundamental_cache.csv"
+KLINE = "data/csi1000_kline_raw.csv"
+OUT   = "data/factor_roe_accel_v2.csv"
 
-BASE  = Path(__file__).resolve().parent.parent
-DATA  = BASE / "data"
-OUT   = DATA / "factor_roe_accel_v2.csv"
+REPORT_LAG = 45   # 报告日后多少天因子生效
 
-# ── load ────────────────────────────────────────────────────────────────────
-print("[1] load …")
-kl   = pd.read_csv(DATA / "csi1000_kline_raw.csv",   parse_dates=["date"])
-fund = pd.read_csv(DATA / "csi1000_fundamental_cache.csv", parse_dates=["report_date"])
+# ── 1. 加载基本面 ────────────────────────────────────────────────────────────
+print("Loading fundamentals …")
+fund = pd.read_csv(FUND, parse_dates=["report_date"])
+fund["stock_code"] = fund["stock_code"].astype(str).str.zfill(6)
+fund = fund.dropna(subset=["roe"]).sort_values(["stock_code","report_date"])
 
-trade_dates = sorted(kl["date"].unique())
-stocks      = sorted(kl["stock_code"].unique())
+# ── 2. 季度 ROE → 季度 yoy (diff 4 periods) ─────────────────────────────
+fund["roe_yoy"] = fund.groupby("stock_code")["roe"].diff(4)
 
-# 20-day rolling amount mean (log), for neutralizer
-amt_raw = kl.pivot_table(index="date", columns="stock_code", values="amount").sort_index()
-amt_20d = np.log(amt_raw.rolling(20, min_periods=10).mean() + 1.0)   # log
-# → long
-amt_long = amt_20d.stack().rename("log_amt").reset_index()
-amt_long.columns = ["date", "stock_code", "log_amt"]
+# ── 3. 季度 yoy → 加速度（yoy 环比差分）───────────────────────────────────
+fund["roe_accel_raw"] = fund.groupby("stock_code")["roe_yoy"].diff(1)
 
-# ── ROE acceleration per report ────────────────────────────────────────────
-print("[2] ROE acceleration per report …")
-fund = fund.sort_values(["stock_code", "report_date"]).reset_index(drop=True)
+# ── 4. 展开到日度 ──────────────────────────────────────────────────────────
+print("Expanding to daily …")
+all_dates = pd.read_csv(KLINE, usecols=["date"], parse_dates=["date"])["date"].unique()
+all_dates = np.sort(all_dates)
+stocks = sorted(fund["stock_code"].unique())
 
+rows = []
+for code, grp in fund.groupby("stock_code"):
+    grp = grp.sort_values("report_date")
+    eff_dates = grp["report_date"] + pd.Timedelta(days=REPORT_LAG)
+    # 只取未来的日期
+    future = grp[eff_dates <= all_dates.max()].copy()
+    if future.empty:
+        continue
+    future["eff_date"] = pd.to_datetime(eff_dates[eff_dates <= all_dates.max()].values)
+    future = future[["eff_date","stock_code","roe_accel_raw"]].rename(columns={"eff_date":"date"})
+    # 将季度数据前向填充到日频
+    daily_idx = pd.DataFrame({"date": all_dates})
+    daily_idx["stock_code"] = code
+    merged = daily_idx.merge(future, on=["date","stock_code"], how="left")
+    merged["roe_accel_raw"] = merged["roe_accel_raw"].ffill()
+    rows.append(merged)
+
+daily_roe = pd.concat(rows, ignore_index=True)
+print(f"  daily ROE rows: {len(daily_roe)}")
+
+# ── 5. 合并 Kline 成交额 ───────────────────────────────────────────────────
+print("Merging kline …")
+kline = pd.read_csv(KLINE, parse_dates=["date"],
+                    usecols=["date","stock_code","amount"])
+kline["stock_code"] = kline["stock_code"].astype(str).str.zfill(6)
+kline["log_amount_20d"] = (
+    kline.groupby("stock_code")["amount"]
+    .transform(lambda x: np.log(x.rolling(20,min_periods=10).mean()+1))
+)
+kline = kline.dropna(subset=["log_amount_20d"])
+
+panel = kline.merge(daily_roe, on=["date","stock_code"], how="left")
+panel = panel.dropna(subset=["roe_accel_raw","log_amount_20d"])
+
+# ── 6. 截面中和 ────────────────────────────────────────────────────────────
 results = []
-for sc, g in fund.groupby("stock_code"):
-    g = g.sort_values("report_date").reset_index(drop=True)
-    roes  = g["roe"].values
-    rdates = g["report_date"].values
-    afrom = (g["report_date"] + pd.Timedelta(days=45)).values   # 披露后45天生效
-
-    # need ≥ 9 non-nan consecutive for clean 2-yoy computation
-    # use 8-quarter block: first4 vs last4 → yoy_0; shifted block → yoy_1
-    # make the two yoy windows overlap in time as much as possible:
-    #    [0..3] [4..7]  are two disjoint 4-quarter blocks → yoy_0 = mean[4:8]-mean[0:4]
-    #    [1..4] [5..8]  need 9 quarters; yoy_1 = mean[5:9]-mean[1:5]
-    # pick the anchor at position i = min index where we have i+1 >= 9
-    valid_idx = np.where(~np.isnan(roes))[0]
-    if len(valid_idx) < 9:
+for dt, p in panel.groupby("date"):
+    if len(p) < 30: continue
+    y = p["roe_accel_raw"].values
+    X = np.column_stack([np.ones(len(p)), p["log_amount_20d"].values])
+    try:
+        b = np.linalg.lstsq(X, y, rcond=None)[0]
+        r = y - X @ b
+    except Exception:
         continue
+    med = np.median(r)
+    mad = np.median(np.abs(r - med)) * 1.4826
+    if mad < 1e-8: continue
+    r = np.clip(r, med - 5.2*mad, med + 5.2*mad)
+    s = r.std()
+    if s < 1e-8: continue
+    z = (r - r.mean()) / s
+    results.append(pd.DataFrame({
+        "date": dt, "stock_code": p["stock_code"].values,
+        "factor_roe_accel_v2": z}))
 
-    # use contiguous best 9 most-recent valid quarters
-    # greedily expand from the last valid index backwards 8
-    last = valid_idx[-1]
-    start = max(0, last - 8)
-    window = roes[start : last + 1]
-    if len(window) < 9:
-        # try fill from beginning
-        window = roes[valid_idx[:9]]
-    if len(window) < 9:
-        continue
-
-    yoy_prev = np.nanmean(window[4:9]) - np.nanmean(window[0:5])  # mean[5:9]-mean[1:5]
-    yoy_cur  = np.nanmean(window[4:8])  - np.nanmean(window[0:4])  # mean[4:8]-mean[0:4]
-    accel = yoy_cur - yoy_prev
-    if np.isnan(accel):
-        continue
-
-    # assign factor valid from the date when the 9th-quarter-in-window report is known
-    avail = pd.Timestamp(rdates[last]) + pd.Timedelta(days=45)
-
-    results.append(dict(stock_code=int(sc), avail_date=avail, factor_raw=accel))
-
-raw = pd.DataFrame(results)
-print(f"  report-level rows: {len(raw)}")
-
-# ── expand to daily panel ──────────────────────────────────────────────────
-print("[3] expand to daily panel …")
-raw = raw.sort_values(["stock_code", "avail_date"])
-
-rows_out = []
-for sc, g in raw.groupby("stock_code"):
-    g = g.sort_values("avail_date")
-    avail_dates = g["avail_date"].values
-    vals        = g["factor_raw"].values
-
-    stock_ts = []
-    val_idx  = 0
-    for dt in trade_dates:
-        while val_idx + 1 < len(avail_dates) and avail_dates[val_idx + 1] <= dt:
-            val_idx += 1
-        if avail_dates[val_idx] <= dt:
-            stock_ts.append((dt, int(sc), float(vals[val_idx])))
-    rows_out.extend(stock_ts)
-
-panel = pd.DataFrame(rows_out, columns=["date", "stock_code", "factor_raw"])
-panel["date"] = pd.to_datetime(panel["date"])
-panel = panel.sort_values(["date", "stock_code"]).reset_index(drop=True)
-print(f"  raw panel rows: {len(panel)}")
-
-# ── neutralise + winsorise + z-score per cross-section ─────────────────────
-print("[4] neutralise …")
-amt_long["date"] = pd.to_datetime(amt_long["date"])
-panel = panel.merge(amt_long, on=["date", "stock_code"], how="left")
-
-WINSOR_MAD = 5.2
-out = []
-for dt, g in panel.groupby("date"):
-    g = g.dropna(subset=["factor_raw", "log_amt"]).copy()
-    if len(g) < 30:
-        continue
-    x = g["log_amt"].values.reshape(-1, 1)
-    y = g["factor_raw"].values
-    xm = x - x.mean()
-    denom = (xm ** 2).sum()
-    beta  = float((xm.ravel() * y).sum() / denom) if denom > 1e-12 else 0.0
-    alpha = float(y.mean() - beta * x.mean())
-    resid = y - (alpha + beta * x.ravel())
-
-    med = float(np.median(resid))
-    mad = float(np.median(np.abs(resid - med))) * 1.4826
-    if mad > 1e-9:
-        clipped = np.clip(resid, med - WINSOR_MAD * mad, med + WINSOR_MAD * mad)
-        z = (clipped - clipped.mean()) / (clipped.std() + 1e-9)
-    else:
-        z = np.zeros_like(resid)
-
-    gg = g[["date", "stock_code"]].copy()
-    gg["factor"] = z
-    out.append(gg)
-
-panel_final = pd.concat(out, ignore_index=True)
-print(f"  final rows: {len(panel_final)}")
-
-# ── save ────────────────────────────────────────────────────────────────────
-print("[5] save …")
-panel_final.to_csv(OUT, index=False)
-print(f"  → {OUT}")
-print(f"  date range: {panel_final['date'].min().date()} ~ {panel_final['date'].max().date()}")
-print(f"  stocks     : {panel_final['stock_code'].nunique()}")
-print()
-print(panel_final.groupby("date")["factor"].describe().tail(5).to_string())
+out = pd.concat(results, ignore_index=True).sort_values(["date","stock_code"]).reset_index(drop=True)
+out.to_csv(OUT, index=False)
+print(f"Done. {len(out)} rows → {OUT}")
+print(f"Range: {out['date'].min()} ~ {out['date'].max()}")
+print(f"Median stocks/day: {out.groupby('date')['stock_code'].count().median():.0f}")
+print(out["factor_roe_accel_v2"].describe())

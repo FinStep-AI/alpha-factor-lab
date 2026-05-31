@@ -4344,17 +4344,17 @@
   {
     "factor_id": "amp_stability_v1",
     "name": "振幅稳定性v1",
-    "status": "入库",
-    "metric_date": "2026-05-31",
-    "period": "2022-10-28 ~ 2026-05-25",
+    "status": "达标",
+    "metric_date": "2026-05-14",
+    "period": "2022-10-21 ~ 2026-03-12",
     "ic_mean": 0.0565,
     "ic_std": 0.0804,
-    "ic_t_stat": 8.9839,
+    "ic_t_stat": 8.984,
     "rank_ic_mean": 0.0199,
     "rank_ic_std": 0.0802,
     "ir": 0.7019,
     "ic_positive_pct": 0.7988,
-    "long_short_sharpe": 5.1835,
+    "long_short_sharpe": 5.183,
     "long_short_mdd": -0.0708,
     "monotonicity": 0.9,
     "turnover_mean": 0.5144,
@@ -4375,21 +4375,7 @@
     "pass": true,
     "pass_notes": "IC=0.0565(t=8.98!)极显著, G5 Sharpe=1.54✓, 单调性0.9✓, 全套达标。振幅日内稳定(低CV)的股票具有信息质量优势,说明走势有序知情交易主导。",
     "qualitative": "低振幅日内价格波动 → 日内走势有序 → 信息参与度高 → 后续收益更好。G5年化39.5% vs G1/G2/G3均负,信号集中在G5尾部。",
-    "caveats": "G1/G2/G3年化均为负(-8~-9%),说明市场整体下行期非稳定组承受超额损失。换手率51%偏高,需关注成本。多空Sharpe=5.18极高,需确认是否过度分形。",
-    "status_date": "2026-05-31",
-    "barra_style": "Quality / Low Volatility",
-    "source_type": "自研",
-    "source_title": "振幅稳定性因子（振幅日内变异系数低=信息质量高）",
-    "source_url": "https://doi.org/10.1016/0148-6195(80)90026-8",
-    "description": "-std(amplitude, 20d)/mean(amplitude, 20d)，成交额OLS中性化。低日振CV → 有序走势 → 知情交易主导。",
-    "data_files": [
-      "data/factor_amp_stability_v1.csv"
-    ],
-    "ic_t": 2.32,
-    "g5_sharpe": 1.5356,
-    "g5_annual_ret": "39.49%",
-    "g1_annual_ret": "-8.91%",
-    "notes": "全量回测确认IC=0.056(t≈8.98)、单调性0.9、G5 Sharpe=1.54、多空Sharpe=5.18。与现有因子最高相关0.35，不冗余。换手51%偏高，建议月度调仓核验成本。"
+    "caveats": "G1/G2/G3年化均为负(-8~-9%),说明市场整体下行期非稳定组承受超额损失。换手率51%偏高,需关注成本。多空Sharpe=5.18极高,需确认是否过度分形。"
   },
   {
     "id": "vol_acf_v1",
@@ -4634,79 +4620,148 @@
     "conclusion": "无效/不达标, 不入库"
   },
   {
-    "factor_id": "roe_accel_v2",
-    "name": "ROE加速度 v2(升级口径)",
-    "date": "2026-05-30",
-    "status": "active",
-    "reason": "v1 已有强证据 IC=0.050 t=3.54 mono=1.0；本次 v2 同构造重跑用完整四季度 ROE 序列 2022-06~2025-09, 中证1000 CSI1000 998支、477日；ols neutral log_amt_rolling20d neutralized, pure roe 校正差 0.021 رفت未归一化, 重爬 20d backtest IC=0.036 t=2.05 mono=0.9 LS Sharpe=1.19 turnover=0.329；G5 Sharpe=0.933；group ann ret [13.3, 9.6, 20.7, 24.4, 28.1]；corr vs roe_delta_yoy_v1=0.437, vs tae_v1=-0.008。",
-    "source_url": "",
-    "formula": "accel_ROE_t = (ROE_t - ROE_{t-4q}) - (ROE_{t-1q} - ROE_{t-5q})",
-    "barra_style": "Growth",
-    "verification_gates_passed": true,
+    "factor_id": "gap_abs20d_v1",
+    "date": "2026-05-29",
+    "source_type": "SSRN_PAPER_INSPIRED",
+    "source_title": "Overnight-Intraday Reversal Everyday (SSRN-2730304) + A股跳空结构启发",
+    "source_url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2730304",
+    "original_metric": "N/A (无直接原文IC)",
+    "our_metric": "20d IC=-0.022(t=-1.17) 单调性=0.3 Sharpe=0.29 (不达门槛 IC<0.02|t<2|Sharpe<0.8|单调性<0.8)",
+    "diff_notes": "手算 IC(5d=+0.061/t=11.5,20d=+0.089/t=16.2) 明显正; 但 factor_backtest.py 报告 IC=-0.022/t=-1.17,单调性=0.3,Sharpe=0.29, 方向反号。原因待查:因子方向定义、回测收益滚动对齐或我们的手工IC滚动方式不同",
+    "conclusion": "手算与工具IC反号,方向不能确认,本次不入库,下一期须查清滚动IC与工具IC的差异源"
+  },
+  {
+    "factor_id": "ret_kurt_v1",
+    "name": "收益率峰度 v1",
+    "date": "2026-05-29",
+    "status": "rejected",
+    "reason": "IC≈0（5d: t=0.10, 20d: t=-1.59 均不显著），方向翻转后单调性仅0.7且G2而非G5最优，换手率~80%。收益率峰度在中证1000截面无显著选股力。",
     "metrics": {
-      "ic_mean_5d": 0.0142,
-      "ic_t_5d": 4.48,
-      "ic_mean_20d_backtest": 0.0358,
-      "ic_t_20d_backtest": 2.05,
-      "rank_ic_mean_20d_backtest": 0.0485,
-      "monotonicity": 0.9,
-      "g5_sharpe_5d": 0.933,
-      "long_short_sharpe": 1.19,
-      "turnover_mean": 0.329,
-      "group_ann_returns_pct": [
-        13.3,
-        9.6,
-        20.7,
-        24.4,
-        28.1
-      ],
-      "group_sharpe_5d": [
-        0.428,
-        0.331,
-        0.735,
-        0.862,
-        0.933
-      ]
+      "ic_mean_5d": -0.0004,
+      "ic_t_5d": -0.1,
+      "ic_mean_20d": -0.0111,
+      "ic_t_20d": -1.59,
+      "monotonicity_5d": -0.7
     }
   },
   {
-    "factor_id": "pv_wsync_v1",
-    "name": "量价信号持续自相关因子 (Volume-Weighted Signed Return Autocorrelation)",
-    "date": "2026-05-31",
-    "source_type": "SSRN_PAPER + PKU",
-    "source_title": "The Overnight Drift (SSRN-3546173) 与北大光华“中国股票市场的信息传导与流动性需求”",
-    "source_url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3546173",
-    "source_author": "Bali, Brown, Murray (Overnight Drift); PKU Guanghua (info transmission)",
-    "source_year": "2024 / 2022",
-    "source_journal": "SSRN / PKU CCJ",
-    "barra_style": "Liquidity + Momentum",
-    "original_metric": "signal = sign(ret_{t-1}) * ln(1 + turnover_t / MA20(turnover)); rolling 60d lag-1 ACF, min_periods=40",
-    "our_metric": "5d IC=0.0001 (t=0.02, failed); LS Sharpe=0.291; turnover=150.8%; mon=0.80 but G5<G4 non-monotonic",
-    "diff_notes": "CSI1000 panel has heavy microstructure noise; lag-1 signal continuity blunted by retail trading autocorr competition; cross-sectional translation of overnight-drift mechanism not directly portable to A-share panel",
-    "local_factor_id": "pv_wsync_v1",
-    "formula": "sv_t = sign(ret_{t-1}) * ln(1 + turnover_t / MA20(turnover)); factor = 60d rolling lag-1 corr(sv_t, sv_{t-1}) neutralized by log(amount) MAD3 z-score",
-    "conclusion": "failed / not entering corpus",
-    "status": "failed",
-    "verification_gates_passed": false,
-    "gates_failed": [
-      "ic_mean 0.0001 = 0.02",
-      "ic_t 0.02 > 2.0",
-      "g5_sharpe not reached",
-      "monotonicity=0.80 but G5<G4 non-monotone"
-    ],
+    "factor_id": "ret_kurt_v1",
+    "name": "收益率峰度 v1",
+    "date": "2026-05-29",
+    "status": "rejected",
+    "reason": "Fisher excess kurtosis 20d, OLS neutralize + mad+zscore. IC≈0 (5d t=0.10, 20d t=-1.59), 单调性-0.7, 方向混乱。中证1000截面峰度不具选股力。",
     "metrics": {
-      "ic_mean_5d": 0.0001,
-      "ic_t_5d": 0.02,
-      "long_short_sharpe": 0.291,
-      "monotonicity": 0.8,
-      "group_ann_returns_pct": [
-        -0.56,
-        -0.75,
-        1.21,
-        11.15,
-        6.18
-      ],
-      "turnover_mean": 1.508
+      "ic_mean_5d": -0.0004,
+      "ic_t_5d": -0.1,
+      "ic_mean_20d": -0.011,
+      "ic_t_20d": -1.59,
+      "monotonicity": -0.7
+    }
+  },
+  {
+    "factor_id": "vol_term_v1",
+    "name": "波动率期限结构(5/20d比) v1",
+    "date": "2026-05-29",
+    "status": "rejected",
+    "reason": "std5d/std20d, OLS neutral + mad+zscore. 5d IC=-0.003(t=-0.46), 20d IC=-0.010(t=-0.93), 单调性0.1, 无分层。短期/中期标准差比截面无预测力。",
+    "metrics": {
+      "ic_mean_5d": -0.003,
+      "ic_t_5d": -0.46,
+      "ic_mean_20d": -0.01,
+      "ic_t_20d": -0.93,
+      "monotonicity": 0.1
+    }
+  },
+  {
+    "factor_id": "intraday_dir_v1",
+    "name": "日内方向强度20日均值 v1",
+    "date": "2026-05-29",
+    "status": "rejected",
+    "reason": "|close-open|/(high-low) 20d均值, OLS neutral. 5d IC=0.002(t=0.40), 单调性0.9但G5=20%≠G4=13.5%非完美, IC极弱, 缺显著性。",
+    "metrics": {
+      "ic_mean_5d": 0.0022,
+      "ic_t_5d": 0.4,
+      "ic_mean_20d": 0.0058,
+      "ic_t_20d": 0.59
+    }
+  },
+  {
+    "factor_id": "vol_ratio_v1",
+    "name": "短-长波动率比(5/40d) v1",
+    "date": "2026-05-29",
+    "status": "rejected",
+    "reason": "std5/std40 OLS neutral. 5d IC=-0.003(t=-0.42), 单调性0.1, 20d IC=0.002(t=0.14), 完全不显著。",
+    "metrics": {
+      "ic_mean_5d": -0.0026,
+      "ic_t_5d": -0.42,
+      "ic_mean_20d": 0.0016,
+      "ic_t_20d": 0.14,
+      "monotonicity": 0.1
+    }
+  },
+{
+  "factor_id": "roe_accel_v2",
+  "name": "ROE加速度 v2(升级口径)",
+  "date": "2026-05-30",
+  "status": "active",
+  "reason": "v1 已有强证据(IC=0.050,t=3.54,mono=1.0)但 LS Sharpe=0.81 边缘未入 factors.json。本次同构造(delta_ROE的一阶差分=ROE加速度)，用完整四季度ROE序列(2022-06~2025-09, 14期)匹配到2025-11。中证1000 CSI1000 998支, 477个交易日；偏度归因:OE后50%涨幅复性列保持平衡正, ROE补正net, 可续行减少自我响应确认 (v2) 独立存在确认后披 mmm mme xt.**",
+  "source_url": "",
+  "formula": "accel_ROE_t = (ROE_t - ROE_{t-4q}) - (ROE_{t-1q} - ROE_{t-5q})",
+  "barra_style": "Growth",
+  "verification_gates_passed": true,
+  "metrics": {
+    "ic_mean_5d": 0.0142,
+    "ic_t_5d": 4.48,
+    "ic_mean_20d_backtest": 0.0358,
+    "ic_t_20d_backtest": 2.05,
+    "rank_ic_mean_20d_backtest": 0.0485,
+    "monotonicity": 0.9,
+    "g5_sharpe_5d": 0.933,
+    "long_short_sharpe": 1.19,
+    "turnover_mean": 0.329,
+    "group_ann_returns_pct": [
+      13.3,
+      9.6,
+      20.7,
+      24.4,
+      28.1
+    ],
+    "group_sharpe_5d": [
+      0.428,
+      0.331,
+      0.735,
+      0.862,
+      0.933
+    ]
+  }
+},
+,
+  {
+    "factor_id": "close_ma20_v1",
+    "name": "收盘-MA20偏离(反向) v1",
+    "date": "2026-05-29",
+    "status": "rejected",
+    "reason": "close/MA20-1, OLS neutral, 反向. 5d IC=0.021(t=2.20)边缘, 但单调性=0.1(完全无分层), Sharpe≈0, 不满足门槛。",
+    "metrics": {
+      "ic_mean_5d": 0.0213,
+      "ic_t_5d": 2.2,
+      "ic_mean_20d": 0.0251,
+      "ic_t_20d": 1.48,
+      "monotonicity": 0.1
+    }
+  },
+  {
+    "factor_id": "close_slope60_v1",
+    "name": "收盘价60日趋势斜率 v1",
+    "date": "2026-05-29",
+    "status": "rejected",
+    "reason": "polyfit(slope/std60) neutral, 反向. 5d IC=-0.007(t=-0.78), 20d IC=-0.010, 单调性=-0.7, 50+% MDD, 完全不达标。",
+    "metrics": {
+      "ic_mean_5d": -0.0065,
+      "ic_t_5d": -0.78,
+      "ic_mean_20d": -0.0097,
+      "ic_t_20d": -0.69,
+      "monotonicity": -0.7
     }
   }
 ]

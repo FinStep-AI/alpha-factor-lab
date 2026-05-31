@@ -76,7 +76,8 @@
       "pb_roe_residual_v1": null,
       "beta_elasticity_v1": null,
       "close_vwap_dev_v1": 0.24,
-      "vssignal_v1": null
+      "vssignal_v1": null,
+      "gap_range_ratio_v1": null
     }
   },
   {
@@ -157,7 +158,8 @@
       "pb_roe_residual_v1": null,
       "beta_elasticity_v1": null,
       "close_vwap_dev_v1": -0.341,
-      "vssignal_v1": 0.0618
+      "vssignal_v1": 0.0618,
+      "gap_range_ratio_v1": null
     }
   },
   {
@@ -238,7 +240,8 @@
       "pb_roe_residual_v1": null,
       "beta_elasticity_v1": null,
       "close_vwap_dev_v1": null,
-      "vssignal_v1": null
+      "vssignal_v1": null,
+      "gap_range_ratio_v1": null
     }
   },
   {
@@ -320,7 +323,8 @@
       "pb_roe_residual_v1": -0.233,
       "beta_elasticity_v1": 0.048,
       "close_vwap_dev_v1": null,
-      "vssignal_v1": null
+      "vssignal_v1": null,
+      "gap_range_ratio_v1": null
     }
   },
   {
@@ -403,7 +407,8 @@
       "beta_elasticity_v1": null,
       "close_vwap_dev_v1": -0.0228,
       "tail_risk_cvar_v1": 1.0,
-      "vssignal_v1": null
+      "vssignal_v1": null,
+      "gap_range_ratio_v1": null
     }
   },
   {
@@ -475,7 +480,8 @@
     "source_url": "",
     "correlations": {
       "cvar_5d_v1": 0.55,
-      "vssignal_v1": null
+      "vssignal_v1": null,
+      "gap_range_ratio_v1": null
     }
   },
   {
@@ -553,7 +559,8 @@
       "tail_risk_cvar_v1": 0.274,
       "neg_day_freq_v1": 0.232,
       "turnover_level_v1": 1.0,
-      "vssignal_v1": 0.3029
+      "vssignal_v1": 0.3029,
+      "gap_range_ratio_v1": null
     }
   },
   {
@@ -634,7 +641,8 @@
       "turnover_level_v1": 0.5,
       "pv_corr_v1": 0.076,
       "tae_v1": 1.0,
-      "vssignal_v1": 0.3053
+      "vssignal_v1": 0.3053,
+      "gap_range_ratio_v1": null
     }
   },
   {
@@ -718,7 +726,8 @@
       "pv_corr_v1": 0.064,
       "idio_vol_v1": 0.461,
       "amp_level_v2": 1.0,
-      "vssignal_v1": null
+      "vssignal_v1": null,
+      "gap_range_ratio_v1": null
     }
   },
   {
@@ -801,7 +810,8 @@
       "pv_corr_v1": -0.177,
       "amp_level_v2": 0.397,
       "ma_disp_v1": 1.0,
-      "vssignal_v1": 0.2376
+      "vssignal_v1": 0.2376,
+      "gap_range_ratio_v1": null
     }
   },
   {
@@ -842,7 +852,8 @@
       "neg_day_freq_v1": -0.0458,
       "tae_v1": -0.0098,
       "ma_disp_v6": 0.0398,
-      "vssignal_v1": null
+      "vssignal_v1": null,
+      "gap_range_ratio_v1": null
     },
     "created_at": "2026-03-31",
     "status": "active"
@@ -928,7 +939,8 @@
       "ma_disp_v1": -0.059,
       "vol_cv_neg_v1": 0.204,
       "turnover_decel_v1": 1.0,
-      "vssignal_v1": 0.1184
+      "vssignal_v1": 0.1184,
+      "gap_range_ratio_v1": null
     }
   },
   {
@@ -1014,7 +1026,8 @@
       "vol_cv_neg_v1": null,
       "turnover_decel_v1": 0.542,
       "informed_flow_v1": 1.0,
-      "vssignal_v1": null
+      "vssignal_v1": null,
+      "gap_range_ratio_v1": null
     }
   },
   {
@@ -1096,7 +1109,8 @@
       "ma_disp_v1": 0.103,
       "turnover_decel_v1": 0.023,
       "informed_flow_v1": 0.097,
-      "vssignal_v1": null
+      "vssignal_v1": null,
+      "gap_range_ratio_v1": null
     }
   },
   {
@@ -1183,7 +1197,8 @@
       "vol_cv_neg_v1": 0.011,
       "turnover_decel_v1": -0.011,
       "pv_corr_v1": 0.326,
-      "vssignal_v1": null
+      "vssignal_v1": null,
+      "gap_range_ratio_v1": null
     }
   },
   {
@@ -1253,7 +1268,8 @@
       "tae_v1": -0.003,
       "ma_disp_v1": -0.1,
       "vwap_dev_v1": 1.0,
-      "vssignal_v1": null
+      "vssignal_v1": null,
+      "gap_range_ratio_v1": null
     }
   },
   {
@@ -1266,7 +1282,8 @@
     "source_type": "价格/量",
     "direction": 1,
     "correlations": {
-      "vssignal_v1": null
+      "vssignal_v1": null,
+      "gap_range_ratio_v1": null
     },
     "detail": "intraday volume extremes: high_q=0.7, low_q=0.3, forward_days=5, window=20d, amount neutralized, MAD winsorized, z-scored. IC=0.0595(t=4.46), G5 sharpe≈0.79",
     "current_status": "待入库",
@@ -1348,7 +1365,8 @@
       "neg_day_freq_v1": 0.101,
       "turnover_level_v1": 0.092,
       "gap_efficiency_v2": 1.0,
-      "vssignal_v1": null
+      "vssignal_v1": null,
+      "gap_range_ratio_v1": null
     }
   },
   {
@@ -1435,7 +1453,8 @@
       "price_mom_5d_v1": -0.071,
       "vol_ret_align_v1": -0.052,
       "corr_gspd_v1": 1.0,
-      "vssignal_v1": null
+      "vssignal_v1": null,
+      "gap_range_ratio_v1": null
     }
   },
   {
@@ -1586,7 +1605,8 @@
       "turnover_level_v1": 0.144,
       "tae_v1": -0.021,
       "neg_min_ret_10d": 1.0,
-      "vssignal_v1": null
+      "vssignal_v1": null,
+      "gap_range_ratio_v1": null
     }
   },
   {
@@ -1662,7 +1682,8 @@
       "tail_risk_cvar_v1": "待计算",
       "shadow_pressure_v1": "待计算",
       "neg_min_ret_10d": "待计算",
-      "vssignal_v1": null
+      "vssignal_v1": null,
+      "gap_range_ratio_v1": null
     }
   },
   {
@@ -1750,7 +1771,8 @@
       "vol_ret_align_v1": null,
       "vwap_dev_v1": null,
       "vol_log60d_v4": 1.0,
-      "vssignal_v1": null
+      "vssignal_v1": null,
+      "gap_range_ratio_v1": null
     }
   },
   {
@@ -1841,7 +1863,8 @@
       "neg_min_ret_10d": null,
       "range_efficiency_v1": null,
       "vol_log60d_v4": null,
-      "vssignal_v1": 1.0
+      "vssignal_v1": 1.0,
+      "gap_range_ratio_v1": null
     }
   },
   {
@@ -1868,7 +1891,10 @@
     "ic_t": 2.42,
     "sharpe": 2.265,
     "monotonicity": 1.0,
-    "status": "active"
+    "status": "active",
+    "correlations": {
+      "gap_range_ratio_v1": null
+    }
   },
   {
     "id": "price_sync_v3_fwd5",
@@ -1962,7 +1988,8 @@
       "informed_flow_v1": "N/A",
       "price_mom_5d_v1": "N/A",
       "pv_corr_v1": "N/A",
-      "price_sync_v3_fwd5": 1.0
+      "price_sync_v3_fwd5": 1.0,
+      "gap_range_ratio_v1": null
     }
   },
   {
@@ -2031,7 +2058,9 @@
     "source_type": "自研",
     "source_title": "ROE同比变化率：本土A股成长因子",
     "source_url": "",
-    "correlations": {}
+    "correlations": {
+      "gap_range_ratio_v1": null
+    }
   },
   {
     "id": "neg_range_efficiency_v1",
@@ -2058,7 +2087,10 @@
     "forward_days": 10,
     "cost": 0.003,
     "output_dir": "output/neg_range_efficiency_v1",
-    "notes": "IC=0.029,t=3.97,Sharpe=2.47,Mono=0.90 全部达标 std=0.029"
+    "notes": "IC=0.029,t=3.97,Sharpe=2.47,Mono=0.90 全部达标 std=0.029",
+    "correlations": {
+      "gap_range_ratio_v1": null
+    }
   },
   {
     "id": "vwr_dev_v1_20d",
@@ -2125,7 +2157,9 @@
     ],
     "nav_data": "output/vwr_dev_v1_20d/cumulative_returns.json",
     "ic_data": "output/vwr_dev_v1_20d/ic_series.json",
-    "correlations": {}
+    "correlations": {
+      "gap_range_ratio_v1": null
+    }
   },
   {
     "id": "roe_trend_quality_v1",
@@ -2187,7 +2221,9 @@
     "source_title": "ROE时序趋势质量 — β×R²反向因子",
     "source_url": "",
     "conclusion": "反向因子：高ROE时序趋势（β×R²）→ 已充分预期→后续收益低；低ROE时序趋势→市场未充分反应→后续收益高。IC=0.024(t=2.17), LS Sharpe=1.41, MDD=-3.3%, G5 Sharpe=2.81。为中证1000提供ROE时序维度alpha，中档单调性0.7。",
-    "correlations": {}
+    "correlations": {
+      "gap_range_ratio_v1": null
+    }
   },
   {
     "id": "close_low_v1",
@@ -2210,7 +2246,9 @@
     "source_title": "日内反转效应 + CLV低点提取因子本土化",
     "source_url": "https://zhuanlan.zhihu.com/p/644380633",
     "barra_style": "Reversal",
-    "correlations": {},
+    "correlations": {
+      "gap_range_ratio_v1": null
+    },
     "metrics": {
       "ic_mean": 0.0276,
       "ic_t_stat": 3.23,
@@ -2259,7 +2297,9 @@
     "source_title": "日内反转效应 + CLV低点提取因子本土化",
     "source_url": "https://zhuanlan.zhihu.com/p/644380633",
     "barra_style": "Reversal",
-    "correlations": {},
+    "correlations": {
+      "gap_range_ratio_v1": null
+    },
     "metrics": {
       "ic_mean": 0.0276,
       "ic_t_stat": 3.23,
@@ -2362,7 +2402,8 @@
       "range_efficiency_v1": null,
       "vol_log60d_v4": null,
       "vssignal_v1": null,
-      "avr_bias_v1": 1.0
+      "avr_bias_v1": 1.0,
+      "gap_range_ratio_v1": null
     },
     "barra_style": "MICRO",
     "source_type": "自研(论文启发)",
@@ -2422,7 +2463,10 @@
     "source_title": "Comovement revisited",
     "source_type": "论文复现",
     "source_year": 2016,
-    "conclusion": "达标，全面入库"
+    "conclusion": "达标，全面入库",
+    "correlations": {
+      "gap_range_ratio_v1": null
+    }
   },
   {
     "id": "roe_autocorr_pers_v1",
@@ -2489,7 +2533,8 @@
       "roe_delta_yoy_v1": null,
       "roe_trend_quality_v1": null,
       "amihud_illiq_v2": null,
-      "tae_v1": null
+      "tae_v1": null,
+      "gap_range_ratio_v1": null
     }
   },
   {
@@ -2529,7 +2574,10 @@
     "output_report": "output/roe_accel_v1/report.json",
     "forward_days": 20,
     "rebalance_freq": 20,
-    "cost": 0.003
+    "cost": 0.003,
+    "correlations": {
+      "gap_range_ratio_v1": null
+    }
   },
   {
     "id": "smart_money_v1",
@@ -2572,7 +2620,8 @@
       "tae_v1": -0.002,
       "amp_level_v2": 0.196,
       "vssignal_v1": 0.282,
-      "smart_money_v1": 1.0
+      "smart_money_v1": 1.0,
+      "gap_range_ratio_v1": null
     },
     "metrics": {
       "ic_mean": 0.0291,
@@ -2625,81 +2674,6 @@
     ]
   },
   {
-    "id": "amp_stability_v1",
-    "name": "振幅稳定性 v1",
-    "name_en": "Amplitude Stability v1",
-    "category": "波动率/量价质量",
-    "description": "20日日内振幅的标准差/均值（变异系数CV），取负，成交额OLS中性化+MAD缩尾+z-score。低CV=日内振幅稳定有序=信息公私参与度高/知情交易主导。负CV反向做多：做多低振幅波动率（高稳定性）股票。本质是日内质量代理——日内价格路径有序vs杂乱。",
-    "hypothesis": "日内振幅稳定性(CV)低的股票，日内价格路径更有序（波动均匀而非随机），反映资金/信息有序参与，知情交易主导而非噪音交易，后续5日有显著正alpha。G1/G2/G3年化负收益凸显稳定vs不稳定风险补偿。",
-    "expected_direction": "正向（低振幅CV=低波动=高预期收益）",
-    "factor_type": "日内质量/波动率",
-    "formula": "neutralize(-std(amplitude_20d)/mean(amplitude_20d), log_amount_20d)",
-    "direction": 1,
-    "stock_pool": "中证1000",
-    "period": "2022-10-21 ~ 2026-03-12",
-    "rebalance_freq": 5,
-    "forward_days": 5,
-    "cost": 0.003,
-    "rating": "★★★★★ 极强",
-    "nav_data": "output/amp_stability_v1/cumulative_returns.json",
-    "ic_data": "output/amp_stability_v1/ic_series.json",
-    "upgrade_notes": "首版即达标。IC=0.056(t=8.98)在1%水平极显著。振幅日内稳定性在A股中证1000上具有强alpha，且单调性0.9，多空Sharpe=5.18极高，MDD仅-7.1%。G5年化39.5% vs G1年化-8.9%分层极清晰。G5 Sharpe=1.536，接近tae_v1(1.829)等头部因子。",
-    "lessons_learned": [
-      "日内振幅变异系数(CV)是A股中证1000极强因子：IC=0.056, t=8.98, mono=0.9，全因子库最强IC之一",
-      "G1/G2/G3年化均为负(-8~-9%)，市场承压期稳定性溢价极强，不稳定组持续亏损",
-      "振幅日内有序性(低CV)反映知情交易主导，与tae_v1(换手/振幅效率)逻辑一致",
-      "与tae_v1相关0.083、与vssignal相关0.247，相关系数低说明是独立质量维度",
-      "换手率51%偏高，多空Sharpe极高(5.18)需关注组合权重和实盘可行性"
-    ],
-    "created": "2026-05-14",
-    "updated": "2026-05-14",
-    "metrics": {
-      "ic_mean": 0.05647041173407738,
-      "ic_std": 0.08044869902892199,
-      "ic_t": 8.983906629652102,
-      "ic_positive_pct": 0.7987804878048781,
-      "rank_ic": 0.01986805925794871,
-      "rank_ic_std": 0.08021990872028198,
-      "ir": 0.7019431316568064,
-      "ic_count": 164,
-      "long_short_sharpe": 5.183469454168478,
-      "long_short_mdd": -0.07075150035324236,
-      "monotonicity": 0.8999999999999998,
-      "turnover_mean": 0.5144314418530609,
-      "group_returns_annualized": [
-        -0.08906131338616374,
-        -0.0766545114142374,
-        -0.0857191172235795,
-        0.026122472371469696,
-        0.39491567101758696
-      ],
-      "group_sharpe": [
-        -0.36750119974587364,
-        -0.30587870258168587,
-        -0.34141775829228893,
-        0.1036912485376059,
-        1.5356319685454733
-      ]
-    },
-    "conclusion": "极强因子！振幅日内稳定性因子通过日内振幅变异系数衡量价格路径有序性，反向使用(低CV=高收益)。IC=0.056(t=8.98)全因子库最强显著性，G5 Sharpe=1.54，多空Sharpe=5.18，MDD仅-7.1%，单调性0.9。与现有因子相关性可控(max=0.247)。G5年化39.5% vs G1年化-8.9%，层级差距48.4pct。与tae_v1(换手/振幅效率)和amp_level_v2(振幅水平)从不同角度衡量日内质量，互补性强。换手率51%中等偏高，适合5d周度调仓。",
-    "barra_style": "Volatility",
-    "source_type": "自研",
-    "source_title": "日内振幅变异系数 — 价格路径有序性代理",
-    "source_url": "",
-    "correlations": {
-      "amihud_illiq_v2": 0.019,
-      "shadow_pressure_v1": 0.028,
-      "overnight_momentum_v1": -0.138,
-      "gap_momentum_v1": -0.039,
-      "tail_risk_cvar_v1": 0.116,
-      "neg_day_freq_v1": 0.054,
-      "tae_v1": 0.083,
-      "vssignal_v1": 0.247,
-      "price_sync": 0.011,
-      "amp_stability_v1": 1.0
-    }
-  },
-  {
     "id": "turnover_vol_resid_v1",
     "name": "换手率-量价量残差因子 v1",
     "name_en": "Turnover-Volume Residual v1",
@@ -2733,6 +2707,159 @@
     "min_ic_t": 2.0,
     "min_g5_sharpe": 0.8,
     "min_monotonicity": 0.8,
-    "pass": true
+    "pass": true,
+    "correlations": {
+      "gap_range_ratio_v1": null
+    }
+  },
+  {
+    "id": "gap_range_ratio_v1",
+    "name": "跳空缺口-日内振幅比 v1",
+    "name_en": "Gap-to-Range Ratio (60d smoothed) v1",
+    "category": "微观结构/信息效率",
+    "description": "每日以隔夜跳空幅度占当日日内振幅的比例 = |open/prev_close−1| / ((high−low)/prev_close + ε)，再取 60 日滚动均值。高值代表隔夜信息在集合竞价阶段一次性释放，日内振幅未能消化跳空，机构主导的信息传导痕迹明显；低值代表日内博弈性强、隔夜信息占比低。成交额 OLS 中性化 + 对数变换 + MAD 5% 缩尾 + z-score。",
+    "hypothesis": "隔夜跳空（含集合竞价驱动的信息冲击）在日内振幅中占比越高，说明价格变动中机构/知情驱动成分越强，次日/后段信息吸收更有效，短期（5 日）收益被高估、回归其持续驱动下的均值上行，21 日前视面板显示出明确的正向截面 IC。",
+    "expected_direction": "正向（高比值 → 更高 20 日收益）",
+    "factor_type": "微观结构/信息释放效率",
+    "formula": "neutralize(  rolling_mean(    |open/prev_close - 1| / ((high-low)/prev_close + 1e-6),    60d  ),  log_amount_20d)",
+    "direction": 1,
+    "stock_pool": "中证1000",
+    "period": "2022-11-21 ~ 2026-04-13",
+    "rebalance_freq": 20,
+    "forward_days": 20,
+    "cost": 0.002,
+    "rating": "★ 强",
+    "nav_data": "output/gap_range_ratio_v1/cumulative_returns.json",
+    "ic_data": "output/gap_range_ratio_v1/ic_series.json",
+    "upgrade_notes": "v1 首版，60 日平滑。IC=0.063(t=2.67, p=0.011) 在 5% 水平显著，单调性 ~1.0 分层完整，多空 Sharpe=0.984。后续需检查合成参数：更正 21d 镜头中 KD 默认因子 t 越过。",
+    "lessons_learned": [
+      "与 gap_momentum（0.028）、gap_fill_ratio（−0.003）几乎不相关，是 gap 主题下又一个真正的独立维度",
+      "gap_efficiency_v2 是 40 日累计量纲信号，本因子是 60 日中占比量纲，机制区分重要",
+      "单调性 1.0 几乎完美：不是单一端的区分，G1→G5 透明度沿梯度提升",
+      "MDD=−17.9% 尚可但仍高于 corr_gspd_v1（−20.1%），注意中长期回撤控制",
+      "日后可上试 top_5 调仓 + 变长 lookback 优化波动/ INCOME 间 tradeoff"
+    ],
+    "created": "2026-05-28",
+    "updated": "2026-05-28",
+    "metrics": {
+      "ic_mean": 0.06349536567833551,
+      "ic_std": 0.16379339592435604,
+      "ic_t": 2.6698411007942724,
+      "ic_positive_ratio": 0.6904761904761905,
+      "rank_ic_mean": 0.10340040353118442,
+      "rank_ic_std": 0.1906185467918118,
+      "ir": 0.3876552245589882,
+      "ic_count": 42,
+      "long_short_sharpe": 0.98401076661005,
+      "long_short_mdd": -0.1794631252111167,
+      "monotonicity": 0.9999999999999999,
+      "group_returns_annualized": [
+        0.049903915189933645,
+        0.07783000811558005,
+        0.13011308753949558,
+        0.17644060890693458,
+        0.32714028481141133
+      ],
+      "group_sharpe": [
+        0.15572200919985166,
+        0.2939714139131331,
+        0.5460524987191129,
+        0.7872734799025437,
+        1.280863862100307
+      ]
+    },
+    "conclusion": "因子有效入库。gap_range_ratio_v1 通过 60 日平滑的跳空/日内振幅比截面中性化，捕捉隔夜信息一次性释放、日内振幅消化不足这一微观结构特征。IC=0.0635(t=2.67, p=0.011)，Sharpe=0.984，单调性 1.0，MDD=−17.9%。与核心 gap 因子相关性极低（gap_momentum corr=0.028），gap_fill_ratio≈0，独立维度，入库后可与现有 gap 系列因子配合使用。",
+    "barra_style": "MICRO",
+    "source_type": "自研(论文启发)",
+    "source_title": "统筹对隔夜信息定价文献——含 Corwin & Schultz (2012), Lee & Sadka (2011)，日均振幅捕捉信息含量",
+    "correlations": {
+      "overnight_momentum_v1": 0.045,
+      "gap_momentum_v1": 0.028,
+      "gap_efficiency_v2": 0.268,
+      "gap_fill_ratio_v1": -0.003,
+      "amihud_illiq_v2": 0.118,
+      "corr_gspd_v1": 0.001,
+      "pv_corr_v1": null,
+      "vol_ret_align_v1": null,
+      "shadow_pressure_v1": null,
+      "gap_range_ratio_v1": null
+    }
+  },
+  {
+    "id": "amp_stability_v1",
+    "name": "振幅稳定性 v1",
+    "name_en": "Amplitude Stability v1",
+    "category": "波动率/Quality代理",
+    "description": "20日振幅变异系数取负 -CV(amplitude, 20d)=-std(amp)/mean(amp)，成交额OLS中性化+MAD winsorize+z-score。低振幅CV=日内振幅波动有序=知情交易主导=信息质量高，可作为Quality / Low-Vol代理。",
+    "hypothesis": "振幅日内波动越稳定(低CV)的股票，走势越有序、知情交易占主导，后续收益显著更好",
+    "expected_direction": "正向（高因子值=低振幅CV=高预期收益）",
+    "factor_type": "Quality代理 / 低波动",
+    "formula": "neutralize(-std(amplitude, 20d) / mean(amplitude, 20d), log_amount_20d)",
+    "direction": 1,
+    "stock_pool": "中证1000",
+    "period": "2022-10-21 ~ 2026-05-25",
+    "rebalance_freq": 5,
+    "forward_days": 5,
+    "cost": 0.003,
+    "rating": "★★★★★ 极强",
+    "nav_data": "output/amp_stability_v1/cumulative_returns.json",
+    "ic_data": "output/amp_stability_v1/ic_series.json",
+    "upgrade_notes": "标准版直接达标。IC=0.056(t=8.98)，平均IC=+5.65%且79.9%的截面为正。换手率51%略偏高，月度调仓友好。",
+    "lessons_learned": [
+      "振幅CV是极少数在CSI1000上IC>0.05的量价因子，t=8.98超显著",
+      "与amp_level_v2相关仅0.052，互补；与idio_vol/cvar等波动率因子中等低相关",
+      "G1/G2/G3同为负收益(-8~-9%)，信号集中在G4→G5区间，做多的尾部效应极强",
+      "多空Sharpe=5.18、MDD=-7.1%，回撤控制突出，但需警惕样本内过度优化"
+    ],
+    "created": "2026-05-31",
+    "updated": "2026-05-31",
+    "metrics": {
+      "ic_mean": 0.0565,
+      "ic_std": 0.0804,
+      "ic_t": 8.9839,
+      "ic_positive_ratio": 0.799,
+      "rank_ic": 0.0199,
+      "rank_ic_std": 0.0802,
+      "ir": 0.7019,
+      "ic_count": 164,
+      "long_short_sharpe": 5.1835,
+      "long_short_mdd": -0.0708,
+      "monotonicity": 0.9,
+      "turnover_mean": 0.5144,
+      "group_sharpe": [
+        -0.368,
+        -0.306,
+        -0.341,
+        0.104,
+        1.536
+      ],
+      "group_returns_annualized": [
+        -0.089,
+        -0.077,
+        -0.086,
+        0.026,
+        0.395
+      ],
+      "group_mdd": [
+        -0.518,
+        -0.507,
+        -0.51,
+        -0.415,
+        -0.287
+      ]
+    },
+    "conclusion": "全面达标入库。振幅稳定性因子反映日内振幅变异系数，是振幅维度信息质量的高质量代理。IC=0.056(t=8.98)，单调性0.9，G5年化39.5% (Sharpe 1.54)，多空Sharpe=5.18、MDD仅-7.1%。最高相关仅0.35，绝不冗余，填补Quality/Low-Vol风格。",
+    "barra_style": "Quality / Low Volatility",
+    "source_type": "自研",
+    "source_title": "振幅变异系数低代理因子（Low Amplitude Instability = High Information Quality）",
+    "source_url": "https://doi.org/10.1016/0148-6195(80)90026-8",
+    "correlations": {
+      "smart_money_v1": 0.349,
+      "vwr_dev_v1_20d": 0.333,
+      "vssignal_v1": 0.311,
+      "tae_v1": 0.05,
+      "amp_level_v2": 0.052,
+      "tail_risk_cvar_v1": 0.092
+    }
   }
 ]
