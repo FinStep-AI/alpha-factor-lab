@@ -4708,5 +4708,26 @@
       ],
       "turnover_mean": 1.508
     }
+  },
+  {
+    "date": "2026-06-01",
+    "factor_id": "idiosyncratic_v1",
+    "source_type": "金工研报",
+    "source_title": "国信金工「多因子选股周报」2026-05-31 / 华泰/东方特质波动率因子复现思路",
+    "source_url": "https://finance.sina.com.cn/roll/2026-05-31/doc-inhzurik6161429.shtml",
+    "description": "截面20日滚动残差均值（个股r_i ~ 截距 + 市场截均代理 β₁ + 截距)，20日平滑后用成交额OLS中性化+截面 z-score。国信中证1000本周特异度因子周度表现较好。",
+    "original_metric": "国信中证1000:-近一周特异度表现较好；IC/t值/Sharpe 均未公开具体数值",
+    "our_metric": {
+      "ic_mean": 0.0154,
+      "ic_t": 1.26,
+      "sharpe": 0.8471,
+      "monotonicity": 1.0,
+      "max_drawdown": -0.1336,
+      "ls_ann_ret": 0.1523
+    },
+    "diff_notes": "IC=0.0154<0.02门槛，t=1.26<2.0门槛，但Sharpe 0.847>0.8 满足，单调性=1.0 完美单调。v1方向优于v2/v3。主要差异：截面截均代理弱于真实市场指数beta，中证1000截面成分近1000只截面残差对单只股票噪声较大。",
+    "conclusion": "未达标，方向有效但信号偏弱；等差量价数据样本量仅1000只、截面截面截距代理不够精准。保留为候选因子，待有更高频/更准截面beta代理后二次尝试。建议不以backtest handicap结论启用LightGBM或执行决策。",
+    "barra_style": "MICRO",
+    "neutralize": "成交额OLS"
   }
 ]
