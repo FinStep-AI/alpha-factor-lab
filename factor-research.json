@@ -4729,5 +4729,171 @@
     "conclusion": "未达标，方向有效但信号偏弱；等差量价数据样本量仅1000只、截面截面截距代理不够精准。保留为候选因子，待有更高频/更准截面beta代理后二次尝试。建议不以backtest handicap结论启用LightGBM或执行决策。",
     "barra_style": "MICRO",
     "neutralize": "成交额OLS"
+  },
+  {
+    "factor_id": "close_zone_streak_rev_v1",
+    "date": "2026-06-01",
+    "source_type": "自研",
+    "source_title": "日内接近低区间回放streak — 20d翻转版",
+    "source_url": "skills/alpha-factor-lab/scripts/ + data/factor_close_zone_streak_rev_v1.csv",
+    "description": "过去20天里 \"close处低位区间(<0.3日内幅度的天数)\" > \"close处高位区间(>0.7)\" 时该股票的反向版本; 翻转后理论上做多\"近期日内经常触底、收盘弱势\"的反转形态。",
+    "our_metric": {
+      "ic_mean": 0.0113,
+      "ic_t": 1.7,
+      "ls_sharpe": 0.2124,
+      "ls_mdd": -0.2494,
+      "monotonicity": 0.6
+    },
+    "diff_notes": "翻转版IC=0.0113，t=1.70<2.0，Sharpe=0.21远不达标，单调性0.6<0.8。信号方向正确但强度不足；分层收益G4>G5，不明显。",
+    "conclusion": "未达标，放弃入库。核心原因：20日日内区间位置分支捕捉的反转信号在截面维度太弱，无法支撑分组单调性与IC显著度。",
+    "status": "rejected",
+    "n_groups": 5,
+    "forward_days": 5
+  },
+  {
+    "factor_id": "close_zone_streak_v1",
+    "date": "2026-06-01",
+    "source_type": "自研",
+    "source_title": "日内接近高区间持续streak — 原方向",
+    "source_url": "data/factor_close_zone_streak_v1.csv",
+    "description": "过去20天里\"close处在日内高位区间(>0.7)天数占比\">低位区间天数占比，原方向为动量。实际IC负(原方向反转)。",
+    "our_metric": {
+      "ic_mean": -0.0246,
+      "ic_t": -4.56,
+      "ls_sharpe": 0.19,
+      "ls_mdd": -0.34,
+      "monotonicity": -0.6
+    },
+    "diff_notes": "IC=-0.0246(t=-4.56>2的绝对值)，但原方向为负信号，翻转后得IC=+0.0246。反转方向已有记录(close_zone_streak_rev_v1)。本方向方向相反，携同方向。",
+    "conclusion": "原方向无效且IC为负；翻转版单独见close_zone_streak_rev_v1，两者并列记录。",
+    "status": "rejected_direction_opposite",
+    "n_groups": 5,
+    "forward_days": 5
+  },
+  {
+    "factor_id": "vol_ret_persist_v1",
+    "date": "2026-06-01",
+    "source_type": "自研",
+    "source_title": "量价共振持续性(vol×ret sign×vol-chng sign mean × abs_ret_5d)",
+    "source_url": "data/factor_vol_ret_persist_v1.csv",
+    "description": "对过去20天逐日 sign(ret)×sign(vol_chg)取均值（量价净一致比例）再乘上过去5日收益率绝对值之和，期望捕捉趋势明确+量价共振一致的股票。",
+    "our_metric": {
+      "ic_mean": 0.0055,
+      "ic_t": 1.06,
+      "ls_sharpe": -0.1,
+      "ls_mdd": -0.213,
+      "monotonicity": -0.2
+    },
+    "diff_notes": "IC均值0.0055极弱,t=1.06不显著，多空Sharpe=-0.10。信号结构缺乏预测力。",
+    "conclusion": "未达标，IC、Sharpe、单调性三重全挂，不继续优化。",
+    "status": "rejected",
+    "n_groups": 5,
+    "forward_days": 5
+  },
+  {
+    "factor_id": "net_buyer_dom_v1",
+    "date": "2026-06-01",
+    "source_type": "自研",
+    "source_title": "净买方主导比 — 20d滚动 sign(ret)×amount 聚合",
+    "source_url": "data/factor_net_buyer_dom_v1.csv",
+    "description": "20日滚动内 sum(sign(ret)*amount)/sum(|amount|)，试图用成交额+方向近似资金流主买/主卖比率，成交额OLS中性化。",
+    "our_metric": {
+      "ic_mean": -0.0029,
+      "ic_t": -0.5,
+      "ls_sharpe": -0.1,
+      "ls_mdd": -0.213,
+      "monotonicity": -0.2
+    },
+    "diff_notes": "IC≈-0.003几乎为零，t=-0.50，方向亦微弱不利；中证1000日线sign(ret)作为资金方向代理过于粗糙。",
+    "conclusion": "未达标，放弃。日线sign(ret)近似资金流代理无效。",
+    "status": "rejected",
+    "n_groups": 5,
+    "forward_days": 5
+  },
+  {
+    "factor_id": "upamt_ratio_20d_v1",
+    "date": "2026-06-01",
+    "source_type": "自研",
+    "source_title": "涨日成交额占比20d因子",
+    "source_url": "data/factor_upamt_ratio_20d_v1.csv + data/factor_upamt_ratio_20d_rev_v1.csv",
+    "description": "20日滚动内，涨日成交额合计/(涨日+跌日成交额合计)，原方向(高=涨日放量更多)与翻转方向均一一回测。",
+    "our_metric": {
+      "ic_mean_orig": -0.0017,
+      "ic_t_orig": -0.31,
+      "ic_mean_rev": 0.0017,
+      "ic_t_rev": 0.31,
+      "ls_sharpe_orig": -0.59,
+      "ls_sharpe_rev": 0.52,
+      "monotonicity_orig": -0.4,
+      "monotonicity_rev": 0.4
+    },
+    "diff_notes": "原/翻两向t值均≈0.3，远低于2.0；分层单调性亦差。纯涨日放量占比对截面收益预测几乎无效。",
+    "conclusion": "未达标，正反均不行；排除。",
+    "status": "rejected",
+    "n_groups": 5,
+    "forward_days": 5
+  },
+  {
+    "factor_id": "close_ma30_dev_v1",
+    "date": "2026-06-01",
+    "source_type": "自研",
+    "source_title": "30日均线偏离度 — 正反两向均测",
+    "source_url": "data/factor_close_ma30_dev_v1.csv + data/factor_close_ma30_dev_rev_v1.csv",
+    "description": "close/MA30 – 1，null成交额OLS中性化。正方向下ICt≈-1.33;翻转t≈1.33。",
+    "our_metric": {
+      "ic_mean_orig": -0.0119,
+      "ic_t_orig": -1.33,
+      "ic_mean_rev": 0.0119,
+      "ic_t_rev": 1.33,
+      "ls_sharpe_orig": 0.4,
+      "ls_sharpe_rev": -0.51,
+      "monotonicity_orig": 0.9,
+      "monotonicity_rev": -0.9
+    },
+    "diff_notes": "两向反转 Shannon: original monotonicity 0.9但IC/t=1.33(源于 close_ma30 和翻转下为负);翻转后Sharpe=-0.51。",
+    "conclusion": "未达标，方向混淆单一，排除。",
+    "status": "rejected",
+    "n_groups": 5,
+    "forward_days": 5
+  },
+  {
+    "factor_id": "mom_accel_7_21_v1",
+    "date": "2026-06-01",
+    "source_type": "自研",
+    "source_title": "均线趋势加速度 close/MA7 – close/MA21",
+    "source_url": "data/factor_mom_accel_7_21_v1.csv",
+    "description": "close/MA7 – close/MA21，体现短期价格对中短期基准线的偏离加速。",
+    "our_metric": {
+      "ic_mean": 0.0129,
+      "ic_t": 1.46,
+      "ls_sharpe": -0.14,
+      "ls_mdd": -0.265,
+      "monotonicity": -0.1
+    },
+    "diff_notes": "IC=0.0129,t=1.46不显著；Sharpe=-0.14，分层几乎不单调(monotonicity=-0.1)。",
+    "conclusion": "未达标，不优化，排除。",
+    "status": "rejected",
+    "n_groups": 5,
+    "forward_days": 5
+  },
+  {
+    "factor_id": "ret_stab_trend_v1",
+    "date": "2026-06-01",
+    "source_type": "自研",
+    "source_title": "收益稳定性×趋势振幅 — 20天稳定度×10天振幅",
+    "source_url": "data/factor_ret_stab_trend_v1.csv",
+    "description": "(-20日收益波动率std) × (10日abs收益均值)，理论上平滑趋势+有振幅；实际反向。",
+    "our_metric": {
+      "ic_mean": -0.0118,
+      "ic_t": -1.26,
+      "ls_sharpe": -1.31,
+      "ls_mdd": -0.543,
+      "monotonicity": -0.6
+    },
+    "diff_notes": "IC=-0.012/t=-1.26且分层严重反向(G4最高G5=-0.12%)；Sharpe=-1.31。",
+    "conclusion": "未达标，信号方向与预期完全相反，不优化。",
+    "status": "rejected",
+    "n_groups": 5,
+    "forward_days": 5
   }
 ]
