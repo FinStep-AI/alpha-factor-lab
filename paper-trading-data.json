@@ -6,7 +6,7 @@
     "benchmark": "000300",
     "benchmark_name": "沪深300",
     "created_at": "2026-02-23 22:14:25",
-    "updated_at": "2026-06-01 09:06:31",
+    "updated_at": "2026-06-01 09:07:28",
     "status": "active",
     "players_count": 6
   },
@@ -17,7 +17,7 @@
       "style": "LightGBM机器学习选股 · 99特征 · 中证1000 · 周度调仓",
       "description": "10因子+K线衍生→99维特征矩阵→LightGBM预测超额收益→风控过滤→TOP25组合",
       "portfolio": {
-        "cash": 109729.91000000149,
+        "cash": 121457.11000000147,
         "positions": {
           "301631.SZ": {
             "code": "301631.SZ",
@@ -44,10 +44,10 @@
           "000019.SZ": {
             "code": "000019.SZ",
             "name": "深粮控股",
-            "volume": 58300,
+            "volume": 58200,
             "avg_cost": 6.45,
             "current_price": 6.45,
-            "market_value": 376035.0,
+            "market_value": 375390.0,
             "pnl": 0,
             "pnl_pct": 0,
             "entry_date": "2026-06-01"
@@ -55,10 +55,10 @@
           "000035.SZ": {
             "code": "000035.SZ",
             "name": "中国天楹",
-            "volume": 63800,
+            "volume": 63700,
             "avg_cost": 5.89,
             "current_price": 5.89,
-            "market_value": 375782.0,
+            "market_value": 375193.0,
             "pnl": 0,
             "pnl_pct": 0,
             "entry_date": "2026-06-01"
@@ -88,10 +88,10 @@
           "000860.SZ": {
             "code": "000860.SZ",
             "name": "顺鑫农业",
-            "volume": 32700,
+            "volume": 32600,
             "avg_cost": 11.5,
             "current_price": 11.5,
-            "market_value": 376050.0,
+            "market_value": 374900.0,
             "pnl": 0,
             "pnl_pct": 0,
             "entry_date": "2026-06-01"
@@ -132,10 +132,10 @@
           "002182.SZ": {
             "code": "002182.SZ",
             "name": "宝武镁业",
-            "volume": 26300,
+            "volume": 26200,
             "avg_cost": 14.29,
             "current_price": 14.29,
-            "market_value": 375827.0,
+            "market_value": 374398.0,
             "pnl": 0,
             "pnl_pct": 0,
             "entry_date": "2026-06-01"
@@ -176,10 +176,10 @@
           "300855.SZ": {
             "code": "300855.SZ",
             "name": "图南股份",
-            "volume": 10200,
+            "volume": 10100,
             "avg_cost": 36.86,
             "current_price": 36.86,
-            "market_value": 375972.0,
+            "market_value": 372286.0,
             "pnl": 0,
             "pnl_pct": 0,
             "entry_date": "2026-06-01"
@@ -209,10 +209,10 @@
           "601020.SH": {
             "code": "601020.SH",
             "name": "华钰矿业",
-            "volume": 15300,
+            "volume": 15200,
             "avg_cost": 24.56,
             "current_price": 24.56,
-            "market_value": 375768.0,
+            "market_value": 373312.0,
             "pnl": 0,
             "pnl_pct": 0,
             "entry_date": "2026-06-01"
@@ -231,10 +231,10 @@
           "603505.SH": {
             "code": "603505.SH",
             "name": "金石资源",
-            "volume": 20600,
+            "volume": 20500,
             "avg_cost": 18.25,
             "current_price": 18.25,
-            "market_value": 375950.0,
+            "market_value": 374125.0,
             "pnl": 0,
             "pnl_pct": 0,
             "entry_date": "2026-06-01"
@@ -295,7 +295,7 @@
             "entry_date": "2026-06-01"
           }
         },
-        "total_value": 9391479.91,
+        "total_value": 9391427.11,
         "last_update": "2026-05-29"
       },
       "nav_history": {
@@ -7286,17 +7286,142 @@
           "pnl": 0,
           "pnl_pct": 0,
           "reason": "LightGBM weekly rebalance 2026-06-01: 30候选风控全过，执行前25"
+        },
+        {
+          "date": "2026-06-01",
+          "code": "000019.SZ",
+          "name": "深粮控股",
+          "direction": "sell",
+          "price": 6.45,
+          "volume": 100,
+          "amount": 645.0,
+          "fees": {
+            "commission": 5.0,
+            "stamp_duty": 0.32,
+            "transfer_fee": 0.01,
+            "slippage_cost": 0.65,
+            "total": 5.97
+          },
+          "pnl": 0.0,
+          "pnl_pct": 0.0,
+          "reason": "LightGBM weekly rebalance 2026-06-01: 30候选风控全过，执行前25 (trim)"
+        },
+        {
+          "date": "2026-06-01",
+          "code": "000035.SZ",
+          "name": "中国天楹",
+          "direction": "sell",
+          "price": 5.89,
+          "volume": 100,
+          "amount": 589.0,
+          "fees": {
+            "commission": 5.0,
+            "stamp_duty": 0.29,
+            "transfer_fee": 0.01,
+            "slippage_cost": 0.59,
+            "total": 5.89
+          },
+          "pnl": 0.0,
+          "pnl_pct": 0.0,
+          "reason": "LightGBM weekly rebalance 2026-06-01: 30候选风控全过，执行前25 (trim)"
+        },
+        {
+          "date": "2026-06-01",
+          "code": "000860.SZ",
+          "name": "顺鑫农业",
+          "direction": "sell",
+          "price": 11.5,
+          "volume": 100,
+          "amount": 1150.0,
+          "fees": {
+            "commission": 5.0,
+            "stamp_duty": 0.58,
+            "transfer_fee": 0.01,
+            "slippage_cost": 1.15,
+            "total": 6.74
+          },
+          "pnl": 0.0,
+          "pnl_pct": 0.0,
+          "reason": "LightGBM weekly rebalance 2026-06-01: 30候选风控全过，执行前25 (trim)"
+        },
+        {
+          "date": "2026-06-01",
+          "code": "002182.SZ",
+          "name": "宝武镁业",
+          "direction": "sell",
+          "price": 14.29,
+          "volume": 100,
+          "amount": 1429.0,
+          "fees": {
+            "commission": 5.0,
+            "stamp_duty": 0.71,
+            "transfer_fee": 0.01,
+            "slippage_cost": 1.43,
+            "total": 7.16
+          },
+          "pnl": 0.0,
+          "pnl_pct": 0.0,
+          "reason": "LightGBM weekly rebalance 2026-06-01: 30候选风控全过，执行前25 (trim)"
+        },
+        {
+          "date": "2026-06-01",
+          "code": "300855.SZ",
+          "name": "图南股份",
+          "direction": "sell",
+          "price": 36.86,
+          "volume": 100,
+          "amount": 3686.0,
+          "fees": {
+            "commission": 5.0,
+            "stamp_duty": 1.84,
+            "transfer_fee": 0.04,
+            "slippage_cost": 3.69,
+            "total": 10.57
+          },
+          "pnl": 0.0,
+          "pnl_pct": 0.0,
+          "reason": "LightGBM weekly rebalance 2026-06-01: 30候选风控全过，执行前25 (trim)"
+        },
+        {
+          "date": "2026-06-01",
+          "code": "601020.SH",
+          "name": "华钰矿业",
+          "direction": "sell",
+          "price": 24.56,
+          "volume": 100,
+          "amount": 2456.0,
+          "fees": {
+            "commission": 5.0,
+            "stamp_duty": 1.23,
+            "transfer_fee": 0.02,
+            "slippage_cost": 2.46,
+            "total": 8.71
+          },
+          "pnl": 0.0,
+          "pnl_pct": 0.0,
+          "reason": "LightGBM weekly rebalance 2026-06-01: 30候选风控全过，执行前25 (trim)"
+        },
+        {
+          "date": "2026-06-01",
+          "code": "603505.SH",
+          "name": "金石资源",
+          "direction": "sell",
+          "price": 18.25,
+          "volume": 100,
+          "amount": 1825.0,
+          "fees": {
+            "commission": 5.0,
+            "stamp_duty": 0.91,
+            "transfer_fee": 0.02,
+            "slippage_cost": 1.82,
+            "total": 7.76
+          },
+          "pnl": 0.0,
+          "pnl_pct": 0.0,
+          "reason": "LightGBM weekly rebalance 2026-06-01: 30候选风控全过，执行前25 (trim)"
         }
       ],
       "decisions": [
-        {
-          "date": "2026-02-24",
-          "time": "09:04",
-          "type": "factor_scan",
-          "action": "hold",
-          "summary": "每日研报扫描。慧博金融工程板块扫描12篇最新研报(2/12-2/22)。三个新因子方向值得关注：(1)PB-ROE估值偏离度因子(华西证券)——时间序列PB-ROE回归残差衡量估值偏离合理水平，可构造反转因子；(2)GRU深度学习行业动量因子(华福证券)——行业+市场双分支GRU叠加分析师预期和基本面的多信号融合，个股层面可借鉴为深度学习动量因子；(3)Beta因子近期表现突出(光大证券)——本周Beta因子正收益1.11%而残差波动率和估值因子负收益，当前市场风格利好高Beta小盘。arXiv新论文：Agentic AI Nowcasting(2601.11958)展示LLM在Russell1000上top20选股年化alpha 18.4bp/日、Sharpe 2.43，验证信息聚合类因子在大盘股的有效性。当前因子库：Amihud v2(★★★★)表现稳健，振幅疲劳v2(★★☆)中等，预期修正v2(☆☆☆)无效。下一步优先回测PB-ROE偏离度因子(数据需求：PB和ROE季度数据)。",
-          "detail": ""
-        },
         {
           "date": "2026-02-24",
           "time": "09:05",
@@ -7642,6 +7767,14 @@
           "detail": "来源：models/lgbm_v1（97特征，2026-05-25截面预测）。特征矩阵201→取前97列与模型对齐。risk_control: 30候选仅30过/0剔，覆盖13行业（有色金属20%/电子13%/机械设备13%）。",
           "recommendation": "调仓：LightGBM预测前25只，risk_control全过",
           "exec_summary": "成功0笔，失败0笔"
+        },
+        {
+          "date": "2026-06-01",
+          "action": "rebalance",
+          "summary": "LightGBM weekly rebalance 2026-06-01: 30候选风控全过，执行前25",
+          "detail": "来源：models/lgbm_v1（97特征，2026-05-25截面预测）。特征矩阵201→取前97列与模型对齐。risk_control: 30候选仅30过/0剔，覆盖13行业（有色金属20%/电子13%/机械设备13%）。",
+          "recommendation": "调仓：LightGBM预测前25只，risk_control全过",
+          "exec_summary": "成功0笔，失败0笔"
         }
       ],
       "rebalances": [
@@ -7663,8 +7796,8 @@
         "calmar_ratio": -1.67,
         "win_rate": 39.57,
         "profit_loss_ratio": 1.69,
-        "total_trades": 312,
-        "total_fees": 202848.91999999995,
+        "total_trades": 319,
+        "total_fees": 202901.71999999997,
         "current_positions": 25,
         "turnover_rate": 99.6
       },
