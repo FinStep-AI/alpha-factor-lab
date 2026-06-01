@@ -6,7 +6,7 @@
     "benchmark": "000300",
     "benchmark_name": "沪深300",
     "created_at": "2026-02-23 22:14:25",
-    "updated_at": "2026-06-01 15:14:25",
+    "updated_at": "2026-06-01 15:15:02",
     "status": "active",
     "players_count": 6
   },
@@ -296,7 +296,7 @@
           }
         },
         "total_value": 9199217.11,
-        "last_update": "2026-06-01 15:14:25"
+        "last_update": "2026-06-01"
       },
       "nav_history": {
         "dates": [
@@ -7793,10 +7793,10 @@
       ],
       "stats": {
         "total_return_pct": -8.01,
-        "annualized_return_pct": -27.84,
-        "max_drawdown_pct": 14.67,
-        "sharpe_ratio": -1.11,
-        "calmar_ratio": -1.9,
+        "annualized_return_pct": -29.18,
+        "max_drawdown_pct": 15.11,
+        "sharpe_ratio": -1.17,
+        "calmar_ratio": -1.93,
         "win_rate": 34.5,
         "profit_loss_ratio": 1.21,
         "total_trades": 319,
@@ -8753,7 +8753,7 @@
           }
         },
         "total_value": 9439594.0,
-        "last_update": "2026-06-01 15:14:25"
+        "last_update": "2026-06-01"
       },
       "nav_history": {
         "dates": [
@@ -9287,10 +9287,10 @@
       "rebalances": [],
       "stats": {
         "total_return_pct": -5.6,
-        "annualized_return_pct": -19.33,
+        "annualized_return_pct": -18.75,
         "max_drawdown_pct": 8.57,
-        "sharpe_ratio": -3.07,
-        "calmar_ratio": -2.26,
+        "sharpe_ratio": -2.98,
+        "calmar_ratio": -2.19,
         "win_rate": 0,
         "profit_loss_ratio": 0.0,
         "total_trades": 5,
@@ -9388,7 +9388,7 @@
           }
         },
         "total_value": 9858307.1,
-        "last_update": "2026-06-01 15:14:25"
+        "last_update": "2026-06-01"
       },
       "nav_history": {
         "dates": [
@@ -15828,12 +15828,12 @@
       "rebalances": [],
       "stats": {
         "total_return_pct": -1.42,
-        "annualized_return_pct": -4.69,
+        "annualized_return_pct": -5.01,
         "max_drawdown_pct": 6.98,
-        "sharpe_ratio": -0.35,
-        "calmar_ratio": -0.67,
-        "win_rate": 54.82,
-        "profit_loss_ratio": 0.89,
+        "sharpe_ratio": -0.37,
+        "calmar_ratio": -0.72,
+        "win_rate": 54.55,
+        "profit_loss_ratio": 0.9,
         "total_trades": 309,
         "total_fees": 361008.84000000014,
         "current_positions": 2,
@@ -15863,7 +15863,7 @@
           }
         },
         "total_value": 10050146.51,
-        "last_update": "2026-06-01 15:14:25"
+        "last_update": "2026-06-01"
       },
       "trades": [
         {
@@ -17211,7 +17211,7 @@
             "entry_date": "2026-06-01"
           }
         },
-        "last_update": "2026-06-01 15:14:25"
+        "last_update": "2026-06-01"
       },
       "trades": [
         {
@@ -19103,10 +19103,10 @@
       "latest_news": "3/9午盘扫描：AI+油气双热点爆发，首日观察不追高，计划明日分化后建仓",
       "stats": {
         "total_return_pct": -10.83,
-        "annualized_return_pct": -33.67,
+        "annualized_return_pct": -33.81,
         "max_drawdown_pct": 13.09,
-        "sharpe_ratio": -3.53,
-        "calmar_ratio": -2.57,
+        "sharpe_ratio": -3.55,
+        "calmar_ratio": -2.58,
         "win_rate": 61.36,
         "profit_loss_ratio": 0.14,
         "total_trades": 76,
@@ -19280,7 +19280,7 @@
         "name": "趋势游侠",
         "emoji": "🏄",
         "total_return_pct": -1.42,
-        "sharpe_ratio": -0.35,
+        "sharpe_ratio": -0.37,
         "max_drawdown_pct": 6.98,
         "current_nav": 0.985831,
         "total_trades": 309,
@@ -19291,7 +19291,7 @@
         "name": "巴菲特门徒",
         "emoji": "🏛️",
         "total_return_pct": -5.6,
-        "sharpe_ratio": -3.07,
+        "sharpe_ratio": -2.98,
         "max_drawdown_pct": 8.57,
         "current_nav": 0.943959,
         "total_trades": 5,
@@ -19313,8 +19313,8 @@
         "name": "因子猎人",
         "emoji": "🔢",
         "total_return_pct": -8.01,
-        "sharpe_ratio": -1.11,
-        "max_drawdown_pct": 14.67,
+        "sharpe_ratio": -1.17,
+        "max_drawdown_pct": 15.11,
         "current_nav": 0.919922,
         "total_trades": 319,
         "rank": 5
@@ -19324,14 +19324,14 @@
         "name": "热点猎手",
         "emoji": "📰",
         "total_return_pct": -10.83,
-        "sharpe_ratio": -3.53,
+        "sharpe_ratio": -3.55,
         "max_drawdown_pct": 13.09,
         "current_nav": 0.891697,
         "total_trades": 76,
         "rank": 6
       }
     ],
-    "updated_at": "2026-06-01 15:14:25"
+    "updated_at": "2026-06-01 15:15:02"
   },
   "quant": {
     "decisions": [
