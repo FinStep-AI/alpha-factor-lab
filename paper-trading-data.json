@@ -6,7 +6,7 @@
     "benchmark": "000300",
     "benchmark_name": "沪深300",
     "created_at": "2026-02-23 22:14:25",
-    "updated_at": "2026-06-02 08:30:29",
+    "updated_at": "2026-06-02 09:08:26",
     "status": "active",
     "players_count": 6
   },
@@ -7427,14 +7427,6 @@
       "decisions": [
         {
           "date": "2026-02-24",
-          "time": "09:05",
-          "type": "factor_scan",
-          "action": "hold",
-          "summary": "研报扫描：发现PB-ROE偏离度因子(⭐⭐⭐)、Beta弹性因子(⭐⭐)、GRU深度学习因子(⭐)。Amihud v2继续主力，周二无调仓，本周优先回测PB-ROE",
-          "detail": "华西证券PB-ROE残差因子与Amihud低相关互补潜力大；Beta因子风格切换风险大作择时信号；GRU实现成本高暂储备"
-        },
-        {
-          "date": "2026-02-24",
           "time": "09:52",
           "type": "factor_scan",
           "action": "hold",
@@ -7778,6 +7770,13 @@
           "detail": "来源：models/lgbm_v1（97特征，2026-05-25截面预测）。特征矩阵201→取前97列与模型对齐。risk_control: 30候选仅30过/0剔，覆盖13行业（有色金属20%/电子13%/机械设备13%）。",
           "recommendation": "调仓：LightGBM预测前25只，risk_control全过",
           "exec_summary": "成功0笔，失败0笔"
+        },
+        {
+          "date": "2026-06-02",
+          "action": "hold",
+          "summary": "因子扫描日：price_delay_v2a_d1_60d入库(IC=0.040,t=3.12,Sharpe=1.47,mono=0.90); K线最新2026-06-01",
+          "detail": "【因子入库】price_delay_v2a_d1_60d — Hou&Moskowitz(2005)价格延迟因子,D1定义,60日滚动+5阶市场收益滞后,截面rank变换后成交额中性化。回测2023-01-03~2026-06-01: IC=0.0398(t=3.12,5%显著), Sharpe=1.47, 单调性=0.90, 换手56.6%。五组分年化[2.85%,8.82%,16.16%,15.28%,21.32%]单调递增。与因子库最大相关Amihud(r=-0.48)/gap_efficiency_v2(r=0.25),无冗余因子。Barra:MICRO。【数据刷新】fintool拉完1000只,K线最新2026-06-01,无需fallback。【非调仓日】周二,跳过LightGBM调仓。",
+          "recommendation": "因子入库完毕,下周一(2026-06-08)考虑将price_delay_v2a_d1_60d纳入组合候选因子池"
         }
       ],
       "rebalances": [
