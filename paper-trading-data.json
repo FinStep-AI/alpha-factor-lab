@@ -6,7 +6,7 @@
     "benchmark": "000300",
     "benchmark_name": "沪深300",
     "created_at": "2026-02-23 22:14:25",
-    "updated_at": "2026-06-03 08:30:49",
+    "updated_at": "2026-06-03 09:01:44",
     "status": "active",
     "players_count": 6
   },
@@ -7429,14 +7429,6 @@
       ],
       "decisions": [
         {
-          "date": "2026-02-24",
-          "time": "09:52",
-          "type": "factor_scan",
-          "action": "hold",
-          "summary": "PB-ROE偏离度因子回测完成：IC=-0.004(t=0.22不显著)，Sharpe=0.08，单调性0.3。基本面因子在中证1000小盘股噪声太大，失效。Amihud v2继续主力。",
-          "detail": "14个报告期基本面数据+817天K线，截面回归ln(PB)~ROE取残差+市值中性化。正反方向均不显著。"
-        },
-        {
           "date": "2026-02-25",
           "time": "10:05",
           "type": "morning_scan",
@@ -7780,6 +7772,13 @@
           "summary": "因子扫描日：price_delay_v2a_d1_60d入库(IC=0.040,t=3.12,Sharpe=1.47,mono=0.90); K线最新2026-06-01",
           "detail": "【因子入库】price_delay_v2a_d1_60d — Hou&Moskowitz(2005)价格延迟因子,D1定义,60日滚动+5阶市场收益滞后,截面rank变换后成交额中性化。回测2023-01-03~2026-06-01: IC=0.0398(t=3.12,5%显著), Sharpe=1.47, 单调性=0.90, 换手56.6%。五组分年化[2.85%,8.82%,16.16%,15.28%,21.32%]单调递增。与因子库最大相关Amihud(r=-0.48)/gap_efficiency_v2(r=0.25),无冗余因子。Barra:MICRO。【数据刷新】fintool拉完1000只,K线最新2026-06-01,无需fallback。【非调仓日】周二,跳过LightGBM调仓。",
           "recommendation": "因子入库完毕,下周一(2026-06-08)考虑将price_delay_v2a_d1_60d纳入组合候选因子池"
+        },
+        {
+          "date": "2026-06-03",
+          "action": "hold",
+          "summary": "因子扫描2026-06-03：类夏普振幅因子amp_sharpe_v1首次构造→回测失败（IC=-0.001,t=-0.14,Sharpe=-0.51,单调性=-0.1）",
+          "detail": "研报来源：知乎2026-05-28《基于类夏普比动量约束与低波反转因子的量化选股》；核心因子amp_sharpe_v1=mean(10d振幅)/std(10d振幅)；首次中证1000实证：ic_mean=-0.0011 t=-0.14 p=0.886 IC>0仅44.2% 多空Sharpe=-0.51 单调性=-0.10；今日换手率79.5%过高；失败原因为振幅维度已被4支现有因子高度覆盖+10日_window过短+摘要参收不全未忠实复现原文缩放/分组约束；不达标不入库，待研报全文可读后再决定是否以完整构造复现；继续扫描其他研报方向",
+          "recommendation": "amp_sharpe_v1不达标不入库；后续优先看低波反转新方向（研报未公开全文约束）或换一个完全独立的量价/基本面方向；当前不触发调仓，维持现有最强因子持仓"
         }
       ],
       "rebalances": [
@@ -19582,6 +19581,13 @@
         "detail": "OI_Reversal_Asym_v1(SSRN-2730304思路): 20d IC=-0.009(t=-0.96), 5d IC=+0.001(t=+0.08), 单调性≈0。gap_abs20d_v1(跳空绝对值20日均): 20d IC=-0.022(t=-1.17), 单调性=0.3, Sharpe=0.29, 不达门槛。备注: gap_abs20d_v1手算可达IC=+0.089, 但工具回测反号, 方向未能确认, 本次不入库。",
         "action": "no_action",
         "recommendation": "OI_Reversal_Asym_v1淘汰; gap_abs20d_v1待确认; 下期优先:委托挂单手数微观结构(国海金工260128)或量价时序衰减方向"
+      },
+      {
+        "date": "2026-06-03",
+        "type": "daily_factor_scan",
+        "summary": "amp_sharpe_v1 类夏普振幅因子 首次构造 → 回测失败（IC=-0.0011,t=-0.14,Sharpe=-0.51），不入库。",
+        "action": "hold",
+        "detail": "{\"factor_id\": \"amp_sharpe_v1\", \"source_title\": \"基于类夏普比动量约束与低波反转因子的量化选股策略研究报告\", \"source_url\": \"https://zhuanlan.zhihu.com/p/2043270356253901960\", \"test_result\": {\"ic_mean\": -0.0011, \"ic_t\": -0.14, \"ic_p_value\": 0.886, \"long_short_sharpe\": -0.51, \"long_short_mdd\": -0.3229, \"monotonicity\": -0.1, \"period\": \"2022-10-14 ~ 2026-06-02\", \"turnover_mean\": 0.796}, \"conclusion\": \"不达标，不入库。待研报全文可读后再决定是否以更完整构造复现，或转向其他研报方向。\", \"next_step\": \"等研报全文可读后再复现；继续扫描其他研报方向\"}"
       }
     ],
     "last_update": "2026-05-06"
