@@ -1053,5 +1053,18 @@
     "trend": "中性略偏多(BOLL测试)",
     "signal": "观望持有",
     "chart": "charts/000681_chart.png"
+  },
+  {
+    "name": "金螳螂",
+    "code": "002081.SZ",
+    "market": "A",
+    "date": "2026-06-03",
+    "price": 6.68,
+    "change_pct": -2.48,
+    "trend": "冲高回落偏弱震荡",
+    "signal": "持有观望",
+    "chart": "charts/002081_chart.png",
+    "summary": "冲高回落长上影阴线：早盘冲7.03后大幅回落收6.68，接近MA20支撑；MACD仍在负柱区绿柱略收窄；综合评分-15，维持持有。",
+    "analysis": {}
   }
 ]
