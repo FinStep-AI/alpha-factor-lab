@@ -407,7 +407,7 @@ def compute_metrics(
         metrics["ic_count"] = 0
     
     # Rank IC
-    if len(rank_ic_series) > 0:
+    if rank_ic_series is not None and len(rank_ic_series) > 0:
         metrics["rank_ic_mean"] = float(rank_ic_series.mean())
         metrics["rank_ic_std"] = float(rank_ic_series.std())
     else:

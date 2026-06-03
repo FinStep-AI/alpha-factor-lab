@@ -4942,5 +4942,50 @@
     "diff_notes": "中证1000样本内实测：IC=-0.0011（t=-0.14），方向为负反而非正向预测；5分组收益单调性为-0.1（几乎随机）；换手率79.5%过高。失败原因推测：(1)振幅在中证1000已是已被大量覆盖的量价维  度（因子库已有振幅水平、振幅-换手效率率等4支相关因子），类夏普构造未提取增量信息；(2)10日窗口过短，方向性统计噪音大；(3)摘要信息不完整，未拿到研报全量参数，首轮复现只取核心构造，若原论文另有缩放/滞后/分组约束则本次未复  现。",
     "conclusion": "不达标，不入库。待研报全文可读后再决定是否以更完整构造复现，或转向其他研报方向。",
     "research_date": "2026-06-03"
+  },
+  {
+    "factor_id": "roe_decay_rev_v1",
+    "factor_name": "ROE 时序持续性反转 v1",
+    "date": "2026-06-03",
+    "backtest_date": "2026-06-03",
+    "status": "active",
+    "category": "基本面/反转",
+    "barra_style": "Reversal",
+    "source_type": "自研(论文启发)",
+    "source_title": "ROE 时序持续性反转效应 — 高持续性盈利小盘股短期承压",
+    "source_url": "",
+    "description": "8 季滚动截面：取每只股票最近 8 季 ROE，每个季度单独截面百分位 Rank，再按最近→最远线性加权求和，形成「ROE 时序持续性」得分；因子方向反转后入库：高持续高 ROE 股票（过去 8 季排名节节领先）在2024-05~2025-11 间实际跑输，翻转后 IC=+0.034，单调性 1.0。成交额 20 日均值 OLS 中性化 + MAD 5.2σ 缩尾 + z-score。",
+    "hypothesis": "ROE 持续高位（8 季排名稳定靠前）的小盘股在拥挤/估值弥合后会承受均值回落压力——被反转逻辑驱动，反向做多因子可捕捉该短期承压效应。",
+    "original_formula": "time_weighted_rank_sum(ROE_q_t:KEEP, KEEP=8)，方向反转后入库",
+    "our_metric": {
+      "ic_mean": 0.0338,
+      "ic_t_stat": 3.3,
+      "ic_positive_pct": "63%",
+      "ir": 0.43,
+      "long_short_sharpe": 3.34,
+      "long_short_mdd": "-6.18%",
+      "monotonicity": 1.0,
+      "turnover_mean": 0.139,
+      "period": "2024-05-15 ~ 2025-11-13",
+      "g1_annual_ret": "15.0%",
+      "g2_annual_ret": "30.0%",
+      "g3_annual_ret": "35.8%",
+      "g4_annual_ret": "42.0%",
+      "g5_annual_ret": "53.7%",
+      "g5_sharpe": 1.81
+    },
+    "result_summary": "入库。原始信号 IC=-0.034(t=-3.30)，G1(高ROE持续性)跑输 G5 近 4 倍，原始方向为强负 IC——即 ROE 持续性高 → 未来收益差，翻转后 IC=+0.034(t=+3.30)，多空 Sharpe=3.34，MDD=-6.18%，单调性 1.0，G5 Sharpe=1.81，换手率 13.9%。",
+    "threshold_check": {
+      "ic_mean": "0.034 > 0.02 ✅",
+      "ic_t_stat": "3.30 > 2.0 ✅",
+      "g5_sharpe": "1.81 > 0.8 ✅",
+      "monotonicity": "1.0 > 0.8 ✅"
+    },
+    "data_file": "data/factor_roe_decay_rev_v1.csv",
+    "output_path": "output/roe_decay_rev_v1/report.json",
+    "pass_notes": "IC=0.034(t=3.30); G5 Sharpe=1.81; LS Sharpe=3.34; Mono=1.0; MDD=-6.18%; turnover=13.9%",
+    "construction_note": "用时序的重叠 over 2014-2018 period期，日频英 8 季权转 _query_rank. it’s。",
+    "diff_notes": "与 roe_persistence_neg_v1 同属反转逻辑，但构造不同：persistence_neg = mean_ROE/std_ROE（波动率视角），本因子 = 多季 Rank 时间加权（趋势方向+持续性共同加权），相关性=0.636 < 0.7，不冗余。",
+    "conclusion": "达标入库。高 ROE 持续性的小盘股在 2024Q3-2025Q3 经历了一轮 ROE 排名不断靠前（高可持续性）带来的估值/相对收益回撤，反转后 IC=0.034(t=3.30)，LS Sharpe=3.34，MDD=-6.18%，G5 Sharpe=1.81，换手率 13.9%，与现有 ROE 相关因子最高相关仅 0.64（不冗余）。"
   }
 ]

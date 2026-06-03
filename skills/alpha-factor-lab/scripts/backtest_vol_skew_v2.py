@@ -182,6 +182,10 @@ REBALANCE_FREQ = best_res["rb"]
 COST = best_res["cost"]
 
 # ────────────────── 相关性 ──────────────────
+open_piv   = df.pivot_table(index="date", columns="stock_code", values="open")
+high_piv   = df.pivot_table(index="date", columns="stock_code", values="high")
+low_piv    = df.pivot_table(index="date", columns="stock_code", values="low")
+amplitude_piv = df.pivot_table(index="date", columns="stock_code", values="amplitude")
 print(f"\n[7] 与现有因子相关性...")
 amihud_raw = (ret_piv.abs() / (amount_piv / 1e8).clip(lower=1e-8))
 amihud_factor = np.log(amihud_raw.rolling(20, min_periods=10).mean().clip(lower=1e-12))

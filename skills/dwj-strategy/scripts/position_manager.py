@@ -289,12 +289,12 @@ def execute_sell(data, pos_code, portion, price, reason):
         print(f"[ERROR] Position {pos_code} not found", file=sys.stderr)
         return False
     
-    sell_shares = int(pos["shares"] * portion / 100) * 100  # 整手
+    sell_shares = int(pos.get("shares", pos.get("volume", 0)) * portion / 100) * 100  # 整手
     if sell_shares <= 0:
-        sell_shares = pos["shares"]  # 不足100股全卖
+        sell_shares = pos.get("shares", pos.get("volume", 0))  # 不足100股全卖
     
     if portion >= 0.99:
-        sell_shares = pos["shares"]  # 全卖
+        sell_shares = pos.get("shares", pos.get("volume", 0))  # 全卖
     
     amount = price * sell_shares
     fee = max(round(amount * 0.001, 2), 5)  # 至少5元
@@ -303,11 +303,11 @@ def execute_sell(data, pos_code, portion, price, reason):
     portfolio["cash"] += amount - fee
     
     # 更新持仓
-    remaining = pos["shares"] - sell_shares
+    remaining = pos.get("shares", pos.get("volume", 0)) - sell_shares
     if remaining <= 0:
         del portfolio["positions"][pos_code]
     else:
-        pos["shares"] = remaining
+        pos["shares"] = pos.get("shares", pos.get("volume", remaining))
         pos["current_price"] = price
         pos["market_value"] = remaining * price
         if portion >= 0.45 and portion <= 0.55:

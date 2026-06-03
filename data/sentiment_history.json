@@ -1,60 +1,6 @@
 {
   "history": [
     {
-      "date": "20260519",
-      "zt_count": 91,
-      "dt_count": 8,
-      "zb_count": 12,
-      "max_streak": 7,
-      "temperature": 100,
-      "phase": "overheated"
-    },
-    {
-      "date": "20260519",
-      "zt_count": 89,
-      "dt_count": 8,
-      "zb_count": 14,
-      "max_streak": 7,
-      "temperature": 100,
-      "phase": "overheated"
-    },
-    {
-      "date": "20260520",
-      "zt_count": 7,
-      "dt_count": 4,
-      "zb_count": 0,
-      "max_streak": 6,
-      "temperature": 41,
-      "phase": "ferment"
-    },
-    {
-      "date": "20260520",
-      "zt_count": 60,
-      "dt_count": 22,
-      "zb_count": 19,
-      "max_streak": 8,
-      "temperature": 67,
-      "phase": "climax"
-    },
-    {
-      "date": "20260520",
-      "zt_count": 61,
-      "dt_count": 22,
-      "zb_count": 19,
-      "max_streak": 8,
-      "temperature": 67,
-      "phase": "climax"
-    },
-    {
-      "date": "20260521",
-      "zt_count": 7,
-      "dt_count": 1,
-      "zb_count": 0,
-      "max_streak": 7,
-      "temperature": 56,
-      "phase": "ferment"
-    },
-    {
       "date": "20260521",
       "zt_count": 32,
       "dt_count": 22,
@@ -270,7 +216,61 @@
       "max_streak": 4,
       "temperature": 71,
       "phase": "climax"
+    },
+    {
+      "date": "20260602",
+      "zt_count": 1,
+      "dt_count": 4,
+      "zb_count": 0,
+      "max_streak": 3,
+      "temperature": 28,
+      "phase": "startup"
+    },
+    {
+      "date": "20260602",
+      "zt_count": 67,
+      "dt_count": 16,
+      "zb_count": 20,
+      "max_streak": 3,
+      "temperature": 50,
+      "phase": "ferment"
+    },
+    {
+      "date": "20260602",
+      "zt_count": 67,
+      "dt_count": 16,
+      "zb_count": 21,
+      "max_streak": 3,
+      "temperature": 50,
+      "phase": "ferment"
+    },
+    {
+      "date": "20260603",
+      "zt_count": 5,
+      "dt_count": 2,
+      "zb_count": 0,
+      "max_streak": 3,
+      "temperature": 38,
+      "phase": "startup"
+    },
+    {
+      "date": "20260603",
+      "zt_count": 63,
+      "dt_count": 10,
+      "zb_count": 53,
+      "max_streak": 3,
+      "temperature": 58,
+      "phase": "ferment"
+    },
+    {
+      "date": "20260603",
+      "zt_count": 66,
+      "dt_count": 11,
+      "zb_count": 51,
+      "max_streak": 3,
+      "temperature": 58,
+      "phase": "ferment"
     }
   ],
-  "updated": "20260601"
+  "updated": "20260603"
 }

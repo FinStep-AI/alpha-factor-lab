@@ -346,10 +346,6 @@ def update_nav(data: dict, player_id: str, prices: dict, date: str, intraday: bo
     portfolio["total_value"] = round(total_value, 2)
     portfolio["last_update"] = date
     
-    # 盘中刷新：只更新portfolio，不追加nav_history
-    if intraday:
-        return
-    
     initial_cash = data["meta"]["initial_cash"]
     nav = round(total_value / initial_cash, 6)
     cash_pct = round(portfolio["cash"] / total_value * 100, 2) if total_value > 0 else 100
@@ -357,18 +353,22 @@ def update_nav(data: dict, player_id: str, prices: dict, date: str, intraday: bo
     # 日期标准化为 YYYY-MM-DD
     date_key = date[:10]
     
-    # 追加或覆盖当日收盘净值（同一天只保留一条）
+    # 追加或覆盖当日净值（同日只保留一条）
     nav_history = player["nav_history"]
     if nav_history["dates"] and nav_history["dates"][-1] == date_key:
-        # 覆盖当日
+        # 覆盖当日 — intraday 也同步写，保持 nav_history 与 portfolio 一致
         nav_history["nav"][-1] = nav
         nav_history["cash_pct"][-1] = cash_pct
     else:
         nav_history["dates"].append(date_key)
         nav_history["nav"].append(nav)
         nav_history["cash_pct"].append(cash_pct)
+
+    # 盘中刷新：已同步写回 nav_history，不追加交易统计
+    if intraday:
+        return
     
-    # 更新统计指标
+    # 收盘逻辑：更新统计指标
     _update_stats(player, initial_cash)
     
     player["stats"]["current_positions"] = len(portfolio["positions"])
