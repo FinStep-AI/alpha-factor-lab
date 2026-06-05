@@ -4987,5 +4987,22 @@
     "construction_note": "用时序的重叠 over 2014-2018 period期，日频英 8 季权转 _query_rank. it’s。",
     "diff_notes": "与 roe_persistence_neg_v1 同属反转逻辑，但构造不同：persistence_neg = mean_ROE/std_ROE（波动率视角），本因子 = 多季 Rank 时间加权（趋势方向+持续性共同加权），相关性=0.636 < 0.7，不冗余。",
     "conclusion": "达标入库。高 ROE 持续性的小盘股在 2024Q3-2025Q3 经历了一轮 ROE 排名不断靠前（高可持续性）带来的估值/相对收益回撤，反转后 IC=0.034(t=3.30)，LS Sharpe=3.34，MDD=-6.18%，G5 Sharpe=1.81，换手率 13.9%，与现有 ROE 相关因子最高相关仅 0.64（不冗余）。"
+  },
+  {
+    "date": "2026-06-05",
+    "source_type": "自研+fintool",
+    "source_title": "主力资金流向净方向因子（hf_netflow_dir_v1）",
+    "source_url": "fintool get_net_flow",
+    "original_metric": {
+      "hypothesis": "super+large大单净流入占比 20d窗口 → 降低成交额偏差 → 知情资金净流入截面排序选股"
+    },
+    "our_metric": {
+      "ic_mean": -0.0171,
+      "ic_t": -1.21,
+      "sharpe": 0.5013,
+      "monotonicity": 0.4
+    },
+    "diff_notes": "IC=-0.017(t=-1.21)，大单净方向截面无预测力，单调性0.40且G2-G4分层平坦；初步观察流动数据T+1滞后导致截面 earnest 偏差。纯粹的大单净方向在中证1000上不构成有效alpha。",
+    "conclusion": "回测不达标，因子淘汰，不入库。"
   }
 ]

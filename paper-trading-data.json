@@ -20154,6 +20154,14 @@
         "summary": "amp_sharpe_v1 类夏普振幅因子 首次构造 → 回测失败（IC=-0.0011,t=-0.14,Sharpe=-0.51），不入库。",
         "action": "hold",
         "detail": "{\"factor_id\": \"amp_sharpe_v1\", \"source_title\": \"基于类夏普比动量约束与低波反转因子的量化选股策略研究报告\", \"source_url\": \"https://zhuanlan.zhihu.com/p/2043270356253901960\", \"test_result\": {\"ic_mean\": -0.0011, \"ic_t\": -0.14, \"ic_p_value\": 0.886, \"long_short_sharpe\": -0.51, \"long_short_mdd\": -0.3229, \"monotonicity\": -0.1, \"period\": \"2022-10-14 ~ 2026-06-02\", \"turnover_mean\": 0.796}, \"conclusion\": \"不达标，不入库。待研报全文可读后再决定是否以更完整构造复现，或转向其他研报方向。\", \"next_step\": \"等研报全文可读后再复现；继续扫描其他研报方向\"}"
+      },
+      {
+        "date": "2026-06-05",
+        "type": "daily_factor_scan",
+        "summary": "hf_netflow_dir_v1 主力资金流净方向因子（fintool）→ 回测失败（IC=-0.017, t=-1.21, Sharpe=0.50, 单调性=0.40），不入库。",
+        "action": "hold",
+        "detail": "{\"factor_id\": \"hf_netflow_dir_v1\", \"source_title\": \"主力资金流向净方向因子（fintool get_net_flow）\", \"source_url\": \"fintool get_net_flow — super+large order net direction, 20d rolling, market-cap neutralized\", \"ic_mean\": -0.0171, \"ic_t\": -1.21, \"sharpe\": 0.5013, \"monotonicity\": 0.4, \"period\": \"2025-07-15 ~ 2026-06-04\", \"forward_days\": 20, \"fail_reasons\": [\"IC为负(-0.017)，方向与假设相反\", \"t=-1.21，不显著\", \"Sharpe=0.50，低于0.8门槛\", \"单调性=0.40，远低于0.8\"], \"conclusion\": \"淘汰——fintool资金流净方向（20d滚动，super+large orders，成交额OLS中性化）在中证1000上无截面预测力。\"}",
+        "recommendation": "净资金流方向日频因子不具备截面选股能力；下次可尝试基于flow persistence/block trade premium的新方向。"
       }
     ],
     "last_update": "2026-05-06"
