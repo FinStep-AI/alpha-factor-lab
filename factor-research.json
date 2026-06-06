@@ -5004,5 +5004,58 @@
     },
     "diff_notes": "IC=-0.017(t=-1.21)，大单净方向截面无预测力，单调性0.40且G2-G4分层平坦；初步观察流动数据T+1滞后导致截面 earnest 偏差。纯粹的大单净方向在中证1000上不构成有效alpha。",
     "conclusion": "回测不达标，因子淘汰，不入库。"
+  },
+  {
+    "id": "vol_risk_adj_trend_v1",
+    "status": "eliminated",
+    "factor_type": "动量/截面趋势",
+    "date": "2026-06-06",
+    "source_type": "论文",
+    "source_title": "Most Claimed Statistical Findings in Cross-Sectional Return Predictability Probably Fail; Bali, Brown, Murray, Tang (2021) Lottery Factor",
+    "source_url": "https://www.anderson.ucla.edu/sites/default/files/document/2024-05/5.24.24%20Paper%20Andrew%20Checn%20Fed%20Reserve%20Board.pdf",
+    "source_author": "Andrew Y. Chen, Alejandro Lopez-Lira, Tom Zimmermann",
+    "source_year": 2024,
+    "source_journal": "UCLA Anderson / FRB",
+    "local_factor_id": "vol_risk_adj_trend_v1",
+    "local_factor_file": "data/factor_vol_risk_adj_trend_v1.csv",
+    "formula": "neutralize(20d Σ(xs_ret_i - med_ret) / σ_xs, log_amount_20d)",
+    "forward_days_tested": [
+      5,
+      20
+    ],
+    "n_groups_tested": 5,
+    "rebalance_freq": [
+      5,
+      20
+    ],
+    "cost": 0.003,
+    "probe_5d": {
+      "ic_mean": -0.0071,
+      "ic_t": -0.79,
+      "long_short_sharpe": -0.098,
+      "monotonicity": 0.4,
+      "long_short_mdd": -0.2828
+    },
+    "probe_20d": {
+      "ic_mean": -0.0196,
+      "ic_t": -1.29,
+      "long_short_sharpe": -0.069,
+      "monotonicity": 0.0,
+      "long_short_mdd": -0.3961
+    },
+    "probe_20d_output": "output/vol_risk_adj_trend_probe/report.json",
+    "original_metric": {
+      "description": "截面超额收益20日累积除以截面自σ，做大截面自适应"
+    },
+    "our_metric": {
+      "period": "2022-10-26 ~ 2026-06-04",
+      "ic_mean": -0.0196,
+      "ic_t": -1.29,
+      "sharpe": -0.07,
+      "monotonicity": 0.0
+    },
+    "diff_notes": "20日前瞻分层出现明显U/J-curve（G1≈G5>>G3，单调性=0），no significant IC(t=-1.29, p=0.21)。因子本质上在价量都是用最差的时序预测，不是动量类回归(kernel)局限，说明市场中的截面适应性根本无法降噪。后续或在8d前瞻睁开盯这一方向，目前不适合catalogue进的组合。",
+    "conclusion": "eliminated",
+    "fail_reason": "IC不显著(t=-1.29, p=0.206)，单调性=0.0，分层J-curve，多方Sharpe=-0.07"
   }
 ]

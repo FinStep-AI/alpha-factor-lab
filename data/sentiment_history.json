@@ -2,24 +2,6 @@
   "history": [
     {
       "date": "20260525",
-      "zt_count": 9,
-      "dt_count": 0,
-      "zb_count": 1,
-      "max_streak": 3,
-      "temperature": 46,
-      "phase": "ferment"
-    },
-    {
-      "date": "20260525",
-      "zt_count": 101,
-      "dt_count": 15,
-      "zb_count": 34,
-      "max_streak": 4,
-      "temperature": 68,
-      "phase": "climax"
-    },
-    {
-      "date": "20260525",
       "zt_count": 103,
       "dt_count": 15,
       "zb_count": 33,
@@ -270,7 +252,25 @@
       "max_streak": 2,
       "temperature": 30,
       "phase": "startup"
+    },
+    {
+      "date": "20260605",
+      "zt_count": 75,
+      "dt_count": 11,
+      "zb_count": 50,
+      "max_streak": 5,
+      "temperature": 56,
+      "phase": "ferment"
+    },
+    {
+      "date": "20250605",
+      "zt_count": 0,
+      "dt_count": 0,
+      "zb_count": 0,
+      "max_streak": 0,
+      "temperature": 0,
+      "phase": "ice"
     }
   ],
-  "updated": "20260605"
+  "updated": "20250605"
 }
