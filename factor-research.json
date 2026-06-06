@@ -5057,5 +5057,83 @@
     "diff_notes": "20日前瞻分层出现明显U/J-curve（G1≈G5>>G3，单调性=0），no significant IC(t=-1.29, p=0.21)。因子本质上在价量都是用最差的时序预测，不是动量类回归(kernel)局限，说明市场中的截面适应性根本无法降噪。后续或在8d前瞻睁开盯这一方向，目前不适合catalogue进的组合。",
     "conclusion": "eliminated",
     "fail_reason": "IC不显著(t=-1.29, p=0.206)，单调性=0.0，分层J-curve，多方Sharpe=-0.07"
+  },
+  {
+    "id": "max_ret_adj_v1",
+    "status": "eliminated",
+    "factor_type": "彩票溢价/极端收益",
+    "date": "2026-06-06",
+    "source_type": "论文",
+    "source_title": "Bali, Brown, Murray, Tang (2017, JFQA) Lottery Demand / Bali Cakici Whitelaw (2011, JFE) Max Factor / 张翼、刘亚茹(2023) MAX效应在中国A股市场中的实证",
+    "source_url": "https://www.tandfonline.com/doi/full/10.1080/23322039.2023.2175471",
+    "source_author": "Bali, Brown, Murray, Tang (2017); Bali, Cakici, Whitelaw (2011)",
+    "source_year": 2017,
+    "source_journal": "JFQA / JFE / International Journal of Economics and Finance 2023",
+    "local_factor_id": "max_ret_adj_v1",
+    "local_factor_file": "data/factor_max_ret_adj_v1.csv",
+    "formula": "-neutralize(max(pct_change, 20d)/std(pct_change,20d), log_amount_20d)",
+    "forward_days": 5,
+    "rebalance_freq": 5,
+    "cost": 0.002,
+    "probe_output": "output/max_ret_adj_v1/backtest_report.json",
+    "original_metric": {
+      "description": "原始方向：做多低彩票溢价"
+    },
+    "our_metric": {
+      "period": "2022-10-26 ~ 2026-06-04",
+      "ic_mean": 0.0012,
+      "ic_t": 0.17,
+      "long_short_sharpe": -0.64,
+      "monotonicity": -0.9,
+      "group_returns_annualized": [
+        0.119,
+        0.041,
+        0.039,
+        0.04,
+        0.02
+      ]
+    },
+    "diff_notes": "在美股MAX因子有效 (IC≈-0.06, t≈-3 显著)，但在中证1000完全失效。原因：A股20%涨跌停压缩了MAX分布，max(20d pct_change)离散度大但截面区分力几乎为零；无论取负(做多高MAX=反转)还是正(做空高MAX=彩票)，IC绝对值均接近0(t<0.2)，单调性最大仅0.7且总Sharpe远低于门槛。该因子不在中证1000工作。",
+    "conclusion": "eliminated",
+    "fail_reason": "IC均值≈0.0012(t=0.17)不显著;LS-S=-0.640<0.8;单调性=-0.9"
+  },
+  {
+    "id": "max_ret_adj_v1_flip_5d5rb",
+    "status": "eliminated",
+    "factor_type": "彩票溢价/极端收益",
+    "date": "2026-06-06",
+    "source_type": "论文",
+    "source_title": "Bali, Brown, Murray, Tang (2017, JFQA) Lottery Demand / Bali Cakici Whitelaw (2011, JFE) Max Factor / 张翼、刘亚茹(2023) MAX效应在中国A股市场中的实证",
+    "source_url": "https://www.tandfonline.com/doi/full/10.1080/23322039.2023.2175471",
+    "source_author": "Bali, Brown, Murray, Tang (2017); Bali, Cakici, Whitelaw (2011)",
+    "source_year": 2017,
+    "source_journal": "JFQA / JFE / International Journal of Economics and Finance 2023",
+    "local_factor_id": "max_ret_adj_v1_flip_5d5rb",
+    "local_factor_file": "data/factor_max_ret_adj_v1.csv",
+    "formula": "-neutralize(max(pct_change, 20d)/std(pct_change,20d), log_amount_20d)",
+    "forward_days": 5,
+    "rebalance_freq": 5,
+    "cost": 0.002,
+    "probe_output": "output/max_ret_adj_v1_flip/backtest_report.json",
+    "original_metric": {
+      "description": "反向：做多高彩票溢价(反转逻辑)"
+    },
+    "our_metric": {
+      "period": "2022-10-26 ~ 2026-06-04",
+      "ic_mean": -0.0012,
+      "ic_t": -0.17,
+      "long_short_sharpe": 0.536,
+      "monotonicity": 0.7,
+      "group_returns_annualized": [
+        0.019,
+        0.043,
+        0.038,
+        0.04,
+        0.119
+      ]
+    },
+    "diff_notes": "在美股MAX因子有效 (IC≈-0.06, t≈-3 显著)，但在中证1000完全失效。原因：A股20%涨跌停压缩了MAX分布，max(20d pct_change)离散度大但截面区分力几乎为零；无论取负(做多高MAX=反转)还是正(做空高MAX=彩票)，IC绝对值均接近0(t<0.2)，单调性最大仅0.7且总Sharpe远低于门槛。该因子不在中证1000工作。",
+    "conclusion": "eliminated",
+    "fail_reason": "IC均值≈-0.0012(t=-0.17)不显著;LS-S=0.536<0.8;单调性=0.7"
   }
 ]
