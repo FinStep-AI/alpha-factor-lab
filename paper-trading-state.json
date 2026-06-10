@@ -7,20 +7,20 @@
     "value_news_scan": null,
     "value_deep_analysis": null,
     "nav_update": null,
-    "frontend_deploy": "2026-06-08"
+    "frontend_deploy": "2026-06-09"
   },
   "pending": [],
   "status": "ok",
   "created_at": "2026-04-24T09:27:28.361220",
-  "updated_at": "2026-06-08T15:31:21.966596+08:00",
+  "updated_at": "2026-06-09T15:31:02.745308+08:00",
   "tasks": {
     "quant_factor_scan": {
       "status": "done",
       "last_run": "2026-05-13"
     },
     "frontend_deploy": {
-      "status": "noop",
-      "last_run": "2026-06-08"
+      "status": "done",
+      "last_run": "2026-06-09"
     }
   }
 }

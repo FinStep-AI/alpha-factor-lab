@@ -1,60 +1,6 @@
 {
   "history": [
     {
-      "date": "20260525",
-      "zt_count": 103,
-      "dt_count": 15,
-      "zb_count": 33,
-      "max_streak": 4,
-      "temperature": 68,
-      "phase": "climax"
-    },
-    {
-      "date": "20260526",
-      "zt_count": 3,
-      "dt_count": 1,
-      "zb_count": 0,
-      "max_streak": 2,
-      "temperature": 30,
-      "phase": "startup"
-    },
-    {
-      "date": "20260526",
-      "zt_count": 46,
-      "dt_count": 17,
-      "zb_count": 22,
-      "max_streak": 3,
-      "temperature": 45,
-      "phase": "ferment"
-    },
-    {
-      "date": "20260526",
-      "zt_count": 46,
-      "dt_count": 16,
-      "zb_count": 24,
-      "max_streak": 3,
-      "temperature": 45,
-      "phase": "ferment"
-    },
-    {
-      "date": "20260527",
-      "zt_count": 4,
-      "dt_count": 3,
-      "zb_count": 0,
-      "max_streak": 2,
-      "temperature": 25,
-      "phase": "startup"
-    },
-    {
-      "date": "20260527",
-      "zt_count": 48,
-      "dt_count": 21,
-      "zb_count": 21,
-      "max_streak": 3,
-      "temperature": 45,
-      "phase": "ferment"
-    },
-    {
       "date": "20260527",
       "zt_count": 47,
       "dt_count": 22,
@@ -270,7 +216,61 @@
       "max_streak": 0,
       "temperature": 0,
       "phase": "ice"
+    },
+    {
+      "date": "20260608",
+      "zt_count": 0,
+      "dt_count": 0,
+      "zb_count": 0,
+      "max_streak": 0,
+      "temperature": 0,
+      "phase": "ice"
+    },
+    {
+      "date": "20260608",
+      "zt_count": 56,
+      "dt_count": 34,
+      "zb_count": 11,
+      "max_streak": 6,
+      "temperature": 61,
+      "phase": "climax"
+    },
+    {
+      "date": "20260608",
+      "zt_count": 57,
+      "dt_count": 35,
+      "zb_count": 10,
+      "max_streak": 6,
+      "temperature": 61,
+      "phase": "climax"
+    },
+    {
+      "date": "20260609",
+      "zt_count": 6,
+      "dt_count": 1,
+      "zb_count": 0,
+      "max_streak": 2,
+      "temperature": 38,
+      "phase": "startup"
+    },
+    {
+      "date": "20260609",
+      "zt_count": 130,
+      "dt_count": 8,
+      "zb_count": 23,
+      "max_streak": 3,
+      "temperature": 83,
+      "phase": "overheated"
+    },
+    {
+      "date": "20260609",
+      "zt_count": 130,
+      "dt_count": 9,
+      "zb_count": 24,
+      "max_streak": 3,
+      "temperature": 83,
+      "phase": "overheated"
     }
   ],
-  "updated": "20250605"
+  "updated": "20260609"
 }

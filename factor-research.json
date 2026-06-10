@@ -5135,5 +5135,185 @@
     "diff_notes": "在美股MAX因子有效 (IC≈-0.06, t≈-3 显著)，但在中证1000完全失效。原因：A股20%涨跌停压缩了MAX分布，max(20d pct_change)离散度大但截面区分力几乎为零；无论取负(做多高MAX=反转)还是正(做空高MAX=彩票)，IC绝对值均接近0(t<0.2)，单调性最大仅0.7且总Sharpe远低于门槛。该因子不在中证1000工作。",
     "conclusion": "eliminated",
     "fail_reason": "IC均值≈-0.0012(t=-0.17)不显著;LS-S=0.536<0.8;单调性=0.7"
+  },
+  {
+    "id": "upper_shadow_decay_v1",
+    "status": "eliminated",
+    "factor_type": "量价/微观结构-上影线",
+    "date": "2026-06-10",
+    "source_type": "自研",
+    "source_title": "上影线衰变因子 (日线上影线比率20日均值)",
+    "source_url": "",
+    "local_factor_id": "upper_shadow_decay_v1",
+    "local_factor_file": "data/factor_upper_shadow_decay_v1.csv",
+    "formula": "neutralize(rolling20d_mean((high - max(open,close))/(high-low)) * abs(close-open)/(high-low), log_amount_20d)",
+    "forward_days_tested": [
+      5,
+      20
+    ],
+    "n_groups_tested": 5,
+    "rebalance_freq": [
+      5,
+      20
+    ],
+    "cost": 0.002,
+    "probe_5d": {
+      "ic_mean": 0.0087,
+      "ic_t": 1.71,
+      "long_short_sharpe": 1.07,
+      "monotonicity": 0.5
+    },
+    "probe_20d": {
+      "ic_mean": 0.0127,
+      "ic_t": 1.38,
+      "long_short_sharpe": 1.03,
+      "monotonicity": 0.7
+    },
+    "probe_20d_output": "output/upper_shadow_decay_v1/backtest_report_20d.json",
+    "original_metric": {
+      "description": "上影线比率20日均值正向使用"
+    },
+    "our_metric": {
+      "period": "2022-11-07 ~ 2026-05-12",
+      "ic_mean": 0.0127,
+      "ic_t": 1.38,
+      "sharpe": 1.03,
+      "monotonicity": 0.7
+    },
+    "diff_notes": "两前瞻均未达门槛：IC低(0.009~0.013)、t不显著(1.38~1.71)、5d单调性0.5(Not mapping)。shadow_pressure已有的上影线概念基本覆盖本方向。",
+    "conclusion": "eliminated",
+    "fail_reason": "IC不足(0.013<t>0.02)、t<2.0(1.38)、不单调，shadow_pressure重复覆盖额"
+  },
+  {
+    "id": "pos_day_dominant_v1",
+    "status": "eliminated",
+    "factor_type": "量价/收益分布",
+    "date": "2026-06-10",
+    "source_type": "自研/browse启发",
+    "source_title": "正向收益日主导因子 (20日内涨幅绝对值来自上涨日占比)",
+    "source_url": "",
+    "local_factor_id": "pos_day_dominant_v1",
+    "local_factor_file": "data/factor_pos_day_dominant_v1.csv",
+    "formula": "neutralize(sum_of_abs(ret)[pos days only 5of20 top / Σabs(all nonzero), 20d, log_amount_20d)",
+    "forward_days_tested": [
+      20
+    ],
+    "n_groups_tested": 5,
+    "rebalance_freq": [
+      20
+    ],
+    "cost": 0.002,
+    "probe_20d": {
+      "ic_mean": -0.0045,
+      "ic_t": -0.41,
+      "long_short_sharpe": 0.47,
+      "monotonicity": 1.0
+    },
+    "probe_20d_output": "output/pos_day_dominant_v1/backtest_report_20d.json",
+    "original_metric": {
+      "description": "正收益日绝对值占全部 nonzero 收益日绝对值之和的比例"
+    },
+    "our_metric": {
+      "period": "2022-11-07 ~ 2026-05-12",
+      "ic_mean": -0.0045,
+      "ic_t": -0.41,
+      "sharpe": 0.47,
+      "monotonicity": 1.0
+    },
+    "diff_notes": "虽然单调性1.0(G1~G5单调递减-低因子值最好)，但IC负数为-0.0045，t=-0.41，核心信号方向与经济直觉错失落，top20 vs bottom20 delta收益仅0.08%。某前计算中研究结果显著的日/收益频数占比因子(neg_day_freq IC 0.04)在A中无偏差重复。",
+    "conclusion": "eliminated",
+    "fail_reason": "IC negatives朝向与理论反向(-0.0045/t=-0.41)，方向为零，收入"
+  },
+  {
+    "id": "body_asymmetry_v1",
+    "status": "eliminated",
+    "factor_type": "量价/实体比",
+    "date": "2026-06-10",
+    "source_type": "自研",
+    "source_title": "实体比率非对称因子 (20日升日用实体占比 - 降日用实体占比)",
+    "source_url": "",
+    "local_factor_id": "body_asymmetry_v1",
+    "local_factor_file": "data/factor_body_asymmetry_v1.csv",
+    "formula": "neutralize(20d_avg(|C-O|/(H-L))_{updays} - 20d_avg(|C-O|/(H-L))_{downdays}, log_amount_20d)",
+    "forward_days_tested": [
+      20
+    ],
+    "n_groups_tested": 5,
+    "rebalance_freq": [
+      20
+    ],
+    "cost": 0.002,
+    "probe_20d": {
+      "ic_mean": -0.0059,
+      "ic_t": -0.72,
+      "long_short_sharpe": -0.26,
+      "monotonicity": -0.6
+    },
+    "probe_20d_output": "output/body_asymmetry_v1/backtest_report_20d.json",
+    "original_metric": {
+      "description": "升日实体占比高：高确信趋势持续；降日实体占比高：强卖压耗尽"
+    },
+    "our_metric": {
+      "period": "2022-11-07 ~ 2026-05-12",
+      "ic_mean": -0.0059,
+      "ic_t": -0.72,
+      "sharpe": -0.26,
+      "monotonicity": -0.6
+    },
+    "diff_notes": "无显著信号。单调性-0.6表示在CSI1000上升日用实体占比最高的股票趋向跑输。实体比率信息与已入库close_low / shadow_pressure / neg_range_efficiency中日内收盘位置信息存在重叠可能。",
+    "conclusion": "eliminated",
+    "fail_reason": "IC=-0.006, t=-0.72，单调性-0.6，方向逆转，无统计显著性"
+  },
+  {
+    "id": "turn_disp_v1",
+    "status": "watchlist",
+    "factor_type": "流动性/换手率离散",
+    "date": "2026-06-10",
+    "source_type": "自研（洞察：换手率水平与残差）",
+    "source_title": "换手率截面极差估计残差因子 (20日换手率标准差OLS中性化)",
+    "source_url": "",
+    "local_factor_id": "turn_disp_v1",
+    "local_factor_file": "data/factor_turn_disp_v1.csv",
+    "formula": "neutralize(std(turnover_pct, 20d), log(mean(amount,20d))) — 换手率水平残差，类似amp_stability但换turnover度量",
+    "forward_days_tested": [
+      5,
+      20
+    ],
+    "n_groups_tested": 5,
+    "rebalance_freq": [
+      5,
+      20
+    ],
+    "cost": 0.002,
+    "probe_5d": {
+      "ic_mean": 0.002,
+      "ic_t": 0.26,
+      "long_short_sharpe": 2.21,
+      "monotonicity": 0.9
+    },
+    "probe_20d": {
+      "ic_mean": 0.0215,
+      "ic_t": 1.3,
+      "long_short_sharpe": 2.21,
+      "monotonicity": 0.9
+    },
+    "probe_20d_output": "output/turn_disp_v1/bt_20d.json",
+    "original_metric": {
+      "description": "今天ovid纯观测：20日换手率标准差截面OLS中性化后，排头过多组收益高",
+      "source_note": "无已知古今研报直接肯定，信号属临床性自主发现。"
+    },
+    "our_metric": {
+      "period": "2022-11-07 ~ 2026-06-09",
+      "ic_mean": 0.0215,
+      "ic_t": 1.3,
+      "sharpe": 2.21,
+      "monotonicity": 0.9,
+      "turnover_mean": 0.519,
+      "ls_ann_return": 0.255,
+      "ls_mdd": -0.187
+    },
+    "diff_notes": "5d / 20d 双前瞻: IC 均值为0.002, 0.0215（20d方向更高），IC正比53.4%",
+    "conclusion": "watchlist（未完，未入库）",
+    "fail_reason": "若判定未入库：t=1.30 未过2.0('t估算或送水 groups: G1 −4%(低产), G5 +21%(最佳). 需更多数据或更长前瞻确认. 可能的提升方向: 非线性中性化方式 (})"
   }
 ]
