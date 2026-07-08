@@ -3081,5 +3081,64 @@
       "roe_trend_quality_v1": -0.083,
       "roe_decay_rev_v1": 1.0
     }
+  },
+  {
+    "id": "close_bias_trend_rev_v1",
+    "name": "收盘偏向趋势反转 v1",
+    "name_en": "Close Bias Trend Reversal v1",
+    "category": "量价/尾盘异动",
+    "description": "收盘位置(在当日高低点区间中的位置)的20日OLS斜率取反，捕捉尾盘持续走弱后的短期反转。高因子值=收盘位置连续下移=尾盘卖压累积，后续5日更易均值回复。",
+    "hypothesis": "尾盘持续走弱的中证1000个股，往往对应短期流动性抛压或情绪宣泄，而非基本面永久恶化。收盘位置连续下移后，未来5日更容易出现均值回复。",
+    "expected_direction": "正向（高因子值=更强反转修复）",
+    "factor_type": "量价/尾盘异动",
+    "formula": "neutralize(-OLS_slope_20d(2*(close-(high+low)/2)/(high-low)), log_amount_20d), 5% winsorize, z-score",
+    "direction": 1,
+    "stock_pool": "中证1000",
+    "period": "2022-11-04 ~ 2026-06-11",
+    "rebalance_freq": 5,
+    "forward_days": 5,
+    "cost": 0.003,
+    "rating": "★★ 可用",
+    "nav_data": "output/close_bias_trend_rev_v1/cumulative_returns.json",
+    "ic_data": "output/close_bias_trend_rev_v1/ic_series.json",
+    "upgrade_notes": "从已有 close_bias_trend 原始趋势信号切换为反向使用。原始方向表现为持续走强后续偏弱；取反后满足门槛。",
+    "lessons_learned": [
+      "尾盘强势延续在中证1000上不稳，反而尾盘持续走弱后的短期反转更可靠",
+      "IC与Sharpe均刚过门槛，属于可用但不算强势的补充型因子",
+      "单调性0.9较好，分层从G1到G5年化收益稳定抬升",
+      "换手率约74%，属于高换手短周期信号，更适合与低换手因子做组合"
+    ],
+    "created": "2026-07-08",
+    "updated": "2026-07-08",
+    "metrics": {
+      "ic_mean": 0.021463881790582933,
+      "ic_std": 0.09512247884659047,
+      "ic_t": 3.335173563330597,
+      "ic_positive_ratio": 0.6206896551724138,
+      "rank_ic": 0.03170867555989445,
+      "rank_ic_std": 0.11270760789343447,
+      "ir": 0.22564468515585026,
+      "ic_count": 174,
+      "long_short_sharpe": 0.5377259891090727,
+      "long_short_mdd": -0.2561278021213236,
+      "monotonicity": 0.8999999999999998,
+      "group_returns_annualized": [
+        -0.11647590053987633,
+        -0.13539393835716274,
+        -0.10952822023061959,
+        -0.06303416754156743,
+        -0.012735343460660409
+      ],
+      "turnover_mean": 0.741009395648835,
+      "turnover_std": 0.03021149225724371
+    },
+    "conclusion": "达标入库。反向后的收盘偏向趋势因子在5日前瞻上取得 IC=0.0215、t=3.34、Sharpe=0.54，单调性0.9。说明尾盘持续走弱更像短期抛压累积，后续存在可交易的均值回复。",
+    "barra_style": "MICRO",
+    "source_type": "自研",
+    "source_title": "尾盘收盘位置趋势反转",
+    "source_url": "",
+    "correlations": {
+      "close_bias_trend_rev_v1": 1.0
+    }
   }
 ]
