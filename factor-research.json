@@ -5315,5 +5315,80 @@
     "diff_notes": "5d / 20d 双前瞻: IC 均值为0.002, 0.0215（20d方向更高），IC正比53.4%",
     "conclusion": "watchlist（未完，未入库）",
     "fail_reason": "若判定未入库：t=1.30 未过2.0('t估算或送水 groups: G1 −4%(低产), G5 +21%(最佳). 需更多数据或更长前瞻确认. 可能的提升方向: 非线性中性化方式 (})"
+  },
+  {
+    "id": "gap_amp_ratio_v1",
+    "status": "failed",
+    "factor_type": "微观结构/跳空信息传导",
+    "date": "2026-07-09",
+    "source_type": "论文思路复现+本土化",
+    "source_title": "Overnight gap absorption / gap-to-intraday-range ratio anomaly",
+    "source_url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6076808",
+    "local_factor_id": "gap_amp_ratio_v1",
+    "local_factor_file": "data/gap_amp_ratio_v1.csv",
+    "formula": "mean_60d(|open/prev_close-1| / (((high-low)/prev_close)+1e-8)), then neutralize by market_cap",
+    "forward_days_tested": [
+      20
+    ],
+    "n_groups_tested": 5,
+    "rebalance_freq": [
+      20
+    ],
+    "cost": 0.002,
+    "original_metric": {
+      "description": "原文/思路强调隔夜信息释放与日内未充分吸收的股票存在后续横截面收益可预测性；公开抓取受限，未拿到完整论文量化指标。"
+    },
+    "our_metric": {
+      "period": "2022-11-21 ~ 2026-07-08",
+      "ic_mean": -0.001,
+      "ic_t": -0.09,
+      "sharpe": 0.32,
+      "monotonicity": 0.3,
+      "turnover_mean": 0.486,
+      "ls_ann_return": 0.0489,
+      "ls_mdd": -0.1807
+    },
+    "diff_notes": "方向和强度都不达标；分组收益呈中间组凸起，非线性明显。末端样本 amount/turnover 为0，只能用历史市值代理中性化，可能削弱信号，但不足以解释IC接近0。",
+    "conclusion": "fail",
+    "fail_reason": "未达门槛：IC均值<=0.02、|t|<2、Sharpe<0.8、单调性<0.8，不入库。"
+  },
+  {
+    "id": "gross_proxy_trend_v1",
+    "status": "failed",
+    "factor_type": "基本面/Quality",
+    "date": "2026-07-09",
+    "source_type": "自研（财务代理指标）",
+    "source_title": "毛利率趋势代理：gross_proxy = ROE / BPS 的同比变化",
+    "source_url": "",
+    "local_factor_id": "gross_proxy_trend_v1",
+    "local_factor_file": "data/factor_gross_proxy_trend_v1.csv",
+    "formula": "gross_proxy_trend = (ROE/BPS)_t - (ROE/BPS)_{t-4}; MAD winsorize + market-cap neutralize + zscore",
+    "forward_days_tested": [
+      5
+    ],
+    "n_groups_tested": 5,
+    "rebalance_freq": [
+      5
+    ],
+    "cost": 0.003,
+    "original_metric": {
+      "description": "基于现有 fundamental_cache 仅有 roe/bps，无法直接构造销售毛利率，故用 ROE/BPS 作为盈利能力代理并取同比趋势。"
+    },
+    "our_metric": {
+      "period": "2023-06-30 ~ 2026-05-25",
+      "ic_mean": 0.0301,
+      "ic_t": 5.94,
+      "sharpe": 1.2241,
+      "monotonicity": 0.7,
+      "turnover_mean": 0.0701,
+      "g5_ann_return": 0.317,
+      "ls_ann_return": 0.1534,
+      "ls_mdd": -0.2543,
+      "max_corr_existing": 0.7241,
+      "max_corr_factor": "roe_delta_yoy_v1"
+    },
+    "diff_notes": "绝对表现其实不错：IC、t值、G5 Sharpe 均达标，且换手低。但与现有 Growth 因子 roe_delta_yoy_v1 横截面相关性 0.724>0.7，且单调性仅 0.7，说明更像 ROE 增长因子的变体，不满足“低冗余新因子”要求。",
+    "conclusion": "fail",
+    "fail_reason": "未入库：与现有 roe_delta_yoy_v1 相关性超过 0.7，且单调性低于 0.8。判定为冗余淘汰。"
   }
 ]
