@@ -5390,5 +5390,45 @@
     "diff_notes": "绝对表现其实不错：IC、t值、G5 Sharpe 均达标，且换手低。但与现有 Growth 因子 roe_delta_yoy_v1 横截面相关性 0.724>0.7，且单调性仅 0.7，说明更像 ROE 增长因子的变体，不满足“低冗余新因子”要求。",
     "conclusion": "fail",
     "fail_reason": "未入库：与现有 roe_delta_yoy_v1 相关性超过 0.7，且单调性低于 0.8。判定为冗余淘汰。"
+  },
+  {
+    "id": "roe_yoy_accel_resid_v1",
+    "status": "passed",
+    "factor_type": "基本面/Growth",
+    "date": "2026-07-09",
+    "source_type": "自研",
+    "source_title": "ROE同比加速度（二阶盈利拐点）",
+    "source_url": "",
+    "local_factor_id": "roe_yoy_accel_resid_v1",
+    "local_factor_file": "data/factor_roe_yoy_accel_resid_v1.csv",
+    "formula": "roe_yoy_accel = (roe_t-roe_t-4) - (roe_t-1-roe_t-5); factor = neutralize(roe_yoy_accel / (abs(roe)+5), log_mktcap), then MAD winsorize + zscore",
+    "forward_days_tested": [
+      5
+    ],
+    "n_groups_tested": 5,
+    "rebalance_freq": [
+      5
+    ],
+    "cost": 0.003,
+    "original_metric": {
+      "description": "自研 Growth 因子：用 ROE 同比增速的加速度表征盈利预期再上修。"
+    },
+    "our_metric": {
+      "period": "2023-10-09 ~ 2026-04-23",
+      "ic_mean": 0.0234,
+      "ic_t": 4.1779,
+      "sharpe": 2.2452,
+      "monotonicity": 1.0,
+      "turnover_mean": 0.1821,
+      "g5_ann_return": 0.2801,
+      "g5_sharpe": 0.9544,
+      "ls_ann_return": 0.1946,
+      "ls_mdd": -0.1164,
+      "max_corr_existing": 0.5893,
+      "max_corr_factor": "roe_accel_v1"
+    },
+    "diff_notes": "相比直接用ROE同比增长，二阶加速度显著降低与既有 Growth 因子的冗余；门槛四项全过，且持仓分布均衡。",
+    "conclusion": "pass",
+    "fail_reason": ""
   }
 ]
