@@ -5479,5 +5479,33 @@
       "monotonicity": 1.0,
       "long_short_sharpe": 0.7552571357149312
     }
+  },
+  {
+    "date": "2026-07-10 15:35:57",
+    "factor_id": "roe_bps_recovery_stability_v1",
+    "factor_name": "ROE回升-BPS扩张稳定性 v1",
+    "theme": "基本面类 / Growth",
+    "status": "pass",
+    "source_type": "fundamental",
+    "barra_style": "Growth",
+    "implementation": "calc_roe_bps_recovery_stability_v1.py",
+    "factor_file": "data/factor_roe_bps_recovery_stability_v1.csv",
+    "backtest_output": "output/roe_bps_recovery_stability_v1/report.json",
+    "summary": "ROE短期回升与BPS扩张稳定性协同因子，市值中性化后5日前瞻表现达标。",
+    "metrics": {
+      "ic_mean": 0.020342214658170224,
+      "ic_t": 2.825262141018488,
+      "g5_sharpe": 0.9672049167069559,
+      "monotonicity": 0.9999999999999999,
+      "long_short_sharpe": 1.7483268692275213
+    },
+    "correlation_check": {
+      "factor_roe_acceleration_v1": 0.4638019335874058,
+      "factor_roe_bps_synergy_v2": 0.5208951075369717,
+      "factor_bps_roe_comp_v2": 0.3169275001050571,
+      "redundant": false,
+      "threshold": 0.7
+    },
+    "notes": "受限于fundamental_cache字段只有roe/bps，无法尝试毛利率/周转率类。改为围绕Growth空白继续挖掘更窄的盈利修复+净资产稳定扩张信号。"
   }
 ]

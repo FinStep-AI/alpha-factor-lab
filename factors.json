@@ -3248,5 +3248,16 @@
       "close_bias_trend_rev_v1": null,
       "roe_yoy_accel_resid_v1": 1.0
     }
+  },
+  {
+    "name": "ROE回升-BPS扩张稳定性 v1",
+    "id": "roe_bps_recovery_stability_v1",
+    "barra_style": "Growth",
+    "source_type": "fundamental",
+    "formula": "0.55*zscore(ROE_MA2 - lag(ROE_MA2,1)) + 0.45*zscore(mean2(dBPS/BPS) / (std4(dBPS/BPS)+1e-6)); then neutralize(log_mktcap)",
+    "detail": "基于季度基本面数据，提取ROE短期回升与BPS扩张稳定性的协同信号。先在报告期横截面做稳健标准化，再按0.55/0.45加权合成，映射到财报可用日后扩展到日频，并做市值中性化。核心直觉是：盈利能力开始修复、且净资产扩张更平稳的公司，后续5日收益更强。",
+    "direction": "positive",
+    "correlations": "{\"factor_roe_acceleration_v1\": 0.464, \"factor_roe_bps_synergy_v2\": 0.521, \"factor_bps_roe_comp_v2\": 0.317}",
+    "performance": "{\"ic_mean\": 0.0203, \"ic_t\": 2.83, \"g5_sharpe\": 0.9672, \"monotonicity\": 1.0, \"ls_sharpe\": 1.7483, \"period\": \"2023-05-15 ~ 2026-02-13\"}"
   }
 ]
