@@ -5430,5 +5430,54 @@
     "diff_notes": "相比直接用ROE同比增长，二阶加速度显著降低与既有 Growth 因子的冗余；门槛四项全过，且持仓分布均衡。",
     "conclusion": "pass",
     "fail_reason": ""
+  },
+  {
+    "date": "2026-07-10",
+    "factor_id": "vol_ret_persist_v1",
+    "source_type": "研报启发+本土化复现",
+    "source_title": "方正金工‘综合量价/量价一致性’主线的日线可实现变体：Volume-Return Persistence",
+    "source_url": "https://finance.sina.com.cn/wm/2026-03-23/doc-inhryhit7989588.shtml?froms=ggmp",
+    "original_metric": {
+      "report_note": "综合量价因子2013-2025 RankICIR绝对值>3.5，今年以来十分组多空相对收益5.24%"
+    },
+    "our_metric": {
+      "ic_mean": 0.0055,
+      "t_value": 1.06,
+      "sharpe": 0.7008,
+      "monotonicity": 0.7,
+      "long_short_total_return": 0.1904,
+      "period": "2022-11-03~2026-04-23"
+    },
+    "diff_notes": "按日线OHLCV构造20日量价符号净一致比例×5日收益幅度，并对log(amount)做截面OLS中性化。该实现保留了‘量价共振持续性’直觉，但无法复现研报中基于高频成交节奏/订单流的细粒度信息，信号强度明显衰减；同时与现有 vol_ret_align_v1、vssignal_v1 主线较近，边际增益有限。",
+    "conclusion": "fail"
+  },
+  {
+    "id": "growth_quality_stable_v1",
+    "source_type": "自研",
+    "source_title": "ROE同比改善+BPS同比增长-ROE环比波动惩罚",
+    "source_url": "",
+    "source_author": "OpenClaw Factor Hunter",
+    "source_year": 2026,
+    "source_journal": "",
+    "date": "2026-07-10",
+    "original_metric": "灵感来自成长/质量类基本面因子：偏好盈利同比改善且净资产稳步扩张、同时惩罚季度ROE大幅波动",
+    "our_metric": "IC均值=0.0256, IC_t=4.96, G5 Sharpe=0.780, 单调性=1.00；但与roe_delta_yoy_v1平均Spearman相关性=0.801，判定冗余",
+    "conclusion": "淘汰",
+    "diff_notes": "使用fundamental_cache中的roe与bps构造 Growth+Quality 复合信号，30天披露滞后映射到日频，并对log(amount)做横截面中性化。性能接近门槛，但与已有ROE同比增长因子高度重合，未入库。",
+    "local_factor_id": "growth_quality_stable_v1",
+    "failure_reason": "G5 Sharpe 0.780 < 0.8，且与roe_delta_yoy_v1相关性0.801 > 0.7，双重不达标",
+    "barra_style": "Growth / Quality",
+    "redundancy_check": {
+      "roe_delta_yoy_v1": 0.8013,
+      "roe_accel_v1": 0.6839
+    },
+    "backtest": {
+      "period": "2023-07-31 ~ 2026-07-09",
+      "ic_mean": 0.02559491716021838,
+      "ic_t": 4.963781585301122,
+      "g5_sharpe": 0.7799909868907821,
+      "monotonicity": 1.0,
+      "long_short_sharpe": 0.7552571357149312
+    }
   }
 ]
