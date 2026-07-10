@@ -6,7 +6,7 @@
     "benchmark": "000300",
     "benchmark_name": "沪深300",
     "created_at": "2026-02-23 22:14:25",
-    "updated_at": "2026-07-10 08:31:39",
+    "updated_at": "2026-07-10 09:04:22",
     "status": "active",
     "players_count": 6
   },
@@ -7453,40 +7453,6 @@
       ],
       "decisions": [
         {
-          "date": "2026-02-26",
-          "type": "factor_scan",
-          "summary": "每日因子扫描: 测试2个新因子",
-          "factors_tested": [
-            {
-              "id": "vol_price_corr_v1",
-              "name": "量价相关性",
-              "result": "FAIL",
-              "ic": -0.014,
-              "ic_t": -1.27,
-              "sharpe": -0.35,
-              "monotonicity": -0.3,
-              "reason": "IC不显著，单调性差，量价相关性在中证1000无预测力"
-            },
-            {
-              "id": "overnight_momentum_v1",
-              "name": "隔夜收益动量",
-              "result": "PASS",
-              "ic": 0.039,
-              "ic_t": 2.87,
-              "sharpe": 1.0,
-              "monotonicity": 0.9,
-              "reason": "所有指标达标，IC最高，发现A股隔夜效应在小盘股显著"
-            }
-          ],
-          "factors_added": [
-            "overnight_momentum_v1"
-          ],
-          "factors_rejected": [
-            "vol_price_corr_v1"
-          ],
-          "notes": "隔夜收益动量是目前IC最高的因子(0.039>Amihud的0.028)。web_search API不可用，基于领域知识选择因子方向。下一步考虑：三因子组合(Amihud+IdioVol+Overnight)。"
-        },
-        {
           "date": "2026-02-27",
           "type": "factor_scan",
           "action": "今日因子扫描：测试3个新因子方向，均未达标",
@@ -7807,6 +7773,13 @@
           "summary": "因子扫描：gap_amp_ratio_v1 未达标，不入库",
           "detail": "完成数据刷新与研报/论文扫描，复现跳空缺口-日内振幅比因子（60日均值，市值中性化）。20日前瞻回测结果：IC=-0.0010，t=-0.09，LS Sharpe=0.32，单调性=0.30，未达门槛，已写入 factor-research.json。",
           "recommendation": "继续扫描新方向"
+        },
+        {
+          "date": "2026-07-10",
+          "action": "hold",
+          "summary": "因子扫描：vol_ret_persist_v1 未达标，不入库",
+          "detail": "完成数据刷新、研报/论文扫描后，选取量价共振持续性因子 vol_ret_persist_v1（日线本土化复现）测试。回测结果：IC均值0.0055，t值1.06，Sharpe0.7008，单调性0.7，均未达到入库门槛(IC>0.02, t>2, Sharpe>0.8, 单调性>0.8)。判断主因是原始研报依赖高频量价/订单流信息，日线代理损失较大，且与现有 vol_ret_align_v1 / vssignal_v1 存在主线重合。已记录到 factor-research.json，本次不入库。",
+          "recommendation": "继续观察高频量价低频化方向，后续优先找与已有量价因子低相关的资金流/股东/大宗交易信号。"
         }
       ],
       "rebalances": [
