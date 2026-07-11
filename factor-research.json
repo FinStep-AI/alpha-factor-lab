@@ -5533,5 +5533,39 @@
       "reason": "未达到IC/Sharpe门槛，无需做冗余性检查"
     },
     "notes": "失败主因不是分层而是线性预测力太弱：G5年化18.3%、G1年化12.7%，单调性刚好0.8，但IC均值仅0.0047、t=0.48。说明‘盈利改善质量’在当前仅有roe/bps字段下可做成温和排序信号，却不足以作为独立因子入库。后续若能拿到净利润、经营现金流、应计项、毛利率等字段，可按更标准的accrual quality / earnings persistence公式重做。"
+  },
+  {
+    "date": "2026-07-11 15:00:00",
+    "factor_id": "roe_improve_quality_v2",
+    "factor_name": "ROE改善质量因子 v2",
+    "theme": "基本面类 / Growth / Quality",
+    "status": "failed",
+    "source_type": "论文启发+代理复现",
+    "source_title": "Profit Persistence and Stock Returns: Does the Market Care? — A股可实现的盈利改善质量代理",
+    "source_url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3211826",
+    "implementation": "/tmp/calc_roe_improve_quality_v2.py",
+    "factor_file": "data/factor_roe_improve_quality_v2.csv",
+    "backtest_output": "output/roe_improve_quality_v2/report.json",
+    "summary": "参考盈利持续性/利润质量文献，将信号定义为 ROE 同比改善 ÷ 过去8季 ROE 波动，并叠加过去8季平均 ROE 水平；报告日+45天滞后映射到日频，对 log(amount_20d) 做截面中性化，再 MAD 缩尾+z-score。",
+    "formula": "[(ROE_t - ROE_t-4) / std(ROE_t-7:t)] * sign(mean(ROE_t-7:t)) * (1 + log(1+|mean(ROE_t-7:t)|)) -> neutralize(log_amount_20d)",
+    "metrics": {
+      "ic_mean": 0.0198,
+      "ic_t": 3.29,
+      "g5_sharpe": 0.7277,
+      "monotonicity": 0.6,
+      "long_short_sharpe": 0.0043,
+      "turnover_mean": 0.2036,
+      "period": "2023-11-14 ~ 2026-04-01"
+    },
+    "correlation_check": {
+      "roe_delta_yoy_v1": 0.4767,
+      "roe_accel_v1": 0.4484,
+      "roe_persistence_neg_v1": -0.0306,
+      "roe_decay_rev_v1": 0.1419,
+      "roe_autocorr_pers_v1": 0.0457,
+      "redundant": false,
+      "threshold": 0.7
+    },
+    "notes": "这版比 v1 明显更接近门槛：IC 均值升至 0.0198、t=3.29，且与已有 ROE 持续性/反转类因子相关性很低，不冗余。但仍未过入库线，核心问题是分层不够单调（0.6）且 G4≈G5，最高组挑选能力不足；多空 Sharpe 近乎为 0。说明‘改善质量’更多提供线性排序信息，未形成稳定顶组 alpha。后续可尝试：1) 对极端改善做 truncation/sigmoid；2) 与 roe_accel_v1 做交互，仅保留中高 ROE 水平样本；3) 若拿到净利润/现金流/应计项，再按更标准 earnings quality 公式重做。"
   }
 ]
