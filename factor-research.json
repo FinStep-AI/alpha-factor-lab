@@ -5567,5 +5567,30 @@
       "threshold": 0.7
     },
     "notes": "这版比 v1 明显更接近门槛：IC 均值升至 0.0198、t=3.29，且与已有 ROE 持续性/反转类因子相关性很低，不冗余。但仍未过入库线，核心问题是分层不够单调（0.6）且 G4≈G5，最高组挑选能力不足；多空 Sharpe 近乎为 0。说明‘改善质量’更多提供线性排序信息，未形成稳定顶组 alpha。后续可尝试：1) 对极端改善做 truncation/sigmoid；2) 与 roe_accel_v1 做交互，仅保留中高 ROE 水平样本；3) 若拿到净利润/现金流/应计项，再按更标准 earnings quality 公式重做。"
+  },
+  {
+    "date": "2026-07-11 20:00:00",
+    "factor_id": "profit_persistence_proxy_v1",
+    "factor_name": "盈利持续性代理因子 v1",
+    "status": "failed",
+    "source_type": "论文复现+本土化",
+    "source_title": "Profit Persistence and Stock Returns: Does the Market Care?",
+    "source_url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3211826",
+    "barra_style": "Quality / Growth",
+    "description": "按论文盈利持续性语义，用现有数据可实现代理 mean(ROE_8q)/std(ROE_8q)，并参考既有A股小盘证据做反向使用；报告日+45天滞后映射到日频，对log(amount_20d)做截面市值代理中性化，再MAD缩尾+z-score。",
+    "formula": "factor = neutralize(-(mean(ROE,8q)/(std(ROE,8q)+1e-6)), log_amount_20d)",
+    "our_metric": {
+      "period": "2023-05-15 ~ 2026-07-09",
+      "ic_mean": 0.00881010354454368,
+      "ic_t": 1.2076653668427362,
+      "rank_ic": -0.003172476000737075,
+      "g5_sharpe": 0.5995278135449547,
+      "long_short_sharpe": 1.0679808750427615,
+      "monotonicity": 0.9,
+      "turnover_mean": 0.14941717750699898
+    },
+    "failure_reason": "未过硬门槛：IC均值仅0.0088，IC_t仅1.21，均明显低于>0.02 / >2.0要求。虽然分层单调性0.9、多空Sharpe 1.07尚可，但G5 Sharpe仅0.60，信号更像组合层面的弱排序而非稳定截面alpha。",
+    "diff_notes": "与2026-04-25已入库的 roe_persistence_neg_v1 属于同一论文语义与近似公式家族，本次使用更朴素的纯ROE持续性代理，在更长样本(至2026-07)上信号明显衰减；说明该方向在当前数据条件下缺乏新增信息，继续优化大概率落入重复/冗余挖掘。",
+    "conclusion": "淘汰"
   }
 ]
