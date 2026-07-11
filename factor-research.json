@@ -5507,5 +5507,31 @@
       "threshold": 0.7
     },
     "notes": "受限于fundamental_cache字段只有roe/bps，无法尝试毛利率/周转率类。改为围绕Growth空白继续挖掘更窄的盈利修复+净资产稳定扩张信号。"
+  },
+  {
+    "date": "2026-07-11 10:00:00",
+    "factor_id": "roe_improve_quality_v1",
+    "factor_name": "ROE改善质量因子 v1",
+    "theme": "基本面类 / Growth / Quality",
+    "status": "failed",
+    "source_type": "论文启发+代理复现",
+    "source_title": "盈利持续性 / 盈利质量文献的A股可实现代理：ROE同比改善 ÷ 过去4季波动，并叠加ROE水平",
+    "source_url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4939779",
+    "implementation": "calc_roe_improve_quality_v1.py",
+    "factor_file": "data/factor_roe_improve_quality_v1.csv",
+    "backtest_output": "output/roe_improve_quality_v1/report.json",
+    "summary": "按盈利持续性/质量的论文直觉构造：优先选择ROE同比改善且改善过程更平滑、同时当前盈利水平不差的股票；对log(amount)做截面市值代理中性化后，5日前瞻仅呈弱单调，IC明显不足。",
+    "metrics": {
+      "ic_mean": 0.00470783488321496,
+      "ic_t": 0.48226454203937424,
+      "g5_sharpe": 0.6662330178474692,
+      "monotonicity": 0.8,
+      "long_short_sharpe": 0.3250379059917962
+    },
+    "correlation_check": {
+      "skipped": true,
+      "reason": "未达到IC/Sharpe门槛，无需做冗余性检查"
+    },
+    "notes": "失败主因不是分层而是线性预测力太弱：G5年化18.3%、G1年化12.7%，单调性刚好0.8，但IC均值仅0.0047、t=0.48。说明‘盈利改善质量’在当前仅有roe/bps字段下可做成温和排序信号，却不足以作为独立因子入库。后续若能拿到净利润、经营现金流、应计项、毛利率等字段，可按更标准的accrual quality / earnings persistence公式重做。"
   }
 ]
