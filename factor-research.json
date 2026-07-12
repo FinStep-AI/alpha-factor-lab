@@ -5592,5 +5592,35 @@
     "failure_reason": "未过硬门槛：IC均值仅0.0088，IC_t仅1.21，均明显低于>0.02 / >2.0要求。虽然分层单调性0.9、多空Sharpe 1.07尚可，但G5 Sharpe仅0.60，信号更像组合层面的弱排序而非稳定截面alpha。",
     "diff_notes": "与2026-04-25已入库的 roe_persistence_neg_v1 属于同一论文语义与近似公式家族，本次使用更朴素的纯ROE持续性代理，在更长样本(至2026-07)上信号明显衰减；说明该方向在当前数据条件下缺乏新增信息，继续优化大概率落入重复/冗余挖掘。",
     "conclusion": "淘汰"
+  },
+  {
+    "date": "2026-07-12 10:00:00",
+    "factor_id": "profit_persistence_growth_proxy_v1",
+    "factor_name": "盈利持续性成长代理因子 v1",
+    "theme": "基本面类 / Quality / Growth",
+    "status": "failed",
+    "source_type": "论文复现+本土化代理",
+    "source_title": "Profit Persistence and Stock Returns: Does the Market Care?",
+    "source_url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3211826",
+    "implementation": "ad-hoc cron script (45d lag quarterly mapping)",
+    "factor_file": "data/factor_profit_persistence_growth_proxy_v1.csv",
+    "backtest_output": "output/profit_persistence_growth_proxy_v1/report.json",
+    "summary": "周末论文复现尝试。参考盈利持续性文献，在仅有roe/bps字段下构造代理：最近4季ROE均值/波动 × BPS同比增长方向，再做log(amount)截面中性化、MAD缩尾和z-score。",
+    "formula": "smooth_growth = mean(ROE,4q)/(std(ROE,4q)+eps) * sign(BPS_yoy) * log(1+|BPS_yoy|); factor = neutralize(smooth_growth, log_amount)",
+    "metrics": {
+      "ic_mean": 0.00036041793528399053,
+      "ic_t": 0.09859299940725977,
+      "rank_ic": 0.0011967174697119296,
+      "g5_sharpe": 0.4102047902162907,
+      "monotonicity": -0.3,
+      "long_short_sharpe": -0.48395508157706824,
+      "turnover_mean": 0.08390669891086182,
+      "period": "2023-08-14 ~ 2026-07-09"
+    },
+    "correlation_check": {
+      "skipped": true,
+      "reason": "因子未达到IC/Sharpe门槛，无需做冗余性检查"
+    },
+    "notes": "失败得很干脆：IC接近0，分组也非单调，G1反而最好。说明在当前fundamental_cache只有roe/bps两个字段时，把盈利持续性论文硬代理成‘ROE平滑度×BPS增长’并不能复现论文核心机制，信息含量基本被噪音淹没。后续若继续做Quality/Growth论文复现，优先找可只依赖ROE时序结构的公式，或等拿到毛利率/应计项/现金流字段再重做标准quality。"
   }
 ]
