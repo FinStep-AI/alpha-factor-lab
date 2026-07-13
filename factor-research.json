@@ -5660,5 +5660,35 @@
     },
     "notes": "性能本身过线：IC=0.0216、t=4.29、G5 Sharpe=1.02、单调性=1.0，多空 Sharpe=2.29。问题在于与 2026-07-11 失败稿 roe_improve_quality_v1 的平均 Spearman 相关性约 0.72，已越过 >0.7 冗余线；虽然后者未入库，但从研究库视角说明这条 alpha 更像既有‘ROE 改善质量’思路的稳定化版本，而不是足够新的一条独立论文复现因子。",
     "conclusion": "淘汰（高相关冗余）"
+  },
+  {
+    "timestamp": "2026-07-13 12:00:00+08:00",
+    "factor_id": "roe_yoy_acc_growth_v1",
+    "name": "ROE同比加速度成长因子 v1",
+    "theme": "基本面类/成长",
+    "status": "rejected",
+    "barra_style": "Growth",
+    "source_type": "self_research",
+    "source_title": "自研：ROE同比变化的加速度刻画盈利拐点",
+    "source_url": "https://bigquant.com/wiki/doc/c7u9IChUio",
+    "formula": "neutralize(zscore(clip((ROE_t-ROE_t-4)-(ROE_t-1-ROE_t-5)+0.2*(BPS_t-BPS_t-4),1%,99%)), log_mktcap)",
+    "data_file": "data/factor_roe_yoy_acc_growth_v1.csv",
+    "period": "2023-11-14 ~ 2026-07-10",
+    "forward_days": 5,
+    "rebalance_freq": 20,
+    "cost": 0.003,
+    "metrics": {
+      "ic_mean": 0.013655561358371733,
+      "ic_t": 2.7778807115307202,
+      "g5_sharpe": 0.6053582876880275,
+      "monotonicity": 0.7999999999999999,
+      "long_short_sharpe": 1.0292145317586072
+    },
+    "correlations": {
+      "roe_yoy_accel_resid_v1": 0.538616817050531,
+      "roe_decay_rev_v1": 0.044427387661387915,
+      "roe_trend_quality_v1": 0.03470912467026704
+    },
+    "decision_reason": "未过入库硬门槛：IC均值0.0137 < 0.02；其余指标基本达标（IC_t=2.78, G5 Sharpe=0.61, 单调性=0.80，Long-Short Sharpe=1.03）。表现说明ROE同比加速度能抓到部分盈利拐点，但高分组收益峰值落在G4而非G5，排序稳定性不足。后续可尝试加入行业/规模双中性，或改成ROE同比加速度残差化版本。"
   }
 ]
