@@ -5690,5 +5690,41 @@
       "roe_trend_quality_v1": 0.03470912467026704
     },
     "decision_reason": "未过入库硬门槛：IC均值0.0137 < 0.02；其余指标基本达标（IC_t=2.78, G5 Sharpe=0.61, 单调性=0.80，Long-Short Sharpe=1.03）。表现说明ROE同比加速度能抓到部分盈利拐点，但高分组收益峰值落在G4而非G5，排序稳定性不足。后续可尝试加入行业/规模双中性，或改成ROE同比加速度残差化版本。"
+  },
+  {
+    "id": "roe_improve_efficiency_v1",
+    "source_type": "self_research",
+    "source_title": "ROE改善效率因子 v1",
+    "source_url": "",
+    "source_author": "OpenClaw cron factor miner",
+    "source_year": 2026,
+    "source_journal": "",
+    "original_metric": {
+      "market": "中证1000",
+      "period": "2023-08 ~ 2026-03",
+      "ic_mean": 0.0219,
+      "sharpe": 0.9749,
+      "description": "ROE同比改善 × 盈利稳定性 × 低净资产扩张惩罚；财报可用日映射到日频，并做成交额代理的市值中性化"
+    },
+    "our_metric": {
+      "market": "中证1000",
+      "period": "2023-08 ~ 2026-03",
+      "ic_mean": 0.021876511354564043,
+      "ic_t": 4.5396459317767555,
+      "sharpe": 0.974899662477974,
+      "monotonicity": 1.0
+    },
+    "diff_notes": "绝对表现达标：IC均值0.0219、IC_t=4.54、G5 Sharpe=0.975、单调性1.0；但与investment_efficiency_proxy_v1相关性0.947，与roe_improve_quality_v1相关性0.716，超过0.7冗余阈值。",
+    "local_factor_id": "roe_improve_efficiency_v1",
+    "conclusion": "淘汰",
+    "date": "2026-07-13",
+    "status": "rejected",
+    "failure_reason": "与现有Growth/Quality家族因子高度冗余，不满足新因子入库的独立性要求。",
+    "correlations": {
+      "investment_efficiency_proxy_v1": 0.9474693637343578,
+      "roe_improve_quality_v1": 0.7157358294863293,
+      "roe_acceleration_v1": 0.482582376446445,
+      "roe_bps_recovery_stability_v1": 0.16387734601472548
+    }
   }
 ]
