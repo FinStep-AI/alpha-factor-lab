@@ -6,7 +6,7 @@
     "benchmark": "000300",
     "benchmark_name": "沪深300",
     "created_at": "2026-02-23 22:14:25",
-    "updated_at": "2026-07-14 08:31:51",
+    "updated_at": "2026-07-14 09:07:38",
     "status": "active",
     "players_count": 6
   },
@@ -8409,14 +8409,6 @@
       ],
       "decisions": [
         {
-          "date": "2026-03-02",
-          "time": "14:02",
-          "type": "weekly_rebalance",
-          "action": "rebalance",
-          "summary": "周一调仓完成。双因子(Amihud非流动性+上影线卖压)等权排名合成选TOP25。卖出17只旧持仓，买入22只新标的，保留迪阿股份+共创草坪。最终24只持仓（南微医学资金不足跳过）。换手率约85%。",
-          "detail": ""
-        },
-        {
           "date": "2026-03-09",
           "time": "09:00",
           "type": "factor_research",
@@ -8694,6 +8686,13 @@
           "detail": "2026-07-13 周一调仓：feature_engine --refresh 成功，最新特征日期停在 2026-05-25；ml_stock_selector 直接预测因 201/97 特征不匹配失败，回退到 lgbm_v1 已训练97特征子集生成TOP30。风控 full-check 剔除 300666.SZ（电子行业超配 26.7%>25%），最终取前25只执行等权调仓。候选含 300634.SZ,688726.SH,603919.SH,300755.SZ,000813.SZ 等。",
           "recommendation": "调仓",
           "exec_summary": "成功0笔，失败0笔"
+        },
+        {
+          "date": "2026-07-14",
+          "action": "hold",
+          "summary": "因子扫描：成交额集中度不对称方向未通过验证",
+          "detail": "先刷新CSI1000 K线：fintool失败且最新仅到2026-07-10，fallback到auto后仍未拿到今天/昨天数据。随后扫描中英文资料，未发现足够明确且与现有库低重复的新方向，于是快速复现成交额集中度不对称因子（20日窗口内top10%成交额均值与bottom10%均值的对数差，做成交额代理市值中性化）。回测结果：正向20/20 IC=0.0060,t=0.55,LS Sharpe=-0.32,Mono=-0.60；反向20/20 IC=-0.0060,t=-0.55,LS Sharpe=0.18,Mono=0.60；正向5/5 IC=-0.0033,t=-0.50,LS Sharpe=0.26,Mono=0.30。结论：信号不稳定，淘汰，不入库。已追加 factor-research.json。",
+          "recommendation": "保持现有组合，不新增因子。继续关注可严格公式化的微观结构/资金流论文。"
         }
       ],
       "rebalances": [
