@@ -5726,5 +5726,82 @@
       "roe_acceleration_v1": 0.482582376446445,
       "roe_bps_recovery_stability_v1": 0.16387734601472548
     }
+  },
+  {
+    "date": "2026-07-14 09:00:00",
+    "factor_id": "amt_concentration_asym_v1",
+    "factor_name": "成交额集中度不对称因子 v1",
+    "theme": "微观结构 / Liquidity",
+    "status": "failed",
+    "source_type": "论文复现+本土化",
+    "source_title": "Volume-Momentum / Information-Spreading Hypothesis related idea",
+    "source_url": "https://doi.org/10.1111/0022-1082.00280",
+    "implementation": "skills/alpha-factor-lab/scripts/backtest_amt_concentration_asym_v1.py",
+    "factor_file": "output/amt_concentration_asym_v1/factor_values.csv",
+    "backtest_output": "output/amt_concentration_asym_v1/backtest_report.json",
+    "summary": "日频成交额20日窗口内，取top10%活跃日与bottom10%低活跃日的成交额均值做对数差，刻画交易活跃度集中是否代表信息优势，再对log(amount)做截面中性化。",
+    "formula": "raw = log(mean(amount | amount>=q90, 20d)) - log(mean(amount | amount<=q10, 20d)); factor = neutralize(raw, log_amount_20d)",
+    "original_metric": {
+      "market": "文献启发，非直接给出中证1000可比指标",
+      "description": "Lee & Swaminathan (2000) 支持成交量承载信息扩散/关注度，但未直接给出本文这种top-bottom concentration asymmetry在A股中证1000上的统一门槛指标"
+    },
+    "our_metric": {
+      "period": "2022-10-10 ~ 2026-07-13",
+      "config_20_20_long_high": {
+        "ic_mean": 0.005998193481220682,
+        "ic_t": 0.55,
+        "long_short_sharpe": -0.32,
+        "monotonicity": -0.6
+      },
+      "config_20_20_long_low": {
+        "ic_mean": -0.005998193481220682,
+        "ic_t": -0.55,
+        "long_short_sharpe": 0.18,
+        "monotonicity": 0.6
+      },
+      "config_5_5_long_high": {
+        "ic_mean": -0.0033,
+        "ic_t": -0.5,
+        "long_short_sharpe": 0.26,
+        "monotonicity": 0.3
+      }
+    },
+    "diff_notes": "原始文献强调成交量与信息扩散/动量延续的关系，但这里的‘窗口内成交额分布不对称’是本土化派生构造，不是论文原式。落到中证1000后，截面排序几乎不稳定，说明成交额极端日占比更多反映事件噪音、游资冲击或流动性扰动，而不是可持续alpha。",
+    "conclusion": "淘汰",
+    "failure_reason": "未过硬门槛：三组配置均未达到IC>0.02、t>2、Sharpe>0.8、单调性>0.8。最佳也仅反向20/20配置 long-short Sharpe 0.18，且IC绝对值只有0.006。",
+    "correlation_check": {
+      "skipped": true,
+      "reason": "因子未达到入库门槛，无需做冗余性检查"
+    }
+  },
+  {
+    "id": "roe_reaccel_stability_v1",
+    "source_type": "自研",
+    "source_title": "ROE再加速稳定性因子",
+    "source_url": "",
+    "source_author": null,
+    "source_year": 2026,
+    "source_journal": "",
+    "date": "2026-07-14",
+    "original_metric": {
+      "market": "",
+      "period": "",
+      "ic_mean": null,
+      "sharpe": null,
+      "description": "季度ROE同比改善的再加速（本期YoY-上期YoY），叠加ROE水平门槛与时序稳定性惩罚，刻画“盈利改善继续变快且噪声较低”的成长质量。"
+    },
+    "our_metric": {
+      "market": "中证1000",
+      "period": "2024-02 ~ 2026-03",
+      "ic_mean": 0.0105,
+      "ic_t": 2.24,
+      "sharpe": 0.674,
+      "monotonicity": 0.7
+    },
+    "diff_notes": "统计显著但经济显著性不足：IC t值达标，然而IC均值仅1.05%，G5 Sharpe 0.67、单调性0.7，说明信号方向基本对但分层拉不开。可能受季度基本面更新频率低、5日持有期过短影响。",
+    "local_factor_id": null,
+    "conclusion": "淘汰",
+    "status": "rejected",
+    "failure_reason": "未达门槛：IC均值<0.02，G5 Sharpe<0.8，单调性<0.8。建议若复试可改为20日持有期或与BPS/营收趋势联合。"
   }
 ]
