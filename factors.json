@@ -3259,5 +3259,53 @@
     "direction": "positive",
     "correlations": "{\"factor_roe_acceleration_v1\": 0.464, \"factor_roe_bps_synergy_v2\": 0.521, \"factor_bps_roe_comp_v2\": 0.317}",
     "performance": "{\"ic_mean\": 0.0203, \"ic_t\": 2.83, \"g5_sharpe\": 0.9672, \"monotonicity\": 1.0, \"ls_sharpe\": 1.7483, \"period\": \"2023-05-15 ~ 2026-02-13\"}"
+  },
+  {
+    "id": "gap_fill_reversal_v1",
+    "name": "跳空回补反转 v1",
+    "name_en": "Gap Fill Reversal v1",
+    "category": "跳空缺口/反转",
+    "description": "过去20日统计跳空后被日内回补的强度：上跳空后回落、下跳空后回升。高因子值代表缺口更容易被反向回补，说明隔夜情绪定价不稳、盘中承接/抛压更强，后续5日呈显著反转效应。采用市值代理做OLS中性化，5%缩尾，5组分层。",
+    "hypothesis": "上跳空若频繁被日内回补，说明高开透支、后续偏弱；下跳空若频繁被回补，说明恐慌被快速承接、后续偏强。把两者统一后可提取缺口回补反转alpha。",
+    "expected_direction": "正向（高因子值=高预期收益）",
+    "factor_type": "量价/反转",
+    "formula": "neutralize(MA20(sign(gap_ret) * fill_ratio * abs(gap_ret)), log_mktcap); auto-select direction",
+    "direction": 1,
+    "stock_pool": "中证1000",
+    "period": "2022-11-03 ~ 2026-07-13",
+    "rebalance_freq": 5,
+    "forward_days": 5,
+    "cost": 0.003,
+    "rating": "★★★★ 强",
+    "nav_data": "output/gap_fill_reversal_v1/cumulative_returns.json",
+    "ic_data": "output/gap_fill_reversal_v1/ic_series.json",
+    "upgrade_notes": "从跳空缺口方向扩展到'缺口是否被日内回补'的行为金融视角。相较单纯gap方向，更能识别隔夜情绪定价是否站得住。",
+    "lessons_learned": [
+      "跳空本身不如'跳空后是否被回补'更有信息量",
+      "中证1000里下跳空被快速承接、上跳空被盘中兑现，短期反转显著",
+      "5日频率下信号最清晰，但换手率偏高，需要组合里搭配低换手因子"
+    ],
+    "created": "2026-07-14",
+    "updated": "2026-07-14",
+    "metrics": {
+      "ic_mean": 0.02858557333858614,
+      "ir": 0.23244847902509463,
+      "ic_t": 3.009096219716275,
+      "long_short_sharpe": 1.2142471740164962,
+      "monotonicity": 0.9,
+      "turnover_mean": 0.5522457384600965,
+      "group_returns_annualized": [
+        -0.09188137803506169,
+        0.017277370635908396,
+        -0.004962568180800431,
+        0.01885976146535362,
+        0.11164145337548059
+      ]
+    },
+    "conclusion": "达标入库。缺口回补反转因子在中证1000上表现稳健：IC=0.0286，t=3.01，多空Sharpe=1.21，分组基本单调。说明隔夜缺口若在日内被系统性回补，往往对应短期错误定价与反转机会。",
+    "barra_style": "Reversal",
+    "source_type": "自研",
+    "source_title": "Gap Fill Reversal（跳空回补行为）",
+    "source_url": ""
   }
 ]
