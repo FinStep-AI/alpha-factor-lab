@@ -5803,5 +5803,32 @@
     "conclusion": "淘汰",
     "status": "rejected",
     "failure_reason": "未达门槛：IC均值<0.02，G5 Sharpe<0.8，单调性<0.8。建议若复试可改为20日持有期或与BPS/营收趋势联合。"
+  },
+  {
+    "timestamp": "2026-07-14T15:35:00+08:00",
+    "factor_id": "roe_smooth_improve_ratio_v1",
+    "name": "ROE平滑改善比率 v1",
+    "status": "rejected",
+    "barra_style": "Quality",
+    "source_type": "fundamental",
+    "idea": "以两期平滑ROE同比改善除以近4季ROE波动，并用正ROE水位做门控，映射到财报可用日后做市值中性化。",
+    "files": {
+      "calculator": "calc_roe_smooth_improve_ratio_v1.py",
+      "factor_csv": "data/factor_roe_smooth_improve_ratio_v1.csv",
+      "report": "output/roe_smooth_improve_ratio_v1/report.json"
+    },
+    "metrics": {
+      "ic_mean": 0.019848062626198856,
+      "ic_t": 4.316443895277938,
+      "g5_sharpe": 1.0199462725869568,
+      "monotonicity": 0.9999999999999999,
+      "long_short_sharpe": 2.32339814928086
+    },
+    "redundancy_check": {
+      "max_abs_corr": 0.4098,
+      "nearest_factor_id": "roe_delta_yoy_v1",
+      "redundant": false
+    },
+    "failure_reason": "未达到硬门槛：IC均值0.0198，略低于0.02；其余指标达标。说明信号方向正确，但边际alpha不足，后续可尝试引入BPS/现金流稳定性或缩短财报映射持有窗口。"
   }
 ]
