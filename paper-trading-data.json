@@ -6,7 +6,7 @@
     "benchmark": "000300",
     "benchmark_name": "沪深300",
     "created_at": "2026-02-23 22:14:25",
-    "updated_at": "2026-07-15 08:31:40",
+    "updated_at": "2026-07-15 09:04:27",
     "status": "active",
     "players_count": 6
   },
@@ -8413,14 +8413,6 @@
       "decisions": [
         {
           "date": "2026-03-09",
-          "time": "09:00",
-          "type": "factor_research",
-          "action": "new_factor_added",
-          "summary": "新因子pv_corr_v1(量价相关性)入库。IC=0.024(t=2.98),Sharpe=1.47,单调性0.9,MDD仅-5.4%(全库最低)。量价同向确认的动量效应在中证1000显著。从CPV量价系列研报改进：降频到日频+方向反转(正PV相关做多)。与现有因子低相关(max|corr|=0.32)。因子库增至12个。",
-          "detail": "pv_corr_v1: rolling_corr(daily_ret, vol_pct_change, 20), neutralized by log_amount_20d. Direction: positive PV corr = volume-confirmed momentum = higher future returns. Source: CPV factor series from Dongfang/Huatai Securities, adapted from minute-level to daily-level. Key insight: in CSI1000 small caps, positive PV correlation (volume confirms price trend) works better than negative (reversal hypothesis), likely due to slower information diffusion."
-        },
-        {
-          "date": "2026-03-09",
           "time": "09:35",
           "type": "rebalance",
           "action": "rebalance",
@@ -8696,6 +8688,13 @@
           "summary": "因子扫描：成交额集中度不对称方向未通过验证",
           "detail": "先刷新CSI1000 K线：fintool失败且最新仅到2026-07-10，fallback到auto后仍未拿到今天/昨天数据。随后扫描中英文资料，未发现足够明确且与现有库低重复的新方向，于是快速复现成交额集中度不对称因子（20日窗口内top10%成交额均值与bottom10%均值的对数差，做成交额代理市值中性化）。回测结果：正向20/20 IC=0.0060,t=0.55,LS Sharpe=-0.32,Mono=-0.60；反向20/20 IC=-0.0060,t=-0.55,LS Sharpe=0.18,Mono=0.60；正向5/5 IC=-0.0033,t=-0.50,LS Sharpe=0.26,Mono=0.30。结论：信号不稳定，淘汰，不入库。已追加 factor-research.json。",
           "recommendation": "保持现有组合，不新增因子。继续关注可严格公式化的微观结构/资金流论文。"
+        },
+        {
+          "date": "2026-07-15",
+          "action": "hold",
+          "summary": "因子扫描：跳空回补强度方向复现失败，不入库",
+          "detail": "完成今日因子扫描与复现：fintool失败后已fallback到auto，CSI1000 K线更新至2026-07-14。选取“跳空回补强度”方向，按日线OHLC复现跳空后日内回补比例并做20日平滑+市值中性化。回测不达标：20日前瞻IC=-0.0094,t=-0.82,Sharpe=-0.07,单调性=-0.20；5日前瞻IC=-0.0063,t=-1.33,Sharpe=-0.42,单调性=-0.30。判断：高频订单流机制无法被日线代理充分捕捉，结果呈U型非线性，暂不入库。",
+          "recommendation": "保持持仓，继续搜索更高信息密度的微观结构/资金流因子"
         }
       ],
       "rebalances": [
