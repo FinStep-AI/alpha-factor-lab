@@ -5830,5 +5830,61 @@
       "redundant": false
     },
     "failure_reason": "未达到硬门槛：IC均值0.0198，略低于0.02；其余指标达标。说明信号方向正确，但边际alpha不足，后续可尝试引入BPS/现金流稳定性或缩短财报映射持有窗口。"
+  },
+  {
+    "date": "2026-07-15",
+    "factor_id": "gap_fill_reversal_strength_v1",
+    "source_type": "paper",
+    "source_title": "Cross-sectional reversal of intraday returns and investor trading behavior / 跳空回补相关微观结构思路本土化",
+    "source_url": "https://www.sciencedirect.com/science/article/pii/S2214845023000029",
+    "original_metric": {
+      "paper_claim": "文献强调日内反转/投资者交易行为具有截面可预测性，跳空后的日内回补可视为该机制在A股日线上的代理信号",
+      "expected_direction": "高回补强度 -> 后续更高收益（反转）"
+    },
+    "our_metric": {
+      "fwd_20d": {
+        "ic_mean": -0.0094,
+        "t_value": -0.82,
+        "sharpe": -0.07,
+        "monotonicity": -0.2,
+        "turnover_mean": 0.8222
+      },
+      "fwd_5d": {
+        "ic_mean": -0.0063,
+        "t_value": -1.33,
+        "sharpe": -0.42,
+        "monotonicity": -0.3,
+        "turnover_mean": 0.5521
+      }
+    },
+    "diff_notes": "论文关注更细颗粒度的日内反转与订单流行为；当前仅用日线OHLC构造“跳空回补强度”，信息损失较大，且中证1000中该信号可能已被现有gap/close-location类因子吸收。分组收益呈U型而非单调，说明更像非线性状态变量，不适合直接做线性选股因子。",
+    "conclusion": "fail_not_add"
+  },
+  {
+    "date": "2026-07-15",
+    "factor_id": "roe_reaccel_bps_guard_v1",
+    "source_type": "self_research",
+    "source_title": "ROE再加速-BPS约束因子",
+    "source_url": "",
+    "original_metric": {
+      "paper_claim": "延续2026-07-14淘汰的 roe_reaccel_stability_v1，按当时结论将 ROE 再加速 与 BPS 扩张约束联合，尝试提升成长质量信号的经济显著性。",
+      "expected_direction": "高ROE再加速、低BPS扩张、低波动稳定 -> 后续更高收益"
+    },
+    "our_metric": {
+      "fwd_5d": {
+        "ic_mean": 0.0102,
+        "t_value": 2.34,
+        "sharpe": 0.5688,
+        "monotonicity": 0.8,
+        "turnover_mean": 0.265
+      },
+      "redundancy_check": {
+        "with_roe_reaccel_stability_v1_spearman": 0.9723,
+        "with_roe_level_speed_v1_spearman": 0.3818,
+        "with_roe_trend_quality_v2_spearman": -0.0114
+      }
+    },
+    "diff_notes": "统计显著性尚可(t=2.34)，但IC均值仅1.02%、G5 Sharpe仅0.57，未达到入库门槛；同时与已淘汰的 roe_reaccel_stability_v1 横截面Spearman高达0.9723，说明BPS约束只是在旧信号上做轻微调制，未形成独立alpha。分组收益虽接近单调，但G1/G5年化差距有限，更像弱排序而非可交易强信号。",
+    "conclusion": "fail_not_add"
   }
 ]
