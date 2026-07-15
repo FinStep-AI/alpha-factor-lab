@@ -6,7 +6,7 @@
     "benchmark": "000300",
     "benchmark_name": "沪深300",
     "created_at": "2026-02-23 22:14:25",
-    "updated_at": "2026-07-15 15:14:06",
+    "updated_at": "2026-07-15 15:15:55",
     "status": "active",
     "players_count": 6
   },
@@ -24,10 +24,10 @@
             "name": "德展健康",
             "volume": 108400,
             "avg_cost": 3.23,
-            "current_price": 3.42,
-            "market_value": 370728.0,
-            "pnl": 20596.0,
-            "pnl_pct": 5.88,
+            "current_price": 3.45,
+            "market_value": 373980.0,
+            "pnl": 23848.0,
+            "pnl_pct": 6.81,
             "entry_date": "2026-07-13"
           },
           "002226.SZ": {
@@ -35,10 +35,10 @@
             "name": "江南化工",
             "volume": 78100,
             "avg_cost": 4.48,
-            "current_price": 4.61,
-            "market_value": 360041.0,
-            "pnl": 10153.0,
-            "pnl_pct": 2.9,
+            "current_price": 4.64,
+            "market_value": 362384.0,
+            "pnl": 12496.0,
+            "pnl_pct": 3.57,
             "entry_date": "2026-07-13"
           },
           "002396.SZ": {
@@ -46,10 +46,10 @@
             "name": "星网锐捷",
             "volume": 12700,
             "avg_cost": 27.47,
-            "current_price": 27.43,
-            "market_value": 348361.0,
-            "pnl": -508.0,
-            "pnl_pct": -0.15,
+            "current_price": 27.52,
+            "market_value": 349504.0,
+            "pnl": 635.0,
+            "pnl_pct": 0.18,
             "entry_date": "2026-07-13"
           },
           "002897.SZ": {
@@ -57,10 +57,10 @@
             "name": "意华股份",
             "volume": 4200,
             "avg_cost": 82.33,
-            "current_price": 71.2,
-            "market_value": 299040.0,
-            "pnl": -46746.0,
-            "pnl_pct": -13.52,
+            "current_price": 71.01,
+            "market_value": 298242.0,
+            "pnl": -47544.0,
+            "pnl_pct": -13.75,
             "entry_date": "2026-07-13"
           },
           "300131.SZ": {
@@ -68,10 +68,10 @@
             "name": "英唐智控",
             "volume": 18500,
             "avg_cost": 18.9,
-            "current_price": 17.33,
-            "market_value": 320605.0,
-            "pnl": -29045.0,
-            "pnl_pct": -8.31,
+            "current_price": 17.0,
+            "market_value": 314500.0,
+            "pnl": -35150.0,
+            "pnl_pct": -10.05,
             "entry_date": "2026-07-13"
           },
           "300166.SZ": {
@@ -79,10 +79,10 @@
             "name": "东方国信",
             "volume": 21800,
             "avg_cost": 16.0,
-            "current_price": 13.89,
-            "market_value": 302802.0,
-            "pnl": -45998.0,
-            "pnl_pct": -13.19,
+            "current_price": 13.95,
+            "market_value": 304110.0,
+            "pnl": -44690.0,
+            "pnl_pct": -12.81,
             "entry_date": "2026-07-13"
           },
           "300576.SZ": {
@@ -90,10 +90,10 @@
             "name": "容大感光",
             "volume": 8700,
             "avg_cost": 39.81,
-            "current_price": 33.85,
-            "market_value": 294495.0,
-            "pnl": -51852.0,
-            "pnl_pct": -14.97,
+            "current_price": 33.82,
+            "market_value": 294234.0,
+            "pnl": -52113.0,
+            "pnl_pct": -15.05,
             "entry_date": "2026-07-13"
           },
           "300593.SZ": {
@@ -101,10 +101,10 @@
             "name": "新雷能",
             "volume": 12700,
             "avg_cost": 27.37,
-            "current_price": 27.03,
-            "market_value": 343281.0,
-            "pnl": -4318.0,
-            "pnl_pct": -1.24,
+            "current_price": 26.99,
+            "market_value": 342773.0,
+            "pnl": -4826.0,
+            "pnl_pct": -1.39,
             "entry_date": "2026-07-13"
           },
           "300602.SZ": {
@@ -112,10 +112,10 @@
             "name": "飞荣达",
             "volume": 7600,
             "avg_cost": 45.82,
-            "current_price": 40.45,
-            "market_value": 307420.0,
-            "pnl": -40812.0,
-            "pnl_pct": -11.72,
+            "current_price": 40.58,
+            "market_value": 308408.0,
+            "pnl": -39824.0,
+            "pnl_pct": -11.44,
             "entry_date": "2026-07-13"
           },
           "300634.SZ": {
@@ -123,10 +123,10 @@
             "name": "彩讯股份",
             "volume": 17700,
             "avg_cost": 19.72,
-            "current_price": 18.57,
-            "market_value": 328689.0,
-            "pnl": -20355.0,
-            "pnl_pct": -5.83,
+            "current_price": 18.69,
+            "market_value": 330813.0,
+            "pnl": -18231.0,
+            "pnl_pct": -5.22,
             "entry_date": "2026-07-13"
           },
           "300755.SZ": {
@@ -134,10 +134,10 @@
             "name": "华致酒行",
             "volume": 30500,
             "avg_cost": 11.47,
-            "current_price": 11.53,
-            "market_value": 351665.0,
-            "pnl": 1830.0,
-            "pnl_pct": 0.52,
+            "current_price": 11.55,
+            "market_value": 352275.0,
+            "pnl": 2440.0,
+            "pnl_pct": 0.7,
             "entry_date": "2026-07-13"
           },
           "301291.SZ": {
@@ -145,10 +145,10 @@
             "name": "明阳电气",
             "volume": 9400,
             "avg_cost": 36.98,
-            "current_price": 35.1,
-            "market_value": 329940.0,
-            "pnl": -17672.0,
-            "pnl_pct": -5.08,
+            "current_price": 35.31,
+            "market_value": 331914.0,
+            "pnl": -15698.0,
+            "pnl_pct": -4.52,
             "entry_date": "2026-07-13"
           },
           "301293.SZ": {
@@ -156,10 +156,10 @@
             "name": "三博脑科",
             "volume": 6900,
             "avg_cost": 50.45,
-            "current_price": 49.41,
-            "market_value": 340929.0,
-            "pnl": -7176.0,
-            "pnl_pct": -2.06,
+            "current_price": 49.75,
+            "market_value": 343275.0,
+            "pnl": -4830.0,
+            "pnl_pct": -1.39,
             "entry_date": "2026-07-13"
           },
           "301316.SZ": {
@@ -167,10 +167,10 @@
             "name": "慧博云通",
             "volume": 8000,
             "avg_cost": 43.7,
-            "current_price": 39.0,
-            "market_value": 312000.0,
-            "pnl": -37600.0,
-            "pnl_pct": -10.76,
+            "current_price": 39.12,
+            "market_value": 312960.0,
+            "pnl": -36640.0,
+            "pnl_pct": -10.48,
             "entry_date": "2026-07-13"
           },
           "603039.SH": {
@@ -178,10 +178,10 @@
             "name": "泛微网络",
             "volume": 10300,
             "avg_cost": 33.83,
-            "current_price": 31.09,
-            "market_value": 320227.0,
-            "pnl": -28222.0,
-            "pnl_pct": -8.1,
+            "current_price": 31.14,
+            "market_value": 320742.0,
+            "pnl": -27707.0,
+            "pnl_pct": -7.95,
             "entry_date": "2026-07-13"
           },
           "603919.SH": {
@@ -189,10 +189,10 @@
             "name": "金徽酒",
             "volume": 23900,
             "avg_cost": 14.63,
-            "current_price": 14.82,
-            "market_value": 354198.0,
-            "pnl": 4541.0,
-            "pnl_pct": 1.3,
+            "current_price": 14.92,
+            "market_value": 356588.0,
+            "pnl": 6931.0,
+            "pnl_pct": 1.98,
             "entry_date": "2026-07-13"
           },
           "605198.SH": {
@@ -200,10 +200,10 @@
             "name": "安德利",
             "volume": 5900,
             "avg_cost": 59.01,
-            "current_price": 56.02,
-            "market_value": 330518.0,
-            "pnl": -17641.0,
-            "pnl_pct": -5.07,
+            "current_price": 56.15,
+            "market_value": 331285.0,
+            "pnl": -16874.0,
+            "pnl_pct": -4.85,
             "entry_date": "2026-07-13"
           },
           "688068.SH": {
@@ -211,10 +211,10 @@
             "name": "热景生物",
             "volume": 2800,
             "avg_cost": 124.3,
-            "current_price": 138.06,
-            "market_value": 386568.0,
-            "pnl": 38528.0,
-            "pnl_pct": 11.07,
+            "current_price": 139.0,
+            "market_value": 389200.0,
+            "pnl": 41160.0,
+            "pnl_pct": 11.83,
             "entry_date": "2026-07-13"
           },
           "688110.SH": {
@@ -222,10 +222,10 @@
             "name": "东芯股份",
             "volume": 2100,
             "avg_cost": 164.0,
-            "current_price": 147.45,
-            "market_value": 309645.0,
-            "pnl": -34755.0,
-            "pnl_pct": -10.09,
+            "current_price": 147.33,
+            "market_value": 309393.0,
+            "pnl": -35007.0,
+            "pnl_pct": -10.16,
             "entry_date": "2026-07-13"
           },
           "688147.SH": {
@@ -233,10 +233,10 @@
             "name": "微导纳米",
             "volume": 2500,
             "avg_cost": 138.97,
-            "current_price": 125.72,
-            "market_value": 314300.0,
-            "pnl": -33125.0,
-            "pnl_pct": -9.53,
+            "current_price": 125.88,
+            "market_value": 314700.0,
+            "pnl": -32725.0,
+            "pnl_pct": -9.42,
             "entry_date": "2026-07-13"
           },
           "688182.SH": {
@@ -244,10 +244,10 @@
             "name": "灿勤科技",
             "volume": 9300,
             "avg_cost": 37.31,
-            "current_price": 30.58,
-            "market_value": 284394.0,
-            "pnl": -62589.0,
-            "pnl_pct": -18.04,
+            "current_price": 30.71,
+            "market_value": 285603.0,
+            "pnl": -61380.0,
+            "pnl_pct": -17.69,
             "entry_date": "2026-07-13"
           },
           "688206.SH": {
@@ -255,10 +255,10 @@
             "name": "概伦电子",
             "volume": 7400,
             "avg_cost": 47.16,
-            "current_price": 45.79,
-            "market_value": 338846.0,
-            "pnl": -10138.0,
-            "pnl_pct": -2.91,
+            "current_price": 46.15,
+            "market_value": 341510.0,
+            "pnl": -7474.0,
+            "pnl_pct": -2.14,
             "entry_date": "2026-07-13"
           },
           "688352.SH": {
@@ -266,10 +266,10 @@
             "name": "颀中科技",
             "volume": 15900,
             "avg_cost": 22.0,
-            "current_price": 17.67,
-            "market_value": 280953.0,
-            "pnl": -68847.0,
-            "pnl_pct": -19.68,
+            "current_price": 17.75,
+            "market_value": 282225.0,
+            "pnl": -67575.0,
+            "pnl_pct": -19.32,
             "entry_date": "2026-07-13"
           },
           "688584.SH": {
@@ -277,10 +277,10 @@
             "name": "上海合晶",
             "volume": 8000,
             "avg_cost": 43.38,
-            "current_price": 38.88,
-            "market_value": 311040.0,
-            "pnl": -36000.0,
-            "pnl_pct": -10.37,
+            "current_price": 39.38,
+            "market_value": 315040.0,
+            "pnl": -32000.0,
+            "pnl_pct": -9.22,
             "entry_date": "2026-07-13"
           },
           "688726.SH": {
@@ -288,14 +288,14 @@
             "name": "拉普拉斯",
             "volume": 7000,
             "avg_cost": 49.57,
-            "current_price": 42.14,
-            "market_value": 294980.0,
-            "pnl": -52010.0,
-            "pnl_pct": -14.99,
+            "current_price": 42.13,
+            "market_value": 294910.0,
+            "pnl": -52080.0,
+            "pnl_pct": -15.01,
             "entry_date": "2026-07-13"
           }
         },
-        "total_value": 8173821.98,
+        "total_value": 8198724.98,
         "last_update": "2026-07-15"
       },
       "nav_history": {
@@ -467,7 +467,7 @@
           0.877064,
           0.837589,
           0.838454,
-          0.817382
+          0.819872
         ],
         "cash_pct": [
           1.3,
@@ -8712,11 +8712,11 @@
         }
       ],
       "stats": {
-        "total_return_pct": -18.26,
-        "annualized_return_pct": -32.97,
-        "max_drawdown_pct": 12.35,
-        "sharpe_ratio": -3.61,
-        "calmar_ratio": -2.67,
+        "total_return_pct": -18.01,
+        "annualized_return_pct": -32.35,
+        "max_drawdown_pct": 12.08,
+        "sharpe_ratio": -3.58,
+        "calmar_ratio": -2.68,
         "win_rate": 32.65,
         "profit_loss_ratio": 1.2,
         "total_trades": 369,
@@ -8961,14 +8961,14 @@
             "name": "正帆科技",
             "volume": 400,
             "avg_cost": 45.93,
-            "current_price": 60.42,
-            "market_value": 24168.0,
-            "pnl": 5796.0,
-            "pnl_pct": 31.55,
+            "current_price": 60.63,
+            "market_value": 24252.0,
+            "pnl": 5880.0,
+            "pnl_pct": 32.01,
             "entry_date": "2026-06-11"
           }
         },
-        "total_value": 7761738.89,
+        "total_value": 7761822.89,
         "last_update": "2026-07-15"
       },
       "nav_history": {
@@ -9056,7 +9056,7 @@
           0.835101,
           0.776384,
           0.776337,
-          0.776174
+          0.776182
         ],
         "cash_pct": [
           50.76,
@@ -9889,10 +9889,10 @@
             "name": "招商银行",
             "volume": 100000,
             "avg_cost": 39.52,
-            "current_price": 37.82,
-            "market_value": 3782000.0,
-            "pnl": -170000.0,
-            "pnl_pct": -4.3,
+            "current_price": 37.76,
+            "market_value": 3776000.0,
+            "pnl": -176000.0,
+            "pnl_pct": -4.45,
             "entry_date": "2026-04-20"
           },
           "601318.SH": {
@@ -9900,10 +9900,10 @@
             "name": "中国平安",
             "volume": 35000,
             "avg_cost": 57.92,
-            "current_price": 51.05,
-            "market_value": 1786750.0,
-            "pnl": -240450.0,
-            "pnl_pct": -11.86,
+            "current_price": 50.95,
+            "market_value": 1783250.0,
+            "pnl": -243950.0,
+            "pnl_pct": -12.03,
             "entry_date": "2026-04-20"
           },
           "600519.SH": {
@@ -9911,10 +9911,10 @@
             "name": "贵州茅台",
             "volume": 500,
             "avg_cost": 1407.24,
-            "current_price": 1256.55,
-            "market_value": 628275.0,
-            "pnl": -75345.0,
-            "pnl_pct": -10.71,
+            "current_price": 1251.06,
+            "market_value": 625530.0,
+            "pnl": -78090.0,
+            "pnl_pct": -11.1,
             "entry_date": "2026-04-20"
           },
           "600887.SH": {
@@ -9922,10 +9922,10 @@
             "name": "伊利股份",
             "volume": 20000,
             "avg_cost": 25.39,
-            "current_price": 25.97,
-            "market_value": 519400.0,
-            "pnl": 11600.0,
-            "pnl_pct": 2.28,
+            "current_price": 25.93,
+            "market_value": 518600.0,
+            "pnl": 10800.0,
+            "pnl_pct": 2.13,
             "entry_date": "2026-04-20"
           },
           "000858.SZ": {
@@ -9933,14 +9933,14 @@
             "name": "五粮液",
             "volume": 29400,
             "avg_cost": 92.13,
-            "current_price": 76.22,
-            "market_value": 2240868.0,
-            "pnl": -467754.0,
-            "pnl_pct": -17.27,
+            "current_price": 76.4,
+            "market_value": 2246160.0,
+            "pnl": -462462.0,
+            "pnl_pct": -17.07,
             "entry_date": "2026-05-11"
           }
         },
-        "total_value": 9045083.0,
+        "total_value": 9037330.0,
         "last_update": "2026-07-15"
       },
       "nav_history": {
@@ -10112,7 +10112,7 @@
           0.877417,
           0.879334,
           0.881279,
-          0.904508
+          0.903733
         ],
         "cash_pct": [
           0.93,
@@ -10513,11 +10513,11 @@
       ],
       "rebalances": [],
       "stats": {
-        "total_return_pct": -9.55,
-        "annualized_return_pct": -10.9,
+        "total_return_pct": -9.63,
+        "annualized_return_pct": -11.13,
         "max_drawdown_pct": 7.08,
-        "sharpe_ratio": -1.11,
-        "calmar_ratio": -1.54,
+        "sharpe_ratio": -1.14,
+        "calmar_ratio": -1.57,
         "win_rate": 0,
         "profit_loss_ratio": 0.0,
         "total_trades": 5,
@@ -10589,7 +10589,7 @@
       "portfolio": {
         "cash": 8430028.119999997,
         "positions": {},
-        "total_value": 8430028.12,
+        "total_value": 8430028.119999997,
         "last_update": "2026-07-15"
       },
       "nav_history": {
@@ -10761,7 +10761,7 @@
           0.898633,
           0.879442,
           0.888547,
-          0.84279
+          0.843003
         ],
         "cash_pct": [
           38.21,
@@ -10846,7 +10846,7 @@
           67.51,
           100.0,
           79.26,
-          24.36
+          100.0
         ]
       },
       "trades": [
@@ -18105,13 +18105,13 @@
       ],
       "rebalances": [],
       "stats": {
-        "total_return_pct": -15.72,
-        "annualized_return_pct": -36.86,
-        "max_drawdown_pct": 14.05,
+        "total_return_pct": -15.7,
+        "annualized_return_pct": -36.81,
+        "max_drawdown_pct": 14.03,
         "sharpe_ratio": -3.4,
         "calmar_ratio": -2.62,
-        "win_rate": 50.0,
-        "profit_loss_ratio": 0.8,
+        "win_rate": 49.56,
+        "profit_loss_ratio": 0.74,
         "total_trades": 363,
         "total_fees": 542603.8400000001,
         "current_positions": 1,
@@ -19747,17 +19747,17 @@
       "description": "追踪市场热点新闻，挖掘受益标的，快进快出。3-5天周期，多热点分散持仓。",
       "portfolio": {
         "cash": 169527.58999999706,
-        "total_value": 8670052.09,
+        "total_value": 8618222.59,
         "positions": {
           "002747.SZ": {
             "code": "002747.SZ",
             "name": "埃斯顿",
             "volume": 50,
             "avg_cost": 21.87,
-            "current_price": 40.99,
-            "market_value": 2049.5,
-            "pnl": 956.0,
-            "pnl_pct": 87.43,
+            "current_price": 40.9,
+            "market_value": 2045.0,
+            "pnl": 951.5,
+            "pnl_pct": 87.01,
             "entry_date": "2026-05-06"
           },
           "300558.SZ": {
@@ -19765,10 +19765,10 @@
             "name": "贝达药业",
             "volume": 22500,
             "avg_cost": 63.28,
-            "current_price": 69.31,
-            "market_value": 1559475.0,
-            "pnl": 135675.0,
-            "pnl_pct": 9.53,
+            "current_price": 67.14,
+            "market_value": 1510650.0,
+            "pnl": 86850.0,
+            "pnl_pct": 6.1,
             "entry_date": "2026-07-10"
           },
           "601377.SH": {
@@ -19776,10 +19776,10 @@
             "name": "兴业证券",
             "volume": 300000,
             "avg_cost": 6.16,
-            "current_price": 6.22,
-            "market_value": 1866000.0,
-            "pnl": 18000.0,
-            "pnl_pct": 0.97,
+            "current_price": 6.21,
+            "market_value": 1863000.0,
+            "pnl": 15000.0,
+            "pnl_pct": 0.81,
             "entry_date": "2026-07-15"
           },
           "603236.SH": {
@@ -21753,7 +21753,7 @@
           0.848075,
           0.841934,
           0.865499,
-          0.867005
+          0.861822
         ],
         "cash_pct": [
           66.88,
@@ -21838,7 +21838,7 @@
           65.03,
           65.5,
           81.83,
-          1.96
+          1.97
         ]
       },
       "decisions": [
@@ -22072,16 +22072,16 @@
       ],
       "latest_news": "3/9午盘扫描：AI+油气双热点爆发，首日观察不追高，计划明日分化后建仓",
       "stats": {
-        "total_return_pct": -13.3,
-        "annualized_return_pct": -4.18,
+        "total_return_pct": -13.82,
+        "annualized_return_pct": -5.9,
         "max_drawdown_pct": 5.93,
-        "sharpe_ratio": -0.58,
-        "calmar_ratio": -0.7,
+        "sharpe_ratio": -0.76,
+        "calmar_ratio": -0.99,
         "win_rate": 53.7,
         "profit_loss_ratio": 0.25,
         "total_trades": 94,
         "total_fees": 175499.9699999999,
-        "current_positions": 2,
+        "current_positions": 4,
         "turnover_rate": 0.0
       },
       "rebalances": []
@@ -22254,7 +22254,7 @@
       1.01556,
       0.997417,
       1.018897,
-      1.017748
+      1.016833
     ],
     "start_value": 4707.54
   },
@@ -22275,10 +22275,10 @@
         "player_id": "value",
         "name": "巴菲特门徒",
         "emoji": "🏛️",
-        "total_return_pct": -9.55,
-        "sharpe_ratio": -1.11,
+        "total_return_pct": -9.63,
+        "sharpe_ratio": -1.14,
         "max_drawdown_pct": 7.08,
-        "current_nav": 0.904508,
+        "current_nav": 0.903733,
         "total_trades": 5,
         "rank": 2
       },
@@ -22286,10 +22286,10 @@
         "player_id": "hotspot",
         "name": "热点猎手",
         "emoji": "📰",
-        "total_return_pct": -13.3,
-        "sharpe_ratio": -0.58,
+        "total_return_pct": -13.82,
+        "sharpe_ratio": -0.76,
         "max_drawdown_pct": 5.93,
-        "current_nav": 0.867005,
+        "current_nav": 0.861822,
         "total_trades": 94,
         "rank": 3
       },
@@ -22297,21 +22297,21 @@
         "player_id": "dwj",
         "name": "趋势游侠",
         "emoji": "🏄",
-        "total_return_pct": -15.72,
+        "total_return_pct": -15.7,
         "sharpe_ratio": -3.4,
-        "max_drawdown_pct": 14.05,
-        "current_nav": 0.84279,
-        "total_trades": 361,
+        "max_drawdown_pct": 14.03,
+        "current_nav": 0.843003,
+        "total_trades": 363,
         "rank": 4
       },
       {
         "player_id": "quant",
         "name": "因子猎人",
         "emoji": "🔢",
-        "total_return_pct": -18.26,
-        "sharpe_ratio": -3.61,
-        "max_drawdown_pct": 12.35,
-        "current_nav": 0.817382,
+        "total_return_pct": -18.01,
+        "sharpe_ratio": -3.58,
+        "max_drawdown_pct": 12.08,
+        "current_nav": 0.819872,
         "total_trades": 369,
         "rank": 5
       },
@@ -22322,12 +22322,12 @@
         "total_return_pct": -22.38,
         "sharpe_ratio": -4.53,
         "max_drawdown_pct": 15.69,
-        "current_nav": 0.776174,
+        "current_nav": 0.776182,
         "total_trades": 27,
         "rank": 6
       }
     ],
-    "updated_at": "2026-07-15 14:30:55"
+    "updated_at": "2026-07-15 15:15:55"
   },
   "quant": {
     "decisions": [
