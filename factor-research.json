@@ -5886,5 +5886,33 @@
     },
     "diff_notes": "统计显著性尚可(t=2.34)，但IC均值仅1.02%、G5 Sharpe仅0.57，未达到入库门槛；同时与已淘汰的 roe_reaccel_stability_v1 横截面Spearman高达0.9723，说明BPS约束只是在旧信号上做轻微调制，未形成独立alpha。分组收益虽接近单调，但G1/G5年化差距有限，更像弱排序而非可交易强信号。",
     "conclusion": "fail_not_add"
+  },
+  {
+    "date": "2026-07-15",
+    "factor_id": "roe_smooth_improve_ratio_v1",
+    "name": "ROE平滑改善比率 v1",
+    "status": "rejected",
+    "barra_style": "Growth",
+    "source_type": "自研",
+    "theme": "基本面类：ROE变化率 / Growth",
+    "formula": "neutralize(mean2(ROE_yoy) * 1/(1+std4(ROE)) * tanh(mean4(ROE)/8), log_amount_20d)",
+    "summary": "本轮新挖掘 Growth 因子。核心思想是“持续改善比跳升更重要”：用2期平滑ROE同比改善，除以近4期ROE波动，再用ROE水平门控。已做市值/成交额中性化。",
+    "metrics": {
+      "ic_mean": 0.0198,
+      "ic_t": 4.32,
+      "g5_sharpe": 1.0,
+      "long_short_sharpe": 2.3234,
+      "monotonicity": 1.0,
+      "turnover": 0.1991
+    },
+    "correlations": {
+      "roe_decay_rev_v1": 0.312,
+      "roe_trend_quality_v1": 0.15,
+      "roe_persistence_neg_v1": 0.122,
+      "roe_yoy_accel_resid_v1": 0.066
+    },
+    "decision": "淘汰（本轮不入库）",
+    "reason": "虽然 IC_t、G5 Sharpe、单调性、换手率都很好，但 IC 均值仅 0.0198，低于 0.02 的硬门槛 0.0002，严格按规则不入库。",
+    "next_step": "优先尝试两条改造：1) 将平滑窗口从2期改为加权2-3期；2) 引入BPS同比或资产周转率变化做二级门控，争取把IC均值抬过0.02。"
   }
 ]
