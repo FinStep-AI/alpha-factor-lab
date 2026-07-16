@@ -5972,5 +5972,34 @@
     "conclusion": "淘汰",
     "date": "2026-07-16",
     "status": "failed"
+  },
+  {
+    "id": "gross_margin_proxy_growth_v1",
+    "source_type": "自研",
+    "source_title": "ROE改善×平滑净资产增长（毛利率趋势代理）",
+    "source_url": "",
+    "source_author": "",
+    "source_year": 2026,
+    "source_journal": "",
+    "date": "2026-07-16",
+    "original_metric": {
+      "market": "",
+      "period": "",
+      "ic_mean": null,
+      "sharpe": null,
+      "description": "用现有fundamental缓存中的ROE/BPS构造 Growth/Quality 代理：ROE同比改善需叠加稳定、平滑的BPS增长，近似刻画毛利率趋势与内生增长质量。"
+    },
+    "our_metric": {
+      "market": "中证1000",
+      "period": "2024-02 ~ 2026-02",
+      "ic_mean": 0.0105,
+      "ic_t": 2.35,
+      "sharpe": 1.3962,
+      "monotonicity": 0.9
+    },
+    "diff_notes": "未达入库门槛：IC均值 0.0105 < 0.02，虽然 IC t=2.35、G5 Sharpe=1.57、单调性=0.90 都不差，但横截面预测强度偏弱，更适合做组合增强信号而非独立主因子。已做市值中性化。",
+    "local_factor_id": null,
+    "conclusion": "淘汰",
+    "status": "rejected"
   }
 ]
