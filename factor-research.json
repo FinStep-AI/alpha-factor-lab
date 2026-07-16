@@ -5914,5 +5914,63 @@
     "decision": "淘汰（本轮不入库）",
     "reason": "虽然 IC_t、G5 Sharpe、单调性、换手率都很好，但 IC 均值仅 0.0198，低于 0.02 的硬门槛 0.0002，严格按规则不入库。",
     "next_step": "优先尝试两条改造：1) 将平滑窗口从2期改为加权2-3期；2) 引入BPS同比或资产周转率变化做二级门控，争取把IC均值抬过0.02。"
+  },
+  {
+    "id": "scan_2026_07_16_no_new_factor",
+    "source_type": "日报扫描",
+    "source_title": "2026-07-16 因子扫描：中文金工/英文学术快扫",
+    "source_url": "",
+    "source_author": "OpenClaw quant cron",
+    "source_year": 2026,
+    "source_journal": "",
+    "original_metric": {
+      "market": "N/A",
+      "period": "2026-07-16",
+      "ic_mean": null,
+      "sharpe": null,
+      "description": "快扫中文金工研报与英文学术/SSRN结果，未发现明显优于现有库且可在40分钟内高质量复现的新方向。"
+    },
+    "our_metric": {
+      "market": "中证1000",
+      "period": "2026-07-16",
+      "ic_mean": null,
+      "ic_t": null,
+      "sharpe": null,
+      "monotonicity": null
+    },
+    "diff_notes": "现有因子库已覆盖流动性、动量、微观结构、波动率、ROE质量、价格延迟、智能资金等主轴；今日搜索结果以旧研报集合页/泛化论文入口为主，缺少可直接严格复现且非重复的新公式。K线刷新停留在2026-07-14，数据新鲜度也不足以支持当天新增因子入库。",
+    "local_factor_id": "",
+    "conclusion": "未入库：今日未发现高置信新因子方向，转为记录扫描日志",
+    "date": "2026-07-16",
+    "status": "inactive"
+  },
+  {
+    "id": "roe_bps_delta_stability_v1",
+    "source_type": "自研",
+    "source_title": "ROE改善-BPS扩张稳定性因子",
+    "source_url": "",
+    "source_author": "OpenClaw 因子猎人",
+    "source_year": 2026,
+    "source_journal": "",
+    "original_metric": {
+      "market": "A股中小盘",
+      "period": "内部研究",
+      "ic_mean": null,
+      "sharpe": null,
+      "description": "结合ROE两季度改善、BPS两季度扩张、ROE稳定性的Quality/Growth混合因子。"
+    },
+    "our_metric": {
+      "market": "中证1000",
+      "period": "2023-02-14 ~ 2026-07-14",
+      "ic_mean": 0.020507,
+      "ic_t": 2.878752,
+      "sharpe": 0.626101,
+      "monotonicity": 0.9
+    },
+    "diff_notes": "使用45天财报滞后映射到日频，并对log(amount)做横截面中性化。门槛失败点：G5 Sharpe仅0.626，略低于0.8。",
+    "local_factor_id": "roe_bps_delta_stability_v1",
+    "conclusion": "淘汰",
+    "date": "2026-07-16",
+    "status": "failed"
   }
 ]
