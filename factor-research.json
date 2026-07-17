@@ -6029,5 +6029,33 @@
     },
     "diff_notes": "外部结果多为索引页/综述，缺少可直接落地的明确公式；最有潜力的订单簿/挂单手数类因子与现有数据粒度不匹配，若强行用日线代理，信息折损过大。",
     "conclusion": "未发现满足“非重复 + 可严格复现 + 40分钟内完成”的新因子方向，今日不新增因子、不入库，仅记录扫描日志。"
+  },
+  {
+    "id": "bps_roe_growth_stability_v1",
+    "date": "2026-07-17",
+    "status": "failed",
+    "barra_style": "Growth",
+    "source_type": "自研",
+    "theme": "基本面类/Quality-Growth",
+    "title": "BPS-ROE增长稳定性因子 v1",
+    "formula_desc": "quality_base * roe_impulse * growth_gate * stability_gate；基于ROE同比/加速度、BPS同比均值、ROE与BPS波动稳定性构造，并做市值中性化",
+    "data_inputs": [
+      "data/csi1000_fundamental_cache.csv",
+      "data/csi1000_kline_raw.csv",
+      "data/csi1000_returns.csv"
+    ],
+    "output_factor": "data/factor_bps_roe_growth_stability_v1.csv",
+    "output_report": "output/bps_roe_growth_stability_v1/report.json",
+    "metrics": {
+      "ic_mean": 0.007455602341847678,
+      "ic_t": 1.8190828770613245,
+      "g5_sharpe": 1.456216515711914,
+      "monotonicity": 0.7,
+      "long_short_sharpe": 0.6863417025712124,
+      "turnover_mean": 0.21475004096222527
+    },
+    "result": "淘汰",
+    "reason": "未达门槛：IC均值<0.02、IC_t<2.0、单调性<0.8；分层中G3优于G5，说明信号更像中段最优而非线性成长质量溢价。",
+    "notes": "优点是G5绝对收益和Sharpe不差，说明基本面改善+稳定性有一定选股价值；下一步可尝试改成纯加速度或加入行业中性/分位门控，避免中间组受益最明显的问题。"
   }
 ]
