@@ -6001,5 +6001,33 @@
     "local_factor_id": null,
     "conclusion": "淘汰",
     "status": "rejected"
+  },
+  {
+    "id": "scan_2026_07_17_no_new_factor",
+    "date": "2026-07-17",
+    "source_type": "日报扫描",
+    "source_title": "2026-07-17 因子扫描：中文金工/英文学术快扫",
+    "source_url": "",
+    "source_author": "OpenClaw quant cron",
+    "source_year": 2026,
+    "source_journal": "",
+    "original_metric": {
+      "market": "N/A",
+      "period": "2026-07-17",
+      "ic_mean": null,
+      "sharpe": null,
+      "description": "快扫中文金工研报与英文学术/SSRN结果，候选方向以旧研报索引、泛化综述、或需盘口/逐笔数据的微观结构为主。"
+    },
+    "our_metric": {
+      "market": "中证1000",
+      "period": "截至 2026-07-16 最新日线",
+      "ic_mean": null,
+      "ic_t": null,
+      "sharpe": null,
+      "monotonicity": null,
+      "notes": "今日已将CSI1000日线从2026-07-14刷新至2026-07-16；fintool全量失败，fallback auto成功。搜索到的'委托挂单手数/订单簿'方向需要盘口级数据，现有OHLCV+基本面环境无法在40分钟内高质量严格复现。"
+    },
+    "diff_notes": "外部结果多为索引页/综述，缺少可直接落地的明确公式；最有潜力的订单簿/挂单手数类因子与现有数据粒度不匹配，若强行用日线代理，信息折损过大。",
+    "conclusion": "未发现满足“非重复 + 可严格复现 + 40分钟内完成”的新因子方向，今日不新增因子、不入库，仅记录扫描日志。"
   }
 ]
