@@ -6057,5 +6057,30 @@
     "result": "淘汰",
     "reason": "未达门槛：IC均值<0.02、IC_t<2.0、单调性<0.8；分层中G3优于G5，说明信号更像中段最优而非线性成长质量溢价。",
     "notes": "优点是G5绝对收益和Sharpe不差，说明基本面改善+稳定性有一定选股价值；下一步可尝试改成纯加速度或加入行业中性/分位门控，避免中间组受益最明显的问题。"
+  },
+  {
+    "factor_id": "gross_margin_revenue_quality_v1",
+    "factor_name": "毛利率收入质量因子 v1",
+    "date": "2026-07-17",
+    "status": "failed",
+    "barra_style": "Quality/Growth",
+    "source_type": "fundamental",
+    "idea": "用毛利率同比改善与收入增长趋势做成长主轴，并加入存货周转改善、应收占比变化、负债变化和流动性缓冲约束；日频上按财报披露日扩散并做市值中性化。",
+    "data_sources": "data/csi1000_revenue_yoy_raw.csv,data/csi1000_kline_raw.csv,data/csi1000_returns.csv",
+    "implementation": "0.30*毛利率同比趋势 + 0.30*营收同比趋势 + 0.20*营运效率 + 0.20*资产负债表约束，再乘以增长稳定性与毛利率水平锚；按披露日映射到交易日并前向填充80日，随后做横截面市值中性化。",
+    "backtest": {
+      "period": "2025-04-18 ~ 2026-02-13",
+      "forward_days": 5,
+      "groups": 5,
+      "cost": 0.003,
+      "ic_mean": 0.00537703781412162,
+      "ic_t": 0.49715546239382413,
+      "g5_sharpe": 3.184997228738696,
+      "monotonicity": 0.8,
+      "long_short_sharpe": 0.7098816270246079
+    },
+    "pass_threshold": false,
+    "failure_reason": "IC均值和IC_t远低于门槛（0.005<0.02, 0.50<2.0），且最高收益组出现在G4而非G5，说明排序尾部不够稳定；多空Sharpe仅0.71，也未形成足够强的可交易alpha。",
+    "artifacts": "calc_gross_margin_revenue_quality_v1.py,data/factor_gross_margin_revenue_quality_v1.csv,output/gross_margin_revenue_quality_v1/report.json"
   }
 ]
