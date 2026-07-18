@@ -6150,5 +6150,41 @@
     "result": "淘汰",
     "reason": "未达门槛：IC均值仅0.0119<0.02，G5 Sharpe仅0.66<0.8；虽然单调性1.0、多空Sharpe 1.18，但更像稳健排序信号而非强横截面alpha。",
     "notes": "本地化后方向正确（低投资优于高投资），但仅用BPS作为资产增长代理信息量偏弱。追加的 profitability gate 版本 investment_efficiency_paper_v1 也未改善（IC_mean=0.0102, G5 Sharpe=0.61），说明在当前fundamental_cache字段下，这条经典Investment论文难以形成可入库的新Growth因子。后续若补齐总资产、资本开支、销售增长、毛利率等字段再重试。"
+  },
+  {
+    "date": "2026-07-18 20:00:00",
+    "factor_id": "idio_shock_reversal_v1",
+    "factor_name": "特异性单日冲击反转因子 v1",
+    "theme": "事件型 / 短期冲击 / 论文复现启发",
+    "status": "failed",
+    "source_type": "论文复现+本土化",
+    "source_title": "Short-term Abnormal Returns Following Sharp One-Day Stock-Specific Shocks",
+    "source_url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6394098",
+    "implementation": "内联脚本构造，输出 data/factor_idio_shock_reversal_v1.csv",
+    "factor_file": "data/factor_idio_shock_reversal_v1.csv",
+    "backtest_output": "output/idio_shock_reversal_v1/report.json",
+    "summary": "周末论文复现尝试。参考“单日个股特异性大冲击后是否存在短期异常收益”的新近SSRＮ题目，用A股中证1000可实现代理定义冲击：idio_shock = (个股日收益-当日截面均值) 相对过去20日自身均值/波动的z-score；取其负值表示‘更极端的负向特异性冲击’，并按日对log(amount)做横截面OLS中性化。",
+    "formula": "raw = -[(r_i,t - mean_cs(r_t)) - mean_20(excess_ret_i)] / std_20(excess_ret_i); factor = neutralize(raw, log(amount_t))",
+    "metrics": {
+      "ic_mean": -0.017529897869071356,
+      "ic_t": -2.163045145374502,
+      "rank_ic": -0.01574669293048559,
+      "g5_sharpe": -0.4418517106534386,
+      "monotonicity": -0.9,
+      "long_short_sharpe": -0.49631178589339126,
+      "turnover_mean": 0.7921850290197997,
+      "period": "2022-10-24 ~ 2026-07-16",
+      "rebalance_freq": 5,
+      "forward_days": 5,
+      "cost": 0.003
+    },
+    "correlation_check": {
+      "tail_risk_cvar_v1": 0.0905541647092118,
+      "neg_min_ret_10d": 0.0677499872545304,
+      "redundant": false,
+      "threshold": 0.7
+    },
+    "notes": "结果明确失败：IC为负且显著(-0.0175, t=-2.16)，单调性-0.9，G5与多空Sharpe均明显为负。说明在中证1000当前样本中，这种‘单日特异性负冲击’并不对应后续5日反转，反而更像持续承压/弱势延续，但即便按本定义翻方向，分层收益仍整体为负，不具备可交易性。好消息是它与已有尾部风险/最大单日亏损因子平均Spearman仅约0.07~0.09，不属于冗余失败，而是经济机制本身未在本地市场样本中成立。后续若要继续追这条论文线，建议补真正的市场模型残差、公告/停牌/涨跌停过滤，并区分正冲击与负冲击两侧事件窗。",
+    "conclusion": "淘汰（论文启发有效，但本地化代理不成立）"
   }
 ]
