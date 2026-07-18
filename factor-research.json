@@ -6082,5 +6082,41 @@
     "pass_threshold": false,
     "failure_reason": "IC均值和IC_t远低于门槛（0.005<0.02, 0.50<2.0），且最高收益组出现在G4而非G5，说明排序尾部不够稳定；多空Sharpe仅0.71，也未形成足够强的可交易alpha。",
     "artifacts": "calc_gross_margin_revenue_quality_v1.py,data/factor_gross_margin_revenue_quality_v1.csv,output/gross_margin_revenue_quality_v1/report.json"
+  },
+  {
+    "date": "2026-07-18 10:00:00",
+    "factor_id": "roe_improve_efficiency_v1",
+    "factor_name": "ROE改善效率因子 v1",
+    "theme": "基本面类 / Quality / Growth",
+    "status": "failed",
+    "source_type": "论文复现+本土化代理",
+    "source_title": "Profit Persistence and Stock Returns: Does the Market Care?",
+    "source_url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3211826",
+    "implementation": "calc_roe_improve_efficiency_v1.py",
+    "factor_file": "data/factor_roe_improve_efficiency_v1.csv",
+    "backtest_output": "output/roe_improve_efficiency_v1/report.json",
+    "summary": "参考盈利持续性/利润质量文献，用 ROE 同比改善刻画盈利改善，用 BPS 同比和 BPS 加速度惩罚激进净资产扩张，再乘以近四季 ROE 水平/波动形成‘改善但不靠堆资本’的效率代理；报告日+45天映射到日频，并对 log(amount_20d) 做截面中性化。",
+    "formula": "raw = (ROE_t-ROE_t-4) × sign(mean(ROE,4q)) × log(1+|mean(ROE,4q)|) / (1+|std(ROE,4q)|) / (1 + 4*|BPS_yoy| + 2*|BPS_accel|); factor = neutralize(raw, log_amount_20d)",
+    "metrics": {
+      "ic_mean": 0.021876511354564043,
+      "ic_t": 4.5396459317767555,
+      "rank_ic": 0.027862571721813792,
+      "g5_sharpe": 0.974899662477974,
+      "monotonicity": 1.0,
+      "long_short_sharpe": 2.454717076371637,
+      "turnover_mean": 0.22646430091753203,
+      "period": "2023-08-14 ~ 2026-03-04"
+    },
+    "correlation_check": {
+      "roe_improve_quality_v1": 0.7338968580081621,
+      "growth_quality_stable_v1": 0.5234907121370665,
+      "roe_autocorr_pers_v1": 0.10389054725781434,
+      "investment_efficiency_proxy_v1": 0.9784906378518257,
+      "redundant": true,
+      "threshold": 0.7,
+      "max_corr_factor": "investment_efficiency_proxy_v1"
+    },
+    "notes": "纯性能已达标：IC=0.0219、t=4.54、G5 Sharpe=0.97、单调性=1.0，多空 Sharpe=2.45。但与既有研究稿 investment_efficiency_proxy_v1 的 Spearman 相关性高达 0.978，与 roe_improve_quality_v1 也有 0.734，说明本质上仍是同一条 ‘ROE改善 + 资本扩张约束’ alpha 支路，不满足‘新因子’要求，因此按冗余淘汰，只保留研究记录。",
+    "conclusion": "淘汰（高相关冗余）"
   }
 ]
