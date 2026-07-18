@@ -6118,5 +6118,37 @@
     },
     "notes": "纯性能已达标：IC=0.0219、t=4.54、G5 Sharpe=0.97、单调性=1.0，多空 Sharpe=2.45。但与既有研究稿 investment_efficiency_proxy_v1 的 Spearman 相关性高达 0.978，与 roe_improve_quality_v1 也有 0.734，说明本质上仍是同一条 ‘ROE改善 + 资本扩张约束’ alpha 支路，不满足‘新因子’要求，因此按冗余淘汰，只保留研究记录。",
     "conclusion": "淘汰（高相关冗余）"
+  },
+  {
+    "id": "asset_growth_paper_v1",
+    "date": "2026-07-18",
+    "status": "failed",
+    "barra_style": "Growth",
+    "source_type": "论文复现+本土化",
+    "source_title": "Asset Growth and the Cross-Section of Stock Returns",
+    "source_url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=1334134",
+    "source_author": "Michael J. Cooper, Huseyin Gulen, Michael J. Schill",
+    "source_year": 2008,
+    "source_journal": "Journal of Finance",
+    "theme": "Investment / Growth",
+    "formula_desc": "严格复现的A股可实现代理：asset_growth_proxy = -((BPS_t / BPS_t-4) - 1)，45天财报滞后映射到日频，并对log(amount)做横截面中性化、MAD去极值、zscore标准化。低BPS扩张≈低投资，预期未来收益更高。",
+    "data_inputs": [
+      "data/csi1000_fundamental_cache.csv",
+      "data/csi1000_kline_raw.csv",
+      "data/csi1000_returns.csv"
+    ],
+    "output_factor": "data/factor_asset_growth_paper_v1.csv",
+    "output_report": "output/asset_growth_paper_v1/report.json",
+    "metrics": {
+      "ic_mean": 0.011876333184370343,
+      "ic_t": 2.3997858489458492,
+      "g5_sharpe": 0.6602824025084472,
+      "monotonicity": 0.9999999999999999,
+      "long_short_sharpe": 1.1775669057350342,
+      "turnover_mean": 0.13362048381895322
+    },
+    "result": "淘汰",
+    "reason": "未达门槛：IC均值仅0.0119<0.02，G5 Sharpe仅0.66<0.8；虽然单调性1.0、多空Sharpe 1.18，但更像稳健排序信号而非强横截面alpha。",
+    "notes": "本地化后方向正确（低投资优于高投资），但仅用BPS作为资产增长代理信息量偏弱。追加的 profitability gate 版本 investment_efficiency_paper_v1 也未改善（IC_mean=0.0102, G5 Sharpe=0.61），说明在当前fundamental_cache字段下，这条经典Investment论文难以形成可入库的新Growth因子。后续若补齐总资产、资本开支、销售增长、毛利率等字段再重试。"
   }
 ]
