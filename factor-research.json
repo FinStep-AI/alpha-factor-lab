@@ -1,5 +1,38 @@
 [
   {
+    "date": "2026-07-19",
+    "factor_id": "profit_smooth_improve_paper_v1",
+    "factor_name": "盈利平滑改善比率 v1",
+    "status": "failed",
+    "source_type": "论文复现+本土化",
+    "source_title": "Profit Persistence and Stock Returns: Does the Market Care?",
+    "source_url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3211826",
+    "source_author": "Chahine, Fang, Hill & Salameh",
+    "source_year": 2018,
+    "source_journal": "Journal of Banking and Finance",
+    "barra_style": "Quality / Growth",
+    "description": "参考盈利持续性论文语义，构造A股可实现代理：2期平滑ROE同比改善 / 近4季ROE波动，并用近4季ROE均值做正盈利门控；财报日+45天映射到日频后，对20日均成交额对数做横截面OLS中性化，再MAD去极值+z-score。",
+    "formula": "factor = neutralize((MA2(ROE_t-ROE_t-4) / (STD4(ROE)+1)) * tanh(MA4(ROE)/8), log_amount_20d)",
+    "our_metric": {
+      "period": "2023-11-14 ~ 2026-07-16",
+      "ic_mean": 0.0009792916213573236,
+      "ic_t": 0.318775665895294,
+      "rank_ic": 0.0008860793338092513,
+      "g5_sharpe": 0.39870833912674924,
+      "long_short_sharpe": -0.7552911088618609,
+      "monotonicity": -0.6,
+      "turnover_mean": 0.3621398618954892
+    },
+    "failure_reason": "全面不达标：IC均值仅0.0010，IC_t仅0.32，G5 Sharpe仅0.40，单调性为-0.6，且最高年化收益出现在G1而非G5。说明‘平滑改善’这一改造把原本可用的盈利持续性/改善信息过度压平，信号被削弱成噪音。",
+    "diff_notes": "与同论文家族中已入库的 roe_persistence_neg_v1（反向盈利持续性）相比，本变体加入‘同比改善+平滑+正ROE门控’后反而失去截面区分度；也侧面说明在当前fundamental_cache只有ROE/BPS两字段时，继续围绕ROE平滑度做变体，边际价值已经很低。",
+    "conclusion": "淘汰",
+    "data_files": [
+      "scripts/calc_profit_smooth_improve_paper_v1.py",
+      "data/factor_profit_smooth_improve_paper_v1.csv",
+      "output/profit_smooth_improve_paper_v1/report.json"
+    ]
+  },
+  {
     "id": "amihud_illiq_v2",
     "source_type": "论文",
     "source_title": "Illiquidity and Stock Returns: Cross-Section and Time-Series Effects",
