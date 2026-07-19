@@ -6219,5 +6219,38 @@
     },
     "notes": "结果明确失败：IC为负且显著(-0.0175, t=-2.16)，单调性-0.9，G5与多空Sharpe均明显为负。说明在中证1000当前样本中，这种‘单日特异性负冲击’并不对应后续5日反转，反而更像持续承压/弱势延续，但即便按本定义翻方向，分层收益仍整体为负，不具备可交易性。好消息是它与已有尾部风险/最大单日亏损因子平均Spearman仅约0.07~0.09，不属于冗余失败，而是经济机制本身未在本地市场样本中成立。后续若要继续追这条论文线，建议补真正的市场模型残差、公告/停牌/涨跌停过滤，并区分正冲击与负冲击两侧事件窗。",
     "conclusion": "淘汰（论文启发有效，但本地化代理不成立）"
+  },
+  {
+    "date": "2026-07-19",
+    "factor_id": "roe_bps_delta_stability_paper_v1",
+    "factor_name": "ROE改善-BPS扩张稳定性因子 v1",
+    "status": "failed",
+    "source_type": "论文复现+本土化",
+    "source_title": "Profit Persistence and Stock Returns: Does the Market Care?",
+    "source_url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3211826",
+    "source_author": "Chahine, Fang, Hill & Salameh",
+    "source_year": 2018,
+    "source_journal": "Journal of Banking and Finance",
+    "barra_style": "Quality / Growth",
+    "description": "沿盈利持续性论文语义，使用当前A股可得字段构造代理：ROE同比改善/近4季ROE波动，并叠加BPS同比增长；财报45天滞后映射到日频，对20日均成交额对数做横截面OLS中性化，再MAD去极值+z-score。",
+    "formula": "factor = neutralize((ΔROE_yoy / (STD4(ROE)+1)) * tanh(MA4(ROE)/10) + 0.5*ΔBPS_yoy, log_amount_20d)",
+    "our_metric": {
+      "period": "2023-08-14 ~ 2026-07-16",
+      "ic_mean": 0.014486520660484606,
+      "ic_t": 2.7749055167438854,
+      "rank_ic": 0.020037009201482905,
+      "g5_sharpe": 0.45807111559586966,
+      "long_short_sharpe": -0.14769938428050794,
+      "monotonicity": 0.5,
+      "turnover_mean": 0.22381478166255933
+    },
+    "failure_reason": "统计上有一定显著性(IC均值0.0145, t=2.77)，但未达入库门槛：IC均值<0.02、G5 Sharpe仅0.46、单调性仅0.5，且多空Sharpe为-0.15。分组表现呈中间组(G3)最优而非高分组(G5)最优，说明信号存在非线性驼峰结构，不适合直接作为线性单因子入库。",
+    "diff_notes": "相较同家族已入库的 roe_persistence_neg_v1，本变体把‘持续性’扩展为‘改善+扩张+稳定’，方向更接近传统Quality/Growth，但在中证1000上反而削弱了可交易性；再次说明仅靠ROE/BPS两类低频字段，做成长质量正向因子很容易得到统计显著但经济意义不足的结果。",
+    "conclusion": "淘汰",
+    "data_files": [
+      "scripts/calc_roe_bps_delta_stability_paper_v1.py",
+      "data/factor_roe_bps_delta_stability_paper_v1.csv",
+      "output/roe_bps_delta_stability_paper_v1/report.json"
+    ]
   }
 ]
