@@ -1,6 +1,40 @@
 [
   {
     "date": "2026-07-19",
+    "factor_id": "conservative_profitability_v1",
+    "factor_name": "保守盈利质量因子 v1",
+    "status": "failed",
+    "source_type": "论文复现+本土化",
+    "source_title": "Quality Minus Junk",
+    "source_url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2312432",
+    "source_author": "Asness, Frazzini, Pedersen",
+    "source_year": 2013,
+    "source_journal": "SSRN / AQR working paper",
+    "barra_style": "Quality / Growth",
+    "description": "参考QMJ中“高盈利、低投资、稳健经营”框架，在仅有ROE/BPS字段下构造A股代理：用4季平均ROE代表盈利水平，2期ROE同比均值代表改善趋势，正向惩罚BPS同比扩张以代理保守投资，再用ROE与BPS增长波动做稳定性折扣；日频映射后对log_mktcap做横截面中性化。",
+    "formula": "raw = tanh(mean4(ROE)/8) × [0.55*tanh(mean2(ROE_yoy)/6)+0.45*tanh((mean4(ROE)+2)/4)] × 1/(1+5*max(BPS_yoy,0)) × 1/(1+0.25*std4(ROE)+4*std4(BPS_yoy)); factor = neutralize(raw, log_mktcap)",
+    "our_metric": {
+      "market": "中证1000",
+      "period": "2023-11-14 ~ 2026-02-13",
+      "ic_mean": 0.012562369228453255,
+      "ic_t": 1.608839320359501,
+      "rank_ic": 0.023564409620021664,
+      "g5_sharpe": 1.0493508072905695,
+      "long_short_sharpe": 1.137631681671706,
+      "monotonicity": 0.7,
+      "turnover_mean": 0.1484060429350702
+    },
+    "failure_reason": "未达门槛：IC均值0.0126、IC_t=1.61、单调性0.7，只有G5 Sharpe=1.05和多空Sharpe=1.14尚可。说明“高盈利+保守扩张”在当前BPS代理下更像慢变量分层信号，横截面强度不足，无法作为新入库因子。",
+    "diff_notes": "和此前失败的asset_growth_paper_v1相比，这版引入ROE水平与改善项后，多空收益明显更稳，但IC仍没被拉起来；说明问题不在排序方向，而在当前fundamental_cache仅含ROE/BPS，无法把QMJ里的profitability、growth、safety三条腿完整还原。若后续补充总资产、毛利率、负债率、应收、现金流字段，再重做更有希望。",
+    "conclusion": "淘汰",
+    "data_files": [
+      "scripts/calc_conservative_profitability_v1.py",
+      "data/factor_conservative_profitability_v1.csv",
+      "output/conservative_profitability_v1/report.json"
+    ]
+  },
+  {
+    "date": "2026-07-19",
     "factor_id": "profit_smooth_improve_paper_v1",
     "factor_name": "盈利平滑改善比率 v1",
     "status": "failed",
