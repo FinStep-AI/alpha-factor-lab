@@ -6286,5 +6286,38 @@
       "data/factor_roe_bps_delta_stability_paper_v1.csv",
       "output/roe_bps_delta_stability_paper_v1/report.json"
     ]
+  },
+  {
+    "date": "2026-07-20 12:00:00",
+    "factor_id": "gross_margin_revenue_quality_v1",
+    "factor_name": "毛利率收入质量因子 v1",
+    "theme": "基本面类 / Quality / Growth",
+    "status": "failed",
+    "source_type": "论文启发+本土化代理",
+    "source_title": "毛利率改善 + 收入增长质量 + 营运效率 组合代理",
+    "implementation": "calc_gross_margin_revenue_quality_v1.py",
+    "factor_file": "data/factor_gross_margin_revenue_quality_v1.csv",
+    "backtest_output": "output/gross_margin_revenue_quality_v1/report.json",
+    "summary": "围绕 Quality/Growth 空白继续挖掘，使用毛利率同比趋势与营收同比趋势作为成长主轴，叠加存货周转改善、应收占比变化、负债变化与流动性缓冲，试图识别“增长质量更高”的小盘股；因子按财报披露日映射到交易日，并做截面市值中性化。",
+    "formula": "raw = (0.30*gm_trend2 + 0.30*rev_trend2 + 0.20*efficiency + 0.20*bs_gate) * stability * (0.7 + 0.3*level_anchor); factor = neutralize(raw, log_mktcap)",
+    "metrics": {
+      "ic_mean": 0.00537703781412162,
+      "ic_t": 0.49715546239382413,
+      "rank_ic": 0.012435933101221281,
+      "g5_sharpe": 3.184997228738696,
+      "monotonicity": 0.8,
+      "long_short_sharpe": 0.7098816270246079,
+      "turnover_mean": 0.2026882061374647,
+      "period": "2025-04-18 ~ 2026-02-13",
+      "forward_days": 5,
+      "groups": 5,
+      "cost": 0.003
+    },
+    "correlation_check": {
+      "status": "skipped",
+      "reason": "performance below threshold, no need to enter library correlation screening"
+    },
+    "notes": "表面上 G5 Sharpe 较高，但排序尾部并不稳：最高年化收益落在 G4 而不是 G5，IC 均值和显著性都偏弱，说明更像“低频分组有效、截面排序无力”的弱信号。单调性仅刚好 0.8，且多空 Sharpe 只有 0.71，无法支持直接入库。另一个教训是：在当前字段下，毛利率/营收类低频因子可把组收益拉开，但未必能形成稳定的横截面 IC。",
+    "conclusion": "淘汰（IC 与显著性不足，尾部排序不稳定）"
   }
 ]
