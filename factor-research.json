@@ -6319,5 +6319,33 @@
     },
     "notes": "表面上 G5 Sharpe 较高，但排序尾部并不稳：最高年化收益落在 G4 而不是 G5，IC 均值和显著性都偏弱，说明更像“低频分组有效、截面排序无力”的弱信号。单调性仅刚好 0.8，且多空 Sharpe 只有 0.71，无法支持直接入库。另一个教训是：在当前字段下，毛利率/营收类低频因子可把组收益拉开，但未必能形成稳定的横截面 IC。",
     "conclusion": "淘汰（IC 与显著性不足，尾部排序不稳定）"
+  },
+  {
+    "timestamp": "2026-07-20T15:40:02",
+    "factor_name": "BPS-ROE改善残差 v1",
+    "factor_id": "bps_roe_improve_neu_v1_rev",
+    "status": "failed",
+    "barra_style": "Growth",
+    "source_type": "fundamental",
+    "source_title": "自研：BPS同比增速 + ROE改善的成长质量混合因子（市值中性）",
+    "factor_csv": "data/factor_bps_roe_improve_neu_v1_rev.csv",
+    "output_dir": "output/bps_roe_improve_neu_v1_rev/",
+    "logic": "以BPS同比增速表征内生扩张，以ROE同比/环比改善表征盈利质量修复；截面上对市值代理取对数回归残差并zscore。实际有效方向为原始定义反向。",
+    "search_theme": "基本面类：毛利率趋势/成长质量代理",
+    "metrics": {
+      "ic_mean": 0.006348593004000246,
+      "ic_t": 1.3176253663211963,
+      "g5_sharpe": 0.6712616629882089,
+      "monotonicity": 0.8999999999999998,
+      "long_short_sharpe": 1.1620831943285168
+    },
+    "correlation_check": {
+      "max_abs_corr_factor": "成交量变异系数(反) v1",
+      "max_abs_corr": 0.011244821366551647,
+      "redundant": false
+    },
+    "pass_threshold": false,
+    "failure_reason": "未达入库门槛：IC均值仅0.0063，IC_t仅1.32，虽单调性0.90且多空Sharpe 1.16，但G5 Sharpe仅0.67，说明排序有效性偏弱、更多体现为两端价差而非高分组绝对优势。",
+    "next_step": "可继续尝试：1) 只保留同比改善项，去掉环比项；2) 对财报信号做披露后衰减；3) 与换手/波动过滤结合。"
   }
 ]
