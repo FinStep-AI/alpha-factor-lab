@@ -6347,5 +6347,76 @@
     "pass_threshold": false,
     "failure_reason": "未达入库门槛：IC均值仅0.0063，IC_t仅1.32，虽单调性0.90且多空Sharpe 1.16，但G5 Sharpe仅0.67，说明排序有效性偏弱、更多体现为两端价差而非高分组绝对优势。",
     "next_step": "可继续尝试：1) 只保留同比改善项，去掉环比项；2) 对财报信号做披露后衰减；3) 与换手/波动过滤结合。"
+  },
+  {
+    "date": "2026-07-21",
+    "factor_id": "up_down_vol_spread_v1",
+    "factor_name": "上下行波动差值因子 v1",
+    "status": "failed",
+    "source_type": "研报启发复现",
+    "source_title": "基于相对强弱下单向波动差值应用",
+    "source_url": "https://github.com/hugo2046/QuantsPlaybook",
+    "source_author": "国信证券系研报脉络（经二手仓库索引）",
+    "source_year": 2015,
+    "source_journal": "券商金工研报",
+    "barra_style": "Volatility",
+    "description": "以20日窗口分别计算正收益样本标准差与负收益绝对值样本标准差，构造 up_vol - down_vol，并对log(amount)做截面中性化、MAD去极值和z-score标准化。",
+    "formula": "up_vol_down_vol_spread = std(ret|ret>0,20d) - std(|ret||ret<0,20d); factor = neutralize(raw, log_amount)",
+    "original_metric": {
+      "paper_claim": "单向波动差值可刻画相对强弱与情绪非对称，在择时/横截面上具有信息含量",
+      "paper_param": "20日窗口（本次按单一窗口直接复现）"
+    },
+    "our_metric": {
+      "market": "中证1000",
+      "period": "2022-11-07 ~ 2026-07-20",
+      "ic_mean": 0.006869507769305976,
+      "ic_t": 0.31957276302484605,
+      "rank_ic": -0.0314,
+      "long_short_sharpe": -0.3490902261527049,
+      "monotonicity": -0.9,
+      "turnover_mean": 0.982
+    },
+    "diff_notes": "该方向在中证1000横截面上出现明显反向单调：低分组收益高于高分组，说明“上行波动大于下行波动”更像短期情绪过热/后续均值回归信号。可能原因包括：1) 原研报更偏指数择时而非个股选股；2) 中证1000小盘股噪声大，条件波动统计不稳定；3) 用成交额代理市值中性化不够充分。",
+    "failure_reason": "未达门槛：IC均值0.0069、t值0.32、Sharpe -0.35、单调性-0.9，全部不满足入库标准。",
+    "conclusion": "淘汰",
+    "data_files": [
+      "scripts/backtest_up_down_vol_spread_v1.py",
+      "data/up_down_vol_spread_v1.csv",
+      "output/up_down_vol_spread_v1/backtest_report.json"
+    ]
+  },
+  {
+    "date": "2026-07-21",
+    "factor_id": "bps_growth_accel_quality_v1",
+    "factor_name": "BPS增长加速度×ROE确认因子 v1",
+    "status": "failed",
+    "source_type": "经验构造+搜索启发",
+    "source_title": "BPS/ROE growth acceleration heuristic inspired by growth-factor research",
+    "source_url": "https://bigquant.com/wiki/doc/c7u9IChUio",
+    "source_author": "因子猎人自构",
+    "source_year": 2026,
+    "source_journal": "internal research",
+    "barra_style": "Growth",
+    "description": "用季频BPS同比增长加速度刻画内生净资产扩张斜率，并用ROE同比/环比改善做盈利确认；日频映射后对收盘价代理市值做横截面中性化。直觉上，账面价值扩张提速且盈利未恶化的公司，应获得更高后续收益。",
+    "formula": "raw = tanh(2.5*(bps_yoy-bps_yoy_lag1)) × (0.6+0.4*tanh(roe_yoy/8)) × (0.7+0.3*tanh(roe_qoq/4)); factor = neutralize(raw, log(close_proxy_mktcap))",
+    "our_metric": {
+      "market": "中证1000",
+      "period": "2022-10-11 ~ 2026-07-20",
+      "ic_mean": 0.009276920821861285,
+      "ic_t": 2.7136883084244747,
+      "rank_ic": 0.016576557510865113,
+      "g5_sharpe": 0.5972229586440517,
+      "long_short_sharpe": 1.036167065179173,
+      "monotonicity": 0.7,
+      "turnover_mean": 0.04910950312543451
+    },
+    "failure_reason": "未达门槛：IC均值仅0.0093，虽t=2.71但经济显著性偏弱；G5 Sharpe=0.60，单调性=0.70。分组收益在G3鼓包，说明“BPS增长提速”更像中段筛选信号，而不是稳定的高低排序alpha。",
+    "diff_notes": "这版相比纯ROE改善因子，更强调账面净资产扩张斜率，并加入ROE同比/环比确认，意图补Growth风格空白。但fundamental_cache字段过少，BPS既受盈利留存也受再融资/会计口径影响，导致“增长”含义不够纯，横截面信号被噪音稀释。后续若补充营收、毛利率、资产、负债、现金流字段，再做成长质量交叉更靠谱。",
+    "conclusion": "淘汰",
+    "data_files": [
+      "scripts/calc_bps_growth_accel_quality_v1.py",
+      "data/factor_bps_growth_accel_quality_v1.csv",
+      "output/bps_growth_accel_quality_v1/report.json"
+    ]
   }
 ]
