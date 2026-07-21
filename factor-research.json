@@ -6418,5 +6418,39 @@
       "data/factor_bps_growth_accel_quality_v1.csv",
       "output/bps_growth_accel_quality_v1/report.json"
     ]
+  },
+  {
+    "date": "2026-07-21",
+    "factor_id": "roe_confirmed_bps_stability_v1",
+    "factor_name": "ROE确认-BPS稳定性因子 v1",
+    "status": "failed",
+    "source_type": "经验构造+搜索启发",
+    "source_title": "ROE变化率 量化因子 A股",
+    "source_url": "https://bigquant.com/wiki/doc/c7u9IChUio",
+    "source_author": "因子猎人自构",
+    "source_year": 2026,
+    "source_journal": "internal research",
+    "barra_style": "Growth",
+    "description": "以ROE同比改善为主信号、ROE环比改善为确认项，并用BPS同比加速度减去BPS增长波动惩罚，试图刻画“盈利改善已被财务质量确认、且净资产扩张更平滑”的成长质量截面。日频映射后对20日成交额对数均值做横截面中性化，作为市值代理。",
+    "formula": "score = 0.55*z(roe_yoy) + 0.25*z(roe_qoq) + 0.15*z(bps_accel) - 0.25*z(std([bps_yoy,bps_yoy_lag1,bps_yoy_lag2])); factor = neutralize(score, ma20_log_amount)",
+    "our_metric": {
+      "market": "中证1000",
+      "period": "2024-05-06 ~ 2026-07-21",
+      "ic_mean": 0.004675383424089128,
+      "ic_t": 0.713922971876436,
+      "rank_ic": 0.012850419580689753,
+      "g5_sharpe": 0.7739538838040394,
+      "long_short_sharpe": 0.6607199118921625,
+      "monotonicity": 0.3,
+      "turnover_mean": 0.1676038301257348
+    },
+    "failure_reason": "未达门槛：IC均值0.0047、IC_t=0.71、G5 Sharpe=0.77、单调性仅0.30。收益主要堆在G2，顶组并未显著优于中间组，说明该信号更像“排除最差公司”的中段筛子，而不是稳定的高分组alpha排序器。",
+    "diff_notes": "这次优先补Growth/Quality空白，尝试把ROE改善和BPS增长稳定性绑定，避免单纯追逐高增长或高波动基本面。但fundamental_cache只有roe/bps两个核心字段，BPS增长受再融资、分红、会计处理影响较大，稳定性惩罚也容易把真正处于扩张期的公司一并压掉，导致排序结构塌成G2最优。后续更适合补充营收、毛利率、总资产周转、经营现金流等字段，再做“成长质量确认”会更干净。",
+    "conclusion": "淘汰",
+    "data_files": [
+      "scripts/calc_roe_confirmed_bps_stability_v1.py",
+      "data/factor_roe_confirmed_bps_stability_v1.csv",
+      "output/roe_confirmed_bps_stability_v1/report.json"
+    ]
   }
 ]
