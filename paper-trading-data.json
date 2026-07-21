@@ -6,7 +6,7 @@
     "benchmark": "000300",
     "benchmark_name": "沪深300",
     "created_at": "2026-02-23 22:14:25",
-    "updated_at": "2026-07-21 15:07:14",
+    "updated_at": "2026-07-21 15:12:28",
     "status": "active",
     "players_count": 6
   },
@@ -10663,15 +10663,15 @@
       "style": "趋势跟踪 · 板块轮动 · 全A股扫描 · 中长线波段",
       "description": "BBI+MA60趋势判断，KDJ低位捕捉买点，板块轮动做趋势收益。核心逻辑：阳率×盈亏比最大化。",
       "portfolio": {
-        "cash": 2983133.6899999958,
+        "cash": 1917753.4499999955,
         "positions": {
           "688361.SH": {
             "code": "688361.SH",
             "name": "中科飞测",
-            "volume": 2700,
+            "volume": 1400,
             "avg_cost": 319.0,
             "current_price": 366.46,
-            "market_value": 989442.0,
+            "market_value": 513044.0,
             "pnl": 251538.0,
             "pnl_pct": 14.88,
             "entry_date": "2026-07-21"
@@ -10686,7 +10686,7 @@
             "pnl": -10906.0,
             "pnl_pct": -0.64,
             "entry_date": "2026-07-21",
-            "max_pnl_pct": 0.28
+            "max_pnl_pct": 0.37
           },
           "688233.SH": {
             "code": "688233.SH",
@@ -10697,7 +10697,8 @@
             "market_value": 1483460.0,
             "pnl": 0,
             "pnl_pct": 0,
-            "entry_date": "2026-07-21"
+            "entry_date": "2026-07-21",
+            "max_pnl_pct": 0.57
           },
           "688409.SH": {
             "code": "688409.SH",
@@ -10708,10 +10709,33 @@
             "market_value": 1487156.0,
             "pnl": 0,
             "pnl_pct": 0,
+            "entry_date": "2026-07-21",
+            "max_pnl_pct": 0.19
+          },
+          "300223.SZ": {
+            "code": "300223.SZ",
+            "name": "北京君正",
+            "volume": 4600,
+            "avg_cost": 168.0,
+            "current_price": 168.0,
+            "market_value": 772800.0,
+            "pnl": 0,
+            "pnl_pct": 0,
+            "entry_date": "2026-07-21"
+          },
+          "688652.SH": {
+            "code": "688652.SH",
+            "name": "京仪装备",
+            "volume": 4700,
+            "avg_cost": 163.0,
+            "current_price": 163.0,
+            "market_value": 766100.0,
+            "pnl": 0,
+            "pnl_pct": 0,
             "entry_date": "2026-07-21"
           }
         },
-        "total_value": 8624273.69,
+        "total_value": 8621395.45,
         "last_update": "2026-07-21"
       },
       "nav_history": {
@@ -18175,16 +18199,66 @@
           "pnl": 0,
           "pnl_pct": 0,
           "reason": "主策略四条件满足：J<13 + 价在BBI上方 + BBI强于MA60 + 上升趋势确认，午盘补位"
+        },
+        {
+          "date": "2026-07-21",
+          "code": "688361.SH",
+          "name": "中科飞测",
+          "direction": "sell",
+          "price": 366.46,
+          "volume": 1300,
+          "amount": 476398.0,
+          "fees": {
+            "commission": 142.92,
+            "stamp_duty": 238.2,
+            "transfer_fee": 4.76,
+            "slippage_cost": 476.4,
+            "total": 862.28
+          },
+          "pnl": 61698.0,
+          "pnl_pct": 14.88,
+          "reason": "收盘复核触发止盈第一档：盈利14.9%≥7%，按规则卖出半仓锁定收益"
+        },
+        {
+          "date": "2026-07-21",
+          "code": "300223.SZ",
+          "name": "北京君正",
+          "direction": "buy",
+          "price": 168.0,
+          "volume": 4600,
+          "amount": 772800.0,
+          "fees": {
+            "commission": 231.84,
+            "stamp_duty": 0,
+            "transfer_fee": 7.73,
+            "slippage_cost": 772.8,
+            "total": 1012.37
+          },
+          "pnl": 0,
+          "pnl_pct": 0,
+          "reason": "收盘主策略候选，J=7.8<13，股价站上BBI且BBI强于MA60，上升趋势明确，作为新增半导体方向配置"
+        },
+        {
+          "date": "2026-07-21",
+          "code": "688652.SH",
+          "name": "京仪装备",
+          "direction": "buy",
+          "price": 163.0,
+          "volume": 4700,
+          "amount": 766100.0,
+          "fees": {
+            "commission": 229.83,
+            "stamp_duty": 0,
+            "transfer_fee": 7.66,
+            "slippage_cost": 766.1,
+            "total": 1003.59
+          },
+          "pnl": 0,
+          "pnl_pct": 0,
+          "reason": "收盘主策略候选，J=12.6<13，价在BBI上方且BBI>MA60，上升趋势延续，用于分散增强趋势仓位"
         }
       ],
       "decisions": [
-        {
-          "date": "2026-06-10",
-          "action": "hold",
-          "summary": "午盘扫描全A 5039只·金叉缩量回调候选12只·主策略J<13=0·板块热点为空·当前空仓持有，开仓理由不足继续等待",
-          "detail": "仓位管理（参考player_dwj.md）：无持仓，无卖出项。全A扫描：L1→4883，L2(BBI>MA60且P>BBI)→523，长阴放量排除33只后剩490，主策略(J<13+N型趋势)0只、单针下30=0只、金叉缩量回调12只。候选以附属通道为主，J值偏高(贵州燃气50/华安证券43最低)，文化艺术业/化工/有色/燃气等分散但均未到≥3只板块共振门槛，最强放量个股华安证券(4.7x金叉17天前)亦非午盘建仓时点。仓位管理：空仓无变动需求。",
-          "recommendation": "午盘不开仓。金叉回调12只整体J偏高、板块零共振，非主策略信号，继续观望至明日晨扫再做评估。"
-        },
         {
           "date": "2026-06-10",
           "action": "hold",
@@ -18399,6 +18473,14 @@
           "detail": "持仓检查显示中科飞测浮盈达到止盈第一档，恒源煤电与热景生物均触发5tick止损；扫描结果新增7只主策略候选，优先选择神工股份与富创精密作为回补对象，维持组合在半导体/高端制造方向的趋势暴露，同时剔除走弱煤炭与医药仓位。",
           "recommendation": "执行 mixed：卖出688361.SH半仓，清仓600971.SH与688068.SH，买入688233.SH神工股份和688409.SH富创精密。",
           "exec_summary": "成功5笔，失败0笔"
+        },
+        {
+          "date": "2026-07-21",
+          "action": "mixed",
+          "summary": "收盘持仓复核后执行1笔止盈减仓，并用2只新的主策略候选回补仓位，维持趋势组合活性。",
+          "detail": "当前真实持仓为中科飞测、中远海特、神工股份、富创精密四只。收盘风控仅中科飞测达到止盈第一档，应卖出半仓锁定收益；其余持仓未触发止损或破BBI清仓。全A收盘扫描共得到8只候选，其中6只满足主策略硬条件、2只为金叉缩量回调，板块集中度仍不足，但半导体链条信号密集且强度更优，因此选择北京君正与京仪装备两只主策略标的补位，继续围绕强趋势方向分散持有。",
+          "recommendation": "执行 mixed：卖出688361.SH半仓；买入300223.SZ北京君正与688652.SH京仪装备，保留中远海特、神工股份、富创精密原仓不动。",
+          "exec_summary": "成功3笔，失败0笔"
         }
       ],
       "rebalances": [],
@@ -18410,8 +18492,8 @@
         "calmar_ratio": -2.22,
         "win_rate": 49.56,
         "profit_loss_ratio": 0.74,
-        "total_trades": 372,
-        "total_fees": 563163.2700000001,
+        "total_trades": 375,
+        "total_fees": 566041.5100000001,
         "current_positions": 1,
         "turnover_rate": 0.0
       },
