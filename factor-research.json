@@ -6526,5 +6526,39 @@
       "data/factor_roe_efficiency_accel_v1.csv",
       "output/roe_efficiency_accel_v1/report.json"
     ]
+  },
+  {
+    "date": "2026-07-22",
+    "factor_id": "bps_growth_accel_confirm_v1",
+    "factor_name": "BPS增长加速度确认因子 v1",
+    "status": "failed",
+    "source_type": "经验构造+搜索启发",
+    "source_title": "毛利率趋势/成长因子思路启发下的BPS-ROE代理构造",
+    "source_url": "https://xueqiu.com/9206536540/222626178",
+    "source_author": "因子猎人自构",
+    "source_year": 2026,
+    "source_journal": "internal research",
+    "barra_style": "Growth",
+    "description": "在基础面缓存仅含BPS与ROE的约束下，构造‘账面价值增长 + 增长加速度 + 盈利确认’成长代理：最新BPS同比增长、BPS同比增长加速度，以及ROE同比改善做截面合成，再映射到日频并对log(BPS×close)代理市值做OLS中性化。",
+    "formula": "raw = 0.4*z(bps_yoy) + 0.4*z(bps_yoy - lag1_bps_yoy) + 0.2*z(roe_yoy); factor = neutralize(raw, log(bps*close))",
+    "our_metric": {
+      "market": "中证1000",
+      "period": "2023-11-14 ~ 2026-07-21",
+      "ic_mean": 0.00750722181394185,
+      "ic_t": 1.392193404978706,
+      "rank_ic": 0.0157,
+      "g5_sharpe": 0.0,
+      "long_short_sharpe": 0.4659,
+      "monotonicity": 0.1,
+      "turnover_mean": 0.0459
+    },
+    "failure_reason": "未达门槛：IC均值0.0075、IC_t=1.39、G5年化虽为10.63%但排序不稳定，单调性仅0.10，多空Sharpe仅0.47。收益主要集中在G2而不是高分组，说明该信号更像‘排除极差成长股’的弱筛子，而非稳定的高低分层alpha。",
+    "diff_notes": "这次优先补Growth风格空白，尝试把BPS同比增长及其加速度与ROE改善绑定，避免纯账面扩张噪音。结果显示中证1000里该代理的信息含量偏弱，且高分组没有持续领先；后续如果继续挖这个方向，更值得尝试事件化版本（财报披露窗口、拐点而非连续水平）或加入现金流/毛利率字段，否则BPS+ROE两字段的信息维度太窄。",
+    "conclusion": "淘汰",
+    "data_files": [
+      "scripts/build_bps_growth_accel_confirm_v1.py",
+      "data/factor_bps_growth_accel_confirm_v1.csv",
+      "output/bps_growth_accel_confirm_v1/backtest_report.json"
+    ]
   }
 ]
