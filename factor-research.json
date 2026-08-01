@@ -1,5 +1,39 @@
 [
   {
+    "date": "2026-08-01 10:00:00",
+    "factor_id": "conservative_growth_quality_v1",
+    "factor_name": "保守成长质量因子 v1",
+    "status": "failed",
+    "source_type": "论文复现+本土化",
+    "source_title": "Asset Growth and the Cross-Section of Stock Returns",
+    "source_url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=1334134",
+    "source_author": "Michael J. Cooper, Huseyin Gulen, Michael J. Schill",
+    "source_year": 2008,
+    "source_journal": "Journal of Finance",
+    "barra_style": "Growth / Quality",
+    "description": "基于资产增长异象论文做轻度 profitability 本土化：以负的 BPS 同比增长代理低投资（conservative investment），再叠加4季平均 ROE 作为盈利锚，以及少量 ROE 同比改善项；财报滞后45天映射到日频，并对 log_mktcap 做横截面中性化、MAD 去极值和 z-score 标准化。",
+    "formula": "raw = -(BPS_t/BPS_t-4 - 1) + 0.35*tanh(MA4(ROE)/10) + 0.15*tanh((ROE_t-ROE_t-4)/10); factor = neutralize(raw, log_mktcap)",
+    "our_metric": {
+      "market": "中证1000",
+      "period": "2022-10-11 ~ 2026-02-13",
+      "ic_mean": 0.0019279789023176398,
+      "ic_t": 0.2942073516932144,
+      "rank_ic": 0.012877245819930903,
+      "g5_sharpe": 0.7534577652502114,
+      "long_short_sharpe": -0.38897519587184115,
+      "monotonicity": -0.3,
+      "turnover_mean": 0.16550846835361527
+    },
+    "failure_reason": "未达门槛且方向错误：IC均值仅0.0019、IC_t=0.29、G5 Sharpe=0.75、单调性=-0.3，多空 Sharpe 为 -0.39。分层结果显示 G2/G4 反而优于 G5，说明在当前 only ROE/BPS 的代理设定下，资产增长异象在 A 股中证1000上没有形成稳定的高分组优势。",
+    "diff_notes": "相较 2026-07-18 失败的 asset_growth_paper_v1，这一版加入了轻度 profitability anchor，试图把纯 BPS 扩张信号与盈利水平结合，但结果并未改善；IC 仍接近 0，且最高年化收益不在 G5。说明问题不在于是否加入少量盈利门控，而在于 BPS 对 asset growth 的代理能力不足，且和小盘股估值/再融资噪音缠在一起。",
+    "conclusion": "淘汰",
+    "data_files": [
+      "calc_conservative_growth_quality_v1.py",
+      "data/factor_conservative_growth_quality_v1.csv",
+      "output/conservative_growth_quality_v1/report.json"
+    ]
+  },
+  {
     "date": "2026-07-19",
     "factor_id": "conservative_profitability_v1",
     "factor_name": "保守盈利质量因子 v1",
