@@ -1,5 +1,41 @@
 [
   {
+    "date": "2026-08-01 15:00:00",
+    "factor_id": "quality_minus_investment_proxy_v1",
+    "factor_name": "质量减投资代理因子 v1",
+    "status": "failed",
+    "source_type": "论文复现+本土化",
+    "source_title": "Quality Minus Junk",
+    "source_url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2312432",
+    "source_author": "Asness, Frazzini, Pedersen",
+    "source_year": 2013,
+    "source_journal": "SSRN / AQR working paper",
+    "barra_style": "Quality / Growth",
+    "description": "参考 QMJ 的 profitability / growth / safety / payout 中‘高质量、保守投资’主线，在现有A股字段下做代理复现：用4季平均ROE、4季平均毛利率、2期净利润同比均值表征盈利能力；用2期营收同比和存货周转率表征成长；用负债率、流动比率/速动比率、应收占营收比表征安全性；再扣除ROE和毛利率波动惩罚，并对 log_mktcap 做横截面中性化。",
+    "formula": "raw = [0.45*tanh(MA4(ROE)/8)+0.35*tanh(MA4(GM)/20)+0.20*tanh(MA2(NetProfitYoY)/40)] + 0.35*[0.60*tanh(MA2(RevenueYoY)/40)+0.40*tanh(MA4(InventoryTurnover)/8)] + 0.20*[0.40*tanh((2-DebtRatio)/20)+0.30*tanh(MA4(Liquidity)-1)-0.30*tanh(MA4(AR/Revenue)/20)] - 0.55*[0.5*tanh(STD4(ROE)/6)+0.5*tanh(STD4(GM)/10)]; factor = neutralize(raw, log_mktcap)",
+    "our_metric": {
+      "market": "中证1000",
+      "period": "2025-08-13 ~ 2026-02-13",
+      "ic_mean": 0.012999154822950281,
+      "ic_t": 0.7414250563642573,
+      "rank_ic": 0.02547032104873101,
+      "g5_sharpe": 1.466553542254188,
+      "long_short_sharpe": -0.3233346187362149,
+      "monotonicity": 0.1,
+      "turnover_mean": 0.16546563713919277,
+      "max_abs_corr_existing": 0.5954796481691847,
+      "closest_existing_factor": "roe_persistence_neg_v1"
+    },
+    "failure_reason": "未达门槛：IC均值仅0.0130、IC_t=0.74、单调性仅0.1，且最高收益落在G3/G4而非G5，多空Sharpe为-0.32。说明把QMJ多维质量框架压缩到中证1000当前可得字段后，得到的是明显非线性的‘中等质量最佳’驼峰结构，而不是稳定的高分组优势。",
+    "diff_notes": "相较此前只依赖ROE/BPS的 conservative_profitability_v1 和 conservative_growth_quality_v1，这一版首次接入 revenue_yoy_raw 中的毛利率、营收同比、净利润同比、负债率、流动比率、应收占比、存货周转率等字段，更贴近论文原始语义；相关性检查显示与现有入库因子最高相关仅 |0.595|（roe_persistence_neg_v1），不构成冗余，但独立有效性仍不足。",
+    "conclusion": "淘汰",
+    "data_files": [
+      "calc_quality_minus_investment_proxy_v1.py",
+      "data/factor_quality_minus_investment_proxy_v1.csv",
+      "output/quality_minus_investment_proxy_v1/report.json"
+    ]
+  },
+  {
     "date": "2026-08-01 10:00:00",
     "factor_id": "conservative_growth_quality_v1",
     "factor_name": "保守成长质量因子 v1",
