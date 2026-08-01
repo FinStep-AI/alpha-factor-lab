@@ -6631,4 +6631,35 @@
       "output/bps_growth_accel_confirm_v1/backtest_report.json"
     ]
   }
+,
+{
+  "date": "2026-08-01 20:00:00",
+  "factor_id": "roe_bps_persistence_spread_v1",
+  "factor_name": "ROE-BPS持续性扩散反转因子 v1",
+  "status": "failed",
+  "source_type": "论文复现+本土化代理",
+  "source_title": "Profit Persistence and Stock Returns: Does the Market Care?",
+  "source_url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3211826",
+  "source_author": "H. Chahine et al.",
+  "source_year": 2018,
+  "barra_style": "Quality / Growth",
+  "implementation": "scripts/calc_roe_bps_persistence_spread_v1.py",
+  "factor_file": "data/factor_roe_bps_persistence_spread_v1.csv",
+  "backtest_output": "output/roe_bps_persistence_spread_v1/report.json",
+  "summary": "周末论文复现尝试。以盈利持续性论文为锚，在仅有 roe/bps 字段的约束下构造‘ROE持续性 × BPS扩张一致性’反向代理，并做 report_date+45d 映射、log(amount) 市值中性化、MAD 缩尾和 z-score。",
+  "formula": "raw = -(0.65*z(mean(ROE_8q)/(std(ROE_8q)+1)) + 0.35*z(mean(BPS_yoy_4q)/(std(BPS_yoy_4q)+0.05)) + 0.20*z(max(BPS_yoy,0))); factor = neutralize(raw, log(amount))",
+  "metrics": {
+    "ic_mean": 0.00567657971933978,
+    "ic_t": 0.646361551195357,
+    "rank_ic": -0.00739466914164133,
+    "g5_sharpe": 0.6571849112156736,
+    "long_short_sharpe": 0.6614820713591334,
+    "monotonicity": 0.5,
+    "turnover_mean": 0.1464759347999861,
+    "period": "2023-11-14 ~ 2026-07-21"
+  },
+  "failure_reason": "未达门槛：IC均值仅0.0057、IC_t仅0.65、G5 Sharpe仅0.66、单调性0.5。虽然G5年化22.4%明显高于其他组，但中间组(G3)再次抬头，说明信号更像尾部挑选而非稳定线性排序，截面IC不足以支撑入库。",
+  "diff_notes": "相比已入库的 roe_persistence_neg_v1 和 roe_decay_rev_v1，这版试图把‘盈利持续性’扩展到‘账面价值扩张持续性’，希望更贴近 Quality/Growth 语义；但在当前只有 roe/bps 两个低频字段时，新增的 BPS 持续性并没有带来显著信息增益，反而把原本更强的纯 ROE 反转信号稀释了。",
+  "conclusion": "淘汰"
+}
 ]
