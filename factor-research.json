@@ -1,5 +1,41 @@
 [
   {
+    "date": "2026-08-02 15:00:00",
+    "factor_id": "quality_reinvestment_gap_v1",
+    "factor_name": "质量-再投资缺口因子 v1",
+    "status": "failed",
+    "source_type": "论文复现+本土化",
+    "source_title": "Quality Minus Junk",
+    "source_url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2312432",
+    "source_author": "Asness, Frazzini, Pedersen",
+    "source_year": 2013,
+    "source_journal": "SSRN / AQR working paper",
+    "barra_style": "Quality / Growth",
+    "description": "参考 QMJ 中‘高质量企业通常体现为更好的盈利能力、更克制的投资/扩张’这一主线，在当前仅有 ROE/BPS 的 A 股数据下做极简本土化代理：用 ROE 同比变化表征盈利质量改善，用 BPS 同比变化代理净资产扩张/再投资强度，构造“盈利改善减去权益扩张”的缺口；财报滞后 45 天映射到日频，并对 20 日对数成交额做横截面 OLS 中性化后再 z-score 标准化。",
+    "formula": "raw = tanh((ROE_t - ROE_t-4)/6) - 0.8 * tanh((BPS_t/BPS_t-4 - 1)/0.3); factor = neutralize(raw, log_amount_20d)",
+    "our_metric": {
+      "market": "中证1000",
+      "period": "2023-08-14 ~ 2026-07-21",
+      "ic_mean": 0.022731442179200947,
+      "ic_t": 4.693328369951708,
+      "rank_ic": 0.025824676252646228,
+      "g5_sharpe": 0.6835314427008871,
+      "long_short_sharpe": 2.9814132434082277,
+      "monotonicity": 0.8999999999999998,
+      "turnover_mean": 0.058418383530146986,
+      "max_abs_corr_existing": 0.3755,
+      "closest_existing_factor": "roe_decay_rev_v1"
+    },
+    "failure_reason": "属于‘统计显著但经济表现不够强’：IC均值 0.0227、IC_t=4.69、单调性 0.9 均达标，多空 Sharpe 甚至达到 2.98，但最高分组 G5 Sharpe 仅 0.68，低于入库门槛 0.8。说明该信号更适合作为排序/对冲腿，而不是单独高分组多头因子。",
+    "diff_notes": "相较此前 conservative_profitability_v1、quality_minus_investment_proxy_v1 等更复杂的 QMJ 代理，这一版显著简化，只保留‘盈利改善 - 权益扩张’这一最干净的差分结构，反而拿到了更高的 IC 显著性和更好的单调性。与现有因子相关性较低，最高仅 |0.376|（roe_decay_rev_v1），不构成冗余；但独立多头可交易性仍稍弱。",
+    "conclusion": "淘汰",
+    "data_files": [
+      "calc_quality_reinvestment_gap_v1.py",
+      "data/factor_quality_reinvestment_gap_v1.csv",
+      "output/quality_reinvestment_gap_v1/report.json"
+    ]
+  },
+  {
     "date": "2026-08-02 10:00:00",
     "factor_id": "roe_smoothing_improve_v1",
     "factor_name": "ROE平滑改善因子 v1",
