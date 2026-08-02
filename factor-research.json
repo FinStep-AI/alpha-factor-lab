@@ -1,5 +1,41 @@
 [
   {
+    "date": "2026-08-02 20:00:00",
+    "factor_id": "operating_profitability_proxy_v1",
+    "factor_name": "经营盈利能力代理因子 v1",
+    "status": "failed",
+    "source_type": "论文复现+本土化代理",
+    "source_title": "A Five-Factor Asset Pricing Model",
+    "source_url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2287202",
+    "source_author": "Fama, French",
+    "source_year": 2013,
+    "source_journal": "Journal of Financial Economics",
+    "barra_style": "Quality / Growth",
+    "description": "参考 Fama-French 五因子中的 profitability/investment 主线，在当前仅有 ROE/BPS 的 A 股数据约束下，用‘高盈利水平 + 盈利改善 - 盈利波动 - 净资产扩张’构造经营盈利能力代理：近4季平均 ROE 代表 profitability 水平，ROE 同比代表盈利改善，ROE 近4季波动作为质量惩罚，BPS 同比扩张作为 investment 代理；财报滞后 45 天映射到日频，并对 20 日对数成交额做横截面 OLS 中性化，随后 MAD 缩尾和 z-score 标准化。",
+    "formula": "raw = 0.55*tanh(MA4(ROE)/8) + 0.35*tanh((ROE_t-ROE_t-4)/6) - 0.25*tanh(STD4(ROE)/4) - 0.20*tanh((BPS_t/BPS_t-4 - 1)/0.25); factor = neutralize(raw, log_amount_20d)",
+    "our_metric": {
+      "market": "中证1000",
+      "period": "2023-08-14 ~ 2026-03-04",
+      "ic_mean": 0.006726110616239515,
+      "ic_t": 0.6605777781217513,
+      "rank_ic": 0.018513231509985874,
+      "g5_sharpe": 0.7839610948811432,
+      "long_short_sharpe": 0.17899621659132062,
+      "monotonicity": 0.8999999999999998,
+      "turnover_mean": 0.18247438773371474,
+      "max_abs_corr_existing": 0.528807607943779,
+      "closest_existing_factor": "quality_reinvestment_gap_v1"
+    },
+    "failure_reason": "未达门槛：IC均值仅0.0067、IC_t=0.66、G5 Sharpe=0.78，只有单调性0.9接近达标。分层上 G5 年化 20.1% 虽为最高，但 G3 年化 19.8% 也明显抬头，说明该信号更像弱排序/分层特征，而不是稳定的线性横截面 alpha。",
+    "diff_notes": "相比 quality_reinvestment_gap_v1、investment_efficiency_proxy_v1 这类‘盈利改善 - 扩张约束’因子，这一版显式加入了盈利水平与波动惩罚，更贴近 Fama-French profitability 语义；但结果说明在当前只有 ROE/BPS 两个低频字段时，‘高盈利水平’本身并未带来额外可交易信息。相关性最高仅 0.529（quality_reinvestment_gap_v1），不构成冗余，但独立有效性也不足。",
+    "conclusion": "淘汰",
+    "data_files": [
+      "calc_operating_profitability_proxy_v1.py",
+      "data/factor_operating_profitability_proxy_v1.csv",
+      "output/operating_profitability_proxy_v1/report.json"
+    ]
+  },
+  {
     "date": "2026-08-02 15:00:00",
     "factor_id": "quality_reinvestment_gap_v1",
     "factor_name": "质量-再投资缺口因子 v1",
