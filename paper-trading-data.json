@@ -6,7 +6,7 @@
     "benchmark": "000300",
     "benchmark_name": "沪深300",
     "created_at": "2026-02-23 22:14:25",
-    "updated_at": "2026-08-03 08:31:35",
+    "updated_at": "2026-08-03 09:08:59",
     "status": "active",
     "players_count": 6
   },
@@ -17,285 +17,285 @@
       "style": "LightGBM机器学习选股 · 99特征 · 中证1000 · 周度调仓",
       "description": "10因子+K线衍生→99维特征矩阵→LightGBM预测超额收益→风控过滤→TOP25组合",
       "portfolio": {
-        "cash": 38156.98000000714,
+        "cash": 21991.140000006213,
         "positions": {
-          "000813.SZ": {
-            "code": "000813.SZ",
-            "name": "德展健康",
-            "volume": 108400,
-            "avg_cost": 3.23,
-            "current_price": 3.28,
-            "market_value": 355552.0,
-            "pnl": 5420.0,
-            "pnl_pct": 1.55,
-            "entry_date": "2026-07-13"
-          },
-          "002226.SZ": {
-            "code": "002226.SZ",
-            "name": "江南化工",
-            "volume": 78100,
-            "avg_cost": 4.48,
-            "current_price": 4.58,
-            "market_value": 357698.0,
-            "pnl": 7810.0,
-            "pnl_pct": 2.23,
-            "entry_date": "2026-07-13"
-          },
           "002396.SZ": {
             "code": "002396.SZ",
             "name": "星网锐捷",
-            "volume": 12700,
+            "volume": 11400,
             "avg_cost": 27.47,
             "current_price": 34.59,
-            "market_value": 439293.0,
+            "market_value": 394326.00000000006,
             "pnl": 90424.0,
             "pnl_pct": 25.92,
-            "entry_date": "2026-07-13"
-          },
-          "002897.SZ": {
-            "code": "002897.SZ",
-            "name": "意华股份",
-            "volume": 4200,
-            "avg_cost": 82.33,
-            "current_price": 64.71,
-            "market_value": 271782.0,
-            "pnl": -74004.0,
-            "pnl_pct": -21.4,
-            "entry_date": "2026-07-13"
-          },
-          "300131.SZ": {
-            "code": "300131.SZ",
-            "name": "英唐智控",
-            "volume": 18500,
-            "avg_cost": 18.9,
-            "current_price": 15.35,
-            "market_value": 283975.0,
-            "pnl": -65675.0,
-            "pnl_pct": -18.78,
-            "entry_date": "2026-07-13"
-          },
-          "300166.SZ": {
-            "code": "300166.SZ",
-            "name": "东方国信",
-            "volume": 21800,
-            "avg_cost": 16.0,
-            "current_price": 13.51,
-            "market_value": 294518.0,
-            "pnl": -54282.0,
-            "pnl_pct": -15.56,
-            "entry_date": "2026-07-13"
-          },
-          "300576.SZ": {
-            "code": "300576.SZ",
-            "name": "容大感光",
-            "volume": 8700,
-            "avg_cost": 39.81,
-            "current_price": 27.89,
-            "market_value": 242643.0,
-            "pnl": -103704.0,
-            "pnl_pct": -29.94,
-            "entry_date": "2026-07-13"
-          },
-          "300593.SZ": {
-            "code": "300593.SZ",
-            "name": "新雷能",
-            "volume": 12700,
-            "avg_cost": 27.37,
-            "current_price": 23.25,
-            "market_value": 295275.0,
-            "pnl": -52324.0,
-            "pnl_pct": -15.05,
-            "entry_date": "2026-07-13"
-          },
-          "300602.SZ": {
-            "code": "300602.SZ",
-            "name": "飞荣达",
-            "volume": 7600,
-            "avg_cost": 45.82,
-            "current_price": 37.78,
-            "market_value": 287128.0,
-            "pnl": -61104.0,
-            "pnl_pct": -17.55,
-            "entry_date": "2026-07-13"
-          },
-          "300634.SZ": {
-            "code": "300634.SZ",
-            "name": "彩讯股份",
-            "volume": 17700,
-            "avg_cost": 19.72,
-            "current_price": 18.46,
-            "market_value": 326742.0,
-            "pnl": -22302.0,
-            "pnl_pct": -6.39,
-            "entry_date": "2026-07-13"
-          },
-          "300755.SZ": {
-            "code": "300755.SZ",
-            "name": "华致酒行",
-            "volume": 30500,
-            "avg_cost": 11.47,
-            "current_price": 10.63,
-            "market_value": 324215.0,
-            "pnl": -25620.0,
-            "pnl_pct": -7.32,
-            "entry_date": "2026-07-13"
-          },
-          "301291.SZ": {
-            "code": "301291.SZ",
-            "name": "明阳电气",
-            "volume": 9400,
-            "avg_cost": 36.98,
-            "current_price": 37.08,
-            "market_value": 348552.0,
-            "pnl": 940.0,
-            "pnl_pct": 0.27,
-            "entry_date": "2026-07-13"
-          },
-          "301293.SZ": {
-            "code": "301293.SZ",
-            "name": "三博脑科",
-            "volume": 6900,
-            "avg_cost": 50.45,
-            "current_price": 51.2,
-            "market_value": 353280.0,
-            "pnl": 5175.0,
-            "pnl_pct": 1.49,
-            "entry_date": "2026-07-13"
-          },
-          "301316.SZ": {
-            "code": "301316.SZ",
-            "name": "慧博云通",
-            "volume": 8000,
-            "avg_cost": 43.7,
-            "current_price": 37.04,
-            "market_value": 296320.0,
-            "pnl": -53280.0,
-            "pnl_pct": -15.24,
-            "entry_date": "2026-07-13"
-          },
-          "603039.SH": {
-            "code": "603039.SH",
-            "name": "泛微网络",
-            "volume": 10300,
-            "avg_cost": 33.83,
-            "current_price": 29.8,
-            "market_value": 306940.0,
-            "pnl": -41509.0,
-            "pnl_pct": -11.91,
-            "entry_date": "2026-07-13"
-          },
-          "603919.SH": {
-            "code": "603919.SH",
-            "name": "金徽酒",
-            "volume": 23900,
-            "avg_cost": 14.63,
-            "current_price": 14.88,
-            "market_value": 355632.0,
-            "pnl": 5975.0,
-            "pnl_pct": 1.71,
-            "entry_date": "2026-07-13"
-          },
-          "605198.SH": {
-            "code": "605198.SH",
-            "name": "安德利",
-            "volume": 5900,
-            "avg_cost": 59.01,
-            "current_price": 48.8,
-            "market_value": 287920.0,
-            "pnl": -60239.0,
-            "pnl_pct": -17.3,
-            "entry_date": "2026-07-13"
-          },
-          "688068.SH": {
-            "code": "688068.SH",
-            "name": "热景生物",
-            "volume": 2800,
-            "avg_cost": 124.3,
-            "current_price": 123.22,
-            "market_value": 345016.0,
-            "pnl": -3024.0,
-            "pnl_pct": -0.87,
-            "entry_date": "2026-07-13"
-          },
-          "688110.SH": {
-            "code": "688110.SH",
-            "name": "东芯股份",
-            "volume": 2100,
-            "avg_cost": 164.0,
-            "current_price": 120.15,
-            "market_value": 252315.0,
-            "pnl": -92085.0,
-            "pnl_pct": -26.74,
-            "entry_date": "2026-07-13"
-          },
-          "688147.SH": {
-            "code": "688147.SH",
-            "name": "微导纳米",
-            "volume": 2500,
-            "avg_cost": 138.97,
-            "current_price": 119.91,
-            "market_value": 299775.0,
-            "pnl": -47650.0,
-            "pnl_pct": -13.72,
-            "entry_date": "2026-07-13"
-          },
-          "688182.SH": {
-            "code": "688182.SH",
-            "name": "灿勤科技",
-            "volume": 9300,
-            "avg_cost": 37.31,
-            "current_price": 25.11,
-            "market_value": 233523.0,
-            "pnl": -113460.0,
-            "pnl_pct": -32.7,
             "entry_date": "2026-07-13"
           },
           "688206.SH": {
             "code": "688206.SH",
             "name": "概伦电子",
-            "volume": 7400,
-            "avg_cost": 47.16,
+            "volume": 9400,
+            "avg_cost": 43.89191489361702,
             "current_price": 36.29,
             "market_value": 268546.0,
             "pnl": -80438.0,
             "pnl_pct": -23.05,
             "entry_date": "2026-07-13"
           },
-          "688352.SH": {
-            "code": "688352.SH",
-            "name": "颀中科技",
-            "volume": 15900,
-            "avg_cost": 22.0,
-            "current_price": 14.33,
-            "market_value": 227847.0,
-            "pnl": -121953.0,
-            "pnl_pct": -34.86,
-            "entry_date": "2026-07-13"
+          "000636.SZ": {
+            "code": "000636.SZ",
+            "name": "风华高科",
+            "volume": 6000,
+            "avg_cost": 49.35,
+            "current_price": 49.35,
+            "market_value": 296100.0,
+            "pnl": 0,
+            "pnl_pct": 0,
+            "entry_date": "2026-08-03"
           },
-          "688584.SH": {
-            "code": "688584.SH",
-            "name": "上海合晶",
-            "volume": 8000,
-            "avg_cost": 43.38,
-            "current_price": 30.83,
-            "market_value": 246640.0,
-            "pnl": -100400.0,
-            "pnl_pct": -28.93,
-            "entry_date": "2026-07-13"
+          "000676.SZ": {
+            "code": "000676.SZ",
+            "name": "智度股份",
+            "volume": 39900,
+            "avg_cost": 7.49,
+            "current_price": 7.49,
+            "market_value": 298851.0,
+            "pnl": 0,
+            "pnl_pct": 0,
+            "entry_date": "2026-08-03"
           },
-          "688726.SH": {
-            "code": "688726.SH",
-            "name": "拉普拉斯",
-            "volume": 7000,
-            "avg_cost": 49.57,
-            "current_price": 38.25,
-            "market_value": 267750.0,
-            "pnl": -79240.0,
-            "pnl_pct": -22.84,
-            "entry_date": "2026-07-13"
+          "002038.SZ": {
+            "code": "002038.SZ",
+            "name": "双鹭药业",
+            "volume": 53200,
+            "avg_cost": 5.62,
+            "current_price": 5.62,
+            "market_value": 298984.0,
+            "pnl": 0,
+            "pnl_pct": 0,
+            "entry_date": "2026-08-03"
+          },
+          "002292.SZ": {
+            "code": "002292.SZ",
+            "name": "奥飞娱乐",
+            "volume": 36200,
+            "avg_cost": 8.25,
+            "current_price": 8.25,
+            "market_value": 298650.0,
+            "pnl": 0,
+            "pnl_pct": 0,
+            "entry_date": "2026-08-03"
+          },
+          "002317.SZ": {
+            "code": "002317.SZ",
+            "name": "众生药业",
+            "volume": 11400,
+            "avg_cost": 26.22,
+            "current_price": 26.22,
+            "market_value": 298908.0,
+            "pnl": 0,
+            "pnl_pct": 0,
+            "entry_date": "2026-08-03"
+          },
+          "002498.SZ": {
+            "code": "002498.SZ",
+            "name": "汉缆股份",
+            "volume": 43700,
+            "avg_cost": 6.83,
+            "current_price": 6.83,
+            "market_value": 298471.0,
+            "pnl": 0,
+            "pnl_pct": 0,
+            "entry_date": "2026-08-03"
+          },
+          "300663.SZ": {
+            "code": "300663.SZ",
+            "name": "科蓝软件",
+            "volume": 28100,
+            "avg_cost": 10.62,
+            "current_price": 10.62,
+            "market_value": 298422.0,
+            "pnl": 0,
+            "pnl_pct": 0,
+            "entry_date": "2026-08-03"
+          },
+          "300821.SZ": {
+            "code": "300821.SZ",
+            "name": "东岳硅材",
+            "volume": 20900,
+            "avg_cost": 14.27,
+            "current_price": 14.27,
+            "market_value": 298243.0,
+            "pnl": 0,
+            "pnl_pct": 0,
+            "entry_date": "2026-08-03"
+          },
+          "301526.SZ": {
+            "code": "301526.SZ",
+            "name": "国际复材",
+            "volume": 9300,
+            "avg_cost": 31.99,
+            "current_price": 31.99,
+            "market_value": 297507.0,
+            "pnl": 0,
+            "pnl_pct": 0,
+            "entry_date": "2026-08-03"
+          },
+          "600129.SH": {
+            "code": "600129.SH",
+            "name": "太极集团",
+            "volume": 18900,
+            "avg_cost": 15.78,
+            "current_price": 15.78,
+            "market_value": 298242.0,
+            "pnl": 0,
+            "pnl_pct": 0,
+            "entry_date": "2026-08-03"
+          },
+          "600664.SH": {
+            "code": "600664.SH",
+            "name": "哈药股份",
+            "volume": 50700,
+            "avg_cost": 5.89,
+            "current_price": 5.89,
+            "market_value": 298623.0,
+            "pnl": 0,
+            "pnl_pct": 0,
+            "entry_date": "2026-08-03"
+          },
+          "600744.SH": {
+            "code": "600744.SH",
+            "name": "华银电力",
+            "volume": 43100,
+            "avg_cost": 6.93,
+            "current_price": 6.93,
+            "market_value": 298683.0,
+            "pnl": 0,
+            "pnl_pct": 0,
+            "entry_date": "2026-08-03"
+          },
+          "601606.SH": {
+            "code": "601606.SH",
+            "name": "长城军工",
+            "volume": 8800,
+            "avg_cost": 33.94,
+            "current_price": 33.94,
+            "market_value": 298672.0,
+            "pnl": 0,
+            "pnl_pct": 0,
+            "entry_date": "2026-08-03"
+          },
+          "603118.SH": {
+            "code": "603118.SH",
+            "name": "共进股份",
+            "volume": 20600,
+            "avg_cost": 14.51,
+            "current_price": 14.51,
+            "market_value": 298906.0,
+            "pnl": 0,
+            "pnl_pct": 0,
+            "entry_date": "2026-08-03"
+          },
+          "603567.SH": {
+            "code": "603567.SH",
+            "name": "珍宝岛",
+            "volume": 48400,
+            "avg_cost": 6.17,
+            "current_price": 6.17,
+            "market_value": 298628.0,
+            "pnl": 0,
+            "pnl_pct": 0,
+            "entry_date": "2026-08-03"
+          },
+          "603881.SH": {
+            "code": "603881.SH",
+            "name": "数据港",
+            "volume": 12300,
+            "avg_cost": 24.28,
+            "current_price": 24.28,
+            "market_value": 298644.0,
+            "pnl": 0,
+            "pnl_pct": 0,
+            "entry_date": "2026-08-03"
+          },
+          "688146.SH": {
+            "code": "688146.SH",
+            "name": "中船特气",
+            "volume": 1100,
+            "avg_cost": 266.0,
+            "current_price": 266.0,
+            "market_value": 292600.0,
+            "pnl": 0,
+            "pnl_pct": 0,
+            "entry_date": "2026-08-03"
+          },
+          "688200.SH": {
+            "code": "688200.SH",
+            "name": "华峰测控",
+            "volume": 800,
+            "avg_cost": 357.67,
+            "current_price": 357.67,
+            "market_value": 286136.0,
+            "pnl": 0,
+            "pnl_pct": 0,
+            "entry_date": "2026-08-03"
+          },
+          "688262.SH": {
+            "code": "688262.SH",
+            "name": "国芯科技",
+            "volume": 12500,
+            "avg_cost": 23.85,
+            "current_price": 23.85,
+            "market_value": 298125.0,
+            "pnl": 0,
+            "pnl_pct": 0,
+            "entry_date": "2026-08-03"
+          },
+          "688498.SH": {
+            "code": "688498.SH",
+            "name": "源杰科技",
+            "volume": 200,
+            "avg_cost": 1092.1,
+            "current_price": 1092.1,
+            "market_value": 218419.99999999997,
+            "pnl": 0,
+            "pnl_pct": 0,
+            "entry_date": "2026-08-03"
+          },
+          "688630.SH": {
+            "code": "688630.SH",
+            "name": "芯碁微装",
+            "volume": 900,
+            "avg_cost": 325.23,
+            "current_price": 325.23,
+            "market_value": 292707.0,
+            "pnl": 0,
+            "pnl_pct": 0,
+            "entry_date": "2026-08-03"
+          },
+          "688660.SH": {
+            "code": "688660.SH",
+            "name": "电气风电",
+            "volume": 34700,
+            "avg_cost": 8.62,
+            "current_price": 8.62,
+            "market_value": 299114.0,
+            "pnl": 0,
+            "pnl_pct": 0,
+            "entry_date": "2026-08-03"
+          },
+          "688766.SH": {
+            "code": "688766.SH",
+            "name": "普冉股份",
+            "volume": 700,
+            "avg_cost": 354.9,
+            "current_price": 354.9,
+            "market_value": 248429.99999999997,
+            "pnl": 0,
+            "pnl_pct": 0,
+            "entry_date": "2026-08-03"
           }
         },
-        "total_value": 7607033.98,
+        "total_value": 7467509.14,
         "last_update": "2026-07-22"
       },
       "nav_history": {
@@ -8426,16 +8426,921 @@
           "pnl": 0,
           "pnl_pct": 0,
           "reason": "LightGBM weekly rebalance"
+        },
+        {
+          "date": "2026-08-03",
+          "code": "000813.SZ",
+          "name": "德展健康",
+          "direction": "sell",
+          "price": 3.3,
+          "volume": 108400,
+          "amount": 357720.0,
+          "fees": {
+            "commission": 107.32,
+            "stamp_duty": 178.86,
+            "transfer_fee": 3.58,
+            "slippage_cost": 357.72,
+            "total": 647.47
+          },
+          "pnl": 7588.0,
+          "pnl_pct": 2.17,
+          "reason": "Weekly rebalance fallback to factor ranking"
+        },
+        {
+          "date": "2026-08-03",
+          "code": "002226.SZ",
+          "name": "江南化工",
+          "direction": "sell",
+          "price": 4.97,
+          "volume": 78100,
+          "amount": 388157.0,
+          "fees": {
+            "commission": 116.45,
+            "stamp_duty": 194.08,
+            "transfer_fee": 3.88,
+            "slippage_cost": 388.16,
+            "total": 702.56
+          },
+          "pnl": 38269.0,
+          "pnl_pct": 10.94,
+          "reason": "Weekly rebalance fallback to factor ranking"
+        },
+        {
+          "date": "2026-08-03",
+          "code": "002897.SZ",
+          "name": "意华股份",
+          "direction": "sell",
+          "price": 51.98,
+          "volume": 4200,
+          "amount": 218316.0,
+          "fees": {
+            "commission": 65.49,
+            "stamp_duty": 109.16,
+            "transfer_fee": 2.18,
+            "slippage_cost": 218.32,
+            "total": 395.15
+          },
+          "pnl": -127470.0,
+          "pnl_pct": -36.86,
+          "reason": "Weekly rebalance fallback to factor ranking"
+        },
+        {
+          "date": "2026-08-03",
+          "code": "300131.SZ",
+          "name": "英唐智控",
+          "direction": "sell",
+          "price": 12.67,
+          "volume": 18500,
+          "amount": 234395.0,
+          "fees": {
+            "commission": 70.32,
+            "stamp_duty": 117.2,
+            "transfer_fee": 2.34,
+            "slippage_cost": 234.4,
+            "total": 424.25
+          },
+          "pnl": -115255.0,
+          "pnl_pct": -32.96,
+          "reason": "Weekly rebalance fallback to factor ranking"
+        },
+        {
+          "date": "2026-08-03",
+          "code": "300166.SZ",
+          "name": "东方国信",
+          "direction": "sell",
+          "price": 13.23,
+          "volume": 21800,
+          "amount": 288414.0,
+          "fees": {
+            "commission": 86.52,
+            "stamp_duty": 144.21,
+            "transfer_fee": 2.88,
+            "slippage_cost": 288.41,
+            "total": 522.03
+          },
+          "pnl": -60386.0,
+          "pnl_pct": -17.31,
+          "reason": "Weekly rebalance fallback to factor ranking"
+        },
+        {
+          "date": "2026-08-03",
+          "code": "300576.SZ",
+          "name": "容大感光",
+          "direction": "sell",
+          "price": 25.07,
+          "volume": 8700,
+          "amount": 218109.0,
+          "fees": {
+            "commission": 65.43,
+            "stamp_duty": 109.05,
+            "transfer_fee": 2.18,
+            "slippage_cost": 218.11,
+            "total": 394.78
+          },
+          "pnl": -128238.0,
+          "pnl_pct": -37.03,
+          "reason": "Weekly rebalance fallback to factor ranking"
+        },
+        {
+          "date": "2026-08-03",
+          "code": "300593.SZ",
+          "name": "新雷能",
+          "direction": "sell",
+          "price": 23.88,
+          "volume": 12700,
+          "amount": 303276.0,
+          "fees": {
+            "commission": 90.98,
+            "stamp_duty": 151.64,
+            "transfer_fee": 3.03,
+            "slippage_cost": 303.28,
+            "total": 548.93
+          },
+          "pnl": -44323.0,
+          "pnl_pct": -12.75,
+          "reason": "Weekly rebalance fallback to factor ranking"
+        },
+        {
+          "date": "2026-08-03",
+          "code": "300602.SZ",
+          "name": "飞荣达",
+          "direction": "sell",
+          "price": 31.72,
+          "volume": 7600,
+          "amount": 241072.0,
+          "fees": {
+            "commission": 72.32,
+            "stamp_duty": 120.54,
+            "transfer_fee": 2.41,
+            "slippage_cost": 241.07,
+            "total": 436.34
+          },
+          "pnl": -107160.0,
+          "pnl_pct": -30.77,
+          "reason": "Weekly rebalance fallback to factor ranking"
+        },
+        {
+          "date": "2026-08-03",
+          "code": "300634.SZ",
+          "name": "彩讯股份",
+          "direction": "sell",
+          "price": 20.16,
+          "volume": 17700,
+          "amount": 356832.0,
+          "fees": {
+            "commission": 107.05,
+            "stamp_duty": 178.42,
+            "transfer_fee": 3.57,
+            "slippage_cost": 356.83,
+            "total": 645.87
+          },
+          "pnl": 7788.0,
+          "pnl_pct": 2.23,
+          "reason": "Weekly rebalance fallback to factor ranking"
+        },
+        {
+          "date": "2026-08-03",
+          "code": "300755.SZ",
+          "name": "华致酒行",
+          "direction": "sell",
+          "price": 11.57,
+          "volume": 30500,
+          "amount": 352885.0,
+          "fees": {
+            "commission": 105.87,
+            "stamp_duty": 176.44,
+            "transfer_fee": 3.53,
+            "slippage_cost": 352.88,
+            "total": 638.72
+          },
+          "pnl": 3050.0,
+          "pnl_pct": 0.87,
+          "reason": "Weekly rebalance fallback to factor ranking"
+        },
+        {
+          "date": "2026-08-03",
+          "code": "301291.SZ",
+          "name": "明阳电气",
+          "direction": "sell",
+          "price": 38.28,
+          "volume": 9400,
+          "amount": 359832.0,
+          "fees": {
+            "commission": 107.95,
+            "stamp_duty": 179.92,
+            "transfer_fee": 3.6,
+            "slippage_cost": 359.83,
+            "total": 651.3
+          },
+          "pnl": 12220.0,
+          "pnl_pct": 3.52,
+          "reason": "Weekly rebalance fallback to factor ranking"
+        },
+        {
+          "date": "2026-08-03",
+          "code": "301293.SZ",
+          "name": "三博脑科",
+          "direction": "sell",
+          "price": 54.11,
+          "volume": 6900,
+          "amount": 373359.0,
+          "fees": {
+            "commission": 112.01,
+            "stamp_duty": 186.68,
+            "transfer_fee": 3.73,
+            "slippage_cost": 373.36,
+            "total": 675.78
+          },
+          "pnl": 25254.0,
+          "pnl_pct": 7.25,
+          "reason": "Weekly rebalance fallback to factor ranking"
+        },
+        {
+          "date": "2026-08-03",
+          "code": "301316.SZ",
+          "name": "慧博云通",
+          "direction": "sell",
+          "price": 36.3,
+          "volume": 8000,
+          "amount": 290400.0,
+          "fees": {
+            "commission": 87.12,
+            "stamp_duty": 145.2,
+            "transfer_fee": 2.9,
+            "slippage_cost": 290.4,
+            "total": 525.62
+          },
+          "pnl": -59200.0,
+          "pnl_pct": -16.93,
+          "reason": "Weekly rebalance fallback to factor ranking"
+        },
+        {
+          "date": "2026-08-03",
+          "code": "603039.SH",
+          "name": "泛微网络",
+          "direction": "sell",
+          "price": 37.42,
+          "volume": 10300,
+          "amount": 385426.0,
+          "fees": {
+            "commission": 115.63,
+            "stamp_duty": 192.71,
+            "transfer_fee": 3.85,
+            "slippage_cost": 385.43,
+            "total": 697.62
+          },
+          "pnl": 36977.0,
+          "pnl_pct": 10.61,
+          "reason": "Weekly rebalance fallback to factor ranking"
+        },
+        {
+          "date": "2026-08-03",
+          "code": "603919.SH",
+          "name": "金徽酒",
+          "direction": "sell",
+          "price": 16.63,
+          "volume": 23900,
+          "amount": 397457.0,
+          "fees": {
+            "commission": 119.24,
+            "stamp_duty": 198.73,
+            "transfer_fee": 3.97,
+            "slippage_cost": 397.46,
+            "total": 719.4
+          },
+          "pnl": 47800.0,
+          "pnl_pct": 13.67,
+          "reason": "Weekly rebalance fallback to factor ranking"
+        },
+        {
+          "date": "2026-08-03",
+          "code": "605198.SH",
+          "name": "安德利",
+          "direction": "sell",
+          "price": 56.96,
+          "volume": 5900,
+          "amount": 336064.0,
+          "fees": {
+            "commission": 100.82,
+            "stamp_duty": 168.03,
+            "transfer_fee": 3.36,
+            "slippage_cost": 336.06,
+            "total": 608.28
+          },
+          "pnl": -12095.0,
+          "pnl_pct": -3.47,
+          "reason": "Weekly rebalance fallback to factor ranking"
+        },
+        {
+          "date": "2026-08-03",
+          "code": "688068.SH",
+          "name": "热景生物",
+          "direction": "sell",
+          "price": 107.8,
+          "volume": 2800,
+          "amount": 301840.0,
+          "fees": {
+            "commission": 90.55,
+            "stamp_duty": 150.92,
+            "transfer_fee": 3.02,
+            "slippage_cost": 301.84,
+            "total": 546.33
+          },
+          "pnl": -46200.0,
+          "pnl_pct": -13.27,
+          "reason": "Weekly rebalance fallback to factor ranking"
+        },
+        {
+          "date": "2026-08-03",
+          "code": "688110.SH",
+          "name": "东芯股份",
+          "direction": "sell",
+          "price": 102.15,
+          "volume": 2100,
+          "amount": 214515.0,
+          "fees": {
+            "commission": 64.35,
+            "stamp_duty": 107.26,
+            "transfer_fee": 2.15,
+            "slippage_cost": 214.52,
+            "total": 388.27
+          },
+          "pnl": -129885.0,
+          "pnl_pct": -37.71,
+          "reason": "Weekly rebalance fallback to factor ranking"
+        },
+        {
+          "date": "2026-08-03",
+          "code": "688147.SH",
+          "name": "微导纳米",
+          "direction": "sell",
+          "price": 86.33,
+          "volume": 2500,
+          "amount": 215825.0,
+          "fees": {
+            "commission": 64.75,
+            "stamp_duty": 107.91,
+            "transfer_fee": 2.16,
+            "slippage_cost": 215.83,
+            "total": 390.64
+          },
+          "pnl": -131600.0,
+          "pnl_pct": -37.88,
+          "reason": "Weekly rebalance fallback to factor ranking"
+        },
+        {
+          "date": "2026-08-03",
+          "code": "688182.SH",
+          "name": "灿勤科技",
+          "direction": "sell",
+          "price": 22.64,
+          "volume": 9300,
+          "amount": 210552.0,
+          "fees": {
+            "commission": 63.17,
+            "stamp_duty": 105.28,
+            "transfer_fee": 2.11,
+            "slippage_cost": 210.55,
+            "total": 381.1
+          },
+          "pnl": -136431.0,
+          "pnl_pct": -39.32,
+          "reason": "Weekly rebalance fallback to factor ranking"
+        },
+        {
+          "date": "2026-08-03",
+          "code": "688352.SH",
+          "name": "颀中科技",
+          "direction": "sell",
+          "price": 13.91,
+          "volume": 15900,
+          "amount": 221169.0,
+          "fees": {
+            "commission": 66.35,
+            "stamp_duty": 110.58,
+            "transfer_fee": 2.21,
+            "slippage_cost": 221.17,
+            "total": 400.32
+          },
+          "pnl": -128631.0,
+          "pnl_pct": -36.77,
+          "reason": "Weekly rebalance fallback to factor ranking"
+        },
+        {
+          "date": "2026-08-03",
+          "code": "688584.SH",
+          "name": "上海合晶",
+          "direction": "sell",
+          "price": 23.8,
+          "volume": 8000,
+          "amount": 190400.0,
+          "fees": {
+            "commission": 57.12,
+            "stamp_duty": 95.2,
+            "transfer_fee": 1.9,
+            "slippage_cost": 190.4,
+            "total": 344.62
+          },
+          "pnl": -156640.0,
+          "pnl_pct": -45.14,
+          "reason": "Weekly rebalance fallback to factor ranking"
+        },
+        {
+          "date": "2026-08-03",
+          "code": "688726.SH",
+          "name": "拉普拉斯",
+          "direction": "sell",
+          "price": 41.25,
+          "volume": 7000,
+          "amount": 288750.0,
+          "fees": {
+            "commission": 86.62,
+            "stamp_duty": 144.38,
+            "transfer_fee": 2.89,
+            "slippage_cost": 288.75,
+            "total": 522.64
+          },
+          "pnl": -58240.0,
+          "pnl_pct": -16.78,
+          "reason": "Weekly rebalance fallback to factor ranking"
+        },
+        {
+          "date": "2026-08-03",
+          "code": "002396.SZ",
+          "name": "星网锐捷",
+          "direction": "sell",
+          "price": 26.06,
+          "volume": 1300,
+          "amount": 33878.0,
+          "fees": {
+            "commission": 10.16,
+            "stamp_duty": 16.94,
+            "transfer_fee": 0.34,
+            "slippage_cost": 33.88,
+            "total": 61.32
+          },
+          "pnl": -1833.0,
+          "pnl_pct": -5.13,
+          "reason": "Weekly rebalance fallback to factor ranking (trim)"
+        },
+        {
+          "date": "2026-08-03",
+          "code": "000636.SZ",
+          "name": "风华高科",
+          "direction": "buy",
+          "price": 49.35,
+          "volume": 6000,
+          "amount": 296100.0,
+          "fees": {
+            "commission": 88.83,
+            "stamp_duty": 0,
+            "transfer_fee": 2.96,
+            "slippage_cost": 296.1,
+            "total": 387.89
+          },
+          "pnl": 0,
+          "pnl_pct": 0,
+          "reason": "Weekly rebalance fallback to factor ranking"
+        },
+        {
+          "date": "2026-08-03",
+          "code": "000676.SZ",
+          "name": "智度股份",
+          "direction": "buy",
+          "price": 7.49,
+          "volume": 39900,
+          "amount": 298851.0,
+          "fees": {
+            "commission": 89.66,
+            "stamp_duty": 0,
+            "transfer_fee": 2.99,
+            "slippage_cost": 298.85,
+            "total": 391.49
+          },
+          "pnl": 0,
+          "pnl_pct": 0,
+          "reason": "Weekly rebalance fallback to factor ranking"
+        },
+        {
+          "date": "2026-08-03",
+          "code": "002038.SZ",
+          "name": "双鹭药业",
+          "direction": "buy",
+          "price": 5.62,
+          "volume": 53200,
+          "amount": 298984.0,
+          "fees": {
+            "commission": 89.7,
+            "stamp_duty": 0,
+            "transfer_fee": 2.99,
+            "slippage_cost": 298.98,
+            "total": 391.67
+          },
+          "pnl": 0,
+          "pnl_pct": 0,
+          "reason": "Weekly rebalance fallback to factor ranking"
+        },
+        {
+          "date": "2026-08-03",
+          "code": "002292.SZ",
+          "name": "奥飞娱乐",
+          "direction": "buy",
+          "price": 8.25,
+          "volume": 36200,
+          "amount": 298650.0,
+          "fees": {
+            "commission": 89.59,
+            "stamp_duty": 0,
+            "transfer_fee": 2.99,
+            "slippage_cost": 298.65,
+            "total": 391.23
+          },
+          "pnl": 0,
+          "pnl_pct": 0,
+          "reason": "Weekly rebalance fallback to factor ranking"
+        },
+        {
+          "date": "2026-08-03",
+          "code": "002317.SZ",
+          "name": "众生药业",
+          "direction": "buy",
+          "price": 26.22,
+          "volume": 11400,
+          "amount": 298908.0,
+          "fees": {
+            "commission": 89.67,
+            "stamp_duty": 0,
+            "transfer_fee": 2.99,
+            "slippage_cost": 298.91,
+            "total": 391.57
+          },
+          "pnl": 0,
+          "pnl_pct": 0,
+          "reason": "Weekly rebalance fallback to factor ranking"
+        },
+        {
+          "date": "2026-08-03",
+          "code": "002498.SZ",
+          "name": "汉缆股份",
+          "direction": "buy",
+          "price": 6.83,
+          "volume": 43700,
+          "amount": 298471.0,
+          "fees": {
+            "commission": 89.54,
+            "stamp_duty": 0,
+            "transfer_fee": 2.98,
+            "slippage_cost": 298.47,
+            "total": 391.0
+          },
+          "pnl": 0,
+          "pnl_pct": 0,
+          "reason": "Weekly rebalance fallback to factor ranking"
+        },
+        {
+          "date": "2026-08-03",
+          "code": "300663.SZ",
+          "name": "科蓝软件",
+          "direction": "buy",
+          "price": 10.62,
+          "volume": 28100,
+          "amount": 298422.0,
+          "fees": {
+            "commission": 89.53,
+            "stamp_duty": 0,
+            "transfer_fee": 2.98,
+            "slippage_cost": 298.42,
+            "total": 390.93
+          },
+          "pnl": 0,
+          "pnl_pct": 0,
+          "reason": "Weekly rebalance fallback to factor ranking"
+        },
+        {
+          "date": "2026-08-03",
+          "code": "300821.SZ",
+          "name": "东岳硅材",
+          "direction": "buy",
+          "price": 14.27,
+          "volume": 20900,
+          "amount": 298243.0,
+          "fees": {
+            "commission": 89.47,
+            "stamp_duty": 0,
+            "transfer_fee": 2.98,
+            "slippage_cost": 298.24,
+            "total": 390.7
+          },
+          "pnl": 0,
+          "pnl_pct": 0,
+          "reason": "Weekly rebalance fallback to factor ranking"
+        },
+        {
+          "date": "2026-08-03",
+          "code": "301526.SZ",
+          "name": "国际复材",
+          "direction": "buy",
+          "price": 31.99,
+          "volume": 9300,
+          "amount": 297507.0,
+          "fees": {
+            "commission": 89.25,
+            "stamp_duty": 0,
+            "transfer_fee": 2.98,
+            "slippage_cost": 297.51,
+            "total": 389.73
+          },
+          "pnl": 0,
+          "pnl_pct": 0,
+          "reason": "Weekly rebalance fallback to factor ranking"
+        },
+        {
+          "date": "2026-08-03",
+          "code": "600129.SH",
+          "name": "太极集团",
+          "direction": "buy",
+          "price": 15.78,
+          "volume": 18900,
+          "amount": 298242.0,
+          "fees": {
+            "commission": 89.47,
+            "stamp_duty": 0,
+            "transfer_fee": 2.98,
+            "slippage_cost": 298.24,
+            "total": 390.7
+          },
+          "pnl": 0,
+          "pnl_pct": 0,
+          "reason": "Weekly rebalance fallback to factor ranking"
+        },
+        {
+          "date": "2026-08-03",
+          "code": "600664.SH",
+          "name": "哈药股份",
+          "direction": "buy",
+          "price": 5.89,
+          "volume": 50700,
+          "amount": 298623.0,
+          "fees": {
+            "commission": 89.59,
+            "stamp_duty": 0,
+            "transfer_fee": 2.99,
+            "slippage_cost": 298.62,
+            "total": 391.2
+          },
+          "pnl": 0,
+          "pnl_pct": 0,
+          "reason": "Weekly rebalance fallback to factor ranking"
+        },
+        {
+          "date": "2026-08-03",
+          "code": "600744.SH",
+          "name": "华银电力",
+          "direction": "buy",
+          "price": 6.93,
+          "volume": 43100,
+          "amount": 298683.0,
+          "fees": {
+            "commission": 89.6,
+            "stamp_duty": 0,
+            "transfer_fee": 2.99,
+            "slippage_cost": 298.68,
+            "total": 391.27
+          },
+          "pnl": 0,
+          "pnl_pct": 0,
+          "reason": "Weekly rebalance fallback to factor ranking"
+        },
+        {
+          "date": "2026-08-03",
+          "code": "601606.SH",
+          "name": "长城军工",
+          "direction": "buy",
+          "price": 33.94,
+          "volume": 8800,
+          "amount": 298672.0,
+          "fees": {
+            "commission": 89.6,
+            "stamp_duty": 0,
+            "transfer_fee": 2.99,
+            "slippage_cost": 298.67,
+            "total": 391.26
+          },
+          "pnl": 0,
+          "pnl_pct": 0,
+          "reason": "Weekly rebalance fallback to factor ranking"
+        },
+        {
+          "date": "2026-08-03",
+          "code": "603118.SH",
+          "name": "共进股份",
+          "direction": "buy",
+          "price": 14.51,
+          "volume": 20600,
+          "amount": 298906.0,
+          "fees": {
+            "commission": 89.67,
+            "stamp_duty": 0,
+            "transfer_fee": 2.99,
+            "slippage_cost": 298.91,
+            "total": 391.57
+          },
+          "pnl": 0,
+          "pnl_pct": 0,
+          "reason": "Weekly rebalance fallback to factor ranking"
+        },
+        {
+          "date": "2026-08-03",
+          "code": "603567.SH",
+          "name": "珍宝岛",
+          "direction": "buy",
+          "price": 6.17,
+          "volume": 48400,
+          "amount": 298628.0,
+          "fees": {
+            "commission": 89.59,
+            "stamp_duty": 0,
+            "transfer_fee": 2.99,
+            "slippage_cost": 298.63,
+            "total": 391.2
+          },
+          "pnl": 0,
+          "pnl_pct": 0,
+          "reason": "Weekly rebalance fallback to factor ranking"
+        },
+        {
+          "date": "2026-08-03",
+          "code": "603881.SH",
+          "name": "数据港",
+          "direction": "buy",
+          "price": 24.28,
+          "volume": 12300,
+          "amount": 298644.0,
+          "fees": {
+            "commission": 89.59,
+            "stamp_duty": 0,
+            "transfer_fee": 2.99,
+            "slippage_cost": 298.64,
+            "total": 391.22
+          },
+          "pnl": 0,
+          "pnl_pct": 0,
+          "reason": "Weekly rebalance fallback to factor ranking"
+        },
+        {
+          "date": "2026-08-03",
+          "code": "688146.SH",
+          "name": "中船特气",
+          "direction": "buy",
+          "price": 266.0,
+          "volume": 1100,
+          "amount": 292600.0,
+          "fees": {
+            "commission": 87.78,
+            "stamp_duty": 0,
+            "transfer_fee": 2.93,
+            "slippage_cost": 292.6,
+            "total": 383.31
+          },
+          "pnl": 0,
+          "pnl_pct": 0,
+          "reason": "Weekly rebalance fallback to factor ranking"
+        },
+        {
+          "date": "2026-08-03",
+          "code": "688200.SH",
+          "name": "华峰测控",
+          "direction": "buy",
+          "price": 357.67,
+          "volume": 800,
+          "amount": 286136.0,
+          "fees": {
+            "commission": 85.84,
+            "stamp_duty": 0,
+            "transfer_fee": 2.86,
+            "slippage_cost": 286.14,
+            "total": 374.84
+          },
+          "pnl": 0,
+          "pnl_pct": 0,
+          "reason": "Weekly rebalance fallback to factor ranking"
+        },
+        {
+          "date": "2026-08-03",
+          "code": "688206.SH",
+          "name": "概伦电子",
+          "direction": "buy",
+          "price": 31.8,
+          "volume": 2000,
+          "amount": 63600.0,
+          "fees": {
+            "commission": 19.08,
+            "stamp_duty": 0,
+            "transfer_fee": 0.64,
+            "slippage_cost": 63.6,
+            "total": 83.32
+          },
+          "pnl": 0,
+          "pnl_pct": 0,
+          "reason": "Weekly rebalance fallback to factor ranking"
+        },
+        {
+          "date": "2026-08-03",
+          "code": "688262.SH",
+          "name": "国芯科技",
+          "direction": "buy",
+          "price": 23.85,
+          "volume": 12500,
+          "amount": 298125.0,
+          "fees": {
+            "commission": 89.44,
+            "stamp_duty": 0,
+            "transfer_fee": 2.98,
+            "slippage_cost": 298.12,
+            "total": 390.54
+          },
+          "pnl": 0,
+          "pnl_pct": 0,
+          "reason": "Weekly rebalance fallback to factor ranking"
+        },
+        {
+          "date": "2026-08-03",
+          "code": "688498.SH",
+          "name": "源杰科技",
+          "direction": "buy",
+          "price": 1092.1,
+          "volume": 200,
+          "amount": 218420.0,
+          "fees": {
+            "commission": 65.53,
+            "stamp_duty": 0,
+            "transfer_fee": 2.18,
+            "slippage_cost": 218.42,
+            "total": 286.13
+          },
+          "pnl": 0,
+          "pnl_pct": 0,
+          "reason": "Weekly rebalance fallback to factor ranking"
+        },
+        {
+          "date": "2026-08-03",
+          "code": "688630.SH",
+          "name": "芯碁微装",
+          "direction": "buy",
+          "price": 325.23,
+          "volume": 900,
+          "amount": 292707.0,
+          "fees": {
+            "commission": 87.81,
+            "stamp_duty": 0,
+            "transfer_fee": 2.93,
+            "slippage_cost": 292.71,
+            "total": 383.45
+          },
+          "pnl": 0,
+          "pnl_pct": 0,
+          "reason": "Weekly rebalance fallback to factor ranking"
+        },
+        {
+          "date": "2026-08-03",
+          "code": "688660.SH",
+          "name": "电气风电",
+          "direction": "buy",
+          "price": 8.62,
+          "volume": 34700,
+          "amount": 299114.0,
+          "fees": {
+            "commission": 89.73,
+            "stamp_duty": 0,
+            "transfer_fee": 2.99,
+            "slippage_cost": 299.11,
+            "total": 391.84
+          },
+          "pnl": 0,
+          "pnl_pct": 0,
+          "reason": "Weekly rebalance fallback to factor ranking"
+        },
+        {
+          "date": "2026-08-03",
+          "code": "688766.SH",
+          "name": "普冉股份",
+          "direction": "buy",
+          "price": 354.9,
+          "volume": 700,
+          "amount": 248430.0,
+          "fees": {
+            "commission": 74.53,
+            "stamp_duty": 0,
+            "transfer_fee": 2.48,
+            "slippage_cost": 248.43,
+            "total": 325.44
+          },
+          "pnl": 0,
+          "pnl_pct": 0,
+          "reason": "Weekly rebalance fallback to factor ranking"
         }
       ],
       "decisions": [
-        {
-          "date": "2026-03-31",
-          "action": "hold",
-          "summary": "新因子入库：成交量变异系数(反) v1",
-          "detail": "构建20日成交量变异系数(取负)因子，市值中性化后回测：IC=0.0211(t=2.37)，Sharpe=1.10，单调性=0.80，MDD=-7.0%。与现有10个因子最大相关性仅0.12，独立性极好。入库factors.json。CLV收盘位置因子不达标(IC=-0.01)。",
-          "recommendation": "持仓不变，周一调仓时纳入新因子"
-        },
         {
           "date": "2026-04-02",
           "action": "hold",
@@ -8711,6 +9616,14 @@
           "summary": "日度因子扫描：主力净流冲击因子 v1 复现失败，未入库",
           "detail": "数据刷新至2026-07-21。扫描资金流方向后，复现主力净流入冲击因子 v1：flow_intensity=major_net_flow_in/ma20(amount)，并减去0.5倍收益z-score后做市值中性化。受fintool资金流历史仅覆盖到2026-05-25影响，有效样本仅17个交易日，20日前瞻IC点10个；实测IC均值约0.0012、t约0.06、单调性0.60，不达标。结论：今日不新增因子，保留该方向待后续补长样本再测。",
           "recommendation": "继续持有现有量化组合，不替换主因子"
+        },
+        {
+          "date": "2026-08-03",
+          "action": "rebalance",
+          "summary": "Weekly rebalance fallback to factor ranking",
+          "detail": "周一LightGBM特征重建被SIGKILL，按回退规则改用现成强因子 vssignal_v1 最新截面(2026-07-31)排名选前30，经 full-check 风控后取前25 执行调仓。数据已刷新至2026-07-31；今日未找到可复现且非重复的新因子方向，因此仅记录扫描失败并完成周度调仓。",
+          "recommendation": "调仓",
+          "exec_summary": "成功0笔，失败0笔"
         }
       ],
       "rebalances": [
@@ -8732,8 +9645,8 @@
         "calmar_ratio": -1.98,
         "win_rate": 32.65,
         "profit_loss_ratio": 1.2,
-        "total_trades": 369,
-        "total_fees": 229960.84999999995,
+        "total_trades": 417,
+        "total_fees": 251103.69000000003,
         "current_positions": 25,
         "turnover_rate": 99.6
       },
