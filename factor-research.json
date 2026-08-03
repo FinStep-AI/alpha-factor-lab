@@ -6767,5 +6767,25 @@
     "failure_reason": "未达门槛：IC均值仅0.0057、IC_t仅0.65、G5 Sharpe仅0.66、单调性0.5。虽然G5年化22.4%明显高于其他组，但中间组(G3)再次抬头，说明信号更像尾部挑选而非稳定线性排序，截面IC不足以支撑入库。",
     "diff_notes": "相比已入库的 roe_persistence_neg_v1 和 roe_decay_rev_v1，这版试图把‘盈利持续性’扩展到‘账面价值扩张持续性’，希望更贴近 Quality/Growth 语义；但在当前只有 roe/bps 两个低频字段时，新增的 BPS 持续性并没有带来显著信息增益，反而把原本更强的纯 ROE 反转信号稀释了。",
     "conclusion": "淘汰"
+  },
+  {
+    "date": "2026-08-03 09:09:00",
+    "factor_id": "scan_only_20260803",
+    "factor_name": "周一扫描记录（未入库）",
+    "status": "skipped",
+    "source_type": "研报/论文扫描",
+    "source_title": "A股 alpha因子 量化选股 金工研报 2026 / cross-sectional stock return predictability factor 2025 2026",
+    "source_url": "https://bigquant.com/wiki/doc/r9iv79YdY9 ; https://papers.ssrn.com/sol3/Delivery.cfm/6076808.pdf?abstractid=6076808&mirid=1 ; https://papers.ssrn.com/sol3/Delivery.cfm/6325199.pdf?abstractid=6325199&mirid=1",
+    "original_metric": {
+      "note": "本次未拿到可稳定抓取的原文全文，未进入严格复现阶段"
+    },
+    "our_metric": {
+      "data_latest": "2026-07-31",
+      "scan_result": "no_new_factor",
+      "fallback_rebalance_factor": "vssignal_v1",
+      "feature_engine_status": "SIGKILL"
+    },
+    "diff_notes": "中文搜索主要命中研报聚合页/二次整理页，英文搜索命中SSRN与综述，但web_fetch未能稳定获取可用全文；在5分钟窗口内没有找到足够具体、可直接按原文参数复现且与现有因子库明显不重复的新方向。",
+    "conclusion": "今日未发现可落地新因子，按规则跳过复现/回测/入库，仅记录扫描结果并执行周一调仓。"
   }
 ]
