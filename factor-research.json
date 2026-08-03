@@ -6822,5 +6822,45 @@
     },
     "diff_notes": "与已入库的 roe_delta_yoy_v1 相比，这版不是看单点同比，而是看连续4季的盈利改善斜率；同时把BPS从‘增长水平’换成‘扩张稳定性约束’，明显降低了激进扩表噪音。结果上 IC、Sharpe、单调性都更强，说明成长信号在中证1000里更适合做‘平滑趋势 + 稳定扩张’而不是简单同比跳变。",
     "conclusion": "新增入库"
+  },
+  {
+    "date": "2026-08-03",
+    "factor_id": "asset_turnover_proxy_growth_v1",
+    "factor_name": "资产周转代理成长因子 v1",
+    "status": "failed_threshold",
+    "theme": "基本面类 / 资产周转率变化",
+    "barra_style": "Growth",
+    "source_type": "自研",
+    "source_title": "DuPont 资产周转效率代理 + ROE/BPS 本土化",
+    "source_url": "",
+    "formula": "neutralize((ROE_yoy - 0.6*(BPS_yoy + 0.5*BPS_qoq)*100) * stability_gate * level_gate * bps_anchor, log_mktcap)",
+    "implementation": "用ROE同比改善减去BPS扩张压力，近似刻画“ROE改善是否跑赢股东权益扩张”，再叠加ROE稳定性、ROE水平门槛和BPS锚定，最后做市值中性化。财报按45天滞后、生效后前向填充70个交易日。",
+    "data_files": [
+      "data/csi1000_fundamental_cache.csv",
+      "data/csi1000_kline_raw.csv",
+      "data/csi1000_returns.csv"
+    ],
+    "output_factor_file": "data/factor_asset_turnover_proxy_growth_v1.csv",
+    "backtest_output": "output/asset_turnover_proxy_growth_v1/report.json",
+    "metrics": {
+      "ic_mean": 0.015534,
+      "ic_t": 4.3604,
+      "g5_sharpe": 0.9125,
+      "monotonicity": 0.9,
+      "long_short_sharpe": 2.4102
+    },
+    "threshold_check": {
+      "ic_mean_pass": false,
+      "ic_t_pass": true,
+      "g5_sharpe_pass": true,
+      "monotonicity_pass": true
+    },
+    "redundancy_check": {
+      "max_abs_corr": 0.3119,
+      "closest_factor": "roe_decay_rev_v1",
+      "is_redundant": false
+    },
+    "failure_reason": "未达入库门槛：IC均值 0.0155 < 0.02。其余指标均达标（IC_t=4.36，G5 Sharpe=0.912，单调性=0.90），说明方向有效但截面强度不足。",
+    "next_step": "后续可尝试把BPS扩张压力替换为更平滑的4季累计扩张率，或加入成交额/换手作为经营效率确认项，提升IC均值。"
   }
 ]
