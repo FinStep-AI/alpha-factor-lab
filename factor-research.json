@@ -6787,5 +6787,40 @@
     },
     "diff_notes": "中文搜索主要命中研报聚合页/二次整理页，英文搜索命中SSRN与综述，但web_fetch未能稳定获取可用全文；在5分钟窗口内没有找到足够具体、可直接按原文参数复现且与现有因子库明显不重复的新方向。",
     "conclusion": "今日未发现可落地新因子，按规则跳过复现/回测/入库，仅记录扫描结果并执行周一调仓。"
+  },
+  {
+    "date": "2026-08-03 12:00:00",
+    "factor_id": "roe_slope_bps_stability_v1",
+    "factor_name": "ROE斜率-BPS稳定成长因子 v1",
+    "status": "active",
+    "source_type": "自研+搜索启发",
+    "source_title": "ROE变化率/毛利率趋势成长思路下的成长质量交叉构造",
+    "source_url": "https://bigquant.com/wiki/doc/c7u9IChUio ; https://zhuanlan.zhihu.com/p/1915550696561971551",
+    "source_author": "因子猎人自构",
+    "source_year": 2026,
+    "source_journal": "internal research",
+    "barra_style": "Growth",
+    "implementation": "calc_roe_slope_bps_stability_v1.py",
+    "factor_file": "data/factor_roe_slope_bps_stability_v1.csv",
+    "backtest_output": "output/roe_slope_bps_stability_v1/report.json",
+    "summary": "本次优先补 Growth/Quality 交叉空白。避开已入库的纯ROE同比增长后，改用最近4季ROE线性斜率刻画盈利改善趋势，并对BPS同比扩张波动、ROE自身波动做惩罚，最终对log_mktcap做截面OLS市值中性化。",
+    "formula": "raw = roe_slope4 * tanh(roe_mean4/8) / (1 + 2*std4(BPS_yoy) + 1.5*std4(ROE)); factor = neutralize(raw, log_mktcap)",
+    "metrics": {
+      "ic_mean": 0.026469599185729796,
+      "ic_t": 5.188307528326152,
+      "rank_ic": 0.026579859053528145,
+      "g5_sharpe": 0.970096310419988,
+      "long_short_sharpe": 2.728787951471184,
+      "monotonicity": 0.9999999999999999,
+      "turnover_mean": 0.2355621656412059,
+      "period": "2023-02-14 ~ 2026-02-13"
+    },
+    "correlation_check": {
+      "max_abs_corr": 0.3227,
+      "closest_factor": "roe_decay_rev_v1",
+      "redundant": false
+    },
+    "diff_notes": "与已入库的 roe_delta_yoy_v1 相比，这版不是看单点同比，而是看连续4季的盈利改善斜率；同时把BPS从‘增长水平’换成‘扩张稳定性约束’，明显降低了激进扩表噪音。结果上 IC、Sharpe、单调性都更强，说明成长信号在中证1000里更适合做‘平滑趋势 + 稳定扩张’而不是简单同比跳变。",
+    "conclusion": "新增入库"
   }
 ]

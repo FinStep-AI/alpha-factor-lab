@@ -3307,5 +3307,81 @@
     "source_type": "自研",
     "source_title": "Gap Fill Reversal（跳空回补行为）",
     "source_url": ""
+  },
+  {
+    "id": "roe_slope_bps_stability_v1",
+    "name": "ROE斜率-BPS稳定成长因子 v1",
+    "name_en": "ROE Slope BPS Stability v1",
+    "category": "基本面/成长质量",
+    "description": "用最近4个可披露季度ROE的线性斜率衡量盈利改善趋势，同时对BPS同比扩张波动和ROE波动做惩罚，再做市值中性化。高因子值=盈利持续上修且扩表更平滑，代表更高质量的成长。",
+    "hypothesis": "相比单点ROE同比增长，ROE斜率能更稳地刻画盈利改善趋势；若这种改善伴随更平滑的BPS扩张而非激进扩表，则未来收益更高。",
+    "expected_direction": "正向（高因子值=高预期收益）",
+    "factor_type": "成长/Quality代理",
+    "formula": "neutralize(roe_slope4 * tanh(roe_mean4/8) / (1 + 2*std4(BPS_yoy) + 1.5*std4(ROE)), log_mktcap)",
+    "direction": 1,
+    "stock_pool": "中证1000",
+    "period": "2023-02-14 ~ 2026-02-13",
+    "rebalance_freq": 20,
+    "forward_days": 5,
+    "cost": 0.003,
+    "rating": "★★★★★ 极强",
+    "nav_data": "output/roe_slope_bps_stability_v1/cumulative_returns.json",
+    "ic_data": "output/roe_slope_bps_stability_v1/ic_series.json",
+    "upgrade_notes": "首版即强势达标。相较已入库的单点ROE同比增长因子，这版把成长改成斜率、把扩张改成稳定性惩罚，显著提升IC与Sharpe。",
+    "lessons_learned": [
+      "基本面成长信号做成斜率，比单季度同比更稳",
+      "BPS扩张本身不是alpha，扩张的稳定性才更重要",
+      "Growth与Quality在A股小盘股上可以通过ROE趋势×扩表约束自然融合",
+      "市值中性化后仍有强IC，说明不是单纯小盘成长暴露"
+    ],
+    "created": "2026-08-03",
+    "updated": "2026-08-03",
+    "metrics": {
+      "ic_mean": 0.026469599185729796,
+      "ic_std": 0.06653920440023837,
+      "ic_t": 5.188307528326152,
+      "ic_positive_ratio": 0.6438356164383562,
+      "rank_ic": 0.026579859053528145,
+      "rank_ic_std": 0.08725377979294584,
+      "ir": 0.39780456385551505,
+      "ic_count": 146,
+      "long_short_sharpe": 2.728787951471184,
+      "long_short_mdd": -0.049135935717712534,
+      "monotonicity": 0.9999999999999999,
+      "group_sharpe": [
+        0.030319172928431223,
+        0.3425540146481504,
+        0.5891486841540102,
+        0.7323003272092916,
+        0.970096310419988
+      ],
+      "group_returns_annualized": [
+        0.007934501204735156,
+        0.0871315055177313,
+        0.15183973236816972,
+        0.18991460769684432,
+        0.24694654651586423
+      ],
+      "group_mdd": [
+        -0.4152361085196618,
+        -0.3581097495844567,
+        -0.33449297648375165,
+        -0.33011431817626025,
+        -0.30372037281132935
+      ]
+    },
+    "conclusion": "全面达标入库。IC=0.0265(t=5.19)极显著，G5 Sharpe=0.97，单调性1.0完美，多空Sharpe=2.73、MDD仅-4.9%。该因子把盈利改善趋势与扩表稳定性结合，刻画‘更平滑、更可信的成长’，可视为Growth与Quality交叉风格的核心候选。",
+    "barra_style": "Growth",
+    "source_type": "自研",
+    "source_title": "ROE趋势 × BPS扩张稳定性：成长质量交叉因子",
+    "source_url": "",
+    "correlations": {
+      "roe_decay_rev_v1": 0.3227,
+      "roe_yoy_accel_resid_v1": 0.1743,
+      "roe_persistence_neg_v1": 0.1167,
+      "amp_level_v2": 0.009,
+      "roe_trend_quality_v1": -0.0081,
+      "roe_slope_bps_stability_v1": 1.0
+    }
   }
 ]
