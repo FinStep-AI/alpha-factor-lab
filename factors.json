@@ -3383,5 +3383,19 @@
       "roe_trend_quality_v1": -0.0081,
       "roe_slope_bps_stability_v1": 1.0
     }
+  },
+  {
+    "id": "gross_margin_trend_proxy_v1",
+    "name": "毛利率趋势代理因子 v1",
+    "name_en": "Gross Margin Trend Proxy v1",
+    "category": "基本面/Growth",
+    "description": "用ROE同比改善与BPS同比扩张构造毛利率趋势代理，再叠加20日振幅与20日波动率惩罚，最后做市值OLS中性化。高因子值代表财务改善更持续、短期价格噪声更低的成长股。",
+    "hypothesis": "毛利率趋势改善通常伴随盈利能力和经营效率提升；在可得数据有限时，ROE与BPS的同比改善可作为成长质量的本土化代理。",
+    "expected_direction": "正向（高因子值=高预期收益）",
+    "factor_type": "基本面/成长质量代理",
+    "barra_style": "Growth",
+    "source_type": "研究启发+本土化代理",
+    "detail": "raw=0.65*ROE同比变化+0.35*BPS同比变化-0.15*log(1+20日振幅)-0.10*20日收益波动率；按日对log市值回归取残差后标准化。",
+    "correlations": "最高Spearman相关因子为roe_delta_yoy_v1，均值相关0.3268；低于0.7，不冗余。"
   }
 ]

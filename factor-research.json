@@ -6888,5 +6888,31 @@
     },
     "diff_notes": "现有因子库已覆盖大量微观结构、量价、估值近邻方向；今日候选方向要么参数细节不足，无法严格按原文复现；要么依赖的fintool扩展字段覆盖率不足，无法形成完整横截面，因此没有进入正式回测。",
     "conclusion": "今日不新增因子，仅记录扫描失败日志。后续优先找具备明确公式、窗口与标准化方式的非重复方向。"
+  },
+  {
+    "date": "2026-08-04 12:00:00",
+    "factor_id": "gross_margin_trend_proxy_v1",
+    "factor_name": "毛利率趋势代理因子 v1",
+    "status": "passed",
+    "source_type": "研究启发+本土化代理",
+    "source_title": "毛利率变动趋势比绝对值更重要（基本面因子研究）",
+    "source_url": "https://bigquant.com/wiki/doc/c7u9IChUio",
+    "source_author": "BigQuant",
+    "barra_style": "Growth",
+    "hypothesis": "ROE同比改善与BPS扩张可作为毛利率趋势的财务代理，叠加短期风险惩罚后能刻画成长质量改善，预示未来5日收益更强。",
+    "implementation": "使用fundamental_cache中的roe/bps构造同比改善代理，通过asof映射到日频后减去20日振幅与20日波动率惩罚，并按日做市值OLS中性化。",
+    "backtest": {
+      "ic_mean": 0.0265,
+      "ic_t": 3.51,
+      "g5_sharpe": 1.1632,
+      "monotonicity": 1.0,
+      "long_short_sharpe": 2.0817
+    },
+    "redundancy_check": {
+      "max_corr_factor": "roe_delta_yoy_v1",
+      "max_corr_value": 0.3268,
+      "redundant": false
+    },
+    "result": "达标并入库。Growth风格补充，且与现有因子相关性低于0.7。"
   }
 ]
