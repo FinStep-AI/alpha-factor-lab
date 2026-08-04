@@ -6862,5 +6862,31 @@
     },
     "failure_reason": "未达入库门槛：IC均值 0.0155 < 0.02。其余指标均达标（IC_t=4.36，G5 Sharpe=0.912，单调性=0.90），说明方向有效但截面强度不足。",
     "next_step": "后续可尝试把BPS扩张压力替换为更平滑的4季累计扩张率，或加入成交额/换手作为经营效率确认项，提升IC均值。"
+  },
+  {
+    "date": "2026-08-04",
+    "factor_id": "daily_scan_no_candidate_20260804",
+    "factor_name": "每日扫描无可复现新因子",
+    "status": "no_candidate",
+    "theme": "研报/论文扫描",
+    "barra_style": "N/A",
+    "source_type": "扫描日志",
+    "source_title": "A股 alpha因子 / 中证1000 选股因子 / SSRN anomaly 每日扫描",
+    "source_url": "step_search queries on 2026-08-04",
+    "original_metric": {
+      "market": "外部研报/论文",
+      "description": "今日检索到的候选方向主要是委托挂单手数/买卖压力、估值动量、股东集中度等，但未在5分钟内拿到足够清晰且可直接复现到中证1000的公开公式与参数。"
+    },
+    "our_metric": {
+      "market": "中证1000",
+      "period": "截至 2026-08-03",
+      "data_refresh": "K线已更新至2026-08-03；fintool失败后fallback auto成功",
+      "precheck": {
+        "shareholder_concentration_build_success": "0/1000",
+        "valuation_momentum_build_success": "260/1000 but no usable factor output"
+      }
+    },
+    "diff_notes": "现有因子库已覆盖大量微观结构、量价、估值近邻方向；今日候选方向要么参数细节不足，无法严格按原文复现；要么依赖的fintool扩展字段覆盖率不足，无法形成完整横截面，因此没有进入正式回测。",
+    "conclusion": "今日不新增因子，仅记录扫描失败日志。后续优先找具备明确公式、窗口与标准化方式的非重复方向。"
   }
 ]
