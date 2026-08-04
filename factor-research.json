@@ -6914,5 +6914,38 @@
       "redundant": false
     },
     "result": "达标并入库。Growth风格补充，且与现有因子相关性低于0.7。"
+  },
+  {
+    "date": "2026-08-04 15:36:00",
+    "factor_id": "gross_margin_stability_proxy_v1",
+    "factor_name": "毛利率稳定改善代理因子 v1",
+    "status": "failed",
+    "source_type": "研究启发+本土化代理",
+    "source_title": "毛利率变动因子有效性及单因子测试 / 基本面因子分析",
+    "source_url": "http://www.hibor.net/data/7bf2c1d9430913b79a683b6bfeb70fd5.html; https://bigquant.com/wiki/doc/c7u9IChUio",
+    "source_author": "源达信息 / BigQuant",
+    "source_year": 2026,
+    "source_journal": "sell-side note / community research",
+    "barra_style": "Growth / Quality",
+    "description": "在缺失毛利率字段的约束下，用“高且稳定的 ROE + ROE 同比改善 - ROE 波动 - BPS 过快扩张”构造毛利率稳定改善代理，并以 report_date+45 天映射到日频；横截面对 log_mktcap 做 OLS 市值中性化，再 MAD 缩尾和 z-score 标准化。",
+    "formula": "raw = 0.55*tanh(mean4q(ROE)/8) + 0.35*tanh((ROE_t-ROE_t-4)/6) - 0.25*tanh(std4q(ROE)/4) - 0.15*tanh(((BPS_t/BPS_t-4)-1)*100/20); factor = neutralize_cs(raw, log_mktcap)",
+    "our_metric": {
+      "ic_mean": 0.005873874387156787,
+      "ic_t_stat": 0.5605322663016533,
+      "rank_ic_mean": 0.021717043175814854,
+      "g5_sharpe": 0.7622771720151725,
+      "monotonicity": 0.8,
+      "long_short_sharpe": -0.09187467208727143
+    },
+    "failure_reason": "未达入库门槛：IC均值仅 0.0059、IC_t=0.56，G5 Sharpe=0.76 也低于 0.8。虽然单调性达到 0.80，且 G4 组收益最好，说明信号更像“中高分段有效”而不是严格单调的 top bucket alpha；在当前代理构造下，毛利率趋势信息被 ROE/BPS 代理稀释。",
+    "diff_notes": "相较已入库 gross_margin_trend_proxy_v1，本次更强调“稳定改善”而非单纯趋势；但代理误差较大，且 top group 不如 G4，未形成可交易顶组优势。",
+    "conclusion": "淘汰。后续若能补到真实毛利率/营业利润率/营收增速字段，再重做 Growth/Quality 方向。",
+    "data_files": [
+      "data/csi1000_kline_raw.csv",
+      "data/csi1000_returns.csv",
+      "data/csi1000_fundamental_cache.csv",
+      "data/factor_gross_margin_stability_proxy_v1.csv",
+      "output/gross_margin_stability_proxy_v1/report.json"
+    ]
   }
 ]
