@@ -6947,5 +6947,36 @@
       "data/factor_gross_margin_stability_proxy_v1.csv",
       "output/gross_margin_stability_proxy_v1/report.json"
     ]
+  },
+  {
+    "timestamp": "2026-08-05 12:00:00+08:00",
+    "factor_id": "roe_reaccel_stability_v2",
+    "factor_name": "ROE再加速-稳定性因子 v2",
+    "status": "rejected",
+    "theme": "基本面类 / Growth",
+    "source_query": "ROE变化率 量化因子 A股",
+    "source_summary": "参考A股ROE增长/盈利改善类公开讨论，围绕ROE再加速、盈利稳定性与BPS扩张稳定性构造Growth代理。",
+    "barra_style": "Growth",
+    "source_type": "fundamental_proxy",
+    "description": "基于季度基本面缓存，组合ROE单季加速度、两季改善、ROE水平、BPS同比扩张，并惩罚ROE/BPS波动；以report_date+45天映射到日频，对log_mktcap做横截面OLS中性化后标准化。",
+    "formula": "raw=0.40*z(roe_accel)+0.25*z(roe_delta_2q)+0.20*z(roe_level4)+0.20*z(bps_yoy)-0.20*z(roe_std4)-0.15*z(bps_yoy_std4); factor=neutralize_cs(raw, log_mktcap)",
+    "our_metric": {
+      "ic_mean": null,
+      "ic_t_stat": null,
+      "rank_ic_mean": null,
+      "g5_sharpe": null,
+      "monotonicity": null,
+      "long_short_sharpe": null
+    },
+    "failure_reason": "未达入库门槛：IC均值0.0071、IC_t=0.78、G5 Sharpe偏弱，且分层单调性为0。收益曲线表现为G4最好、G5明显回落，说明再加速信息在最高分段拥挤或噪声偏大。",
+    "diff_notes": "相较已存在roe_delta_yoy_v1、roe_yoy_accel_resid_v1与roe_bps_recovery_stability_v1，本次更强调单季再加速+稳定性联合，但实盘可交易性不足，顶组没有持续超额。",
+    "conclusion": "淘汰。后续若能引入真实营收/利润同比、毛利率或公告日字段，可把ROE再加速与经营质量确认信号联立再试。",
+    "data_files": [
+      "data/csi1000_kline_raw.csv",
+      "data/csi1000_returns.csv",
+      "data/csi1000_fundamental_cache.csv",
+      "data/factor_roe_reaccel_stability_v2.csv",
+      "output/roe_reaccel_stability_v2/report.json"
+    ]
   }
 ]
