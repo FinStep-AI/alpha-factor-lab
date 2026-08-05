@@ -3397,5 +3397,70 @@
     "source_type": "研究启发+本土化代理",
     "detail": "raw=0.65*ROE同比变化+0.35*BPS同比变化-0.15*log(1+20日振幅)-0.10*20日收益波动率；按日对log市值回归取残差后标准化。",
     "correlations": "最高Spearman相关因子为roe_delta_yoy_v1，均值相关0.3268；低于0.7，不冗余。"
+  },
+  {
+    "id": "roe_slope_smoothness_v1",
+    "name": "ROE斜率平滑度因子 v1",
+    "name_en": "ROE Slope Smoothness v1",
+    "category": "基本面/成长质量",
+    "description": "用最近4个可披露季度ROE的线性斜率除以ROE波动，衡量盈利改善的“平滑度”，再叠加ROE水平与BPS同比确认，并惩罚BPS扩张离散度，最后做市值中性化。高因子值=盈利改善更持续、更平滑。",
+    "hypothesis": "A股中小盘里，盈利改善若以更平滑的季度路径体现，通常比单季跳升更可持续；用斜率/波动比能过滤一次性业绩脉冲。",
+    "expected_direction": "正向（高因子值=高预期收益）",
+    "factor_type": "成长/Quality代理",
+    "formula": "neutralize(0.55*z(roe_slope4/(abs(roe_std4)+0.5))+0.20*z(roe_mean4)+0.15*z(bps_yoy)-0.20*z(bps_cv4), log_mktcap)",
+    "direction": 1,
+    "stock_pool": "中证1000",
+    "period": "2023-08-14 ~ 2026-02-13",
+    "rebalance_freq": 20,
+    "forward_days": 5,
+    "cost": 0.003,
+    "rating": "★★★★☆ 稳健偏强",
+    "nav_data": "output/roe_slope_smoothness_v1/cumulative_returns.json",
+    "ic_data": "output/roe_slope_smoothness_v1/ic_series.json",
+    "upgrade_notes": "首版直接达标。相比已有斜率成长因子，更强调ROE趋势的平滑度而非单纯斜率大小。",
+    "lessons_learned": "ROE趋势做成斜率/波动比，比只看斜率更稳；BPS同比只需轻度确认，不宜过重；市值中性化后仍保留显著IC，说明不是单纯小盘暴露。",
+    "created": "2026-08-05",
+    "updated": "2026-08-05",
+    "metrics": {
+      "ic_mean": 0.017459909496961645,
+      "ic_std": 0.08554110479904752,
+      "ic_t": 2.3311200050494114,
+      "ic_positive_ratio": 0.5950413223140496,
+      "rank_ic": 0.031342361987887445,
+      "rank_ic_std": 0.10412656838903951,
+      "ir": 0.20411133966504555,
+      "ic_count": 121,
+      "long_short_sharpe": 1.869084671623314,
+      "long_short_mdd": -0.0640085796267256,
+      "monotonicity": 0.7999999999999999,
+      "group_sharpe": [
+        0.46134725884068994,
+        0.4705489571583476,
+        0.6526429595074369,
+        0.6087199448902006,
+        1.2930822682720493
+      ],
+      "group_returns_annualized": [
+        0.13830261784702969,
+        0.1320406610496907,
+        0.17214556876634024,
+        0.15680086381824831,
+        0.34156600693810235
+      ],
+      "group_mdd": [
+        -0.3616254216869503,
+        -0.347565232544554,
+        -0.3056810631429338,
+        -0.2937198482388879,
+        -0.25899255367610335
+      ]
+    },
+    "conclusion": "达标入库。IC均值和显著性较好，G5 Sharpe>0.8，单调性达到0.8门槛，且与现有Growth/Quality因子相关性均低于0.7，可作为Growth风格补充因子。",
+    "barra_style": "Growth",
+    "source_type": "自研",
+    "source_title": "ROE趋势平滑度：盈利改善质量因子",
+    "source_url": "",
+    "detail": "raw=0.55*z(ROE四季斜率/(ROE四季波动+0.5))+0.20*z(ROE四季均值)+0.15*z(BPS同比)-0.20*z(BPS四季变异系数)；按日对log市值回归取残差后标准化。",
+    "correlations": "growth_quality_stable_v1:0.5062; roe_reaccel_stability_v2:0.3956; roe_slope_bps_stability_v1:0.3639; quality_reinvestment_gap_v1:0.2030; roe_smooth_improve_ratio_v1:0.1632; conservative_growth_quality_v1:-0.0386"
   }
 ]

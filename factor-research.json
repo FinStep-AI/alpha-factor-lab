@@ -6978,5 +6978,36 @@
       "data/factor_roe_reaccel_stability_v2.csv",
       "output/roe_reaccel_stability_v2/report.json"
     ]
+  },
+  {
+    "timestamp": "2026-08-05 15:36:00+08:00",
+    "factor_id": "roe_slope_smoothness_v1",
+    "factor_name": "ROE斜率平滑度因子 v1",
+    "status": "accepted",
+    "theme": "基本面类 / Growth",
+    "source_query": "ROE变化率 毛利率趋势 资产周转率变化 量化因子 A股",
+    "source_summary": "参考A股盈利改善与成长质量研究思路，用ROE四季斜率刻画盈利改善方向，并用ROE/BPS平滑性约束过滤激进扩张与噪声。",
+    "barra_style": "Growth",
+    "source_type": "fundamental_proxy",
+    "description": "基于季度基本面缓存，使用最近4个可披露季度ROE回归斜率除以ROE波动构造“趋势平滑度”，再叠加ROE水平与BPS同比确认，并惩罚BPS变异系数；以report_date+45天映射到日频，对log_mktcap做横截面OLS中性化后标准化。",
+    "formula": "raw=0.55*z(roe_slope4/(abs(roe_std4)+0.5))+0.20*z(roe_mean4)+0.15*z(bps_yoy)-0.20*z(bps_cv4); factor=neutralize_cs(raw, log_mktcap)",
+    "our_metric": {
+      "ic_mean": 0.017459909496961645,
+      "ic_t_stat": 2.3311200050494114,
+      "rank_ic_mean": 0.031342361987887445,
+      "g5_sharpe": 1.2930822682720493,
+      "monotonicity": 0.7999999999999999,
+      "long_short_sharpe": 1.869084671623314
+    },
+    "failure_reason": "",
+    "diff_notes": "相较roe_slope_bps_stability_v1，本次把核心从“ROE斜率×BPS稳定扩张”调整为“ROE斜率/ROE波动”的趋势平滑度，相关性0.3639，明显低于冗余阈值0.7。相较growth_quality_stable_v1相关性0.5062，也保留了独立信息。",
+    "conclusion": "入库。IC均值、IC_t、G5 Sharpe均达标，单调性=0.80达到门槛下沿；更像一个可与已有Growth因子并行使用的稳健补充，而不是替代品。",
+    "data_files": [
+      "data/csi1000_kline_raw.csv",
+      "data/csi1000_returns.csv",
+      "data/csi1000_fundamental_cache.csv",
+      "data/factor_roe_slope_smoothness_v1.csv",
+      "output/roe_slope_smoothness_v1/report.json"
+    ]
   }
 ]
