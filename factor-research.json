@@ -7074,5 +7074,26 @@
       "data/factor_roe_bps_inflect_quality_v1.csv",
       "output/roe_bps_inflect_quality_v1/report.json"
     ]
+  },
+  {
+    "date": "2026-08-06 15:36:00",
+    "factor_id": "boll_breakout_compress_v1",
+    "factor_name": "布林压缩突破确认因子 v1",
+    "status": "failed",
+    "source_type": "技术分析启发+本土化量化实现",
+    "source_title": "布林带宽度挤压后往往预示突破",
+    "source_url": "https://bigquant.com/wiki/doc/f9lmFFMF9A",
+    "source_author": "BigQuant",
+    "barra_style": "Technical",
+    "hypothesis": "低布林带宽度代表波动压缩，若同时出现高收盘位置、收盘高于VWAP及温和放量，后续5日应存在向上突破收益。",
+    "implementation": "基于日线构造20日布林带宽度在60日内的分位数，叠加close_pos、close-vwap_proxy、amount相对20日均值的偏离惩罚和5日趋势；随后对close*amount的对数代理市值做按日OLS中性化并zscore。",
+    "backtest": {
+      "ic_mean": -0.0102,
+      "ic_t": -1.4967,
+      "g5_sharpe": null,
+      "monotonicity": -0.9,
+      "long_short_sharpe": -0.994
+    },
+    "result": "未达标。信号方向与预期相反：G1年化8.18%而G5年化-8.22%，IC=-0.0102、单调性=-0.9，说明在中证1000样本中“压缩后高位确认”更像短期过热，随后均值回归。后续若再做该方向，应尝试反向化或加入涨停/连板过滤。"
   }
 ]
