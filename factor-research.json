@@ -7009,5 +7009,70 @@
       "data/factor_roe_slope_smoothness_v1.csv",
       "output/roe_slope_smoothness_v1/report.json"
     ]
+  },
+  {
+    "timestamp": "2026-08-06 09:00:00+08:00",
+    "factor_id": "scan_20260806_no_new_factor",
+    "factor_name": "2026-08-06 因子扫描（无新增入库）",
+    "status": "rejected",
+    "theme": "daily_scan / no_new_factor",
+    "source_query": "A股 alpha因子 量化选股 金工研报 2026; 因子挖掘 中证1000 选股因子; cross-sectional stock return predictability factor 2025 2026; SSRN anomaly alpha factor equity",
+    "source_summary": "扫描了中文金工研报与英文学术/SSRN线索。广发金工月报提到ret_overnight、keyperiod_ret_zero等近期表现较好；但现有因子库已覆盖隔夜收益动量、价格延迟、聪明资金、跳空效率等相近方向。未发现一个同时满足“原文公式清晰、与现有库不重复、适合立即在中证1000复现”的新方向。",
+    "barra_style": "N/A",
+    "source_type": "daily_scan",
+    "source_title": "广发金工《新入库Level-2因子：Alpha因子跟踪月报（2026年5月）》等",
+    "source_url": "https://finance.sina.com.cn/wm/2026-06-03/doc-iniactak2313454.shtml",
+    "original_metric": {
+      "ret_overnight_hist_rankic_mean": 0.0323,
+      "ret_overnight_1m_rankic_mean": 0.121,
+      "keyperiod_ret_zero_hist_rankic_mean": -0.054
+    },
+    "our_metric": {
+      "action": "not_reproduced",
+      "reason": "candidate directions overlap with existing library; no sufficiently differentiated factor found within time budget"
+    },
+    "diff_notes": "现有库已含：隔夜收益动量 v1、跳空缺口动量 v1、跳空缺口效率 v2、价格延迟 v2、聪明资金比率 v1、异常成交量收益偏向 v1 等。若强行复现，极可能只是旧因子的改名或轻微变体，缺乏新增信息量。",
+    "conclusion": "今日不新增因子、不入库。保留候选方向：若后续拿到更完整原文，可针对keyperiod_ret_zero做更细的“关键时段零收益/收盘撮合不连续”微观结构复现。",
+    "data_files": [
+      "data/csi1000_kline_raw.csv",
+      "data/csi1000_returns.csv",
+      "factors.json"
+    ]
+  },
+  {
+    "date": "2026-08-06 12:00:00",
+    "factor_id": "roe_bps_inflect_quality_v1",
+    "factor_name": "ROE-BPS拐点质量因子 v1",
+    "status": "passed",
+    "source_type": "自研代理",
+    "source_title": "ROE improvement with conservative book-value expansion",
+    "source_url": "",
+    "source_author": "OpenClaw Factor Miner",
+    "source_year": 2026,
+    "source_journal": "internal",
+    "barra_style": "Quality / Growth",
+    "description": "在仅有 ROE/BPS 两个低频字段的约束下，抓“盈利改善但非激进扩表”的拐点质量信号：4季平均 ROE 作为盈利水平锚，ROE 同比与单季二阶加速度刻画改善/拐点，BPS 同比与单季环比扩张作为保守投资惩罚，叠加 ROE/BPS 稳定性与资本纪律门控；财报滞后45天映射到日频，并对日度对数市值代理做横截面 OLS 中性化。",
+    "formula": "raw = [0.35*tanh(MA4(ROE)/8) + 0.40*tanh((ROE_t-ROE_t-4)/6) + 0.25*tanh(((ROE_t-ROE_t-1)-(ROE_t-1-ROE_t-2))/4) - 0.45*(tanh(BPS_yoy/0.25)-0.8*tanh(BPS_qoq/0.12))] * stability(ROE_std4,BPS_std4) * capital_discipline; factor = neutralize(raw, log_mktcap)",
+    "our_metric": {
+      "market": "中证1000",
+      "period": "2023-08-14 ~ 2026-02-13",
+      "ic_mean": 0.017402511542511268,
+      "ic_t": 2.061772103478191,
+      "rank_ic": 0.02766475166687095,
+      "g5_sharpe": 0.880194204254436,
+      "long_short_sharpe": 0.6221102242104323,
+      "monotonicity": 0.9999999999999999,
+      "turnover_mean": 0.23625508437850104,
+      "max_abs_corr_existing": 0.5249,
+      "closest_existing_factor": "roe_delta_yoy_v1"
+    },
+    "failure_reason": "",
+    "diff_notes": "与现有 ROE 家族因子相比，这一版不只看 ROE 水平或同比，而是显式加入“拐点”与“扩表约束”两层语义。相关性最高仅 0.525（roe_delta_yoy_v1），低于 0.7 冗余阈值，说明它更像盈利改善 × 保守成长的复合信号，而非旧因子的简单变体。",
+    "conclusion": "入库",
+    "data_files": [
+      "calc_roe_bps_inflect_quality_v1.py",
+      "data/factor_roe_bps_inflect_quality_v1.csv",
+      "output/roe_bps_inflect_quality_v1/report.json"
+    ]
   }
 ]

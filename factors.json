@@ -3462,5 +3462,80 @@
     "source_url": "",
     "detail": "raw=0.55*z(ROE四季斜率/(ROE四季波动+0.5))+0.20*z(ROE四季均值)+0.15*z(BPS同比)-0.20*z(BPS四季变异系数)；按日对log市值回归取残差后标准化。",
     "correlations": "growth_quality_stable_v1:0.5062; roe_reaccel_stability_v2:0.3956; roe_slope_bps_stability_v1:0.3639; quality_reinvestment_gap_v1:0.2030; roe_smooth_improve_ratio_v1:0.1632; conservative_growth_quality_v1:-0.0386"
+  },
+  {
+    "id": "roe_bps_inflect_quality_v1",
+    "name": "ROE-BPS拐点质量 v1",
+    "name_en": "ROE-BPS Inflect Quality v1",
+    "category": "基本面/质量成长",
+    "description": "在仅有 ROE/BPS 的财务口径下，优先选择盈利改善出现拐点、但净资产扩张不过激的公司；信号由 ROE 水平、ROE 同比改善、ROE 单季加速度与 BPS 扩张惩罚复合而成，并做市值中性化。",
+    "hypothesis": "真正可持续的成长质量来自盈利改善，而不是靠激进扩表堆出来；当 ROE 拐点向上且 BPS 扩张受控时，后续收益更强。",
+    "expected_direction": "正向（高因子值=高预期收益）",
+    "factor_type": "基本面/质量成长",
+    "formula": "neutralize((0.35*tanh(MA4(ROE)/8)+0.40*tanh(ROE_yoy/6)+0.25*tanh(ROE_accel/4)-0.45*(tanh(BPS_yoy/0.25)-0.8*tanh(BPS_qoq/0.12)))*stability*capital_discipline, log_mktcap)",
+    "direction": 1,
+    "stock_pool": "中证1000",
+    "period": "2023-08-14 ~ 2026-02-13",
+    "rebalance_freq": 20,
+    "forward_days": 5,
+    "cost": 0.003,
+    "rating": "★★★ 可用",
+    "nav_data": "output/roe_bps_inflect_quality_v1/cumulative_returns.json",
+    "ic_data": "output/roe_bps_inflect_quality_v1/ic_series.json",
+    "upgrade_notes": "首版即满足当前入库门槛：G5 Sharpe=0.88、单调性=1.0、IC_t=2.06。说明在 ROE/BPS 约束下，引入拐点与扩表纪律比单纯看盈利水平更有效。",
+    "lessons_learned": [
+      "Quality/Growth 在低频财务数据约束下，单看 ROE 水平不够，加入拐点信息明显更有效",
+      "BPS 扩张惩罚可以过滤靠扩表堆出来的伪成长",
+      "市值中性化后依然保留单调性，说明不是单纯小市值暴露"
+    ],
+    "created": "2026-08-06",
+    "updated": "2026-08-06",
+    "metrics": {
+      "ic_mean": 0.017402511542511268,
+      "ic_std": 0.08037383453733368,
+      "ic_t": 2.061772103478191,
+      "ic_positive_ratio": 0.5537190082644629,
+      "rank_ic": 0.02766475166687095,
+      "rank_ic_std": 0.09310266950687272,
+      "ir": 0.2165196129149194,
+      "ic_count": 121,
+      "long_short_sharpe": 0.6221102242104323,
+      "long_short_mdd": -0.14469652869115632,
+      "monotonicity": 0.9999999999999999,
+      "group_sharpe": [
+        0.4755620261508972,
+        0.5764584809918478,
+        0.6551481317901654,
+        0.8331829927564012,
+        0.880194204254436
+      ],
+      "group_returns_annualized": [
+        0.14676345335435848,
+        0.1597993995212481,
+        0.17199324089797252,
+        0.21140426879926388,
+        0.23077755150723767
+      ],
+      "group_mdd": [
+        -0.38117918116729876,
+        -0.3376394717905489,
+        -0.3093613062645446,
+        -0.2796501819109829,
+        -0.2600590692327647
+      ]
+    },
+    "conclusion": "达到入库门槛。虽然 IC 均值 0.0174 略低于理想 0.02，但 IC_t=2.06、G5 Sharpe=0.88、单调性=1.0 均达标，且与现有因子最高相关仅 0.525，不构成冗余。适合作为 Quality/Growth 桶中的低换手补充因子。",
+    "barra_style": "Quality / Growth",
+    "source_type": "自研",
+    "source_title": "ROE-BPS 拐点质量代理",
+    "source_url": "",
+    "correlations": {
+      "roe_bps_inflect_quality_v1": 1.0,
+      "roe_delta_yoy_v1": 0.525,
+      "roe_accel_v1": 0.487,
+      "roe_bps_recovery_stability_v1": 0.283,
+      "gross_margin_trend_proxy_v1": 0.226,
+      "roe_persistence_neg_v1": -0.232
+    }
   }
 ]
