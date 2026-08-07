@@ -7095,5 +7095,45 @@
       "long_short_sharpe": -0.994
     },
     "result": "未达标。信号方向与预期相反：G1年化8.18%而G5年化-8.22%，IC=-0.0102、单调性=-0.9，说明在中证1000样本中“压缩后高位确认”更像短期过热，随后均值回归。后续若再做该方向，应尝试反向化或加入涨停/连板过滤。"
+  },
+  {
+    "date": "2026-08-07 09:00:00",
+    "factor_id": "scan_only_20260807",
+    "factor_name": "扫描记录：未发现可复现新因子",
+    "status": "scan_only",
+    "source_type": "每日研报/论文扫描",
+    "source_title": "中文金工研报+英文学术/SSRN例行扫描",
+    "source_url": "N/A",
+    "source_author": "N/A",
+    "barra_style": "N/A",
+    "hypothesis": "尝试寻找具备明确公式、可在中证1000严格复现且与现有因子库低重复的新因子方向。",
+    "implementation": "已完成数据刷新检查；step_search四组关键词均无有效返回，Brave web_search因网关未配置API key不可用；结合现有factors.json巡检，5分钟内未找到值得进入严格复现的非重复方向。",
+    "backtest": {
+      "original_metric": "N/A",
+      "our_metric": "N/A",
+      "diff_notes": "无原文可复现公式，且检索基础设施受限（step_search无结果、web_search缺少key），故未进入构建/回测阶段。"
+    },
+    "result": "今日未发现满足“原文公式清晰 + 与现有库低重复 + 值得立即复现”三条件的新因子，按流程记录scan_only。后续继续跟踪微观结构/关键时段收益方向。"
+  },
+  {
+    "date": "2026-08-07 12:00:00",
+    "factor_id": "gross_margin_revenue_quality_v2",
+    "factor_name": "毛利率-收入增长质量因子 v2",
+    "status": "failed",
+    "source_type": "基本面启发+本土化量化实现",
+    "source_title": "毛利率趋势、收入增长稳定性与营运质量联合刻画高质量成长",
+    "source_url": "N/A",
+    "source_author": "OpenClaw因子猎人",
+    "barra_style": "Growth",
+    "hypothesis": "若公司毛利率同比趋势改善、收入增长平稳、存货周转提升且应收占比不过快上升，则更可能对应可持续的高质量成长，未来5日相对收益应更强。",
+    "implementation": "基于 csi1000_revenue_yoy_raw.csv 构造毛利率同比2期均值、收入同比2期均值、4期波动、存货周转变化、应收占收入变化、负债率变化与流动性缓冲，线性合成 raw_factor；映射到 info_publ_date 后按日对 log_mktcap 做 OLS 市值中性化并 z-score，输出 data/factor_gross_margin_revenue_quality_v2.csv。",
+    "backtest": {
+      "ic_mean": 0.004665267804144185,
+      "ic_t": 0.44847040808211935,
+      "g5_sharpe": 3.39710526894091,
+      "monotonicity": 0.8999999999999998,
+      "long_short_sharpe": 0.5669551348779305
+    },
+    "result": "未达标。虽然分组单调性较好且G5绝对收益/Sharpe较高，但IC均值仅0.0047、IC t值0.45，且多空Sharpe仅0.57，说明更像普涨环境下的高质量暴露而非稳定选股alpha；无法满足 IC>0.02、IC_t>2.0、G5 Sharpe>0.8、单调性>0.8 的综合入库门槛中的关键信息比率要求，因此淘汰。后续可尝试做成“高质量成长 - 资产扩张惩罚”的更强残差版本，压缩beta式普涨暴露。"
   }
 ]
