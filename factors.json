@@ -3537,5 +3537,14 @@
       "gross_margin_trend_proxy_v1": 0.226,
       "roe_persistence_neg_v1": -0.232
     }
+  },
+  {
+    "name": "ROE改善稳定性因子 v1",
+    "file": "data/factor_roe_recovery_consistency_v1.csv",
+    "barra_style": "Growth",
+    "source_type": "fundamental",
+    "detail": "raw=0.7*z(ROE同比加速度)+0.3*z(-过去4季ROE波动率)；先在财报可用日横截面稳健标准化，再映射到日频，对20日成交额对数代理市值做回归中性化并标准化。核心直觉是：ROE改善更快且改善过程更平稳的公司，短期收益更强。",
+    "correlations": "{\"roe_yoy_accel_resid_v1\": 0.6622, \"roe_slope_smoothness_v1\": 0.2745}",
+    "status": "active"
   }
 ]

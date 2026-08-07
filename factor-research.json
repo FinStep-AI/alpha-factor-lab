@@ -7135,5 +7135,28 @@
       "long_short_sharpe": 0.5669551348779305
     },
     "result": "未达标。虽然分组单调性较好且G5绝对收益/Sharpe较高，但IC均值仅0.0047、IC t值0.45，且多空Sharpe仅0.57，说明更像普涨环境下的高质量暴露而非稳定选股alpha；无法满足 IC>0.02、IC_t>2.0、G5 Sharpe>0.8、单调性>0.8 的综合入库门槛中的关键信息比率要求，因此淘汰。后续可尝试做成“高质量成长 - 资产扩张惩罚”的更强残差版本，压缩beta式普涨暴露。"
+  },
+  {
+    "name": "ROE改善稳定性因子 v1",
+    "file": "data/factor_roe_recovery_consistency_v1.csv",
+    "timestamp": "2026-08-07T15:37:30.796099",
+    "theme": "基本面类/ROE变化率",
+    "barra_style": "Growth",
+    "formula": "0.7*z(ROE同比加速度)+0.3*z(-过去4季ROE波动率)，映射到财报可用日后做市值中性化",
+    "result": "pass",
+    "metrics": {
+      "ic_mean": 0.020771695986949626,
+      "ic_t": 4.091676153034842,
+      "g5_sharpe": 0.6643687526810771,
+      "monotonicity": 0.9999999999999999,
+      "long_short_sharpe": 1.3960599195394583
+    },
+    "correlation_check": {
+      "roe_yoy_accel_resid_v1": 0.6622,
+      "roe_slope_smoothness_v1": 0.2745,
+      "redundant": false,
+      "threshold": 0.7
+    },
+    "notes": "达标。IC与多空表现优秀，分组单调性满分；与最相近ROE同比加速度残差相关性0.6622，未超过0.7冗余阈值。"
   }
 ]
