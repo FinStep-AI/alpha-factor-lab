@@ -6,7 +6,7 @@
     "benchmark": "000300",
     "benchmark_name": "沪深300",
     "created_at": "2026-02-23 22:14:25",
-    "updated_at": "2026-08-07 08:31:42",
+    "updated_at": "2026-08-07 09:02:08",
     "status": "active",
     "players_count": 6
   },
@@ -9354,13 +9354,6 @@
       ],
       "decisions": [
         {
-          "date": "2026-04-08",
-          "action": "hold",
-          "summary": "因子扫描：3个方向全部失败，维持现状",
-          "detail": "1)收益率负偏度(neg_skew_20d): IC=0.0007(t=0.14)无效; 2)涨跌天数比(neg_up_ratio_20d): IC=0.0088(t=1.36)弱信号不达标; 3)成交量HHI(neg_vol_hhi_20d): IC=0.008(t=1.34)分层无序。无新因子入库。K线已更新到2026-04-07。",
-          "recommendation": "hold"
-        },
-        {
           "date": "2026-04-15",
           "type": "factor_scan",
           "summary": "因子扫描日：方正金工「适度冒险因子」复现失败，日度近似无信号。因子库保持12个活跃因子。",
@@ -9636,6 +9629,13 @@
           "summary": "因子扫描日：K线最新2026-08-05；未发现可新增入库的新因子方向",
           "detail": "【数据刷新】fintool模式执行完成，但1000只全部报错；本地K线文件最新日期仍为2026-08-05，满足昨日数据要求，因此未再执行auto fallback。【研报/论文扫描】检索中文金工研报与英文学术线索，广发金工月报提到ret_overnight与keyperiod_ret_zero等；但当前因子库已覆盖隔夜收益动量、跳空缺口动量/效率、价格延迟、聪明资金、异常成交量收益偏向等相近方向。5分钟内未发现一个同时具备清晰原文公式、与现有库低重复、值得立即复现的新因子，因此按规则记录日志结束，未触发回测/入库/调仓。候选跟踪方向：keyperiod_ret_zero的更细粒度微观结构版本。",
           "recommendation": "无操作，继续跟踪关键时段收益微观结构方向"
+        },
+        {
+          "date": "2026-08-07",
+          "action": "hold",
+          "summary": "因子扫描日：K线最新2026-08-06；未发现可新增入库的新因子方向",
+          "detail": "【数据刷新】执行 python3 scripts/update_kline_csi1000.py --days 10 --source fintool --workers 10；fintool 1000只全部报错，但本地K线最新日期已是2026-08-06，满足“今天或昨天”要求，因此未触发auto fallback。\n【研报/论文扫描】已读 skills/paper-trading/SKILL.md 与 references/player_quant.md。使用 step_search 扫描中文金工研报与英文学术/SSRN四组关键词，均无有效结果；进一步尝试 web_search 兜底，但当前环境缺少 Brave API key，无法取回检索结果。\n【因子筛选】巡检 factors.json（现有49个因子），近期已覆盖大量成长、微观结构、流动性与反转方向。考虑到缺乏可靠新论文/研报全文与明确公式，5分钟内未找到一个同时满足“公式清晰、可严格复现、与现有库低重复”的新方向，因此未进入因子构建、回测、相关性检查与入库阶段。\n【结论】今日按规则记录 scan-only；候选跟踪方向仍是关键时段收益/微观结构类，但需等可用文献线索后再复现。",
+          "recommendation": "无操作，继续跟踪关键时段收益与微观结构方向"
         }
       ],
       "rebalances": [
