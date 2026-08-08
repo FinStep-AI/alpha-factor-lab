@@ -7158,5 +7158,73 @@
       "threshold": 0.7
     },
     "notes": "达标。IC与多空表现优秀，分组单调性满分；与最相近ROE同比加速度残差相关性0.6622，未超过0.7冗余阈值。"
+  },
+  {
+    "date": "2026-08-08 10:00:00",
+    "factor_id": "monthend_illiq_reversal_v1",
+    "factor_name": "月末流动性需求暴露因子 v1",
+    "status": "failed",
+    "source_type": "论文复现+本土化代理",
+    "source_title": "Month-End Liquidity Demand and the Factor Zoo",
+    "source_url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6909918",
+    "source_author": "SSRN working paper",
+    "source_year": 2026,
+    "barra_style": "Liquidity / Seasonality",
+    "implementation": "inline cron build (未单独落脚本)",
+    "factor_file": "data/factor_monthend_illiq_reversal_v1.csv",
+    "backtest_output": "output/monthend_illiq_reversal_v1/report.json",
+    "summary": "参考论文‘因子收益集中在月末前六个交易日’的设定，用中证1000日频价量数据构造‘月末权重 × Amihud式20日非流动性’暴露，并对log市值代理做横截面OLS中性化，检验月末流动性需求在A股小盘股上的截面预测力。",
+    "formula": "factor = neutralize(monthend_weight(last_6_trading_days) * zscore(log(1+mean20(|ret|/amount))), log_mktcap_proxy)",
+    "metrics": {
+      "ic_mean": 0.02134507495678014,
+      "ic_t": 1.676418316546162,
+      "rank_ic": 0.03589350060771435,
+      "g5_sharpe": 0.6695031133364525,
+      "long_short_sharpe": -0.1756753558915004,
+      "monotonicity": -0.1,
+      "turnover_mean": 0.06977909138774074,
+      "period": "2022-10-24 ~ 2026-03-20"
+    },
+    "failure_reason": "IC均值略过0.02门槛，但显著性不足（t=1.68<2）且分组单调性为负，G5 Sharpe仅0.67，多空Sharpe为负。说明‘月末流动性需求’在中证1000横截面上更像弱时点效应，而不是稳定的全样本排序因子。",
+    "diff_notes": "与已有常规非流动性/振幅质量类因子不同，这版显式加入月末日历窗口，论文语义更强；但A股样本里G1和G5同时偏强、中间组塌陷，表明信号可能只在极端尾部或特定月份有效，不能作为稳定因子入库。后续若继续做，应改成事件驱动：只在月末前六日建仓，或叠加机构持仓/资金流数据，而不是全样本日频横截面直接排序。",
+    "conclusion": "淘汰",
+    "data_files": [
+      "data/factor_monthend_illiq_reversal_v1.csv",
+      "output/monthend_illiq_reversal_v1/report.json"
+    ]
+  },
+  {
+    "date": "2026-08-08 15:00:00",
+    "factor_id": "gross_profitability_discipline_v1",
+    "factor_name": "毛利盈利纪律因子 v1",
+    "status": "failed",
+    "source_type": "论文复现+本土化代理",
+    "source_title": "The Other Side of Value: Good Growth and the Gross Profitability Premium",
+    "source_url": "https://www.nber.org/papers/w15940",
+    "source_author": "Robert Novy-Marx",
+    "source_year": 2010,
+    "source_journal": "NBER Working Paper / Journal of Financial Economics (2013)",
+    "barra_style": "Quality / Growth",
+    "description": "参考 Novy-Marx 的 gross profitability 主线，用A股可得字段构造‘高毛利水平 + 毛利改善 + 收入增长确认 + 应收纪律约束’的质量成长代理，并在日频截面上做市值中性化。",
+    "formula": "raw = 0.42*GP_level + 0.28*Growth_quality + 0.20*Receivable_discipline + 0.06*Inventory_turn + 0.04*Balance_sheet; factor = neutralize(raw, log_mktcap)",
+    "our_metric": {
+      "ic_mean": 0.011834139350600514,
+      "ic_t": 0.868656952575492,
+      "rank_ic": 0.012909494215845143,
+      "g5_sharpe": 3.185115249573462,
+      "long_short_sharpe": 3.0420105919878986,
+      "monotonicity": 0.7,
+      "turnover_mean": 0.18092411249900944,
+      "period": "2025-08-08 ~ 2026-02-13"
+    },
+    "failure_reason": "未达门槛：虽然G5 Sharpe=3.19、Long-Short Sharpe=3.04都很强，但IC均值仅0.0118、IC_t=0.87、单调性0.70，说明信号主要集中在高分尾部，缺乏稳定线性横截面预测力，不能作为标准单因子入库。",
+    "diff_notes": "相较已有 gross_margin_revenue_quality_v2，这一版更贴近论文原义，弱化资产负债表与杂项约束，强化 gross profitability 和 receivable discipline 的组合；结果显示A股小盘样本中该类信号更像‘右尾精选器’，绝对收益很强，但IC不稳定。后续若继续做，更适合改造成二段式策略：先用质量成长筛尾部，再叠加短期交易/反转因子，而不是单独作为线性排序因子。",
+    "conclusion": "淘汰",
+    "data_files": [
+      "data/factor_gross_profitability_discipline_v1.csv",
+      "output/gross_profitability_discipline_v1/report.json",
+      "output/gross_profitability_discipline_v1/cumulative_returns.json",
+      "output/gross_profitability_discipline_v1/ic_series.json"
+    ]
   }
 ]
