@@ -7226,5 +7226,37 @@
       "output/gross_profitability_discipline_v1/cumulative_returns.json",
       "output/gross_profitability_discipline_v1/ic_series.json"
     ]
+  },
+  {
+    "date": "2026-08-08 20:00:00",
+    "factor_id": "ff_profit_invest_proxy_v1",
+    "factor_name": "盈利能力减投资代理因子 v1",
+    "status": "failed",
+    "source_type": "论文复现+本土化代理",
+    "source_title": "The Other Side of Value: Good Growth and the Gross Profitability Premium / Fama-French profitability-investment",
+    "source_url": "https://www.nber.org/papers/w15940",
+    "source_author": "Robert Novy-Marx",
+    "source_year": 2010,
+    "source_journal": "NBER Working Paper / JFE 2013",
+    "barra_style": "Quality / Growth",
+    "description": "周末论文复现。受限于当前基础面缓存仅含 ROE 与 BPS，按 gross profitability / investment 主线构造极简 A 股代理：以近4季平均 ROE/ROE 波动近似盈利能力，以 BPS 同比扩张近似投资强度，形成‘盈利能力减投资’信号；财报日+45天映射到日频，并对20日对数成交额做横截面 OLS 市值代理中性化。",
+    "formula": "raw = MA4(ROE)/(1+STD4(ROE)) - 8*clip(BPS_yoy,-0.5,0.5); factor = neutralize(raw, log_amount_20d)",
+    "our_metric": {
+      "market": "中证1000",
+      "period": "2023-08-14 ~ 2026-03-04",
+      "ic_mean": -0.0027562593737126295,
+      "ic_t": -0.6275486435986869,
+      "rank_ic": 0.0016002112131722967,
+      "g5_sharpe": 0.5179761267469719,
+      "long_short_sharpe": -1.2148902970672883,
+      "monotonicity": -0.7,
+      "turnover_mean": 0.16506705542205022
+    },
+    "failure_reason": "完全不达门槛：IC均值为-0.0028、IC_t=-0.63、G5 Sharpe=0.52、单调性=-0.7，多空Sharpe为-1.21。分组表现呈明显反向且非线性，G1优于G5，说明在中证1000里‘高盈利能力+低账面扩张’这个由 ROE/BPS 近似得到的论文代理，并不能稳定映射出 gross profitability premium。",
+    "diff_notes": "这次有意减少特征堆叠，试图修复此前 gross_profitability_discipline_v1 出现的‘G5尾部很强但IC弱’问题；结果表明问题不在复杂度，而在代理变量本身：仅用 ROE/BPS 难以忠实刻画毛利盈利能力与投资约束，得到的更像低频盈利水平暴露，缺乏横截面alpha。后续若继续复现 Novy-Marx / FF5 线，至少需要营业收入、营业成本、总资产或经营现金流字段。",
+    "artifacts": {
+      "factor_file": "data/factor_ff_profit_invest_proxy_v1.csv",
+      "report": "output/ff_profit_invest_proxy_v1/report.json"
+    }
   }
 ]
