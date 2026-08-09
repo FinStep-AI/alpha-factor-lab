@@ -1,5 +1,41 @@
 [
   {
+    "date": "2026-08-09 15:00:00",
+    "factor_id": "roe_persistence_gap_v2",
+    "factor_name": "ROE持续性缺口因子 v2",
+    "status": "failed",
+    "source_type": "论文复现+本土化",
+    "source_title": "Profit Persistence and Stock Returns: Does the Market Care?",
+    "source_url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3211826",
+    "source_author": "Chahine, Fang, Hill & Salameh",
+    "source_year": 2018,
+    "source_journal": "Journal of Banking and Finance",
+    "barra_style": "Quality / Growth",
+    "description": "参考盈利持续性文献中‘高持续性利润应获得更高定价、低持续性利润未来回报更弱’的主线，在仅有 ROE/BPS 字段约束下构造 level-vs-change 缺口代理：用近4季平均 ROE 表示盈利水平，用 ROE 同比变化表示短期利润冲高/回落，用 BPS 同比作为扩张惩罚，组合成‘高盈利底子 - 过热改善 - 权益扩张’；财报滞后45天映射到日频后，对 log(amount) 代理市值做横截面 OLS 中性化，并做残差缩尾与 z-score 标准化。",
+    "formula": "raw = 0.65*tanh(MA4(ROE)/8) - 0.55*tanh((ROE_t-ROE_t-4)/6) - 0.15*tanh((BPS_t/BPS_t-4-1)/0.25); factor = neutralize(raw, log_mktcap_proxy)",
+    "our_metric": {
+      "market": "中证1000",
+      "period": "2023-08-14 ~ 2026-08-06",
+      "ic_mean": -0.026248129765714445,
+      "ic_t": -5.104394325071118,
+      "rank_ic": -0.028025048088720503,
+      "g5_sharpe": 0.06704634752894585,
+      "long_short_sharpe": -2.0001462192879274,
+      "monotonicity": -0.9,
+      "turnover_mean": 0.2276542797610066,
+      "max_abs_corr_existing": 0.5056984107570509,
+      "closest_existing_factor": "roe_accel_v1"
+    },
+    "failure_reason": "显著失败且方向系统性反转：IC均值 -0.0262、IC_t=-5.10、单调性=-0.9，多空 Sharpe=-2.00。收益几乎从 G1 到 G5 递减，说明这版‘高持续性’定义在中证1000上被市场反向定价，高分组反而更差。",
+    "diff_notes": "与已失败的 roe_smoothing_improve_v1 / profit_smooth_improve_paper_v1 不同，这一版不再强调盈利波动率或平滑性，而是直接比较‘盈利水平’与‘盈利变化’之间的缺口，更贴近 profit persistence 里‘高水平但不过热的利润更可持续’逻辑；与现有 active 因子相关性最高仅 |0.506|（roe_accel_v1），不构成冗余，但独立方向明显错误。结果表明在 A 股小盘股中，利润冲高回落/改善过热本身更像反向 alpha，应考虑未来直接测试反向版本。",
+    "conclusion": "淘汰",
+    "data_files": [
+      "calc_roe_persistence_gap_v2.py",
+      "data/factor_roe_persistence_gap_v2.csv",
+      "output/roe_persistence_gap_v2/report.json"
+    ]
+  },
+  {
     "date": "2026-08-09 10:00:00",
     "factor_id": "accrual_quality_v2",
     "factor_name": "应计质量代理因子 v2",
