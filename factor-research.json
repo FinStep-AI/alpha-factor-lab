@@ -7328,5 +7328,38 @@
       "factor_file": "data/factor_ff_profit_invest_proxy_v1.csv",
       "report": "output/ff_profit_invest_proxy_v1/report.json"
     }
+  },
+  {
+    "date": "2026-08-09 20:00:00",
+    "factor_id": "gross_profitability_core_v1",
+    "factor_name": "核心毛利盈利因子 v1",
+    "status": "failed",
+    "source_type": "论文复现+本土化代理",
+    "source_title": "The Other Side of Value: Good Growth and the Gross Profitability Premium",
+    "source_url": "https://www.nber.org/papers/w15940",
+    "source_author": "Robert Novy-Marx",
+    "source_year": 2010,
+    "source_journal": "NBER Working Paper / Journal of Financial Economics (2013)",
+    "barra_style": "Quality / Growth",
+    "description": "周末论文复现。沿 Novy-Marx 的 gross profitability 主线，用可得A股字段构造‘高毛利水平 + 毛利改善 + 收入增长确认 + 应收约束 + 存货周转确认’代理，在财报发布日期映射到日频后前向填充，并对日频市值代理做横截面OLS中性化。",
+    "formula": "raw = 0.50*GP_level + 0.25*GP_yoy + 0.20*Revenue_yoy - 0.20*Receivable_ratio + 0.10*Inventory_turn_delta; factor = neutralize(raw, log_mktcap_proxy)",
+    "our_metric": {
+      "market": "中证1000",
+      "period": "2025-08-08 ~ 2026-02-13",
+      "ic_mean": 0.008576606959935156,
+      "ic_t": 0.7456941813634566,
+      "rank_ic": 0.00743347703753094,
+      "g5_sharpe": 2.9544591217459364,
+      "long_short_sharpe": 1.5068152292112473,
+      "monotonicity": 0.6,
+      "turnover_mean": 0.17061850976751344
+    },
+    "failure_reason": "未达门槛：虽然G5 Sharpe=2.95、Long-Short Sharpe=1.51，说明高分尾部绝对收益不差，但IC均值仅0.0086、IC_t=0.75、单调性0.60，横截面线性预测力和分层一致性都不足，不能作为标准单因子入库。",
+    "diff_notes": "相比前一天失败的 gross_profitability_discipline_v1，这一版进一步简化到论文核心主干，减少资产负债表约束与稳定性门控，保留 gross profitability、毛利改善、收入确认、应收约束和存货周转确认。结果依然表现为‘尾部精选器’而不是稳定排序因子：G4/G5收益强，但中间组混乱，说明在当前A股小盘样本和可得字段下，gross profitability 主线更适合作为复合策略中的质量过滤层，而非独立横截面alpha。",
+    "conclusion": "淘汰",
+    "artifacts": {
+      "factor_file": "data/factor_gross_profitability_core_v1.csv",
+      "report": "output/gross_profitability_core_v1/report.json"
+    }
   }
 ]
