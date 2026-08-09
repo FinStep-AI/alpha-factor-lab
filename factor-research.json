@@ -1,5 +1,39 @@
 [
   {
+    "date": "2026-08-09 10:00:00",
+    "factor_id": "accrual_quality_v2",
+    "factor_name": "应计质量代理因子 v2",
+    "status": "failed",
+    "source_type": "论文复现+本土化",
+    "source_title": "Earnings Quality on the Street",
+    "source_url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3347217",
+    "source_author": "Boonlert-U-Thai, Meek, Nabar et al.",
+    "source_year": 2018,
+    "source_journal": "SSRN working paper",
+    "barra_style": "Quality / Growth",
+    "description": "参考 earnings quality / accrual anomaly 文献里‘利润增长若缺少收入支撑、同时伴随应收与存货堆积，则盈利质量更差、未来回报更弱’的主线，在现有 A 股字段下做本土化代理：用净利润同比-营收同比的差值衡量利润增长与销售增长的背离，以应收同比和应收/营收比变化刻画赊销扩张，以存货占流动资产比变化和存货周转率变化刻画库存堆积，再叠加 ROE 与毛利率水平作为盈利质量锚；财报披露日映射到日频后，对 log_mktcap 做横截面 OLS 中性化并标准化。",
+    "formula": "raw = 0.35*tanh(MA4(ROE)/8)+0.25*tanh(MA4(GM)/20) - tanh(MA2(NetProfitYoY-RevYoY)/25) - 0.7*tanh(AR_YoY/30) - 0.6*tanh(Δ(AR/Revenue)/6) - 0.5*tanh(Δ(Inventory/CurrentAsset)/8) + 0.5*tanh(ΔInventoryTurnover/1.2); factor = neutralize(raw, log_mktcap)",
+    "our_metric": {
+      "market": "中证1000",
+      "period": "2025-03-18 ~ 2026-02-13",
+      "ic_mean": -0.008643347722348748,
+      "ic_t": -1.0481488249727973,
+      "rank_ic": -0.006437930271955704,
+      "g5_sharpe": 1.4069218242000252,
+      "long_short_sharpe": -1.1427690699847692,
+      "monotonicity": -0.3,
+      "turnover_mean": 0.11530952032474001
+    },
+    "failure_reason": "明显不达标且方向错了：IC均值 -0.0086、IC_t=-1.05、单调性=-0.3，多空 Sharpe=-1.14。虽然 G5 Sharpe=1.41 本身不差，但 G1 Sharpe 更高达 2.06，最高收益落在低分组，说明这版‘高应计质量’定义在中证1000上被市场反向定价，或者代理变量把‘保守确认收入’与‘景气修复前夜’混在了一起。",
+    "diff_notes": "相比已失败的 QMJ / profit persistence / asset growth 线，这一版首次明确走 Sloan-style accrual quality 路线，并引入应收/营收与库存占比两条更贴近会计异象的代理；它与单纯 ROE/BPS 改善类因子在经济含义上更接近‘盈利兑现质量’，理论上补齐了 Quality 空白。但回测显示信号整体反向，说明在当前样本和可得字段下，A股小盘股里‘高利润增长但伴随营运资本扩张’未必代表垃圾利润，反而可能对应高景气扩张阶段。",
+    "conclusion": "淘汰",
+    "data_files": [
+      "calc_accrual_quality_v2.py",
+      "data/factor_accrual_quality_v2.csv",
+      "output/accrual_quality_v2/report.json"
+    ]
+  },
+  {
     "date": "2026-08-02 20:00:00",
     "factor_id": "operating_profitability_proxy_v1",
     "factor_name": "经营盈利能力代理因子 v1",
