@@ -7418,5 +7418,39 @@
       "data/factor_roe_accel_bps_guard_v1.csv",
       "output/roe_accel_bps_guard_v1/report.json"
     ]
+  },
+  {
+    "date": "2026-08-10 15:36:00",
+    "factor_id": "roe_heat_instability_proxy_v1",
+    "factor_name": "ROE过热不稳定代理因子 v1",
+    "status": "failed",
+    "source_type": "研究启发+本土化代理",
+    "source_title": "毛利率趋势/成长质量在A股小盘中的反向定价再检验",
+    "source_url": "https://bigquant.com/wiki/doc/c7u9IChUio",
+    "source_author": "因子猎人自研",
+    "source_year": 2026,
+    "source_journal": "internal research",
+    "barra_style": "Quality / Growth",
+    "description": "原始设想是沿“毛利率趋势稳定性”方向填补 Growth/Quality 空白，但由于仅有 ROE/BPS 两个低频财务口径，改用‘ROE同比改善 + 盈利不稳定度 + BPS扩张/收缩节奏’构造成长过热代理，试图捕捉 A 股小盘中景气弹性与财务噪声的混合暴露；财报滞后45天映射到日频后，对横截面对数成交额代理市值做 OLS 中性化，再做缩尾与标准化。",
+    "formula": "raw = -0.25*tanh(MA4(ROE)/8) + 0.55*tanh(ROE_yoy/5) + 0.35*tanh(STD4(ROE)/2.5) + 0.15*tanh(BPS_yoy/0.25) - 0.20*tanh(BPS_qoq/0.10); factor = neutralize(raw, log_mktcap_proxy)",
+    "our_metric": {
+      "market": "中证1000",
+      "period": "2022-10-11 ~ 2026-08-07",
+      "ic_mean": -0.0032413166742487278,
+      "ic_t": -1.1551643535419567,
+      "rank_ic": -0.0025648462594421825,
+      "g5_sharpe": 0.21999008233852407,
+      "long_short_sharpe": -0.7316576457732598,
+      "monotonicity": -0.7,
+      "turnover_mean": 0.7924841151742423
+    },
+    "failure_reason": "未达门槛，且分层结构仍明显反向：IC均值 -0.0032、IC_t=-1.16、G5 Sharpe=0.22、单调性=-0.70，多空 Sharpe=-0.73。最高收益依然落在低分组与中间组，说明这条“成长过热/不稳定”代理在当前字段约束下既没形成稳定正向 alpha，也没有清晰的反向排序价值。",
+    "diff_notes": "相比 gross_margin_trend_proxy_v1 / roe_bps_inflect_quality_v1 这些“盈利改善+扩表约束”的正向成长质量因子，这一版刻意提高了对 ROE 波动和短期过热的暴露，希望捕捉小盘股景气弹性；但结果显示，不论正向解释还是过热解释，都没带来可交易分层。更像是 ROE/BPS 两字段不足以稳定代理毛利率趋势，且高换手(79%)进一步削弱了经济性。",
+    "conclusion": "淘汰",
+    "data_files": [
+      "calc_gross_margin_stability_proxy_v1.py",
+      "data/factor_roe_heat_instability_proxy_v1.csv",
+      "output/roe_heat_instability_proxy_v1/report.json"
+    ]
   }
 ]
