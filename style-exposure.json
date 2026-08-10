@@ -1,43 +1,45 @@
 {
-  "updated_at": "2026-08-03",
+  "updated_at": "2026-08-10",
   "player": "quant",
-  "date": "2026-08-03",
+  "date": "2026-08-10",
   "positions_count": 25,
-  "cash": 21991.140000006213,
-  "total_value": 7467509.14,
-  "nav": 0.746750914,
+  "cash": 79019.79,
+  "total_value": 8051157.79,
+  "nav": 0.805115779,
   "industry_exposure": {
-    "summarized_from": "risk_control full-check 2026-08-03 + executed rebalance",
+    "summarized_from": "risk_control full-check 2026-08-10 + execute_decision fallback rebalance (range_efficiency_v1)",
     "by_industry": {
-      "电子": 0.233,
-      "医药生物": 0.2,
-      "通信": 0.1,
-      "电力设备": 0.1,
-      "国防军工": 0.067,
-      "计算机": 0.067,
-      "基础化工": 0.067,
-      "传媒": 0.033,
-      "公用事业": 0.033,
-      "食品饮料": 0.033,
-      "有色金属": 0.033,
+      "电力设备": 0.2,
+      "电子": 0.167,
+      "基础化工": 0.133,
+      "机械设备": 0.1,
+      "有色金属": 0.067,
+      "通信": 0.067,
+      "国防军工": 0.033,
       "轻工制造": 0.033,
-      "家用电器": 0.033
+      "建筑装饰": 0.033,
+      "医药生物": 0.033,
+      "商贸零售": 0.033,
+      "建筑材料": 0.033,
+      "计算机": 0.033,
+      "交通运输": 0.033
     }
   },
   "style_loading": {
-    "micro_structure": 0.42,
-    "momentum_reversal": 0.18,
-    "liquidity_illiquidity": 0.16,
+    "micro_structure": 0.14,
+    "momentum_reversal": 0.12,
+    "liquidity_illiquidity": 0.08,
     "quality_growth": 0.06,
-    "kline_momentum_macd": 0.18
+    "kline_momentum_macd": 0.1,
+    "range_efficiency": 0.5
   },
   "risk_summary": {
-    "max_single_industry": 0.233,
+    "max_single_industry": 0.2,
     "max_single_position": 0.04,
     "st_holdings": 0,
     "reduction_warning": 0,
-    "cash_ratio": 0.0029,
-    "note": "周一LightGBM失败后回退至vssignal_v1排序调仓"
+    "cash_ratio": 0.0098,
+    "note": "周一LightGBM链路失败（refresh被SIGKILL，predict特征维度97/219不一致），已回退到range_efficiency_v1排序调仓"
   },
   "top_holdings_by_weight": [
     [

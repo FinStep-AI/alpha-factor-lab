@@ -7361,5 +7361,27 @@
       "factor_file": "data/factor_gross_profitability_core_v1.csv",
       "report": "output/gross_profitability_core_v1/report.json"
     }
+  },
+  {
+    "date": "2026-08-10",
+    "factor_id": "shareholder_concentration_probe_20260810",
+    "source_type": "fintool_api",
+    "source_title": "股东户数变化率（筹码集中）",
+    "source_url": "internal:fintool:get_share_holder_number",
+    "original_metric": "文献/经验逻辑：股东户数下降（筹码集中）通常利好后续收益，适合作为低频质量/筹码因子",
+    "our_metric": "构建失败：1000/1000 股票无有效返回，未生成可回测因子",
+    "diff_notes": "fintool股东户数接口当日全量失败，无法形成有效样本；非因子逻辑失效，而是数据源不可用",
+    "conclusion": "fail_data_unavailable"
+  },
+  {
+    "date": "2026-08-10",
+    "factor_id": "valuation_momentum_probe_20260810",
+    "source_type": "fintool_api",
+    "source_title": "PE_TTM变化率（估值动量）",
+    "source_url": "internal:fintool:get_valuation_metrics_daily",
+    "original_metric": "原始构造：ln(PE_TTM_t)-ln(PE_TTM_t-20)，并做市值中性化",
+    "our_metric": "原始估值点3368条，覆盖292/1000股票；20日差分后有效样本为0，无法回测",
+    "diff_notes": "估值序列覆盖过稀，无法在中证1000截面形成20日连续日频信号；与原设想差异来自数据频率/覆盖率，而非回测结果不达标",
+    "conclusion": "fail_sparse_data"
   }
 ]
