@@ -7383,5 +7383,40 @@
     "our_metric": "原始估值点3368条，覆盖292/1000股票；20日差分后有效样本为0，无法回测",
     "diff_notes": "估值序列覆盖过稀，无法在中证1000截面形成20日连续日频信号；与原设想差异来自数据频率/覆盖率，而非回测结果不达标",
     "conclusion": "fail_sparse_data"
+  },
+  {
+    "date": "2026-08-10 12:01:00",
+    "factor_id": "roe_accel_bps_guard_v1",
+    "factor_name": "ROE加速度-净资产扩张约束因子 v1",
+    "status": "failed",
+    "source_type": "论文复现+本土化",
+    "source_title": "Post-Earnings-Announcement Drift / Profitability-Momentum related intuition",
+    "source_url": "",
+    "source_author": "Self-localized from profitability trend literature",
+    "source_year": 2026,
+    "source_journal": "",
+    "barra_style": "Quality / Growth",
+    "description": "在当前基本面缓存仅含 ROE 与 BPS 的约束下，构造更朴素的二阶盈利改善代理：用 ROE 同比变化相对上一季度同比变化的增量刻画“盈利改善加速度”，再用 BPS 同比扩张作为再投资/净资产扩张惩罚，形成“加速改善但不过度扩张”的 Quality/Growth 因子；财报滞后45天映射到日频后，对 log(amount) 做横截面 OLS 市值代理中性化，并对残差做 MAD 缩尾与 z-score 标准化。",
+    "formula": "raw = 0.75*tanh((ROE_YoY_t - ROE_YoY_t-1Q)/6) - 0.25*tanh(BPS_YoY/0.30); factor = neutralize(raw, log_amount)",
+    "our_metric": {
+      "market": "中证1000",
+      "period": "2023-11-14 ~ 2026-08-07",
+      "ic_mean": 0.01818538716676112,
+      "ic_t": 3.9089989348370424,
+      "rank_ic": 0.019921276515639536,
+      "g5_sharpe": 0.6967216282283312,
+      "long_short_sharpe": 2.155014537241465,
+      "monotonicity": 0.8999999999999998,
+      "turnover_mean": 0.10052114702681873,
+      "max_abs_corr_existing": 0.4434639235514708,
+      "closest_existing_factor": "roe_accel_v1"
+    },
+    "failure_reason": "统计上接近可用，但未过入库门槛：IC均值 0.0182、IC_t=3.91、单调性 0.9、多空 Sharpe=2.16 都不错，但最高分组并未出现在 G5，且 G5 Sharpe 仅 0.697，低于要求的 0.8。收益峰值落在 G4，说明信号更像“中高分有效、极高分过热”的驼峰结构，独立多头腿不够强。",
+    "diff_notes": "相比近期连续失败的 Quality/Growth 复杂因子，这一版大幅简化，只保留最核心的“盈利改善加速度 - 净资产扩张约束”结构，避免把盈利水平、波动率、BPS 扩张等多个低频代理堆在一起。与现有 active 因子最高相关仅 |0.443|（roe_accel_v1），不构成冗余；但结果也说明在当前仅有 ROE/BPS 两字段时，二阶改善信号仍容易把“景气高点”一起打进去，导致 G4 优于 G5。",
+    "conclusion": "淘汰",
+    "data_files": [
+      "data/factor_roe_accel_bps_guard_v1.csv",
+      "output/roe_accel_bps_guard_v1/report.json"
+    ]
   }
 ]
