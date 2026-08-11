@@ -7452,5 +7452,73 @@
       "data/factor_roe_heat_instability_proxy_v1.csv",
       "output/roe_heat_instability_proxy_v1/report.json"
     ]
+  },
+  {
+    "date": "2026-08-11 09:00:00",
+    "factor_id": "major_flow_dir_v2",
+    "factor_name": "主力资金净流入方向指示因子 v2",
+    "status": "failed",
+    "source_type": "研报复现+本土化",
+    "source_title": "大单与小单资金流的 alpha 能力",
+    "source_url": "",
+    "source_author": "i研报",
+    "source_year": 2026,
+    "source_journal": "卖方研报",
+    "barra_style": "Liquidity",
+    "description": "参考研报中“大单/主力净流入强度可预测未来收益”的主线，使用 fintool 的 major_net_flow_in 日频字段，按 20 日成交额均值缩放形成 flow_ratio，再除以个股 60 日基线得到 intensity，5 日平滑后做对数成交额/市值代理中性化，作为中证1000 的主力资金方向因子。",
+    "formula": "raw = MA5((major_net_flow_in / amount_20d) / MA60(major_net_flow_in / amount_20d)); factor = neutralize(sign(raw)*log1p(|raw|), log_mktcap_proxy)",
+    "original_metric": {
+      "market": "研报样本",
+      "ic_mean": 0.054,
+      "ir": 3.96
+    },
+    "our_metric": {
+      "market": "中证1000",
+      "period": "2026-08-11",
+      "status": "not_completed",
+      "reason": "build script was SIGKILL before producing factor csv/backtest report"
+    },
+    "failure_reason": "未完成复现：脚本 build_major_flow_dir_v2.py 在拉取/处理全量资金流缓存时被系统 SIGKILL，中断于因子值生成前，未能进入正式回测阶段。",
+    "diff_notes": "原始研报使用更完整的大单/小单资金流数据并报告较高 IC/IR；当前本地复现依赖 fintool 全量日频主力净流入缓存，1000 只股票全历史拉取的资源占用较高，今日在时间预算内无法稳定跑完。经济含义上该方向与现有 Amihud/聪明资金因子相关但不等价，值得后续做缓存增量化或截面采样后再评估。",
+    "conclusion": "中止，待优化复现链路",
+    "data_files": [
+      "scripts/build_major_flow_dir_v2.py"
+    ]
+  },
+  {
+    "date": "2026-08-11 12:00:00",
+    "factor_id": "roe_slope_bps_inflect_v1",
+    "factor_name": "ROE斜率-BPS拐点因子 v1",
+    "status": "failed",
+    "source_type": "论文启发+自研本土化",
+    "source_title": "Profitability / investment timing inspired slope-inflection proxy",
+    "source_url": "",
+    "source_author": "",
+    "source_year": 2026,
+    "source_journal": "",
+    "barra_style": "Growth",
+    "description": "围绕 Growth/Quality 空白，尝试用“ROE 改善斜率 + ROE 单季加速度 + ROE 水平”捕捉盈利趋势，同时用 BPS 同比减季度扩张构造资本扩张拐点惩罚，并附加 ROE/BPS 稳定性约束。财报滞后45天映射到日频后，对 log_mktcap 做横截面 OLS 中性化。",
+    "formula": "raw = 0.42*tanh((ROE_t-ROE_t-2)/4)+0.26*tanh(((ROE_t-ROE_t-1)-(ROE_t-1-ROE_t-2))/3)+0.18*tanh(MA4(ROE)/8)-0.24*tanh(STD4(ROE)/3)-0.22*tanh((BPS_yoy-0.7*BPS_qoq)/0.18)-0.12*tanh(STD4(BPS_pct_change)/0.12); factor = neutralize(raw, log_mktcap)",
+    "our_metric": {
+      "market": "中证1000",
+      "period": "2023-02-14 ~ 2026-02-13",
+      "ic_mean": 0.02184669514709388,
+      "ic_t": 3.3987992645856178,
+      "rank_ic": 0.027255797211472213,
+      "g5_sharpe": 0.7947419955146657,
+      "long_short_sharpe": 1.300538386685771,
+      "monotonicity": 0.8999999999999998,
+      "turnover_mean": 0.2550251401742777,
+      "max_abs_corr_existing": 0.5728709040930919,
+      "closest_existing_factor": "roe_bps_inflect_quality_v1"
+    },
+    "failure_reason": "接近达标但未过门槛：IC均值 0.0218、IC_t=3.40、单调性 0.90、长短组合 Sharpe=1.30 都不错，但最高分组 G5 Sharpe 仅 0.795，略低于 0.8 入库线。分层上 G3/G4/G5 递增清晰，但顶组优势还不够厚。",
+    "diff_notes": "与既有 roe_bps_inflect_quality_v1 相比，这版把“同比改善”改成“2季斜率 + 单季加速度”，更强调趋势拐点的前瞻性；同时加入 BPS 扩张拐点与波动惩罚，试图把“真盈利改善”和“靠扩表推高 ROE”区分开。相关性最高为 0.573（roe_bps_inflect_quality_v1），低于 0.7 冗余阈值，不算重复，但经济表现仍是“差一点”。",
+    "conclusion": "淘汰",
+    "data_files": [
+      "calc_roe_slope_bps_inflect_v1.py",
+      "data/factor_roe_slope_bps_inflect_v1.csv",
+      "output/roe_slope_bps_inflect_v1/report.json"
+    ]
   }
 ]
