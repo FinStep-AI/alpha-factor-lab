@@ -6,7 +6,7 @@
     "benchmark": "000300",
     "benchmark_name": "沪深300",
     "created_at": "2026-02-23 22:14:25",
-    "updated_at": "2026-08-11 09:37:41",
+    "updated_at": "2026-08-11 09:38:13",
     "status": "active",
     "players_count": 6
   },
@@ -12609,7 +12609,7 @@
       "style": "趋势跟踪 · 板块轮动 · 全A股扫描 · 中长线波段",
       "description": "BBI+MA60趋势判断，KDJ低位捕捉买点，板块轮动做趋势收益。核心逻辑：阳率×盈亏比最大化。",
       "portfolio": {
-        "cash": 4916106.129999999,
+        "cash": 30707.629999998957,
         "positions": {
           "600428.SH": {
             "code": "600428.SH",
@@ -12670,9 +12670,64 @@
             "pnl_pct": 0.0,
             "entry_date": "2026-08-10",
             "max_pnl_pct": 0.37
+          },
+          "603669.SH": {
+            "code": "603669.SH",
+            "name": "灵康药业",
+            "volume": 157300,
+            "avg_cost": 6.17,
+            "current_price": 6.17,
+            "market_value": 970541.0,
+            "pnl": 0,
+            "pnl_pct": 0,
+            "entry_date": "2026-08-11"
+          },
+          "600285.SH": {
+            "code": "600285.SH",
+            "name": "羚锐制药",
+            "volume": 43700,
+            "avg_cost": 22.43,
+            "current_price": 22.43,
+            "market_value": 980191.0,
+            "pnl": 0,
+            "pnl_pct": 0,
+            "entry_date": "2026-08-11"
+          },
+          "600236.SH": {
+            "code": "600236.SH",
+            "name": "桂冠电力",
+            "volume": 90000,
+            "avg_cost": 10.85,
+            "current_price": 10.85,
+            "market_value": 976500.0,
+            "pnl": 0,
+            "pnl_pct": 0,
+            "entry_date": "2026-08-11"
+          },
+          "002396.SZ": {
+            "code": "002396.SZ",
+            "name": "星网锐捷",
+            "volume": 32800,
+            "avg_cost": 29.75,
+            "current_price": 29.75,
+            "market_value": 975800.0,
+            "pnl": 0,
+            "pnl_pct": 0,
+            "entry_date": "2026-08-11"
+          },
+          "002827.SZ": {
+            "code": "002827.SZ",
+            "name": "高争民爆",
+            "volume": 16900,
+            "avg_cost": 57.75,
+            "current_price": 57.75,
+            "market_value": 975975.0,
+            "pnl": 0,
+            "pnl_pct": 0,
+            "entry_date": "2026-08-11"
           }
         },
-        "total_value": 8697858.13,
+        "total_value": 8691466.63,
         "last_update": "2026-08-11"
       },
       "nav_history": {
@@ -20977,16 +21032,104 @@
           "pnl": 20022.0,
           "pnl_pct": 17.85,
           "reason": "止盈第一档：盈利18.8%≥7%，先卖出一半锁定利润"
+        },
+        {
+          "date": "2026-08-11",
+          "code": "603669.SH",
+          "name": "灵康药业",
+          "direction": "buy",
+          "price": 6.17,
+          "volume": 157300,
+          "amount": 970541.0,
+          "fees": {
+            "commission": 291.16,
+            "stamp_duty": 0,
+            "transfer_fee": 9.71,
+            "slippage_cost": 970.54,
+            "total": 1271.41
+          },
+          "pnl": 0,
+          "pnl_pct": 0,
+          "reason": "医药制造业板块共振优先，BBI金叉17天前 + 放量4.2x + 缩量回调55.5%;强放量4.2x;量比4.0，score=78"
+        },
+        {
+          "date": "2026-08-11",
+          "code": "600285.SH",
+          "name": "羚锐制药",
+          "direction": "buy",
+          "price": 22.43,
+          "volume": 43700,
+          "amount": 980191.0,
+          "fees": {
+            "commission": 294.06,
+            "stamp_duty": 0,
+            "transfer_fee": 9.8,
+            "slippage_cost": 980.19,
+            "total": 1284.05
+          },
+          "pnl": 0,
+          "pnl_pct": 0,
+          "reason": "医药制造业板块共振优先，BBI金叉14天前 + 放量1.99x + 缩量回调54.2%;量比3.2;量价齐升，score=68"
+        },
+        {
+          "date": "2026-08-11",
+          "code": "600236.SH",
+          "name": "桂冠电力",
+          "direction": "buy",
+          "price": 10.85,
+          "volume": 90000,
+          "amount": 976500.0,
+          "fees": {
+            "commission": 292.95,
+            "stamp_duty": 0,
+            "transfer_fee": 9.77,
+            "slippage_cost": 976.5,
+            "total": 1279.21
+          },
+          "pnl": 0,
+          "pnl_pct": 0,
+          "reason": "电力、热力生产和供应业板块共振优先，BBI金叉10天前 + 放量2.74x + 缩量回调45.8%;缩量至半量以下;强放量2.74x，score=83"
+        },
+        {
+          "date": "2026-08-11",
+          "code": "002396.SZ",
+          "name": "星网锐捷",
+          "direction": "buy",
+          "price": 29.75,
+          "volume": 32800,
+          "amount": 975800.0,
+          "fees": {
+            "commission": 292.74,
+            "stamp_duty": 0,
+            "transfer_fee": 9.76,
+            "slippage_cost": 975.8,
+            "total": 1278.3
+          },
+          "pnl": 0,
+          "pnl_pct": 0,
+          "reason": "未分类板块共振优先，BBI金叉10天前 + 放量2.63x + 缩量回调43.2%;缩量至半量以下;强放量2.63x，score=78"
+        },
+        {
+          "date": "2026-08-11",
+          "code": "002827.SZ",
+          "name": "高争民爆",
+          "direction": "buy",
+          "price": 57.75,
+          "volume": 16900,
+          "amount": 975975.0,
+          "fees": {
+            "commission": 292.79,
+            "stamp_duty": 0,
+            "transfer_fee": 9.76,
+            "slippage_cost": 975.98,
+            "total": 1278.53
+          },
+          "pnl": 0,
+          "pnl_pct": 0,
+          "reason": "未分类板块共振优先，BBI金叉5天前 + 放量3.6x + 缩量回调36.4%;缩量至半量以下;强放量3.6x，score=78"
         }
       ],
       "decisions": [
-        {
-          "date": "2026-07-20",
-          "action": "hold",
-          "summary": "晨扫完成，当前无持仓，无止盈止损动作。",
-          "detail": "当前账户空仓，现金8430028.12元，可开仓位10个。 全A扫描5070只，最终候选5只；主策略1只，金叉缩量回调4只，单针下30 0只。 本轮候选分布分散，热门板块集中度不足（hot_industries为空），不满足“板块共振优先”的进攻条件。 最强信号为SZ301377 鼎泰高科，评分63，类型main，行业未分类；但整体未形成3只以上同行业共振，且多数候选J值偏高，追入胜率一般。",
-          "recommendation": "维持空仓观察，优先等待出现板块集中度更高、且主策略四条件同时满足的标的；若后续盘中形成行业共振，再考虑分批开仓。"
-        },
         {
           "date": "2026-07-20",
           "action": "hold",
@@ -21208,6 +21351,14 @@
           "detail": "当前持仓为中远海特、天目药业、海正药业、天士力、太极集团。止盈止损检查仅海正药业出现动作信号，盈利18.8%，按纪律先卖出一半。今日主策略与单针下30无新增信号，候选主要来自BBI金叉后的缩量回调通道，共25只；其中医药制造业出现明显板块共振，因此优先从医药候选中挑选，同时保持行业分散，不对已有持仓重复加仓。",
           "recommendation": "建议执行顺序为先卖后买，计划新增桂冠电力、灵康药业、羚锐制药、四方科技、高争民爆5只，使组合扩展到10只持仓；若执行时价格偏离较大，可由执行脚本按可成交整手数量微调。",
           "exec_summary": "成功1笔，失败5笔"
+        },
+        {
+          "date": "2026-08-11",
+          "action": "mixed",
+          "summary": "晨扫补单：海正药业止盈半仓已执行，现按候选强度与板块集中度补齐5个新仓位。",
+          "detail": "由于执行器在 action=sell 模式下会把全部 trades 视作卖单，早前买入腿未成交。现保持已完成的海正药业半仓止盈结果不变，单独提交买入决策。候选仍以医药制造业为主，并兼顾电力与科技方向分散配置。",
+          "recommendation": "本次仅执行买入腿，计划新开灵康药业、羚锐制药、桂冠电力、星网锐捷、高争民爆5只，使组合回到10只持仓。",
+          "exec_summary": "成功5笔，失败0笔"
         }
       ],
       "rebalances": [],
@@ -21219,8 +21370,8 @@
         "calmar_ratio": -1.94,
         "win_rate": 50.39,
         "profit_loss_ratio": 0.81,
-        "total_trades": 415,
-        "total_fees": 637032.8299999998,
+        "total_trades": 420,
+        "total_fees": 643424.33,
         "current_positions": 5,
         "turnover_rate": 0.0
       },
