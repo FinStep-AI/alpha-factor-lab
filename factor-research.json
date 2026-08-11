@@ -7520,5 +7520,39 @@
       "data/factor_roe_slope_bps_inflect_v1.csv",
       "output/roe_slope_bps_inflect_v1/report.json"
     ]
+  },
+  {
+    "date": "2026-08-11 15:32:00",
+    "factor_id": "asset_turnover_stability_proxy_v1",
+    "factor_name": "资产周转稳定改善代理因子 v1",
+    "status": "failed",
+    "source_type": "论文启发+本土化代理",
+    "source_title": "Asset Turnover / Financial Quality inspired proxy",
+    "source_url": "https://zhuanlan.zhihu.com/p/624121865",
+    "source_author": "内部搜索启发，非严格单篇论文复现",
+    "source_year": 2026,
+    "source_journal": "StepSearch / 二手研究线索",
+    "barra_style": "Growth",
+    "description": "围绕“总资产周转率变化”思路，在仅有 ROE/BPS 字段约束下构造资产周转代理：用 ROE 同比改善减去 BPS 同比与环比扩张惩罚，近似识别‘盈利改善更多来自经营效率提升而非净资产膨胀’；再叠加 ROE 水平锚、ROE 波动稳定门槛与 BPS 增速约束，最后对 log_mktcap 做横截面 OLS 中性化并标准化。",
+    "formula": "raw = (ROE_yoy - 55*BPS_yoy - 20*BPS_qoq) * tanh(MA4(ROE)/7.5) * 1/(1+0.7*STD4(ROE)+0.3*STD8(ROE)) * 1/(1+8*max(MA2(BPS_yoy),0)); factor = neutralize(raw, log_mktcap)",
+    "our_metric": {
+      "market": "中证1000",
+      "period": "2023-08-14 ~ 2026-02-13",
+      "ic_mean": 0.014587678013505197,
+      "ic_t": 4.0459361375405605,
+      "rank_ic": 0.01816287017959965,
+      "g5_sharpe": 0.8490215248391941,
+      "long_short_sharpe": 2.070585698092257,
+      "monotonicity": 0.7,
+      "turnover_mean": 0.18179171117553622
+    },
+    "failure_reason": "差一点但仍不达标：IC_t=4.05、G5 Sharpe=0.85 都过线，但 IC均值仅0.0146 < 0.02，且单调性只有0.7。分层结构表现为 G3/G5 双峰，说明它更像“中高分组有效”的弱非线性效率因子，不是稳定线性 alpha。",
+    "diff_notes": "相对已有 asset_turnover_proxy_growth_v1，这一版额外引入 ROE 稳定性门槛与 BPS 增速约束，试图把“效率改善”与“激进扩张”进一步拆开；从结果看，多空 Sharpe 2.07 很强，说明排序信息存在，但高分组并未持续优于次高分组，独立做多可交易性一般。方向上比近期多数 Quality/Growth 代理更健康，但仍未达到入库门槛。",
+    "conclusion": "淘汰",
+    "data_files": [
+      "calc_asset_turnover_stability_proxy_v1.py",
+      "data/factor_asset_turnover_stability_proxy_v1.csv",
+      "output/asset_turnover_stability_proxy_v1/report.json"
+    ]
   }
 ]
