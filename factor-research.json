@@ -7599,5 +7599,39 @@
       "data/factor_bps_turnover_efficiency_v1.csv",
       "output/bps_turnover_efficiency_v1/report.json"
     ]
+  },
+  {
+    "date": "2026-08-12 15:37:00",
+    "factor_id": "roe_slope_bps_discipline_v1",
+    "factor_name": "ROE斜率资本纪律因子 v1",
+    "status": "failed",
+    "source_type": "研究启发+本土化代理",
+    "source_title": "Conservative Growth / Capital Discipline proxy",
+    "source_url": "https://www.fxbaogao.com/detail/5299510",
+    "source_author": "内部搜索启发，结合现有 ROE/BPS 数据自研",
+    "source_year": 2026,
+    "source_journal": "StepSearch / 二手研究线索",
+    "barra_style": "Quality / Growth",
+    "description": "在仅有 ROE/BPS 财务字段下，尝试刻画“盈利趋势改善但资本扩张克制”的成长质量。用 ROE 两期斜率与单季加速度提取改善拐点，用 ROE 四季均值与波动率做质量门槛，再用 BPS 同比/环比扩张惩罚近似资本纪律；财报后45天映射到可交易日后，对 log_mktcap 做横截面 OLS 中性化并标准化。",
+    "formula": "raw = (0.40*tanh(ROE_slope2/2.5)+0.28*tanh(ROE_accel/2.0)+0.40*tanh((ROE_yoy-45*BPS_yoy)/5.5)+0.20*tanh(MA4(ROE)/7.5)) * 1/(1+0.8*STD4(ROE)) * 1/(1+7.5*max(MA2(BPS_yoy),0)+4*max(BPS_qoq,0)); factor = neutralize(raw, log_mktcap)",
+    "our_metric": {
+      "market": "中证1000",
+      "period": "2023-02-14 ~ 2026-02-13",
+      "ic_mean": 0.018959744789384947,
+      "ic_t": 3.513926813513088,
+      "rank_ic": 0.018275308291454274,
+      "g5_sharpe": 0.8341087567976359,
+      "long_short_sharpe": 1.3851442122980266,
+      "monotonicity": 0.8999999999999998,
+      "turnover_mean": 0.24362857603882182
+    },
+    "failure_reason": "硬门槛下淘汰。该因子 IC_t=3.51、G5 Sharpe=0.83、单调性=0.90 均达标，且多空 Sharpe 1.39 很强，但 IC 均值仅 0.0190，仍低于 0.02 门槛，说明它更像“统计显著但边际预测力略弱”的成长质量排序信号。",
+    "diff_notes": "相对已有 roe_bps_inflect_quality_v1 / roe_slope_bps_inflect_v1 / conservative_growth_quality_v1，这一版更强调“ROE趋势斜率 + 资本纪律”而非单纯拐点或平滑增长：把 BPS 扩张惩罚直接嵌入质量成长主项后，单调性改善到 0.90，但 IC 均值仍未越线，说明资本纪律约束改善了分层结构，却没有显著提升截面相关强度。后续若继续沿这条线深挖，建议引入真实营收/毛利率或现金流字段，否则 ROE/BPS 代理空间接近上限。",
+    "conclusion": "淘汰",
+    "data_files": [
+      "calc_roe_slope_bps_discipline_v1.py",
+      "data/factor_roe_slope_bps_discipline_v1.csv",
+      "output/roe_slope_bps_discipline_v1/report.json"
+    ]
   }
 ]
