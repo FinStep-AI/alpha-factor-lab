@@ -6,7 +6,7 @@
     "benchmark": "000300",
     "benchmark_name": "沪深300",
     "created_at": "2026-02-23 22:14:25",
-    "updated_at": "2026-08-12 09:38:17",
+    "updated_at": "2026-08-12 09:38:54",
     "status": "active",
     "players_count": 6
   },
@@ -12615,7 +12615,7 @@
       "style": "趋势跟踪 · 板块轮动 · 全A股扫描 · 中长线波段",
       "description": "BBI+MA60趋势判断，KDJ低位捕捉买点，板块轮动做趋势收益。核心逻辑：阳率×盈亏比最大化。",
       "portfolio": {
-        "cash": 1261506.849999999,
+        "cash": 1589645.1299999983,
         "positions": {
           "600428.SH": {
             "code": "600428.SH",
@@ -12632,10 +12632,10 @@
           "600671.SH": {
             "code": "600671.SH",
             "name": "天目药业",
-            "volume": 7700,
+            "volume": 3900,
             "avg_cost": 20.51,
             "current_price": 21.66,
-            "market_value": 166782.0,
+            "market_value": 84474.0,
             "pnl": 8855.0,
             "pnl_pct": 5.61,
             "entry_date": "2026-07-22",
@@ -12644,10 +12644,10 @@
           "600267.SH": {
             "code": "600267.SH",
             "name": "海正药业",
-            "volume": 4800,
+            "volume": 2400,
             "avg_cost": 11.93,
             "current_price": 14.0,
-            "market_value": 67200.0,
+            "market_value": 33600.0,
             "pnl": 9936.0,
             "pnl_pct": 17.35,
             "entry_date": "2026-08-04",
@@ -12677,30 +12677,6 @@
             "entry_date": "2026-08-11",
             "max_pnl_pct": 1.94
           },
-          "600285.SH": {
-            "code": "600285.SH",
-            "name": "羚锐制药",
-            "volume": 43700,
-            "avg_cost": 22.43,
-            "current_price": 20.71,
-            "market_value": 905027.0,
-            "pnl": -75164.0,
-            "pnl_pct": -7.67,
-            "entry_date": "2026-08-11",
-            "max_pnl_pct": 0.53
-          },
-          "002396.SZ": {
-            "code": "002396.SZ",
-            "name": "星网锐捷",
-            "volume": 32800,
-            "avg_cost": 29.75,
-            "current_price": 29.6,
-            "market_value": 970880.0,
-            "pnl": -4920.0,
-            "pnl_pct": -0.5,
-            "entry_date": "2026-08-11",
-            "max_pnl_pct": 0.84
-          },
           "002827.SZ": {
             "code": "002827.SZ",
             "name": "高争民爆",
@@ -12712,9 +12688,20 @@
             "pnl_pct": 1.47,
             "entry_date": "2026-08-11",
             "max_pnl_pct": 1.49
+          },
+          "600129.SH": {
+            "code": "600129.SH",
+            "name": "太极集团",
+            "volume": 100100,
+            "avg_cost": 16.44,
+            "current_price": 16.44,
+            "market_value": 1645644.0000000002,
+            "pnl": 0,
+            "pnl_pct": 0,
+            "entry_date": "2026-08-12"
           }
         },
-        "total_value": 8561764.85,
+        "total_value": 8543732.13,
         "last_update": "2026-08-12"
       },
       "nav_history": {
@@ -21174,17 +21161,104 @@
           "pnl": -15300.0,
           "pnl_pct": -1.57,
           "reason": "止损触发：现价跌破成本下5tick止损线，按纪律全清"
+        },
+        {
+          "date": "2026-08-12",
+          "code": "600671.SH",
+          "name": "天目药业",
+          "direction": "sell",
+          "price": 22.03,
+          "volume": 3800,
+          "amount": 83714.0,
+          "fees": {
+            "commission": 25.11,
+            "stamp_duty": 41.86,
+            "transfer_fee": 0.84,
+            "slippage_cost": 83.71,
+            "total": 151.52
+          },
+          "pnl": 5776.0,
+          "pnl_pct": 7.41,
+          "reason": "止盈第一档：盈利7.1%≥7%，卖出1/2"
+        },
+        {
+          "date": "2026-08-12",
+          "code": "600267.SH",
+          "name": "海正药业",
+          "direction": "sell",
+          "price": 14.35,
+          "volume": 2400,
+          "amount": 34440.0,
+          "fees": {
+            "commission": 10.33,
+            "stamp_duty": 17.22,
+            "transfer_fee": 0.34,
+            "slippage_cost": 34.44,
+            "total": 62.34
+          },
+          "pnl": 5808.0,
+          "pnl_pct": 20.28,
+          "reason": "止盈第一档：盈利20.2%≥7%，卖出1/2"
+        },
+        {
+          "date": "2026-08-12",
+          "code": "600285.SH",
+          "name": "羚锐制药",
+          "direction": "sell",
+          "price": 20.67,
+          "volume": 43700,
+          "amount": 903279.0,
+          "fees": {
+            "commission": 270.98,
+            "stamp_duty": 451.64,
+            "transfer_fee": 9.03,
+            "slippage_cost": 903.28,
+            "total": 1634.93
+          },
+          "pnl": -76912.0,
+          "pnl_pct": -7.85,
+          "reason": "止损：价格20.75≤止损线22.38（成本22.43下5个价位）"
+        },
+        {
+          "date": "2026-08-12",
+          "code": "002396.SZ",
+          "name": "星网锐捷",
+          "direction": "sell",
+          "price": 29.21,
+          "volume": 32800,
+          "amount": 958088.0,
+          "fees": {
+            "commission": 287.43,
+            "stamp_duty": 479.04,
+            "transfer_fee": 9.58,
+            "slippage_cost": 958.09,
+            "total": 1734.14
+          },
+          "pnl": -17712.0,
+          "pnl_pct": -1.82,
+          "reason": "止损：价格29.42≤止损线29.7（成本29.75下5个价位）"
+        },
+        {
+          "date": "2026-08-12",
+          "code": "600129.SH",
+          "name": "太极集团",
+          "direction": "buy",
+          "price": 16.44,
+          "volume": 100100,
+          "amount": 1645644.0,
+          "fees": {
+            "commission": 493.69,
+            "stamp_duty": 0,
+            "transfer_fee": 16.46,
+            "slippage_cost": 1645.64,
+            "total": 2155.79
+          },
+          "pnl": 0,
+          "pnl_pct": 0,
+          "reason": "板块集中优先 + 缩量回调候选，分配空出仓位"
         }
       ],
       "decisions": [
-        {
-          "date": "2026-07-21",
-          "action": "mixed",
-          "summary": "午盘执行1笔止盈减仓、2笔止损清仓，并用两只新的主策略候选回补仓位。",
-          "detail": "持仓检查显示中科飞测浮盈达到止盈第一档，恒源煤电与热景生物均触发5tick止损；扫描结果新增7只主策略候选，优先选择神工股份与富创精密作为回补对象，维持组合在半导体/高端制造方向的趋势暴露，同时剔除走弱煤炭与医药仓位。",
-          "recommendation": "执行 mixed：卖出688361.SH半仓，清仓600971.SH与688068.SH，买入688233.SH神工股份和688409.SH富创精密。",
-          "exec_summary": "成功5笔，失败0笔"
-        },
         {
           "date": "2026-07-21",
           "action": "mixed",
@@ -21406,6 +21480,14 @@
           "summary": "先处理止盈止损，再把空出仓位回补到医药集中与高分回调标的。",
           "detail": "当前真实持仓8只，止盈止损触发4笔：天目药业、海正药业各卖半；羚锐制药、星网锐捷止损清仓。扫描候选19只，热点板块集中在医药制造业，因此优先考虑同板块高分标的太极集团、视源股份；其中太极集团属于医药集中板块，视源股份作为高分非医药补充分散。执行后预计持仓约8只，仍在目标5-10只区间。",
           "recommendation": "执行 mixed 决策：卖出4笔，买入2笔，维持中等分散并向强势板块倾斜。"
+        },
+        {
+          "date": "2026-08-12",
+          "action": "mixed",
+          "summary": "先处理止盈止损，再把空出仓位回补到医药集中与高分回调标的。",
+          "detail": "当前真实持仓8只，止盈止损触发4笔：天目药业、海正药业各卖半；羚锐制药、星网锐捷止损清仓。扫描候选19只，热点板块集中在医药制造业，因此优先考虑同板块高分标的太极集团、视源股份；其中太极集团属于医药集中板块，视源股份作为高分非医药补充分散。执行后预计持仓约8只，仍在目标5-10只区间。",
+          "recommendation": "执行 mixed 决策：卖出4笔，买入2笔，维持中等分散并向强势板块倾斜。",
+          "exec_summary": "成功5笔，失败1笔"
         }
       ],
       "rebalances": [],
@@ -21417,8 +21499,8 @@
         "calmar_ratio": -2.14,
         "win_rate": 50.38,
         "profit_loss_ratio": 0.82,
-        "total_trades": 423,
-        "total_fees": 645656.11,
+        "total_trades": 428,
+        "total_fees": 651394.8300000001,
         "current_positions": 8,
         "turnover_rate": 0.0
       },
