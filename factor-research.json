@@ -7554,5 +7554,16 @@
       "data/factor_asset_turnover_stability_proxy_v1.csv",
       "output/asset_turnover_stability_proxy_v1/report.json"
     ]
+  },
+  {
+    "date": "2026-08-12",
+    "factor_id": "order_lot_info_scan_20260812",
+    "source_type": "sellside_report_scan",
+    "source_title": "国海证券《金工因子研究系列专题1：委托挂单手数蕴含的选股信息》",
+    "source_url": "https://www.baogaobox.com/reports/260130000092592.html",
+    "original_metric": "研报搜索命中，但未拿到可核验全文公式与参数；摘要层面为委托挂单手数/订单规模信息选股",
+    "our_metric": "未复现；数据侧现有 fintool 接口仅覆盖 valuation/shareholder_count/block_trade，缺 Level-2 委托挂单明细；因子库已有 smart_money/order-flow/vwap/price_delay 邻近方向",
+    "diff_notes": "无法满足‘严格按原文参数复现’要求；若强做只能变成近似替代因子，信息含量与论文定义不一致。今日数据刷新已完成到 2026-08-11。",
+    "conclusion": "skip_no_formula_or_data"
   }
 ]
