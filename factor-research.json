@@ -7565,5 +7565,39 @@
     "our_metric": "未复现；数据侧现有 fintool 接口仅覆盖 valuation/shareholder_count/block_trade，缺 Level-2 委托挂单明细；因子库已有 smart_money/order-flow/vwap/price_delay 邻近方向",
     "diff_notes": "无法满足‘严格按原文参数复现’要求；若强做只能变成近似替代因子，信息含量与论文定义不一致。今日数据刷新已完成到 2026-08-11。",
     "conclusion": "skip_no_formula_or_data"
+  },
+  {
+    "date": "2026-08-12 12:01:00",
+    "factor_id": "bps_turnover_efficiency_v1",
+    "factor_name": "BPS-低换手扩张效率因子 v1",
+    "status": "failed",
+    "source_type": "研究启发+本土化代理",
+    "source_title": "Equity Expansion Efficiency / Low Attention Growth Proxy",
+    "source_url": "",
+    "source_author": "",
+    "source_year": 2026,
+    "source_journal": "",
+    "barra_style": "Growth",
+    "description": "基于仅有 BPS/ROE 与日线量价字段，尝试刻画“净资产同比扩张但市场交易不拥挤”的成长效率。先用 BPS 同比增长、ROE 四季均值、ROE 波动惩罚、BPS 单季过快扩张惩罚构造季度成长底子，再映射到财报后45天可交易日期，叠加 20 日成交额/换手率/波动率惩罚，并做 log 市值横截面 OLS 中性化。",
+    "formula": "raw_quarter = -(0.55*tanh(BPS_yoy/0.35)+0.20*tanh(ROE_mean4/8)-0.15*tanh(ROE_std4/4)-0.10*tanh(BPS_qoq/0.20)); raw = raw_quarter - 0.35*liq_penalty - 0.08*tanh(amplitude_ma20/6); factor = neutralize(raw, log_mktcap)",
+    "our_metric": {
+      "market": "中证1000",
+      "period": "2023-08-14 ~ 2026-08-11",
+      "ic_mean": 0.0006194519689384148,
+      "ic_t": 0.11544710561672158,
+      "rank_ic": 0.0009227269575474053,
+      "g5_sharpe": 0.6582914550240014,
+      "long_short_sharpe": 0.6030348695363038,
+      "monotonicity": 0.09999999999999999,
+      "turnover_mean": 0.12859746775076547
+    },
+    "failure_reason": "未达标。虽然 G5 年化 21.46%、G5 Sharpe 0.66 尚可，但 IC 均值仅 0.0006、IC_t=0.12、单调性仅 0.10，多空 Sharpe 0.60，说明信号缺乏稳定横截面预测力，更多像偶然挑中了部分高收益股票，而不是可靠因子。",
+    "diff_notes": "与既有 gross_margin_trend_proxy_v1 / roe_slope_bps_stability_v1 / roe_bps_inflect_quality_v1 不同，这版明确把“低换手/低关注”约束叠加在 BPS 扩张上，想抓成长被低估的情形；但结果显示低关注约束并未提升基本面成长信号，反而削弱了横截面排序稳定性。后续若再沿这条线挖，应该改成事件触发式或直接测试反向版本，而不是继续加交易冷门惩罚。",
+    "conclusion": "淘汰",
+    "data_files": [
+      "calc_bps_turnover_efficiency_v1.py",
+      "data/factor_bps_turnover_efficiency_v1.csv",
+      "output/bps_turnover_efficiency_v1/report.json"
+    ]
   }
 ]
