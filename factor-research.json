@@ -7633,5 +7633,39 @@
       "data/factor_roe_slope_bps_discipline_v1.csv",
       "output/roe_slope_bps_discipline_v1/report.json"
     ]
+  },
+  {
+    "date": "2026-08-13 12:00:00",
+    "factor_id": "roe_yoy_delta_v1",
+    "factor_name": "ROE同比变化因子 v1",
+    "status": "failed",
+    "source_type": "研究启发+本土化代理",
+    "source_title": "ROE同比变化（earnings quality/growth proxy）",
+    "source_url": "https://bigquant.com/wiki/doc/c7u9IChUio",
+    "source_author": "StepSearch启发，基于现有ROE字段自研复现",
+    "source_year": 2026,
+    "source_journal": "StepSearch / 基本面因子综述",
+    "barra_style": "Quality / Growth",
+    "description": "使用财报ROE相对四季度前的同比变化（ROE_t - ROE_t-4）作为成长/质量改善信号，按财报后30天映射到可交易日；横截面先做MAD缩尾，再对log(amount)做OLS市值中性化并z-score标准化。仅使用现有fundamental_cache与日线成交额代理市值。",
+    "formula": "roe_yoy_delta = ROE_t - ROE_t-4; factor = zscore(neutralize(winsorize(roe_yoy_delta, MAD=3), log_amount))",
+    "our_metric": {
+      "market": "中证1000",
+      "period": "2023-07-31 ~ 2026-08-12",
+      "ic_mean": 0.02564180847220309,
+      "ic_t": 4.345265763965693,
+      "rank_ic": 0.03370723931574422,
+      "g5_sharpe": 0.8120125693991699,
+      "long_short_sharpe": 0.7110882864877337,
+      "monotonicity": 0.8999999999999998,
+      "turnover_mean": 0.10922422219456523
+    },
+    "failure_reason": "按硬门槛淘汰。该因子 IC均值=0.0256、IC_t=4.35、单调性=0.90 均达标，说明ROE同比改善确有稳定截面信息；但 G5 Sharpe=0.812 勉强过线、多空Sharpe=0.711 未过 0.8，且在5天调仓+30bp成本设定下收益被显著侵蚀，作为单独交易因子的实施性不足。",
+    "diff_notes": "相比库内更复杂的 ROE/BPS 斜率、资本纪律、稳定性类因子，这一版极其朴素，只保留“盈利改善”主信号，因此 IC 更干净、单调性也更好；但它缺少额外过滤层，导致可交易收益端不够厚，说明ROE改善更适合做组合增强项或拉长持有期，而不是5日频单因子直上。",
+    "conclusion": "淘汰",
+    "data_files": [
+      "scripts/build_roe_yoy_delta_v1.py",
+      "data/factor_roe_yoy_delta_v1.csv",
+      "output/roe_yoy_delta_v1/backtest_report.json"
+    ]
   }
 ]
