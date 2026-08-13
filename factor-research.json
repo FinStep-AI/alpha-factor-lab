@@ -7667,5 +7667,39 @@
       "data/factor_roe_yoy_delta_v1.csv",
       "output/roe_yoy_delta_v1/backtest_report.json"
     ]
+  },
+  {
+    "date": "2026-08-13 15:33:00",
+    "factor_id": "roe_persistence_gap_v3",
+    "factor_name": "ROE回升持续性缺口因子 v3",
+    "status": "failed",
+    "source_type": "StepSearch启发+自研",
+    "source_title": "毛利率/盈利改善趋势因子思路，落地为ROE持续性代理",
+    "source_url": "https://www.fxbaogao.com/detail/5299510",
+    "source_author": "StepSearch启发，基于fundamental_cache自研",
+    "source_year": 2026,
+    "source_journal": "StepSearch / 基本面因子综述",
+    "barra_style": "Quality / Growth",
+    "description": "以季度ROE同比改善、连续两个季度的ROE环比回升持续性、以及ROE变化一致性构造成长质量信号，同时惩罚BPS同比/环比扩张过快的公司，并在映射到财报可用日后做日频市值中性化。核心直觉是：真正可持续的质量成长应表现为盈利改善连续发生，而不是靠净资产快速扩张堆出来。",
+    "formula": "raw = (0.32*tanh((ROE_t-ROE_t-4)/5.5)+0.28*tanh(((ROE_t-ROE_t-1)+0.8*(ROE_t-1-ROE_t-2))/3)+0.18*tanh(-abs((ROE_t-ROE_t-1)-(ROE_t-1-ROE_t-2))/2)+0.22*tanh(mean4(ROE)/9)-0.30*tanh(4*mean2(max(BPS_yoy,0))+2*max(BPS_qoq,0))) * 1/(1+0.9*std4(ROE)); factor = zscore(neutralize(raw, log_mktcap))",
+    "our_metric": {
+      "market": "中证1000",
+      "period": "2022-11-14 ~ 2026-02-13",
+      "ic_mean": 0.016369022798973766,
+      "ic_t": 2.5539989472413134,
+      "rank_ic": 0.0187855507256027,
+      "g5_sharpe": 0.9753434917969155,
+      "long_short_sharpe": 1.074398649503129,
+      "monotonicity": 0.8999999999999998,
+      "turnover_mean": 0.23209385601094804
+    },
+    "failure_reason": "按硬门槛淘汰。该因子 G5 Sharpe=0.975、单调性=0.90、IC_t=2.55 都不错，说明排序收益和统计显著性是有的；但 IC均值只有0.0164，低于>0.02的入库线，说明截面预测强度仍偏弱，属于‘能赚一点但不够锋利’。",
+    "diff_notes": "与库内 ROE-BPS拐点质量 v1、ROE斜率平滑度因子 v1 的相关性分别约为0.585和0.553，未达到>0.7的冗余线；这版更强调ROE回升的连续性和一致性，而不是拐点/斜率本身，交易表现更强，但IC厚度仍不够。后续如果继续挖这条线，建议叠加更强的资本纪律过滤，或与毛利率/现金流真实字段结合，而不是只靠ROE+BPS代理。",
+    "conclusion": "淘汰",
+    "data_files": [
+      "calc_roe_persistence_gap_v3.py",
+      "data/factor_roe_persistence_gap_v3.csv",
+      "output/roe_persistence_gap_v3/backtest_report.json"
+    ]
   }
 ]
