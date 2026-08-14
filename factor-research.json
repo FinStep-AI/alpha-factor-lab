@@ -7755,5 +7755,41 @@
       "output/roe_reaccel_lowexp_smooth_v1/ic_series.csv",
       "calc_roe_reaccel_lowexp_smooth_v1.py"
     ]
+  },
+  {
+    "factor_id": "asset_turnover_proxy_v1",
+    "factor_name": "资产周转率变化代理因子 v1",
+    "date": "2026-08-14",
+    "theme": "基本面类/Growth",
+    "search_query": "资产周转率变化 量化因子 A股",
+    "hypothesis": "净利润代理增速若持续跑赢净资产代理增速，说明经营效率/资产周转能力在改善，后续应有超额收益。",
+    "construction": "使用 fundamentals 中 roe 与 bps 构造 ni_proxy=roe*bps、equity_proxy=bps；因子 raw=0.50*(ni_proxy_yoy-equity_proxy_yoy)+0.25*(ni_proxy_qoq-equity_proxy_qoq)+0.25*roe_slope4。财报按最近一期映射到日频，截面缩尾、标准化，并对 log_mktcap 做 OLS 残差化。",
+    "neutralization": "市值中性化(log_mktcap OLS residualization)",
+    "data_sources": [
+      "data/csi1000_fundamental_cache.csv",
+      "data/csi1000_kline_raw.csv",
+      "data/csi1000_returns.csv"
+    ],
+    "backtest": {
+      "forward_days": 5,
+      "groups": 5,
+      "cost": 0.003,
+      "period": "2023-06-30 ~ 2026-02-13"
+    },
+    "metrics": {
+      "ic_mean": 0.02221158420176647,
+      "ic_t_stat": 4.523679080299516,
+      "g5_sharpe": 1.312629747757095,
+      "monotonicity": 0.8999999999999998,
+      "long_short_sharpe": 3.883719889178882
+    },
+    "decision": "新增候选/通过",
+    "pass_threshold": true,
+    "notes": "满足 IC均值>0.02、IC_t>2、G5 Sharpe>0.8；单调性=0.90 刚好越线。属于 Growth 方向的经营效率改善代理。",
+    "artifacts": [
+      "data/factor_asset_turnover_proxy_v1.csv",
+      "output/asset_turnover_proxy_v1/report.json",
+      "scripts/build_asset_turnover_proxy_v1.py"
+    ]
   }
 ]
