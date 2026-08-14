@@ -7701,5 +7701,59 @@
       "data/factor_roe_persistence_gap_v3.csv",
       "output/roe_persistence_gap_v3/backtest_report.json"
     ]
+  },
+  {
+    "date": "2026-08-14",
+    "factor_id": "vol_spike_continuation_v1",
+    "source_type": "研报复现+本土化",
+    "source_title": "成交量异动后的信息延续/噪音回吐（QuantsPlaybook公开资料启发）",
+    "source_url": "https://github.com/hugo2046/QuantsPlaybook",
+    "original_metric": "公开页面仅给出因子方向与经验性绩效，未披露可严格对齐的IC/Sharpe数值",
+    "our_metric": {
+      "generated_rows": 51,
+      "dates": 3,
+      "stocks": 44,
+      "backtest": "not_run_effectively"
+    },
+    "diff_notes": "严格按现有脚本参数(window=20, forward_days=5, spike_z>0.5, low_vol<0)复现时，因高量/低量条件过稀，rolling均值大面积缺失；生成因子仅覆盖3个截面，无法形成有效回测样本。另原脚本存在大量empty-slice warning，稳定性不足。",
+    "conclusion": "fail"
+  },
+  {
+    "factor_id": "roe_reaccel_lowexp_smooth_v1",
+    "factor_name": "ROE再加速-低扩表平滑因子 v1",
+    "date": "2026-08-14",
+    "theme": "基本面类/Quality-Growth",
+    "search_query": "ROE变化率 量化因子 A股; 毛利率 趋势 资产周转率 量化因子 A股",
+    "hypothesis": "偏好ROE季度再加速、盈利趋势平滑、且BPS扩张不过激的公司；希望捕捉盈利改善而非单纯扩表驱动的成长。",
+    "construction": "raw=(0.38*tanh(ROE_qoq再加速/3)+0.34*tanh(ROE两期同比均值/6)+0.28*tanh(ROE四季均值/9)-0.32*tanh(3*正BPS两期同比均值+1.5*正BPS环比))*(1/(1+0.8*ROE四季波动)); 财报滞后45天映射到日频，80日内前向填充；按日对log市值OLS回归取残差并标准化。",
+    "neutralization": "市值中性化(log_mktcap OLS residualization)",
+    "data_sources": [
+      "data/csi1000_fundamental_cache.csv",
+      "data/csi1000_kline_raw.csv",
+      "data/csi1000_returns.csv"
+    ],
+    "backtest": {
+      "forward_days": 5,
+      "groups": 5,
+      "cost": 0.003,
+      "period": "2022-11-14 ~ 2026-02-13"
+    },
+    "metrics": {
+      "ic_mean": 0.009750288238432029,
+      "ic_t_stat": 1.5626094562048154,
+      "g5_sharpe": 0.82606093459605,
+      "monotonicity": 0.39999999999999997,
+      "long_short_sharpe": 0.22861784462423593
+    },
+    "decision": "淘汰",
+    "pass_threshold": false,
+    "failure_reason": "高分组收益尚可，G5 Sharpe=0.826接近门槛，但IC均值仅0.0098、t=1.56、单调性0.40，说明该因子更像弱分层排序而非稳定截面预测信号；ROE再加速与低扩表约束的信息可能已被现有ROE/BPS家族吸收，增量不足。",
+    "artifacts": [
+      "data/factor_roe_reaccel_lowexp_smooth_v1.csv",
+      "output/roe_reaccel_lowexp_smooth_v1/backtest_report.json",
+      "output/roe_reaccel_lowexp_smooth_v1/cumulative_returns.csv",
+      "output/roe_reaccel_lowexp_smooth_v1/ic_series.csv",
+      "calc_roe_reaccel_lowexp_smooth_v1.py"
+    ]
   }
 ]
