@@ -7861,5 +7861,52 @@
       "output/roe_improve_capital_efficiency_v1/ic_series.csv",
       "calc_roe_improve_capital_efficiency_v1.py"
     ]
+  },
+  {
+    "factor_id": "roe_improve_capital_efficiency_v2",
+    "factor_name": "ROE改善资本效率因子 v2",
+    "date": "2026-09-01",
+    "theme": "基本面类/Quality-Growth",
+    "search_query": "毛利率趋势 量化因子 A股",
+    "hypothesis": "优先选择ROE同比改善明显、且净资产扩张克制的公司；若盈利改善并非靠激进扩表驱动，同时ROE底座更高更稳，则未来5日应有更强横截面超额收益。",
+    "construction": "raw=tanh((ROE同比改善/(1+2.5*正BPS同比+1.2*正BPS环比))/4)*(0.55+0.45*tanh(近4期ROE均值/8))*(1/(1+0.9*近4期ROE波动/4))+0.25*tanh((0.65*ROE同比+0.35*ROE环比)/5.5)*(1/(1+3*近两期正BPS增速均值)); 财报滞后45天映射到日频，最多前向填充80个交易日；按日对log市值OLS回归取残差并zscore。",
+    "neutralization": "市值中性化(log_mktcap OLS residualization)",
+    "data_sources": [
+      "data/csi1000_fundamental_cache.csv",
+      "data/csi1000_kline_raw.csv",
+      "data/csi1000_returns.csv"
+    ],
+    "backtest": {
+      "forward_days": 5,
+      "groups": 5,
+      "cost": 0.003,
+      "period": "2023-08-14 ~ 2026-02-13"
+    },
+    "metrics": {
+      "ic_mean": 0.027243592932260252,
+      "ic_t_stat": 3.8398126290220236,
+      "rank_ic_mean": 0.029497023373338142,
+      "g5_sharpe": 1.2172973890667795,
+      "long_short_sharpe": 2.958818247176953,
+      "monotonicity": 0.9999999999999999,
+      "turnover_mean": 0.05369727712391362
+    },
+    "decision": "adopt",
+    "pass_threshold": {
+      "ic_mean_gt_0_02": true,
+      "ic_t_gt_2": true,
+      "g5_sharpe_gt_0_8": true,
+      "monotonicity_gt_0_8": true
+    },
+    "failure_reason": "",
+    "redundancy_check": {
+      "status": "partial",
+      "note": "自动扫描本地data目录中可比历史因子CSV时，仅找到vssignal_v1可计算相关性，平均截面相关约-0.009；其余历史因子缺少统一本地CSV路径，暂无>0.7冗余证据。"
+    },
+    "artifacts": {
+      "factor_csv": "data/factor_roe_improve_capital_efficiency_v2.csv",
+      "report": "output/roe_improve_capital_efficiency_v2/report.json",
+      "output_dir": "output/roe_improve_capital_efficiency_v2/"
+    }
   }
 ]

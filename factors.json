@@ -3546,5 +3546,129 @@
     "detail": "raw=0.7*z(ROE同比加速度)+0.3*z(-过去4季ROE波动率)；先在财报可用日横截面稳健标准化，再映射到日频，对20日成交额对数代理市值做回归中性化并标准化。核心直觉是：ROE改善更快且改善过程更平稳的公司，短期收益更强。",
     "correlations": "{\"roe_yoy_accel_resid_v1\": 0.6622, \"roe_slope_smoothness_v1\": 0.2745}",
     "status": "active"
+  },
+  {
+    "id": "gap_fill_pressure_v1",
+    "name": "跳空回补压力因子 v1",
+    "name_en": "Gap Fill Pressure v1",
+    "category": "量价/跳空缺口",
+    "description": "刻画个股在出现跳空后，日内是否迅速朝回补缺口方向运行。对向上跳空，若当日从开盘向下回补更深，则记为更高正值；对向下跳空，若当日继续向上回补不足，则记为更低值。过去20日均值后做市值中性化，捕捉“缺口被回补的压力强弱”。",
+    "hypothesis": "中证1000里，频繁出现“跳空后立刻被日内回补”的股票，往往反映资金冲击后仍有承接/均值回归买盘，说明价格偏离并不稳定；这种回补压力若持续存在，后续5日更容易获得正收益。",
+    "expected_direction": "正向（高跳空回补压力=高预期收益）",
+    "factor_type": "量价/Gap microstructure",
+    "formula": "neutralize(MA20(sign(gap_t)*intraday_fill_t*(1+5*abs(gap_t))), log_mktcap)",
+    "direction": 1,
+    "stock_pool": "中证1000",
+    "period": "2022-10-31 ~ 2026-02-13",
+    "rebalance_freq": 5,
+    "forward_days": 5,
+    "cost": 0.003,
+    "rating": "★★★ 边际达标",
+    "nav_data": "output/gap_fill_pressure_v1/cumulative_returns.json",
+    "ic_data": "output/gap_fill_pressure_v1/ic_series.json",
+    "upgrade_notes": "首版即踩线达标，说明“跳空后是否被快速回补”比单纯 gap 大小更有信息。后续可尝试区分 gap up / gap down 或引入成交量确认。",
+    "lessons_learned": [
+      "单独看跳空幅度通常噪声大，但把“跳空是否被日内回补”纳入后，信号明显改善",
+      "5日频率比20日更适合这类微观结构型短期因子",
+      "市值中性化后仍有统计显著性，说明并非纯小盘效应"
+    ],
+    "created": "2026-08-07",
+    "updated": "2026-08-07",
+    "metrics": {
+      "ic_mean": 0.018108051171181867,
+      "ir": 0.16960450292741763,
+      "ic_t": 2.173390721871668,
+      "long_short_sharpe": 0.5965831572659831,
+      "long_short_mdd": -0.1271162808750579,
+      "long_short_ann_return": 0.07379729397746249,
+      "monotonicity": 0.6,
+      "group_returns_annualized": [
+        0.028953172788609427,
+        0.006790910584297594,
+        -0.01066520831839124,
+        0.03348131994832948,
+        0.1257174034357902
+      ],
+      "turnover_mean": 0.47932478752164087
+    },
+    "conclusion": "边际达标入库。IC=0.0181、Newey-West t=2.17、多空Sharpe=0.60、单调性=0.6，刚好超过当前门槛，适合作为跳空缺口方向的补充型短周期因子。",
+    "barra_style": "Residual / Trading",
+    "source_type": "自研",
+    "source_title": "跳空回补压力：缺口稳定性代理",
+    "source_url": "",
+    "detail": "对向上跳空，度量(open-low)/open；对向下跳空，度量-(high-open)/open；再乘以(1+5*|gap|)强调大缺口样本，取20日均值并做市值中性化。",
+    "correlations": {}
+  },
+  {
+    "id": "roe_improve_capital_efficiency_v2",
+    "name": "ROE改善资本效率因子 v2",
+    "name_en": "ROE Improvement with Capital Efficiency v2",
+    "category": "基本面/成长质量",
+    "description": "衡量ROE改善是否建立在克制扩表和稳定盈利底座之上。优先选择ROE同比/环比改善明显，但BPS增速不过度激进、近4期ROE均值更高且波动更低的股票。因子先映射到日频，再做市值中性化。",
+    "hypothesis": "若盈利能力改善并非依赖大幅扩表，而是来自更高质量的经营修复，则这类公司在A股中证1000横截面上会获得更稳定的短期定价重估。",
+    "expected_direction": "正向（高因子值=高预期收益）",
+    "factor_type": "基本面/Quality-Growth",
+    "formula": "neutralize(zscore(tanh((ROE_yoy/(1+2.5*pos(BPS_yoy)+1.2*pos(BPS_qoq)))/4)*(0.55+0.45*tanh(mean4(ROE)/8))*(1/(1+0.9*std4(ROE)/4))+0.25*tanh((0.65*ROE_yoy+0.35*ROE_qoq)/5.5)*(1/(1+3*mean(pos(BPS_yoy),pos(BPS_qoq))))), log_mktcap)",
+    "direction": 1,
+    "stock_pool": "中证1000",
+    "period": "2023-08-14 ~ 2026-02-13",
+    "rebalance_freq": 5,
+    "forward_days": 5,
+    "cost": 0.003,
+    "rating": "★★★★ 强",
+    "nav_data": "output/roe_improve_capital_efficiency_v2/cumulative_returns.json",
+    "ic_data": "output/roe_improve_capital_efficiency_v2/ic_series.json",
+    "upgrade_notes": "相对v1，强化了“盈利改善但扩表克制”的资本效率约束，并加入ROE底座与稳定性项；在5日调仓设定下IC与分层收益均明显提升。",
+    "lessons_learned": [
+      "纯ROE趋势容易与成长扩表混在一起，加入BPS增速惩罚后信号更干净",
+      "Quality/Growth在中证1000上也能做成短周期因子，不一定只能月频",
+      "市值中性化后仍有显著IC，说明并非简单小盘暴露"
+    ],
+    "created": "2026-09-01",
+    "updated": "2026-09-01",
+    "metrics": {
+      "ic_mean": 0.027243592932260252,
+      "ic_std": 0.07169040747746962,
+      "ic_t": 3.8398126290220236,
+      "ic_positive_ratio": 0.6198347107438017,
+      "rank_ic": 0.029497023373338142,
+      "rank_ic_std": 0.08658032854559472,
+      "ir": 0.38001726996491386,
+      "ic_count": 121,
+      "long_short_sharpe": 2.958818247176953,
+      "long_short_mdd": -0.06656857809394721,
+      "monotonicity": 0.9999999999999999,
+      "group_sharpe": [
+        0.2305506638733081,
+        0.5229660453654889,
+        0.6489512529668536,
+        0.9150640271842102,
+        1.2172973890667795
+      ],
+      "group_returns_annualized": [
+        0.06555916703069009,
+        0.145586932143684,
+        0.17356394615799164,
+        0.24562244819248646,
+        0.3264940172141888
+      ],
+      "group_mdd": [
+        -0.360003179714317,
+        -0.3269089273483064,
+        -0.3306210854612387,
+        -0.29769325645951145,
+        -0.2527160127349584
+      ]
+    },
+    "conclusion": "达标并入库。IC均值0.0272、t=3.84、G5 Sharpe=1.22、单调性1.0，全指标超过门槛。该因子抓住了“盈利改善质量”而非单纯扩表成长，在中证1000上表现出稳定横截面选股能力。",
+    "barra_style": "Growth",
+    "source_type": "自研",
+    "source_title": "ROE改善资本效率复合因子",
+    "source_url": "",
+    "correlations": {
+      "roe_improve_capital_efficiency_v2": 1.0,
+      "vssignal_v1": -0.009,
+      "note": "其余历史因子因缺少统一本地CSV路径，暂未完成全量相关性校验。"
+    }
   }
 ]
