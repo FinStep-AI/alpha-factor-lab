@@ -7791,5 +7791,75 @@
       "output/asset_turnover_proxy_v1/report.json",
       "scripts/build_asset_turnover_proxy_v1.py"
     ]
+  },
+  {
+    "date": "2026-09-01 09:00:00",
+    "factor_id": "keyperiod_ret_zero_proxy_v0",
+    "factor_name": "关键时段零收益代理 v0",
+    "status": "failed",
+    "source_type": "研报扫描/摘要跟踪",
+    "source_title": "广发金工 Alpha因子跟踪月报（2026年5月）— keyperiod_ret_zero；以及公开检索到的委托挂单/高频微观结构方向",
+    "source_url": "https://finance.sina.com.cn/wm/2026-06-03/doc-iniactak2313454.shtml",
+    "source_author": "广发金工团队",
+    "source_year": 2026,
+    "source_journal": "券商金工月报",
+    "barra_style": "微观结构",
+    "description": "今日扫描到 keyperiod_ret_zero 等 Level-2/高频因子方向，直觉上可对应尾盘/关键时段价格粘滞、零收益占比、委托簿信息含量等微观结构 alpha。但当前公开可得仅为摘要级描述，未获得可核验的原文公式、采样区间、关键时段定义和标准化参数；同时本地日线库虽覆盖 close/overnight/volume 等字段，但不含 Level-2 委托挂单、分钟成交切片与关键时段细分成交明细，无法满足“严格按原文参数复现”的要求。",
+    "formula": "未复现；候选代理思路为 zero_ret_ratio_on_key_period / tail_stickiness / closing_inactivity，但均未进入正式实验",
+    "original_metric": {
+      "paper_claim": "摘要仅披露 keyperiod_ret_zero 为近期表现较好的 Level-2 因子之一，未给出可复现指标细节"
+    },
+    "our_metric": {
+      "market": "中证1000",
+      "period": "截至 2026-08-31",
+      "result": "未进入正式构建与回测"
+    },
+    "diff_notes": "一是数据层缺失：无 Level-2/分钟关键时段字段；二是文献层缺失：只有摘要，没有公式参数；三是因子库已有 vssignal_v1、VWAP偏离、量价一致性、隔夜/收盘位置等相邻微观结构因子，若强行做日线代理，极易变成重复或伪复现。",
+    "conclusion": "终止当日复现，不入库。等待拿到全文公式或补齐分钟/Level-2 数据后再启动。"
+  },
+  {
+    "factor_id": "roe_improve_capital_efficiency_v1",
+    "factor_name": "ROE改善资本效率因子 v1",
+    "date": "2026-09-01",
+    "theme": "基本面类/Quality-Growth",
+    "search_query": "毛利率趋势 量化因子 A股",
+    "hypothesis": "优先选择ROE同比改善明显、但BPS扩张克制的公司；若盈利改善并非靠激进扩表驱动，则后续应获得更稳定超额收益。",
+    "construction": "raw=tanh((ROE同比改善/(1+2.5*正BPS同比+1.2*正BPS环比))/4)*(0.55+0.45*tanh(ROE四季均值/8))*(1/(1+0.9*ROE四季波动))+0.25*tanh((0.65*ROE同比+0.35*ROE环比)/5.5)*(1/(1+3*近两期正BPS同比均值)); 财报滞后45天映射到日频，80日内前向填充；按日对log市值OLS回归取残差并标准化。",
+    "neutralization": "市值中性化(log_mktcap OLS residualization)",
+    "data_sources": [
+      "data/csi1000_fundamental_cache.csv",
+      "data/csi1000_kline_raw.csv",
+      "data/csi1000_returns.csv"
+    ],
+    "backtest": {
+      "forward_days": 5,
+      "groups": 5,
+      "cost": 0.003,
+      "period": "2022-11-14 ~ 2026-02-13"
+    },
+    "metrics": {
+      "ic_mean": 0.020692433201423256,
+      "ic_t_stat": 3.2375191130386636,
+      "g5_sharpe": 0.9245298078140403,
+      "monotonicity": 0.8999999999999998,
+      "long_short_sharpe": 1.1303607970724279
+    },
+    "decision": "淘汰",
+    "pass_threshold": false,
+    "failure_reason": "纯业绩上已达门槛（IC=0.0207, t=3.24, G5 Sharpe=0.9245, 单调性=0.90），但与现有 quality_reinvestment_gap_v1 的截面相关性达 0.7062，超过 >0.7 冗余线；说明该信号本质仍是“ROE改善-扩表约束”家族的近邻重述，增量不足，不入库。",
+    "redundancy_check": {
+      "quality_reinvestment_gap_v1": 0.7062269609120893,
+      "roe_bps_inflect_quality_v1": 0.6576967173198801,
+      "roe_improve_efficiency_v1": 0.6042149519064256,
+      "roe_persistence_gap_v3": 0.5308988370799856,
+      "roe_reaccel_lowexp_smooth_v1": 0.42691182926147114
+    },
+    "artifacts": [
+      "data/factor_roe_improve_capital_efficiency_v1.csv",
+      "output/roe_improve_capital_efficiency_v1/backtest_report.json",
+      "output/roe_improve_capital_efficiency_v1/cumulative_returns.csv",
+      "output/roe_improve_capital_efficiency_v1/ic_series.csv",
+      "calc_roe_improve_capital_efficiency_v1.py"
+    ]
   }
 ]
