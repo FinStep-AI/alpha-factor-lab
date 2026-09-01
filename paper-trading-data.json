@@ -6,7 +6,7 @@
     "benchmark": "000300",
     "benchmark_name": "沪深300",
     "created_at": "2026-02-23 22:14:25",
-    "updated_at": "2026-09-01 08:31:13",
+    "updated_at": "2026-09-01 09:04:04",
     "status": "active",
     "players_count": 6
   },
@@ -10266,14 +10266,6 @@
       "decisions": [
         {
           "date": "2026-04-22",
-          "action": "rebalance",
-          "summary": "因子排名法调仓",
-          "detail": "7因子rank_sum前25只",
-          "recommendation": "调仓",
-          "exec_summary": "成功0笔，失败0笔"
-        },
-        {
-          "date": "2026-04-22",
           "type": "weekly_rebalance",
           "action": "rebalance",
           "summary": "因子排名调仓 (LightGBM fallback) — 价格数据异常",
@@ -10544,6 +10536,13 @@
           "summary": "因子扫描完成：今日未新增入库因子",
           "detail": "已刷新中证1000日线至2026-08-11。扫描到国海证券《委托挂单手数蕴含的选股信息》方向，但当前仅获得摘要/目录级信息，未取得可核验公式参数；且现有可用数据接口不含Level-2委托挂单明细，无法按原文严格复现。因子库已存在smart_money、VWAP偏离、量价一致性、价格延迟等相近微观结构因子，避免做伪复现，今日记录研究日志，不入库。",
           "recommendation": "继续跟踪可获取全文公式或补充Level-2委托数据接口后再复现"
+        },
+        {
+          "date": "2026-09-01",
+          "action": "hold",
+          "summary": "因子扫描完成：数据已更新，今日未新增入库因子",
+          "detail": "先按要求刷新中证1000日线：fintool 模式 1000/1000 失败，已自动 fallback 到 auto，K线与收益率成功更新至 2026-08-31（昨天），满足时效要求。随后扫描中文金工研报与英文论文，重点跟踪到广发金工月报中的 keyperiod_ret_zero 等 Level-2/关键时段微观结构方向。但当前公开可得仅为摘要级信息，未取得可核验公式、参数与采样定义；本地数据也缺少 Level-2 委托簿与关键时段分钟明细，无法按原文严格复现。考虑到现有因子库已包含 vssignal_v1、VWAP偏离、量价一致性、隔夜动量、收盘位置等相邻微观结构因子，若强行用日线代理构造，重复与伪复现风险高，因此今日不进入正式回测、不新增因子入库。相关研究结论已写入 factor-research.json。",
+          "recommendation": "维持现有因子库与持仓不变；后续待获取全文公式或补充分钟/Level-2 数据后再复现该方向。"
         }
       ],
       "rebalances": [
