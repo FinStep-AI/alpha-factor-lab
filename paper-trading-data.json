@@ -6,7 +6,7 @@
     "benchmark": "000300",
     "benchmark_name": "沪深300",
     "created_at": "2026-02-23 22:14:25",
-    "updated_at": "2026-09-01 15:06:33",
+    "updated_at": "2026-09-01 15:12:02",
     "status": "active",
     "players_count": 6
   },
@@ -12645,7 +12645,7 @@
       "style": "趋势跟踪 · 板块轮动 · 全A股扫描 · 中长线波段",
       "description": "BBI+MA60趋势判断，KDJ低位捕捉买点，板块轮动做趋势收益。核心逻辑：阳率×盈亏比最大化。",
       "portfolio": {
-        "cash": 125442.4199999983,
+        "cash": 2060595.4399999983,
         "positions": {
           "600428.SH": {
             "code": "600428.SH",
@@ -12671,42 +12671,6 @@
             "entry_date": "2026-07-22",
             "max_pnl_pct": 6.68
           },
-          "603669.SH": {
-            "code": "603669.SH",
-            "name": "灵康药业",
-            "volume": 157300,
-            "avg_cost": 6.17,
-            "current_price": 5.39,
-            "market_value": 847847.0,
-            "pnl": -122694.0,
-            "pnl_pct": -12.64,
-            "entry_date": "2026-08-11",
-            "max_pnl_pct": 2.43
-          },
-          "688237.SH": {
-            "code": "688237.SH",
-            "name": "超卓航科",
-            "volume": 8800,
-            "avg_cost": 56.69,
-            "current_price": 55.56,
-            "market_value": 488928.0,
-            "pnl": -9944.0,
-            "pnl_pct": -1.99,
-            "entry_date": "2026-08-13",
-            "max_pnl_pct": 6.21
-          },
-          "301520.SZ": {
-            "code": "301520.SZ",
-            "name": "万邦医药",
-            "volume": 9500,
-            "avg_cost": 85.68,
-            "current_price": 64.01,
-            "market_value": 608095.0,
-            "pnl": -205865.0,
-            "pnl_pct": -25.29,
-            "entry_date": "2026-08-14",
-            "max_pnl_pct": 0.13
-          },
           "603161.SH": {
             "code": "603161.SH",
             "name": "科华控股",
@@ -12729,10 +12693,10 @@
             "pnl": 30968.0,
             "pnl_pct": 1.55,
             "entry_date": "2026-09-01",
-            "max_pnl_pct": 1.55
+            "max_pnl_pct": 1.77
           }
         },
-        "total_value": 8124607.42,
+        "total_value": 8114890.44,
         "last_update": "2026-09-01"
       },
       "nav_history": {
@@ -21600,17 +21564,66 @@
           "pnl": 0,
           "pnl_pct": 0,
           "reason": "晨扫候选靠前，pullback通道，评分53，量比4.29，行业房地产业"
+        },
+        {
+          "date": "2026-09-01",
+          "code": "603669.SH",
+          "name": "灵康药业",
+          "direction": "sell",
+          "price": 5.38,
+          "volume": 157300,
+          "amount": 846274.0,
+          "fees": {
+            "commission": 253.88,
+            "stamp_duty": 423.14,
+            "transfer_fee": 8.46,
+            "slippage_cost": 846.27,
+            "total": 1531.76
+          },
+          "pnl": -124267.0,
+          "pnl_pct": -12.8,
+          "reason": "止损：收盘价5.38明显跌破止损线6.12，且价格低于BBI，尾盘全清"
+        },
+        {
+          "date": "2026-09-01",
+          "code": "688237.SH",
+          "name": "超卓航科",
+          "direction": "sell",
+          "price": 55.26,
+          "volume": 8800,
+          "amount": 486288.0,
+          "fees": {
+            "commission": 145.89,
+            "stamp_duty": 243.14,
+            "transfer_fee": 4.86,
+            "slippage_cost": 486.29,
+            "total": 880.18
+          },
+          "pnl": -12584.0,
+          "pnl_pct": -2.52,
+          "reason": "止损：收盘价55.26跌破止损线56.64，趋势走弱，尾盘全清"
+        },
+        {
+          "date": "2026-09-01",
+          "code": "301520.SZ",
+          "name": "万邦医药",
+          "direction": "sell",
+          "price": 63.8,
+          "volume": 9500,
+          "amount": 606100.0,
+          "fees": {
+            "commission": 181.83,
+            "stamp_duty": 303.05,
+            "transfer_fee": 6.06,
+            "slippage_cost": 606.1,
+            "total": 1097.04
+          },
+          "pnl": -207860.0,
+          "pnl_pct": -25.54,
+          "reason": "止损：收盘价63.80远低于止损线85.63，且跌破BBI，尾盘全清"
         }
       ],
       "decisions": [
-        {
-          "date": "2026-08-06",
-          "action": "buy",
-          "summary": "先卖出中远海特38950股做止盈；新开仓甘李药业22300股",
-          "detail": "买入候选优先选择甘李药业（603087.SH），因其属于今日唯一明显集中板块医药制造业，综合评分88，量比3.57，且处于BBI金叉后的缩量回调结构。 持仓方面，中远海特触发第一档止盈；海正药业与天士力仍处医药线内部，天目药业继续持有观察。",
-          "recommendation": "先执行止盈，再把新增仓位优先留给板块集中度最高的医药方向，整体持仓维持5只左右，避免同日过度扩张。",
-          "exec_summary": "成功2笔，失败0笔"
-        },
         {
           "date": "2026-08-06",
           "action": "mixed",
@@ -21834,6 +21847,14 @@
           "summary": "午盘未触发持仓调整，维持现有仓位。",
           "detail": "持仓未出现新的止盈止损动作；扫描候选未形成足够强度和板块共振，故不新增仓位。",
           "recommendation": "继续观察尾盘强势信号，未确认前保持耐心。"
+        },
+        {
+          "date": "2026-09-01",
+          "action": "mixed",
+          "summary": "收盘检查触发3笔止损卖出，未新增开仓。",
+          "detail": "今日收盘后更新行情与K线缓存，现有持仓中灵康药业、超卓航科、万邦医药均已跌破各自止损线，且同步出现BBI破位，按趋势纪律尾盘全清。扫描结果仅发现4只BBI金叉缩量回调候选，主策略与单针下30通道均无新信号；其中中远海特为已有持仓，不做重复加仓，其余候选板块共振与确定性不足，且组合当前可用现金较低，因此本次不新增买入。其余持仓继续观察，保留中远海特、天目药业、科华控股、陆家嘴。",
+          "recommendation": "执行3笔卖出、保持其余仓位不动，等待后续更强的趋势共振信号再补仓。",
+          "exec_summary": "成功3笔，失败0笔"
         }
       ],
       "rebalances": [],
@@ -21845,8 +21866,8 @@
         "calmar_ratio": -2.22,
         "win_rate": 51.27,
         "profit_loss_ratio": 0.76,
-        "total_trades": 444,
-        "total_fees": 671580.5400000002,
+        "total_trades": 447,
+        "total_fees": 675089.5200000003,
         "current_positions": 5,
         "turnover_rate": 0.0
       },
