@@ -7908,5 +7908,41 @@
       "report": "output/roe_improve_capital_efficiency_v2/report.json",
       "output_dir": "output/roe_improve_capital_efficiency_v2/"
     }
+  },
+  {
+    "date": "2026-09-02 12:01:00",
+    "factor_id": "roe_reaccel_capdisc_v1",
+    "factor_name": "ROE再加速-资本纪律因子 v1",
+    "status": "failed",
+    "source_type": "自研+论文启发",
+    "source_title": "盈利再加速 + 保守扩张（Quality/Growth 代理）",
+    "source_url": "",
+    "source_author": "古城飞雪",
+    "source_year": 2026,
+    "source_journal": "internal research",
+    "barra_style": "Quality / Growth",
+    "description": "在仅有 ROE/BPS 基本面字段约束下，构造“盈利同比改善再次加速，但净资产扩张受约束”的日频代理。先计算 ROE 同比变化的一阶与二阶加速度，奖励盈利改善的再加速；再用近两期 BPS 同比/环比扩张作为资本纪律惩罚，并用 ROE 水平、ROE 趋势与 ROE 波动做锚定，最后做横截面市值中性化。",
+    "formula": "core = 0.65*Δ(ROE_yoy) + 0.35*Δ²(ROE_yoy); factor = neutralize(core * anchor(ROE_level, ROE_trend) * stability(ROE_vol) * discipline(BPS_expansion), log_mktcap)",
+    "our_metric": {
+      "market": "中证1000",
+      "period": "2023-11-14 ~ 2026-02-13",
+      "ic_mean": 0.011374517309330772,
+      "ic_t": 2.3878186313471006,
+      "rank_ic": 0.017204591812568122,
+      "g5_sharpe": 0.8038809567549965,
+      "long_short_sharpe": 0.47442165000674635,
+      "monotonicity": 0.8,
+      "turnover_mean": 0.26139620290670185,
+      "max_abs_corr_existing": 0.0,
+      "closest_existing_factor": ""
+    },
+    "failure_reason": "部分指标接近门槛，但未形成“强且稳”的可入库形态：IC均值仅0.0114，明显低于0.02；G5 Sharpe 0.804 只是擦线通过；单调性 0.8 也只是卡门槛，多空 Sharpe 仅0.47。说明该信号更多提供弱排序信息，横截面强度不足，难以作为独立主因子入库。",
+    "diff_notes": "相比 roe_reaccel_bps_guard_v1，这一版显式加入 ROE 同比二阶加速度，并把 BPS 扩张惩罚改成更直接的“资本纪律”门控；相比 quality_reinvestment_gap_v1，则更强调盈利变化的曲率而非水平差。经济含义更聚焦“低扩张下的盈利再加速”，但实证上仍停留在弱 alpha。",
+    "conclusion": "淘汰",
+    "data_files": [
+      "calc_roe_reaccel_capdisc_v1.py",
+      "data/factor_roe_reaccel_capdisc_v1.csv",
+      "output/roe_reaccel_capdisc_v1/report.json"
+    ]
   }
 ]
