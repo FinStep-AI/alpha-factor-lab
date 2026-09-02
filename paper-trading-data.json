@@ -6,7 +6,7 @@
     "benchmark": "000300",
     "benchmark_name": "沪深300",
     "created_at": "2026-02-23 22:14:25",
-    "updated_at": "2026-09-02 08:32:20",
+    "updated_at": "2026-09-02 09:05:31",
     "status": "active",
     "players_count": 6
   },
@@ -10268,38 +10268,6 @@
       ],
       "decisions": [
         {
-          "date": "2026-04-22",
-          "type": "weekly_rebalance",
-          "action": "rebalance",
-          "summary": "因子排名调仓 (LightGBM fallback) — 价格数据异常",
-          "detail": "因子rank选25只，risk通过。execute_decision: 17只SH价格=0未买入，仅8只SZ成交。现金68%替代30%。可能原因：周一早盘价格数据未更新（9:00 ftm data lag）。",
-          "target_codes": [
-            "002320.SZ",
-            "000089.SZ",
-            "002507.SZ",
-            "002668.SZ",
-            "002936.SZ",
-            "301061.SZ",
-            "301087.SZ",
-            "301267.SZ"
-          ],
-          "result_codes": [
-            "000089.SZ",
-            "002320.SZ",
-            "002507.SZ",
-            "002668.SZ",
-            "002936.SZ",
-            "301061.SZ",
-            "301087.SZ",
-            "301267.SZ"
-          ],
-          "executed": "partial",
-          "nav": 1.0646,
-          "cash_pct": 0.681,
-          "positions_count": 8,
-          "recommendation": "调仓"
-        },
-        {
           "date": "2026-04-24",
           "action": "hold",
           "summary": "日度因子扫描：新增成交量放大确认因子 vssignal_v1 并入库",
@@ -10546,6 +10514,13 @@
           "summary": "因子扫描完成：数据已更新，今日未新增入库因子",
           "detail": "先按要求刷新中证1000日线：fintool 模式 1000/1000 失败，已自动 fallback 到 auto，K线与收益率成功更新至 2026-08-31（昨天），满足时效要求。随后扫描中文金工研报与英文论文，重点跟踪到广发金工月报中的 keyperiod_ret_zero 等 Level-2/关键时段微观结构方向。但当前公开可得仅为摘要级信息，未取得可核验公式、参数与采样定义；本地数据也缺少 Level-2 委托簿与关键时段分钟明细，无法按原文严格复现。考虑到现有因子库已包含 vssignal_v1、VWAP偏离、量价一致性、隔夜动量、收盘位置等相邻微观结构因子，若强行用日线代理构造，重复与伪复现风险高，因此今日不进入正式回测、不新增因子入库。相关研究结论已写入 factor-research.json。",
           "recommendation": "维持现有因子库与持仓不变；后续待获取全文公式或补充分钟/Level-2 数据后再复现该方向。"
+        },
+        {
+          "date": "2026-09-02",
+          "action": "hold",
+          "summary": "因子扫描：未新增入库",
+          "detail": "完成数据刷新：fintool模式全量失败但本地K线最新已至2026-09-01，满足昨天时效要求，未触发auto回退。随后扫描中文金工与英文论文/SSRN，重点考察中证1000因子挖掘、cross-sectional predictability 与异常因子方向。候选方向选择估值动量（PE_TTM 20日对数变化率，市值中性化）与股东集中度变化（股东户数环比，负向视为筹码集中）。两者均尝试用fintool脚本严格构建：valuation_momentum在1000只中仅287只返回估值接口结果，滚动20日后无有效输出；shareholder_concentration为0/1000成功，无可用季频数据。由于原始数据缺失，无法形成可回测因子CSV，更无法满足IC>0.02、t>2、Sharpe>0.8、单调性>0.8门槛。结合现有因子库已覆盖流动性、动量、波动、量价微观结构与部分基本面主线，今日不强行做日线伪复现，不新增因子入库。已建议在factor-research.json记录本次失败，结论为数据源覆盖不足，后续优先转向可稳定获取的资金流/估值缓存或本地基本面时序信号。",
+          "recommendation": "今日维持现有因子库，后续优先排查fintool估值/股东接口可用性，再做本土化复现。"
         }
       ],
       "rebalances": [
