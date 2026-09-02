@@ -7944,5 +7944,41 @@
       "data/factor_roe_reaccel_capdisc_v1.csv",
       "output/roe_reaccel_capdisc_v1/report.json"
     ]
+  },
+  {
+    "date": "2026-09-02 15:38:00",
+    "factor_id": "roe_bps_stable_compound_v1",
+    "factor_name": "ROE-BPS稳定复合成长因子 v1",
+    "status": "failed",
+    "source_type": "自研+论文启发",
+    "source_title": "ROE改善 × BPS稳定扩张（Growth/Quality 代理）",
+    "source_url": "",
+    "source_author": "古城飞雪",
+    "source_year": 2026,
+    "source_journal": "internal research",
+    "barra_style": "Growth",
+    "description": "基于仅有的 ROE/BPS 季频字段，构造“盈利改善 + 净资产稳定扩张”的成长代理。因子奖励 ROE 同比/环比改善，同时要求近四季 ROE 水平较高、波动较低；在 BPS 侧奖励温和持续扩张、惩罚跳跃式扩表，再做横截面市值中性化。目标是捕捉由内生盈利带动、而非激进扩表驱动的稳健成长公司。",
+    "formula": "factor = neutralize[tanh(0.7*ROE_yoy+0.3*ROE_qoq) * gate(ROE_level, ROE_stability) * tanh(BPS_growth) * gate(BPS_stability, capital_discipline), log_mktcap]",
+    "our_metric": {
+      "market": "中证1000",
+      "period": "2022-11-14 ~ 2026-02-13",
+      "ic_mean": 0.01136800971988611,
+      "ic_t": 2.8643584714477655,
+      "rank_ic": 0.012666042905786387,
+      "g5_sharpe": 0.6058124586510718,
+      "long_short_sharpe": 1.1840244308408214,
+      "monotonicity": 0.7,
+      "turnover_mean": 0.2386319374292313,
+      "max_abs_corr_existing": 0.0,
+      "closest_existing_factor": ""
+    },
+    "failure_reason": "未达到入库门槛。虽然 IC t=2.86、长短组合 Sharpe=1.18 说明信号不是纯噪音，但 IC均值仅0.0114，显著低于0.02；G5 Sharpe 只有0.61，且分层收益在 G4 达峰后 G5 回落，单调性仅0.7。说明该因子更像“中段排序有效、极端分位失真”的弱成长代理，尚不足以作为独立 Growth 主因子。",
+    "diff_notes": "相较已入库的 gross_margin_trend_proxy_v1 与 roe_improve_capital_efficiency_v2，这一版更强调 ROE 改善与 BPS 平稳扩张的联动，并显式惩罚跳跃式扩表。经济含义更干净，但实证表现显示顶层分组选股不够锋利，边际增益有限。",
+    "conclusion": "淘汰",
+    "data_files": [
+      "calc_roe_bps_stable_compound_v1.py",
+      "data/factor_roe_bps_stable_compound_v1.csv",
+      "output/roe_bps_stable_compound_v1/backtest_report.json"
+    ]
   }
 ]
