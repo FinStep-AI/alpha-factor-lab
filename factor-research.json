@@ -7980,5 +7980,74 @@
       "data/factor_roe_bps_stable_compound_v1.csv",
       "output/roe_bps_stable_compound_v1/backtest_report.json"
     ]
+  },
+  {
+    "date": "2026-09-03 09:00:00",
+    "factor_id": "major_net_flow_ratio_v1",
+    "factor_name": "主力净流入占比 v1",
+    "status": "failed",
+    "source_type": "论文启发+fintool本土化",
+    "source_title": "资金流 alpha / order imbalance literature（主力净流入占比）",
+    "source_url": "",
+    "barra_style": "微观结构",
+    "description": "使用 fintool 主力资金流数据，构造 major_net_flow_in / (super_in + large_in + medium_in + little_in) 的20日滚动均值，并在横截面对 log(amount) 代理市值做 OLS 中性化、z-score 标准化。严格按原始直觉方向：主力净流入占比越高，未来收益越高。",
+    "formula": "raw = MA20(major_net_flow_in / total_inflow_components); factor = neutralize(raw, log_market_cap_proxy)",
+    "original_metric": {
+      "reference": "资金流/订单不平衡类文献通常报告正向短期预测能力，主力净流入越强、后续收益越高（未找到可直接对齐中证1000日频20日持有参数的单一论文指标）"
+    },
+    "our_metric": {
+      "market": "中证1000",
+      "period": "2026-02-06 ~ 2026-09-02",
+      "ic_mean": -0.013781368934285434,
+      "ic_t": -0.3042676576869255,
+      "rank_ic": -0.021958569685716783,
+      "long_short_sharpe": -0.40982181404154344,
+      "monotonicity": -0.4,
+      "turnover_mean": 0.7377351204869824
+    },
+    "failure_reason": "明显不达标且方向错误：IC均值-0.0138、t=-0.30、多空Sharpe=-0.41、单调性-0.4。高主力净流入占比分组(G5)反而最差，年化-29.3%。",
+    "diff_notes": "与文献中更常见的超短期订单不平衡/事件日收益预测不同，这里采用20日平滑+20日前瞻收益，在中证1000上可能把短期拥挤交易、题材出清与高位派发混到一起；此外主力净流入字段口径更接近交易活跃度/情绪而非稳定知情交易。当前结果更像反向拥挤指标，而不是正向 alpha。",
+    "conclusion": "淘汰",
+    "data_files": [
+      "data/factor_major_net_flow_ratio_v1.csv",
+      "output/major_net_flow_ratio_v1/backtest_report.json"
+    ]
+  },
+  {
+    "date": "2026-09-03 12:01:00",
+    "factor_id": "roe_yoy_stability_guard_v1",
+    "factor_name": "ROE同比稳定成长因子 v1",
+    "status": "failed",
+    "source_type": "自研",
+    "source_title": "ROE同比改善 + 稳定性约束 + BPS扩张惩罚",
+    "source_url": "",
+    "source_author": "OpenClaw cron factor miner",
+    "source_year": 2026,
+    "source_journal": "",
+    "barra_style": "Growth",
+    "description": "在仅有 ROE/BPS 基本面字段下，构造“ROE同比改善 × 盈利稳定性 × 低扩张约束”信号：以近2期 ROE 同比均值表征盈利改善趋势，以近4季 ROE 波动率惩罚不稳定改善，以 BPS 同比扩张惩罚高资本消耗/激进扩表，再映射财报滞后45天到日频，并对 log_mktcap 代理市值做横截面中性化与标准化。",
+    "formula": "raw = tanh(MA2(ROE_t-ROE_t-4)/4) * (0.65 + 0.35*tanh(MA4(ROE)/10)) * 1/(1+STD4(ROE)) * 1/(1+3*max(BPS_t/BPS_t-4-1,0)); factor = neutralize(raw, log_mktcap)",
+    "our_metric": {
+      "market": "中证1000",
+      "period": "2023-11-14 ~ 2026-02-13",
+      "ic_mean": 0.016651986981383385,
+      "ic_t": 2.6207152282524273,
+      "rank_ic": 0.020091923038947815,
+      "g5_sharpe": 1.1001452228317852,
+      "long_short_sharpe": 1.5216043349479569,
+      "monotonicity": 0.8999999999999998,
+      "turnover_mean": 0.04628885284821233
+    },
+    "failure_reason": "接近达标但未过严格门槛：IC均值 0.0167 < 0.02。其余指标较强（IC_t=2.62，G5 Sharpe=1.10，单调性=0.90，多空 Sharpe=1.52），说明 Growth 方向有效，但横截面预测强度仍略弱，不足以按入库标准上线。",
+    "diff_notes": "相比已有 roe_trend_quality_v1、roe_yoy_accel_resid_v1、roe_slope_bps_stability_v1，这一版更聚焦“同比改善本身”，同时用 ROE 波动与 BPS 扩张做双重守门，尽量剔除高波动和高资本消耗型假成长。回测表现优于同轮尝试的 roe_improve_smooth_guard_v1，但 IC 仍未跨过 0.02，说明约束有效、alpha 仍不够尖锐。后续可尝试与价格确认/成交量确认做低相关复合。",
+    "conclusion": "淘汰",
+    "data_files": [
+      "calc_roe_yoy_stability_guard_v1.py",
+      "data/factor_roe_yoy_stability_guard_v1.csv",
+      "output/roe_yoy_stability_guard_v1/report.json",
+      "calc_roe_improve_smooth_guard_v1.py",
+      "data/factor_roe_improve_smooth_guard_v1.csv",
+      "output/roe_improve_smooth_guard_v1/report.json"
+    ]
   }
 ]
