@@ -8049,5 +8049,39 @@
       "data/factor_roe_improve_smooth_guard_v1.csv",
       "output/roe_improve_smooth_guard_v1/report.json"
     ]
+  },
+  {
+    "date": "2026-09-03 15:32:00",
+    "factor_id": "boll_breakout_intensity_v1",
+    "factor_name": "布林收缩放量突破强度因子 v1",
+    "status": "failed",
+    "source_type": "经验构造+本土化",
+    "source_title": "Bollinger Band Squeeze / Volatility Contraction Breakout",
+    "source_url": "https://www.tradingsetupsreview.com/bollinger-squeeze/",
+    "source_author": "经验规则整理",
+    "source_year": 2026,
+    "source_journal": "Trading heuristic",
+    "barra_style": "Technical",
+    "description": "基于A股日频量价数据构造“布林带宽收缩后的放量向上突破强度”信号：先用20日布林带宽在60日窗口中的分位数刻画波动率收缩程度，再用收盘价相对上轨的突破幅度表征价格脱离整理区间的强弱，并用成交额相对20日均值的放大倍数做确认，最后叠加5日收益方向门控，避免把纯噪声上影线错判成突破。对20日平均成交额取对数作为市值代理，做横截面OLS中性化并标准化。",
+    "formula": "raw = (1-rank60(BBW20)) * (Close/Upper20-1) * log(1+Amount/MA20(Amount)) * tanh(Ret5/0.12); factor = neutralize(raw, log(Amount20))",
+    "our_metric": {
+      "market": "中证1000",
+      "period": "2022-12-08 ~ 2026-04-23",
+      "ic_mean": 0.01463350346036095,
+      "ic_t": 2.2039566937932213,
+      "rank_ic": 0.022258195938698485,
+      "g5_sharpe": -0.1129343266055837,
+      "long_short_sharpe": 0.9779624065864091,
+      "monotonicity": 0.7,
+      "turnover_mean": 0.7725684096824875
+    },
+    "failure_reason": "未过入库门槛。虽然IC均值0.0146、IC_t=2.20、Long-Short Sharpe=0.98都不差，但G5 Sharpe仅-0.11，单调性0.70低于0.8，最高分组并没有形成稳定可持有组合，收益主要来自做空G1而非做多G5。",
+    "diff_notes": "与常见的布林带宽/突破因子不同，这一版明确把“收缩状态”“上轨突破幅度”和“成交额确认”三者相乘，并在末端用5日收益方向做软门控，目的是抓整理后资金驱动的短期趋势启动。结果说明它更像一个偏事件驱动的横截面相对弱强信号，而不是稳定的高分组多头alpha。后续可尝试反向使用、加入突破后回踩确认，或把门控改为“低位收缩后仅在首日突破时打分”。",
+    "conclusion": "淘汰",
+    "data_files": [
+      "calc_boll_breakout_intensity_v1.py",
+      "data/factor_boll_breakout_intensity_v1.csv",
+      "output/boll_breakout_intensity_v1/report.json"
+    ]
   }
 ]
