@@ -6,7 +6,7 @@
     "benchmark": "000300",
     "benchmark_name": "沪深300",
     "created_at": "2026-02-23 22:14:25",
-    "updated_at": "2026-09-04 09:37:37",
+    "updated_at": "2026-09-04 09:38:49",
     "status": "active",
     "players_count": 6
   },
@@ -12697,15 +12697,15 @@
       "style": "趋势跟踪 · 板块轮动 · 全A股扫描 · 中长线波段",
       "description": "BBI+MA60趋势判断，KDJ低位捕捉买点，板块轮动做趋势收益。核心逻辑：阳率×盈亏比最大化。",
       "portfolio": {
-        "cash": 3639.319999998668,
+        "cash": 2932530.079999998,
         "positions": {
           "600671.SH": {
             "code": "600671.SH",
             "name": "天目药业",
-            "volume": 200,
+            "volume": 100,
             "avg_cost": 20.51,
             "current_price": 22.54,
-            "market_value": 4508.0,
+            "market_value": 2254.0,
             "pnl": 406.0,
             "pnl_pct": 9.9,
             "entry_date": "2026-07-22",
@@ -12714,10 +12714,10 @@
           "603161.SH": {
             "code": "603161.SH",
             "name": "科华控股",
-            "volume": 126700,
+            "volume": 63400,
             "avg_cost": 15.75,
             "current_price": 16.7,
-            "market_value": 2115890.0,
+            "market_value": 1058780.0,
             "pnl": 120365.0,
             "pnl_pct": 6.03,
             "entry_date": "2026-09-01",
@@ -12746,20 +12746,9 @@
             "pnl_pct": 0.84,
             "entry_date": "2026-09-03",
             "max_pnl_pct": 1.22
-          },
-          "300862.SZ": {
-            "code": "300862.SZ",
-            "name": "蓝盾光电",
-            "volume": 39600,
-            "avg_cost": 50.2,
-            "current_price": 46.22,
-            "market_value": 1830312.0,
-            "pnl": -157608.0,
-            "pnl_pct": -7.93,
-            "entry_date": "2026-09-03"
           }
         },
-        "total_value": 7984567.32,
+        "total_value": 8023782.08,
         "last_update": "2026-09-04"
       },
       "nav_history": {
@@ -21807,16 +21796,66 @@
           "pnl": 0,
           "pnl_pct": 0,
           "reason": "仪器仪表制造业高分回调信号，放量启动后缩量整理，趋势强度靠前，作为进攻型补仓"
+        },
+        {
+          "date": "2026-09-04",
+          "code": "600671.SH",
+          "name": "天目药业",
+          "direction": "sell",
+          "price": 22.28,
+          "volume": 100,
+          "amount": 2228.0,
+          "fees": {
+            "commission": 5.0,
+            "stamp_duty": 1.11,
+            "transfer_fee": 0.02,
+            "slippage_cost": 2.23,
+            "total": 8.36
+          },
+          "pnl": 177.0,
+          "pnl_pct": 8.63,
+          "reason": "止盈第一档：盈利9.5%≥7%，卖出1/2"
+        },
+        {
+          "date": "2026-09-04",
+          "code": "603161.SH",
+          "name": "科华控股",
+          "direction": "sell",
+          "price": 17.26,
+          "volume": 63300,
+          "amount": 1092558.0,
+          "fees": {
+            "commission": 327.77,
+            "stamp_duty": 546.28,
+            "transfer_fee": 10.93,
+            "slippage_cost": 1092.56,
+            "total": 1977.53
+          },
+          "pnl": 95583.0,
+          "pnl_pct": 9.59,
+          "reason": "止盈第一档：盈利9.8%≥7%，卖出1/2"
+        },
+        {
+          "date": "2026-09-04",
+          "code": "300862.SZ",
+          "name": "蓝盾光电",
+          "direction": "sell",
+          "price": 46.45,
+          "volume": 39600,
+          "amount": 1839420.0,
+          "fees": {
+            "commission": 551.83,
+            "stamp_duty": 919.71,
+            "transfer_fee": 18.39,
+            "slippage_cost": 1839.42,
+            "total": 3329.35
+          },
+          "pnl": -148500.0,
+          "pnl_pct": -7.47,
+          "reason": "止损：价格46.84≤止损线50.15（成本50.2下5个价位）"
         }
       ],
       "decisions": [
-        {
-          "date": "2026-08-10",
-          "action": "hold",
-          "summary": "收盘检查完成，当前空仓，无需尾盘卖出或新增建仓。",
-          "detail": "已完成收盘行情拉取与K线缓存更新。收盘持仓检查结果显示当前DWJ账户无持仓（positions为空），因此不存在止盈、止损或破位离场需求。盘后扫描共发现10只候选，主要集中于医药制造业与部分缩量回调标的，但本次收盘流程以持仓检查和必要尾盘调整为主，当前不触发新增交易执行。",
-          "recommendation": "维持空仓观察，等待下一次明确入场信号。"
-        },
         {
           "date": "2026-08-11",
           "action": "sell",
@@ -22041,6 +22080,14 @@
           "detail": "优先级按行业集中度、信号分数、量比与KDJ位置综合排序；规避过多未分类标的，尽量分散到卫生、有色、零售、渔业等方向。当前dwj账户为空仓且现金1000万，可一次性开5只基础仓位。",
           "recommendation": "按决策先建立5只分散仓位，后续由尾盘扫描继续确认强弱；若盘中出现止损/止盈条件，严格按系统规则执行。",
           "exec_summary": "成功0笔，失败5笔"
+        },
+        {
+          "date": "2026-09-04",
+          "action": "mixed",
+          "summary": "晨扫完成：全A候选23只，持仓检查触发2笔止盈半卖与1笔止损清仓；当前账户现金极低，卖出回笼资金后再观察是否具备开新仓条件。",
+          "detail": "候选信号以BBI金叉后的缩量回调为主，行业分布较散，未形成≥3只的强板块共振。组合层面已有蓝盾光电跌破止损线，天目药业与科华控股达到首档止盈，按纪律先处理存量仓位。由于现有可用现金仅约3639元，晨扫阶段不追加买入，等待卖出成交后在后续窗口再评估新开仓。",
+          "recommendation": "先卖后看，优先兑现止盈并切断止损，暂不在晨扫阶段追新仓；若尾盘仍有行业共振并且卖出后现金充足，再从大东方、兰卫医学、东方钽业等候选中择优介入。",
+          "exec_summary": "成功3笔，失败0笔"
         }
       ],
       "rebalances": [],
@@ -22052,8 +22099,8 @@
         "calmar_ratio": -2.08,
         "win_rate": 51.06,
         "profit_loss_ratio": 0.69,
-        "total_trades": 453,
-        "total_fees": 683801.6400000002,
+        "total_trades": 456,
+        "total_fees": 689116.8800000002,
         "current_positions": 5,
         "turnover_rate": 0.0
       },
