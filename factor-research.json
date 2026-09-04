@@ -8152,5 +8152,27 @@
       "data/factor_roe_steady_growth_v1.csv",
       "output/roe_steady_growth_v1/report.json"
     ]
+  },
+  {
+    "id": "asset_turnover_change_proxy_v1",
+    "name": "资产周转率变化代理因子 v1",
+    "status": "rejected",
+    "barra_style": "Growth",
+    "source_type": "研究启发+财报代理",
+    "research_topic": "基本面类：资产周转率变化",
+    "hypothesis": "用 ROE/BPS 近似经营效率，并结合同比变化与加速度，捕捉资产周转率改善带来的成长溢价。",
+    "implementation": "raw=0.50*atan((roe/bps)/1.5)+0.35*atan(turn_eff_yoy/0.35)+0.15*atan(turn_eff_accel/0.25)-0.20*atan(bps_yoy/0.30)；财报45天滞后映射；对log(20日均成交额)做OLS中性化并zscore。",
+    "data_range": "2024-08-14~2026-09-03",
+    "backtest": {
+      "ic_mean": "0.0119",
+      "ic_t": "1.6926",
+      "g5_sharpe": "1.4290",
+      "monotonicity": "0.4000",
+      "long_short_sharpe": "0.8035"
+    },
+    "decision_reason": "未达门槛：IC均值与IC_t均不足，单调性仅0.4；且与已有roe_delta_yoy_v1平均Spearman相关0.7777、与roe_improve_capital_efficiency_v2相关0.7701，超过0.7冗余阈值。",
+    "correlations": "roe_delta_yoy_v1:0.7777; roe_improve_capital_efficiency_v2:0.7701; roe_accel_v1:0.6916",
+    "artifacts": "scripts/calc_asset_turnover_change_proxy_v1.py; data/factor_asset_turnover_change_proxy_v1.csv; output/asset_turnover_change_proxy_v1/report.json",
+    "date": "2026-09-04"
   }
 ]
