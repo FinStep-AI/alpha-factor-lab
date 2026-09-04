@@ -8083,5 +8083,74 @@
       "data/factor_boll_breakout_intensity_v1.csv",
       "output/boll_breakout_intensity_v1/report.json"
     ]
+  },
+  {
+    "date": "2026-09-04 09:00:00",
+    "factor_id": "daily_scan_no_new_factor_20260904",
+    "factor_name": "日报扫描：未发现可入库新因子",
+    "status": "failed",
+    "source_type": "研报/论文扫描",
+    "source_title": "A股 alpha因子 量化选股 金工研报 2026；因子挖掘 中证1000 选股因子；realized skewness / idiosyncratic skewness papers",
+    "source_url": "https://core.ac.uk/download/pdf/323959067.pdf",
+    "barra_style": "微观结构",
+    "description": "完成数据刷新后，扫描中文金工研报与英文学术论文入口，重点查看已实现偏度/特质偏度/高阶矩方向。结合现有因子库与历史回测文件，发现 skewness 家族（如 ret_ts_skew_v1、vol_skew_v2）已被覆盖且结果普遍不达标，本日未找到具备明确原文参数、且与现有因子不重复的新方向。",
+    "formula": "N/A",
+    "original_metric": {
+      "paper_claim": "文献普遍报告 realized skewness / idiosyncratic skewness 对未来收益存在可预测性，常见结论为高偏度股票后续收益更低或存在一周级别负向关系。"
+    },
+    "our_metric": {
+      "market": "中证1000",
+      "latest_data": "2026-09-03",
+      "existing_skew_examples": {
+        "vol_skew_v2": {
+          "ic_mean": 0.0002,
+          "ic_t": 0.043,
+          "sharpe": 0.533,
+          "monotonicity": 0.7
+        },
+        "ret_ts_skew_v1": {
+          "ic_mean": -0.0005,
+          "ic_t": -0.1,
+          "sharpe": 0.323,
+          "monotonicity": 0.6
+        }
+      }
+    },
+    "diff_notes": "论文多基于更细颗粒度高频数据、周频构造或海外市场；当前中证1000日线+现有字段下，偏度/高阶矩方向已做过多轮本土化尝试，但统计显著性和经济表现都偏弱。继续在同方向迭代的边际收益低，且容易与已失败实验重复。",
+    "conclusion": "今日不新增因子，转入日志记录"
+  },
+  {
+    "date": "2026-09-04 12:01:00",
+    "factor_id": "roe_steady_growth_v1",
+    "factor_name": "ROE稳健增长因子 v1",
+    "status": "failed",
+    "source_type": "论文启发+本土化代理",
+    "source_title": "Profitability / Quality / Growth（ROE persistence & smoothing inspired）",
+    "source_url": "https://bigquant.com/wiki/doc/c7u9IChUio",
+    "source_author": "自研整理",
+    "source_year": 2026,
+    "source_journal": "Web research",
+    "barra_style": "Quality / Growth",
+    "description": "基于现有 fundamental_cache 仅含 ROE/BPS 字段，构造“高ROE水平 + ROE同比改善 + 环比不塌 + ROE波动低 + BPS扩张温和”的稳健增长代理，并以财报滞后45天映射到日频；再用 20 日平均成交额×收盘价构造市值代理，做横截面 OLS 市值中性化、残差缩尾与 z-score 标准化。",
+    "formula": "raw = 0.45*tanh(MA4(ROE)/8) + 0.30*tanh((ROE_t-ROE_t-4)/5) + 0.15*tanh((ROE_t-ROE_t-1)/3) - 0.20*tanh(STD4(ROE)/3) - 0.15*tanh((BPS_t/BPS_t-4-1)/0.30); factor = neutralize(raw, log(price*MA20(amount)))",
+    "our_metric": {
+      "market": "中证1000",
+      "period": "2023-08-14 ~ 2026-09-03",
+      "ic_mean": 0.010181471728399215,
+      "ic_t": 1.0853895284927004,
+      "rank_ic": 0.023851042417717922,
+      "g5_sharpe": 0.4834658464093488,
+      "long_short_sharpe": -0.4320558205157963,
+      "monotonicity": -0.4,
+      "turnover_mean": 0.17334037675340416
+    },
+    "failure_reason": "未达标，而且排序方向偏反。IC均值仅 0.0102、IC_t=1.09，G5 Sharpe=0.48，单调性=-0.4，多空 Sharpe=-0.43。分层上 G1 年化 16.6% 反而显著高于 G5 的 12.0%，说明这版“稳健增长/高质量”定义在中证1000上没有被市场正向定价。",
+    "diff_notes": "相比此前多条已失败的 ROE 改善/持续性/平滑度路线，这一版同时加入 ROE 水平、同比改善、环比稳定、波动惩罚和 BPS 扩张约束，想抓“高盈利且不激进扩张”的稳健成长股；但结果依然不行，说明在当前可得字段下，ROE/BPS 两个低频变量很难独立提炼出可交易的 Quality/Growth alpha，更可能只是弱分层特征。",
+    "conclusion": "淘汰",
+    "data_files": [
+      "calc_roe_steady_growth_v1.py",
+      "data/factor_roe_steady_growth_v1.csv",
+      "output/roe_steady_growth_v1/report.json"
+    ]
   }
 ]
