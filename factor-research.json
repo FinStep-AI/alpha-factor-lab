@@ -1,5 +1,40 @@
 [
   {
+    "date": "2026-09-05 10:00:00",
+    "factor_id": "monthend_liquidity_reversal_v1",
+    "factor_name": "月末流动性需求反转因子 v1",
+    "status": "failed",
+    "source_type": "论文复现+本土化",
+    "source_title": "Month-End Liquidity Demand and the Factor Zoo",
+    "source_url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6909918",
+    "source_author": "SSRN working paper",
+    "source_year": 2026,
+    "source_journal": "SSRN",
+    "barra_style": "Liquidity / Sentiment",
+    "description": "参考月末流动性需求论文中‘大量因子溢价在月末前若干交易日集中兑现’的主线，做中证1000日频本土化代理：在每个自然月最后5个交易日内，对个股的 Amihud 非流动性与当日收益方向做加权汇总，越接近月末权重越高，用以刻画月末被动调仓/资金需求造成的价格冲击压力；随后对 log(amount) 做横截面 OLS 中性化，并对残差做 MAD 缩尾与 z-score 标准化。",
+    "formula": "raw = -WAVG_5(sign(ret_t) * log(1 + 1e8*|ret_t|/amount_t), weight=month_end_proximity); factor = neutralize(raw, log_amount)",
+    "our_metric": {
+      "market": "中证1000",
+      "period": "2022-10-25 ~ 2026-04-27",
+      "ic_mean": 0.015620316015096544,
+      "ic_t": 1.3432990401810585,
+      "rank_ic": 0.030437378579200824,
+      "g5_sharpe": 1.0979837256389209,
+      "long_short_sharpe": 0.4989771124756981,
+      "monotonicity": 0.7,
+      "turnover_mean": 0.7571144931366107
+    },
+    "failure_reason": "接近有效但未过门槛：G5 Sharpe=1.10 已达标，但 IC均值仅0.0156、IC_t=1.34、单调性0.7，说明该信号更像‘高分组可持有但横截面排序不够线性’。此外换手率均值高达75.7%，扣成本后多空 Sharpe 仅0.50，交易效率偏弱。",
+    "diff_notes": "这次不是继续硬挖 Quality/Growth 的低频财务代理，而是转向 2026 新论文的月末流动性需求视角，用现有 OHLCV 数据做轻量复现。和现有 amihud_illiq_v2 同属流动性家族，但这里强调的是‘月末时点上的非流动性冲击’，不是稳定的平均非流动性水平。辅助测试显示去掉收益方向后信号整体反向且更差，说明方向项确实提供了部分信息，但仍不足以形成稳定 alpha。",
+    "conclusion": "淘汰",
+    "data_files": [
+      "data/factor_monthend_liquidity_reversal_v1.csv",
+      "data/factor_monthend_illiq_v1.csv",
+      "output/monthend_liquidity_reversal_v1/report.json",
+      "output/monthend_illiq_v1/report.json"
+    ]
+  },
+  {
     "date": "2026-08-09 15:00:00",
     "factor_id": "roe_persistence_gap_v2",
     "factor_name": "ROE持续性缺口因子 v2",
