@@ -3670,5 +3670,36 @@
       "vssignal_v1": -0.009,
       "note": "其余历史因子因缺少统一本地CSV路径，暂未完成全量相关性校验。"
     }
+  },
+  {
+    "id": "roe_persistence_gap_v4",
+    "name": "ROE持续性缺口 v4",
+    "name_en": "ROE Persistence Gap v4",
+    "category": "质量/成长",
+    "description": "论文 Profit Persistence and Stock Returns 的A股本土化版本。用近3个季度ROE改善的加权持续项、改善一致性、反转缺口、ROE水平/同比改善与BPS资本扩张约束联合刻画盈利持续性，并做市值中性化。",
+    "hypothesis": "高质量的盈利改善持续性在中证1000中会获得更高未来5日收益；相比单纯ROE均值/波动率，季度改善持续性+资本纪律约束能更好贴合A股小盘风格。",
+    "expected_direction": "正向（因子越高，未来收益越高）",
+    "factor_type": "质量/成长",
+    "formula": "neutralize(0.28*z(persist_core)+0.18*z(persist_consistency)+0.14*z(reversal_gap)+0.18*z(roe_mean4)+0.12*z(roe_yoy)+0.10*z(-roe_std4)+0.12*z(-(2.5*bps_qoq_pos+1.5*bps_yoy_pos)), log_mktcap)",
+    "direction": 1,
+    "stock_pool": "中证1000",
+    "period": "2023-08-14 ~ 2026-02-13",
+    "rebalance_freq": 20,
+    "forward_days": 5,
+    "cost": 0.003,
+    "rating": "★★★★ 强",
+    "nav_data": "output/roe_persistence_gap_v4/cumulative_returns.json",
+    "turnover": 0.1992,
+    "ic_mean": 0.0254,
+    "ic_t": 3.83,
+    "sharpe": 2.2621,
+    "monotonicity": 1.0,
+    "status": "active",
+    "source_type": "论文复现+本土化",
+    "source_url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3211826",
+    "barra_style": "Growth",
+    "correlations": {
+      "roe_slope_smoothness_v1": 0.5325
+    }
   }
 ]

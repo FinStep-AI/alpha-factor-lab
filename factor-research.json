@@ -8209,5 +8209,31 @@
     "correlations": "roe_delta_yoy_v1:0.7777; roe_improve_capital_efficiency_v2:0.7701; roe_accel_v1:0.6916",
     "artifacts": "scripts/calc_asset_turnover_change_proxy_v1.py; data/factor_asset_turnover_change_proxy_v1.csv; output/asset_turnover_change_proxy_v1/report.json",
     "date": "2026-09-04"
+  },
+  {
+    "date": "2026-09-05 15:00:00",
+    "factor_id": "roe_persistence_gap_v4",
+    "factor_name": "ROE持续性缺口因子 v4",
+    "status": "passed",
+    "source_type": "论文复现+本土化",
+    "source_title": "Profit Persistence and Stock Returns: Does the Market Care?",
+    "source_url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3211826",
+    "source_author": "H. Chahine et al.",
+    "barra_style": "Growth",
+    "hypothesis": "论文强调盈利持续性可解释横截面收益；在A股小盘上，用ROE季度改善的持续性、一致性与资本扩张约束联合刻画“高质量成长持续性”，应优于单纯8季均值/波动率代理。",
+    "implementation": "基于fundamental_cache中的roe/bps，构造近3个季度ROE改善的加权持续项、改善一致性、反转缺口、ROE水平/同比改善、ROE稳定性与BPS扩张约束；report_date+45天映射到日频，按log_mktcap做横截面OLS市值中性化后标准化。",
+    "backtest": {
+      "ic_mean": 0.0254,
+      "ic_t": 3.83,
+      "g5_sharpe": 1.1627,
+      "monotonicity": 1.0,
+      "long_short_sharpe": 2.2621
+    },
+    "redundancy_check": {
+      "max_corr_factor": "roe_slope_smoothness_v1",
+      "max_corr_value": 0.5325,
+      "redundant": false
+    },
+    "result": "达标并入库。相较已有roe_persistence_neg_v1，这个版本更贴近论文“持续性/市场是否定价”主线，但在A股通过季度改善持续性与资本纪律做了本土化增强，且与已入库Growth因子相关性低于0.7。"
   }
 ]
