@@ -1,5 +1,42 @@
 [
   {
+    "date": "2026-09-05 20:00:00",
+    "factor_id": "factor_max_momentum_v1",
+    "factor_name": "Factor MAX动量因子 v1",
+    "status": "failed",
+    "source_type": "论文复现+本土化",
+    "source_title": "Factor MAX and Predictable Factor Returns",
+    "source_url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6053114",
+    "source_author": "Liyao Wang, Ming Zeng",
+    "source_year": 2026,
+    "source_journal": "SSRN",
+    "barra_style": "Lottery / Momentum",
+    "description": "参考论文中‘过去一个月极端单日上涨越高，后续因子收益越强’的 MAX 主线，在中证1000个股截面上做最轻量本土化：以个股近20个交易日最大单日收益率作为 raw MAX，使用20日平均成交额的对数作为市值代理做横截面 OLS 中性化，再做 MAD 缩尾与 z-score 标准化，按5日调仓、5日前瞻收益检验。",
+    "formula": "raw = MAX(daily_return, 20d); factor = neutralize(raw, log_amount_20d)",
+    "our_metric": {
+      "market": "中证1000",
+      "period": "2022-10-31 ~ 2026-09-03",
+      "ic_mean": -0.0021292096022265668,
+      "ic_t": -0.20341179443596635,
+      "rank_ic": -0.0335402529125739,
+      "g5_sharpe": 0.2928129716347961,
+      "long_short_sharpe": 0.39651672953578593,
+      "monotonicity": 0.4,
+      "turnover_mean": 0.3543115385488357,
+      "max_abs_corr_existing": 0.603914125430868,
+      "closest_existing_factor": "vwr_dev_v1_20d"
+    },
+    "failure_reason": "明显不达标：IC均值 -0.0021、IC_t=-0.20、G5 Sharpe=0.29、单调性=0.4，只有多空 Sharpe 0.40 略有形状但远未达到入库标准。分层表现呈局部跳跃，G5 虽优于多数分组，但 G4 明显塌陷，说明 MAX 在个股层面更像弱非线性/彩票偏好特征，而非稳定截面排序 alpha。",
+    "diff_notes": "这次复现的是 2026 新论文里的 Factor MAX 主线，但原文研究对象更偏‘因子组合收益可预测’而非直接个股截面；我先做了个股版本的最小复现，并强制做了市值中性化。结果看，中证1000里高 MAX 个股确实对应略强的高分组收益，但横截面 IC 基本为零，说明论文信号在‘因子层’可能成立，在‘股票层’则明显衰减。与现有因子最高相关仅 0.604（vwr_dev_v1_20d），未触发 >0.7 冗余阈值，但独立有效性不足。",
+    "conclusion": "淘汰",
+    "data_files": [
+      "data/factor_factor_max_momentum_v1.csv",
+      "output/factor_max_momentum_v1/report.json",
+      "data/factor_factor_max_reversal_v1.csv",
+      "output/factor_max_reversal_v1/report.json"
+    ]
+  },
+  {
     "date": "2026-09-05 10:00:00",
     "factor_id": "monthend_liquidity_reversal_v1",
     "factor_name": "月末流动性需求反转因子 v1",
