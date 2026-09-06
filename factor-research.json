@@ -1,5 +1,42 @@
 [
   {
+    "date": "2026-09-06 10:00:00",
+    "factor_id": "roe_overheat_reversal_neg_v1",
+    "factor_name": "ROE过热回落反转因子 v1",
+    "status": "failed",
+    "source_type": "论文复现+本土化反向",
+    "source_title": "Profit Persistence and Stock Returns: Does the Market Care?",
+    "source_url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3211826",
+    "source_author": "Chahine, Fang, Hill & Salameh",
+    "source_year": 2018,
+    "source_journal": "Journal of Banking and Finance",
+    "barra_style": "Quality / Growth",
+    "description": "参考盈利持续性文献中“市场容易外推短期高盈利、而过热利润持续性未必可靠”的主线，在仅有 ROE/BPS 字段约束下，构造“高 ROE 中枢 - 当期 ROE 相对8季均值的过热偏离 - BPS 激进扩张”复合信号；先按论文语义做正向复现，再在中证1000上检验其反向版本。因子映射到财报滞后45天的日频后，对20日平均成交额对数做横截面 OLS 市值中性化，并做 MAD 缩尾与 z-score 标准化。",
+    "formula": "raw = 0.70*tanh(MA8(ROE)/8) - 0.85*tanh((ROE-MA8(ROE))/STD8(ROE)/1.5) - 0.35*tanh(BPS_yoy/0.25); factor = -neutralize(raw, log_amount_20d)",
+    "our_metric": {
+      "market": "中证1000",
+      "period": "2023-08-14 ~ 2026-09-03",
+      "ic_mean": 0.02448523575314136,
+      "ic_t": 5.166150281270195,
+      "rank_ic": 0.03096771377251466,
+      "g5_sharpe": 0.7182902031754731,
+      "long_short_sharpe": 0.4728637758720288,
+      "monotonicity": 0.9,
+      "turnover_mean": 0.21897268516534416,
+      "max_abs_corr_existing": 0.5001214372976978,
+      "closest_existing_factor": "roe_accel_v1"
+    },
+    "failure_reason": "统计上显著，但经济表现仍未过门槛：IC均值 0.0245、IC_t=5.17、单调性=0.9 都很好，但 G5 Sharpe 仅 0.72，低于 0.8 入库标准；多空 Sharpe 也只有 0.47。说明“做多盈利未过热、做空盈利短期冲高”的方向在截面排序上成立，但高分组多头收益强度仍不够，暂时不能作为独立可交易因子入库。",
+    "diff_notes": "这次复现刻意避开了已有 roe_accel_v1 / roe_yoy_accel_resid_v1 这类一阶、二阶 ROE 改善信号，转而测试“当前 ROE 相对自身长期中枢是否过热”这一更贴近 profit persistence 文献的外推偏差逻辑。原始论文语义的正向版本在中证1000上明显反向（IC=-0.0245，单调性=-0.9），翻转后才恢复为正 IC，说明 A 股小盘股中高盈利过热更像应被回避的拥挤特征，而不是应被追逐的质量溢价。与现有 active 因子最高相关仅 0.50（roe_accel_v1），未触发 >0.7 冗余阈值，独立性尚可，但经济收益不足。",
+    "conclusion": "淘汰",
+    "data_files": [
+      "data/factor_roe_overheat_reversal_v1.csv",
+      "data/factor_roe_overheat_reversal_neg_v1.csv",
+      "output/roe_overheat_reversal_v1/report.json",
+      "output/roe_overheat_reversal_neg_v1/report.json"
+    ]
+  },
+  {
     "date": "2026-09-05 20:00:00",
     "factor_id": "factor_max_momentum_v1",
     "factor_name": "Factor MAX动量因子 v1",
