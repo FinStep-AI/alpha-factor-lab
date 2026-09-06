@@ -1,5 +1,41 @@
 [
   {
+    "date": "2026-09-06 20:00:00",
+    "factor_id": "cashflow_guarded_growth_v1",
+    "factor_name": "现金流约束成长因子 v1",
+    "status": "failed",
+    "source_type": "论文启发+本土化代理",
+    "source_title": "Earnings Quality on the Street",
+    "source_url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3347217",
+    "source_author": "Boonlert-U-Thai, Meek, Nabar et al.",
+    "source_year": 2018,
+    "source_journal": "SSRN working paper",
+    "barra_style": "Quality / Growth",
+    "description": "参考 earnings quality / accrual quality 文献中‘高质量成长应由收入增长、现金/流动性缓冲和较轻的应收/库存扩张共同支撑’的主线，在现有中证1000 revenue_yoy 原始字段下构造本土化代理：用2期营收同比均值与扣非利润同比均值表征增长，用利润-收入增速缺口刻画利润兑现是否透支，用应收占营收变化、应收同比、存货占流动资产变化和存货周转变化约束营运资本膨胀，再叠加流动比率/速动比率、现金流入对流动负债比和毛利率水平作为质量护城河；按财报披露日映射到日频后，对市值代理做横截面OLS中性化并标准化。",
+    "formula": "raw = 0.22*RevYoY_MA2 + 0.10*ProfitYoY_MA2 - 0.18*(ProfitYoY-RevYoY)_MA2 - 0.12*Δ(AR/Revenue) - 0.08*AR_YoY_MA2 + 0.10*ΔInventoryTurnover - 0.08*Δ(Inventory/CurrentAsset) + 0.10*LiquidityBuffer - 0.07*ΔDebtRatio + 0.08*CashInflow/CurrentDebt_MA2 + 0.07*GrossMargin_MA2; factor = neutralize(raw, log_mktcap)",
+    "our_metric": {
+      "market": "中证1000",
+      "period": "2025-04-18 ~ 2026-02-13",
+      "ic_mean": 0.0035940813013595196,
+      "ic_t": 0.5754767243104941,
+      "rank_ic": 0.009095047906782571,
+      "g5_sharpe": 3.2713993353517106,
+      "long_short_sharpe": 0.5785378213039494,
+      "monotonicity": 0.6,
+      "turnover_mean": 0.2005153046065101,
+      "max_abs_corr_existing": null,
+      "closest_existing_factor": null
+    },
+    "failure_reason": "明显不达门槛：IC均值仅0.0036、IC_t=0.58、单调性0.6，多空Sharpe仅0.58。虽然G5 Sharpe表面上很高，但G4反而最高，且G1/G3/G5整体都不差，说明这是一个‘普遍偏多的财务慢变量分层’，不是稳定的截面排序alpha。",
+    "diff_notes": "与此前应计质量、毛利率增长质量等尝试相比，这一版更强调‘成长要被现金与营运资本质量护住’，逻辑上更接近高质量成长而非单纯盈利改善；但在中证1000样本中，信号主要把股票分成“普遍质量较好的一篮子”而不是给出清晰的高低优先级，排序线性很弱。结果说明把多条财务约束简单线性叠加后，容易得到低频 quality beta，而不是可交易的 5 日截面 alpha。",
+    "conclusion": "淘汰",
+    "data_files": [
+      "calc_cashflow_guarded_growth_v1.py",
+      "data/factor_cashflow_guarded_growth_v1.csv",
+      "output/cashflow_guarded_growth_v1/report.json"
+    ]
+  },
+  {
     "date": "2026-09-06 15:00:00",
     "factor_id": "limit_contam_proxy_neg_v1",
     "factor_name": "可交易性污染回避因子 v1",
