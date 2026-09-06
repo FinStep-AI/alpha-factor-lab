@@ -1,5 +1,42 @@
 [
   {
+    "date": "2026-09-06 15:00:00",
+    "factor_id": "limit_contam_proxy_neg_v1",
+    "factor_name": "可交易性污染回避因子 v1",
+    "status": "failed",
+    "source_type": "论文复现+本土化",
+    "source_title": "Machine Learning Enhanced Multi-Factor Quantitative Trading: A Cross-Sectional Portfolio Optimization Approach with Bias Correction",
+    "source_url": "https://arxiv.org/abs/2507.07107",
+    "source_author": "Yimin Du",
+    "source_year": 2025,
+    "source_journal": "arXiv",
+    "barra_style": "Liquidity / Microstructure",
+    "description": "参考论文中对A股涨跌停不可交易价格造成上游污染(upstream contamination)的讨论，在中证1000个股层面构造轻量可交易性污染代理：过去20日内收盘贴近10%涨跌停价的频率、精确贴停频率，以及极端单日绝对收益三者加权，刻画‘价格虽可观测但执行风险高/窗口统计容易被不可交易边界污染’的程度；随后对20日平均成交额对数做横截面OLS中性化，并做MAD缩尾与z-score标准化。按论文语义先做正向版本（高污染=高信号），回测后发现方向系统性相反，因此记录反向版本（回避高污染标的）。",
+    "formula": "raw = -(0.55*MA20(near_limit_1pct) + 0.25*MA20(at_limit_0.2pct) + 0.20*MAX20(|ret|)/0.10); factor = neutralize(raw, log_amount_20d)",
+    "our_metric": {
+      "market": "中证1000",
+      "period": "2022-10-24 ~ 2026-01-22",
+      "ic_mean": 0.01341164363242672,
+      "ic_t": 1.7372880761734364,
+      "rank_ic": -0.009009940786054419,
+      "g5_sharpe": 0.5873957349285596,
+      "long_short_sharpe": 1.4247420444251255,
+      "monotonicity": 0.7,
+      "turnover_mean": 0.6699936100588847,
+      "max_abs_corr_existing": null,
+      "closest_existing_factor": null
+    },
+    "failure_reason": "未达入库门槛：虽然反向版本多空Sharpe达到1.42、回撤也仅-10.9%，但IC均值仅0.0134、IC_t=1.74，且G5 Sharpe仅0.59，单调性0.7，也就是说它更像一个可用于做空高污染尾部或做多空对冲的风险过滤器，而不是稳定的高分组多头选股因子。",
+    "diff_notes": "论文主旨是‘回测/训练流程要先做tradability mask，避免不可交易价格污染因子输入’，并不是直接提出个股alpha因子；这次把论文的方法论硬映射成股票截面信号，结果发现A股中证1000上最有效的含义是‘回避高贴停/高边界污染股票’，而不是利用其做多。与常规极端收益/流动性异象相比，这个信号确实抓到了一部分执行风险，但经济收益主要体现在G1→G4改善，G5并未继续抬升，说明它更像过滤器而非独立alpha。",
+    "conclusion": "淘汰",
+    "data_files": [
+      "data/factor_limit_contam_proxy_v1.csv",
+      "data/factor_limit_contam_proxy_neg_v1.csv",
+      "output/limit_contam_proxy_v1/report.json",
+      "output/limit_contam_proxy_neg_v1/report.json"
+    ]
+  },
+  {
     "date": "2026-09-06 10:00:00",
     "factor_id": "roe_overheat_reversal_neg_v1",
     "factor_name": "ROE过热回落反转因子 v1",
