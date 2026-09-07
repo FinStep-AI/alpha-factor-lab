@@ -8414,5 +8414,27 @@
     },
     "diff_notes": "原文研究的是 overnight/intraday expected return tug-of-war，本地直接用 close-open momentum spread 做横截面排序后，信号被A股小盘股的高噪声开盘、涨跌停/集合竞价机制以及较高换手侵蚀。分层上G3最好而非G5，说明关系非单调，可能需要叠加流动性筛选或只保留隔夜腿。",
     "conclusion": "failed: 严格复现后的单因子不达标，不入库；保留“隔夜腿优于价差腿”的研究结论，后续更适合沿 overnight-only 或 gap consistency 方向继续挖掘。"
+  },
+  {
+    "factor_id": "asset_turnover_reaccel_quality_v2",
+    "factor_name": "资产周转再加速质量因子 v2",
+    "status": "rejected",
+    "barra_style": "Growth",
+    "source_type": "自研(ROE/BPS代理资产周转率)",
+    "date": "2026-09-07",
+    "summary": "用 ROE/BPS 代理资产周转率，构造同比改善+再加速+ROE确认+稳定性约束，并做市值中性化。",
+    "backtest": {
+      "ic_mean": 0.019045659494793216,
+      "ic_t": 3.870880448817172,
+      "g5_sharpe": 0.9675337182469671,
+      "monotonicity": 1.0,
+      "long_short_sharpe": 2.044864912940978
+    },
+    "decision_reason": "未过入库门槛：IC均值0.0190 < 0.02，虽 IC_t/G5 Sharpe/单调性均达标，但截面预测强度仍略弱，暂不入库。",
+    "artifacts": {
+      "factor_csv": "data/factor_asset_turnover_reaccel_quality_v2.csv",
+      "report": "output/asset_turnover_reaccel_quality_v2/report.json",
+      "script": "calc_asset_turnover_reaccel_quality_v2.py"
+    }
   }
 ]
