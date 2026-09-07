@@ -6,7 +6,7 @@
     "benchmark": "000300",
     "benchmark_name": "沪深300",
     "created_at": "2026-02-23 22:14:25",
-    "updated_at": "2026-09-07 08:32:18",
+    "updated_at": "2026-09-07 09:08:38",
     "status": "active",
     "players_count": 6
   },
@@ -10277,13 +10277,6 @@
       ],
       "decisions": [
         {
-          "date": "2026-05-07",
-          "action": "hold",
-          "summary": "完成因子日扫，未新增入库因子",
-          "detail": "已完成K线刷新：fintool失败后fallback auto，最新数据到2026-05-06。检索中文金工研报与英文论文后，选取‘成交量激增/适度冒险’方向做日线近似复现（vol_spike_continuation_v1）。结果发现原型脚本仅生成3个交易日、44只股票的有效因子值，回测样本不足；且该方向与现有vssignal_v1（成交量放大确认）高度重合，存在明显重复风险，因此本次判定不入库，仅记录研究日志。",
-          "recommendation": "后续优先转向非重复的基本面时序、股东/大宗交易或资金流本土化因子"
-        },
-        {
           "date": "2026-05-11",
           "action": "rebalance",
           "summary": "周一定期调仓：Amihud非流动性因子排名选前25只",
@@ -10530,6 +10523,13 @@
           "summary": "因子扫描：今日未发现可复现实用新因子，不入库",
           "detail": "完成数据刷新（fintool 全失败后已自动 fallback 到 auto，K线最新更新至 2026-09-03）。随后扫描中文金工研报、英文学术论文与 SSRN 入口，重点查看已实现偏度/特质偏度/高阶矩方向。结合现有 factors.json 与历史回测结果，发现 skewness 家族方向已被多次覆盖，代表性结果如 vol_skew_v2(IC≈0.0002,t≈0.04,Sharpe≈0.53,单调性0.7) 与 ret_ts_skew_v1(IC≈-0.0005,t≈-0.10,Sharpe≈0.32,单调性0.6) 均明显不达门槛。基于时间预算与避免重复试错原则，今日不新增因子，仅记录研究日志。",
           "recommendation": "继续转向未充分覆盖的资金流/事件驱动/基本面拐点方向"
+        },
+        {
+          "date": "2026-09-07",
+          "action": "hold",
+          "summary": "因子扫描：收盘-开盘动量差复现失败；LightGBM周调仓链路失败未执行",
+          "detail": "今日先刷新中证1000 K线（fintool失败后fallback到auto，最新到2026-09-04）。论文方向选择Lou/Polk/Skouras的overnight vs intraday tug-of-war，复现co_mom_spread_v1=20日log(close动量)-log(open动量)，并对20日成交额做OLS中性化。回测区间2022-10-24~2026-09-04，IC均值0.0026，t=0.20，Sharpe=-0.2177，单调性-0.2，未达标，不入factors.json。周一额外任务中，feature_engine --refresh被SIGKILL，ml_stock_selector --mode predict报97/219特征维度不一致，按铁律未直接交易；本次仅记录研究日志，待修复ML链路后再调仓。",
+          "recommendation": "修复特征工程资源占用与模型特征版本一致性；短期继续沿overnight-only/gap consistency方向挖掘。"
         }
       ],
       "rebalances": [
