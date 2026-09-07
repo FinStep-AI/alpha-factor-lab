@@ -8436,5 +8436,33 @@
       "report": "output/asset_turnover_reaccel_quality_v2/report.json",
       "script": "calc_asset_turnover_reaccel_quality_v2.py"
     }
+  },
+  {
+    "id": "asset_turnover_smooth_reaccel_growth_v1",
+    "name": "资产周转平滑再加速成长因子 v1",
+    "barra_style": "Growth",
+    "source_type": "mined",
+    "source_title": "step_search: 资产周转率变化 量化因子 A股",
+    "source_url": "local://scripts/step_search.py",
+    "formula": "raw=0.32*tanh(18*AT同比)+0.24*tanh(22*AT同比再加速)+0.18*tanh(10*AT平滑度)+0.10*tanh(14*AT环比)+0.16*tanh((0.7*ROE同比+0.3*BPS同比)/5); 再乘以AT/ROE稳定度与低水平惩罚，财报披露后45天生效，日频前向填充80天，并对log市值代理做横截面回归中性化。AT代理=ROE/abs(BPS)",
+    "status": "rejected",
+    "reason": "未达入库门槛：IC均值0.0161<0.02；其余指标较好（IC_t=3.37, G5 Sharpe=0.8903, 单调性=0.90），说明方向有效但alpha强度不足。",
+    "metrics": {
+      "ic_mean": 0.016114764135909277,
+      "ic_t": 3.3735485791068776,
+      "g5_sharpe": 0.8903412658620079,
+      "monotonicity": 0.8999999999999998,
+      "long_short_sharpe": 1.2197031726537146,
+      "forward_days": 5,
+      "groups": 5,
+      "cost": 0.003
+    },
+    "artifacts": {
+      "factor_csv": "data/factor_asset_turnover_smooth_reaccel_growth_v1.csv",
+      "backtest_report": "output/asset_turnover_smooth_reaccel_growth_v1/report.json",
+      "calc_script": "calc_asset_turnover_smooth_reaccel_growth_v1.py"
+    },
+    "notes": "优点是分层顺序和多空表现都不错，说明资产周转率代理的平滑再加速有信息量；短板在于横截面IC绝对值偏弱，可能需叠加现金流/毛利率确认项，或改进财报生效窗口。",
+    "researched_at": "2026-09-07 15:39:17"
   }
 ]
