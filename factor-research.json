@@ -8382,5 +8382,37 @@
       "redundant": false
     },
     "result": "达标并入库。相较已有roe_persistence_neg_v1，这个版本更贴近论文“持续性/市场是否定价”主线，但在A股通过季度改善持续性与资本纪律做了本土化增强，且与已入库Growth因子相关性低于0.7。"
+  },
+  {
+    "date": "2026-09-07 09:00:00",
+    "factor_id": "co_mom_spread_v1",
+    "factor_name": "收盘-开盘动量差 v1",
+    "status": "failed",
+    "source_type": "论文复现+本土化",
+    "source_title": "A Tug of War: Overnight vs Intraday Expected Returns",
+    "source_url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2856453",
+    "source_author": "Lou, Polk, Skouras",
+    "source_year": 2019,
+    "source_journal": "Journal of Financial Economics",
+    "barra_style": "Momentum",
+    "description": "严格按 overnight vs intraday 文献思路，构造20日收盘动量与开盘动量之差：log(close_t/close_{t-20}) - log(open_t/open_{t-20})，并对20日成交额做OLS中性化，检验机构主导的日内价格发现是否优于集合竞价噪声。",
+    "formula": "raw = sum_t^20 [log(close_t/close_{t-1}) - log(open_t/open_{t-1})]; factor = neutralize(raw, log_amount_20d)",
+    "original_metric": {
+      "paper_claim": "隔夜与日内收益存在显著分化，close-open与open-close腿可解释预期收益差异",
+      "market": "US equities",
+      "note": "原文更偏分解 expected return，不直接给出中证1000同口径IC/Shapre门槛"
+    },
+    "our_metric": {
+      "market": "中证1000",
+      "period": "2022-10-24 ~ 2026-09-04",
+      "ic_mean": 0.0026,
+      "ic_t": 0.2,
+      "sharpe": -0.2177,
+      "monotonicity": -0.2,
+      "long_short_total_return": -0.0967,
+      "turnover": 0.8487
+    },
+    "diff_notes": "原文研究的是 overnight/intraday expected return tug-of-war，本地直接用 close-open momentum spread 做横截面排序后，信号被A股小盘股的高噪声开盘、涨跌停/集合竞价机制以及较高换手侵蚀。分层上G3最好而非G5，说明关系非单调，可能需要叠加流动性筛选或只保留隔夜腿。",
+    "conclusion": "failed: 严格复现后的单因子不达标，不入库；保留“隔夜腿优于价差腿”的研究结论，后续更适合沿 overnight-only 或 gap consistency 方向继续挖掘。"
   }
 ]

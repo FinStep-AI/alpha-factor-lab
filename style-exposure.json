@@ -1,7 +1,7 @@
 {
-  "updated_at": "2026-08-10",
+  "updated_at": "2026-09-07",
   "player": "quant",
-  "date": "2026-08-10",
+  "date": "2026-09-07",
   "positions_count": 25,
   "cash": 79019.79,
   "total_value": 8051157.79,
@@ -39,7 +39,7 @@
     "st_holdings": 0,
     "reduction_warning": 0,
     "cash_ratio": 0.0098,
-    "note": "周一LightGBM链路失败（refresh被SIGKILL，predict特征维度97/219不一致），已回退到range_efficiency_v1排序调仓"
+    "note": "本周一未调仓：feature_engine --refresh 被 SIGKILL，LightGBM predict 出现特征维度 97/219 不一致；按执行铁律仅记录日志，延续上期持仓，待修复链路后再执行周调仓。"
   },
   "top_holdings_by_weight": [
     [
