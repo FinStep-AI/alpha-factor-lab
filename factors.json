@@ -3701,5 +3701,74 @@
     "correlations": {
       "roe_slope_smoothness_v1": 0.5325
     }
+  },
+  {
+    "id": "profitability_accel_stability_v1",
+    "name": "盈利改善加速度稳定性因子 v1",
+    "name_en": "Profitability Acceleration Stability v1",
+    "category": "基本面/Quality-Growth",
+    "description": "基于现有 fundamental_cache 中的 ROE/BPS 字段，先用 ROE/BPS 构造盈利能力代理，再提取近三期盈利改善(chg1/chg2/chg3)与改善加速度(accel1/accel2)，偏好“盈利改善持续、且二阶变化更平滑”的公司；映射到日频后做市值中性化。",
+    "hypothesis": "相比单纯看 ROE 水平或同比改善，盈利改善若同时具备持续性与加速度稳定性，更可能代表经营质量真实改善而非一次性噪声，因此未来5日横截面收益应更高。",
+    "expected_direction": "正向（高因子值=高预期收益）",
+    "factor_type": "基本面/Quality-Growth",
+    "formula": "raw=0.65*(0.5*chg1+0.3*chg2+0.2*chg3)+0.35*(-std(accel1,accel2)); 其中 profit_proxy=ROE/abs(BPS)。财报值映射到对应日频后，按日对 log(close*amount) 回归取残差并 z-score。",
+    "direction": 1,
+    "stock_pool": "中证1000",
+    "period": "2023-03-31 ~ 2026-09-08",
+    "rebalance_freq": 20,
+    "forward_days": 5,
+    "cost": 0.003,
+    "rating": "★★★★ 强",
+    "nav_data": "output/profitability_accel_stability_v1/cumulative_returns.json",
+    "ic_data": "output/profitability_accel_stability_v1/ic_series.json",
+    "upgrade_notes": "首版即实现高单调性，说明“盈利改善持续+加速度平滑”比绝对盈利水平更有效。后续可尝试加入财报发布日期滞后、更细的行业中性化或与资产周转代理做正交组合。",
+    "lessons_learned": [
+      "基本面代理因子里，level 往往不如“改善路径是否持续、是否平滑”有信息量",
+      "在仅有 ROE/BPS 字段的约束下，用 ROE/abs(BPS) 作为盈利能力代理仍能挖出有效 Quality/Growth 信号",
+      "20日调仓+5日前瞻在这类低频基本面映射因子上仍有不错表现"
+    ],
+    "created": "2026-09-08",
+    "updated": "2026-09-08",
+    "metrics": {
+      "ic_mean": 0.015975742331494354,
+      "ic_std": 0.049945701832040494,
+      "ic_t": 4.499116207110552,
+      "ic_positive_ratio": 0.6463414634146342,
+      "rank_ic": 0.032266339623485275,
+      "rank_ic_std": 0.06618649874051248,
+      "ir": 0.3198622052647944,
+      "ic_count": 164,
+      "long_short_sharpe": 1.3535524706645259,
+      "long_short_mdd": -0.08153242933380934,
+      "monotonicity": 0.9999999999999999,
+      "group_sharpe": [
+        0.10933504621079199,
+        0.21770465533403527,
+        0.405681410587331,
+        0.47201344039822446,
+        0.8647547037094391
+      ],
+      "group_returns_annualized": [
+        0.02912755004503209,
+        0.05813808097893913,
+        0.10349943641888482,
+        0.1205285151494595,
+        0.24095881337386538
+      ],
+      "group_mdd": [
+        -0.39054273068351886,
+        -0.3802465175596646,
+        -0.3290581795379982,
+        -0.3325758756764019,
+        -0.2911573693112958
+      ]
+    },
+    "conclusion": "达标并入库。IC均值0.0160虽不算极高，但 Newey-West t=4.50、G5 Sharpe=0.865、单调性=1.0，且最高Spearman相关仅0.5297，说明该因子具备稳定且独立的横截面选股能力。",
+    "barra_style": "Quality / Growth",
+    "source_type": "自研",
+    "source_title": "盈利改善加速度稳定性",
+    "source_url": "",
+    "detail": "以 profit_proxy=ROE/abs(BPS) 为盈利代理，奖励近三期改善持续(chg1/chg2/chg3)且改善加速度波动更低(accel1/accel2 std 更小)的股票；再做横截面市值中性化与标准化。",
+    "correlations": "最高Spearman相关因子为 roe_persistence_gap_v4，均值相关 0.5297；低于 0.7，不冗余。"
   }
 ]

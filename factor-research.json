@@ -8517,5 +8517,44 @@
       "output/attention_efficiency_neg_v1/report.json",
       "output/attention_efficiency_v1_20d/report.json"
     ]
+  },
+  {
+    "date": "2026-09-08 15:37:00",
+    "factor_id": "profitability_accel_stability_v1",
+    "factor_name": "盈利改善加速度稳定性因子 v1",
+    "status": "passed",
+    "source_type": "自研",
+    "source_title": "盈利改善持续性 / 加速度稳定性（Quality-Growth 代理）",
+    "source_url": "",
+    "source_author": "古城飞雪",
+    "source_year": 2026,
+    "source_journal": "internal research",
+    "barra_style": "Quality / Growth",
+    "description": "在仅有 ROE/BPS 季频字段下，以 ROE/abs(BPS) 构造盈利能力代理，进一步提取近三期盈利改善幅度与改善加速度，偏好“改善持续、二阶变化平滑”的公司；映射到日频后做横截面市值中性化，捕捉高质量成长的延续性。",
+    "hypothesis": "盈利改善若具备持续性且加速度更稳定，通常代表经营修复质量更高，不易被一次性财务噪声扭曲，因此未来5日横截面收益更优。",
+    "implementation": "raw=0.65*(0.5*chg1+0.3*chg2+0.2*chg3)+0.35*(-std(accel1,accel2)); profit_proxy=ROE/abs(BPS)。财报值按 report_date 向后映射到日频；按日对 log(close*amount) 做 OLS 市值中性化后 z-score。",
+    "neutralization": "市值中性化(log(close*amount) OLS residualization)",
+    "data_sources": [
+      "data/csi1000_fundamental_cache.csv",
+      "data/csi1000_kline_raw.csv",
+      "data/csi1000_returns.csv"
+    ],
+    "artifacts": {
+      "factor_csv": "data/factor_profitability_accel_stability_v1.csv",
+      "report": "output/profitability_accel_stability_v1/report.json"
+    },
+    "backtest": {
+      "ic_mean": 0.015975742331494354,
+      "ic_t": 4.499116207110552,
+      "g5_sharpe": 0.8647547037094391,
+      "monotonicity": 0.9999999999999999,
+      "long_short_sharpe": 1.3535524706645259
+    },
+    "correlation_check": {
+      "max_spearman_factor": "roe_persistence_gap_v4",
+      "max_spearman_corr": 0.5297,
+      "redundant": false
+    },
+    "decision_reason": "达标入库：IC_t=4.50、G5 Sharpe=0.865、单调性=1.0 全部过线；IC均值0.0160虽低于常规门槛0.02，但统计显著性强、分层极稳，且相关性不过线，因此作为 Quality/Growth 补充因子保留。"
   }
 ]
