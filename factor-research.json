@@ -8464,5 +8464,58 @@
     },
     "notes": "优点是分层顺序和多空表现都不错，说明资产周转率代理的平滑再加速有信息量；短板在于横截面IC绝对值偏弱，可能需叠加现金流/毛利率确认项，或改进财报生效窗口。",
     "researched_at": "2026-09-07 15:39:17"
+  },
+  {
+    "date": "2026-09-08 09:00:00",
+    "factor_id": "attention_efficiency_v1",
+    "factor_name": "注意力效率因子 v1",
+    "status": "failed",
+    "source_type": "论文启发+本土化代理",
+    "source_title": "Real Time Investor Alphas and the Survival of the Anomaly Zoo",
+    "source_url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5135221",
+    "source_author": "SSRN working paper",
+    "source_year": 2025,
+    "source_journal": "SSRN",
+    "barra_style": "Liquidity / Microstructure",
+    "description": "受实时投资者 alpha / 注意力竞争思路启发，在仅有 OHLCV+turnover 字段约束下构造轻量代理：用 log(1+turnover) - log(1+100*|ret|) 的 20 日均值衡量‘单位价格波动对应的交易参与强度’，再对 20 日平均成交额对数做横截面 OLS 中性化，并做 MAD 缩尾与 z-score 标准化。高值表示较小价格扰动吸引了更稳定、更广泛的交易参与，低值则更像高波动驱动的噪声拥挤。",
+    "formula": "raw = MA20(log(1+turnover) - log(1+100*abs(ret))); factor = neutralize(raw, log_amount_20d)",
+    "original_metric": {
+      "paper_claim": "论文讨论 anomaly 的 real-time investor alpha / welfare relevance，并非直接给出可在个股日线字段上照搬的单一公式，因此这里属于方法论启发后的本土化代理复现。"
+    },
+    "our_metric": {
+      "market": "中证1000",
+      "period": "2022-10-31 ~ 2026-09-07",
+      "spec_5d": {
+        "ic_mean": 0.0251,
+        "ic_t": 2.46,
+        "rank_ic": 0.0289,
+        "g5_annual": 0.1371,
+        "long_short_sharpe": 0.7186,
+        "monotonicity": 0.9,
+        "turnover_mean": 0.2976
+      },
+      "spec_20d": {
+        "ic_mean": 0.0368,
+        "ic_t": 2.24,
+        "rank_ic": 0.0347,
+        "g5_annual": 0.1845,
+        "long_short_sharpe": 0.7478,
+        "monotonicity": 0.9,
+        "turnover_mean": 0.5138
+      },
+      "max_abs_corr_existing": null,
+      "closest_existing_factor": "tae_v1 / informed_flow_v1（经济含义接近，未做正式IC相关矩阵）"
+    },
+    "failure_reason": "两套参数都未过入库门槛。5d 版与 20d 版都满足 IC>0.02、t>2、单调性=0.9，但多空 Sharpe 分别仅 0.72 / 0.75，低于 0.8 阈值；20d 版换手率还升到 51%，经济可交易性不够强。",
+    "diff_notes": "这个方向和已有 TAE / informed_flow / range_efficiency 家族有明显亲缘性：本质上仍是‘参与度 ÷ 波动/冲击’的效率视角，只是把价格尺度从振幅/价格冲击换成绝对收益噪声。回测显示它确实抓到一部分稳定截面排序信息（IC 和单调性都不错），但收益强度始终差一口气，说明在中证1000里它更像已有流动性-效率因子的弱变体或过滤器，而不是值得单独入库的新 alpha。",
+    "conclusion": "淘汰",
+    "data_files": [
+      "data/factor_attention_efficiency_v1.csv",
+      "data/factor_attention_efficiency_neg_v1.csv",
+      "data/factor_attention_efficiency_v1_20d.csv",
+      "output/attention_efficiency_v1/report.json",
+      "output/attention_efficiency_neg_v1/report.json",
+      "output/attention_efficiency_v1_20d/report.json"
+    ]
   }
 ]
