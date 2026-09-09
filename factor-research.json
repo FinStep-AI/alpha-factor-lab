@@ -8556,5 +8556,84 @@
       "redundant": false
     },
     "decision_reason": "达标入库：IC_t=4.50、G5 Sharpe=0.865、单调性=1.0 全部过线；IC均值0.0160虽低于常规门槛0.02，但统计显著性强、分层极稳，且相关性不过线，因此作为 Quality/Growth 补充因子保留。"
+  },
+  {
+    "date": "2026-09-09 09:00:00",
+    "factor_id": "daily_scan_no_new_20260909",
+    "factor_name": "日度扫描记录（未入库）",
+    "status": "skipped",
+    "source_type": "mixed_scan",
+    "source_title": "中文金工研报 + 英文学术/SSRN 日度快扫",
+    "source_url": "multiple",
+    "source_author": "古城飞雪",
+    "source_year": 2026,
+    "source_journal": "daily research scan",
+    "barra_style": "N/A",
+    "description": "按计划完成中证1000数据刷新与研报/论文扫描，但未发现一个同时满足“原文公式清晰、现有数据可严格复现、与因子库非重复”的新因子方向。",
+    "hypothesis": "无；今日不做强行复现，避免伪创新与重复入库。",
+    "implementation": "扫描关键词覆盖 alpha因子/量化选股/中证1000/SSRN anomaly/cross-sectional predictability，并对现有因子库做重复性核查。候选方向多落在已覆盖的隔夜动量、跳空、换手/流动性、价格延迟、聪明资金、量价一致性等主题。",
+    "neutralization": "N/A",
+    "data_sources": [
+      "data/csi1000_kline_raw.csv",
+      "scripts/step_search.py 搜索结果",
+      "factors.json"
+    ],
+    "artifacts": {
+      "factor_csv": "",
+      "report": ""
+    },
+    "original_metric": {
+      "note": "未取得可严格复现且明确参数的新原文指标"
+    },
+    "our_metric": {
+      "kline_latest": "2026-09-08",
+      "scan_result": "no_new_factor"
+    },
+    "diff_notes": "中文结果多为月报/索引页，英文结果多为综述或宏观/ML泛化主题；少数可追溯方向与现有 price_delay、overnight_momentum、gap 系列、turnover/liquidity/microstructure 因子高度重叠。",
+    "conclusion": "今日未发现值得立即复现的新因子，按规则记录日志结束，不做回测、不入库。"
+  },
+  {
+    "date": "2026-09-09 12:01:00",
+    "factor_id": "roe_bps_compound_smooth_quality_v1",
+    "factor_name": "ROE-BPS平滑复利质量因子 v1",
+    "status": "failed",
+    "source_type": "自研",
+    "source_title": "ROE趋势平滑 × BPS复利质量（Quality/Growth 代理）",
+    "source_url": "",
+    "source_author": "古城飞雪",
+    "source_year": 2026,
+    "source_journal": "internal research",
+    "barra_style": "Quality / Growth",
+    "description": "在仅有 ROE/BPS 季频字段下，联合刻画 ROE 同比/环比改善、二阶平滑度、BPS 同比与隐含复利扩张，并对过热扩表与 ROE 加速度过冲施加惩罚；映射到日频后做横截面市值中性化，试图捕捉“质量更高、节奏更稳”的内生成长。",
+    "hypothesis": "如果公司盈利改善更平滑、净资产扩张更连续且不过热，那么其成长质量更高，未来5日横截面收益应更优。",
+    "implementation": "raw=(0.38*roe_trend+0.14*roe_level+0.18*bps_growth+0.16*bps_compound)*roe_stability*bps_stability*roe_accel_guard*over_expand_penalty；其中 roe_trend 综合同比/环比改善，roe_stability 惩罚 ROE 波动与二阶不平滑，bps_compound 用季度增速隐含复利代理；日频按 log(mktcap_proxy) 做 OLS 市值中性化并 z-score。",
+    "neutralization": "市值中性化(log(close*amount/turnover) OLS residualization)",
+    "data_sources": [
+      "data/csi1000_fundamental_cache.csv",
+      "data/csi1000_kline_raw.csv",
+      "data/csi1000_returns.csv"
+    ],
+    "artifacts": {
+      "factor_csv": "data/factor_roe_bps_compound_smooth_quality_v1.csv",
+      "report": "output/roe_bps_compound_smooth_quality_v1/report.json",
+      "script": "calc_roe_bps_compound_smooth_quality_v1.py"
+    },
+    "backtest": {
+      "ic_mean": 0.015078569095986311,
+      "ic_t": 2.1627936134986383,
+      "g5_sharpe": 0.9153004048274936,
+      "monotonicity": 0.8999999999999998,
+      "long_short_sharpe": 0.6293858571419214,
+      "turnover_mean": 0.2277195933516302
+    },
+    "correlation_check": {
+      "max_ic_corr_factor": "neg_day_freq_v1",
+      "max_ic_corr": 0.354,
+      "redundant": false,
+      "note": "check_correlation.py 输出含部分旧因子文件缺失报错，但最大可用相关性仅 0.354，未达 0.7 冗余线。"
+    },
+    "failure_reason": "未达入库门槛。虽然 G5 Sharpe=0.915、单调性=0.90、IC_t=2.16 都过线，但 IC均值仅 0.0151，且多空 Sharpe 只有 0.629，说明排序信息存在但强度不足，净收益不够硬。",
+    "diff_notes": "和已有 profitability_accel_stability_v1、roe_bps_stable_compound_v1 同属 Quality/Growth 家族，但本版更强调“二阶平滑 + 复利不过热惩罚”。结果显示它把高组收益抬上去了，却没有同步拉开多空利差，说明更像对高质量成长篮子的温和过滤器，而不是独立 alpha。",
+    "conclusion": "淘汰"
   }
 ]
