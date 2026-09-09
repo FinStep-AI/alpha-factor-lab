@@ -8635,5 +8635,47 @@
     "failure_reason": "未达入库门槛。虽然 G5 Sharpe=0.915、单调性=0.90、IC_t=2.16 都过线，但 IC均值仅 0.0151，且多空 Sharpe 只有 0.629，说明排序信息存在但强度不足，净收益不够硬。",
     "diff_notes": "和已有 profitability_accel_stability_v1、roe_bps_stable_compound_v1 同属 Quality/Growth 家族，但本版更强调“二阶平滑 + 复利不过热惩罚”。结果显示它把高组收益抬上去了，却没有同步拉开多空利差，说明更像对高质量成长篮子的温和过滤器，而不是独立 alpha。",
     "conclusion": "淘汰"
+  },
+  {
+    "date": "2026-09-09 15:33:00",
+    "factor_id": "bb_squeeze_stability_v1",
+    "factor_name": "布林压缩稳定性因子 v1",
+    "status": "failed",
+    "source_type": "自研",
+    "source_title": "布林带宽收缩 × 价格稳定 × 成交确认",
+    "source_url": "",
+    "source_author": "古城飞雪",
+    "source_year": 2026,
+    "source_journal": "internal research",
+    "barra_style": "Low Volatility / Technical",
+    "description": "以20日布林带宽度衡量波动压缩程度，叠加价格相对20日均线的偏离约束与成交额确认，并加入换手降温项；优先选择“波动收窄、价格不离均线太远、放量不失控”的个股。因子按日对市值代理 log(amount/turnover) 做 OLS 中性化后标准化。",
+    "hypothesis": "若个股处于波动压缩末期且价格结构稳定，同时伴随适度成交确认，后续更容易出现有序突破或低波动延续，未来5日横截面收益应更优。",
+    "implementation": "bandwidth=4*std20(close)/ma20(close); raw=(-bandwidth)*(1-abs((close-ma20)/ma20))*(1+0.35*log1p(amount/ma20(amount))) + 0.15*(-(turnover/ma20(turnover)-1)); 之后按日对 log(amount/(turnover/100)) 做市值中性化并 z-score。",
+    "neutralization": "市值中性化(log(amount/(turnover/100)) OLS residualization)",
+    "data_sources": [
+      "data/csi1000_kline_raw.csv",
+      "data/csi1000_returns.csv",
+      "scripts/step_search.py 搜索结果"
+    ],
+    "artifacts": {
+      "factor_csv": "data/factor_bb_squeeze_stability_v1.csv",
+      "report": "output/bb_squeeze_stability_v1/report.json"
+    },
+    "backtest": {
+      "ic_mean": 0.019617156622591055,
+      "ic_t": 2.09204941938436,
+      "g5_sharpe": 0.5371536363524354,
+      "monotonicity": 0.09999999999999999,
+      "long_short_sharpe": -0.17490328753123963,
+      "turnover_mean": 0.7501667431485897
+    },
+    "correlation_check": {
+      "max_spearman_factor": "成交量变异系数(反) v1",
+      "max_spearman_corr": 0.2795,
+      "redundant": false
+    },
+    "failure_reason": "未达入库门槛。IC均值 0.0196 和 IC_t 2.09 勉强过线，但 G5 Sharpe 仅 0.537、单调性只有 0.10，多空 Sharpe 为 -0.175，说明信号更像“低波动中段持有”而不是能稳定把高分组推到最上层的选股 alpha。",
+    "diff_notes": "这个版本把“波动压缩 + 稳定价格结构”做成了偏防守型因子，结果分组收益集中在 G2/G3，中间组反而最好，典型的 hump-shape；说明单纯的布林压缩并不足以区分即将向上突破和继续横盘。后续若再做，可加方向确认（如近端收益斜率、回撤修复、尾盘收盘位置）而不是只看压缩。",
+    "conclusion": "淘汰"
   }
 ]
