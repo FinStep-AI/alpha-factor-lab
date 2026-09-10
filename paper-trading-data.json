@@ -6,7 +6,7 @@
     "benchmark": "000300",
     "benchmark_name": "沪深300",
     "created_at": "2026-02-23 22:14:25",
-    "updated_at": "2026-09-10 08:31:42",
+    "updated_at": "2026-09-10 09:05:25",
     "status": "active",
     "players_count": 6
   },
@@ -10286,15 +10286,6 @@
       ],
       "decisions": [
         {
-          "date": "2026-05-12",
-          "player": "quant",
-          "type": "factor_scan",
-          "action": "hold",
-          "summary": "周二因子日扫：数据刷新至2026-05-11，搜索无有效结果，未构建新因子",
-          "detail": "K线刷新成功：fintool失败后fallback auto（tencent数据源），最新数据至2026-05-11。研报扫描：StepSearch staging+Brave均无新研报结果，StepSearch返回所有query空结果。因子评估：当前因子库35个，核心因子amihud_illiq_v2(Sharpe=1.21)、turnover_level_v1(Sharpe=2.43)、informed_flow_v1(Sharpe=2.02)表现稳定。昨日测试的vol_slope_v1、clv_skew_v1、entropy_fwd5_v1均失败。本轮未发现有价值新因子方向，Waiting for next scan cycle。",
-          "conclusion": "今日扫描无新因子入库，等待数据更新后下一轮扫描。"
-        },
-        {
           "date": "2026-05-27",
           "title": "周三维度因子扫描",
           "summary": "gap_contrib_v1 复现失败 IC=-0.004 t=-0.48 Sharpe 0.04 mono 0.1；负向变体对称失效；不入因子库，最强仍为 amihud_illiq_v2",
@@ -10507,6 +10498,13 @@
           "summary": "因子扫描：未发现可严格复现且非重复的新因子方向",
           "detail": "已执行中证1000 K线刷新；fintool 模式 1000 只全部报错，但本地数据最新日期为 2026-09-08，满足昨日数据要求，因此未触发 auto fallback。随后完成中文金工研报与英文学术/SSRN 快扫，并核对 factors.json。候选多落在已有方向：隔夜收益动量、跳空缺口/效率、换手率水平/减速、流动性、价格延迟、聪明资金、量价一致性等。5 分钟内未发现一个同时具备清晰原文公式、现有数据可严格复现、且与现有库低重复的新因子，因此按规则仅记录研究日志，不进行强行复现、回测或入库。",
           "recommendation": "继续跟踪更细粒度委托挂单/关键时段收益等微观结构方向，待拿到可复现公式或更高频数据后再做复现。"
+        },
+        {
+          "date": "2026-09-10",
+          "action": "hold",
+          "summary": "日度因子扫描：未发现可严格复现的新因子",
+          "detail": "完成中证1000 K线刷新（fintool失败后自动fallback到auto，数据更新至2026-09-09）。随后扫描中文金工研报与英文学术/SSRN，公开网页多为月报索引、综述或缺少可执行公式。结合 factors.json 去重后，今日未找到同时满足‘原文参数清晰、现有数据可严格复现、与现有因子非重复’的新方向。仓库内虽已有股东集中度/估值动量/资金流等 fintool 因子脚本，但缺少今天新增且足够明确的外部原始研究依据，因此按规则不强行复现，记录日志结束。",
+          "recommendation": "继续持有，等待更清晰的新因子材料"
         }
       ],
       "rebalances": [
