@@ -8756,5 +8756,49 @@
     },
     "diff_notes": "原始假设是“过热高位收盘”应偏反转，但实际只有弱方向性：取反后 IC 与分层方向转正，却仍明显达不到 IC>0.02、IC_t>2、G5 Sharpe>0.8、单调性>0.8 的入库门槛。分层中 G2~G4 交错，说明 overdrive 对 CLV 的调制并不稳定。",
     "conclusion": "淘汰。该因子提供了弱正信号，但统计显著性和单调性不足，暂不入库 factors.json。后续若继续挖该方向，应拆开“收盘位置强度”和“量能过热”两部分，用事件触发或分位阈值而不是线性相乘。"
+  },
+  {
+    "date": "2026-09-10 15:37:00",
+    "factor_id": "asset_turnover_inflect_guard_v1",
+    "factor_name": "资产周转拐点约束因子 v1",
+    "status": "failed",
+    "source_type": "自研",
+    "source_title": "资产周转率变化 × 盈利确认 × 扩表约束",
+    "source_url": "https://bigquant.com/wiki/doc/AFdf9Rxr2S",
+    "source_author": "古城飞雪",
+    "source_year": 2026,
+    "source_journal": "internal research",
+    "barra_style": "Growth",
+    "description": "以ROE/BPS近似总资产周转效率，提取同比改善与拐点再加速，并要求ROE改善确认，同时对净资产过快扩张施加惩罚；映射到日频后做横截面市值中性化，试图捕捉“效率改善但非靠粗放扩表”的成长股。",
+    "hypothesis": "如果资产周转效率出现拐点改善、盈利同步确认且资本扩张受控，那么未来5日横截面收益应更强。",
+    "implementation": "raw=(0.36*at_inflect+0.24*at_yoy+0.18*at_qoq+0.22*profit_confirm)*capital_guard*stability*low_roe_guard；其中 at=roe/bps 近似效率代理，at_inflect=(at_yoy-0.65*prev_at_yoy)，capital_guard 惩罚 bps 同比/环比过快扩张；日频按 log(close*amount/turnover) OLS 残差做市值中性化并标准化。",
+    "neutralization": "市值中性化(log(close*amount/turnover) OLS residualization)",
+    "data_sources": [
+      "data/csi1000_fundamental_cache.csv",
+      "data/csi1000_kline_raw.csv",
+      "data/csi1000_returns.csv"
+    ],
+    "artifacts": {
+      "factor_csv": "data/factor_asset_turnover_inflect_guard_v1.csv",
+      "report": "output/asset_turnover_inflect_guard_v1/report.json",
+      "script": "calc_asset_turnover_inflect_guard_v1.py"
+    },
+    "backtest": {
+      "ic_mean": 0.021074299486616335,
+      "ic_t": 3.5384686065386486,
+      "g5_sharpe": 1.0174419275285753,
+      "monotonicity": 0.8999999999999998,
+      "long_short_sharpe": 1.6123744465707395,
+      "turnover_mean": 0.22291743735142716
+    },
+    "correlation_check": {
+      "max_ic_corr_factor": "roe_improve_capital_efficiency_v2",
+      "max_ic_corr": 0.842,
+      "redundant": true,
+      "note": "与现有 Growth 因子 roe_improve_capital_efficiency_v2 横截面因子值相关性 0.842，超过 0.7 冗余线。虽然单因子回测已达标，但不满足入库去重要求。"
+    },
+    "failure_reason": "未入库。回测指标全部达标（IC均值0.0211、IC_t=3.54、G5 Sharpe=1.02、单调性=0.90），但与 roe_improve_capital_efficiency_v2 的相关性高达0.842，判定为冗余因子。",
+    "diff_notes": "本版把“资产周转拐点”显式拆成同比改善+再加速+盈利确认，表现比前两版 asset_turnover_reaccel_quality 更硬，但经济含义仍与已有“ROE改善资本效率”家族高度重合，本质上是同一条质量成长链条的重参数化。",
+    "conclusion": "淘汰（冗余，不入库）"
   }
 ]
