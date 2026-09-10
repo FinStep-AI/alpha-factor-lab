@@ -8677,5 +8677,84 @@
     "failure_reason": "未达入库门槛。IC均值 0.0196 和 IC_t 2.09 勉强过线，但 G5 Sharpe 仅 0.537、单调性只有 0.10，多空 Sharpe 为 -0.175，说明信号更像“低波动中段持有”而不是能稳定把高分组推到最上层的选股 alpha。",
     "diff_notes": "这个版本把“波动压缩 + 稳定价格结构”做成了偏防守型因子，结果分组收益集中在 G2/G3，中间组反而最好，典型的 hump-shape；说明单纯的布林压缩并不足以区分即将向上突破和继续横盘。后续若再做，可加方向确认（如近端收益斜率、回撤修复、尾盘收盘位置）而不是只看压缩。",
     "conclusion": "淘汰"
+  },
+  {
+    "date": "2026-09-10 09:00:00",
+    "factor_id": "daily_scan_no_new_20260910",
+    "factor_name": "日度扫描记录（未入库）",
+    "status": "skipped",
+    "source_type": "mixed_scan",
+    "source_title": "中文金工研报 + 英文学术/SSRN 日度快扫",
+    "source_url": "multiple",
+    "source_author": "古城飞雪",
+    "source_year": 2026,
+    "source_journal": "daily research scan",
+    "barra_style": "N/A",
+    "description": "完成中证1000数据刷新与外部资料扫描，但未发现一个同时满足“原文公式清晰、现有数据可严格复现、与现有因子库非重复”的新因子方向。",
+    "hypothesis": "无；今日不做强行复现，避免伪创新与重复入库。",
+    "implementation": "先用 fintool 更新K线失败后自动 fallback 到 auto，数据从 2026-09-08 补到 2026-09-09。随后扫描 A股 alpha因子/中证1000/SSRN anomaly/cross-sectional predictability 等关键词，并对 factors.json 做主题去重。候选结果多为月报索引、综述或与现有隔夜动量、跳空、量价/流动性、价延迟等主题重合。",
+    "neutralization": "N/A",
+    "data_sources": [
+      "data/csi1000_kline_raw.csv",
+      "data/csi1000_returns.csv",
+      "scripts/step_search.py 搜索结果",
+      "factors.json"
+    ],
+    "artifacts": {
+      "factor_csv": "",
+      "report": ""
+    },
+    "original_metric": {
+      "note": "未取得可严格复现且参数明确的新原文指标"
+    },
+    "our_metric": {
+      "kline_latest": "2026-09-09",
+      "scan_result": "no_new_factor"
+    },
+    "diff_notes": "中文结果主要是券商月报索引或二手转载；英文结果主要是宏观/机器学习泛化主题，缺少可直接映射到当前日线+基本面+fintool字段的明确公式。仓库虽已有 shareholder_concentration / valuation_momentum / net_flow 等方向，但今天并未找到新的高置信原始研究材料支持继续复现。",
+    "conclusion": "今日未发现值得立即复现的新因子，按规则记录日志结束，不做回测、不入库。"
+  },
+  {
+    "date": "2026-09-10 12:01:00",
+    "factor_id": "clv_amount_overdrive_reversal_neg_v1",
+    "factor_name": "收盘位置-放量过热反转因子",
+    "status": "failed",
+    "source_type": "internal_hypothesis",
+    "source_title": "close location × amount overdrive reversal",
+    "source_url": "internal",
+    "source_author": "古城飞雪",
+    "source_year": 2026,
+    "source_journal": "internal mining",
+    "barra_style": "Momentum",
+    "description": "用5日收盘位置均值(CL V)与3日实体方向刻画短线强弱，再乘以(1-overdrive)；其中 overdrive 由20日成交额/振幅/换手异常度加权构成，试图捕捉“高位收盘但伴随异常放量和高波动”后的拥挤反转。",
+    "hypothesis": "低过热背景下的高收盘位置代表健康强势；若高收盘位置来自异常放量与振幅扩张，则后续5日更易均值回归，因子取反后应更接近正向排序。",
+    "implementation": "基于 data/csi1000_kline_raw.csv 计算 clv_ma5、body_ma3、amt_z20、amp_z20、turn_z20，raw=(0.70*clv_ma5+0.30*body_ma3)*(1-overdrive)。使用 close*amount/turnover 构造市值代理并逐日做 OLS 中性化，输出 data/factor_clv_amount_overdrive_reversal_v1.csv；原始方向回测为负，随后测试取反版本。",
+    "neutralization": "市值中性化（log_mktcap proxy = log(close*amount/turnover)）+ MAD clipping + z-score",
+    "data_sources": [
+      "data/csi1000_kline_raw.csv",
+      "data/csi1000_returns.csv"
+    ],
+    "artifacts": {
+      "factor_csv": "data/factor_clv_amount_overdrive_reversal_neg_v1.csv",
+      "report": "output/clv_amount_overdrive_reversal_neg_v1/report.json"
+    },
+    "original_metric": {
+      "raw_direction_ic_mean": -0.00937985190731789,
+      "raw_direction_ic_t": -1.228933169442194,
+      "raw_direction_long_short_sharpe": -0.3744,
+      "raw_direction_monotonicity": -0.4
+    },
+    "our_metric": {
+      "ic_mean": 0.00937985190731789,
+      "ic_t": 1.228933169442194,
+      "g5_sharpe": 0.668958997696475,
+      "long_short_sharpe": 0.2923019878520563,
+      "monotonicity": 0.4,
+      "forward_days": 5,
+      "groups": 5,
+      "cost": 0.003
+    },
+    "diff_notes": "原始假设是“过热高位收盘”应偏反转，但实际只有弱方向性：取反后 IC 与分层方向转正，却仍明显达不到 IC>0.02、IC_t>2、G5 Sharpe>0.8、单调性>0.8 的入库门槛。分层中 G2~G4 交错，说明 overdrive 对 CLV 的调制并不稳定。",
+    "conclusion": "淘汰。该因子提供了弱正信号，但统计显著性和单调性不足，暂不入库 factors.json。后续若继续挖该方向，应拆开“收盘位置强度”和“量能过热”两部分，用事件触发或分位阈值而不是线性相乘。"
   }
 ]
