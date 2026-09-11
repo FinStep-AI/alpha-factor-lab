@@ -8800,5 +8800,108 @@
     "failure_reason": "未入库。回测指标全部达标（IC均值0.0211、IC_t=3.54、G5 Sharpe=1.02、单调性=0.90），但与 roe_improve_capital_efficiency_v2 的相关性高达0.842，判定为冗余因子。",
     "diff_notes": "本版把“资产周转拐点”显式拆成同比改善+再加速+盈利确认，表现比前两版 asset_turnover_reaccel_quality 更硬，但经济含义仍与已有“ROE改善资本效率”家族高度重合，本质上是同一条质量成长链条的重参数化。",
     "conclusion": "淘汰（冗余，不入库）"
+  },
+  {
+    "date": "2026-09-11",
+    "factor_id": "iovr_v1",
+    "factor_name": "日内/隔夜波动率比 v1",
+    "status": "failed",
+    "source_type": "论文/本土化复现",
+    "source_title": "Intraday-Overnight Volatility Ratio (IOVR)",
+    "source_url": "Muravyev & Ni (2020); Kelly & Clark (2011) 概念复现",
+    "source_author": "Muravyev & Ni; Kelly & Clark",
+    "source_year": "2011/2020",
+    "source_journal": "JFE / related literature",
+    "barra_style": "微观结构",
+    "description": "过去20日日内收益方差/隔夜收益方差的对数，按截面对log_amount_20d做OLS中性化，再MAD去极值和z-score标准化。",
+    "hypothesis": "低IOVR代表更高隔夜信息含量与机构主导，高IOVR代表盘中噪音偏多，预期低IOVR股票后续收益更高。",
+    "implementation": {
+      "formula": "log(var(close/open-1,20)/var(open/prev_close-1,20))",
+      "neutralization": "cross-sectional OLS on log_amount_20d",
+      "winsorize": "MAD 5x",
+      "standardization": "z-score",
+      "rebalance_freq": 20,
+      "forward_days": 20,
+      "cost": 0.002
+    },
+    "neutralization": "market_cap proxy via log_amount_20d",
+    "data_sources": [
+      "data/csi1000_kline_raw.csv",
+      "data/csi1000_returns.csv"
+    ],
+    "artifacts": {
+      "factor_csv": "data/factor_iovr_v1.csv",
+      "report": "output/iovr_v1/backtest_report.json",
+      "output_dir": "output/iovr_v1"
+    },
+    "backtest": {
+      "original_metric": "原文偏机制解释，未给出可直接对照的中证1000月频单因子指标。",
+      "our_metric": {
+        "ic_mean": -0.008945271255886386,
+        "ic_t": -1.2422526759556574,
+        "long_short_sharpe": -0.4206762076991944,
+        "monotonicity": -0.3,
+        "turnover_mean": 0.7753313230877736
+      },
+      "diff_notes": "在A股中证1000上更像交易活跃度/噪音代理，而非稳定信息优势信号；方向和分层都不稳定。",
+      "conclusion": "不达标，不入库。"
+    },
+    "correlation_check": {
+      "performed": false,
+      "reason": "因子未达标，未进入入库前相关性检查。"
+    },
+    "failure_reason": "IC均值、t值、Sharpe、单调性均未达门槛。"
+  },
+  {
+    "date": "2026-09-11 12:01:00",
+    "factor_id": "roe_reaccel_capdisc_v2",
+    "factor_name": "ROE再加速资本纪律因子 v2",
+    "status": "failed",
+    "source_type": "搜索启发+本土化代理",
+    "source_title": "ROE增长/成长质量类A股基本面因子思路",
+    "source_url": "https://bigquant.com/wiki/doc/c7u9IChUio",
+    "source_author": "BigQuant（聚合资料）",
+    "source_year": 2026,
+    "source_journal": "Web research",
+    "barra_style": "Quality / Growth",
+    "description": "基于‘高质量成长应体现为盈利同比改善的再加速，同时不能依赖过快的净资产扩张’这一轻量假设，在仅有 ROE/BPS 财报字段的约束下，构造 ROE 同比改善的一阶与二阶变化（roe_yoy、roe_reaccel）作为成长主轴，以近4季平均 ROE 作为盈利底座，以 BPS 同比和单季 BPS 扩张作为资本纪律惩罚，并加入 ROE 4 季波动惩罚；财报滞后 45 天映射到日频后，对 log_mktcap 代理做横截面 OLS 市值中性化并标准化。",
+    "hypothesis": "若公司盈利改善出现再加速，且没有同步发生过度的净资产扩张/再融资痕迹，那么这类成长更可持续，未来 5 日应获得更高截面收益。",
+    "implementation": "raw = 0.46*z(roe_reaccel) + 0.24*z(roe_yoy) + 0.18*z(roe_level4) - 0.18*z(bps_yoy) - 0.10*z(bps_growth_qoq) - 0.10*z(roe_std4)",
+    "neutralization": "对每个交易日横截面使用 log_mktcap 做 OLS 中性化；残差 MAD 截断后 z-score 标准化。",
+    "data_sources": [
+      "data/csi1000_fundamental_cache.csv",
+      "data/csi1000_kline_raw.csv",
+      "data/csi1000_returns.csv"
+    ],
+    "artifacts": [
+      "calc_roe_reaccel_capdisc_v2.py",
+      "data/factor_roe_reaccel_capdisc_v2.csv",
+      "output/roe_reaccel_capdisc_v2/report.json"
+    ],
+    "backtest": {
+      "market": "中证1000",
+      "period": "2023-11-14 ~ 2026-02-13",
+      "ic_mean": 0.0189751738563073,
+      "ic_t": 3.3295460867102142,
+      "rank_ic": 0.024135250853765132,
+      "g5_sharpe": 0.9026227500315993,
+      "long_short_sharpe": 1.617531501461687,
+      "monotonicity": 0.9,
+      "turnover_mean": 0.224606189795693,
+      "group_returns_annualized": [
+        0.1325367017504615,
+        0.1763845664632675,
+        0.2217461884210461,
+        0.2550471271711554,
+        0.2541090611023238
+      ]
+    },
+    "correlation_check": {
+      "status": "skipped",
+      "reason": "未进入入库流程；虽接近门槛，但因 IC 均值略低于 0.02，不做与现有 active 因子逐一相关性比对。"
+    },
+    "failure_reason": "非常接近入库，但仍按规则淘汰：IC_t=3.33、G5 Sharpe=0.90、单调性=0.9 均达标，唯独 IC均值=0.0190 略低于 0.02 的硬门槛。分层上 G4 与 G5 几乎持平，说明高分组顶部仍有轻微平台化，统计显著性主要来自整体排序斜率而非最顶组的显著拔尖。",
+    "diff_notes": "相较此前 quality_reinvestment_gap_v1、roe_overheat_reversal_neg_v1 等 Quality/Growth 因子，这一版更聚焦‘盈利改善的二阶变化’而非利润水平或过热回落，且把 BPS 扩张直接当作资本纪律约束，结构更简洁。结果显示仅靠 ROE/BPS 两字段仍能逼近门槛，说明二阶盈利改善确实有信息，但顶部收益没有进一步张开，可能需要额外的收入/现金流确认字段来把‘真成长’与‘会计改善’分开。",
+    "conclusion": "淘汰"
   }
 ]
