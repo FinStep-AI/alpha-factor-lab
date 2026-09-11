@@ -6,7 +6,7 @@
     "benchmark": "000300",
     "benchmark_name": "沪深300",
     "created_at": "2026-02-23 22:14:25",
-    "updated_at": "2026-09-11 08:31:31",
+    "updated_at": "2026-09-11 09:06:36",
     "status": "active",
     "players_count": 6
   },
@@ -10289,13 +10289,6 @@
       ],
       "decisions": [
         {
-          "date": "2026-05-27",
-          "title": "周三维度因子扫描",
-          "summary": "gap_contrib_v1 复现失败 IC=-0.004 t=-0.48 Sharpe 0.04 mono 0.1；负向变体对称失效；不入因子库，最强仍为 amihud_illiq_v2",
-          "detail": "今日扫描走4条文献路径：\n  1. QuantaAlpha arXiv 2602.07085v3 提出'日内可预测性退化后隔夜成为主导信号'，据此按gap贡献率gap_contrib_v1 = MA20(|ovret|)/MA20(|idret|) 构造日频因子，成交额OLS中性化 → MAD winsor → z-score。\n  2. 国海20260128金工系列委托挂单手数方向、方正金工成交量激增方向两路均因数据位级不足未能落地复现。\n回测结果：截面830×1000，IC=-0.0038,t=-0.48，多空Sharpe=0.04，单调性=0.10；反项gap_contrib_neg_v1对称证伪IC=+0.004,t=+0.48,Sharpe=-0.104。分组 G3最高19.3% G1/G5均约9%，凸形非单调，截面无排序列选股能力。结论：不入factor库，仅记factor-research.json已处理。非调仓日，不执行rebalance。",
-          "source": "paper_scan 2026-05-27"
-        },
-        {
           "date": "2026-06-01",
           "action": "rebalance",
           "summary": "LightGBM weekly rebalance 2026-06-01: 30候选风控全过，执行前25",
@@ -10508,6 +10501,13 @@
           "summary": "日度因子扫描：未发现可严格复现的新因子",
           "detail": "完成中证1000 K线刷新（fintool失败后自动fallback到auto，数据更新至2026-09-09）。随后扫描中文金工研报与英文学术/SSRN，公开网页多为月报索引、综述或缺少可执行公式。结合 factors.json 去重后，今日未找到同时满足‘原文参数清晰、现有数据可严格复现、与现有因子非重复’的新方向。仓库内虽已有股东集中度/估值动量/资金流等 fintool 因子脚本，但缺少今天新增且足够明确的外部原始研究依据，因此按规则不强行复现，记录日志结束。",
           "recommendation": "继续持有，等待更清晰的新因子材料"
+        },
+        {
+          "date": "2026-09-11",
+          "action": "hold",
+          "summary": "IOVR因子复现失败，不新增入库",
+          "detail": "数据刷新：fintool模式报错，但本地K线最新已至2026-09-10，满足T-1新鲜度要求，未触发auto回退。信息扫描覆盖A股alpha因子/中证1000选股因子/cross-sectional predictability/SSRN anomaly；公开来源在时限内未拿到可稳定抓取全文且参数完整的新方向，遂转向本地可严格复现候选IOVR（日内/隔夜波动率比）。复现公式：log(var(close/open-1,20)/var(open/prev_close-1,20))，并按截面对log_amount_20d做OLS中性化，MAD去极值+z-score标准化，生成data/factor_iovr_v1.csv。回测参数：20日调仓、20日前瞻、成本0.2%。结果：IC均值=-0.0089，t=-1.24，Sharpe=-0.4207，单调性=-0.30，换手77.53%，明显不达门槛。结论：该信号在中证1000更像噪音/活跃度代理，不具备稳定截面选股能力；今日不更新factors.json，仅记录失败复现到factor-research.json。",
+          "recommendation": "继续持有，后续优先探索可稳定获取且与现有微观结构库低相关的资金流持续性/大宗交易溢价方向。"
         }
       ],
       "rebalances": [
