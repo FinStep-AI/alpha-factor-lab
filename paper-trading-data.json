@@ -6,7 +6,7 @@
     "benchmark": "000300",
     "benchmark_name": "沪深300",
     "created_at": "2026-02-23 22:14:25",
-    "updated_at": "2026-09-11 09:36:58",
+    "updated_at": "2026-09-11 09:37:42",
     "status": "active",
     "players_count": 6
   },
@@ -12783,9 +12783,65 @@
       "style": "趋势跟踪 · 板块轮动 · 全A股扫描 · 中长线波段",
       "description": "BBI+MA60趋势判断，KDJ低位捕捉买点，板块轮动做趋势收益。核心逻辑：阳率×盈亏比最大化。",
       "portfolio": {
-        "cash": 7843010.759999998,
-        "positions": {},
-        "total_value": 7843010.76,
+        "cash": 179369.51999999816,
+        "positions": {
+          "688237.SH": {
+            "code": "688237.SH",
+            "name": "超卓航科",
+            "volume": 26300,
+            "avg_cost": 57.85,
+            "current_price": 57.85,
+            "market_value": 1521455.0,
+            "pnl": 0,
+            "pnl_pct": 0,
+            "entry_date": "2026-09-11"
+          },
+          "600391.SH": {
+            "code": "600391.SH",
+            "name": "航发科技",
+            "volume": 36800,
+            "avg_cost": 41.82,
+            "current_price": 41.82,
+            "market_value": 1538976.0,
+            "pnl": 0,
+            "pnl_pct": 0,
+            "entry_date": "2026-09-11"
+          },
+          "001324.SZ": {
+            "code": "001324.SZ",
+            "name": "长青科技",
+            "volume": 75500,
+            "avg_cost": 20.33,
+            "current_price": 20.33,
+            "market_value": 1534914.9999999998,
+            "pnl": 0,
+            "pnl_pct": 0,
+            "entry_date": "2026-09-11"
+          },
+          "002687.SZ": {
+            "code": "002687.SZ",
+            "name": "乔治白",
+            "volume": 249900,
+            "avg_cost": 6.13,
+            "current_price": 6.13,
+            "market_value": 1531887.0,
+            "pnl": 0,
+            "pnl_pct": 0,
+            "entry_date": "2026-09-11"
+          },
+          "002396.SZ": {
+            "code": "002396.SZ",
+            "name": "星网锐捷",
+            "volume": 42900,
+            "avg_cost": 35.58,
+            "current_price": 35.58,
+            "market_value": 1526382.0,
+            "pnl": 0,
+            "pnl_pct": 0,
+            "entry_date": "2026-09-11"
+          }
+        },
+        "total_value": 7832984.52,
         "last_update": "2026-09-11"
       },
       "nav_history": {
@@ -22190,16 +22246,104 @@
           "pnl": -24332.0,
           "pnl_pct": -1.22,
           "reason": "止损卖出：跌破买入价下5个价位，先执行风控"
+        },
+        {
+          "date": "2026-09-11",
+          "code": "688237.SH",
+          "name": "超卓航科",
+          "direction": "buy",
+          "price": 57.85,
+          "volume": 26300,
+          "amount": 1521455.0,
+          "fees": {
+            "commission": 456.44,
+            "stamp_duty": 0,
+            "transfer_fee": 15.21,
+            "slippage_cost": 1521.45,
+            "total": 1993.11
+          },
+          "pnl": 0,
+          "pnl_pct": 0,
+          "reason": "板块/趋势回补：pullback信号，score=80，行业=铁路、船舶、航空航天和其他运输设备制造业；BBI金叉17天前 + 放量2.27x + 缩量回调41.4%；缩量至半量以下；强放量2.27x"
+        },
+        {
+          "date": "2026-09-11",
+          "code": "600391.SH",
+          "name": "航发科技",
+          "direction": "buy",
+          "price": 41.82,
+          "volume": 36800,
+          "amount": 1538976.0,
+          "fees": {
+            "commission": 461.69,
+            "stamp_duty": 0,
+            "transfer_fee": 15.39,
+            "slippage_cost": 1538.98,
+            "total": 2016.06
+          },
+          "pnl": 0,
+          "pnl_pct": 0,
+          "reason": "板块/趋势回补：pullback信号，score=73，行业=铁路、船舶、航空航天和其他运输设备制造业；BBI金叉4天前 + 放量2.25x + 缩量回调57.9%；强放量2.25x；量比3.0"
+        },
+        {
+          "date": "2026-09-11",
+          "code": "001324.SZ",
+          "name": "长青科技",
+          "direction": "buy",
+          "price": 20.33,
+          "volume": 75500,
+          "amount": 1534915.0,
+          "fees": {
+            "commission": 460.47,
+            "stamp_duty": 0,
+            "transfer_fee": 15.35,
+            "slippage_cost": 1534.91,
+            "total": 2010.74
+          },
+          "pnl": 0,
+          "pnl_pct": 0,
+          "reason": "板块/趋势回补：pullback信号，score=65，行业=铁路、船舶、航空航天和其他运输设备制造业；BBI金叉4天前 + 放量2.62x + 缩量回调50.1%；强放量2.62x；板块集中:铁路、船舶、航空航天和其他运输设备制造业(3只)"
+        },
+        {
+          "date": "2026-09-11",
+          "code": "002687.SZ",
+          "name": "乔治白",
+          "direction": "buy",
+          "price": 6.13,
+          "volume": 249900,
+          "amount": 1531887.0,
+          "fees": {
+            "commission": 459.57,
+            "stamp_duty": 0,
+            "transfer_fee": 15.32,
+            "slippage_cost": 1531.89,
+            "total": 2006.77
+          },
+          "pnl": 0,
+          "pnl_pct": 0,
+          "reason": "板块/趋势回补：main信号，score=50，行业=纺织服装、服饰业；J=7.0<13 + 上升趋势"
+        },
+        {
+          "date": "2026-09-11",
+          "code": "002396.SZ",
+          "name": "星网锐捷",
+          "direction": "buy",
+          "price": 35.58,
+          "volume": 42900,
+          "amount": 1526382.0,
+          "fees": {
+            "commission": 457.91,
+            "stamp_duty": 0,
+            "transfer_fee": 15.26,
+            "slippage_cost": 1526.38,
+            "total": 1999.56
+          },
+          "pnl": 0,
+          "pnl_pct": 0,
+          "reason": "板块/趋势回补：main信号，score=50，行业=未分类；J=8.1<13 + 上升趋势"
         }
       ],
       "decisions": [
-        {
-          "date": "2026-08-14",
-          "action": "hold",
-          "summary": "收盘持仓5只，仓位以医药与个别趋势票为主；今日持仓检查未触发止盈止损，主策略与单针下30均无新信号，仅出现9只BBI金叉缩量回调候选，但板块集中度不足且KDJ未回到理想低位，尾盘不追。",
-          "detail": "收盘扫描共5082只，基础过滤后仅9只进入回调候选，主策略0只、单针下300只，说明市场可交易趋势信号偏弱。现有5只持仓中，灵康药业与超卓航科仍处于上升结构内，中远海特与天目药业接近第一止盈线但尚未触发，万邦医药为今日新仓，小幅浮亏但未破风控。由于无持仓卖出动作、亦无满足高分且板块共振的新开仓标的，维持现有仓位等待下一交易日确认。当前候选中星网锐捷、视源股份、四方科技等属于回调观察名单，后续若J值继续回落并出现板块聚集，可再评估。",
-          "recommendation": "继续持有现有5只仓位，不做尾盘调整；下周重点观察医药与金属制品方向是否形成板块共振，同时盯紧万邦医药的止损位以及超卓航科/天目药业的7%止盈触发情况。"
-        },
         {
           "date": "2026-09-01",
           "action": "buy",
@@ -22420,6 +22564,14 @@
           "detail": "当前持仓3只，陆家嘴、老百姓、唐人神均触发5tick止损，按纪律全部卖出。扫描共得30只候选，热点行业集中在铁路、船舶、航空航天和其他运输设备制造业。综合板块集中度、score与信号类型，优先选择航空航天设备链的超卓航科、航发科技、长青科技作为回补对象；其余高分标的因行业分散或未分类，优先级次之。单笔按等额仓位估算股数，避免超过目标5只持仓。",
           "recommendation": "按决策JSON通过 execute_decision.py 执行，不直接改账本；若执行时价格波动导致部分买单无法成交，宁可留现金，也不追高替补。",
           "exec_summary": "成功3笔，失败5笔"
+        },
+        {
+          "date": "2026-09-11",
+          "action": "mixed",
+          "summary": "止损卖出已完成，当前空仓；按板块集中度与趋势强度回补5只，目标恢复至5只持仓。",
+          "detail": "卖出已先执行完成。当前候选中，铁路、船舶、航空航天和其他运输设备制造业出现最明显板块共振，因此优先选择超卓航科、航发科技、长青科技；再用主策略信号中的乔治白、星网锐捷补足到5只。所有买单按等额仓位分配。",
+          "recommendation": "执行本次回补买单；若有个股因实时价格变化导致资金不足，则允许少买一只并保留现金。",
+          "exec_summary": "成功5笔，失败0笔"
         }
       ],
       "rebalances": [],
@@ -22431,8 +22583,8 @@
         "calmar_ratio": -2.05,
         "win_rate": 51.88,
         "profit_loss_ratio": 0.69,
-        "total_trades": 471,
-        "total_fees": 728380.2000000004,
+        "total_trades": 476,
+        "total_fees": 738406.4400000005,
         "current_positions": 3,
         "turnover_rate": 0.0
       },
