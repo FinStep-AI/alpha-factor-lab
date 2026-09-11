@@ -8903,5 +8903,41 @@
     "failure_reason": "非常接近入库，但仍按规则淘汰：IC_t=3.33、G5 Sharpe=0.90、单调性=0.9 均达标，唯独 IC均值=0.0190 略低于 0.02 的硬门槛。分层上 G4 与 G5 几乎持平，说明高分组顶部仍有轻微平台化，统计显著性主要来自整体排序斜率而非最顶组的显著拔尖。",
     "diff_notes": "相较此前 quality_reinvestment_gap_v1、roe_overheat_reversal_neg_v1 等 Quality/Growth 因子，这一版更聚焦‘盈利改善的二阶变化’而非利润水平或过热回落，且把 BPS 扩张直接当作资本纪律约束，结构更简洁。结果显示仅靠 ROE/BPS 两字段仍能逼近门槛，说明二阶盈利改善确实有信息，但顶部收益没有进一步张开，可能需要额外的收入/现金流确认字段来把‘真成长’与‘会计改善’分开。",
     "conclusion": "淘汰"
+  },
+  {
+    "date": "2026-09-11 15:33:00",
+    "factor_id": "bband_squeeze_bias_v1",
+    "factor_name": "布林带压缩方向偏离因子 v1",
+    "status": "failed",
+    "source_type": "技术分析启发+本土化",
+    "source_title": "Bollinger Band Squeeze / Bandwidth Contraction",
+    "source_url": "https://bigquant.com/wiki/doc/f9lmFFMF9A",
+    "source_author": "John Bollinger / 技术分析通用思路",
+    "source_year": 0,
+    "source_journal": "技术分析经验规则",
+    "barra_style": "Volatility / Momentum",
+    "description": "用20日布林带宽度在过去60日中的分位数刻画“压缩”状态，在压缩越强时，结合收盘相对20日均线的标准化偏离、20日趋势收益和20日平均换手确认，构造方向性释放信号；随后按日对市值代理做OLS中性化并标准化。高值表示窄波动压缩后价格已向上偏离且有一定参与度支撑，预期随后出现延续性释放。",
+    "formula": "raw=(1-BW_pct_60)*(0.55*z_close_to_ma20+0.30*ret20_trend+0.15*turnover20_confirm); factor=neutralize(raw, log(close*amount))",
+    "our_metric": {
+      "market": "中证1000",
+      "period": "2022-10-11 ~ 2026-09-10",
+      "ic_mean": -0.0007854448510997457,
+      "ic_t": -0.32337045573733403,
+      "rank_ic": 0.0021176464688084785,
+      "g5_sharpe": 0.3981829178145111,
+      "long_short_sharpe": 0.19235090249703737,
+      "monotonicity": 0.3,
+      "turnover_mean": 0.7811101219732339,
+      "max_abs_corr_existing": null,
+      "closest_existing_factor": null
+    },
+    "failure_reason": "全面不达标：IC均值=-0.0008、IC_t=-0.32、G5 Sharpe=0.40、单调性仅0.3，多空Sharpe只有0.19。说明“压缩后方向偏离”在中证1000日线口径下并没有形成稳定截面alpha，更多只是一个时间序列择时叙事，被横截面分组后基本失效。",
+    "diff_notes": "和已有波动率/价格位置类因子相比，这一版更强调“低波动压缩 + 已经发生的方向性偏离 + 参与度确认”的组合，本来希望捕捉布林挤压后的延续释放；但结果显示，压缩本身更像全市场共性状态，单只股票间的可比性弱，而收盘偏离与20日趋势的加入又把信号推向普通价格动量，最终分组收益呈现G3最好、两端都不突出，线性排序关系被破坏。",
+    "conclusion": "淘汰",
+    "data_files": [
+      "scripts/calc_bband_squeeze_bias_v1.py",
+      "data/factor_bband_squeeze_bias_v1.csv",
+      "output/bband_squeeze_bias_v1/report.json"
+    ]
   }
 ]
