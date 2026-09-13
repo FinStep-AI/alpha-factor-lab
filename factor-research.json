@@ -1,5 +1,41 @@
 [
   {
+    "date": "2026-09-13 15:00:00",
+    "factor_id": "retained_profitability_gap_v1",
+    "factor_name": "留存盈利缺口因子 v1",
+    "status": "failed",
+    "source_type": "论文复现+本土化代理",
+    "source_title": "External Growth and the Cross Section of Stock Returns",
+    "source_url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2690030",
+    "source_author": "SSRN working paper",
+    "source_year": 2015,
+    "source_journal": "SSRN",
+    "barra_style": "Quality / Growth",
+    "description": "周末论文复现，沿着“外部扩张越强、由内生盈利支撑的成长越稀缺”主线，在仅有 ROE/BPS 条件下构造留存盈利缺口代理：以近四季平均 ROE 相对 BPS 同比扩张的比值衡量盈利对净资产扩张的覆盖能力，并加入 ROE 同比改善、ROE 环比稳定性、BPS 扩张稳定性与 ROE 波动惩罚；财报按45天滞后映射到日频后，对市值代理做横截面 OLS 中性化与标准化。",
+    "formula": "core_gap = log1p(abs(MA4(ROE)/(1+100*abs(BPS_yoy))))*sign(...); raw = 0.55*core_gap + 0.20*tanh(ROE_yoy/5) - 0.10*tanh(abs(ROE_qoq)/3) - 0.10*tanh(BPS_yoy_std4/0.20) - 0.05*tanh(ROE_std4/4); factor = neutralize(raw, log_mktcap)",
+    "our_metric": {
+      "market": "中证1000",
+      "period": "2023-08-14 ~ 2026-02-13",
+      "ic_mean": 0.004776,
+      "ic_t": 0.52,
+      "rank_ic": 0.0258,
+      "g5_sharpe": null,
+      "long_short_sharpe": -0.0759,
+      "monotonicity": 0.5,
+      "turnover_mean": 0.0476,
+      "max_abs_corr_existing": null,
+      "closest_existing_factor": null
+    },
+    "failure_reason": "明显不达标：IC均值仅0.0048、IC_t=0.52、单调性0.5，多空Sharpe为-0.08。虽然高分组(G5)绝对年化收益不差，但 G4 反而最高，且 G1/G2 也接近，说明这是低频质量分层而非稳定截面 alpha。",
+    "diff_notes": "相较昨天已失败的 sustainable_growth_efficiency/internal_growth_gap 系列，这版更强调“盈利覆盖净资产扩张”的留存盈利缺口，并显式惩罚 ROE 波动与扩张不稳定，试图更贴近论文中 external growth 的融资约束语义。但结果显示，仅靠 ROE/BPS 两个低频字段仍不足以提炼出 5 日可交易的 Quality/Growth 信号，排序线性很弱，更像温和的财务质量标签。后续若再挖这条线，应引入分红/再融资/总资产增长或现金流字段，而不是继续在 ROE/BPS 局部变形。",
+    "conclusion": "淘汰",
+    "data_files": [
+      "calc_retained_profitability_gap_v1.py",
+      "data/factor_retained_profitability_gap_v1.csv",
+      "output/retained_profitability_gap_v1/report.json"
+    ]
+  },
+  {
     "date": "2026-09-12 20:00:00",
     "factor_id": "sustainable_growth_efficiency_v1",
     "factor_name": "可持续成长效率因子 v1",
