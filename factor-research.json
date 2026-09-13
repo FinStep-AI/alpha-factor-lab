@@ -9044,5 +9044,41 @@
       "data/factor_bband_squeeze_bias_v1.csv",
       "output/bband_squeeze_bias_v1/report.json"
     ]
+  },
+  {
+    "date": "2026-09-13 10:00:00",
+    "factor_id": "internal_growth_gap_v1",
+    "factor_name": "内生增长缺口因子 v1",
+    "status": "failed",
+    "source_type": "论文复现代理+本土化",
+    "source_title": "External Growth and the Cross Section of Stock Returns",
+    "source_url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2690030",
+    "source_author": "SSRN working paper",
+    "source_year": 2015,
+    "source_journal": "SSRN",
+    "barra_style": "Quality / Growth",
+    "description": "沿着 external growth 文献主线，尝试用现有 BPS 与 ROE 数据复现“内生盈利支撑的增长优于资产负债表外延扩张”这一思想：以4季平均 ROE 近似内生增长能力，以 BPS 同比增长近似净资产扩张速度，构造二者缺口 internal_growth-gap，并加入 ROE 持续性、ROE 同比改善奖励，以及 BPS 扩张波动与 ROE 波动惩罚；财报信号按报告期后45天映射到日频，再做市值代理横截面 OLS 中性化。",
+    "formula": "raw = 0.45*(tanh(ROE_mean4/10)-tanh(BPS_yoy/0.25)) + 0.20*tanh(-abs(ROE_qoq)/3) + 0.20*tanh(ROE_yoy/5) - 0.10*tanh(std4(BPS_yoy)/0.20) - 0.05*tanh(std4(ROE)/4); factor = neutralize(raw, log_mktcap)",
+    "our_metric": {
+      "market": "中证1000",
+      "period": "2022-10-11 ~ 2026-02-13",
+      "ic_mean": 0.0022740718915210054,
+      "ic_t": 0.41405393986806616,
+      "rank_ic": 0.010248130193362246,
+      "g5_sharpe": 0.7554125661620348,
+      "long_short_sharpe": -0.1404871490346328,
+      "monotonicity": 0.3,
+      "turnover_mean": 0.18813238262764181,
+      "max_abs_corr_existing": null,
+      "closest_existing_factor": null
+    },
+    "failure_reason": "明显不达标：IC均值仅0.0023、IC_t=0.41，G5 Sharpe=0.76 未过 0.8，单调性只有 0.3，多空 Sharpe 甚至为负。分层结果呈现中间组优于两端组，说明“内生增长缺口”这套代理在当前 BPS/ROE 低维财报口径下没有形成稳定横截面排序。",
+    "diff_notes": "和昨日失败的 sustainable_growth_efficiency_v1 相比，这版不再用 ROE 与 BPS 扩张的比值，而改用“盈利内生增长能力 - 净资产扩张速度”的 gap，并额外加入 ROE 持续性与扩张波动约束，理论上更贴近 external growth 文献里“低外部扩张、更高内生支撑”的思想。但实测上，这个 gap 在中证1000 更像一个温和质量刻画，无法把高低组显著拉开，且 5 日前瞻下两端分组都不突出。",
+    "conclusion": "淘汰",
+    "data_files": [
+      "calc_internal_growth_gap_v1.py",
+      "data/factor_internal_growth_gap_v1.csv",
+      "output/internal_growth_gap_v1/report.json"
+    ]
   }
 ]
