@@ -9153,5 +9153,41 @@
     "implementation": "calc_operating_asset_expansion_reversal_v1.py",
     "factor_file": "data/factor_operating_asset_expansion_reversal_v1.csv",
     "backtest_output": "output/operating_asset_expansion_reversal_v1/report.json"
+  },
+  {
+    "date": "2026-10-01 12:01:00",
+    "factor_id": "asset_turnover_inflect_repair_growth_v1",
+    "factor_name": "资产周转拐点修复成长因子 v1",
+    "status": "failed",
+    "source_type": "搜索启发+自研代理",
+    "source_title": "资产周转率变动因子十年回测（思路启发）",
+    "source_url": "https://finance.sina.com.cn/roll/2026-09-18/doc-inisfyex3528875.shtml",
+    "source_author": "源达资讯（二手报道）",
+    "source_year": 2026,
+    "source_journal": "财经媒体",
+    "barra_style": "Growth / Quality",
+    "description": "沿着“经营效率改善优于单纯资本扩张”的主线，使用 ROE/BPS 近似资产周转率代理(at=ROE/BPS)，构造同比改善、前期恶化后修复、环比拐点确认三层信号，并用 ROE 同比改善做盈利确认；同时对 BPS 同比/环比过快扩张施加资本纪律惩罚，再做市值中性化。目标是捕捉小盘股中经营效率由弱转强、但不是靠摊大饼扩表实现的成长修复。",
+    "formula": "raw = (0.28*tanh(20*at_yoy) + 0.26*tanh(24*(at_yoy-at_prev_yoy)) + 0.18*tanh(18*(at_qoq-at_prev_qoq)) + 0.10*tanh(14*at_qoq) + 0.18*tanh((0.75*roe_yoy+0.25*roe_qoq)/4)) * weakness_gate * capital_discipline * stability * level_gate; factor = neutralize(raw, log_mktcap)",
+    "our_metric": {
+      "market": "中证1000",
+      "period": "2022-11-14 ~ 2026-02-13",
+      "ic_mean": 0.016583238136187877,
+      "ic_t": 3.4728878425841727,
+      "rank_ic": 0.016048543309100972,
+      "g5_sharpe": 0.9346439369499875,
+      "long_short_sharpe": 1.601996397660823,
+      "monotonicity": 0.8999999999999998,
+      "turnover_mean": 0.24614185124161111,
+      "max_abs_corr_existing": 0.8634742787920278,
+      "closest_existing_factor": "asset_turnover_smooth_reaccel_growth_v1"
+    },
+    "failure_reason": "未达入库门槛且存在明显冗余：IC均值 0.0166 虽显著(t=3.47)，但仍低于 0.02 硬门槛；同时与 asset_turnover_smooth_reaccel_growth_v1 的相关性高达 0.863，超过 0.7 冗余阈值，因此不能入库。",
+    "diff_notes": "相比已有 asset_turnover_reaccel / smooth_reaccel 系列，这版更强调“先弱后强”的修复拐点，用前期恶化后的 yoy 修复、qoq 二阶拐点和 ROE 改善做联合确认，并额外惩罚 BPS 扩张过快，逻辑上更接近经营效率修复而非单纯高 ROE。结果显示这条线确实能得到不错的多空 Sharpe(1.60) 与高分组 Sharpe(0.93)，但横截面线性强度仍不足，而且和已有 smooth_reaccel 版本高度同源，属于旧信号的细化而非新增 alpha。后续若继续挖 Growth/Quality，应该换数据维度，引入营收、现金流或周转相关财务字段，而不是继续在 ROE/BPS 的资产周转代理上做局部变形。",
+    "conclusion": "淘汰",
+    "data_files": [
+      "calc_asset_turnover_inflect_repair_growth_v1.py",
+      "data/factor_asset_turnover_inflect_repair_growth_v1.csv",
+      "output/asset_turnover_inflect_repair_growth_v1/report.json"
+    ]
   }
 ]
