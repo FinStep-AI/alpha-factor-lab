@@ -6,7 +6,7 @@
     "benchmark": "000300",
     "benchmark_name": "沪深300",
     "created_at": "2026-02-23 22:14:25",
-    "updated_at": "2026-10-01 09:31:06",
+    "updated_at": "2026-10-01 09:42:11",
     "status": "active",
     "players_count": 6
   },
@@ -12008,7 +12008,7 @@
         "max_drawdown_pct": 27.23,
         "sharpe_ratio": -5.42,
         "calmar_ratio": -2.57,
-        "win_rate": 57.69,
+        "win_rate": 55.56,
         "profit_loss_ratio": 0.07,
         "total_trades": 41,
         "total_fees": 134435.17,
@@ -12800,7 +12800,7 @@
       "style": "趋势跟踪 · 板块轮动 · 全A股扫描 · 中长线波段",
       "description": "BBI+MA60趋势判断，KDJ低位捕捉买点，板块轮动做趋势收益。核心逻辑：阳率×盈亏比最大化。",
       "portfolio": {
-        "cash": 1662735.7599999981,
+        "cash": 1515331.1699999988,
         "positions": {
           "688237.SH": {
             "code": "688237.SH",
@@ -12812,45 +12812,43 @@
             "pnl": 28404.0,
             "pnl_pct": 1.87,
             "entry_date": "2026-09-11",
-            "max_pnl_pct": 1.78
+            "max_pnl_pct": 1.87
           },
-          "600391.SH": {
-            "code": "600391.SH",
-            "name": "航发科技",
-            "volume": 36800,
-            "avg_cost": 41.82,
-            "current_price": 40.61,
-            "market_value": 1494448.0,
-            "pnl": -44528.0,
-            "pnl_pct": -2.89,
-            "entry_date": "2026-09-11",
-            "max_pnl_pct": 5.05
+          "688247.SH": {
+            "code": "688247.SH",
+            "name": "宣泰医药",
+            "volume": 150400,
+            "avg_cost": 10.09,
+            "current_price": 10.09,
+            "market_value": 1517536.0,
+            "pnl": 0,
+            "pnl_pct": 0,
+            "entry_date": "2026-10-01"
           },
-          "001324.SZ": {
-            "code": "001324.SZ",
-            "name": "长青科技",
-            "volume": 75500,
-            "avg_cost": 20.33,
-            "current_price": 20.26,
-            "market_value": 1529630.0,
-            "pnl": -5285.0,
-            "pnl_pct": -0.34,
-            "entry_date": "2026-09-11"
+          "301151.SZ": {
+            "code": "301151.SZ",
+            "name": "冠龙节能",
+            "volume": 72500,
+            "avg_cost": 20.92,
+            "current_price": 20.92,
+            "market_value": 1516700.0000000002,
+            "pnl": 0,
+            "pnl_pct": 0,
+            "entry_date": "2026-10-01"
           },
-          "002687.SZ": {
-            "code": "002687.SZ",
-            "name": "乔治白",
-            "volume": 249900,
-            "avg_cost": 6.13,
-            "current_price": 5.58,
-            "market_value": 1394442.0,
-            "pnl": -137445.0,
-            "pnl_pct": -8.97,
-            "entry_date": "2026-09-11",
-            "max_pnl_pct": 1.79
+          "603956.SH": {
+            "code": "603956.SH",
+            "name": "威派格",
+            "volume": 220600,
+            "avg_cost": 6.88,
+            "current_price": 6.88,
+            "market_value": 1517728.0,
+            "pnl": 0,
+            "pnl_pct": 0,
+            "entry_date": "2026-10-01"
           }
         },
-        "total_value": 7631114.76,
+        "total_value": 7617154.17,
         "last_update": "2026-10-01"
       },
       "nav_history": {
@@ -22372,17 +22370,123 @@
           "pnl": -40326.0,
           "pnl_pct": -2.64,
           "reason": "午盘止损触发：现价34.62低于止损线35.53，且价格跌破BBI，按纪律先卖出控制回撤"
+        },
+        {
+          "date": "2026-10-01",
+          "code": "600391.SH",
+          "name": "航发科技",
+          "direction": "sell",
+          "price": 40.61,
+          "volume": 36800,
+          "amount": 1494448.0,
+          "fees": {
+            "commission": 448.33,
+            "stamp_duty": 747.22,
+            "transfer_fee": 14.94,
+            "slippage_cost": 1494.45,
+            "total": 2704.95
+          },
+          "pnl": -44528.0,
+          "pnl_pct": -2.89,
+          "reason": "晨扫风控卖出：触发止损/破位，先按纪律清仓"
+        },
+        {
+          "date": "2026-10-01",
+          "code": "001324.SZ",
+          "name": "长青科技",
+          "direction": "sell",
+          "price": 20.26,
+          "volume": 75500,
+          "amount": 1529630.0,
+          "fees": {
+            "commission": 458.89,
+            "stamp_duty": 764.82,
+            "transfer_fee": 15.3,
+            "slippage_cost": 1529.63,
+            "total": 2768.63
+          },
+          "pnl": -5285.0,
+          "pnl_pct": -0.34,
+          "reason": "晨扫风控卖出：触发止损/破位，先按纪律清仓"
+        },
+        {
+          "date": "2026-10-01",
+          "code": "002687.SZ",
+          "name": "乔治白",
+          "direction": "sell",
+          "price": 5.58,
+          "volume": 249900,
+          "amount": 1394442.0,
+          "fees": {
+            "commission": 418.33,
+            "stamp_duty": 697.22,
+            "transfer_fee": 13.94,
+            "slippage_cost": 1394.44,
+            "total": 2523.94
+          },
+          "pnl": -137445.0,
+          "pnl_pct": -8.97,
+          "reason": "晨扫风控卖出：触发止损/破位，先按纪律清仓"
+        },
+        {
+          "date": "2026-10-01",
+          "code": "688247.SH",
+          "name": "宣泰医药",
+          "direction": "buy",
+          "price": 10.09,
+          "volume": 150400,
+          "amount": 1517536.0,
+          "fees": {
+            "commission": 455.26,
+            "stamp_duty": 0,
+            "transfer_fee": 15.18,
+            "slippage_cost": 1517.54,
+            "total": 1987.97
+          },
+          "pnl": 0,
+          "pnl_pct": 0,
+          "reason": "晨扫补仓：pullback信号，评分70，行业未分类，板块相对集中优先"
+        },
+        {
+          "date": "2026-10-01",
+          "code": "301151.SZ",
+          "name": "冠龙节能",
+          "direction": "buy",
+          "price": 20.92,
+          "volume": 72500,
+          "amount": 1516700.0,
+          "fees": {
+            "commission": 455.01,
+            "stamp_duty": 0,
+            "transfer_fee": 15.17,
+            "slippage_cost": 1516.7,
+            "total": 1986.88
+          },
+          "pnl": 0,
+          "pnl_pct": 0,
+          "reason": "晨扫补仓：pullback信号，评分60，行业未分类，板块相对集中优先"
+        },
+        {
+          "date": "2026-10-01",
+          "code": "603956.SH",
+          "name": "威派格",
+          "direction": "buy",
+          "price": 6.88,
+          "volume": 220600,
+          "amount": 1517728.0,
+          "fees": {
+            "commission": 455.32,
+            "stamp_duty": 0,
+            "transfer_fee": 15.18,
+            "slippage_cost": 1517.73,
+            "total": 1988.22
+          },
+          "pnl": 0,
+          "pnl_pct": 0,
+          "reason": "晨扫补仓：pullback信号，评分55，行业未分类，板块相对集中优先"
         }
       ],
       "decisions": [
-        {
-          "date": "2026-09-01",
-          "action": "mixed",
-          "summary": "收盘检查触发3笔止损卖出，未新增开仓。",
-          "detail": "今日收盘后更新行情与K线缓存，现有持仓中灵康药业、超卓航科、万邦医药均已跌破各自止损线，且同步出现BBI破位，按趋势纪律尾盘全清。扫描结果仅发现4只BBI金叉缩量回调候选，主策略与单针下30通道均无新信号；其中中远海特为已有持仓，不做重复加仓，其余候选板块共振与确定性不足，且组合当前可用现金较低，因此本次不新增买入。其余持仓继续观察，保留中远海特、天目药业、科华控股、陆家嘴。",
-          "recommendation": "执行3笔卖出、保持其余仓位不动，等待后续更强的趋势共振信号再补仓。",
-          "exec_summary": "成功3笔，失败0笔"
-        },
         {
           "date": "2026-09-01",
           "action": "mixed",
@@ -22603,6 +22707,14 @@
           "summary": "收盘复核4只持仓，均未触发买入价下5tick止损、+7%半仓止盈或跌破BBI清仓条件；候选信号以BBI金叉后缩量回调为主，但板块集中度不足，暂不新增仓位。",
           "detail": "当前持仓为超卓航科、航发科技、长青科技、乔治白。航发科技浮盈约5.05%，接近但未达到+7%止盈1阈值；其余个股盈亏处于趋势容忍区间。收盘扫描共得到9个候选，其中主策略硬信号为0，只出现1只单针下30与8只金叉缩量回调，且热门板块未形成3只以上共振，不满足板块轮动加分条件。基于趋势优先与低频调仓原则，尾盘维持现有4只持仓，不做追价补仓。",
           "recommendation": "下个交易日继续重点跟踪航发科技是否冲破+7%触发半仓止盈，同时监控长青科技是否回落至买入价下5tick止损线；若航空航天链继续扩散并形成新的板块共振，再考虑补回第5个仓位。"
+        },
+        {
+          "date": "2026-10-01",
+          "action": "mixed",
+          "summary": "先按纪律卖出3只触发止损持仓，再回补4只高优先级候选，组合维持约5只持仓。",
+          "detail": "晨扫覆盖5100只个股，漏斗后得到16个候选，主策略1只、金叉缩量回调15只。正式账本显示当前持仓4只，其中航发科技、长青科技、乔治白已触发止损/破位，按纪律先卖；超卓航科暂未触发卖点继续持有。候选中医药相关方向最集中，兰卫医学、瑞康医药、百洋医药、睿智医药兼具较高分数与相对板块共振，优先作为回补对象。预计执行后组合约保留5只持仓，本次计划新开：宣泰医药(688247.SH)、冠龙节能(301151.SZ)、威派格(603956.SH)、哈三联(002900.SZ)。",
+          "recommendation": "严格通过 execute_decision.py 执行本决策；若实时成交价格变化导致个别买单资金不足，允许少买一只并保留现金，不追高替补。",
+          "exec_summary": "成功6笔，失败1笔"
         }
       ],
       "rebalances": [],
@@ -22614,8 +22726,8 @@
         "calmar_ratio": -2.0,
         "win_rate": 51.18,
         "profit_loss_ratio": 0.69,
-        "total_trades": 477,
-        "total_fees": 741096.2000000005,
+        "total_trades": 483,
+        "total_fees": 755056.7900000004,
         "current_positions": 4,
         "turnover_rate": 0.0
       },
@@ -22630,7 +22742,7 @@
       "portfolio": {
         "cash": 10752557.460000005,
         "positions": {},
-        "total_value": 10752557.46,
+        "total_value": 10752557.460000005,
         "last_update": "2026-10-01"
       },
       "trades": [
@@ -24655,8 +24767,8 @@
         "max_drawdown_pct": 18.74,
         "sharpe_ratio": 0.61,
         "calmar_ratio": 1.01,
-        "win_rate": 41.03,
-        "profit_loss_ratio": 1.19,
+        "win_rate": 40.0,
+        "profit_loss_ratio": 1.01,
         "total_trades": 76,
         "total_fees": 670962.5399999998,
         "current_positions": 1,
@@ -27653,7 +27765,7 @@
         "sharpe_ratio": 0.61,
         "max_drawdown_pct": 18.74,
         "current_nav": 1.076053,
-        "total_trades": 75,
+        "total_trades": 76,
         "rank": 1
       },
       {
@@ -27708,11 +27820,11 @@
         "sharpe_ratio": -5.42,
         "max_drawdown_pct": 27.23,
         "current_nav": 0.669951,
-        "total_trades": 40,
+        "total_trades": 41,
         "rank": 6
       }
     ],
-    "updated_at": "2026-10-01 09:12:07"
+    "updated_at": "2026-10-01 09:32:59"
   },
   "quant": {
     "decisions": [
