@@ -9189,5 +9189,30 @@
       "data/factor_asset_turnover_inflect_repair_growth_v1.csv",
       "output/asset_turnover_inflect_repair_growth_v1/report.json"
     ]
+  },
+  {
+    "date": "2026-10-01 15:36:00",
+    "factor_id": "boll_squeeze_breakout_confirm_v1",
+    "factor_name": "布林压缩突破确认因子 v1",
+    "status": "failed",
+    "source_type": "搜索启发+自研",
+    "source_title": "布林带挤压策略/BBANDS 带宽压缩突破",
+    "source_url": "https://developer.volcengine.com/articles/7475229144146509851 ; https://bigquant.com/wiki/doc/f9lmFFMF9A",
+    "source_author": "公开资料整理",
+    "source_year": 2025,
+    "source_journal": "Web",
+    "barra_style": "Technical / Volatility",
+    "description": "使用布林带宽历史分位定义 squeeze gate，在低带宽压缩阶段重点关注对上轨与近10日高点的相对突破，再叠加近5日成交额放大确认与短期趋势确认；最后按日对 log 市值代理回归中性化并标准化。希望捕捉小盘股中“先压缩、后放量、再突破”的短期延续。",
+    "formula": "raw = (1-bbw_pct_80d) * (0.65*(close/upper20-1) + 0.35*(close/max_close_10-1)) * (1+log(1+amt5/amt20)) * tanh(ret5/0.10) * (1-0.35*abs(tanh(ret3/0.12))); factor = zscore(neutralize(raw, log_mktcap_proxy))",
+    "our_metric": "IC_mean=0.0122, IC_t=1.61, RankIC=0.0160, G5_Sharpe=0.5269, LS_Sharpe=0.6729, Monotonicity=0.7000, Turnover=0.7644",
+    "failure_reason": "未达门槛：IC均值<0.02，IC_t<2.0，G5 Sharpe<0.8，单调性<0.8。分层呈现 G1<G2<G3<G4 但 G5 回落，说明“突破确认”在最高组出现过热/拥挤，顶部组合收益被回吐。",
+    "diff_notes": "相对已有 boll_breakout_intensity_v1，本版增加了 squeeze gate、10日新高确认、成交额确认和短线过热惩罚，信号形态更完整，但最终只改善了中间层分布，没有把最强分位稳定拉开。",
+    "conclusion": "淘汰。后续若再迭代，优先尝试把该类信号改造成反转型（高位过热突破做反向）或与换手衰减/尾盘承压联立，而不是继续做单纯趋势确认。",
+    "data_files": [
+      "data/csi1000_kline_raw.csv",
+      "data/csi1000_returns.csv",
+      "data/factor_boll_squeeze_breakout_confirm_v1.csv",
+      "output/boll_squeeze_breakout_confirm_v1/report.json"
+    ]
   }
 ]
