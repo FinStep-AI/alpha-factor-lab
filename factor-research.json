@@ -9116,5 +9116,42 @@
       "data/factor_internal_growth_gap_v1.csv",
       "output/internal_growth_gap_v1/report.json"
     ]
+  },
+  {
+    "date": "2026-09-13 20:00:00",
+    "factor_id": "operating_asset_expansion_reversal_v1",
+    "factor_name": "经营资产扩张反转因子 v1",
+    "status": "failed",
+    "source_type": "论文复现+本土化反向发现",
+    "source_title": "Balance Sheet Information and Future Stock Returns",
+    "source_url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=918135",
+    "source_author": "Scott Richardson, Richard Sloan, Mark Soliman, Irem Tuna",
+    "source_year": 2006,
+    "source_journal": "SSRN / Journal of Accounting and Economics",
+    "barra_style": "Quality / Growth",
+    "description": "参考 Richardson et al. 关于净经营资产/资产负债表扩张与未来收益的文献主线，在现有A股字段下用经营资产扩张代理做复现：以应收/营收比变化、存货占流动资产比变化、现金占流动资产比变化、资产负债率变化刻画经营资产与融资扩张；信号按披露日映射到日频，做市值代理 OLS 中性化。原始 anomaly 在中证1000 5日窗上方向反转，因此记录为 reversal 版本。",
+    "formula": "raw = 0.42*tanh(Δ应收/营收 / 4) + 0.30*tanh(Δ存货占流动资产 / 6) - 0.18*tanh(Δ现金占流动资产 / 0.08) + 0.24*tanh(Δ资产负债率 / 4); factor = neutralize(raw, log_mktcap)",
+    "our_metric": {
+      "market": "中证1000",
+      "period": "2025-04-10 ~ 2026-02-13",
+      "ic_mean": 0.015334562696232413,
+      "ic_t": 1.8650979947074409,
+      "g5_sharpe": 4.1552202730710315,
+      "monotonicity": 0.7,
+      "long_short_sharpe": 1.7088625633972938,
+      "turnover_mean": 0.23397777892883043
+    },
+    "failure_reason": "虽有明显反向有效性，但未达到入库门槛：IC均值 0.0153 < 0.02，IC_t 1.87 < 2.0，单调性 0.70 < 0.80。说明短期里“经营资产扩张”更像高弹性/高叙事交易，而非经典 NOA anomaly 的做空端。",
+    "diff_notes": "与原论文长期负向关系不同，中证1000 5日窗口呈反向；本地可用字段缺少完整总资产、经营负债与现金流科目，只能以应收/存货/现金/杠杆代理 NOA 扩张。",
+    "conclusion": "淘汰，不入 factors.json。保留为后续可继续尝试的中周期版本（20日/60日）或与营收增长、毛利率/ROE 组成二阶段条件因子。",
+    "data_files": [
+      "data/csi1000_revenue_yoy_raw.csv",
+      "data/csi1000_kline_raw.csv",
+      "data/csi1000_returns.csv",
+      "data/factor_operating_asset_expansion_reversal_v1.csv"
+    ],
+    "implementation": "calc_operating_asset_expansion_reversal_v1.py",
+    "factor_file": "data/factor_operating_asset_expansion_reversal_v1.csv",
+    "backtest_output": "output/operating_asset_expansion_reversal_v1/report.json"
   }
 ]
