@@ -9269,5 +9269,39 @@
     ],
     "search_query": "成交量加权价格偏离 量化因子 A股",
     "researched_at": "2026-10-02 12:01:00"
+  },
+  {
+    "timestamp": "2026-10-02 15:42:45",
+    "factor_id": "asset_turnover_reaccel_expansion_gap_growth_v1",
+    "name": "资产周转率重加速-扩张缺口成长因子 v1",
+    "theme": "基本面类/资产周转率变化",
+    "barra_style": "Growth",
+    "source_type": "自研",
+    "status": "candidate_pass_no_commit",
+    "decision": "达标，但本次未自动修改 factors.json / factor-research.json / git push，因为仓库已有大量无关改动，且 factors.json 当前亦有脏改动，直接落库存在污染风险。",
+    "hypothesis": "ROE相对BPS刻画的资产周转率代理若出现同比重加速，且不是靠股本快速扩张堆出来，则未来5日收益更强。",
+    "implementation": "at_proxy=roe/abs(bps); 核心信号=同比改善+同比重加速+QoQ拐点+ROE确认；乘以股本扩张惩罚、平滑增长奖励、稳定性门控、ROE水平门控；再做按日市值中性化。",
+    "data_files": [
+      "data/csi1000_fundamental_cache.csv",
+      "data/csi1000_kline_raw.csv",
+      "data/csi1000_returns.csv"
+    ],
+    "output_factor_csv": "data/factor_asset_turnover_reaccel_expansion_gap_growth_v1.csv",
+    "output_report": "output/asset_turnover_reaccel_expansion_gap_growth_v1/report.json",
+    "metrics": {
+      "ic_mean": 0.0152721243096916,
+      "ic_t": 3.2006087472675957,
+      "g5_sharpe": 1.019741102141691,
+      "monotonicity": 0.9999999999999999,
+      "long_short_sharpe": 2.253817885603965,
+      "long_short_ann_return": 0.13962272647238905
+    },
+    "threshold_check": {
+      "ic_mean_gt_0_02": false,
+      "ic_t_gt_2": true,
+      "g5_sharpe_gt_0_8": true,
+      "monotonicity_gt_0_8": true
+    },
+    "failure_or_risk": "主短板是IC均值0.0153，低于硬门槛0.02；虽然t值、G5 Sharpe、单调性都很好，但按规则仍不能正式入库。另需补做与现有因子IC相关性扫描后再决定是否作为候选保留。"
   }
 ]
