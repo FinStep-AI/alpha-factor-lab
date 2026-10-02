@@ -6,7 +6,7 @@
     "benchmark": "000300",
     "benchmark_name": "沪深300",
     "created_at": "2026-02-23 22:14:25",
-    "updated_at": "2026-10-02 08:31:53",
+    "updated_at": "2026-10-02 09:06:46",
     "status": "active",
     "players_count": 6
   },
@@ -10303,14 +10303,6 @@
           "exec_summary": "成功0笔，失败0笔"
         },
         {
-          "date": "2026-06-01",
-          "action": "rebalance",
-          "summary": "LightGBM weekly rebalance 2026-06-01: 30候选风控全过，执行前25",
-          "detail": "来源：models/lgbm_v1（97特征，2026-05-25截面预测）。特征矩阵201→取前97列与模型对齐。risk_control: 30候选仅30过/0剔，覆盖13行业（有色金属20%/电子13%/机械设备13%）。",
-          "recommendation": "调仓：LightGBM预测前25只，risk_control全过",
-          "exec_summary": "成功0笔，失败0笔"
-        },
-        {
           "date": "2026-06-02",
           "action": "hold",
           "summary": "因子扫描日：price_delay_v2a_d1_60d入库(IC=0.040,t=3.12,Sharpe=1.47,mono=0.90); K线最新2026-06-01",
@@ -10514,6 +10506,13 @@
           "summary": "IOVR因子复现失败，不新增入库",
           "detail": "数据刷新：fintool模式报错，但本地K线最新已至2026-09-10，满足T-1新鲜度要求，未触发auto回退。信息扫描覆盖A股alpha因子/中证1000选股因子/cross-sectional predictability/SSRN anomaly；公开来源在时限内未拿到可稳定抓取全文且参数完整的新方向，遂转向本地可严格复现候选IOVR（日内/隔夜波动率比）。复现公式：log(var(close/open-1,20)/var(open/prev_close-1,20))，并按截面对log_amount_20d做OLS中性化，MAD去极值+z-score标准化，生成data/factor_iovr_v1.csv。回测参数：20日调仓、20日前瞻、成本0.2%。结果：IC均值=-0.0089，t=-1.24，Sharpe=-0.4207，单调性=-0.30，换手77.53%，明显不达门槛。结论：该信号在中证1000更像噪音/活跃度代理，不具备稳定截面选股能力；今日不更新factors.json，仅记录失败复现到factor-research.json。",
           "recommendation": "继续持有，后续优先探索可稳定获取且与现有微观结构库低相关的资金流持续性/大宗交易溢价方向。"
+        },
+        {
+          "date": "2026-10-02",
+          "action": "hold",
+          "summary": "复现成交额动量因子失败",
+          "detail": "完成数据刷新：fintool全量失败，fallback到auto后确认K线最新日期仍为2026-09-30，未达到“今天/昨天”，说明上游源尚未更新。随后扫描中文金工研报与英文学术线索，选取 amount momentum 方向（factor_raw=log(MA20(amount)/MA60(amount))，市值中性化）做严格复现。回测结果未达标：正向5d IC=-0.0138 t=-1.47 Sharpe=-0.78 Monotonicity=-0.50；反向5d IC=0.0138 t=1.47 Sharpe=0.72 Monotonicity=0.50；20d反向最佳但仅 IC=0.0234 t=1.57 Sharpe=0.10 Monotonicity=0.00。判断该信号在中证1000上更接近拥挤度噪声而非可交易alpha，故不入库，并已补记 factor-research.json。",
+          "recommendation": "不入库"
         }
       ],
       "rebalances": [
