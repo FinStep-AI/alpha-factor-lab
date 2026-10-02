@@ -3770,5 +3770,103 @@
     "source_url": "",
     "detail": "以 profit_proxy=ROE/abs(BPS) 为盈利代理，奖励近三期改善持续(chg1/chg2/chg3)且改善加速度波动更低(accel1/accel2 std 更小)的股票；再做横截面市值中性化与标准化。",
     "correlations": "最高Spearman相关因子为 roe_persistence_gap_v4，均值相关 0.5297；低于 0.7，不冗余。"
+  },
+  {
+    "id": "tail_auction_bias_v1",
+    "name": "尾盘异动强度 v1",
+    "name_en": "Tail Auction Bias v1",
+    "category": "尾盘异动/微观结构",
+    "description": "((close-vwap_proxy)/(high-low))*turnover 的20日均值，市值中性化。衡量收盘相对日内均衡价格的系统性偏移并用换手率加权。高值代表持续尾盘抢筹/拉抬，低值代表尾盘承压/砸盘。",
+    "hypothesis": "中证1000中，持续尾盘抢筹更多是短线资金博弈和次日兑现，后续5日存在反转；尾盘承压的股票反而在未来一周修复。",
+    "expected_direction": "反向（高尾盘抢筹=低预期收益）",
+    "factor_type": "尾盘异动/反转",
+    "formula": "neutralize(MA20(((close-vwap_proxy)/(high-low))*turnover), log_mktcap)",
+    "direction": -1,
+    "stock_pool": "中证1000",
+    "period": "2022-10-28 ~ 2026-02-13",
+    "rebalance_freq": 5,
+    "forward_days": 5,
+    "cost": 0.003,
+    "rating": "★★★★ 强",
+    "nav_data": "output/tail_auction_bias_v1/cumulative_returns.json",
+    "ic_data": "output/tail_auction_bias_v1/ic_series.json",
+    "upgrade_notes": "首版达标。用OHLC均价近似VWAP，捕捉尾盘相对日内均衡价格的偏移。结果显示尾盘抢筹在中证1000更像短线过热信号，后续5日反转。",
+    "lessons_learned": [
+      "尾盘异动不是简单动量，持续尾盘抢筹在小盘股里更可能对应次日/短期兑现",
+      "把尾盘偏移乘上换手率后，纯价格偏移噪音明显下降",
+      "5日持有期有效，说明这是典型短周期微观结构反转信号",
+      "分组单调性0.7，属于可交易但非完美线性因子"
+    ],
+    "created": "2026-09-09",
+    "updated": "2026-09-09",
+    "metrics": {
+      "ic_mean": 0.021599028437751744,
+      "ir": 0.17235695140594598,
+      "ic_t": 2.6751686290852716,
+      "long_short_sharpe": 1.0107331653601808,
+      "long_short_mdd": -0.11431621262516485,
+      "monotonicity": 0.7,
+      "group_returns_annualized": [
+        -0.028218794302614425,
+        0.036253601935989144,
+        0.005941557303923428,
+        0.016253420532499785,
+        0.13473403914997828
+      ]
+    },
+    "conclusion": "达标入库。尾盘异动强度因子显示：持续尾盘抢筹越强，未来5日收益反而越弱；尾盘承压个股更容易修复。IC=0.0216，Newey-West t=2.68，Sharpe=1.01，说明尾盘异动在中证1000中更偏向短线过热/反转信号而非动量延续。",
+    "barra_style": "MICRO",
+    "source_type": "自研",
+    "source_title": "尾盘异动强度（收盘偏离日内均衡价格 × 换手率）",
+    "source_url": ""
+  },
+  {
+    "id": "close_ramp_reversal_v1",
+    "name": "收盘拉抬反转因子 v1",
+    "name_en": "Close Ramp Reversal v1",
+    "category": "尾盘异动/反转",
+    "description": "用收盘在日内振幅中的相对位置乘以日内收益，刻画“临近收盘被拉到高位”的强度；再对隔夜跳空做惩罚，尽量剔除纯信息驱动高开。过去20日均值取反并做市值中性化后，捕捉尾盘拉抬后的短期均值回归。",
+    "hypothesis": "尾盘被资金集中拉抬到高位的中证1000个股，次周更容易回吐，体现尾盘异动后的反转效应。",
+    "expected_direction": "正向（高因子值=近期尾盘拉抬更强=后续预期收益更高；已取反处理）",
+    "factor_type": "量价/尾盘异动/反转",
+    "formula": "neutralize(-MA20(((close-low)/(high-low))*((close-open)/open)*(1-0.5*abs(gap_ret)/0.15)), log_mktcap)",
+    "direction": 1,
+    "stock_pool": "中证1000",
+    "period": "2022-10-31 ~ 2026-02-13",
+    "rebalance_freq": 5,
+    "forward_days": 5,
+    "cost": 0.003,
+    "rating": "★★★ 可用",
+    "nav_data": "output/close_ramp_reversal_v1/cumulative_returns.json",
+    "ic_data": "output/close_ramp_reversal_v1/ic_series.json",
+    "upgrade_notes": "新增尾盘异动方向。相比直接用收盘位置，叠加日内收益并对跳空做惩罚，更能提纯“尾盘被拉抬”的交易型信号。",
+    "lessons_learned": [
+      "尾盘拉抬在中证1000上更偏短期反转而非延续",
+      "对隔夜跳空做惩罚有助于剔除信息型高开，保留交易拥挤成分",
+      "5日调仓下单调性接近完美，适合与流动性/跳空类因子组合"
+    ],
+    "created": "2026-10-02",
+    "updated": "2026-10-02",
+    "metrics": {
+      "ic_mean": 0.029523714144432094,
+      "ir": 0.1975502537235096,
+      "ic_t": 2.2945283758389032,
+      "long_short_sharpe": 0.7505631635314114,
+      "long_short_mdd": -0.20106623624354553,
+      "monotonicity": 0.8999999999999998,
+      "group_returns_annualized": [
+        -0.06518714615548327,
+        0.02982038871571846,
+        0.06418457082450346,
+        0.05391108977920944,
+        0.1153780718044779
+      ],
+      "turnover_mean": 0.4686873671280031
+    },
+    "conclusion": "有效。尾盘拉抬越明显的股票，未来5日越偏弱；取反后形成稳定正向alpha。IC=0.0295，Newey-West t=2.29，Long-Short Sharpe=0.75，分组基本单调。",
+    "barra_style": "Microstructure",
+    "source_type": "自研",
+    "source_title": "尾盘拉抬反转（收盘位置×日内收益）",
+    "source_url": ""
   }
 ]
