@@ -6,7 +6,7 @@
     "benchmark": "000300",
     "benchmark_name": "沪深300",
     "created_at": "2026-02-23 22:14:25",
-    "updated_at": "2026-10-02 15:17:00",
+    "updated_at": "2026-10-02 15:19:10",
     "status": "active",
     "players_count": 6
   },
@@ -24355,7 +24355,8 @@
           "2026-09-09",
           "2026-09-10",
           "2026-09-11",
-          "2026-10-01"
+          "2026-10-01",
+          "2026-10-02"
         ],
         "nav": [
           0.998828,
@@ -24465,6 +24466,7 @@
           1.273108,
           1.273108,
           1.272275,
+          1.075256,
           1.075256
         ],
         "cash_pct": [
@@ -24575,6 +24577,7 @@
           100.0,
           100.0,
           49.97,
+          100.0,
           100.0
         ]
       },
@@ -24803,10 +24806,10 @@
       "latest_news": "2/27收盘：过热期(温度90)。涨停75/跌停0/炸板15。豫能控股7板弱封，金正大4板极弱封。空仓观望等退潮。",
       "stats": {
         "total_return_pct": 7.53,
-        "annualized_return_pct": 18.77,
+        "annualized_return_pct": 18.59,
         "max_drawdown_pct": 18.8,
-        "sharpe_ratio": 0.61,
-        "calmar_ratio": 1.0,
+        "sharpe_ratio": 0.6,
+        "calmar_ratio": 0.99,
         "win_rate": 40.0,
         "profit_loss_ratio": 1.01,
         "total_trades": 76,
@@ -27594,7 +27597,7 @@
         "profit_loss_ratio": 0.34,
         "total_trades": 115,
         "total_fees": 218898.46999999994,
-        "current_positions": 4,
+        "current_positions": 1,
         "turnover_rate": 0.0
       },
       "rebalances": []
@@ -27830,7 +27833,7 @@
         "name": "情绪战神",
         "emoji": "⚡",
         "total_return_pct": 7.53,
-        "sharpe_ratio": 0.61,
+        "sharpe_ratio": 0.6,
         "max_drawdown_pct": 18.8,
         "current_nav": 1.075256,
         "total_trades": 76,
@@ -27892,7 +27895,7 @@
         "rank": 6
       }
     ],
-    "updated_at": "2026-10-02 14:31:03"
+    "updated_at": "2026-10-02 15:19:10"
   },
   "quant": {
     "decisions": [
