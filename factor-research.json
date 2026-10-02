@@ -9214,5 +9214,60 @@
       "data/factor_boll_squeeze_breakout_confirm_v1.csv",
       "output/boll_squeeze_breakout_confirm_v1/report.json"
     ]
+  },
+  {
+    "id": "amt_mom_v1_repro_2026-10-02",
+    "source_type": "paper",
+    "source_title": "Alternative factor specifications, security characteristics, and the cross-section of expected stock returns",
+    "source_url": "https://doi.org/10.1016/S0304-405X(97)00041-7",
+    "source_author": "Brennan, Chordia & Subrahmanyam",
+    "source_year": 1998,
+    "source_journal": "Journal of Financial Economics",
+    "original_metric": "文献强调成交量/成交额相关特征对横截面收益有解释力，未提供可直接对标的中证1000 5d/20d IC、Sharpe门槛。",
+    "our_metric": "严格按 amount momentum 思路复现：factor_raw=log(MA20(amount)/MA60(amount))，市值中性化。5d: IC=-0.0138, t=-1.47, Sharpe=-0.78, Monotonicity=-0.50；反向5d: IC=0.0138, t=1.47, Sharpe=0.72, Monotonicity=0.50。20d反向最佳但仍仅 IC=0.0234, t=1.57, Sharpe=0.10, Monotonicity=0.00。",
+    "diff_notes": "A股中证1000上，成交额趋势更像拥挤度而非持续资金流入；正向失效，反向虽有轻微IC但统计不显著。另原脚本因 amount=0 导致 log(0) 出现 -inf，提示原始构造需先做下界裁剪，否则分布不稳。",
+    "local_factor_id": "amt_mom_v1",
+    "conclusion": "淘汰，不入库。后续若再试，应改为“成交额动量×收益确认”或加入尾盘/资金流过滤，而不是单独使用 amount MA20/MA60。",
+    "date": "2026-10-02",
+    "status": "failed",
+    "data_file": "data/csi1000_kline_raw.csv",
+    "output_report": "",
+    "forward_days": "5/20",
+    "rebalance_freq": "5/20",
+    "cost": "0.003/0.002",
+    "correlations": {}
+  },
+  {
+    "date": "2026-10-02 12:01:00",
+    "factor_id": "vwap_discount_pressure_reversal_v1",
+    "factor_name": "VWAP折价压力反转因子 v1",
+    "status": "failed",
+    "theme": "技术类：成交量加权价格偏离",
+    "barra_style": "Trading / Short-term reversal",
+    "source_type": "StepSearch启发+自研",
+    "source_title": "VWAP偏离度因子量化策略 / 成交量加权价格偏离研究",
+    "source_url": "https://zhuanlan.zhihu.com/p/2054980382018295515",
+    "description": "用收盘价相对近似VWAP（amount/volume）的偏离，结合20日成交额放大、收盘在日内区间中的位置与20日振幅做归一化，试图捕捉‘放量下的成交成本偏离’在未来5日的修复或延续。因子按日对log(20日均成交额×收盘价)做OLS市值中性化后标准化。",
+    "formula": "raw = -(close/vwap_proxy-1) * (0.6+0.4*tanh(log(amount/MA20(amount)))) * (1.2-close_pos) / (1+3*MA20(amplitude)); factor = zscore(neutralize(raw, log_mktcap_proxy))",
+    "hypothesis": "若个股收盘显著低于全天成交均价，且伴随放量与弱收盘位置，可能对应短期被动抛压，后续存在均值回归；反之若高于VWAP则可能代表尾盘抢筹延续。",
+    "metrics": {
+      "ic_mean": "-0.0057",
+      "ic_t": "-0.81",
+      "rank_ic": "-0.0017",
+      "g5_sharpe": "-0.2727",
+      "monotonicity": "-0.4000",
+      "long_short_sharpe": "-0.2727"
+    },
+    "failure_reason": "首版方向错误且整体信号弱，反向后也仅得到 IC=0.0057、Sharpe=0.1538、单调性=0.4，说明该构造在中证1000上既不稳定也不够强；更像已有尾盘异动/ VWAP偏离家族的弱变体。",
+    "correlation_check": "未做入库相关性检查；因硬门槛显著不达标，直接淘汰。结合已有 vwap_dev_v1 / tail_auction_bias_v1，可判断主题增量有限。",
+    "conclusion": "淘汰",
+    "artifacts": [
+      "data/factor_vwap_discount_pressure_reversal_v1.csv",
+      "data/factor_vwap_discount_pressure_reversal_v1_inv.csv",
+      "output/vwap_discount_pressure_reversal_v1/report.json",
+      "output/vwap_discount_pressure_reversal_v1_inv/report.json"
+    ],
+    "search_query": "成交量加权价格偏离 量化因子 A股",
+    "researched_at": "2026-10-02 12:01:00"
   }
 ]
