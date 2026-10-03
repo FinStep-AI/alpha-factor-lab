@@ -1,5 +1,40 @@
 [
   {
+    "date": "2026-10-03 20:00:00",
+    "factor_id": "tae_persistence_v1",
+    "factor_name": "交易效率持续性因子 v1",
+    "status": "failed",
+    "source_type": "论文脉络复现+本土化代理",
+    "source_title": "The Intersection of Expected Returns",
+    "source_url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5244033",
+    "source_author": "Austin Sobotka",
+    "source_year": 2025,
+    "source_journal": "SSRN",
+    "barra_style": "Quality",
+    "description": "沿着近期 anomaly intersection / common-selection 文献脉络，把已验证有效的 TAE（换手-振幅效率）从“水平值”推进到“持续性”刻画：先计算20日均值口径的交易效率 TAE=log(MA20(turnover)/(MA20(amplitude)+0.01))，再用20日均值减去0.8倍20日波动，提取“持续处于高交易效率、且效率波动较小”的股票；最后对对数成交额做横截面 OLS 市值中性化，并进行MAD缩尾与z-score标准化。",
+    "formula": "tae = log(MA20(turnover)/(MA20(amplitude)+0.01)); factor = neutralize(MA20(tae) - 0.8*STD20(tae), log(amount))",
+    "our_metric": {
+      "market": "中证1000",
+      "period": "2022-11-03 ~ 2026-09-30",
+      "ic_mean": 0.015769006763864765,
+      "ic_t": 1.93746999797963,
+      "rank_ic": 0.017288236235120023,
+      "g5_sharpe": 0.3478839289310324,
+      "long_short_sharpe": 0.6096393561004381,
+      "monotonicity": 0.7,
+      "turnover_mean": 0.3473320148418889,
+      "max_abs_corr_existing": null,
+      "closest_existing_factor": "tae_v1"
+    },
+    "failure_reason": "接近门槛但仍不达标：IC均值0.0158低于0.02，IC_t=1.94略低于2.0，G5 Sharpe仅0.35，单调性0.70也低于0.8。说明“高交易效率的持续性”虽然保留了一点截面解释力，但被平滑后经济收益显著弱化，不足以作为独立新因子入库。",
+    "diff_notes": "相较已入库的 tae_v1（高换手低振幅的水平因子），这版尝试复现更偏“异常交集/持续特征”的论文思路，不直接押注单日或单窗口水平，而是奖励持续高效率、惩罚效率波动，希望挖出更稳定的 Quality 代理。结果显示，它与 tae_v1 在经济含义上高度接近，且平滑/降波后把原本有效的尾部信号也一并削弱了；从统计结果看更像 tae_v1 的弱化版，而不是一条新增 alpha 线。后续若还沿这条论文脉络深挖，应该引入更细的成交结构或订单流数据，而不是继续只在 TAE 时间平滑上做变体。",
+    "conclusion": "淘汰",
+    "data_files": [
+      "data/factor_tae_persistence_v1.csv",
+      "output/tae_persistence_v1/report.json"
+    ]
+  },
+  {
     "date": "2026-10-03 15:00:00",
     "factor_id": "open_auction_fade_neg_v1",
     "factor_name": "开盘竞价回吐反转因子 v1",
