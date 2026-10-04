@@ -1,5 +1,42 @@
 [
   {
+    "date": "2026-10-04 15:00:00",
+    "factor_id": "trading_resilience_v1",
+    "factor_name": "交易韧性因子 v1",
+    "status": "failed",
+    "source_type": "论文脉络复现+本土化代理",
+    "source_title": "Resilience Anomaly and Asset Pricing",
+    "source_url": "https://papers.ssrn.com/sol3/Delivery.cfm/2165c53f-1cf8-49bd-a295-e1a280f77938-MECA.pdf?abstractid=7506942&mirid=1",
+    "source_author": "SSRN working paper",
+    "source_year": 2026,
+    "source_journal": "SSRN",
+    "barra_style": "Quality / Liquidity",
+    "description": "沿着近期 resilience anomaly / anomaly intersection 文献脉络，用中证1000日线可得数据构造可交易代理：把‘高参与但价格扰动小’视为交易韧性。具体做法是以20日平均换手率衡量市场参与度，以20日收益波动与20日振幅波动衡量价格承压后的不稳定度，构造 raw = log(MA20(turnover)) - 0.7*log(1+100*STD20(ret)) - 0.3*log(1+STD20(amplitude))，再对20日成交额对数做横截面 OLS 市值中性化，并做 MAD 缩尾与 z-score 标准化。",
+    "formula": "raw = log(MA20(turnover)) - 0.7*log(1+100*STD20(ret)) - 0.3*log(1+STD20(amplitude)); factor = neutralize(raw, log_amount_20d)",
+    "our_metric": {
+      "market": "中证1000",
+      "period": "2022-10-24 ~ 2026-09-30",
+      "ic_mean": 0.018651006291890197,
+      "ic_t": 1.743841678510779,
+      "rank_ic": 0.015457121279533824,
+      "g5_sharpe": 0.4923625245345938,
+      "long_short_sharpe": 0.7986811170239555,
+      "monotonicity": 0.9,
+      "turnover_mean": 0.4247228392386956,
+      "max_abs_corr_existing": null,
+      "closest_existing_factor": "tae_v1"
+    },
+    "failure_reason": "接近门槛但仍未达标：IC均值0.0187略低于0.02，IC_t=1.74低于2.0，G5 Sharpe仅0.49明显不够；虽然多空Sharpe=0.80、单调性=0.9都不错，但高分组多头收益强度不足，不能作为独立新因子入库。",
+    "diff_notes": "和已入库的 tae_v1 相比，这版不再把低振幅本身视作效率，而是强调‘高换手下仍能维持低收益波动/低振幅波动’的交易韧性，更贴近近期 resilience 文献的市场吸收冲击能力语义。结果显示该线在中证1000确实有一定排序力：G1→G5整体向上，多空Sharpe接近0.8；但统计显著性和高分组收益仍偏弱，说明仅靠日线OHLCV/换手率代理，尚不足以提炼出强韧性alpha。后续若继续深挖，应该接入更细粒度的盘口/订单流/竞价数据，而不是继续在日线波动项上微调。",
+    "conclusion": "淘汰",
+    "data_files": [
+      "data/factor_trading_resilience_v1.csv",
+      "data/factor_resilience_impact_v1.csv",
+      "output/trading_resilience_v1/report.json",
+      "output/resilience_impact_v1/report.json"
+    ]
+  },
+  {
     "date": "2026-10-03 20:00:00",
     "factor_id": "tae_persistence_v1",
     "factor_name": "交易效率持续性因子 v1",
@@ -9410,5 +9447,106 @@
       "monotonicity_gt_0_8": true
     },
     "failure_or_risk": "主短板是IC均值0.0153，低于硬门槛0.02；虽然t值、G5 Sharpe、单调性都很好，但按规则仍不能正式入库。另需补做与现有因子IC相关性扫描后再决定是否作为候选保留。"
+  },
+  {
+    "timestamp": "2026-10-04 10:00:00",
+    "factor_id": "roe_confirmed_improve_quality_v1",
+    "name": "ROE确认式改善质量因子 v1",
+    "theme": "基本面类/Quality-Growth",
+    "barra_style": "Quality",
+    "source_type": "论文脉络复现+本土化代理",
+    "source_title": "盈利改善质量 / earnings persistence literature（在仅有ROE/BPS字段下的A股轻量代理复现）",
+    "source_url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5244033",
+    "source_author": "Austin Sobotka et al. (intersection / quality-improvement research thread)",
+    "status": "failed",
+    "decision": "不入库；保留研究记录。",
+    "hypothesis": "相比单纯ROE同比改善，‘改善被连续季度确认且盈利水平为正、波动较低’的公司更可能对应高质量成长，未来5日横截面收益更强。",
+    "implementation": "raw = (0.45*tanh(ROE_yoy/4)+0.20*tanh(ROE_accel/3)+0.20*tanh(ROE_mean4/8)) * [1/(1+ROE_std4)] * confirm，其中 confirm=0.55*近3期ROE_yoy为正占比+0.25*近4期ROE为正占比+0.20*ROE_yoy在近4期分位；财报滞后45天映射到日频后，对log_mktcap做横截面OLS中性化。",
+    "data_files": [
+      "data/csi1000_fundamental_cache.csv",
+      "data/csi1000_kline_raw.csv",
+      "data/csi1000_returns.csv"
+    ],
+    "artifacts": [
+      "calc_roe_confirmed_improve_quality_v1.py",
+      "data/factor_roe_confirmed_improve_quality_v1.csv",
+      "output/roe_confirmed_improve_quality_v1/report.json"
+    ],
+    "metrics": {
+      "ic_mean": 0.01325709609552501,
+      "ic_t": 1.9151970363742141,
+      "rank_ic": 0.021173206987361887,
+      "g5_sharpe": 0.6934666522408715,
+      "monotonicity": 0.9,
+      "long_short_sharpe": 0.4829159217985254,
+      "long_short_ann_return": 0.03912918080730621,
+      "turnover_mean": 0.21736419631178142,
+      "period": "2023-02-14 ~ 2026-02-13"
+    },
+    "threshold_check": {
+      "ic_mean_gt_0_02": false,
+      "ic_t_gt_2": false,
+      "g5_sharpe_gt_0_8": false,
+      "monotonicity_gt_0_8": true
+    },
+    "correlations": {
+      "roe_improve_quality_v1": 0.5091322599588336,
+      "roe_improve_quality_v2": 0.6875033739182501,
+      "investment_efficiency_proxy_v1": 0.6539537209735325,
+      "roe_yoy_acc_growth_v1": 0.6508513092535906,
+      "quality_reinvestment_gap_v1": 0.6554015862325305,
+      "max_corr_factor": "roe_improve_quality_v2"
+    },
+    "diff_notes": "相较已有 roe_improve_quality_v2 / investment_efficiency_proxy_v1，这版故意去掉 BPS 扩张约束，改为强调‘改善是否被连续季度确认’：用 ROE_yoy 正值占比、ROE 正值占比和近4期改善分位做确认门控，想更贴近盈利持续性/确认度的学术主线。结果说明确认门控确实提升了分层线性，单调性达到0.9，且与现有最像因子的平均Spearman相关性最高仅0.688，未触发>0.7冗余线；但信号强度不够，IC均值、t值和G5 Sharpe都未达标，仍属于温和排序器而非可入库alpha。后续若继续挖这条线，最好补充毛利率、现金流或应计项字段，把‘确认式改善’从纯ROE时序扩展到更标准的earnings quality框架。"
+  },
+  {
+    "timestamp": "2026-10-04 20:00:00",
+    "factor_id": "conservative_investment_bps_v1",
+    "name": "保守投资BPS代理因子 v1",
+    "theme": "基本面类/Quality-Growth",
+    "barra_style": "Growth",
+    "source_type": "经典论文复现代理",
+    "source_title": "Fama-French Five-Factor Model / Conservative Minus Aggressive (CMA) investment factor",
+    "source_url": "http://www.jryj.org.cn/CN/10.12094/1002-7246（2017）06-0191-16",
+    "source_author": "Fama & French (2015) 主线；中国A股实证参考：李志冰等（2017）",
+    "status": "failed",
+    "decision": "不入库；保留研究记录。",
+    "hypothesis": "在A股中，净资产扩张更慢（更保守投资）的公司应获得更高未来横截面收益；在当前数据约束下，用BPS同比增速作为investment proxy，做市值中性化后检验5日收益预测力。",
+    "implementation": "严格按CMA主线做轻量代理：raw = -tanh(BPS_yoy/0.30)，其中 BPS_yoy = BPS_t / BPS_t-4 - 1；财报按 report_date+45天 映射到日频，并在80个交易日内前向填充；对日度 log_mktcap proxy 做横截面 OLS 中性化，再做 MAD 缩尾 + z-score 标准化。未混入ROE等质量项，尽量保持论文原教旨。",
+    "data_files": [
+      "data/csi1000_fundamental_cache.csv",
+      "data/csi1000_kline_raw.csv",
+      "data/csi1000_returns.csv"
+    ],
+    "artifacts": [
+      "calc_conservative_investment_bps_v1.py",
+      "data/factor_conservative_investment_bps_v1.csv",
+      "output/conservative_investment_bps_v1/report.json"
+    ],
+    "metrics": {
+      "ic_mean": 0.0077,
+      "ic_t": 1.48,
+      "rank_ic": 0.0004,
+      "g5_sharpe": 0.7508,
+      "monotonicity": 0.9,
+      "long_short_sharpe": 1.109,
+      "long_short_ann_return": 0.0874,
+      "turnover_mean": 0.1204,
+      "period": "2023-08-14 ~ 2026-02-13"
+    },
+    "threshold_check": {
+      "ic_mean_gt_0_02": false,
+      "ic_t_gt_2": false,
+      "g5_sharpe_gt_0_8": false,
+      "monotonicity_gt_0_8": true
+    },
+    "correlations": {
+      "quality_reinvestment_gap_v1": 0.3719,
+      "investment_efficiency_proxy_v1": -0.0912,
+      "operating_profitability_proxy_v1": -0.1639
+    },
+    "redundant": false,
+    "failure_reason": "虽然分层单调性很强（0.9），且多空Sharpe达到1.11，但核心门槛未过：IC均值仅0.0077、IC_t仅1.48、G5 Sharpe仅0.75。说明该因子更像低换手的组合分层特征，而不是稳定显著的横截面选股alpha。纯BPS扩张代理信息量偏弱，单独使用不足以入库。",
+    "next_step": "后续可沿论文主线继续做‘保守投资 × 盈利质量’双维交互，或引入更直接的资产增长/资本开支字段替代BPS代理。"
   }
 ]
