@@ -1,5 +1,31 @@
 [
   {
+    "date": "2026-10-05 09:00:00",
+    "factor_id": "no_new_factor_2026-10-05",
+    "factor_name": "本日未入库新因子",
+    "status": "skipped",
+    "source_type": "日报扫描",
+    "source_title": "2026-10-05 金工研报/论文扫描",
+    "source_url": "",
+    "source_author": "system scan",
+    "source_year": 2026,
+    "source_journal": "daily scan",
+    "barra_style": "N/A",
+    "description": "按日报流程扫描中文金工研报与英文学术论文，重点检查 price delay / market synchronicity / anomaly intersection 等方向。结果发现 price delay / price sync 线已在当前因子库与研究日志中存在（含 active 因子 price_sync_v3_fwd5），其余候选多为高频/分钟级或缺少可在现有日线+基本面数据下严格复现的明确公式，因此本轮不新增因子。",
+    "formula": "N/A",
+    "original_metric": {
+      "notes": "候选文献多为定性月报摘要或已被现有因子覆盖，未形成可独立复现的新公式"
+    },
+    "our_metric": {
+      "market": "中证1000",
+      "period": "截至 2026-09-30",
+      "result": "skip"
+    },
+    "diff_notes": "Price Delay / Sync 方向与现有 active 因子存在明显重合，不满足“不是已有因子的重复”；其余搜索命中多为分钟级/Level-2 因子月报，只给绩效摘要，不给可直接在现有数据条件下落地的构造细节。为避免把旧方向换壳重复入库，本轮选择不强行造新因子。",
+    "conclusion": "今日扫描无可入库新因子，转入周一调仓主流程",
+    "data_files": []
+  },
+  {
     "date": "2026-10-04 15:00:00",
     "factor_id": "trading_resilience_v1",
     "factor_name": "交易韧性因子 v1",
