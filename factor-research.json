@@ -9574,5 +9574,52 @@
     "redundant": false,
     "failure_reason": "虽然分层单调性很强（0.9），且多空Sharpe达到1.11，但核心门槛未过：IC均值仅0.0077、IC_t仅1.48、G5 Sharpe仅0.75。说明该因子更像低换手的组合分层特征，而不是稳定显著的横截面选股alpha。纯BPS扩张代理信息量偏弱，单独使用不足以入库。",
     "next_step": "后续可沿论文主线继续做‘保守投资 × 盈利质量’双维交互，或引入更直接的资产增长/资本开支字段替代BPS代理。"
+  },
+  {
+    "timestamp": "2026-10-05 12:01:00",
+    "factor_id": "roe_accel_bps_guard_growth_v2",
+    "name": "ROE加速度-BPS约束成长 v2",
+    "theme": "基本面类/Growth",
+    "barra_style": "Growth",
+    "source_type": "自研（ROE加速度×净资产扩张约束）",
+    "source_title": "ROE acceleration with BPS expansion guard",
+    "source_url": "",
+    "source_author": "OpenClaw cron 因子挖掘",
+    "status": "failed",
+    "decision": "不入库；仅保留研究记录。",
+    "hypothesis": "若企业 ROE 的季度变化再次加速，且同期 BPS 保持温和扩张、盈利波动不大，则更可能对应可持续成长，未来5日横截面收益更强。",
+    "implementation": "以财报口径构造 roe_qoq=diff(roe)、roe_accel=diff(roe_qoq)、bps_growth=pct_change(bps)、roe_vol_4q=std(roe_qoq,4q)，raw=(roe_accel*(1+clip(bps_growth,-0.2,0.3)))/(1+abs(roe_vol_4q))；将财报值向后映射到日频交易日，用 close*bps 作为市值代理并对 log_mcap 做横截面 OLS 中性化，残差再做日内 z-score。",
+    "data_files": [
+      "data/csi1000_fundamental_cache.csv",
+      "data/csi1000_kline_raw.csv",
+      "data/csi1000_returns.csv"
+    ],
+    "artifacts": [
+      "calc_roe_accel_bps_guard_growth_v2_mine.py",
+      "data/factor_roe_accel_bps_guard_growth_v2.csv",
+      "output/roe_accel_bps_guard_growth_v2/report.json"
+    ],
+    "metrics": {
+      "ic_mean": 0.011939677306976374,
+      "ic_t": 2.134986656506979,
+      "rank_ic": 0.016555826731597532,
+      "g5_sharpe": 0.5168757377241395,
+      "monotonicity": 0.49999999999999994,
+      "long_short_sharpe": 0.05945608220687065,
+      "long_short_ann_return": 0.0051326423328084125,
+      "turnover_mean": 0.2250434826736423,
+      "period": "2023-01-03 ~ 2026-09-30"
+    },
+    "threshold_check": {
+      "ic_mean_gt_0_02": false,
+      "ic_t_gt_2": true,
+      "g5_sharpe_gt_0_8": false,
+      "monotonicity_gt_0_8": false
+    },
+    "correlations": {
+      "factor_roe_recovery_consistency_v1": 0.15197460501706794
+    },
+    "failure_reason": "只有 IC t 值过线，但 IC 均值仅 0.0119，G5 Sharpe 0.52、单调性 0.50，分层收益呈 G4>G5 的非单调结构，说明信号更像弱排序而不是可交易成长因子。",
+    "next_step": "后续可尝试加入财报滞后窗口、同比口径替代环比加速度，或叠加价格确认项，避免纯基本面加速度落到中间组更强。"
   }
 ]
