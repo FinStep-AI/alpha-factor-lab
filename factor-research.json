@@ -9621,5 +9621,56 @@
     },
     "failure_reason": "只有 IC t 值过线，但 IC 均值仅 0.0119，G5 Sharpe 0.52、单调性 0.50，分层收益呈 G4>G5 的非单调结构，说明信号更像弱排序而不是可交易成长因子。",
     "next_step": "后续可尝试加入财报滞后窗口、同比口径替代环比加速度，或叠加价格确认项，避免纯基本面加速度落到中间组更强。"
+  },
+  {
+    "timestamp": "2026-10-05 15:33:00",
+    "factor_id": "asset_turnover_reaccel_stability_growth_v1",
+    "name": "资产周转再加速稳定成长因子 v1",
+    "theme": "基本面类/Growth",
+    "barra_style": "Growth",
+    "source_type": "自研（资产周转代理再加速×稳定性约束）",
+    "source_title": "Asset-turnover reacceleration with stability guard",
+    "source_url": "https://finance.sina.com.cn/roll/2026-09-18/doc-inisfyex3528875.shtml",
+    "source_author": "公开报道启发 + OpenClaw cron 因子挖掘",
+    "status": "failed_correlation_redundant",
+    "decision": "不入库；表现过阈值但与现有因子高度相关，按冗余规则淘汰。",
+    "hypothesis": "若企业经营效率代理（ROE/BPS）同比改善再次加速，且净资产扩张温和、盈利波动较低，则更可能对应可持续成长，未来5日横截面收益更强。",
+    "implementation": "以 at_proxy=ROE/|BPS| 近似资产周转效率，构造 at_yoy、at_reaccel、at_inflect，并叠加 ROE_yoy/ROE_qoq 的盈利确认；再用 at_std4、roe_std4 做稳定性惩罚，用 BPS_yoy/BPS_qoq 做扩张约束，并在 report_date+45d 映射至日频后对 log_mktcap 做横截面 OLS 中性化与标准化。",
+    "data_files": [
+      "data/csi1000_fundamental_cache.csv",
+      "data/csi1000_kline_raw.csv",
+      "data/csi1000_returns.csv"
+    ],
+    "artifacts": [
+      "calc_asset_turnover_reaccel_stability_growth_v1.py",
+      "data/factor_asset_turnover_reaccel_stability_growth_v1.csv",
+      "output/asset_turnover_reaccel_stability_growth_v1/report.json"
+    ],
+    "metrics": {
+      "ic_mean": 0.01719385017347795,
+      "ic_t": 3.261609537540495,
+      "rank_ic": 0.014719516286640314,
+      "g5_sharpe": 0.8952798020230727,
+      "monotonicity": 0.9999999999999999,
+      "long_short_sharpe": 1.2762869247697983,
+      "long_short_ann_return": 0.08636174240220584,
+      "turnover_mean": 0.25735412661624163,
+      "period": "2022-11-14 ~ 2026-02-13"
+    },
+    "threshold_check": {
+      "ic_mean_gt_0_02": false,
+      "ic_t_gt_2": true,
+      "g5_sharpe_gt_0_8": true,
+      "monotonicity_gt_0_8": true
+    },
+    "correlations": {
+      "roe_improve_capital_efficiency_v2": 0.7647987708038605,
+      "roe_bps_inflect_quality_v1": 0.6193372665339981,
+      "roe_persistence_gap_v4": 0.5132706626986894,
+      "max_corr_factor": "roe_improve_capital_efficiency_v2"
+    },
+    "redundant": true,
+    "failure_reason": "虽然分组表现很漂亮（IC_t=3.26、G5 Sharpe=0.90、单调性=1.00），但 IC 均值仅 0.0172 未过 0.02，同时与现有入库因子 roe_improve_capital_efficiency_v2 的 Spearman 相关性达 0.765，超过 >0.7 冗余阈值，因此不能入库。",
+    "next_step": "沿这条线继续挖时，需要显著改变信号来源而不是继续围绕 ROE/BPS 组合；更适合等补充真实资产周转率、营收、总资产等字段后再做标准 asset-turnover growth 因子。"
   }
 ]
