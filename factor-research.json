@@ -9672,5 +9672,29 @@
     "redundant": true,
     "failure_reason": "虽然分组表现很漂亮（IC_t=3.26、G5 Sharpe=0.90、单调性=1.00），但 IC 均值仅 0.0172 未过 0.02，同时与现有入库因子 roe_improve_capital_efficiency_v2 的 Spearman 相关性达 0.765，超过 >0.7 冗余阈值，因此不能入库。",
     "next_step": "沿这条线继续挖时，需要显著改变信号来源而不是继续围绕 ROE/BPS 组合；更适合等补充真实资产周转率、营收、总资产等字段后再做标准 asset-turnover growth 因子。"
+  },
+  {
+    "date": "2026-10-06",
+    "factor_id": "info_discreteness_v1",
+    "source_type": "paper",
+    "source_title": "Da, Gurun, Warachka (2014) Frog in the Pan / Information Discreteness",
+    "source_url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6497598",
+    "original_metric": {
+      "note": "原始文献核心结论为信息分散释放对应更强延续、信息集中释放对应后续反转；今日未成功抓取全文，未记录统一口径数值指标"
+    },
+    "our_metric": {
+      "universe": "CSI1000",
+      "sample": "2022-11-07~2026-03-10",
+      "forward_days": 20,
+      "rebalance_freq": 20,
+      "neutralize": "market_cap_proxy(amount_ma20)",
+      "ic_mean": -0.0063,
+      "t_value": -0.78,
+      "sharpe": -0.5317,
+      "monotonicity": -0.1,
+      "turnover": 0.7951
+    },
+    "diff_notes": "使用日线OHLCV按20日窗口复现 ID=sgn(cum_ret)- (pos_days-neg_days)/20，并反向作为做多因子后再做成交额代理市值中性化。与文献结论不一致，可能因原文更依赖美国市场月频/公告扩散语境，中证1000小盘股日线噪声更大，且amount代理市值与真实free-float market cap存在偏差。当前结果更像弱反向/无效信号。",
+    "conclusion": "eliminated"
   }
 ]
