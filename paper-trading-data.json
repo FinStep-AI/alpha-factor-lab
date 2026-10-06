@@ -6,7 +6,7 @@
     "benchmark": "000300",
     "benchmark_name": "沪深300",
     "created_at": "2026-02-23 22:14:25",
-    "updated_at": "2026-10-06 08:31:52",
+    "updated_at": "2026-10-06 09:05:20",
     "status": "active",
     "players_count": 6
   },
@@ -11213,13 +11213,6 @@
       ],
       "decisions": [
         {
-          "date": "2026-06-02",
-          "action": "hold",
-          "summary": "因子扫描日：price_delay_v2a_d1_60d入库(IC=0.040,t=3.12,Sharpe=1.47,mono=0.90); K线最新2026-06-01",
-          "detail": "【因子入库】price_delay_v2a_d1_60d — Hou&Moskowitz(2005)价格延迟因子,D1定义,60日滚动+5阶市场收益滞后,截面rank变换后成交额中性化。回测2023-01-03~2026-06-01: IC=0.0398(t=3.12,5%显著), Sharpe=1.47, 单调性=0.90, 换手56.6%。五组分年化[2.85%,8.82%,16.16%,15.28%,21.32%]单调递增。与因子库最大相关Amihud(r=-0.48)/gap_efficiency_v2(r=0.25),无冗余因子。Barra:MICRO。【数据刷新】fintool拉完1000只,K线最新2026-06-01,无需fallback。【非调仓日】周二,跳过LightGBM调仓。",
-          "recommendation": "因子入库完毕,下周一(2026-06-08)考虑将price_delay_v2a_d1_60d纳入组合候选因子池"
-        },
-        {
           "date": "2026-06-03",
           "action": "hold",
           "summary": "因子扫描2026-06-03：类夏普振幅因子amp_sharpe_v1首次构造→回测失败（IC=-0.001,t=-0.14,Sharpe=-0.51,单调性=-0.1）",
@@ -11431,6 +11424,13 @@
           "detail": "周一ML特征重建(feature_engine.py --refresh)因进程被系统SIGKILL/exit137失败，按预案回退到旧方法：使用现有强因子 roe_persistence_gap_v4、roe_persistence_neg_v1、turnover_vol_resid_v1、smart_money_v1 的最新可用截面做等权rank融合，取TOP30后经 risk_control.py --action full-check 风控筛选，最终保留前25只执行周度调仓。候选前25为：002747.SZ,000712.SZ,600728.SH,600155.SH,600550.SH,300026.SZ,002612.SZ,688321.SH,300363.SZ,600246.SH,600105.SH,600252.SH,601606.SH,300045.SZ,300244.SZ,002292.SZ,000970.SZ,300180.SZ,600782.SH,600744.SH,603997.SH,300678.SZ,600718.SH,301526.SZ,688208.SH",
           "recommendation": "调仓",
           "exec_summary": "成功0笔，失败0笔"
+        },
+        {
+          "date": "2026-10-06",
+          "action": "hold",
+          "summary": "信息离散度因子复现失败，今日不新增因子",
+          "detail": "完成数据刷新检查：fintool 模式 1000/1000 error，已自动 fallback 到 auto，但 CSI1000 K线最新仍仅到 2026-09-30，未达到今天/昨天时效要求。随后扫描中文金工与英文论文/SSRN，选择 Information Discreteness（Frog in the Pan）方向本土化复现：20日窗口 ID=sgn(cum_ret)-(pos_days-neg_days)/20，取负号作为因子，并用 amount_ma20 做成交额代理市值中性化。回测结果（20日前瞻、20天调仓、成本0.2%）：IC=-0.0063，t=-0.78，Sharpe=-0.5317，单调性=-0.10，换手79.51%，明显不达标，不入库。已追加 factor-research.json；今日仅记录研究日志，不做调仓。",
+          "recommendation": "保持现有因子库，继续优先寻找可明确公式且与现有库低相关的新方向"
         }
       ],
       "rebalances": [
