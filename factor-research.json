@@ -9723,5 +9723,34 @@
       "turnover": 0.2574
     },
     "diff_notes": "结果接近达标：IC_t、G5 Sharpe、单调性均过线，但IC均值仅0.0167<0.02；且与既有 ROE改善资本效率因子 v2 的截面Spearman相关性约0.738，超过0.7冗余阈值，因此本轮判定为淘汰，不入 factors.json。后续若要救，可以继续削弱ROE主导项、强化独立毛利率/营运能力数据源。"
+  },
+  {
+    "date": "2026-10-06",
+    "factor_id": "gross_margin_inflect_asset_turnover_growth_v1",
+    "name": "毛利率拐点-资产周转协同成长因子 v1",
+    "status": "rejected",
+    "barra_style": "Growth",
+    "source_type": "研究启发+本土化代理",
+    "idea": "用log(1+bps)近似毛利率代理，结合资产周转代理(roe/bps)的同比/环比拐点、协同项、稳定性约束与资本扩张惩罚，映射到财报可用日后做市值中性化。",
+    "files": [
+      "data/factor_gross_margin_inflect_asset_turnover_growth_v1.csv",
+      "output/gross_margin_inflect_asset_turnover_growth_v1_report.json"
+    ],
+    "backtest": {
+      "ic_mean": 0.0161381461933558,
+      "ic_t": 2.7625025339374845,
+      "g5_sharpe": 0.8920305203849485,
+      "monotonicity": 1.0,
+      "long_short_sharpe": 1.0918803753069641
+    },
+    "threshold_check": {
+      "ic_mean_pass": false,
+      "ic_t_pass": true,
+      "g5_sharpe_pass": true,
+      "monotonicity_pass": true
+    },
+    "redundancy_check": "未完成全量IC相关性扫描；由于核心门槛IC均值(0.0161)未达0.02，按流程直接淘汰，不入库。",
+    "failure_reason": "因子整体排序与分层表现不错，但alpha强度不足，IC均值仅0.0161，低于入库门槛0.02。说明该基本面代理在5日窗口上更像弱有效增强信号，而非可直接入库的主因子。",
+    "next_step": "可尝试把毛利率代理从log(1+bps)改成结合ROE/BPS与20~60日量价确认项，或改为季度调仓/10日以上forward窗口验证。"
   }
 ]
