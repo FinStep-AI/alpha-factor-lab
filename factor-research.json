@@ -9696,5 +9696,32 @@
     },
     "diff_notes": "使用日线OHLCV按20日窗口复现 ID=sgn(cum_ret)- (pos_days-neg_days)/20，并反向作为做多因子后再做成交额代理市值中性化。与文献结论不一致，可能因原文更依赖美国市场月频/公告扩散语境，中证1000小盘股日线噪声更大，且amount代理市值与真实free-float market cap存在偏差。当前结果更像弱反向/无效信号。",
     "conclusion": "eliminated"
+  },
+  {
+    "timestamp": "2026-10-06 12:01:00",
+    "factor_id": "gross_margin_inflect_asset_turnover_growth_v1",
+    "name": "毛利率拐点-资产周转协同成长因子 v1",
+    "theme": "基本面类/Growth",
+    "barra_style": "Growth",
+    "source_type": "自研（毛利率拐点代理×资产周转协同）",
+    "source_title": "Gross margin inflection with asset-turnover synergy",
+    "source_url": "https://finance.sina.com.cn/roll/2026-09-18/doc-inisfyex3528875.shtml",
+    "original_metric": {
+      "note": "搜索到的公开线索主要验证资产周转率变动在A股十年回测有效，未找到同口径“毛利率拐点×周转协同”的直接公开指标，因此本次为代理构造型自研因子。"
+    },
+    "our_metric": {
+      "universe": "CSI1000",
+      "sample": "2022-11-14 ~ 2026-02-13",
+      "forward_days": 5,
+      "rebalance_freq": 20,
+      "neutralize": "market_cap_proxy(close*amount/turnover)",
+      "ic_mean": 0.0167,
+      "t_value": 2.92,
+      "sharpe": 0.879,
+      "monotonicity": 0.9,
+      "long_short_sharpe": 1.0486,
+      "turnover": 0.2574
+    },
+    "diff_notes": "结果接近达标：IC_t、G5 Sharpe、单调性均过线，但IC均值仅0.0167<0.02；且与既有 ROE改善资本效率因子 v2 的截面Spearman相关性约0.738，超过0.7冗余阈值，因此本轮判定为淘汰，不入 factors.json。后续若要救，可以继续削弱ROE主导项、强化独立毛利率/营运能力数据源。"
   }
 ]
