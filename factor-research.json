@@ -9809,5 +9809,39 @@
     "redundancy_check": "未进入相关性扫描。核心门槛已失败：IC均值仅0.0163，单调性仅0.7，按流程直接淘汰。",
     "failure_reason": "这类基本面成长信号在5日窗口上呈现“高端组合有效、全截面排序不足”的特征：G5年化26.2%、G5 Sharpe 1.07都不错，但G2/G3/G4分层不够线性，导致IC均值和单调性同时不过线。说明信号更像右尾精选器，不适合作为当前入库标准下的主因子。",
     "next_step": "后续可尝试两条路：1）叠加20~60日量价确认，把基本面改善变成“基本面+交易确认”复合因子；2）改到10日/20日forward与更低频调仓，验证这类财报驱动信号的中周期有效性。"
+  },
+  {
+    "date": "2026-10-07",
+    "factor_id": "roe_confirm_capdisc_growth_v3",
+    "name": "ROE确认-资本纪律成长因子 v3",
+    "status": "rejected",
+    "barra_style": "Growth",
+    "source_type": "研究启发+本土化代理",
+    "theme": "基本面类 / Growth",
+    "search_theme": "ROE变化率、成长确认、资本扩张约束",
+    "idea": "用ROE同比改善刻画盈利修复主趋势，用环比确认与同比加速度筛掉一次性跳升，再对BPS同比/环比过快扩张施加资本纪律惩罚；财报按45天滞后映射到交易日，并做log_mktcap横截面中性化。",
+    "formula_desc": "raw = (0.40*ROE_yoy + 0.28*ROE_confirm + 0.14*ROE_yoy_accel + 0.08*ROE_mean4) * stability * cap_guard * match_guard；其中 stability 惩罚 ROE波动与BPS增长波动，cap_guard/match_guard 惩罚资本扩张快于盈利改善。",
+    "files": [
+      "calc_roe_confirm_capdisc_growth_v3.py",
+      "data/factor_roe_confirm_capdisc_growth_v3.csv",
+      "output/roe_confirm_capdisc_growth_v3/report.json"
+    ],
+    "backtest": {
+      "ic_mean": 0.017566555700054005,
+      "ic_t": 2.385394405029065,
+      "g5_sharpe": 0.8965571610591467,
+      "monotonicity": 0.39999999999999997,
+      "long_short_sharpe": 0.6203573310596386
+    },
+    "threshold_check": {
+      "ic_mean_pass": false,
+      "ic_t_pass": true,
+      "g5_sharpe_pass": true,
+      "monotonicity_pass": false
+    },
+    "redundancy_check": "与已有 Growth/Quality 家族最高相关为 roe_yoy_acc_growth_v1，相关系数 0.5447，低于 0.7 冗余阈值，不构成重复。",
+    "failure_reason": "没有冗余问题，失败点在排序结构：IC均值 0.0176、IC_t 2.39、G5 Sharpe 0.90，说明顶部组合可选出来，但中间分层塌陷，G2 显著弱于 G1/G3/G4，单调性仅 0.4。它更像“右尾精选器”，不是稳定的全截面主因子。",
+    "diff_notes": "相较同家族的 v2，这版加强了“同比改善已出现 + 环比仍在确认”的事件化定义，并把资本扩张约束从绝对惩罚改成“扩张需被盈利改善匹配”。结果 IC_t 和 G5 Sharpe 仍在线，但单调性进一步塌陷，说明仅靠 ROE/BPS 两字段做成长确认，容易得到高端有效但排序不线性的半成品信号。",
+    "next_step": "若继续深挖这条线，更值得加入20~60日量价确认或财报披露窗口事件化处理；只在 ROE/BPS 两字段上继续调权重，大概率还是得到类似的尾部精选器。"
   }
 ]
