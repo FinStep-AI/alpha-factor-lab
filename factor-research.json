@@ -1,5 +1,31 @@
 [
   {
+    "date": "2026-10-07 09:00:00",
+    "factor_id": "no_new_factor_2026-10-07",
+    "factor_name": "本日未入库新因子",
+    "status": "skipped",
+    "source_type": "日报扫描",
+    "source_title": "2026-10-07 金工研报/论文扫描",
+    "source_url": "https://finance.sina.com.cn/wm/2026-06-03/doc-iniactak2313454.shtml",
+    "source_author": "system scan",
+    "source_year": 2026,
+    "source_journal": "daily scan",
+    "barra_style": "N/A",
+    "description": "按日报流程扫描中文金工研报与英文学术论文，重点检查广发金工Level-2/月报线索、隔夜收益(ret_overnight)、跳空/竞价、price delay / price sync 等方向。检索结果里最明确的可落地方向仍是隔夜收益与竞价信息效率，但当前因子库已存在 overnight_momentum_v1、gap_momentum_v1、gap_efficiency_v2、price_delay_v2a_d1_60d、price_sync_v3_fwd5、tail_auction_bias_v1 等同脉络因子，重复度高。",
+    "formula": "N/A",
+    "original_metric": {
+      "notes": "广发月报提到 ret_overnight 近期表现较好；其余多为高频/分钟级/Level-2 因子摘要，未公开足够公式细节供在当前日线数据下严格复现。"
+    },
+    "our_metric": {
+      "market": "中证1000",
+      "period": "截至 2026-09-30",
+      "result": "skip"
+    },
+    "diff_notes": "本轮命中最多的是隔夜收益、跳空竞价、价格延迟/同步性几条主线，但这些方向已在现有 active 因子或历史研究日志中反复覆盖。若强行继续做，只会是旧因子换壳：既不满足“不是已有因子的重复”，也很难在5分钟内给出比现有版本更明确的新公式。加上今日数据刷新两路(source=fintool/auto)都确认最新仍停在2026-09-30，尚未拿到10月新K线，不适合在重复方向上继续消耗预算。",
+    "conclusion": "今日扫描无可入库新因子，记录日志结束",
+    "data_files": []
+  },
+  {
     "date": "2026-10-05 09:00:00",
     "factor_id": "no_new_factor_2026-10-05",
     "factor_name": "本日未入库新因子",
@@ -9752,5 +9778,36 @@
     "redundancy_check": "未完成全量IC相关性扫描；由于核心门槛IC均值(0.0161)未达0.02，按流程直接淘汰，不入库。",
     "failure_reason": "因子整体排序与分层表现不错，但alpha强度不足，IC均值仅0.0161，低于入库门槛0.02。说明该基本面代理在5日窗口上更像弱有效增强信号，而非可直接入库的主因子。",
     "next_step": "可尝试把毛利率代理从log(1+bps)改成结合ROE/BPS与20~60日量价确认项，或改为季度调仓/10日以上forward窗口验证。"
+  },
+  {
+    "date": "2026-10-07",
+    "factor_id": "roe_confirm_capdisc_growth_v2",
+    "name": "ROE确认-资本纪律成长因子 v2",
+    "status": "rejected",
+    "barra_style": "Growth",
+    "source_type": "研究启发+本土化代理",
+    "idea": "以ROE同比改善为主信号，叠加环比确认与同比加速度，同时对BPS同比/环比过快扩张施加资本纪律惩罚；财报可用日后映射到交易日，并做市值中性化。",
+    "files": [
+      "data/factor_roe_confirm_capdisc_growth_v2.csv",
+      "output/roe_confirm_capdisc_growth_v2/report.json",
+      "data/factor_roe_yoy_qoq_confirm_growth_v1.csv",
+      "output/roe_yoy_qoq_confirm_growth_v1/report.json"
+    ],
+    "backtest": {
+      "ic_mean": 0.01630951303321359,
+      "ic_t": 2.602476615171093,
+      "g5_sharpe": 1.0679881152446968,
+      "monotonicity": 0.7,
+      "long_short_sharpe": 1.3728674247011377
+    },
+    "threshold_check": {
+      "ic_mean_pass": false,
+      "ic_t_pass": true,
+      "g5_sharpe_pass": true,
+      "monotonicity_pass": false
+    },
+    "redundancy_check": "未进入相关性扫描。核心门槛已失败：IC均值仅0.0163，单调性仅0.7，按流程直接淘汰。",
+    "failure_reason": "这类基本面成长信号在5日窗口上呈现“高端组合有效、全截面排序不足”的特征：G5年化26.2%、G5 Sharpe 1.07都不错，但G2/G3/G4分层不够线性，导致IC均值和单调性同时不过线。说明信号更像右尾精选器，不适合作为当前入库标准下的主因子。",
+    "next_step": "后续可尝试两条路：1）叠加20~60日量价确认，把基本面改善变成“基本面+交易确认”复合因子；2）改到10日/20日forward与更低频调仓，验证这类财报驱动信号的中周期有效性。"
   }
 ]
