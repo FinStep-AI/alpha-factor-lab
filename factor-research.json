@@ -9843,5 +9843,16 @@
     "failure_reason": "没有冗余问题，失败点在排序结构：IC均值 0.0176、IC_t 2.39、G5 Sharpe 0.90，说明顶部组合可选出来，但中间分层塌陷，G2 显著弱于 G1/G3/G4，单调性仅 0.4。它更像“右尾精选器”，不是稳定的全截面主因子。",
     "diff_notes": "相较同家族的 v2，这版加强了“同比改善已出现 + 环比仍在确认”的事件化定义，并把资本扩张约束从绝对惩罚改成“扩张需被盈利改善匹配”。结果 IC_t 和 G5 Sharpe 仍在线，但单调性进一步塌陷，说明仅靠 ROE/BPS 两字段做成长确认，容易得到高端有效但排序不线性的半成品信号。",
     "next_step": "若继续深挖这条线，更值得加入20~60日量价确认或财报披露窗口事件化处理；只在 ROE/BPS 两字段上继续调权重，大概率还是得到类似的尾部精选器。"
+  },
+  {
+    "date": "2026-10-08",
+    "factor_id": null,
+    "source_type": "scan_only",
+    "source_title": "2026-10-08 因子扫描（未复现）",
+    "source_url": "step_search: A股 alpha因子 量化选股 金工研报 2026; 因子挖掘 中证1000 选股因子; cross-sectional stock return predictability factor 2025 2026; SSRN anomaly alpha factor equity",
+    "original_metric": "N/A",
+    "our_metric": "N/A",
+    "diff_notes": "fintool源100%失败，fallback auto后数据仍停留在2026-09-30，未达到“今天或昨天”刷新要求；外部检索未在时限内拿到可严格复现且明显非重复的新因子全文与公式。为避免基于过期样本误判，今日不做复现/回测/入库。",
+    "conclusion": "skip_due_to_stale_data_and_no_clear_factor"
   }
 ]
