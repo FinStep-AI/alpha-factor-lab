@@ -1,5 +1,31 @@
 [
   {
+    "date": "2026-10-07 09:00:00",
+    "factor_id": "no_new_factor_2026-10-07",
+    "factor_name": "本日未入库新因子",
+    "status": "skipped",
+    "source_type": "日报扫描",
+    "source_title": "2026-10-07 金工研报/论文扫描",
+    "source_url": "https://finance.sina.com.cn/wm/2026-06-03/doc-iniactak2313454.shtml",
+    "source_author": "system scan",
+    "source_year": 2026,
+    "source_journal": "daily scan",
+    "barra_style": "N/A",
+    "description": "按日报流程扫描中文金工研报与英文学术论文，重点检查广发金工Level-2/月报线索、隔夜收益(ret_overnight)、跳空/竞价、price delay / price sync 等方向。检索结果里最明确的可落地方向仍是隔夜收益与竞价信息效率，但当前因子库已存在 overnight_momentum_v1、gap_momentum_v1、gap_efficiency_v2、price_delay_v2a_d1_60d、price_sync_v3_fwd5、tail_auction_bias_v1 等同脉络因子，重复度高。",
+    "formula": "N/A",
+    "original_metric": {
+      "notes": "广发月报提到 ret_overnight 近期表现较好；其余多为高频/分钟级/Level-2 因子摘要，未公开足够公式细节供在当前日线数据下严格复现。"
+    },
+    "our_metric": {
+      "market": "中证1000",
+      "period": "截至 2026-09-30",
+      "result": "skip"
+    },
+    "diff_notes": "本轮命中最多的是隔夜收益、跳空竞价、价格延迟/同步性几条主线，但这些方向已在现有 active 因子或历史研究日志中反复覆盖。若强行继续做，只会是旧因子换壳：既不满足“不是已有因子的重复”，也很难在5分钟内给出比现有版本更明确的新公式。加上今日数据刷新两路(source=fintool/auto)都确认最新仍停在2026-09-30，尚未拿到10月新K线，不适合在重复方向上继续消耗预算。",
+    "conclusion": "今日扫描无可入库新因子，记录日志结束",
+    "data_files": []
+  },
+  {
     "factor_id": "vol_accel_v1",
     "date": "2026-04-14",
     "source_type": "自研(学术启发)",
@@ -148,5 +174,33 @@
     "variant_note": "Counter-variant `gap_contrib_neg_v1 = -gap_contrib_v1` confirmed: IC +0.004 ∼ t=+0.48, Sharpe = −0.104, mono = −0.10 — symmetrical null.",
     "diff_notes": "H1 part-verified from QuantaAlpha: CSI1000 overnight volatility does dominate intraday ratios at mean, but cross-sectional ranking IC –0.0038 (t –0.48) is noise — no predictable winners/losers in sorted cross-section; group return shape is convex peaking at G3 rather than monotone → raw dominance does not translate to cross-sectional return predictability. Gap-contrib inverted symmetric null still fails. Likely reason: CSI1000 gap variance clustered across sectors/years; mean-ratio at cross-section has no return information without context. For this version the factor is FAILING our threshold on every metric — not entering library.",
     "conclusion": "FAIL — do not store"
+  },
+  {
+    "timestamp": "2026-10-08 15:41:00+08:00",
+    "factor_id": "roe_improve_stability_v1",
+    "factor_name": "ROE改善稳定性因子 v1",
+    "theme": "基本面类 / Growth",
+    "hypothesis": "ROE同比改善且改善过程更平滑的公司，后续存在持续超额收益；用BPS恶化与ROE加速度过冲作为惩罚项。",
+    "data_inputs": [
+      "data/csi1000_fundamental_cache.csv",
+      "data/csi1000_kline_raw.csv",
+      "data/csi1000_returns.csv"
+    ],
+    "formula": "0.75*ROE同比变化 + 0.25*ROE环比变化 - 0.20*负向BPS同比变化绝对值 - 0.15*ROE加速度绝对值 + 0.10*20日均收益确认；按日对log市值回归取残差并标准化。",
+    "barra_style": "Growth",
+    "source_type": "自研",
+    "status": "rejected",
+    "reason": "分层收益和单调性都很强，但IC均值仅0.0033、t=0.84，未过IC显著性门槛，更像排序收益而非稳定横截面预测力。",
+    "metrics": {
+      "ic_mean": 0.0032646279978875282,
+      "ic_t": 0.8376092721215257,
+      "g5_sharpe": 1.3966226786306644,
+      "monotonicity": 0.9999999999999999,
+      "long_short_sharpe": 3.807011069566713
+    },
+    "artifacts": {
+      "factor_csv": "data/factor_roe_improve_stability_v1.csv",
+      "report": "output/roe_improve_stability_v1/report.json"
+    }
   }
 ]
