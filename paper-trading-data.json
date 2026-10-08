@@ -6,7 +6,7 @@
     "benchmark": "000300",
     "benchmark_name": "沪深300",
     "created_at": "2026-02-23 22:14:25",
-    "updated_at": "2026-10-08 08:32:17",
+    "updated_at": "2026-10-08 09:03:28",
     "status": "active",
     "players_count": 6
   },
@@ -11219,19 +11219,6 @@
       ],
       "decisions": [
         {
-          "date": "2026-06-10",
-          "type": "factor_scan",
-          "summary": "量化研报+论文扫描，4候选因子，0入库（4个均未达IC>0.02+t>2门槛）。最佳候选：turn_disp_v1换手率截面离散残差(IC=0.021,t=1.30,Sharpe=2.21,单调性0.90)，目前归档watchlist待后续数据积累重测。",
-          "detail": "本次扫描方向：(1)国海证券委托挂单手数（须L2，当前日线数据不可建）；(2)方正金工'满意度冒险'+'勇攀高峰'均须分钟级OHLC，无可建路径；(3)Dai et al. 2023 FRL已实现偏度偏度论文得确认(A股独家负向IC)，但须月频日内K线；(4)turn_DISPR残差(自研)构造上影线衰变(IC=0.013,t=1.38)，正收益日主导(IC=-0.005,t=-0.41，方向反)，实体比率非对称(IC=-0.006,t=-0.72)。没有新因子入库。",
-          "action": "watchlist_only",
-          "atom": [
-            "K线数据最新2026-06-09（fintool全量失败，auto/tencent fallback回复），前置已空转",
-            "turn_DISPR: IC=0.0215, t=1.30, Sharpe=2.21, 单调性0.9, 换手率52%(月份调仓成本合理)。待后续v2迭代(非线性中性化、加点历史市场变量作额外正交)。",
-            "3个自建因子全部eliminated，写入factor-research.json"
-          ],
-          "created": "2026-06-10T09:00+08:00"
-        },
-        {
           "date": "2026-07-09",
           "action": "hold",
           "summary": "因子扫描：gap_amp_ratio_v1 未达标，不入库",
@@ -11437,6 +11424,13 @@
           "summary": "因子日报扫描：未发现可入库新因子",
           "detail": "完成数据刷新检查后，fintool失败自动fallback到auto；两路结果均显示本地中证1000 K线最新日期仍为2026-09-30，未到今天/昨天。随后扫描中文金工研报与英文论文，重点查看广发金工Level-2/月报、ret_overnight、跳空/竞价、price delay / sync 等方向。检索到的最可落地方向与现有因子库高度重合，当前库中已覆盖 overnight_momentum_v1、gap_momentum_v1、gap_efficiency_v2、price_delay_v2a_d1_60d、price_sync_v3_fwd5、tail_auction_bias_v1 等同脉络因子，因此本轮不做重复复现，也不新增入库。已更新 factor-research.json 记录本次跳过原因。",
           "recommendation": "继续等待更新后的K线数据，再优先挖掘非隔夜/非跳空/非价格延迟方向的新alpha"
+        },
+        {
+          "date": "2026-10-08",
+          "action": "hold",
+          "summary": "因子扫描完成：数据刷新未达标，今日不复现不入库",
+          "detail": "先执行了CSI1000日线刷新：fintool模式1000/1000报错，fallback到auto后虽成功请求腾讯源，但数据最新日期仍停在2026-09-30，未满足“今天或昨天”的数据新鲜度要求。并行扫描中文金工研报与英文论文后，未在时限内拿到可严格复现、且确认与现有56个因子不重复的明确公式。因此为避免基于陈旧样本误判，今日仅记录研究日志，不执行复现、回测、入库与调仓。factor-research.json 已追加 skip_due_to_stale_data_and_no_clear_factor 记录。",
+          "recommendation": "等待数据源恢复后重跑量化扫描"
         }
       ],
       "rebalances": [
