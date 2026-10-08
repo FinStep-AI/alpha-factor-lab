@@ -3868,5 +3868,79 @@
     "source_type": "自研",
     "source_title": "尾盘拉抬反转（收盘位置×日内收益）",
     "source_url": ""
+  },
+  {
+    "id": "roe_yoy_pb_resid_v1",
+    "name": "ROE同比改善-PB约束残差 v1",
+    "name_en": "ROE YoY Improvement with PB Constraint Residual v1",
+    "category": "基本面/成长",
+    "description": "以季度ROE同比改善为核心，叠加每股净资产同比变化，并用PB代理进行估值约束，避免把高估值高景气一把梭。信号先映射到日频，再按日做市值中性化与z-score。高因子值代表“盈利改善更快、估值约束更克制”的成长股。",
+    "hypothesis": "A股小盘成长股里，ROE同比改善若能在不过度透支估值的前提下发生，更容易在后续5日继续获得超额收益。",
+    "expected_direction": "正向（高因子值=高预期收益）",
+    "factor_type": "成长/质量残差",
+    "formula": "neutralize(0.6*(0.7*ΔROE_yoy + 0.3*ΔBPS_yoy - 0.2*|ROE_yoy_accel|) + 0.4*(ROE_yoy / PB_proxy), log_mktcap)",
+    "direction": 1,
+    "stock_pool": "中证1000",
+    "period": "2023-10-09 ~ 2026-02-13",
+    "rebalance_freq": 20,
+    "forward_days": 5,
+    "cost": 0.003,
+    "rating": "★★★★★ 强",
+    "nav_data": "output/roe_yoy_pb_resid_v1/cumulative_returns.json",
+    "ic_data": "output/roe_yoy_pb_resid_v1/ic_series.json",
+    "upgrade_notes": "首版即通过。相对纯ROE同比因子，加入BPS改善与PB约束后，IC、G5 Sharpe、多空Sharpe同步提升，且换手仅19.6%。",
+    "lessons_learned": [
+      "Growth因子不一定要靠复杂拐点，简单的ROE改善×估值约束在中证1000上更稳",
+      "PB约束显著压制了“高景气高估值”的噪音，提升了分层单调性",
+      "与已有roe_delta_yoy_v1相关性0.67，接近但未超过0.7冗余线，可作为Growth内部增强版"
+    ],
+    "created": "2026-10-08",
+    "updated": "2026-10-08",
+    "metrics": {
+      "ic_mean": 0.024315783067545647,
+      "ic_std": 0.0633342937254941,
+      "ic_t": 4.466642212647366,
+      "ic_positive_ratio": 0.6578947368421053,
+      "rank_ic": 0.04652922548313045,
+      "rank_ic_std": 0.0959750070198306,
+      "ir": 0.38392759494462886,
+      "ic_count": 114,
+      "long_short_sharpe": 4.949223991519843,
+      "long_short_mdd": -0.05965643210647945,
+      "monotonicity": 0.9999999999999999,
+      "group_sharpe": [
+        0.21622737668528755,
+        0.40036442563015534,
+        0.5842009135524029,
+        1.1404116321274445,
+        1.7365209110826252
+      ],
+      "group_returns_annualized": [
+        0.06196752036753583,
+        0.1109725345584438,
+        0.156603338899304,
+        0.3171779677788402,
+        0.4755228892717793
+      ],
+      "group_mdd": [
+        -0.3604176653601857,
+        -0.34028845205667957,
+        -0.31853946002257877,
+        -0.2952316521911753,
+        -0.26289555648815505
+      ]
+    },
+    "conclusion": "通过门槛。IC=0.0243(t=4.47)，G5 Sharpe=1.74，单调性=1.0，多空Sharpe=4.95。是当前Growth条线里风险收益比非常优秀的一版，适合纳入成长/质量子组合。",
+    "barra_style": "Growth",
+    "source_type": "自研",
+    "source_title": "ROE同比改善 + BPS变化 + PB约束的成长残差",
+    "source_url": "",
+    "correlations": {
+      "roe_delta_yoy_v1": 0.67,
+      "roe_accel_v1": 0.552,
+      "roe_improve_capital_efficiency_v2": 0.533,
+      "roe_bps_recovery_stability_v1": 0.386,
+      "gross_margin_trend_proxy_v1": 0.222
+    }
   }
 ]

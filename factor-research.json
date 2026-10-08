@@ -9854,5 +9854,40 @@
     "our_metric": "N/A",
     "diff_notes": "fintool源100%失败，fallback auto后数据仍停留在2026-09-30，未达到“今天或昨天”刷新要求；外部检索未在时限内拿到可严格复现且明显非重复的新因子全文与公式。为避免基于过期样本误判，今日不做复现/回测/入库。",
     "conclusion": "skip_due_to_stale_data_and_no_clear_factor"
+  },
+  {
+    "date": "2026-10-08 12:01:00",
+    "factor_id": "roe_yoy_pb_resid_v1",
+    "factor_name": "ROE同比改善-PB约束残差 v1",
+    "status": "active",
+    "source_type": "自研",
+    "source_title": "ROE同比改善 + BPS变化 + PB约束的成长残差",
+    "source_url": "",
+    "source_author": "system mining",
+    "source_year": 2026,
+    "source_journal": "daily mining",
+    "barra_style": "Growth",
+    "description": "围绕Growth空白优先级，放弃重复的毛利率/周转率拐点路线，转向“ROE同比改善 + BPS同比变化 + PB约束”的估值感知型成长因子。做法是先把季度ROE、BPS映射到财报披露后日频，再做市值中性化。",
+    "formula": "neutralize(0.6*(0.7*ΔROE_yoy + 0.3*ΔBPS_yoy - 0.2*|ROE_yoy_accel|) + 0.4*(ROE_yoy / PB_proxy), log_mktcap)",
+    "original_metric": {
+      "notes": "灵感来自基本面成长因子里“盈利改善优先于盈利水平”的经验规律，并加入A股常见的PB约束，避免把高估值高成长股直接打满。"
+    },
+    "our_metric": {
+      "market": "中证1000",
+      "period": "2023-10-09 ~ 2026-02-13",
+      "forward_days": 5,
+      "rebalance_freq": 20,
+      "neutralize": "log_mktcap",
+      "ic_mean": 0.0243,
+      "t_value": 4.47,
+      "g5_sharpe": 1.7365,
+      "long_short_sharpe": 4.9492,
+      "monotonicity": 1.0,
+      "turnover": 0.1963
+    },
+    "diff_notes": "与现有roe_delta_yoy_v1相比，不再只看ROE同比本身，而是加入BPS同比改善和PB约束，提升了估值纪律。和已有因子最高相关性为0.67（roe_delta_yoy_v1），未超过0.7冗余线，可视为同主题增强版而非重复壳。",
+    "conclusion": "通过并入库。所有门槛均满足：IC均值>0.02、IC_t>2、G5 Sharpe>0.8、单调性>0.8。",
+    "data_file": "data/factor_roe_yoy_pb_resid_v1.csv",
+    "output_report": "output/roe_yoy_pb_resid_v1/report.json"
   }
 ]
