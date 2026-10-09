@@ -6,7 +6,7 @@
     "benchmark": "000300",
     "benchmark_name": "沪深300",
     "created_at": "2026-02-23 22:14:25",
-    "updated_at": "2026-10-09 08:32:17",
+    "updated_at": "2026-10-09 09:04:52",
     "status": "active",
     "players_count": 6
   },
@@ -11222,13 +11222,6 @@
       ],
       "decisions": [
         {
-          "date": "2026-07-09",
-          "action": "hold",
-          "summary": "因子扫描：gap_amp_ratio_v1 未达标，不入库",
-          "detail": "完成数据刷新与研报/论文扫描，复现跳空缺口-日内振幅比因子（60日均值，市值中性化）。20日前瞻回测结果：IC=-0.0010，t=-0.09，LS Sharpe=0.32，单调性=0.30，未达门槛，已写入 factor-research.json。",
-          "recommendation": "继续扫描新方向"
-        },
-        {
           "date": "2026-07-10",
           "action": "hold",
           "summary": "因子扫描：vol_ret_persist_v1 未达标，不入库",
@@ -11434,6 +11427,13 @@
           "summary": "因子扫描完成：数据刷新未达标，今日不复现不入库",
           "detail": "先执行了CSI1000日线刷新：fintool模式1000/1000报错，fallback到auto后虽成功请求腾讯源，但数据最新日期仍停在2026-09-30，未满足“今天或昨天”的数据新鲜度要求。并行扫描中文金工研报与英文论文后，未在时限内拿到可严格复现、且确认与现有56个因子不重复的明确公式。因此为避免基于陈旧样本误判，今日仅记录研究日志，不执行复现、回测、入库与调仓。factor-research.json 已追加 skip_due_to_stale_data_and_no_clear_factor 记录。",
           "recommendation": "等待数据源恢复后重跑量化扫描"
+        },
+        {
+          "date": "2026-10-09",
+          "action": "hold",
+          "summary": "因子扫描：尾盘异动反转 v1 复现未达标",
+          "detail": "数据已更新至2026-10-08。尝试复现大单资金流方向因子时，build_major_flow_dir_v2 进程被系统kill(137)；改用日频近似脚本 calc_tail_flow_reversal_v1.py 做本土化验证。结果：IC均值0.0115，t值0.917，Sharpe 1.080，单调性1.000，未达到入库门槛（IC>0.02, t>2.0）。判断尾盘异动代理信息损失较大，今日不新增因子。",
+          "recommendation": "不交易，仅记录本次因子扫描结果"
         }
       ],
       "rebalances": [
