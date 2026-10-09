@@ -9943,5 +9943,45 @@
       "data/factor_grossmargin_proxy_trend_v1.csv",
       "output/grossmargin_proxy_trend_v1/report.json"
     ]
+  },
+  {
+    "date": "2026-10-09 15:37:00",
+    "factor_id": "bollinger_squeeze_reversal_v1",
+    "factor_name": "布林收缩反转因子 v1",
+    "status": "failed",
+    "source_type": "研报启发+自研本土化",
+    "source_title": "Bollinger Band Width / Volatility Squeeze 文献与A股日线代理",
+    "source_url": "https://bigquant.com/wiki/doc/f9lmFFMF9A",
+    "source_author": "Bollinger bandwidth heuristic",
+    "source_year": 2024,
+    "source_journal": "practitioner note",
+    "barra_style": "Volatility / Reversal",
+    "description": "基于布林带宽度收缩与超跌反转思路，在中证1000日线数据上构造技术因子：优先选择近60日处于低带宽分位的股票，再叠加价格相对20日均线的负偏离、成交额放量zscore以及当日开收回吐项，试图捕捉“波动压缩后向下过冲”的5日均值回复。全流程对日度市值代理做横截面OLS中性化，并做MAD缩尾与z-score标准化。",
+    "formula": "raw = 0.45*(1-BBW_rank60) + 0.35*tanh(-(close-MA20)/STD20/1.5) + 0.15*tanh(amount_z20/2) + 0.05*tanh(20*(open-close)/open); factor = neutralize(raw, log_mktcap)",
+    "original_metric": {
+      "notes": "布林带宽收缩通常被视作潜在突破前兆；这里改成A股小盘股场景下的“收缩+下行过冲”反转代理。"
+    },
+    "our_metric": {
+      "market": "中证1000",
+      "period": "2022-12-08 ~ 2026-02-13",
+      "ic_mean": 0.008877394935397286,
+      "ic_t": 1.1407193691802733,
+      "rank_ic": 0.03493263372191878,
+      "g5_sharpe": 0.27621507842798104,
+      "long_short_sharpe": -0.4344790353125661,
+      "monotonicity": -0.8,
+      "turnover_mean": 0.7908741437412228,
+      "max_abs_corr_existing": null,
+      "closest_existing_factor": null
+    },
+    "failure_reason": "明显不达标：IC均值仅0.0089、IC_t=1.14，G5 Sharpe仅0.28，多空Sharpe为-0.43，且分层单调性为-0.8，呈现高分组收益更差的反向结构。说明“低带宽+超跌+放量”在中证1000上没有形成稳定5日反转alpha。",
+    "diff_notes": "先试了 breakout 正向版本，结果IC为负且两端分组更强，说明布林收缩在小盘股里并不直接对应趋势延续；再翻成反转版本后，虽Rank IC转正，但收益曲线仍表现为G1/G2最好、G5最差，意味着信号更像噪声混合了弱反向暴露，而不是可交易独立因子。与库里现有VWAP偏离、影线压力、跳空回补等微观结构因子相比，这条线的核心问题不是冗余，而是日线级布林带宽代理本身太粗，无法稳定区分“压缩后的有效过冲”和普通弱势股。",
+    "conclusion": "淘汰",
+    "data_files": [
+      "data/factor_bollinger_squeeze_breakout_v1.csv",
+      "data/factor_bollinger_squeeze_reversal_v1.csv",
+      "output/bollinger_squeeze_breakout_v1/report.json",
+      "output/bollinger_squeeze_reversal_v1/report.json"
+    ]
   }
 ]
