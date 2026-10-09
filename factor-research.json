@@ -9889,5 +9889,59 @@
     "conclusion": "通过并入库。所有门槛均满足：IC均值>0.02、IC_t>2、G5 Sharpe>0.8、单调性>0.8。",
     "data_file": "data/factor_roe_yoy_pb_resid_v1.csv",
     "output_report": "output/roe_yoy_pb_resid_v1/report.json"
+  },
+  {
+    "date": "2026-10-09",
+    "factor_id": "tail_flow_reversal_v1",
+    "source_type": "report_reproduction_localized",
+    "source_title": "尾盘异动/大单资金流反转思路（本地日频近似复现）",
+    "source_url": "local://scripts/calc_tail_flow_reversal_v1.py",
+    "original_metric": {
+      "reference": "研报《大单与小单资金流的 alpha 能力》在 build_major_flow_dir_v2.py 注释中给出 IC 0.054, IR 3.96；本次受限未成功完成该重脚本复现"
+    },
+    "our_metric": {
+      "ic_mean": 0.011543849508218908,
+      "t_value": 0.9171840180340557,
+      "sharpe": 1.079697885694323,
+      "monotonicity": 0.9999999999999999,
+      "turnover_mean": 0.7236488589600351
+    },
+    "diff_notes": "严格的大单资金流脚本 build_major_flow_dir_v2 在运行中被 kill(code 137)，故退而用日频近似尾盘异动强度做本土化验证。结果单调性和多空Sharpe尚可，但IC均值与t值显著低于门槛，说明日频代理丢失了原始资金流信息，且尾盘异动更像交易型排序信号而非稳定截面alpha。",
+    "conclusion": "failed_not_added"
+  },
+  {
+    "date": "2026-10-09 12:01:00",
+    "factor_id": "grossmargin_proxy_trend_v1",
+    "factor_name": "毛利率趋势代理因子 v1",
+    "status": "failed",
+    "source_type": "研究启发+本土化代理",
+    "source_title": "毛利率趋势 量化因子 A股（日线+ROE/BPS代理）",
+    "source_url": "https://bigquant.com/wiki/doc/c7u9IChUio",
+    "source_author": "step_search / BigQuant线索",
+    "source_year": 2026,
+    "source_journal": "web research",
+    "barra_style": "Growth",
+    "description": "本轮优先填补 Growth/Quality 方向，参考“毛利率的变动趋势比数值本身更重要”的基本面选股思路，但受限于当前基础数据只有 ROE/BPS，没有营收、毛利率、费用率等字段，因此用 ROE 同比改善、ROE 相对近四季均值的拐点，以及 BPS 同比扩张惩罚，构造一个毛利率趋势的本土化代理，并在日频映射后做市值中性化。",
+    "formula": "raw = 0.50*tanh(ROE_yoy/4) + 0.25*tanh((ROE-mean4(ROE))/2) - 0.15*tanh(BPS_yoy/0.25) - 0.10*tanh(std4(ROE)/3); factor = neutralize(raw, log_mktcap)",
+    "our_metric": {
+      "market": "中证1000",
+      "period": "2023-08-14 ~ 2026-02-13",
+      "ic_mean": 0.03349742971674693,
+      "ic_t": 5.095863379137328,
+      "rank_ic": 0.03582552167976055,
+      "g5_sharpe": 1.241940028950435,
+      "long_short_sharpe": 3.3289348002835513,
+      "monotonicity": 0.9999999999999999,
+      "turnover_mean": 0.18386454418281836,
+      "max_abs_corr_existing": 0.8859870552124421,
+      "closest_existing_factor": "roe_improve_capital_efficiency_v2"
+    },
+    "failure_reason": "虽然单独回测结果非常强（IC均值0.0335、IC_t=5.10、G5 Sharpe=1.24、单调性=1.0），但与已入库因子 roe_improve_capital_efficiency_v2 的截面相关性高达0.886，超过0.7 冗余阈值，不能作为新因子入库。",
+    "diff_notes": "这版名义上从“毛利率趋势”出发，但由于缺少真实毛利率字段，落地后核心仍是“ROE改善 + 扩表克制 + 稳定性惩罚”的 Growth/Quality 代理，和既有 roe_improve_capital_efficiency_v2 高度同构。强表现说明这条基本面主线仍然有效，但新增信息含量不足，更像旧因子的换壳加强版，而不是一条独立新alpha。后续若真想挖毛利率趋势，必须补营收成本、毛利率、期间费用率、现金流等字段，否则继续在 ROE/BPS 上变形大概率只会撞上现有库。",
+    "conclusion": "淘汰（原因：高相关冗余，不入库）",
+    "data_files": [
+      "data/factor_grossmargin_proxy_trend_v1.csv",
+      "output/grossmargin_proxy_trend_v1/report.json"
+    ]
   }
 ]
