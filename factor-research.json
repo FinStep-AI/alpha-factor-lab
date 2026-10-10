@@ -1,5 +1,42 @@
 [
   {
+    "date": "2026-10-10 10:00:00",
+    "factor_id": "roe_slope_bps_discipline_v2",
+    "factor_name": "ROE斜率-资本纪律因子 v2",
+    "status": "failed",
+    "source_type": "论文复现+本土化",
+    "source_title": "Profit Persistence and Stock Returns: Does the Market Care?",
+    "source_url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3211826",
+    "source_author": "Chahine, Fang, Hill & Salameh",
+    "source_year": 2018,
+    "source_journal": "Journal of Banking and Finance",
+    "barra_style": "Quality / Growth",
+    "description": "沿着 profit persistence 文献的‘高持续性盈利应比短期冲高型盈利更值得定价’主线，在仅有 ROE/BPS 字段约束下，构造一个更强调盈利斜率与资本纪律的本土化代理：用近4季 ROE 斜率刻画盈利持续改善，用近4季平均 ROE 和 ROE 同比做辅助确认，同时惩罚 BPS 同比扩张、BPS 斜率扩张和 ROE 波动；财报按45天披露滞后映射到日频后，对20日平均成交额对数做横截面 OLS 市值中性化，并以分位数高斯化强化尾部排序。",
+    "formula": "raw = 0.75*tanh(roe_slope4/2.0) + 0.15*tanh(roe_ma4/8) + 0.10*tanh(roe_yoy/18) - 0.55*tanh(bps_yoy/0.20) - 0.25*tanh((bps_slope4/(abs(bps_ma4)+1))/0.06) - 0.35*tanh(roe_std4/5.5); factor = gaussianize(neutralize(raw, log(MA20(amount))))",
+    "our_metric": {
+      "market": "中证1000",
+      "period": "2023-08-14 ~ 2026-05-19",
+      "ic_mean": 0.020369223040007964,
+      "ic_t": 4.1404115419577225,
+      "rank_ic": 0.02227300998543634,
+      "g5_sharpe": 0.8724063278229478,
+      "long_short_sharpe": 2.190255325338967,
+      "monotonicity": 0.9,
+      "turnover_mean": 0.19366063520965698,
+      "max_abs_corr_existing": null,
+      "closest_existing_factor": "roe_accel_v1"
+    },
+    "failure_reason": "离门槛很近，但仍未严格达标：IC均值0.0204、IC_t=4.14、G5 Sharpe=0.87、单调性=0.9。问题不在统计显著性，而在高分组收益峰值落在G4而非G5，说明信号更像‘中高分组有效的质量成长排序器’，尾部做多纯度仍不够，按当前入库标准不能放行。",
+    "diff_notes": "相较此前 roe_persistence_gap / roe_overheat_reversal / quality_reinvestment_gap 等版本，这一版不再强调‘盈利过热回落’或简单的‘盈利改善减扩张’，而是直接用 ROE 四季斜率刻画盈利持续性，并加入 BPS 扩张斜率约束，更贴近 profit persistence 文献里‘持续型盈利优于外延摊大饼’的语义。回测结果很干净：IC 和 t 值都过线，多空 Sharpe 2.19 也很强，说明它很适合作为排序腿或多空腿；但最高收益停在 G4，说明顶部尾部仍混入了部分“扩张过猛但ROE也很陡”的公司，离可独立入库的高分组多头因子还差最后一步。若后续继续深挖，优先试分段阈值/interaction（例如只奖励 ROE 正斜率且 BPS 扩张处于中低分位），而不是继续线性加权。",
+    "conclusion": "淘汰",
+    "data_files": [
+      "data/factor_roe_slope_bps_discipline_v1.csv",
+      "data/factor_roe_slope_bps_discipline_v2.csv",
+      "output/roe_slope_bps_discipline_v1/report.json",
+      "output/roe_slope_bps_discipline_v2/report.json"
+    ]
+  },
+  {
     "date": "2026-10-07 09:00:00",
     "factor_id": "no_new_factor_2026-10-07",
     "factor_name": "本日未入库新因子",
