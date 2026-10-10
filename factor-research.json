@@ -1,5 +1,40 @@
 [
   {
+    "date": "2026-10-10 15:00:00",
+    "factor_id": "profit_persistence_gate_v1",
+    "factor_name": "盈利持续性门控因子 v1",
+    "status": "failed",
+    "source_type": "论文复现+本土化",
+    "source_title": "Profit Persistence and Stock Returns: Does the Market Care?",
+    "source_url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3211826",
+    "source_author": "Chahine, Fang, Hill & Salameh",
+    "source_year": 2018,
+    "source_journal": "Journal of Banking and Finance",
+    "barra_style": "Quality / Growth",
+    "description": "周末论文复现，沿着 profit persistence 文献里‘持续改善且非外延摊大饼的盈利更值得定价’主线，在仅有 ROE/BPS 字段约束下构造门控版代理：用 ROE 加速度与 ROE 同比改善刻画盈利持续改善，用当前 ROE 相对近四季均值的不过热缺口约束顶部追高，并惩罚 BPS 同比/环比激进扩张与 ROE 波动；财报按45天披露滞后映射到日频后，对20日平均成交额对数做横截面 OLS 市值中性化。",
+    "formula": "core = 0.55*tanh(roe_accel/3) + 0.25*tanh(roe_yoy/8) + 0.15*tanh((roe_ma4-roe)/4) - 0.30*tanh(bps_yoy/0.18) - 0.15*tanh(bps_qoq/0.06) - 0.20*tanh(roe_std4/4); factor = neutralize(core * I[roe_yoy>0 & bps_yoy<0.18], log_amount)",
+    "our_metric": {
+      "market": "中证1000",
+      "period": "2023-08-14 ~ 2026-10-09",
+      "ic_mean": -0.003844617464528667,
+      "ic_t": -0.713370293000939,
+      "rank_ic": -0.006230528503293178,
+      "g5_sharpe": 0.31017841040193495,
+      "long_short_sharpe": -0.692501123127226,
+      "monotonicity": -0.1,
+      "turnover_mean": 0.10018408872752711,
+      "max_abs_corr_existing": null,
+      "closest_existing_factor": null
+    },
+    "failure_reason": "明显不达标且并未形成稳定正向排序：IC均值-0.0038、IC_t=-0.71、G5 Sharpe仅0.31、单调性-0.1，多空Sharpe为-0.69。收益高点落在G1/G4而非G5，说明‘盈利改善门控’虽然试图过滤过热扩张，但在中证1000上并没有提纯出高分组多头。",
+    "diff_notes": "与此前 roe_persistence_gap / roe_overheat_reversal / roe_slope_bps_discipline 等版本不同，这次不再线性拼接‘高ROE + 低扩张’，而是显式加入 gating：只有当 ROE 同比改善且 BPS 扩张不过猛时，盈利加速度信号才被放大，试图更贴近论文中的‘持续型盈利改善优于外延扩张’语义。结果仍然失败，说明在只有 ROE/BPS 两个低频字段时，靠门控和非线性压缩也不足以把 profit persistence 变成5日截面 alpha。",
+    "conclusion": "淘汰",
+    "data_files": [
+      "data/factor_profit_persistence_gate_v1.csv",
+      "output/profit_persistence_gate_v1/report.json"
+    ]
+  },
+  {
     "date": "2026-10-10 10:00:00",
     "factor_id": "roe_slope_bps_discipline_v2",
     "factor_name": "ROE斜率-资本纪律因子 v2",
@@ -10020,5 +10055,47 @@
       "output/bollinger_squeeze_breakout_v1/report.json",
       "output/bollinger_squeeze_reversal_v1/report.json"
     ]
+  },
+  {
+    "date": "2026-10-10 20:00:00",
+    "factor_id": "operating_asset_expansion_quality_v1",
+    "factor_name": "经营性资产扩张质量因子 v1",
+    "status": "failed",
+    "source_type": "学术论文复现代理",
+    "source_title": "Net Operating Assets / Operating Asset Growth anomaly",
+    "source_url": "https://www.sciencedirect.com/science/article/abs/pii/S1057521911000627",
+    "source_author": "Richardson et al. / NOA anomaly literature；Papanastasopoulos (2011) balance-sheet information",
+    "source_year": 2011,
+    "source_journal": "Journal of International Financial Markets, Institutions & Money",
+    "barra_style": "Quality/Growth",
+    "description": "按 NOA/经营性资产扩张异象主线，在A股可得字段约束下，用应收占收入提升、存货占流动资产提升、现金占比下降、杠杆上升刻画经营性资产扩张惩罚，并用ROE/Gross Margin/营收增速均值作为质量锚。先复现“资产扩张越激进、未来收益越差”的论文语义，再做A股字段本土化与市值中性化。",
+    "formula": "raw = quality_anchor - operating_asset_penalty; quality_anchor = 0.38*tanh(ROE_ma4/8)+0.30*tanh(GM_ma4/18)+0.22*tanh(REV_yoy_ma2/25); penalty = 0.40*tanh(ΔAR/REV/4)+0.28*tanh(ΔINV_SHARE/6)-0.20*tanh(ΔCASH_SHARE/0.08)+0.18*tanh(ΔLEVERAGE/4); factor = neutralize(raw, log_mktcap)",
+    "original_metric": {
+      "notes": "NOA anomaly 强调净经营资产/经营性资产扩张越高，未来回报越弱；这里在缺少完整经营负债拆分时，用应收、存货、现金缓冲和杠杆变动做代理。"
+    },
+    "our_metric": {
+      "market": "中证1000",
+      "period": "2025-04-10 ~ 2026-02-13",
+      "ic_mean": -0.002851665076260239,
+      "ic_t": -0.3558503905184702,
+      "rank_ic": 0.003968463060432972,
+      "g5_sharpe": 3.2818540276731945,
+      "long_short_sharpe": 0.23097232704955642,
+      "monotonicity": 0.1,
+      "turnover_mean": 0.2267163058116648
+    },
+    "threshold_check": {
+      "ic_mean_gt_0_02": false,
+      "ic_t_gt_2": false,
+      "g5_sharpe_gt_0_8": true,
+      "monotonicity_gt_0_8": false
+    },
+    "artifacts": [
+      "calc_operating_asset_expansion_quality_v1.py",
+      "data/factor_operating_asset_expansion_quality_v1.csv",
+      "output/operating_asset_expansion_quality_v1/report.json"
+    ],
+    "failure_reason": "组合绝对收益不差，但几乎所有分组都涨得差不多，导致横截面区分能力失效：IC为负且不显著，单调性仅0.1，多空Sharpe仅0.23。说明‘质量锚 + 经营资产扩张惩罚’这个代理在当前字段下更像慢变量风格暴露，不足以形成5日截面alpha。",
+    "next_step": "若继续沿论文主线，应补充更完整的经营负债/净经营资产字段，或将该慢变量只作为风险过滤器，与更快的盈利拐点因子做交互，而不是单独入库。"
   }
 ]
