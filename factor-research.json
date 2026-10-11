@@ -1,5 +1,41 @@
 [
   {
+    "date": "2026-10-11 20:00:00",
+    "factor_id": "sustainable_growth_quality_v1",
+    "factor_name": "可持续增长质量因子 v1",
+    "status": "failed",
+    "source_type": "论文脉络复现+本土化代理",
+    "source_title": "Sustainable Growth, Internal Financing, and Cross-Sectional Stock Returns",
+    "source_url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6909918",
+    "source_author": "SSRN / weekend paper mining",
+    "source_year": 2026,
+    "source_journal": "SSRN working paper",
+    "barra_style": "Quality / Growth",
+    "description": "周末论文复现脉络选择“可持续增长/内生融资增长”方向，试图填补 Quality/Growth 空白。基于现有财务字段，用留存收益增长、现金增长、ROE加速度、ROA同比改善、毛利率趋势、营收同比加速度共同刻画 internally financed growth，再用应收占比恶化、杠杆抬升、流动性缺口恶化做质量约束；财报按披露日映射到日频，并对收盘价×成交额/换手率构造的市值代理做横截面 OLS 中性化。",
+    "formula": "raw = 0.26*tanh(retained_profit_yoy_log/0.22) + 0.16*tanh(cash_yoy_log/0.20) + 0.20*tanh(roe_qoq/1.8) + 0.14*tanh(roa_yoy_level/1.2) + 0.14*tanh(gross_margin_yoy_level/4.5) + 0.10*tanh(revenue_yoy_accel/12.0) + 0.10*tanh(inventory_turnover_yoy/1.6) - 0.16*tanh(ar_to_revenue_yoy/4.0) - 0.14*tanh(debt_assets_yoy/4.0) + 0.08*tanh(-liquidity_gap_yoy/0.12); factor = neutralize(raw, log_mktcap_proxy)",
+    "our_metric": {
+      "market": "中证1000",
+      "period": "2025-04-10 ~ 2026-02-13",
+      "ic_mean": 0.028824077664143057,
+      "ic_t": 2.7692625855761417,
+      "rank_ic": 0.020676755555014775,
+      "g5_sharpe": 4.272229137393405,
+      "long_short_sharpe": 1.5652556419509078,
+      "monotonicity": 0.5,
+      "turnover_mean": 0.2418950067336579,
+      "max_abs_corr_existing": 0.42540575523545887,
+      "closest_existing_factor": "roe_bps_inflect_quality_v1"
+    },
+    "failure_reason": "虽然 IC均值0.0288、IC_t=2.77、G5 Sharpe=4.27、多空Sharpe=1.57 都明显过线，但分组收益呈 G1=49.9%、G2=51.6%、G3=40.0%、G4=50.7%、G5=73.1%，只有顶部 G5 很强，中间排序紊乱，单调性仅0.5，未达到入库门槛 0.8。说明该信号更像“挑出极少数高质量可持续增长赢家”的尖峰因子，而不是稳定的五分组截面排序器。",
+    "diff_notes": "和此前 roe_persistence_gap / profitability_accel_stability / operating_asset_expansion_quality 一路不同，这一版不再围绕单一 ROE/BPS 持续性，而是显式强调“内生增长是否由留存收益和现金支撑”，并把应收膨胀、杠杆上升作为可持续性惩罚，更贴近 sustainable growth literature 的财务逻辑。和现有因子最高相关仅 0.43（roe_bps_inflect_quality_v1），不是冗余问题；真正问题在于它只把尾部赢家挑得很准，但不能把 1~5 档连续排顺。后续若继续挖，优先尝试 gating/threshold 版本（例如仅在 retained_growth 和 cash_growth 同时为正时放大盈利趋势），而不是继续线性加权。",
+    "conclusion": "淘汰",
+    "data_files": [
+      "data/factor_sustainable_growth_quality_v1.csv",
+      "output/sustainable_growth_quality_v1/report.json",
+      "calc_sustainable_growth_quality_v1.py"
+    ]
+  },
+  {
     "date": "2026-10-10 15:00:00",
     "factor_id": "profit_persistence_gate_v1",
     "factor_name": "盈利持续性门控因子 v1",
