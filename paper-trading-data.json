@@ -6,7 +6,7 @@
     "benchmark": "000300",
     "benchmark_name": "沪深300",
     "created_at": "2026-02-23 22:14:25",
-    "updated_at": "2026-10-12 08:32:05",
+    "updated_at": "2026-10-12 09:04:16",
     "status": "active",
     "players_count": 6
   },
@@ -11225,13 +11225,6 @@
       ],
       "decisions": [
         {
-          "date": "2026-07-10",
-          "action": "hold",
-          "summary": "因子扫描：vol_ret_persist_v1 未达标，不入库",
-          "detail": "完成数据刷新、研报/论文扫描后，选取量价共振持续性因子 vol_ret_persist_v1（日线本土化复现）测试。回测结果：IC均值0.0055，t值1.06，Sharpe0.7008，单调性0.7，均未达到入库门槛(IC>0.02, t>2, Sharpe>0.8, 单调性>0.8)。判断主因是原始研报依赖高频量价/订单流信息，日线代理损失较大，且与现有 vol_ret_align_v1 / vssignal_v1 存在主线重合。已记录到 factor-research.json，本次不入库。",
-          "recommendation": "继续观察高频量价低频化方向，后续优先找与已有量价因子低相关的资金流/股东/大宗交易信号。"
-        },
-        {
           "date": "2026-07-13",
           "action": "rebalance",
           "summary": "LightGBM weekly rebalance",
@@ -11437,6 +11430,13 @@
           "summary": "因子扫描：尾盘异动反转 v1 复现未达标",
           "detail": "数据已更新至2026-10-08。尝试复现大单资金流方向因子时，build_major_flow_dir_v2 进程被系统kill(137)；改用日频近似脚本 calc_tail_flow_reversal_v1.py 做本土化验证。结果：IC均值0.0115，t值0.917，Sharpe 1.080，单调性1.000，未达到入库门槛（IC>0.02, t>2.0）。判断尾盘异动代理信息损失较大，今日不新增因子。",
           "recommendation": "不交易，仅记录本次因子扫描结果"
+        },
+        {
+          "date": "2026-10-12",
+          "action": "hold",
+          "summary": "因子扫描：隔夜波动率候选未入库",
+          "detail": "数据刷新后最新K线仍停在2026-10-09。扫描到广发金工月报 ret_overnight 脉络，复现 20日隔夜收益标准差并做市值/成交额中性化。回测结果 IC=0.0315, t=2.38, Sharpe=1.48, 单调性=0.80。因与原文分钟因子定义偏离较大，且单调性仅卡阈值，决定不入库，仅记录研究日志。",
+          "recommendation": "继续寻找定义更贴近原文且单调性更干净的隔夜/竞价因子"
         }
       ],
       "rebalances": [
