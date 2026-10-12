@@ -10168,5 +10168,33 @@
     },
     "diff_notes": "原研报披露的是分钟因子 ret_overnight 的 RankIC 表现，我们这里无法直接复刻分钟级定义，只能用日线可得的 20日隔夜收益标准差做同主题本土化代理。结果 IC/t/Sharpe 都过线，但单调性只有 0.8，恰好卡阈值，且分组收益呈 G2/G4/G5 接近、G3 偏弱，不够干净；同时它更像“隔夜不确定性风险”而非原文的 overnight return alpha，定义差异较大。",
     "conclusion": "不入库（边缘通过但复现偏离原文定义，且单调性仅卡线）"
+  },
+  {
+    "date": "2026-10-12 15:42:14",
+    "factor_id": "roe_bps_smooth_growth_v1",
+    "factor_name": "ROE-BPS平滑成长因子 v1",
+    "status": "failed",
+    "source_type": "自研+基本面文献脉络",
+    "source_title": "ROE trend / BPS growth smoothness proxy",
+    "source_url": "",
+    "source_author": "factor-mining-afternoon cron",
+    "source_year": 2026,
+    "source_journal": "internal research",
+    "barra_style": "Growth",
+    "description": "用最近财报的BPS两季扩张与ROE变动平滑度构造成长质量代理，再映射到日频并对市值代理做横截面OLS中性化。目标是填补Growth/Quality空白，避免与已有纯量价因子重复。",
+    "formula": "raw = 0.6*tanh(log(bps/bps_lag2)/0.15) + 0.4*tanh(-std(roe_delta,3)/1.5); factor = neutralize(raw, log_mktcap_proxy)",
+    "data_inputs": "data/csi1000_fundamental_cache.csv + data/csi1000_kline_raw.csv",
+    "factor_csv": "data/factor_roe_bps_smooth_growth_v1.csv",
+    "backtest_output": "output/roe_bps_smooth_growth_v1/",
+    "metrics": {
+      "ic_mean": 0.0043,
+      "ic_t": 0.88,
+      "g5_sharpe": 0.728,
+      "long_short_sharpe": 0.4122,
+      "monotonicity": 0.5,
+      "turnover_mean": 0.0592
+    },
+    "failure_reason": "基本面信号更新频率太低，映射到周频调仓后截面区分度不足；G1-G5收益差距小且非单调，IC与t值均远低于门槛。日频价格噪音对低频财报信号稀释明显。",
+    "next_step": "后续可尝试加入更多基本面字段（毛利率、资产周转率、营收增速）或改成事件驱动披露窗口因子，而不是仅靠ROE/BPS两字段。"
   }
 ]
