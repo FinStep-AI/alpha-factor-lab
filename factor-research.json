@@ -10133,5 +10133,40 @@
     ],
     "failure_reason": "组合绝对收益不差，但几乎所有分组都涨得差不多，导致横截面区分能力失效：IC为负且不显著，单调性仅0.1，多空Sharpe仅0.23。说明‘质量锚 + 经营资产扩张惩罚’这个代理在当前字段下更像慢变量风格暴露，不足以形成5日截面alpha。",
     "next_step": "若继续沿论文主线，应补充更完整的经营负债/净经营资产字段，或将该慢变量只作为风险过滤器，与更快的盈利拐点因子做交互，而不是单独入库。"
+  },
+  {
+    "date": "2026-10-12 09:00:00",
+    "factor_id": "overnight_std20d_v1",
+    "factor_name": "20日隔夜波动率因子 v1",
+    "status": "failed",
+    "source_type": "研报复现+本土化",
+    "source_title": "广发金工《Alpha因子跟踪月报（2026年5月）》中 ret_overnight 脉络扩展",
+    "source_url": "https://finance.sina.com.cn/wm/2026-06-03/doc-iniactak2313454.shtml",
+    "source_author": "广发金融工程研究",
+    "source_year": 2026,
+    "source_journal": "金工月报",
+    "barra_style": "Volatility",
+    "description": "严格复现候选选择隔夜维度的波动率版本：对每只股票计算最近20日 overnight return 标准差，按横截面用 log(amount) 做 OLS 中性化，再做稳健标准化输出因子值。逻辑是隔夜信息到达越不稳定，后续风险补偿/信息扩散效应可能越强。",
+    "formula": "factor = neutralize(std(open/prev_close-1, 20d), log_amount)",
+    "original_metric": {
+      "market": "全市场/中证1000（研报披露口径）",
+      "factor": "ret_overnight",
+      "recent_1m_rankic": 0.121,
+      "recent_1y_rankic": 0.0381,
+      "since_inception_rankic": 0.0323,
+      "win_rate": 0.7233
+    },
+    "our_metric": {
+      "market": "中证1000",
+      "period": "2022-10-31 ~ 2026-06-10",
+      "ic_mean": 0.03148948150393877,
+      "ic_t": 2.3846793253219016,
+      "rank_ic": 0.014300289138859671,
+      "long_short_sharpe": 1.4820535911407846,
+      "monotonicity": 0.8,
+      "turnover_mean": 0.7094340142021288
+    },
+    "diff_notes": "原研报披露的是分钟因子 ret_overnight 的 RankIC 表现，我们这里无法直接复刻分钟级定义，只能用日线可得的 20日隔夜收益标准差做同主题本土化代理。结果 IC/t/Sharpe 都过线，但单调性只有 0.8，恰好卡阈值，且分组收益呈 G2/G4/G5 接近、G3 偏弱，不够干净；同时它更像“隔夜不确定性风险”而非原文的 overnight return alpha，定义差异较大。",
+    "conclusion": "不入库（边缘通过但复现偏离原文定义，且单调性仅卡线）"
   }
 ]
