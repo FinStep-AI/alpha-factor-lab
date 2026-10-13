@@ -6,7 +6,7 @@
     "benchmark": "000300",
     "benchmark_name": "沪深300",
     "created_at": "2026-02-23 22:14:25",
-    "updated_at": "2026-10-13 08:31:31",
+    "updated_at": "2026-10-13 09:03:41",
     "status": "active",
     "players_count": 6
   },
@@ -11228,14 +11228,6 @@
       ],
       "decisions": [
         {
-          "date": "2026-07-13",
-          "action": "rebalance",
-          "summary": "LightGBM weekly rebalance",
-          "detail": "2026-07-13 周一调仓：feature_engine --refresh 成功，最新特征日期停在 2026-05-25；ml_stock_selector 直接预测因 201/97 特征不匹配失败，回退到 lgbm_v1 已训练97特征子集生成TOP30。风控 full-check 剔除 300666.SZ（电子行业超配 26.7%>25%），最终取前25只执行等权调仓。候选含 300634.SZ,688726.SH,603919.SH,300755.SZ,000813.SZ 等。",
-          "recommendation": "调仓",
-          "exec_summary": "成功0笔，失败0笔"
-        },
-        {
           "date": "2026-07-14",
           "action": "hold",
           "summary": "因子扫描：成交额集中度不对称方向未通过验证",
@@ -11440,6 +11432,13 @@
           "summary": "因子扫描：隔夜波动率候选未入库",
           "detail": "数据刷新后最新K线仍停在2026-10-09。扫描到广发金工月报 ret_overnight 脉络，复现 20日隔夜收益标准差并做市值/成交额中性化。回测结果 IC=0.0315, t=2.38, Sharpe=1.48, 单调性=0.80。因与原文分钟因子定义偏离较大，且单调性仅卡阈值，决定不入库，仅记录研究日志。",
           "recommendation": "继续寻找定义更贴近原文且单调性更干净的隔夜/竞价因子"
+        },
+        {
+          "date": "2026-10-13",
+          "action": "hold",
+          "summary": "完成日度因子扫描，新增候选 auction_failure_v1 未达标，维持现有因子库不变",
+          "detail": "数据刷新确认本地CSI1000 K线最新至2026-10-12。今日扫描中文金工与英文论文后，选择微观结构方向‘集合竞价失败压力（auction failure / gap fill pressure）’做首版复现：raw=-sign(gap_ret)*intraday_ret*(1+clip(20*abs(gap_ret),0,2))，20日均值并对log_amount_20d做截面OLS中性化。回测区间2022-10-31~2026-06-03，IC均值-0.0134，t=-1.43，Sharpe=-0.4461，单调性-0.4，未达到IC>0.02、t>2、Sharpe>0.8、单调性>0.8门槛。判断该构造在中证1000上失效，今日不入库、不调仓，保留现有主力因子。",
+          "recommendation": "继续使用现有已验证因子；后续可拆分正跳空失败与负跳空修复子信号再研究"
         }
       ],
       "rebalances": [
