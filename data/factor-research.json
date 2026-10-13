@@ -202,5 +202,35 @@
       "factor_csv": "data/factor_roe_improve_stability_v1.csv",
       "report": "output/roe_improve_stability_v1/report.json"
     }
+  },
+  {
+    "date": "2026-10-13 09:03:39",
+    "factor_id": "auction_failure_v1",
+    "factor_name": "集合竞价失败压力因子 v1",
+    "status": "failed",
+    "source_type": "研报脉络复现+本土化",
+    "source_title": "集合竞价跳空失败 / gap fill pressure",
+    "source_url": "https://www.wolai.com/ustfinance/mPoBv5VDZHVhym5Y41yPMB",
+    "source_author": "quant-factor-scan cron",
+    "source_year": 2026,
+    "source_journal": "broker microstructure idea",
+    "barra_style": "微观结构",
+    "description": "用 -sign(open/prev_close-1) * intraday_ret 度量开盘跳空方向在日内是否被吞没，并以跳空幅度加权；20日均值后对20日成交额对数做截面OLS中性化。",
+    "formula": "raw=-sign(gap_ret)*intraday_ret*(1+clip(20*abs(gap_ret),0,2)); factor=neutralize(MA20(raw), log_amount_20d)",
+    "data_inputs": "data/csi1000_kline_raw.csv + data/csi1000_returns.csv",
+    "factor_csv": "data/factor_auction_failure_v1.csv",
+    "backtest_output": "output/auction_failure_v1/",
+    "original_metric": {
+      "hypothesis": "开盘跳空若被日内回补，说明竞价信息失败，后续应偏弱；反之偏强",
+      "expected_direction": "negative for failure pressure / positive if取反作为auction efficiency"
+    },
+    "our_metric": {
+      "ic_mean": -0.0134,
+      "ic_t": -1.43,
+      "sharpe": -0.4461,
+      "monotonicity": -0.4
+    },
+    "diff_notes": "在中证1000上，当前构造不是正向alpha，反而显示高失败压力对应更弱后续收益，且分层不单调。可能原因：gap fill在小盘股中更多反映短线过度波动和次日修复，而不是20日维度的持续信息；另一个可能是需要区分正跳空失败与负跳空修复两个子信号，不能简单对称合并。",
+    "conclusion": "rejected"
   }
 ]
