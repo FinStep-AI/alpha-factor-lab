@@ -10196,5 +10196,65 @@
     },
     "failure_reason": "基本面信号更新频率太低，映射到周频调仓后截面区分度不足；G1-G5收益差距小且非单调，IC与t值均远低于门槛。日频价格噪音对低频财报信号稀释明显。",
     "next_step": "后续可尝试加入更多基本面字段（毛利率、资产周转率、营收增速）或改成事件驱动披露窗口因子，而不是仅靠ROE/BPS两字段。"
+  },
+  {
+    "date": "2026-10-13 09:03:39",
+    "factor_id": "auction_failure_v1",
+    "factor_name": "集合竞价失败压力因子 v1",
+    "status": "failed",
+    "source_type": "研报脉络复现+本土化",
+    "source_title": "集合竞价跳空失败 / gap fill pressure",
+    "source_url": "https://www.wolai.com/ustfinance/mPoBv5VDZHVhym5Y41yPMB",
+    "source_author": "quant-factor-scan cron",
+    "source_year": 2026,
+    "source_journal": "broker microstructure idea",
+    "barra_style": "微观结构",
+    "description": "用 -sign(open/prev_close-1) * intraday_ret 度量开盘跳空方向在日内是否被吞没，并以跳空幅度加权；20日均值后对20日成交额对数做截面OLS中性化。",
+    "formula": "raw=-sign(gap_ret)*intraday_ret*(1+clip(20*abs(gap_ret),0,2)); factor=neutralize(MA20(raw), log_amount_20d)",
+    "data_inputs": "data/csi1000_kline_raw.csv + data/csi1000_returns.csv",
+    "factor_csv": "data/factor_auction_failure_v1.csv",
+    "backtest_output": "output/auction_failure_v1/",
+    "original_metric": {
+      "hypothesis": "开盘跳空若被日内回补，说明竞价信息失败，后续应偏弱；反之偏强",
+      "expected_direction": "negative for failure pressure / positive if取反作为auction efficiency"
+    },
+    "our_metric": {
+      "ic_mean": -0.0134,
+      "ic_t": -1.43,
+      "sharpe": -0.4461,
+      "monotonicity": -0.4
+    },
+    "diff_notes": "在中证1000上，当前构造不是正向alpha，反而显示高失败压力对应更弱后续收益，且分层不单调。可能原因：gap fill在小盘股中更多反映短线过度波动和次日修复，而不是20日维度的持续信息；另一个可能是需要区分正跳空失败与负跳空修复两个子信号，不能简单对称合并。",
+    "conclusion": "rejected"
+  },
+  {
+    "date": "2026-10-13 12:04:20",
+    "factor_id": "gross_margin_asset_turnover_sync_growth_v1",
+    "factor_name": "毛利率-资产周转同步成长因子 v1",
+    "status": "failed",
+    "source_type": "经典质量成长框架本土化代理",
+    "source_title": "Piotroski风格：毛利率变化 + 资产周转率变化 协同改善",
+    "source_url": "http://pdf.dfcfw.com/pdf/H3_AP201907021337021980_1.pdf",
+    "source_author": "factor-mining-noon cron",
+    "source_year": 2019,
+    "source_journal": "A股基本面因子脉络 / quality-growth heuristic",
+    "barra_style": "Growth",
+    "description": "在仅有 roe/bps 基础字段下，以 log(1+bps) 代理毛利率、roe/bps 代理资产周转率，构造毛利率改善与资产周转改善的同步项，并叠加 ROE 同比/环比确认、资本扩张约束和市值中性化。",
+    "formula": "raw=(0.16*gm_yoy+0.14*at_yoy+0.14*gm_accel+0.12*at_accel+0.26*(gm_yoy*at_yoy)+0.08*(gm_accel*at_accel)+0.10*roe_confirm)*stability*capital_guard*quality_gate; factor=neutralize(raw, log_mktcap, amp20)",
+    "data_inputs": "data/csi1000_fundamental_cache.csv + data/csi1000_kline_raw.csv + data/csi1000_returns.csv",
+    "factor_csv": "data/factor_gross_margin_asset_turnover_sync_growth_v1.csv",
+    "backtest_output": "output/gross_margin_asset_turnover_sync_growth_v1/",
+    "original_metric": {
+      "hypothesis": "毛利率与资产周转率若同步改善且 ROE 提供确认，说明经营质量与成长效率共振，未来1周应有更强超额收益",
+      "expected_direction": "positive"
+    },
+    "our_metric": {
+      "ic_mean": 0.0192,
+      "ic_t": 3.7857,
+      "sharpe": 0.892,
+      "monotonicity": 1.0
+    },
+    "diff_notes": "表现非常接近入库线：IC_t、G5 Sharpe、单调性均达标，但 IC 均值仅 0.0192，略低于 0.02 硬门槛。说明该方向有效，但当前 bps/roe 代理对“毛利率”和“资产周转率”的刻画仍偏粗糙，同步项更多抓到中期质量成长截面，而非更强的5日阿尔法。下一步可尝试接入真实营收/资产/毛利率字段，或拆分为“同步改善”和“加速度确认”两个子因子再做组合。",
+    "conclusion": "rejected"
   }
 ]
