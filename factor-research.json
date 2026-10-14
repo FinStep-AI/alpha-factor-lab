@@ -10256,5 +10256,107 @@
     },
     "diff_notes": "表现非常接近入库线：IC_t、G5 Sharpe、单调性均达标，但 IC 均值仅 0.0192，略低于 0.02 硬门槛。说明该方向有效，但当前 bps/roe 代理对“毛利率”和“资产周转率”的刻画仍偏粗糙，同步项更多抓到中期质量成长截面，而非更强的5日阿尔法。下一步可尝试接入真实营收/资产/毛利率字段，或拆分为“同步改善”和“加速度确认”两个子因子再做组合。",
     "conclusion": "rejected"
+  },
+  {
+    "date": "2026-10-13 15:37:00",
+    "factor_id": "dupont_efficiency_proxy_v1",
+    "factor_name": "杜邦效率代理因子 v1",
+    "status": "failed",
+    "source_type": "研究启发+本土化代理",
+    "source_title": "毛利率趋势 / 资产周转率变化 / 杜邦效率 拆解思路（在低维财务字段下的代理实现）",
+    "source_url": "http://pdf.dfcfw.com/pdf/H3_AP201907021337021980_1.pdf",
+    "source_author": "日报检索 + 自研",
+    "source_year": 2019,
+    "source_journal": "金工因子研究脉络",
+    "barra_style": "Quality / Growth",
+    "description": "尝试沿着“毛利率趋势+资产周转率变化→杜邦效率改善”主线，在仅有 BPS/ROE 日历化财务缓存和日线量价数据约束下做本土化代理。核心用 ROE 同比/环比改善表征盈利效率提升，用 BPS 同比/环比扩张惩罚约束外延式资本膨胀，再叠加日内效率、20日波动率、20日振幅和5日过热惩罚做价格端确认；财报按45天滞后映射到日频，并对 amount/turnover 构造的市值代理做横截面 OLS 中性化。",
+    "formula": "raw = [0.50*tanh(roe_yoy/4)+0.25*tanh(roe_qoq/2)-0.30*tanh(bps_yoy/0.20)-0.10*tanh(bps_qoq/0.08)] + 0.15*tanh(intraday_eff_10/0.25) - 0.12*tanh(vol_20/0.04) - 0.08*tanh(amp_20/6) - 0.10*tanh(ret_5d/0.12); factor = neutralize(raw, log(amount/turnover))",
+    "our_metric": {
+      "market": "中证1000",
+      "period": "2023-08-14 ~ 2026-02-13",
+      "ic_mean": 0.028532907349936625,
+      "ic_t": 3.8180809902868944,
+      "rank_ic": 0.03501681480301835,
+      "g5_sharpe": 1.1372554165385567,
+      "long_short_sharpe": 2.5986362588157657,
+      "monotonicity": 0.9999999999999999,
+      "turnover_mean": 0.37073894185953266,
+      "max_abs_corr_existing": 0.8399014832176802,
+      "closest_existing_factor": "roe_improve_capital_efficiency_v2"
+    },
+    "failure_reason": "绩效本身明显达标：IC均值0.0285、IC_t=3.82、G5 Sharpe=1.14、单调性1.0、多空Sharpe=2.60，但与现有因子 roe_improve_capital_efficiency_v2 的Spearman相关高达0.84，且与 roe_delta_yoy_v1 / roe_bps_inflect_quality_v1 相关也分别达到0.77 / 0.74，已超过 >0.7 的冗余阈值。说明这版虽然包装成“杜邦效率代理”，本质仍主要在提取 ROE 改善 + 资本扩张约束 这条已有主轴，不满足新增入库要求。",
+    "diff_notes": "相比 gross_margin_trend_proxy_v1 或近几版 roe_slope/roe_persistence 系列，这一版额外加入了 intraday_eff_10、20日波动率、20日振幅、5日过热惩罚，目的是把“财务改善”与“价格低噪声确认”绑在一起，回测上也确实把分组拉得更顺，单调性直接做到1.0。但相关性结果说明新增的价格端修饰主要只是提高了已有质量成长轴的排序纯度，没有创造出独立的新维度 alpha。后续若继续挖 Quality/Growth，应该跳出 ROE/BPS 主轴，转向现金流质量、营运资本收缩、利润兑现率、应收/存货消化等与现有库更低相关的维度。",
+    "conclusion": "淘汰（非因子质量问题，而是与现有库高度冗余）",
+    "data_files": [
+      "data/factor_dupont_efficiency_proxy_v1.csv",
+      "output/dupont_efficiency_proxy_v1/report.json",
+      "calc_dupont_efficiency_proxy_v1.py"
+    ]
+  },
+  {
+    "date": "2026-10-14",
+    "factor_id": "vol_cluster_v1",
+    "factor_name": "波动率持续性 v1",
+    "status": "failed",
+    "source_type": "研报启发+学术概念复现",
+    "source_title": "国盛证券《异动雷达事件簇》启发 + Volatility Clustering",
+    "source_url": "https://www.fxbaogao.com/detail/5296242",
+    "source_author": "国盛证券 / Engle volatility clustering literature",
+    "source_year": "2026",
+    "source_journal": "sell-side research",
+    "barra_style": "Volatility",
+    "description": "以20日滚动 |ret|^2 的lag-1自相关刻画异动/波动聚簇，尝试用日线近似事件簇密度。",
+    "formula": "autocorr_1(|ret|^2, 20d), then neutralize(market_cap proxy)",
+    "original_metric": {
+      "paper_claim": "异动事件簇可挖掘与众不同个股；原文未给出公开统一IC阈值"
+    },
+    "our_metric": {
+      "ic_mean": -0.006301631454495897,
+      "ic_t": -0.8300765567210411,
+      "long_short_sharpe": -0.5618815135828297,
+      "monotonicity": -0.5,
+      "turnover_mean": 0.7935860055570279
+    },
+    "failure_reason": "核心指标全未达标，且分组收益非单调，G3最好而非高聚簇组。",
+    "diff_notes": "研报中的“异动雷达事件簇”更依赖细粒度事件定义与事件簇识别；仅用日线 |ret|^2 自相关替代，信息损失大。另A股中证1000上波动聚簇更像噪声/风险，不形成稳定截面alpha。原脚本中性化阶段还暴露 shape mismatch bug，虽不影响已有因子文件回测结论，但需后续修复。",
+    "conclusion": "不入库。后续若继续做该方向，应改为“异常量价事件发生频次/连续性/方向一致性”而非纯波动聚簇。",
+    "data_files": [
+      "data/factor_vol_cluster_v1.csv",
+      "output/vol_cluster_v1/backtest_report.json"
+    ]
+  },
+  {
+    "date": "2026-10-14",
+    "factor_id": "asset_turnover_proxy_growth_v1",
+    "factor_name": "资产周转率变化代理因子 v1",
+    "status": "failed",
+    "source_type": "研报启发+基本面代理构造",
+    "source_title": "成长/质量因子中 ROE 增长率、资本周转率思路的日线化代理实现",
+    "source_url": "http://pdf.dfcfw.com/pdf/H3_AP201907021337021980_1.pdf",
+    "source_author": "东方财富证券研报启发",
+    "source_year": "2019",
+    "source_journal": "sell-side research",
+    "barra_style": "Growth",
+    "description": "基于季度基本面 cache，用 ROE 同比改善、ROE 改善加速度、BPS 同比扩张以及二者缺口惩罚，构造资本效率改善代理；财报后45天映射到日频，并对20日平均成交额对数做市值中性化。",
+    "formula": "raw = 0.55*z(roe_yoy) + 0.25*z(roe_accel) + 0.20*z(bps_yoy) - 0.20*z(abs(bps_yoy - roe_yoy/100)); factor = zscore(residual(raw ~ log_amount_20d))",
+    "original_metric": {
+      "paper_claim": "盈利/成长类指标如 ROE 增长率、毛利率增长率在部分阶段具备选股有效性"
+    },
+    "our_metric": {
+      "ic_mean": 0.019269117467071467,
+      "ic_t": 3.0992496232442366,
+      "g5_sharpe": 0.6413768147808337,
+      "long_short_sharpe": 1.1388233775653531,
+      "monotonicity": 0.7,
+      "turnover_mean": 0.1802372902601702
+    },
+    "failure_reason": "IC均值略低于 0.02，且 G5 Sharpe=0.64、单调性=0.70 均未达门槛；虽然多空 Sharpe 较好，但高分组收益不够稳定。",
+    "diff_notes": "季度基本面映射到日频后，信号刷新频率低，表现更像慢变量；中间组收益高于预期，说明组合中混入了“稳健改善”与“低效扩表”两类公司，当前 gap penalty 约束还不够强。若继续迭代，可加入营业收入/总资产或毛利率真实字段，而不是仅靠 ROE/BPS 代理。",
+    "conclusion": "本轮淘汰，不入库。保留脚本与结果，后续在拿到更丰富基本面字段后重做 Quality/Growth 方向。",
+    "data_files": [
+      "data/factor_asset_turnover_proxy_growth_v1.csv",
+      "output/asset_turnover_proxy_growth_v1/report.json",
+      "scripts/mine_asset_turnover_proxy_growth_v1.py"
+    ]
   }
 ]
