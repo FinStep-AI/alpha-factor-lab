@@ -10358,5 +10358,44 @@
       "output/asset_turnover_proxy_growth_v1/report.json",
       "scripts/mine_asset_turnover_proxy_growth_v1.py"
     ]
+  },
+  {
+    "id": "roe_improve_valuation_resid_v2",
+    "name": "ROE改善估值约束残差 v2",
+    "date": "2026-10-14",
+    "status": "rejected",
+    "barra_style": "Growth",
+    "source_type": "自研",
+    "theme": "基本面类/ROE变化率/估值约束",
+    "summary": "以季度ROE同比改善为核心，先对log(PB)做截面残差化，提取“ROE在改善但估值尚未充分反映”的成长残差；再对log(amount)做市值代理中性化、MAD缩尾和z-score。",
+    "formula": "factor_raw = resid_cs(roe_yoy ~ log(PB)); factor_value = neutralize_cs(factor_raw, log_amount)",
+    "data_inputs": "data/csi1000_kline_raw.csv + data/csi1000_fundamental_cache.csv + data/csi1000_returns.csv",
+    "backtest": {
+      "period": "2023-06-30 ~ 2026-10-13",
+      "forward_days": 5,
+      "rebalance_freq": 20,
+      "cost": 0.003,
+      "ic_mean": 0.03200166358816636,
+      "ic_t": 5.245710681342887,
+      "rank_ic_mean": 0.03828429779438587,
+      "long_short_sharpe": 1.0152576557806428,
+      "g5_sharpe": 0.8086642778709494,
+      "monotonicity": 1.0,
+      "turnover_mean": 0.2613833126567229
+    },
+    "decision": "淘汰",
+    "reason": "虽然IC均值、IC_t、多空Sharpe、单调性都过线，但G5 Sharpe=0.8087，仅略高于0.8边缘值；更关键的是与已有因子 roe_yoy_pb_resid_v1 的整体相关性 0.715、平均日度相关性 0.717，超过 0.7 冗余阈值，因此不入库。",
+    "redundancy_check": {
+      "against": "roe_yoy_pb_resid_v1",
+      "overall_corr": 0.7153485134971443,
+      "avg_daily_corr": 0.7173907252734046,
+      "median_daily_corr": 0.7910679990491097
+    },
+    "artifacts": {
+      "factor_csv": "data/factor_roe_improve_valuation_resid_v2.csv",
+      "calc_script": "calc_roe_improve_valuation_resid_v2.py",
+      "report": "output/roe_improve_valuation_resid_v2/report.json"
+    },
+    "next_step": "如果还想沿这个方向继续挖，建议减少与PB约束残差的重合，改做“ROE改善稳定性 × 周转/毛利率代理”的二阶变化，或者在财报映射上引入披露滞后与行业内残差化。"
   }
 ]
