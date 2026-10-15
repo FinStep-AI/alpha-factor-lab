@@ -10397,5 +10397,31 @@
       "report": "output/roe_improve_valuation_resid_v2/report.json"
     },
     "next_step": "如果还想沿这个方向继续挖，建议减少与PB约束残差的重合，改做“ROE改善稳定性 × 周转/毛利率代理”的二阶变化，或者在财报映射上引入披露滞后与行业内残差化。"
+  },
+  {
+    "date": "2026-10-15 09:00:00",
+    "factor_id": "event_radar_proxy_v1",
+    "factor_name": "异动雷达事件强度 v1",
+    "status": "passed",
+    "source_type": "中文金工研报复现+本土化代理",
+    "source_title": "国盛证券《“量价淘金”选股因子系列研究（十六）：异动雷达事件簇：寻找“与众不同”的个股》",
+    "source_url": "https://www.fxbaogao.com/detail/5296242",
+    "source_author": "国盛证券",
+    "source_year": 2026,
+    "source_journal": "金工研报",
+    "barra_style": "微观结构",
+    "description": "基于研报“异动雷达/与众不同个股”脉络，用日频可得数据构造事件强度代理：amplitude × |pct_change| / turnover，并做市值中性化。该代理捕捉大波动但换手未同步放大的异动个股。",
+    "original_metric": {
+      "paper_claim": "原文全文未直接拿到，基于标题与摘要脉络复现，无法精确提取原文IC/Sharpe数值"
+    },
+    "our_metric": {
+      "ic_mean": 0.02795129103670435,
+      "ic_t": 2.9001636303653404,
+      "long_short_sharpe": 1.472836290692494,
+      "monotonicity": 0.8999999999999998,
+      "turnover_mean": 0.7452975614365398
+    },
+    "diff_notes": "原文应基于更细粒度事件簇/异动识别，本次受限于现有日线OHLCV数据，使用“振幅×绝对收益/换手”做低频代理。效果达标，说明“异动但未充分换手确认”的个股后续存在延续/重估空间。换手74.5%，高于理想水平，后续可考虑加入滚动平滑或成交额约束。",
+    "conclusion": "passed_but_proxy"
   }
 ]

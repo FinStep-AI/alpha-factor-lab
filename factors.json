@@ -1683,7 +1683,8 @@
       "shadow_pressure_v1": "待计算",
       "neg_min_ret_10d": "待计算",
       "vssignal_v1": null,
-      "gap_range_ratio_v1": null
+      "gap_range_ratio_v1": null,
+      "event_radar_proxy_v1": -0.1724
     }
   },
   {
@@ -3306,7 +3307,8 @@
     "barra_style": "Reversal",
     "source_type": "自研",
     "source_title": "Gap Fill Reversal（跳空回补行为）",
-    "source_url": ""
+    "source_url": "",
+    "correlations": {}
   },
   {
     "id": "roe_slope_bps_stability_v1",
@@ -3818,7 +3820,8 @@
     "barra_style": "MICRO",
     "source_type": "自研",
     "source_title": "尾盘异动强度（收盘偏离日内均衡价格 × 换手率）",
-    "source_url": ""
+    "source_url": "",
+    "correlations": {}
   },
   {
     "id": "close_ramp_reversal_v1",
@@ -3867,7 +3870,8 @@
     "barra_style": "Microstructure",
     "source_type": "自研",
     "source_title": "尾盘拉抬反转（收盘位置×日内收益）",
-    "source_url": ""
+    "source_url": "",
+    "correlations": {}
   },
   {
     "id": "roe_yoy_pb_resid_v1",
@@ -3941,6 +3945,78 @@
       "roe_improve_capital_efficiency_v2": 0.533,
       "roe_bps_recovery_stability_v1": 0.386,
       "gross_margin_trend_proxy_v1": 0.222
+    }
+  },
+  {
+    "id": "event_radar_proxy_v1",
+    "name": "异动雷达事件强度 v1",
+    "name_en": "Event Radar Intensity v1",
+    "category": "量价/事件驱动",
+    "description": "基于异动雷达研报脉络构造的日频代理因子：振幅×绝对日收益/换手率，并做市值中性化。高值代表价格异动强、但换手确认不足，可能对应信息未完全扩散的“与众不同”个股。",
+    "hypothesis": "当个股出现显著价格异动，但换手放大不足时，市场对异动信息的定价尚不充分，后续20日存在超额收益。",
+    "expected_direction": "正向（高因子值=高预期收益）",
+    "factor_type": "微观结构/事件驱动",
+    "formula": "neutralize(amplitude * abs(pct_change) / turnover, market_cap)",
+    "direction": 1,
+    "stock_pool": "中证1000",
+    "period": "2022-10-11 ~ 2026-02-13",
+    "rebalance_freq": 20,
+    "forward_days": 20,
+    "cost": 0.002,
+    "rating": "★★★★ 强",
+    "nav_data": "output/event_radar_proxy_v1/cumulative_returns.json",
+    "ic_data": "output/event_radar_proxy_v1/ic_series.json",
+    "upgrade_notes": "基于2026年国盛证券“异动雷达事件簇”研报脉络做日频代理复现。虽然未获得逐笔/事件簇细节，但仅用日线量价代理已达标：IC=0.028, Sharpe=1.47, 单调性0.9。",
+    "lessons_learned": [
+      "异动类信号即使简化到日频代理，依然能在中证1000上提取显著alpha",
+      "单独用振幅或换手不如两者与绝对收益联合构造事件强度",
+      "高换手不是必须，关键是“价格异动相对换手确认不足”",
+      "换手率74.5%偏高，后续可考虑20日平滑降低交易频率"
+    ],
+    "created": "2026-10-15",
+    "updated": "2026-10-15",
+    "metrics": {
+      "ic_mean": 0.02795129103670435,
+      "ic_std": 0.06477342839617332,
+      "ic_t": 2.9001636303653404,
+      "ic_positive_ratio": 0.75,
+      "rank_ic": 0.027786819633974648,
+      "rank_ic_std": 0.08321343132591322,
+      "ir": 0.43152403275222734,
+      "ic_count": 40,
+      "long_short_sharpe": 1.472836290692494,
+      "long_short_mdd": -0.15058432165965566,
+      "monotonicity": 0.8999999999999998,
+      "group_sharpe": [
+        0.32260727608793677,
+        0.7180767111263073,
+        0.6543461927409293,
+        0.8491131545817092,
+        0.8731242617167069
+      ],
+      "group_returns_annualized": [
+        0.07474272544505345,
+        0.17724755696119976,
+        0.16668233610910166,
+        0.21819921864124914,
+        0.23111780415639904
+      ],
+      "group_mdd": [
+        -0.38428552567357455,
+        -0.32723527466582847,
+        -0.3641474910767141,
+        -0.36127432087760986,
+        -0.3696983888026816
+      ]
+    },
+    "conclusion": "新因子入库。异动雷达事件强度代理在中证1000上达标：IC=0.028(t=2.90)，多空Sharpe=1.47，单调性0.90。与已记录的振幅-换手效率因子IC相关性仅-0.17，未见冗余。适合作为微观结构/事件驱动补充因子。",
+    "barra_style": "微观结构",
+    "source_type": "研报复现+本土化代理",
+    "source_title": "国盛证券《“量价淘金”选股因子系列研究（十六）：异动雷达事件簇：寻找“与众不同”的个股》",
+    "source_url": "https://www.fxbaogao.com/detail/5296242",
+    "correlations": {
+      "event_radar_proxy_v1": 1.0,
+      "range_efficiency_v1": -0.1724
     }
   }
 ]
