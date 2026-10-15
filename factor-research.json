@@ -10459,5 +10459,43 @@
       "output/gross_margin_inflect_asset_turnover_gate_growth_v1/report.json",
       "calc_gross_margin_inflect_asset_turnover_gate_growth_v1.py"
     ]
+  },
+  {
+    "date": "2026-10-15",
+    "factor_id": "gross_margin_inflect_asset_turnover_gate_growth_v2",
+    "factor_name": "毛利率拐点-资产周转门控成长 v2",
+    "status": "rejected",
+    "barra_style": "Growth",
+    "source_type": "自研",
+    "theme": "基本面类：毛利率趋势 + 资产周转率变化",
+    "hypothesis": "毛利率改善拐点若同时伴随资产周转未恶化，代表经营质量改善已被验证；再叠加ROE确认和扩表惩罚，理论上可捕捉更稳健的成长股。",
+    "implementation": "用fundamental_cache中的roe/bps构造gross_margin_proxy=log(1+bps)、asset_turnover_proxy=roe/|bps|；计算同比/环比/拐点项，并做市值+20日振幅双中性化。财报信号自report_date+45天起向前填充80个交易日。",
+    "search_notes": "检索关键词：ROE变化率 量化因子 A股；参考了ROE稳定性、盈利质量与成长确认思路，但未直接复现外部公式。",
+    "artifacts": {
+      "factor_csv": "data/factor_gross_margin_inflect_asset_turnover_gate_growth_v2.csv",
+      "script": "calc_gross_margin_inflect_asset_turnover_gate_growth_v2.py",
+      "report": "output/gross_margin_inflect_asset_turnover_gate_growth_v2/report.json"
+    },
+    "metrics": {
+      "ic_mean": 0.017700438898714248,
+      "ic_t": 3.1871541751148427,
+      "g5_sharpe": 0.8110612094190213,
+      "monotonicity": 0.7,
+      "long_short_sharpe": 1.315799966848014,
+      "turnover_mean": 0.2901086849187195
+    },
+    "threshold_check": {
+      "ic_mean_pass": false,
+      "ic_t_pass": true,
+      "g5_sharpe_pass": true,
+      "monotonicity_pass": false
+    },
+    "redundancy_check": {
+      "max_abs_corr": 0.6638674431934067,
+      "most_similar_factor": "roe_improve_capital_efficiency_v2",
+      "redundant": false
+    },
+    "failure_reason": "信号强度和稳定性不匹配：IC_t和G5 Sharpe达标，但IC均值仅0.0177，且分组年化出现G2>G3、G4接近G2，单调性只有0.70。说明成长确认逻辑有一定alpha，但横截面排序不够线性。",
+    "next_step": "后续可尝试弱化roe_confirm权重、改进gross_margin_proxy（若拿到真实毛利率字段），或把资产周转门控改成分段惩罚以提升单调性。"
   }
 ]
