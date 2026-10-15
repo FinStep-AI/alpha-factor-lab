@@ -10423,5 +10423,41 @@
     },
     "diff_notes": "原文应基于更细粒度事件簇/异动识别，本次受限于现有日线OHLCV数据，使用“振幅×绝对收益/换手”做低频代理。效果达标，说明“异动但未充分换手确认”的个股后续存在延续/重估空间。换手74.5%，高于理想水平，后续可考虑加入滚动平滑或成交额约束。",
     "conclusion": "passed_but_proxy"
+  },
+  {
+    "date": "2026-10-15 12:01:00",
+    "factor_id": "gross_margin_inflect_asset_turnover_gate_growth_v1",
+    "factor_name": "毛利率拐点-资产周转门控成长因子 v1",
+    "status": "failed",
+    "source_type": "研报脉络本土化代理",
+    "source_title": "毛利率趋势 × 资产周转率变化（Quality/Growth）",
+    "source_url": "http://pdf.dfcfw.com/pdf/H3_AP201907021337021980_1.pdf",
+    "source_author": "东方财富证券金工研报线索 + 自研代理",
+    "source_year": 2019,
+    "source_journal": "A股多因子研究脉络",
+    "barra_style": "Quality / Growth",
+    "description": "沿着‘毛利率改善与资产周转改善共同驱动高质量成长’的基本面主线，在仅有 roe/bps 两个低频字段约束下做本土化代理：以 log(1+bps) 近似毛利率代理、roe/|bps| 近似资产周转代理，重点抓毛利率 qoq 改善相对前期的拐点（gm_inflect），并要求资产周转至少没有明显恶化；同时用 ROE 同比/环比改善做确认、用 BPS 扩张过快做资本纪律惩罚，再对市值代理和20日振幅做横截面中性化。",
+    "formula": "raw = (0.22*tanh(6*gm_yoy) + 0.28*tanh(8.5*gm_inflect) + 0.14*tanh(4.5*at_yoy) + 0.08*tanh(6*at_inflect) + 0.12*tanh((0.65*roe_yoy+0.35*roe_qoq)/5) + 0.16*tanh(14*gm_inflect*at_yoy)) * improve_gate * capital_guard * stability * quality_gate; factor = neutralize(raw, log_mktcap_proxy, amp20)",
+    "our_metric": {
+      "market": "中证1000",
+      "period": "2022-11-14 ~ 2026-02-13",
+      "ic_mean": 0.017700438898714248,
+      "ic_t": 3.1871541751148427,
+      "rank_ic": 0.021172974199886885,
+      "g5_sharpe": 0.8110612094190213,
+      "long_short_sharpe": 1.315799966848014,
+      "monotonicity": 0.7,
+      "turnover_mean": 0.2901086849187195,
+      "max_abs_corr_existing": 0.6638674431934011,
+      "closest_existing_factor": "roe_improve_capital_efficiency_v2"
+    },
+    "failure_reason": "差一点但仍不能入库：IC_t=3.19、多空Sharpe=1.32、G5 Sharpe=0.81 都过线，但 IC均值仅0.0177 低于 0.02，且五分组收益为 G1=10.6%、G2=16.3%、G3=13.6%、G4=16.0%、G5=19.9%，中间档位回落导致单调性只有 0.7，未达到 0.8 门槛。",
+    "diff_notes": "相对已有 gross_margin_trend_proxy / roe_improve_capital_efficiency / roe_bps_inflect_quality 一路，这一版不再只奖励‘盈利改善’本身，而是显式强调‘毛利率改善拐点已经出现，且资产周转未恶化’的门控逻辑，更贴近质量成长里 margin expansion + turnover discipline 的叙事。结果说明这个方向能挑出顶部赢家（G5最好），但中段排序不够顺滑；同时与 roe_improve_capital_efficiency_v2 的相关性已达 0.664，虽然没到 0.7 冗余线，但已经说明其 alpha 很大一部分仍来自既有的 ROE/资本效率谱系。后续若继续挖这一方向，更值得尝试分段阈值或尾部二分类器，而不是继续在线性/平滑加权上微调。",
+    "conclusion": "淘汰",
+    "data_files": [
+      "data/factor_gross_margin_inflect_asset_turnover_gate_growth_v1.csv",
+      "output/gross_margin_inflect_asset_turnover_gate_growth_v1/report.json",
+      "calc_gross_margin_inflect_asset_turnover_gate_growth_v1.py"
+    ]
   }
 ]
