@@ -6,7 +6,7 @@
     "benchmark": "000300",
     "benchmark_name": "沪深300",
     "created_at": "2026-02-23 22:14:25",
-    "updated_at": "2026-10-15 08:32:18",
+    "updated_at": "2026-10-15 09:08:24",
     "status": "active",
     "players_count": 6
   },
@@ -11234,13 +11234,6 @@
       ],
       "decisions": [
         {
-          "date": "2026-07-15",
-          "action": "hold",
-          "summary": "因子扫描：跳空回补强度方向复现失败，不入库",
-          "detail": "完成今日因子扫描与复现：fintool失败后已fallback到auto，CSI1000 K线更新至2026-07-14。选取“跳空回补强度”方向，按日线OHLC复现跳空后日内回补比例并做20日平滑+市值中性化。回测不达标：20日前瞻IC=-0.0094,t=-0.82,Sharpe=-0.07,单调性=-0.20；5日前瞻IC=-0.0063,t=-1.33,Sharpe=-0.42,单调性=-0.30。判断：高频订单流机制无法被日线代理充分捕捉，结果呈U型非线性，暂不入库。",
-          "recommendation": "保持持仓，继续搜索更高信息密度的微观结构/资金流因子"
-        },
-        {
           "date": "2026-07-16",
           "action": "hold",
           "summary": "今日因子扫描未发现可入库新因子",
@@ -11445,6 +11438,13 @@
           "summary": "quant日扫描：vol_cluster_v1失败，不入库",
           "detail": "完成数据刷新（fintool失败后fallback auto，K线最新到2026-10-13，满足昨日要求）。扫描中文金工与英文论文后，选取国盛异动雷达事件簇启发方向，用日线代理复现vol_cluster_v1=20日|ret|^2一阶自相关，并做市值/成交额代理中性化。统一回测结果：IC均值-0.0063，t=-0.83，Sharpe=-0.56，单调性-0.50，明显不达标。判断为日线代理无法保留事件簇细粒度信息，且该方向在中证1000更偏噪声风险而非稳定alpha。本次已写入factor-research.json，结论为不入库。",
           "recommendation": "保持持仓不变，继续搜索更贴近异常量价事件频次/方向一致性的因子方向。"
+        },
+        {
+          "date": "2026-10-15",
+          "action": "hold",
+          "summary": "新增异动雷达事件强度因子并完成入库",
+          "detail": "基于国盛证券“异动雷达事件簇”研报脉络，使用日频代理因子 amplitude*abs(pct_change)/turnover 并做市值中性化。回测结果：IC均值0.0280，t值2.90，Sharpe1.47，单调性0.90，换手74.5%。与已记录 range_efficiency_v1 的IC相关性 -0.17，未见冗余，已写入 factors.json 与 factor-research.json。",
+          "recommendation": "入库并后续观察换手优化"
         }
       ],
       "rebalances": [
