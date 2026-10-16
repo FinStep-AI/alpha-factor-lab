@@ -10497,5 +10497,65 @@
     },
     "failure_reason": "信号强度和稳定性不匹配：IC_t和G5 Sharpe达标，但IC均值仅0.0177，且分组年化出现G2>G3、G4接近G2，单调性只有0.70。说明成长确认逻辑有一定alpha，但横截面排序不够线性。",
     "next_step": "后续可尝试弱化roe_confirm权重、改进gross_margin_proxy（若拿到真实毛利率字段），或把资产周转门控改成分段惩罚以提升单调性。"
+  },
+  {
+    "date": "2026-10-16",
+    "factor_id": "event_cluster_breakout_v1",
+    "factor_name": "异动雷达事件簇突破因子 v1",
+    "status": "rejected",
+    "barra_style": "微观结构",
+    "source_type": "研报复现",
+    "source_title": "国盛证券《“量价淘金”选股因子系列研究（十六）：异动雷达事件簇：寻找“与众不同”的个股》",
+    "source_url": "https://www.fxbaogao.com/detail/5296242",
+    "original_metric": {
+      "paper_claim": "事件簇/异动雷达可从时序异动中提取截面选股信号，原文页面未披露可直接核对的IC/Sharpe数值",
+      "formula": "20日内统计“接近20日新高且成交额异常放大(abn_amt>=1.5)”事件，事件收益求和后除以sqrt(事件数)"
+    },
+    "our_metric": {
+      "ic_mean": -0.015638338626190205,
+      "ic_t": -0.658517405324133,
+      "long_short_sharpe": 0.0029446883844159518,
+      "monotonicity": -0.09999999999999999,
+      "turnover_mean": 0.9409077723259873
+    },
+    "diff_notes": "严格按“事件簇”思路在仅有日线OHLCV条件下做本土化复现：用20日新高+成交额放大代理异动事件，并做市值中性化。由于缺少逐笔/日内行为数据，信号被压缩成简单突破放量代理，信息含量明显弱于原文设想。回测中IC为负、分组不单调且换手极高。",
+    "conclusion": "不入库",
+    "artifacts": {
+      "factor_csv": "data/event_cluster_breakout_v1.csv",
+      "raw_factor_csv": "data/event_cluster_breakout_raw_v1.csv",
+      "report": "output/event_cluster_breakout_v1/backtest_report.json"
+    }
+  },
+  {
+    "date": "2026-10-16",
+    "factor_id": "asset_turnover_reaccel_capdisc_growth_v1",
+    "factor_name": "资产周转率重加速-资本纪律成长因子 v1",
+    "status": "rejected",
+    "barra_style": "Growth",
+    "source_type": "搜索启发/自构",
+    "source_title": "资产周转率变动因子十年回测（杜邦营运能力视角）+ 本地ROE/BPS代理改造",
+    "source_url": "https://finance.sina.com.cn/roll/2026-09-18/doc-inisfyex3528875.shtml",
+    "original_metric": {
+      "paper_claim": "资产周转率TTM同比变动可刻画ROE引擎中的营运能力改善，适合作为成长/质量维度选股线索",
+      "formula": "以 asset_turnover_proxy = ROE / |BPS| 近似资产周转率，构造同比改善 at_yoy 与同比重加速 at_reaccel，并叠加 ROE 改善确认、资本扩张约束与稳定性惩罚；截面做市值中性化"
+    },
+    "our_metric": {
+      "ic_mean": 0.019087373770233295,
+      "ic_t": 3.5677869412021748,
+      "long_short_sharpe": 1.4512996819335335,
+      "g5_sharpe": 0.9733308322380928,
+      "monotonicity": 0.9999999999999999,
+      "turnover_mean": 0.24817879562965303
+    },
+    "diff_notes": "受限于当前基本面缓存仅含 roe/bps，无法直接计算真实资产周转率或毛利率，故采用杜邦近似中的 ROE/BPS 代理。该版本在市值中性化后呈现极佳分层单调性和显著 IC t 值，但 IC 均值仅 0.0191，略低于入库阈值 0.02；进一步强化重加速与资本约束的 v2 版本反而恶化，说明当前数据口径下信号已接近上限。",
+    "conclusion": "不入库",
+    "failure_reason": "未满足硬门槛：IC均值 0.0191 < 0.02。虽其余指标达标，但按规则仍淘汰。后续若补充更完整财务字段（收入/总资产/毛利率）可再做真资产周转率/杜邦拆解版本。",
+    "artifacts": {
+      "factor_csv": "data/factor_asset_turnover_reaccel_capdisc_growth_v1.csv",
+      "alt_factor_csv": "data/factor_asset_turnover_reaccel_capdisc_growth_v2.csv",
+      "report": "output/asset_turnover_reaccel_capdisc_growth_v1/report.json",
+      "alt_report": "output/asset_turnover_reaccel_capdisc_growth_v2/report.json",
+      "calc_script": "calc_asset_turnover_reaccel_capdisc_growth_v1.py"
+    }
   }
 ]
