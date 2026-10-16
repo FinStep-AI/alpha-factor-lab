@@ -10557,5 +10557,35 @@
       "alt_report": "output/asset_turnover_reaccel_capdisc_growth_v2/report.json",
       "calc_script": "calc_asset_turnover_reaccel_capdisc_growth_v1.py"
     }
+  },
+  {
+    "date": "2026-10-16",
+    "factor_id": "quality_growth_consistency_v1",
+    "factor_name": "质量成长一致性因子 v1",
+    "status": "rejected",
+    "barra_style": "Quality / Growth",
+    "source_type": "搜索启发/自构",
+    "source_title": "毛利率趋势/质量成长因子研究启发 + 本地ROE/BPS一致性代理",
+    "source_url": "https://bigquant.com/wiki/doc/c7u9IChUio",
+    "original_metric": {
+      "paper_claim": "毛利率及盈利能力的改善趋势比绝对水平更重要，适合刻画成长与质量。",
+      "formula": "以 ROE同比改善、BPS同比改善 为成长/质量代理，并用 ROE/BPS同比变化的再加速度绝对值惩罚不稳定改善；截面按价格对数代理市值做OLS中性化。"
+    },
+    "our_metric": {
+      "ic_mean": 0.014299054088107756,
+      "ic_t": 2.6248941345722265,
+      "long_short_sharpe": 0.09616070643610673,
+      "g5_sharpe": 1.0601831668081874,
+      "monotonicity": 0.7,
+      "turnover_mean": 0.11193031011489714
+    },
+    "diff_notes": "当前基本面缓存仅含 roe/bps，无法直接计算毛利率、费用率或资产周转率，因此只能构造代理因子。该因子能把高分组收益抬高到 G5 Sharpe 1.06，但低分组本身也表现不差，导致多空价差弱、IC 均值偏低，单调性也仅 0.70。与已入库因子抽样Spearman相关最高约 0.087，说明并不冗余，但信号强度不足。",
+    "conclusion": "不入库",
+    "failure_reason": "未满足硬门槛：IC均值 0.0143 < 0.02，Long-Short Sharpe 0.096 < 0.8，单调性 0.70 < 0.8。",
+    "artifacts": {
+      "factor_csv": "data/factor_quality_growth_consistency_v1.csv",
+      "report": "output/quality_growth_consistency_v1/report.json",
+      "calc_script": "calc_quality_growth_consistency_v1.py"
+    }
   }
 ]
