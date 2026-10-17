@@ -1,5 +1,34 @@
 [
   {
+    "date": "2026-10-17",
+    "factor_id": "conservative_asset_growth_proxy_v1",
+    "factor_name": "Conservative Asset Growth Proxy",
+    "barra_style": "Growth",
+    "status": "rejected",
+    "source_title": "The Asset Growth Effect in Stock Returns",
+    "source_url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=873315",
+    "formula": "raw = -0.70*tanh(BPS_YoY/0.20) + 0.20*tanh(ROE_YoY/5.0) + 0.15*tanh(ROE_accel/3.0) + 0.10*tanh((ROE_YoY - 35*BPS_YoY)/5.0) - 0.15*tanh(max(BPS_YoY-0.18,0)/0.12); then neutralize by log market cap cross-sectionally, MAD winsorize and z-score by date. Quarterly fundamentals lagged by 45 days.",
+    "description": "Weekend paper-replication proxy for asset growth anomaly using available A-share fundamentals only. Because total asset growth was unavailable, BPS YoY was used as a conservative expansion proxy, with ROE change as profitability confirmation.",
+    "implementation": "Built from data/csi1000_fundamental_cache.csv (bps, roe) and data/csi1000_kline_raw.csv (amount/turnover as market-cap proxy). Applied publication lag 45d and market-cap neutralization.",
+    "backtest": {
+      "forward_days": 5,
+      "groups": 5,
+      "cost": 0.003,
+      "ic_mean": 0.0168,
+      "ic_t": 3.81,
+      "rank_ic": 0.011,
+      "long_short_sharpe": 1.6579,
+      "monotonicity": 0.7,
+      "g5_annual_return": 0.2511
+    },
+    "decision_reason": "Rejected. Signal direction works and long-short Sharpe is strong, but it fails the library admission thresholds on IC mean (>0.02 required) and monotonicity (>0.8 required). Group profile is hump-shaped (G3/G4 > G5), suggesting proxy contamination and insufficient purity as a standalone Growth factor.",
+    "redundancy_check": "Family overlap is high with existing BPS/ROE growth factors already recorded in research. This proxy does not offer enough purity improvement to justify a new library entry.",
+    "artifacts": [
+      "data/factor_conservative_asset_growth_proxy_v1.csv",
+      "output/conservative_asset_growth_proxy_v1/report.json"
+    ]
+  },
+  {
     "date": "2026-10-17 10:00:00",
     "factor_id": "profit_persistence_discipline_v3",
     "factor_name": "盈利持续性-成长纪律因子 v3",
