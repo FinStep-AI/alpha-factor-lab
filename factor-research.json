@@ -1,5 +1,41 @@
 [
   {
+    "date": "2026-10-17 10:00:00",
+    "factor_id": "profit_persistence_discipline_v3",
+    "factor_name": "盈利持续性-成长纪律因子 v3",
+    "status": "passed",
+    "source_type": "论文复现+本土化代理",
+    "source_title": "Profit Persistence and Stock Returns: Does the Market Care?",
+    "source_url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3211826",
+    "source_author": "Chahine, Fang, Hill & Salameh",
+    "source_year": 2018,
+    "source_journal": "Journal of Banking and Finance",
+    "barra_style": "Quality / Growth",
+    "description": "周末论文复现任务，沿着 profit persistence 文献里“持续型盈利改善优于一次性冲高，且外延扩张会稀释质量”的主线，在仅有 ROE/BPS 财报缓存约束下做本土化代理：用 ROE 同比改善刻画盈利持续性，用 ROE 同比再加速刻画改善是否继续强化，再用 BPS 同比扩张提供成长确认，但当 BPS 扩张超过温和阈值时反向扣分，避免把激进扩表当成高质量成长。财报值按最近已披露 report_date 向后映射到交易日，并对 amount/turnover 构造的市值代理做横截面 OLS 中性化。",
+    "formula": "gate=(I[roe_yoy>0]*0.7 + I[roe_accel>0]*0.3); raw=(0.55*tanh(roe_yoy/6.0) + 0.30*tanh(roe_accel/4.0) + 0.20*tanh(bps_yoy/1.2) - 0.25*tanh(max(bps_yoy-1.5,0)/1.5))*gate; factor=neutralize(raw, log(amount/turnover))",
+    "our_metric": {
+      "market": "中证1000",
+      "period": "2024-07-01 ~ 2026-02-13",
+      "ic_mean": 0.025647526806622325,
+      "ic_t": 3.551986850363133,
+      "rank_ic": 0.029148504485937133,
+      "g5_sharpe": 2.2444913255242844,
+      "long_short_sharpe": 3.5094698159045894,
+      "monotonicity": 0.8999999999999998,
+      "turnover_mean": 0.18839486395618482,
+      "max_abs_corr_existing": 0.6922931884048843,
+      "closest_existing_factor": "roe_yoy_pb_resid_v1"
+    },
+    "failure_reason": "",
+    "diff_notes": "和此前 quality_growth_consistency_v1 / profit_persistence_gate_v1 / roe_slope_bps_discipline_v2 的区别在于，这版不是继续做线性平滑或单一门控，而是把“盈利持续改善”与“成长纪律”拆成两个层次：ROE 同比改善 + ROE 再加速负责选出持续变好的公司，BPS 扩张只做确认项且设置过度扩张惩罚，从而避免尾部混入单纯靠扩表堆出来的成长股。结果看，这个门控+惩罚结构明显改善了尾部分组纯度，G5 年化 66.2%、Sharpe 2.24，单调性 0.90，且与最相近的 roe_yoy_pb_resid_v1 Spearman 相关 0.692，低于 0.7 冗余红线。",
+    "conclusion": "入库",
+    "data_files": [
+      "data/factor_profit_persistence_discipline_v3.csv",
+      "output/profit_persistence_discipline_v3/report.json",
+      "calc_profit_persistence_discipline_v3.py"
+    ]
+  },
+  {
     "date": "2026-10-11 20:00:00",
     "factor_id": "sustainable_growth_quality_v1",
     "factor_name": "可持续增长质量因子 v1",

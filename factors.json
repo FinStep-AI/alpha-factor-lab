@@ -1,5 +1,83 @@
 [
   {
+    "id": "profit_persistence_discipline_v3",
+    "name": "盈利持续性-成长纪律因子 v3",
+    "name_en": "Profit Persistence Discipline v3",
+    "category": "基本面/质量成长",
+    "description": "基于 Profit Persistence 文献脉络，在仅有 ROE/BPS 财报缓存下构造可交易代理：奖励 ROE 同比改善与改善再加速，并用 BPS 同比扩张做成长确认；但当 BPS 扩张过猛时视作外延摊大饼而扣分。因子值按 amount/turnover 构造的市值代理做横截面 OLS 中性化，再经 MAD 缩尾与 z-score 标准化。",
+    "hypothesis": "持续改善且仍在加速的盈利质量，应优于靠激进扩表堆出来的表观成长；温和成长纪律能提升未来截面收益。",
+    "expected_direction": "正向（高因子值=高预期收益）",
+    "factor_type": "Quality / Growth",
+    "formula": "gate=(I[ROE_yoy>0]*0.7 + I[ROE_accel>0]*0.3); raw=(0.55*tanh(ROE_yoy/6)+0.30*tanh(ROE_accel/4)+0.20*tanh(BPS_yoy/1.2)-0.25*tanh(max(BPS_yoy-1.5,0)/1.5))*gate; factor=neutralize(raw, log(amount/turnover))",
+    "direction": 1,
+    "stock_pool": "中证1000",
+    "period": "2024-07-01 ~ 2026-02-13",
+    "rebalance_freq": 20,
+    "forward_days": 5,
+    "cost": 0.003,
+    "rating": "★★★★ 强",
+    "nav_data": "output/profit_persistence_discipline_v3/cumulative_returns.json",
+    "ic_data": "output/profit_persistence_discipline_v3/ic_series.json",
+    "upgrade_notes": "相较此前 consistency / persistence 线性版本，本版显式加入 ROE 正向门控与 BPS 过度扩张惩罚，尾部纯度明显提升。",
+    "lessons_learned": [
+      "在只有 ROE/BPS 两个低频字段时，直接做平滑一致性不够，门控和纪律约束更关键",
+      "BPS 扩张不是越高越好，温和扩张优于激进扩张",
+      "用 amount/turnover 代理市值后，信号仍显著，说明不只是简单 size 暴露"
+    ],
+    "created": "2026-10-17",
+    "updated": "2026-10-17",
+    "metrics": {
+      "ic_mean": 0.025647526806622325,
+      "ic_std": 0.06627310549939172,
+      "ic_t": 3.551986850363133,
+      "ic_positive_ratio": 0.6455696202531646,
+      "rank_ic": 0.029148504485937133,
+      "rank_ic_std": 0.07602172995843844,
+      "ir": 0.38699750997571297,
+      "ic_count": 79,
+      "long_short_sharpe": 3.5094698159045894,
+      "long_short_mdd": -0.044123814720839205,
+      "monotonicity": 0.8999999999999998,
+      "group_sharpe": [
+        1.260806548770533,
+        1.31541843826968,
+        1.727456986025383,
+        1.8828806050298148,
+        2.2444913255242844
+      ],
+      "group_returns_annualized": [
+        0.33334078801411193,
+        0.34227253561314375,
+        0.4865235839581994,
+        0.47871266871896645,
+        0.6621523153071833
+      ],
+      "group_mdd": [
+        -0.17116266350740295,
+        -0.16284010797843868,
+        -0.1554691662866393,
+        -0.14292880952600337,
+        -0.16915521635323408
+      ]
+    },
+    "conclusion": "达标入库。IC、t值、G5 Sharpe、单调性全部过线，多空Sharpe 3.51 非常强，属于当前质量成长线上较扎实的一版。",
+    "barra_style": "Quality / Growth",
+    "source_type": "论文复现+本土化代理",
+    "source_title": "Profit Persistence and Stock Returns: Does the Market Care?",
+    "source_url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3211826",
+    "correlations": {
+      "profit_persistence_discipline_v3": 1.0,
+      "roe_yoy_pb_resid_v1": 0.692,
+      "roe_improve_capital_efficiency_v2": 0.592,
+      "roe_slope_smoothness_v1": 0.468,
+      "roe_yoy_accel_resid_v1": 0.414,
+      "roe_persistence_gap_v4": 0.372,
+      "roe_bps_inflect_quality_v1": 0.32,
+      "gross_margin_trend_proxy_v1": 0.259,
+      "roe_slope_bps_stability_v1": 0.254
+    }
+  },
+  {
     "id": "amihud_illiq_v2",
     "name": "Amihud非流动性 v2",
     "name_en": "Amihud Illiquidity v2",
