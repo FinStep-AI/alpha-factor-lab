@@ -1,5 +1,40 @@
 [
   {
+    "date": "2026-11-01 15:00:00",
+    "factor_id": "earnings_acceleration_proxy_v1",
+    "factor_name": "盈利加速度代理因子 v1",
+    "status": "failed",
+    "source_type": "论文复现+本土化代理",
+    "source_title": "Earnings Acceleration and Stock Returns",
+    "source_url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3057632",
+    "source_author": "He et al.",
+    "source_year": 2018,
+    "source_journal": "SSRN / earnings acceleration literature",
+    "barra_style": "Quality / Growth",
+    "description": "周末论文复现任务，参考 earnings acceleration 文献中“盈利增长的加速度比静态盈利水平更能预测未来收益”的主线，在当前仅有 ROE/BPS 财报缓存约束下构造A股中证1000代理：用 ROE 同比变化(roe_yoy) 刻画盈利增长，用其环比再变化(roe_accel) 与再加速度(roe_reaccel) 刻画盈利加速度链条；同时用 ROE 路径二阶差分的绝对值惩罚不平滑改善，并对 BPS 同比扩张超过温和阈值的部分施加惩罚，避免把激进扩表误当成高质量盈利加速。财报值按 report_date+45天映射到交易日，并对 amount/turnover 构造的市值代理做横截面 OLS 中性化、MAD 缩尾与 z-score 标准化。",
+    "formula": "raw = 0.55*tanh(roe_yoy/6.0) + 0.35*tanh(roe_accel/4.0) + 0.20*tanh(roe_reaccel/3.0) - 0.18*tanh(abs(roe-2*roe_lag1+roe_lag2)/4.0) - 0.20*tanh(max(bps_yoy-0.25,0)/0.20); gate = 0.7*I[roe_yoy>0] + 0.3*I[roe_accel>0]; factor = neutralize(raw*gate, log(amount/turnover))",
+    "our_metric": {
+      "market": "中证1000",
+      "period": "2024-02-19 ~ 2026-02-13",
+      "ic_mean": 0.0164,
+      "ic_t": 3.1,
+      "rank_ic": 0.0213,
+      "g5_sharpe": 1.6193,
+      "long_short_sharpe": 1.6193,
+      "monotonicity": 0.9,
+      "turnover_mean": 0.2754,
+      "max_abs_corr_existing": 0.6838,
+      "closest_existing_factor": "profit_persistence_discipline_v3"
+    },
+    "failure_reason": "未过入库门槛。虽然 IC_t=3.10、单调性=0.9、多空Sharpe=1.62 都不错，且与最接近已入库因子的相关性 0.684 仍低于 0.7 冗余红线，但 IC均值只有 0.0164，低于 0.02 硬门槛；同时分组收益呈 G4≈G5 并列、G3 也偏强，说明它更像中高分组有效的盈利改善排序腿，而不是顶部尾部足够纯的独立新因子。",
+    "diff_notes": "和已入库的 profit_persistence_discipline_v3 不同，这一版把重心从“持续改善+成长纪律”切到更论文直觉的“盈利变化的变化”，显式加入 roe_reaccel 与 ROE 路径曲率惩罚，试图复现 earnings acceleration 而非一般 profitability trend。结果说明 acceleration 链条本身是有信息的——IC t值和多空Sharpe都不弱——但在当前只有 ROE/BPS 两个低频字段时，它很容易退化成已有盈利持续性因子的近邻版本，顶部纯度不足。后续若继续深挖这条线，优先引入 EPS/净利润同比、分析师预期修正或营收 surprise 数据，而不是继续在 ROE/BPS 上做更高阶差分。",
+    "conclusion": "淘汰",
+    "data_files": [
+      "data/factor_earnings_acceleration_proxy_v1.csv",
+      "output/earnings_acceleration_proxy_v1/report.json"
+    ]
+  },
+  {
     "date": "2026-10-17",
     "factor_id": "conservative_asset_growth_proxy_v1",
     "factor_name": "Conservative Asset Growth Proxy",
