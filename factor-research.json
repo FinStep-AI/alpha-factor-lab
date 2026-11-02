@@ -1,5 +1,41 @@
 [
   {
+    "date": "2026-11-01 20:00:00",
+    "factor_id": "operating_profitability_proxy_v1",
+    "factor_name": "经营盈利能力代理因子 v1",
+    "status": "failed",
+    "source_type": "论文复现+本土化代理",
+    "source_title": "A Five-Factor Asset Pricing Model",
+    "source_url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2287202",
+    "source_author": "Fama & French",
+    "source_year": 2015,
+    "source_journal": "Journal of Financial Economics / SSRN",
+    "barra_style": "Quality / Growth",
+    "description": "沿着 Fama-French 5-factor 中 profitability-investment 主线，在当前中证1000数据只稳定具备 ROE/BPS 的约束下，先做严格轻量代理复现：用近4季平均ROE刻画经营盈利能力中枢，用ROE同比改善补充盈利变化信息，用ROE四季波动惩罚持续性不足，再用BPS同比扩张惩罚激进投资/净资产扩张；财报按 report_date+45天映射到交易日，并对20日平均成交额对数做横截面OLS市值中性化，随后MAD缩尾与z-score标准化。",
+    "formula": "raw = 0.55*tanh(MA4(ROE)/8) + 0.35*tanh((ROE_t-ROE_t-4)/6) - 0.25*tanh(STD4(ROE)/4) - 0.20*tanh((BPS_t/BPS_t-4 - 1)/0.25); factor = neutralize(raw, log_amount_20d)",
+    "our_metric": {
+      "market": "中证1000",
+      "period": "2023-08-14 ~ 2026-03-04",
+      "ic_mean": 0.006726110616239515,
+      "ic_t": 0.6605777781217513,
+      "rank_ic": 0.018513231509985874,
+      "g5_sharpe": 0.7839610948811432,
+      "long_short_sharpe": 0.17899621659132062,
+      "monotonicity": 0.8999999999999998,
+      "turnover_mean": 0.18247438773371474,
+      "max_abs_corr_existing": null,
+      "closest_existing_factor": null
+    },
+    "failure_reason": "未过入库门槛。虽然分组单调性0.90、G5 Sharpe 0.784 已接近门槛，说明高盈利且低扩张这条经典学术主线在中证1000里有一定排序力，但 IC均值仅0.0067、IC_t仅0.66，远低于 >0.02 与 >2.0 的硬标准；同时多空Sharpe只有0.18，说明它更像低频质量分层，而不是足够锋利的5日截面alpha。",
+    "diff_notes": "和此前更多围绕 profit persistence / sustainable growth / external growth 的本土化版本不同，这版尽量回到最经典、最简洁的 profitability-minus-investment 文献语义，不再叠加复杂门控，而是直接检验“高ROE中枢 + 盈利改善 + 低净资产扩张”这条核心线。在当前仅ROE/BPS可用的条件下，结果呈现出典型的“方向对、强度弱”：G1到G5大体递增，但G3/G4仍有扰动，截面线性相关几乎不显著，说明代理变量过于粗糙，没法把FF5里的 operating profitability 与 investment 真正分拆出来。后续若继续沿这条论文主线深挖，优先补 total assets / book equity growth / operating profit / gross profit 等原始字段，而不是继续在 ROE/BPS 上调权重。",
+    "conclusion": "淘汰",
+    "data_files": [
+      "data/factor_operating_profitability_proxy_v1.csv",
+      "output/operating_profitability_proxy_v1/backtest_report.json",
+      "calc_operating_profitability_proxy_v1.py"
+    ]
+  },
+  {
     "date": "2026-11-01 15:00:00",
     "factor_id": "earnings_acceleration_proxy_v1",
     "factor_name": "盈利加速度代理因子 v1",
@@ -10687,5 +10723,34 @@
       "report": "output/quality_growth_consistency_v1/report.json",
       "calc_script": "calc_quality_growth_consistency_v1.py"
     }
+  },
+  {
+    "date": "2026-11-02 09:00:00",
+    "factor_id": "water_boat_amt_follow_v1",
+    "factor_name": "水中行舟-成交额市场跟随因子 v1",
+    "status": "failed",
+    "source_type": "中文金工研报思路复现",
+    "source_title": "水中行舟：市场跟随性选股因子",
+    "source_url": "https://bigquant.com/wiki/topic/4d35240c98",
+    "barra_style": "Liquidity",
+    "description": "复现研报中的市场跟随性思路：用个股成交额与全市场成交额的滚动相关刻画资金行为一致性，并结合价格高低位做方向切换；高位时更偏好跟随市场放量，低位时偏好脱离市场的一致性抛压。",
+    "formula": "corr20 = corr(log(1+amount_i), log(1+market_amount)); z=(close-ma20)/std20; raw = corr20 if z>0.5 else -corr20 if z<-0.5 else 0; factor = neutralize(raw, log(market_cap_proxy))",
+    "original_metric": {
+      "paper_claim": "市场跟随性在高位/低位存在非对称预测力，可形成可交易截面选股信号",
+      "market": "A股",
+      "notes": "公开二手资料，未取到统一可比IC口径"
+    },
+    "our_metric": {
+      "market": "中证1000",
+      "period": "2022-10-21 ~ 2026-06-03",
+      "ic_mean": -0.0014,
+      "ic_t": -0.08,
+      "rank_ic": -0.0081,
+      "long_short_sharpe": 0.431,
+      "monotonicity": 0.6
+    },
+    "diff_notes": "方向不稳定，只有尾组收益略高，但IC近零且不显著。可能原因：1) 公开资料不含完整原始参数和状态划分；2) 仅用日线 amount 近似，缺少更细粒度资金行为；3) 中证1000样本与原文股票池、时间段不同。",
+    "conclusion": "不达标，不入库。保留为后续接入更细粒度资金流数据后的候选方向。",
+    "failure_reason": "IC均值、t值、Sharpe、单调性均未达到入库门槛。"
   }
 ]
