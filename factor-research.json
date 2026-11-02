@@ -10752,5 +10752,72 @@
     "diff_notes": "方向不稳定，只有尾组收益略高，但IC近零且不显著。可能原因：1) 公开资料不含完整原始参数和状态划分；2) 仅用日线 amount 近似，缺少更细粒度资金行为；3) 中证1000样本与原文股票池、时间段不同。",
     "conclusion": "不达标，不入库。保留为后续接入更细粒度资金流数据后的候选方向。",
     "failure_reason": "IC均值、t值、Sharpe、单调性均未达到入库门槛。"
+  },
+  {
+    "date": "2026-11-02 12:01:00",
+    "factor_id": "gross_margin_trend_proxy_v2",
+    "factor_name": "毛利率趋势代理因子 v2",
+    "status": "failed",
+    "source_type": "论文脉络复现+本土化代理",
+    "source_title": "毛利率趋势/经营质量趋势 因子脉络",
+    "source_url": "https://bigquant.com/wiki/doc/c7u9IChUio",
+    "source_author": "公开因子研究资料",
+    "source_year": 2026,
+    "source_journal": "BigQuant Wiki / A股因子经验研究",
+    "barra_style": "Quality / Growth",
+    "description": "沿着“毛利率趋势比静态水平更重要”的质量成长脉络，在当前只有 BPS/ROE 财报缓存约束下构造可交易代理：用 BPS 同比扩张近似产品/资产质量的累积改善，用 ROE 同比改善与短期斜率表示经营盈利能力未恶化且继续上行，再用 ROE 路径波动惩罚不平滑改善，并对过快 BPS 扩张施加惩罚，避免把激进扩表误当成毛利率改善。财报按 report_date+45天映射到交易日，并对 amount/turnover 构造的市值代理做横截面 OLS 中性化，随后 MAD 缩尾与 z-score 标准化。",
+    "formula": "raw = (0.45*tanh(BPS_yoy/0.25) + 0.30*tanh(ROE_yoy/4.0) + 0.20*tanh(ROE_slope2/2.0) + 0.15*tanh(-STD(ROE_t,ROE_t-1,ROE_t-2)/2.5) - 0.20*tanh(max(BPS_yoy-0.60,0)/0.25)) * (0.7*I[ROE_yoy>0] + 0.3*I[ROE_slope2>0]); factor = neutralize(raw, log(amount/turnover))",
+    "our_metric": {
+      "market": "中证1000",
+      "period": "2023-08-14 ~ 2026-02-13",
+      "ic_mean": 0.009680792282376534,
+      "ic_t": 1.447641421418333,
+      "rank_ic": 0.012048776173707462,
+      "g5_sharpe": 0.8361852642656425,
+      "long_short_sharpe": 0.5815807964601091,
+      "monotonicity": 0.7999999999999999,
+      "turnover_mean": 0.2697581780959715,
+      "max_abs_corr_existing": null,
+      "closest_existing_factor": null
+    },
+    "failure_reason": "未过入库门槛。虽然 G5 Sharpe=0.836 已略高于 0.8，且单调性=0.80 卡在门槛边缘，说明高分组里确实抓到了一些质量改善赢家，但 IC均值仅 0.0097、IC_t 仅 1.45、多空 Sharpe 仅 0.58，截面线性预测力不足，整体更像“顶部挑尖子”的弱排序器，而不是稳定的5日 alpha。",
+    "diff_notes": "和库里已存在的 profit_persistence_discipline_v3、earnings_acceleration_proxy_v1 相比，这版不再强调 ROE 改善的持续/再加速，而是尝试用 BPS 温和扩张 + ROE 平滑上行去代理“毛利率趋势/经营质量趋势”。结果说明这条脉络方向可能没错，但在当前缺少真实 gross margin、revenue、expense ratio 等字段时，BPS/ROE 代理太粗，最终退化成一个偏弱的 quality-growth 混合信号。后续若继续深挖毛利率趋势，应优先补真实毛利率、期间费用率、营收同比等原始字段，或改成明显的 threshold/gating 结构，而不是继续在线性代理上微调权重。",
+    "conclusion": "淘汰",
+    "data_files": [
+      "data/factor_gross_margin_trend_proxy_v2.csv",
+      "output/gross_margin_trend_proxy_v2/report.json"
+    ]
+  },
+  {
+    "date": "2026-11-02",
+    "factor_id": "gross_margin_proxy_reaccel_growth_v2_mine",
+    "factor_name": "毛利率代理重加速成长因子 v2",
+    "status": "rejected",
+    "barra_style": "Growth",
+    "source_type": "研究启发+本土化代理",
+    "summary": "因子本身回测达标，但与既有成长因子相关性过高，按冗余规则淘汰。",
+    "implementation": "基于fundamental_cache中的ROE/BPS季度序列构造同比改善、同比重加速、8季净资产扩张与4季ROE稳定性，并在日频映射后做市值中性化。输出文件 data/factor_gross_margin_proxy_reaccel_growth_v2_mine.csv。",
+    "backtest": {
+      "ic_mean": 0.02395333857698629,
+      "ic_t": 3.3329805890660547,
+      "rank_ic_mean": 0.030233043768290085,
+      "g5_sharpe": 1.2076740442870464,
+      "monotonicity": 0.8,
+      "long_short_sharpe": 1.9645574100799925,
+      "forward_days": 5,
+      "cost": 0.003
+    },
+    "redundancy_check": {
+      "top_factor_id": "roe_yoy_pb_resid_v1",
+      "top_factor_name": "ROE同比改善-PB约束残差 v1",
+      "spearman_mean_corr": 0.7638981395028319,
+      "decision_rule": ">0.7 判冗余"
+    },
+    "failure_reason": "虽满足IC和分层收益门槛，但最高相关因子相关性0.7639，大于0.7，不能作为新增独立因子入库。",
+    "artifacts": {
+      "factor_csv": "data/factor_gross_margin_proxy_reaccel_growth_v2_mine.csv",
+      "report_json": "output/gross_margin_proxy_reaccel_growth_v2_mine/report.json",
+      "script": "calc_gross_margin_proxy_reaccel_growth_v2_mine.py"
+    }
   }
 ]
