@@ -4096,5 +4096,19 @@
       "event_radar_proxy_v1": 1.0,
       "range_efficiency_v1": -0.1724
     }
+  },
+  {
+    "id": "roe_accel_bps_sustainable_growth_v1",
+    "name": "ROE加速-可持续净资产成长因子 v1",
+    "name_en": "ROE Acceleration Sustainable Growth v1",
+    "category": "基本面/Growth",
+    "description": "基于ROE同比改善、改善加速与BPS温和扩张构造的成长质量代理，并对ROE波动较大的公司施加惩罚。映射到日频后使用amount/turnover构造市值代理做横截面OLS中性化，再经MAD缩尾与z-score标准化。",
+    "hypothesis": "真正可持续的成长，不只是净资产扩张，更应伴随盈利能力改善并继续加速；若ROE波动过大，则成长质量存疑，后续收益应更弱。",
+    "expected_direction": "正向（高因子值=高预期收益）",
+    "factor_type": "基本面/成长质量代理",
+    "barra_style": "Growth",
+    "source_type": "研究启发+本土化代理",
+    "detail": "raw = 0.45*tanh(ROE同比/0.60) + 0.25*tanh(ROE同比加速度/0.40) + 0.20*tanh(BPS同比/0.35) - 0.15*tanh(max(-BPS同比加速度,0)/0.25) - 0.20*tanh(4季ROE波动/3.0)；以amount/turnover作为市值代理逐日中性化后标准化。",
+    "correlations": "最高Spearman相关因子为gross_margin_trend_proxy_v1，均值相关0.6412；低于0.7，不构成冗余。"
   }
 ]

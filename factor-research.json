@@ -10819,5 +10819,37 @@
       "report_json": "output/gross_margin_proxy_reaccel_growth_v2_mine/report.json",
       "script": "calc_gross_margin_proxy_reaccel_growth_v2_mine.py"
     }
+  },
+  {
+    "date": "2026-11-03",
+    "factor_id": "roe_accel_bps_sustainable_growth_v1",
+    "factor_name": "ROE加速-可持续净资产成长因子 v1",
+    "status": "accepted",
+    "barra_style": "Growth",
+    "source_type": "研究启发+本土化代理",
+    "summary": "围绕成长/质量空白位，构造“ROE同比改善+改善加速+BPS温和扩张-ROE不稳定惩罚”的可持续成长代理。回测四项门槛全部通过，且与现有最相近成长因子相关性仅0.641。",
+    "implementation": "基于fundamental_cache季度ROE/BPS序列，计算ROE同比、ROE同比加速度、BPS同比、BPS同比加速度与4季ROE波动；将最新已披露财报向前映射到日频后，用amount/turnover构造市值代理并逐日OLS中性化，随后MAD缩尾与z-score标准化。输出 data/factor_roe_accel_bps_sustainable_growth_v1.csv。",
+    "backtest": {
+      "ic_mean": 0.027857380469476424,
+      "ic_t": 4.1541885055228684,
+      "rank_ic_mean": 0.0356442947970649,
+      "g5_sharpe": 1.4172094981897663,
+      "monotonicity": 0.9999999999999999,
+      "long_short_sharpe": 3.6879574096160352,
+      "forward_days": 5,
+      "cost": 0.003
+    },
+    "redundancy_check": {
+      "top_factor_id": "gross_margin_trend_proxy_v1",
+      "top_factor_name": "毛利率趋势代理因子 v1",
+      "spearman_mean_corr": 0.6411695966822751,
+      "decision_rule": ">0.7 判冗余"
+    },
+    "failure_reason": "",
+    "artifacts": {
+      "factor_csv": "data/factor_roe_accel_bps_sustainable_growth_v1.csv",
+      "report_json": "output/test_growth/report.json",
+      "script": "calc_roe_accel_bps_sustainable_growth_v1.py"
+    }
   }
 ]
