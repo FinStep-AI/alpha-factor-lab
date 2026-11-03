@@ -6,7 +6,7 @@
     "benchmark": "000300",
     "benchmark_name": "沪深300",
     "created_at": "2026-02-23 22:14:25",
-    "updated_at": "2026-11-03 08:31:43",
+    "updated_at": "2026-11-03 09:05:58",
     "status": "active",
     "players_count": 6
   },
@@ -12174,13 +12174,6 @@
       ],
       "decisions": [
         {
-          "date": "2026-07-21",
-          "action": "hold",
-          "summary": "因子扫描：上下行波动差值 v1 复现失败",
-          "detail": "完成K线刷新到2026-07-20。扫描中英资料后，选取“基于相对强弱下单向波动差值应用”方向，按20日窗口复现 up_vol - down_vol，并对log(amount)做截面中性化。回测区间2022-11-07~2026-07-20，IC均值0.0069，t值0.32，多空Sharpe=-0.35，单调性=-0.90，表现明显不达标且近似反向单调，判断该信号更像过热反转而非可入库alpha，今日不新增因子。复现记录已追加到factor-research.json。",
-          "recommendation": "保持现有组合，不入库该因子"
-        },
-        {
           "date": "2026-07-22",
           "action": "hold",
           "summary": "日度因子扫描：主力净流冲击因子 v1 复现失败，未入库",
@@ -12386,6 +12379,13 @@
           "detail": "feature_engine.py --refresh 被SIGTERM杀掉，改用当日低波+低量变异 fallback 排名；先取TOP30，再经 risk_control.py full-check 过滤，最终前25等权调仓。",
           "recommendation": "调仓",
           "exec_summary": "成功0笔，失败0笔"
+        },
+        {
+          "date": "2026-11-03",
+          "action": "hold",
+          "summary": "因子扫描：资金流冲击后静默延续 v1 未入库",
+          "detail": "完成中证1000 K线刷新确认（最新到 2026-11-02）。扫描中英文研报/论文后，选择‘大单净流入冲击后价格与换手静默收敛’方向，构造 flow_shock_silence_v1：flow_ratio=major_net_flow_in/amount，flow_z=MA5(flow_ratio)/STD20(flow_ratio)，静默门控为 MA5(|ret|)<MA20(|ret|) 且 MA5(turnover)<MA20(turnover)，raw=flow_z*(0.5+0.5*silence)，并做市值中性化。回测样本仅 2026-01-19~2026-02-13，IC 样本数为 0，无法满足正式入库标准；虽多空Sharpe 1.69、单调性 0.8，但 G4 高于 G5，顶部纯度不足，因此记录研究日志后淘汰。",
+          "recommendation": "不入库，等待更长资金流历史后再验证"
         }
       ],
       "rebalances": [
