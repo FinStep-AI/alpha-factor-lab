@@ -232,5 +232,84 @@
     },
     "diff_notes": "在中证1000上，当前构造不是正向alpha，反而显示高失败压力对应更弱后续收益，且分层不单调。可能原因：gap fill在小盘股中更多反映短线过度波动和次日修复，而不是20日维度的持续信息；另一个可能是需要区分正跳空失败与负跳空修复两个子信号，不能简单对称合并。",
     "conclusion": "rejected"
+  },
+  {
+    "date": "2026-11-03 09:00:00",
+    "factor_id": "flow_shock_silence_v1",
+    "factor_name": "资金流冲击后静默延续因子 v1",
+    "status": "failed",
+    "source_type": "论文脉络复现+本土化微观结构代理",
+    "source_title": "Flow Shock / Price Pressure / Post-Shock Underreaction literature",
+    "source_url": "",
+    "source_author": "研报扫描+文献脉络",
+    "source_year": 2026,
+    "source_journal": "microstructure / anomaly scan",
+    "barra_style": "微观结构",
+    "description": "基于大单净流入冲击之后、价格与换手进入短期静默收敛阶段，可能意味着筹码被吸收但未被充分交易透支的思路，构造中证1000本土化代理。使用 major_net_flow_in/amount 作为资金流强度，取5日均值再除以20日波动形成 shock z-score；若近5日绝对收益均值与换手率均值同时低于近20日对应均值，则视为‘静默’，提高信号权重。随后按 amount/turnover 构造市值代理做横截面 OLS 中性化，并做 MAD 缩尾与 z-score 标准化。",
+    "formula": "flow_ratio=major_net_flow_in/amount; flow_z=MA5(flow_ratio)/STD20(flow_ratio); silence=I[MA5(|ret|)<MA20(|ret|) & MA5(turnover)<MA20(turnover)]; raw=flow_z*(0.5+0.5*silence); factor=neutralize(raw, log(amount/turnover))",
+    "original_metric": {
+      "paper_metric": "未锁定单篇可严格量化复现的原文指标，属于文献脉络启发构造"
+    },
+    "our_metric": {
+      "market": "中证1000",
+      "period": "2026-01-19 ~ 2026-02-13",
+      "ic_mean": null,
+      "ic_t": null,
+      "rank_ic": null,
+      "g5_sharpe": 0.3687429461013681,
+      "long_short_sharpe": 1.6854045333942347,
+      "monotonicity": 0.8,
+      "turnover_mean": null,
+      "max_abs_corr_existing": null,
+      "closest_existing_factor": null
+    },
+    "failure_reason": "不入库。核心问题不是收益腿完全无效，而是样本期过短：major_flow_cache 当前只覆盖 2026-01-19 ~ 2026-02-13，导致 IC 样本数为 0，无法满足 IC均值>0.02、t值>2.0 的硬性验证标准。虽然多空Sharpe=1.69、单调性=0.8 边缘可看，但 G4 高于 G5，顶部纯度也不足。",
+    "diff_notes": "与库内 mainflow_shock / flow_consistency / resilience_impact 不同，这版显式强调‘冲击之后的静默吸收’，试图把强流入但未被高波动高换手消耗掉的股票挑出来。思路上有一定直觉，但当前资金流历史太短，先天不满足正式复现要求；后续若补全更长区间资金流数据，可继续验证这条线是否真有 alpha，而不是短样本偶然多空收益。",
+    "conclusion": "淘汰",
+    "data_files": [
+      "data/factor_flow_shock_silence_v1.csv",
+      "output/flow_shock_silence_v1/backtest_report.json"
+    ]
+  },
+  {
+    "date": "2026-11-03 15:41:00",
+    "factor_id": "bps_roe_synergy_reaccel_smooth_growth_v1",
+    "factor_name": "BPS-ROE协同再加速平滑成长因子 v1",
+    "status": "failed",
+    "source_type": "研究启发+本土化代理",
+    "source_title": "毛利率/盈利质量趋势类成长因子研究启发（当前数据下用ROE/BPS代理实现）",
+    "source_url": "https://bigquant.com/wiki/doc/c7u9IChUio",
+    "source_author": "BigQuant研究社区",
+    "source_year": 2026,
+    "source_journal": "Web Research",
+    "barra_style": "Quality / Growth",
+    "description": "为填补 Growth/Quality 空白位，在仅有季度 ROE/BPS 财报缓存的数据约束下，构造“ROE同比改善+ROE改善再加速+BPS同比扩张+BPS扩张再加速”的协同成长代理，并加入 ROE 四季波动与 BPS 同比波动惩罚，强调内生增长改善必须同时具备盈利确认、净资产支撑与路径平滑性。财报按 report_date+45 天映射到交易日，再与日频价格成交额拼接，用 amount/turnover 构造市值代理，对原始因子做横截面 OLS 市值中性化、MAD 缩尾与 z-score 标准化。",
+    "formula": "roe_core = 0.55*tanh(roe_yoy/3.5) + 0.45*tanh(roe_reaccel/3.0); bps_core = 0.55*tanh(6*bps_yoy) + 0.45*tanh(8*bps_reaccel); confirm = 0.6*tanh(roe_qoq/2.5) + 0.4*tanh(8*bps_qoq); synergy = sign(roe_core*bps_core)*sqrt(abs(roe_core*bps_core)); raw = (0.52*synergy + 0.28*confirm + 0.20*(roe_core+bps_core)/2) * stability * quality_gate * trend_gate; factor = neutralize(raw, log(amount/turnover))",
+    "our_metric": {
+      "market": "中证1000",
+      "period": "2022-11-14 ~ 2026-02-13",
+      "ic_mean": 0.01880700429613121,
+      "ic_t": 3.087249137894363,
+      "rank_ic": 0.01921219388622563,
+      "g5_sharpe": 1.073410117299317,
+      "long_short_sharpe": 1.8732104208180937,
+      "monotonicity": 0.6,
+      "forward_days": 5,
+      "cost": 0.003,
+      "pass_threshold": false
+    },
+    "threshold": {
+      "ic_mean_gt": 0.02,
+      "ic_t_gt": 2.0,
+      "g5_sharpe_gt": 0.8,
+      "monotonicity_gt": 0.8
+    },
+    "failure_reason": "IC均值0.0188略低于0.02门槛，且分层单调性仅0.6，组收益呈G2/G3高于G4的塌腰结构，说明协同再加速信号存在但排序稳定性不足，暂不满足入库标准。",
+    "improvement_hint": "后续可尝试加入更严格的盈利确认门槛、分段非线性惩罚激进扩表、或延长披露映射/调仓周期以提升分层稳定性。",
+    "artifacts": {
+      "factor_csv": "data/factor_bps_roe_synergy_reaccel_smooth_growth_v1.csv",
+      "report_json": "output/bps_roe_synergy_reaccel_smooth_growth_v1/report.json",
+      "script": "calc_bps_roe_synergy_reaccel_smooth_growth_v1.py"
+    }
   }
 ]

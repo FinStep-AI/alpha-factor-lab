@@ -10851,5 +10851,46 @@
       "report_json": "output/test_growth/report.json",
       "script": "calc_roe_accel_bps_sustainable_growth_v1.py"
     }
+  },
+  {
+    "date": "2026-11-03 15:41:00",
+    "factor_id": "bps_roe_synergy_reaccel_smooth_growth_v1",
+    "factor_name": "BPS-ROE协同再加速平滑成长因子 v1",
+    "status": "failed",
+    "source_type": "研究启发+本土化代理",
+    "source_title": "毛利率/盈利质量趋势类成长因子研究启发（当前数据下用ROE/BPS代理实现）",
+    "source_url": "https://bigquant.com/wiki/doc/c7u9IChUio",
+    "source_author": "BigQuant研究社区",
+    "source_year": 2026,
+    "source_journal": "Web Research",
+    "barra_style": "Quality / Growth",
+    "description": "为填补 Growth/Quality 空白位，在仅有季度 ROE/BPS 财报缓存的数据约束下，构造“ROE同比改善+ROE改善再加速+BPS同比扩张+BPS扩张再加速”的协同成长代理，并加入 ROE 四季波动与 BPS 同比波动惩罚，强调内生增长改善必须同时具备盈利确认、净资产支撑与路径平滑性。财报按 report_date+45 天映射到交易日，再与日频价格成交额拼接，用 amount/turnover 构造市值代理，对原始因子做横截面 OLS 市值中性化、MAD 缩尾与 z-score 标准化。",
+    "formula": "roe_core = 0.55*tanh(roe_yoy/3.5) + 0.45*tanh(roe_reaccel/3.0); bps_core = 0.55*tanh(6*bps_yoy) + 0.45*tanh(8*bps_reaccel); confirm = 0.6*tanh(roe_qoq/2.5) + 0.4*tanh(8*bps_qoq); synergy = sign(roe_core*bps_core)*sqrt(abs(roe_core*bps_core)); raw = (0.52*synergy + 0.28*confirm + 0.20*(roe_core+bps_core)/2) * stability * quality_gate * trend_gate; factor = neutralize(raw, log(amount/turnover))",
+    "our_metric": {
+      "market": "中证1000",
+      "period": "2022-11-14 ~ 2026-02-13",
+      "ic_mean": 0.01880700429613121,
+      "ic_t": 3.087249137894363,
+      "rank_ic": 0.01921219388622563,
+      "g5_sharpe": 1.073410117299317,
+      "long_short_sharpe": 1.8732104208180937,
+      "monotonicity": 0.6,
+      "forward_days": 5,
+      "cost": 0.003,
+      "pass_threshold": false
+    },
+    "threshold": {
+      "ic_mean_gt": 0.02,
+      "ic_t_gt": 2.0,
+      "g5_sharpe_gt": 0.8,
+      "monotonicity_gt": 0.8
+    },
+    "failure_reason": "IC均值0.0188略低于0.02门槛，且分层单调性仅0.6，组收益呈G2/G3高于G4的塌腰结构，说明协同再加速信号存在但排序稳定性不足，暂不满足入库标准。",
+    "improvement_hint": "后续可尝试加入更严格的盈利确认门槛、分段非线性惩罚激进扩表、或延长披露映射/调仓周期以提升分层稳定性。",
+    "artifacts": {
+      "factor_csv": "data/factor_bps_roe_synergy_reaccel_smooth_growth_v1.csv",
+      "report_json": "output/bps_roe_synergy_reaccel_smooth_growth_v1/report.json",
+      "script": "calc_bps_roe_synergy_reaccel_smooth_growth_v1.py"
+    }
   }
 ]
