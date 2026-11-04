@@ -10892,5 +10892,22 @@
       "report_json": "output/bps_roe_synergy_reaccel_smooth_growth_v1/report.json",
       "script": "calc_bps_roe_synergy_reaccel_smooth_growth_v1.py"
     }
+  },
+  {
+    "date": "2026-11-04",
+    "factor_id": "scan_only_no_new_factor_20261104",
+    "source_type": "研报扫描/论文扫描",
+    "source_title": "广发金工Alpha因子跟踪月报（2026年5月）等；候选为 keyperiod_ret_zero / 关键时段收益为零方向",
+    "source_url": "https://finance.sina.com.cn/wm/2026-06-03/doc-iniactak2313454.shtml",
+    "original_metric": {
+      "report_excerpt": "月报摘要提到 keyperiod_ret_zero 为近期表现较好的 Level-2 因子，但公开摘要未给出完整公式、采样时段、口径与中证1000分项指标"
+    },
+    "our_metric": {
+      "status": "not_reproduced",
+      "data_latest": "2026-11-03",
+      "reason": "现有库已覆盖 auction_failure/tail_auction/tail_flow/VWAP/price_delay/overnight 等相邻微观结构方向；公开材料缺少严格复现参数，本地仅有日线OHLCV，无Level-2关键时段数据"
+    },
+    "diff_notes": "无法满足“严格按原文参数复现”要求；若改用日线代理，重复度与伪复现风险过高。与现有因子 tail_auction_bias_v1、auction_failure_v1、tail_flow_reversal_v1、price_delay_v2a_d1_60d 等高度邻近。",
+    "conclusion": "skip_today"
   }
 ]
