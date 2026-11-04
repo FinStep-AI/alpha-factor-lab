@@ -6,7 +6,7 @@
     "benchmark": "000300",
     "benchmark_name": "沪深300",
     "created_at": "2026-02-23 22:14:25",
-    "updated_at": "2026-11-04 08:31:46",
+    "updated_at": "2026-11-04 09:03:44",
     "status": "active",
     "players_count": 6
   },
@@ -12177,13 +12177,6 @@
       ],
       "decisions": [
         {
-          "date": "2026-07-22",
-          "action": "hold",
-          "summary": "日度因子扫描：主力净流冲击因子 v1 复现失败，未入库",
-          "detail": "数据刷新至2026-07-21。扫描资金流方向后，复现主力净流入冲击因子 v1：flow_intensity=major_net_flow_in/ma20(amount)，并减去0.5倍收益z-score后做市值中性化。受fintool资金流历史仅覆盖到2026-05-25影响，有效样本仅17个交易日，20日前瞻IC点10个；实测IC均值约0.0012、t约0.06、单调性0.60，不达标。结论：今日不新增因子，保留该方向待后续补长样本再测。",
-          "recommendation": "继续持有现有量化组合，不替换主因子"
-        },
-        {
           "date": "2026-08-03",
           "action": "rebalance",
           "summary": "Weekly rebalance fallback to factor ranking",
@@ -12389,6 +12382,13 @@
           "summary": "因子扫描：资金流冲击后静默延续 v1 未入库",
           "detail": "完成中证1000 K线刷新确认（最新到 2026-11-02）。扫描中英文研报/论文后，选择‘大单净流入冲击后价格与换手静默收敛’方向，构造 flow_shock_silence_v1：flow_ratio=major_net_flow_in/amount，flow_z=MA5(flow_ratio)/STD20(flow_ratio)，静默门控为 MA5(|ret|)<MA20(|ret|) 且 MA5(turnover)<MA20(turnover)，raw=flow_z*(0.5+0.5*silence)，并做市值中性化。回测样本仅 2026-01-19~2026-02-13，IC 样本数为 0，无法满足正式入库标准；虽多空Sharpe 1.69、单调性 0.8，但 G4 高于 G5，顶部纯度不足，因此记录研究日志后淘汰。",
           "recommendation": "不入库，等待更长资金流历史后再验证"
+        },
+        {
+          "date": "2026-11-04",
+          "action": "hold",
+          "summary": "日度因子扫描：未发现满足严格复现条件的新因子，今日跳过回测与入库",
+          "detail": "完成数据刷新检查：在 /home/sunrui/.openclaw/workspace-buffett/alpha-factor-lab 运行 update_kline_csi1000.py --source fintool 后，1000/1000 全部报错，但本地 csi1000_kline_raw.csv 最新日期已是 2026-11-03，满足今天/昨天要求，因此未再触发 auto fallback。随后扫描中文金工研报与英文学术线索，重点关注广发金工月报提到的 keyperiod_ret_zero / 关键时段收益为零等 Level-2 微观结构方向。经核对 factors.json 与历史输出，当前库已覆盖 overnight_momentum_v1、gap_momentum_v1、price_delay_v2a_d1_60d、tail_auction_bias_v1、auction_failure_v1、tail_flow_reversal_v1 等相邻方向。公开材料仅有摘要，缺少完整公式、关键时段定义、采样参数和中证1000可核验指标；本地数据也只有日线OHLCV与基础面缓存，不具备严格复现 Level-2 因子的条件。为避免重复和伪复现，今日不进入正式构建/回测/入库，仅将研究结论追加到 factor-research.json。",
+          "recommendation": "维持现有因子库，后续优先寻找具备公开公式且与现有库低相关的新微观结构或基本面增量方向。"
         }
       ],
       "rebalances": [
